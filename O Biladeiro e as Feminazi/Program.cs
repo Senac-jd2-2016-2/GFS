@@ -16,6 +16,7 @@ namespace O_Biladeiro_e_as_Feminazi
         {
             using (var game = new Game1())
                 game.Run();
+
         }
     }
 #endif
