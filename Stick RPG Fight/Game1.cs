@@ -19,31 +19,51 @@ namespace Stick_RPG_Fight
         GraphicsDeviceManager graphics;
         SpriteBatch spriteBatch;
 
+        //inicio
+        //gerador de numero randomico
         Random aleatório;
 
+        //booleaveis usuais comuns no game
         bool MENU = true, menu00 = true, menu01, Bapply, BFULL, BOTAO;
-
         bool[] b1 = new bool[5];//botoes do menu
         Rectangle[] B1 = new Rectangle[5]; //botao
-        Rectangle Bfull, APPLY;
+        Rectangle Bfull, APPLY, TELACHEIA, FlechaE, FlechaD;
 
+        //fonte escrita do jogo
         SpriteFont menu;
 
-        Texture2D imgB1, imgB2, imgAPPLY2, imgAPPLY, imgAPPLY3, imgteste;
+        //imagens de itens fora das classes
+        Texture2D imgB1, imgB2, imgAPPLY2, imgAPPLY, imgAPPLY3, imgteste, imgFlechaD, imgFlechaE;
 
+        //intro
         intromenu Entrada = new intromenu();
 
+        //menu e o audio
         Menu M1 = new Menu();
         Audio AUDIO = new Audio();
 
+        // 1 personagem player só
         Personagem P1 = new Personagem();
 
-        public void Criarinimmigos()
-        {
+        //novo botao pro menu
+        Botoes Botao = new Botoes();
 
-        }
+        //nova lista de i1
+        List<Inimigo> listai1 = new List<Inimigo>();
 
-        List<Personagem> inimigo1 = new List<Personagem>();
+        //tempo para gerar 1/++ inimigo 
+        int TempoParaInimigos = 0;
+
+        //slow motion
+        public static int slowmotion = 0;
+
+        //contagem
+        int contagemREGEN = 0;
+        int contagemGERADOR = 0;
+        //fim
+        Draw DRAW = new Draw();
+
+       
 
         public Game1()
         {
@@ -66,18 +86,12 @@ namespace Stick_RPG_Fight
             }
             APPLY = new Rectangle(Window.ClientBounds.Width / 4, Window.ClientBounds.Height / 8, Window.ClientBounds.Width / 3, Window.ClientBounds.Width / 3);
             Bfull = new Rectangle(B1[4].X, Window.ClientBounds.Height - Window.ClientBounds.Height / 4, Window.ClientBounds.Width / 16, Window.ClientBounds.Height / 12);
+            
 
+            //novo inimigo
 
-            //exemplo
-
-
-            for (int i = 0; i < 3; i++)
-            {
-                Personagem inimigo = new Personagem();
-
-
-                inimigo1.Add(inimigo);
-            }
+            Inimigo i1 = new Inimigo();
+            listai1.Add(i1);
 
             base.Initialize();
         }
@@ -87,7 +101,7 @@ namespace Stick_RPG_Fight
         {
             spriteBatch = new SpriteBatch(GraphicsDevice);
 
-            Contexto.inicializar(Content, M1, AUDIO, P1); // classe contexto
+            Contexto.inicializar(Content, M1, AUDIO, P1, Botao, listai1); // classe contexto
 
             menu = Content.Load<SpriteFont>("menu");
 
@@ -97,6 +111,9 @@ namespace Stick_RPG_Fight
             imgAPPLY = Content.Load<Texture2D>("B APPLY");
             imgAPPLY2 = Content.Load<Texture2D>("B APPLY2");
             imgAPPLY3 = Content.Load<Texture2D>("B APPLY3");
+
+            imgFlechaD = Content.Load<Texture2D>("Flecha D");
+            imgFlechaE = Content.Load<Texture2D>("Flecha E");
 
             imgteste = Content.Load<Texture2D>("teste");
            //--
@@ -111,16 +128,68 @@ namespace Stick_RPG_Fight
         protected override void Update(GameTime gameTime)
         {
             //universal
+
+            var mouseState = Mouse.GetState();
+            var mousePosition = new Point(mouseState.X, mouseState.Y);
+
             if (Mouse.GetState().LeftButton != ButtonState.Pressed) // BOTAO não pressionado
             {
                 BOTAO = false;
             }
+
+            if (Botao.HOME == true)
+            {
+                MENU = true;
+                Botao.COMERCIO = false;
+                M1.COMBATE = false;
+                M1.HISTORY = false;
+            }
+
+            //clicando
+            //----  HOME
+            if (Mouse.GetState().LeftButton == ButtonState.Pressed && M1.CombateBotao.Contains(mousePosition))
+            {
+                BOTAO = true;
+                M1.COMBATEativado = true;
+            }
+
+            if (!M1.CombateBotao.Contains(mousePosition))
+            {
+                M1.COMBATEativado = false;
+            }
+
+            if (!BOTAO && M1.COMBATEativado)
+            {
+                MENU = false;
+                M1.COMBATE = true;
+                Botao.HOME = false;
+            }
             
-            var mouseState = Mouse.GetState();
-            var mousePosition = new Point(mouseState.X, mouseState.Y);
+            //
+            if (!Botao.HOME)
+            {
+
+                if (Botao.HOMEquadrado.Contains(mousePosition) && Mouse.GetState().LeftButton == ButtonState.Pressed) // botao home
+                {
+                    BOTAO = true;
+                    Botao.HOMEb = true;
+                }
+                if (Botao.HOMEb && !BOTAO)
+                {
+                    Botao.HOME = true;
+                }
+                if (!Botao.HOMEquadrado.Contains(mousePosition))
+                {
+                    Botao.HOMEb = false;
+                }
+
+            }
+           //                                                           menu
+
+
 
             //============================================================ MENU ===================================================
-                //============================================================ MENU ===================================================
+            //============================================================ MENU ===================================================
             if (MENU && !M1.COMBATE)
             {
                 if (menu00)
@@ -176,7 +245,34 @@ namespace Stick_RPG_Fight
                             Contexto.Fundo.chao = new Rectangle(Contexto.Fundo.fase.X, Contexto.Fundo.fase.Y + Window.ClientBounds.Height / 4 + Contexto.Fundo.fase.Height - Window.ClientBounds.Height / 3 - 1, Contexto.Fundo.fase.Width, Window.ClientBounds.Height / 3 - Window.ClientBounds.Height / 4);
 
                             //MediaPlayer.Play(AUDIO.menusong);
+
+                            //botao
+                            Botao.HOME = true;
+                            Botao.HOMEquadrado = new Rectangle(Window.ClientBounds.Height / 100, Window.ClientBounds.Height / 100, Window.ClientBounds.Height / 10, Window.ClientBounds.Height / 10);
+                            Botao.COMERCIO = false;
+                            Botao.COMERCIOquadrado = new Rectangle(Window.ClientBounds.Height / 100, Window.ClientBounds.Height / 100 + Window.ClientBounds.Height / 10 + Window.ClientBounds.Height / 100, Window.ClientBounds.Height / 10, Window.ClientBounds.Height / 10);
                             
+                            //HUD
+                            //barra
+                            P1.Barra = new Rectangle(Botao.HOMEquadrado.X + Botao.HOMEquadrado.Width + Window.ClientBounds.Height / 100, Botao.HOMEquadrado.Y, Window.ClientBounds.Width / 3, Window.ClientBounds.Height / 10);
+                            P1.BarraEnergia = new Rectangle(Botao.HOMEquadrado.X + Botao.HOMEquadrado.Width + Window.ClientBounds.Height / 100, Botao.HOMEquadrado.Y, Window.ClientBounds.Width / 3, Window.ClientBounds.Height / 10);
+                            P1.BarraVida = new Rectangle(Botao.HOMEquadrado.X + Botao.HOMEquadrado.Width + Window.ClientBounds.Height / 100, Botao.HOMEquadrado.Y, Window.ClientBounds.Width / 3, Window.ClientBounds.Height / 10);
+                            P1.BarraMana = new Rectangle(Botao.HOMEquadrado.X + Botao.HOMEquadrado.Width + Window.ClientBounds.Height / 100, Botao.HOMEquadrado.Y, Window.ClientBounds.Width / 3, Window.ClientBounds.Height / 10);
+
+                            P1.vida = 200;
+                            P1.vidaTOTAL = 200;
+                            P1.energia = 150;
+                            P1.energiaTOTAL = 150;
+                            P1.mana = 120;
+                            P1.manaTOTAL = 120;
+
+                            //tela
+                            TELACHEIA = new Rectangle(0, 0, Window.ClientBounds.Width, Window.ClientBounds.Height);
+
+                            //flecha D e E
+                            FlechaD = new Rectangle(Window.ClientBounds.Width - Window.ClientBounds.Height / 10, Window.ClientBounds.Height - Window.ClientBounds.Height / 10, Window.ClientBounds.Height / 10, Window.ClientBounds.Height / 10);
+                            FlechaE = new Rectangle(0, Window.ClientBounds.Height - Window.ClientBounds.Height / 10, Window.ClientBounds.Height / 10, Window.ClientBounds.Height / 10);
+
                         }//fim da transição
 
                     }
@@ -190,76 +286,17 @@ namespace Stick_RPG_Fight
 
                 if (menu01)
                 {
-                    
 
+                    var WidthTela = Window.ClientBounds.Width;
+                    var HeightTela = Window.ClientBounds.Height;
 
                     if (Keyboard.GetState().IsKeyDown(Keys.Escape))//saida
                         Exit();
                     else
                     {
-                        if (M1.HistoryBotao.Contains(mousePosition))
-                        {
-                            M1.FRAMEhistory(M1);
 
-                            M1.HistoryBotao.X = 0;
-                            M1.HistoryBotao.Y = Window.ClientBounds.Height / 3 - Window.ClientBounds.Height / 30;
-                            M1.HistoryBotao.Width = Window.ClientBounds.Width / 2;
-                            M1.HistoryBotao.Height = Window.ClientBounds.Height / 6;
+                        M1.menu01GAME(WidthTela, HeightTela); //RESUMAO 
 
-                        }
-                        else
-                        {
-                            if (M1.HistoryBotao.Y != Window.ClientBounds.Height / 3)
-                            {
-                                M1.HistoryBotao.X = 0;
-                                M1.HistoryBotao.Y = Window.ClientBounds.Height / 3;
-                                M1.HistoryBotao.Width = Window.ClientBounds.Width / 3;
-                                M1.HistoryBotao.Height = Window.ClientBounds.Height / 8;
-                                M1.framehistoryB.X = 0;
-                                M1.framehistoryB.Y = 0;
-                            }
-                        }
-
-                        //combate
-                        if (M1.CombateBotao.Contains(mousePosition))
-                        {
-                            M1.FRAMEcombate(M1);
-
-                            M1.CombateBotao.X = Window.ClientBounds.Width - Window.ClientBounds.Width / 2;
-                            M1.CombateBotao.Y = Window.ClientBounds.Height / 3 - Window.ClientBounds.Height / 30;
-                            M1.CombateBotao.Width = Window.ClientBounds.Width / 2;
-                            M1.CombateBotao.Height = Window.ClientBounds.Height / 6;
-
-                           
-                        }
-                        else
-                        {
-                            M1.CombateBotao.X = Window.ClientBounds.Width - Window.ClientBounds.Width / 3;
-                            M1.CombateBotao.Y = Window.ClientBounds.Height / 3;
-                            M1.CombateBotao.Width = Window.ClientBounds.Width / 3;
-                            M1.CombateBotao.Height = Window.ClientBounds.Height / 8;
-                            M1.framecombateB.X = 0;
-                            M1.framecombateB.Y = 0;
-                        }
-
-
-                        //clicando
-                        if (Mouse.GetState().LeftButton == ButtonState.Pressed && M1.CombateBotao.Contains(mousePosition))
-                        {
-                            BOTAO = true;
-                            M1.COMBATEativado = true;
-                        }
-
-                        if (!M1.CombateBotao.Contains(mousePosition))
-                        {
-                            M1.COMBATEativado = false;
-                        }
-
-                        if (!BOTAO && M1.COMBATEativado)
-                        {
-                            MENU = false;
-                            M1.COMBATE = true;
-                        }
                     }
                 }
             }// FIM DO INICIO
@@ -267,192 +304,170 @@ namespace Stick_RPG_Fight
             // #--------------------------------------------------------------------------------- jogo ------------------------------------------------------#
 
 
+            
+
+
+            // #--------------------------------------------------------------------------------- jogo ------------------------------------------------------#
 
 
 
 
 
-
+            // #--------------------------------------------------------------------------------- jogo ------------------------------------------------------#
             if (M1.COMBATE)
             {
 
                 var WidthTela = Window.ClientBounds.Width;
                 var HeightTela = Window.ClientBounds.Height;
 
-                Contexto.Fundo.atualizachao(Contexto.Fundo, HeightTela);
+                Contexto.Fundo.atualizaçao(Contexto.Fundo, HeightTela);
 
                 if (Keyboard.GetState().IsKeyDown(Keys.Escape))//saida
                     Exit();
                 else
                 {
-                    P1.MOV(WidthTela,HeightTela, aleatório);
+                    //mov do personagem
+                    P1.MOV(WidthTela, HeightTela, aleatório);
+
+                    //posiçao do bot
+                    for (int i = 0; i < listai1.Count; i++) // atualização de todos os inimigos
+                    {
+                        listai1[i].PosiçãoINIMIGO(WidthTela, HeightTela);
+                    }
+
+                    // SEPARADO --- PARA PODER USAR O PODER DE SLOW MOTION + CLONES
+                    if (P1.PODER)
+                    {
+                        //preço
+                        if (P1.mana > 0)
+                        P1.mana -= 1;
+                        else if (P1.mana <= 0)
+                        {
+                            P1.PODER = false;
+                        }
+
+                        P1.POSIÇÃOdoCLONE(P1);
+
+
+
+                        //açao
+                        if (slowmotion == 7)
+                        {
+                            //mov do bot
+                            for (int i = 0; i < listai1.Count; i++) // atualização de todos os inimigos
+                            {
+                                
+                                listai1[i].MOV(WidthTela, HeightTela, aleatório);
+                                listai1[i].INTELIGENCIA(WidthTela, HeightTela, P1, listai1);
+                            }
+                            //gerador de inimigos
+                            if (TempoParaInimigos == 400)
+                            {
+                                listai1[0].GERARi1(listai1, WidthTela, HeightTela, aleatório);
+                                TempoParaInimigos = 0;
+                            }
+                            else
+                            {
+                                TempoParaInimigos++;
+                            }
+                            slowmotion = 0;
+                        }
+                        else
+                        {
+                            slowmotion++;
+                        }
+                        if (contagemGERADOR == 5)
+                        {
+                            P1.GERADORdeCLONES(P1);
+                            contagemGERADOR = 0;
+                        }
+                        else
+                        {
+                            contagemGERADOR++;
+                        }
+
+                    }
+                    else if (!P1.PODER)
+                    {
+                        //mov do bot
+                        for (int i = 0; i < listai1.Count; i++) // atualização de todos os inimigos
+                        {
+                            
+                            listai1[i].MOV(WidthTela, HeightTela, aleatório);
+                            listai1[i].INTELIGENCIA(WidthTela, HeightTela, P1, listai1);
+                        }
+                        //gerador de inimigos
+                        if (TempoParaInimigos == 400)
+                        {
+                            listai1[0].GERARi1(listai1, WidthTela, HeightTela, aleatório);
+                            TempoParaInimigos = 0;
+                        }
+                        else
+                        {
+                            TempoParaInimigos++;
+                        }
+
+                        P1.clonelistaPoder.Clear();
+                    }
 
                     
-
-                    if (P1.DIREITA) // olhando pra direita
+                    //definir o combate
+                    for (int i = 0; i < listai1.Count; i++) // atualização de todos os inimigos
                     {
-                        if (!P1.COMBATE) // fora de combate
+                        if (listai1[i].individuo.Intersects(TELACHEIA)) // se ele estiver NA TELA
                         {
-                            if (P1.PARADO)
-                            {
-                                //frame
-                                P1.FRAMESparado1();
-                                //tamanho do personagem
-                                P1.individuo.Width = Window.ClientBounds.Width / 16;
-                            }
+                            P1.COMBATE = true;
                         }
-                        if (P1.ANDANDO)
+                        else if (listai1.Count == 0) // se ele nao estiver NA TELA
                         {
-                            //frame
-                            P1.FRAMESmovendo();
-                            //tamanho do personagem
-                            P1.individuo.Width = Window.ClientBounds.Width / 10;
-
+                            P1.COMBATE = false;
                         }
+                    }
 
-                        if (P1.CORRENDO)
-                        {
-                            //frame
-                            P1.FRAMESmovendo();
-                            //tamanho do personagem
-                            P1.individuo.Width = Window.ClientBounds.Width / 7;
-                        }
+                    //HUD
+                    P1.BarraVida.Width = (int)((float)(P1.vida) / P1.vidaTOTAL * WidthTela / 3);
+                    P1.BarraEnergia.Width = (int)((float)(P1.energia) / P1.energiaTOTAL * WidthTela / 3);
+                    P1.BarraMana.Width = (int)((float)(P1.mana) / P1.manaTOTAL * WidthTela / 3);
 
-                        if (P1.PULANDOparado)
-                        {
-                            //frame
-                            if (!P1.ATACANDO)
-                            {
-                                P1.FRAMESpular(WidthTela, HeightTela);
-                            }
-
-                            //tamanho do personagem
-                            P1.individuo.Width = Window.ClientBounds.Width / 8;
-                        }
-
-                        if (P1.PULANDOandando)
-                        {
-                            
-                            //frame
-                            if (!P1.ATACANDO)
-                            {
-                                P1.FRAMESpular(WidthTela, HeightTela);
-                            }
-
-
-                            
-                            //tamanho do personagem
-                            P1.individuo.Width = Window.ClientBounds.Width / 14;
-                        }
-
-                        if (P1.PULANDOcorrendo)
-                        {
-
-                            //frame
-                            if (!P1.ATACANDO)
-                            {
-                                P1.FRAMESpular(WidthTela, HeightTela);
-                            }
-
-
-                            
-                            //tamanho do personagem
-                            P1.individuo.Width = Window.ClientBounds.Width / 8;
-                        }
-                        
-                    }//fim da direita
-
-                    if (P1.ESQUERDA) // olhando pra esquerda
+                    //constantes
+                    if (P1.energia <= 150 && !P1.CORRENDO && !P1.PULANDOcorrendo)
                     {
-                        if (!P1.COMBATE) // fora de combate
+                        P1.energia += 2;
+                    }
+                    if (P1.mana <= 120 && !P1.PODER)
+                    {
+                        if (contagemREGEN == 2)
                         {
-                            if (P1.PARADO)
-                            {
-                                //frame
-                                P1.FRAMESparado1E();
-                                //tamanho do personagem
-                                P1.individuo.Width = Window.ClientBounds.Width / 16;
-                            }
+                            P1.mana += 1;
+                            contagemREGEN = 0;
                         }
-                        if (P1.ANDANDO)
+                        else
                         {
-                            //frame
-                            P1.FRAMESmovendoE();
-                            //tamanho do personagem
-                            P1.individuo.Width = Window.ClientBounds.Width / 10;
-
+                            contagemREGEN++;
                         }
+                    }
 
-                        if (P1.CORRENDO)
-                        {
-                            //frame
-                            P1.FRAMESmovendoE();
-                            //tamanho do personagem
-                            P1.individuo.Width = Window.ClientBounds.Width / 7;
-                        }
+                    if (Keyboard.GetState().IsKeyDown(Keys.R) && !P1.PODER && P1.mana >= 75)
+                    {
+                        P1.PODER = true;
+                    }
 
-                        if (P1.PULANDOparado)
-                        {
-                            //frame
-                            if (!P1.ATACANDO)
-                            {
-                                P1.FRAMESpularE( WidthTela, HeightTela);
-                            }
-
-                            //tamanho do personagem
-                            P1.individuo.Width = Window.ClientBounds.Width / 8;
-                        }
-
-                        if (P1.PULANDOandando)
-                        {
-
-                            //frame
-                            if (!P1.ATACANDO)
-                            {
-                                P1.FRAMESpularE( WidthTela, HeightTela);
-                            }
-
-
-                            
-                            //tamanho do personagem
-                            P1.individuo.Width = Window.ClientBounds.Width / 14;
-                        }
-
-                        if (P1.PULANDOcorrendo)
-                        {
-
-                            //frame
-                            if (!P1.ATACANDO)
-                            {
-                                P1.FRAMESpularE( WidthTela, HeightTela);
-                            }
-
-
-                            
-                            //tamanho do personagem
-                            P1.individuo.Width = Window.ClientBounds.Width / 8;
-                        }
-
-                    }//fim da direita
-                }
-
-                
-            }
+                }//fim do jogo
+            }//fim do combate
 
 
             base.Update(gameTime);
         }
 
-        /// <summary>
-        /// This is called when the game should draw itself.
-        /// </summary>
-        /// <param name="gameTime">Provides a snapshot of timing values.</param>
+       
         protected override void Draw(GameTime gameTime)
         {
             GraphicsDevice.Clear(Color.CornflowerBlue);
 
             var mouseState = Mouse.GetState();
             var mousePosition = new Point(mouseState.X, mouseState.Y);
+            var WidthTela = Window.ClientBounds.Width;
+            var HeightTela = Window.ClientBounds.Height;
 
             spriteBatch.Begin();
 
@@ -464,76 +479,18 @@ namespace Stick_RPG_Fight
 
                 spriteBatch.Draw(Contexto.Fundo.menu00fundo, new Rectangle(0, 0, Window.ClientBounds.Width, Window.ClientBounds.Height), Color.White);
 
-                spriteBatch.DrawString(menu, "TESTE: " + inimigo1.Count, new Vector2(0, Window.ClientBounds.Height - 15), Color.White); //teste
 
                 if (menu00)
                 {
-                    spriteBatch.Draw(Contexto.Fundo.menu00fundo, new Rectangle(0, 0, Window.ClientBounds.Width, Window.ClientBounds.Height), Color.White);
 
-                    if (!APPLY.Contains(mousePosition))
-                    {
-                        spriteBatch.Draw(imgAPPLY2, APPLY, Color.White);//menu00
-                    }
-                    if (APPLY.Contains(mousePosition))
-                    {
-                        spriteBatch.Draw(imgAPPLY, APPLY, Color.White);//menu00
-                    }
-                    if (APPLY.Contains(mousePosition) && Mouse.GetState().LeftButton == ButtonState.Pressed && Bapply)
-                    {
-                        spriteBatch.Draw(imgAPPLY3, APPLY, Color.White);//menu00
-                    }
-
-
-                    for (int i = 0; i < B1.Length; i++)
-                    {
-                        if (!b1[i])
-                        {
-                            spriteBatch.Draw(imgB1, B1[i], Color.White);
-                        }
-                        else if (b1[i])
-                        {
-                            spriteBatch.Draw(imgB2, B1[i], Color.White);
-                        }
-                    }
-
-                    spriteBatch.DrawString(menu, "1920x1080p", new Vector2(B1[0].X - 20, B1[0].Y - 15), Color.White);
-
-                    spriteBatch.DrawString(menu, "1440x900p", new Vector2(B1[1].X, B1[1].Y - 15), Color.White);
-
-                    spriteBatch.DrawString(menu, "1366x768p", new Vector2(B1[2].X, B1[2].Y - 15), Color.White);
-
-                    spriteBatch.DrawString(menu, "1280x960p", new Vector2(B1[3].X, B1[3].Y - 15), Color.White);
-
-                    spriteBatch.DrawString(menu, "800x600p", new Vector2(B1[4].X, B1[4].Y - 15), Color.White);
-
-                    if (!BFULL)
-                    {
-                        spriteBatch.Draw(imgB1, Bfull, Color.White);
-                    }
-                    else if (BFULL)
-                    {
-                        spriteBatch.Draw(imgB2, Bfull, Color.White);
-                    }
-
-                    spriteBatch.DrawString(menu, "FULL SCREEN", new Vector2(Bfull.X, Bfull.Y - 15), Color.White);
-
+                    DRAW.Drawmenu00(WidthTela, HeightTela, spriteBatch, imgAPPLY2, imgAPPLY3, imgAPPLY, APPLY, Bapply, B1, imgB1, imgB2, b1, BFULL, menu, Bfull); // resumao
 
 
                 }
 
                 if (menu01)
                 {
-                    spriteBatch.Draw(M1.imghistory, M1.HistoryBotao,
-                                   new Rectangle(M1.framehistoryB.X * M1.TamanhoSpritesheethistoryB.X, M1.framehistoryB.Y * M1.TamanhoSpritesheethistoryB.Y,
-                                                 M1.TamanhoSpritesheethistoryB.X, M1.TamanhoSpritesheethistoryB.Y),
-                                                 Color.White);
-
-                    spriteBatch.Draw(M1.imgcombate, M1.CombateBotao,
-                                   new Rectangle(M1.framecombateB.X * M1.TamanhoSpritesheetcombateB.X, M1.framecombateB.Y * M1.TamanhoSpritesheetcombateB.Y,
-                                                 M1.TamanhoSpritesheetcombateB.X, M1.TamanhoSpritesheetcombateB.Y),
-                                                 Color.White);
-
-                    spriteBatch.DrawString(menu, "Versão 1.0", new Vector2(Window.ClientBounds.Width - 100, Window.ClientBounds.Height - 15), Color.Cyan);
+                    DRAW.Drawmenu01(spriteBatch, M1, WidthTela, HeightTela, menu); // resumao
                 }
             }//FIM DO MENU
 
@@ -541,104 +498,14 @@ namespace Stick_RPG_Fight
 
             if (M1.COMBATE)
             {
-                spriteBatch.Draw(Contexto.Fundo.imgfase1, Contexto.Fundo.fase, Color.White); // fundo
-                spriteBatch.Draw(imgteste, Contexto.Fundo.chao, Color.White);
-                //--------------------------------------------------------------------------------------------------
-                //--------------------------------------------------------------------------------------------------
-                //--------------------------------------------------------------------------------------------------
+                DRAW.DrawCombate(spriteBatch,P1,listai1, TELACHEIA, FlechaD, FlechaE, imgFlechaD, imgFlechaE); //RESUMAO
+                DRAW.DrawCLONES(spriteBatch, P1); // PODER
 
-                if (P1.DIREITA)
-                {
-                    if (!P1.COMBATE) // fora de combate
-                    {
-                        if (P1.PARADO) // parado fora de luta
-                        {
-                            spriteBatch.Draw(P1.imgSpriteSheetparado1, P1.individuo,
-                                          new Rectangle(P1.frameparado1.X * P1.tamanhoSpriteSheetparado1.X, P1.frameparado1.Y * P1.tamanhoSpriteSheetparado1.Y,
-                                                        P1.tamanhoSpriteSheetparado1.X, P1.tamanhoSpriteSheetparado1.Y),
-                                                        Color.White);
-                        }
-                    }
-
-                    if (P1.COMBATE) // em combate
-                    {
-                        if (P1.PARADO) // parado na luta
-                        {
-                            spriteBatch.Draw(P1.imgSpriteSheetparado2, P1.individuo,
-                                          new Rectangle(P1.frameparado2.X * P1.tamanhoSpriteSheetparado2.X, P1.frameparado2.Y * P1.tamanhoSpriteSheetparado2.Y,
-                                                        P1.tamanhoSpriteSheetparado2.X, P1.tamanhoSpriteSheetparado2.Y),
-                                                        Color.White);
-                        }
-                    }
-
-                    if (P1.ANDANDO) // se movimentando pra direita
-                    {
-                        spriteBatch.Draw(P1.imgSpriteSheetandando, P1.individuo,
-                                          new Rectangle(P1.framemovendo.X * P1.tamanhoSpriteSheetandando.X, P1.framemovendo.Y * P1.tamanhoSpriteSheetandando.Y,
-                                                        P1.tamanhoSpriteSheetandando.X, P1.tamanhoSpriteSheetandando.Y),
-                                                        Color.White);
-                    }
-
-                    if (P1.CORRENDO)
-                    {
-                        spriteBatch.Draw(P1.imgSpriteSheetcorrendo, P1.individuo,
-                                          new Rectangle(P1.framemovendo.X * P1.tamanhoSpriteSheetcorrendo.X, P1.framemovendo.Y * P1.tamanhoSpriteSheetcorrendo.Y,
-                                                        P1.tamanhoSpriteSheetcorrendo.X, P1.tamanhoSpriteSheetcorrendo.Y),
-                                                        Color.White);
-                    }
-
-                    if (P1.PULANDOandando || P1.PULANDOcorrendo || P1.PULANDOparado)
-                    {
-                        spriteBatch.Draw(P1.imgSpriteSheetpular, P1.individuo,
-                                         new Rectangle(P1.framepular.X * P1.tamanhoSpriteSheetpular.X, P1.framepular.Y * P1.tamanhoSpriteSheetpular.Y,
-                                                       P1.tamanhoSpriteSheetpular.X, P1.tamanhoSpriteSheetpular.Y),
-                                                       Color.White);
-                    }
-                }
-
-
-                //--------------------------------------------------------------------------------------------------
-                //--------------------------------------------------------------------------------------------------
-                //--------------------------------------------------------------------------------------------------
-                if (P1.ESQUERDA)
-                {
-                    if (!P1.COMBATE) // fora de combate
-                    {
-                        if (P1.PARADO) // parado fora de luta
-                        {
-                            spriteBatch.Draw(P1.imgSpriteSheetparado1E, P1.individuo,
-                                          new Rectangle(P1.frameparado1.X * P1.tamanhoSpriteSheetparado1.X, P1.frameparado1.Y * P1.tamanhoSpriteSheetparado1.Y,
-                                                        P1.tamanhoSpriteSheetparado1.X, P1.tamanhoSpriteSheetparado1.Y),
-                                                        Color.White);
-                        }
-                    }
-                    if (P1.ANDANDO) // se movimentando pra esquerda
-                    {
-                        spriteBatch.Draw(P1.imgSpriteSheetandandoE, P1.individuo,
-                                          new Rectangle(P1.framemovendo.X * P1.tamanhoSpriteSheetandando.X, P1.framemovendo.Y * P1.tamanhoSpriteSheetandando.Y,
-                                                        P1.tamanhoSpriteSheetandando.X, P1.tamanhoSpriteSheetandando.Y),
-                                                        Color.White);
-                    }
-
-                    if (P1.CORRENDO)
-                    {
-                        spriteBatch.Draw(P1.imgSpriteSheetcorrendoE, P1.individuo,
-                                          new Rectangle(P1.framemovendo.X * P1.tamanhoSpriteSheetcorrendo.X, P1.framemovendo.Y * P1.tamanhoSpriteSheetcorrendo.Y,
-                                                        P1.tamanhoSpriteSheetcorrendo.X, P1.tamanhoSpriteSheetcorrendo.Y),
-                                                        Color.White);
-                    }
-
-                    if (P1.PULANDOandando || P1.PULANDOcorrendo || P1.PULANDOparado)
-                    {
-                        spriteBatch.Draw(P1.imgSpriteSheetpularE, P1.individuo,
-                                         new Rectangle(P1.framepular.X * P1.tamanhoSpriteSheetpular.X, P1.framepular.Y * P1.tamanhoSpriteSheetpular.Y,
-                                                       P1.tamanhoSpriteSheetpular.X, P1.tamanhoSpriteSheetpular.Y),
-                                                       Color.White);
-                    }
-                }
-
-                spriteBatch.DrawString(menu, "TESTE X: " + P1.framepular.X + " TESTE Y: " + P1.framepular.Y, new Vector2(0, Window.ClientBounds.Height - 15), Color.Black); //teste
+                spriteBatch.DrawString(menu, "LISTA: " + listai1.Count , new Vector2(0, Window.ClientBounds.Height - 15), Color.Black); //teste
             }//FIM DO COMBATE
+
+            //botao menu e comercio
+            DRAW.DrawBotaoEstatico(Botao, spriteBatch, MENU, M1); //resumo dos botoes
 
             spriteBatch.End();
 

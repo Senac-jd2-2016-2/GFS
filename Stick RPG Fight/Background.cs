@@ -12,12 +12,13 @@ namespace Stick_RPG_Fight
     {
         public Texture2D menu00fundo;
         public Texture2D imgfase1;
+        public Texture2D imgfundopoder;
         public Rectangle fase = new Rectangle();
         public Rectangle chao = new Rectangle();
         
 
 
-        public void atualizachao(Background Fundo, int HeightTela)
+        public void atualizaçao(Background Fundo, int HeightTela)
         {
             Contexto.Fundo.chao.X = Contexto.Fundo.fase.X;
             Contexto.Fundo.chao.Y = Contexto.Fundo.fase.Y + Contexto.Fundo.fase.Height + HeightTela / 4 - HeightTela / 3 - 1;

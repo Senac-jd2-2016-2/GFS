@@ -31,33 +31,85 @@ namespace Stick_RPG_Fight
         public bool COMBATE;
         public bool COMBATEativado;
 
-        public void FRAMEhistory(Menu M1)
+        public void FRAMEhistory()
         {
-            M1.framehistoryB.X++;
-            if (M1.framehistoryB.X >= M1.SpritesheethistoryB.X)
+            framehistoryB.X++;
+            if (framehistoryB.X >= SpritesheethistoryB.X)
             {
-                M1.framehistoryB.X = 0;
-                M1.framehistoryB.Y++;
+                framehistoryB.X = 0;
+                framehistoryB.Y++;
             }
-            if (M1.framehistoryB.X == 6 && M1.framehistoryB.Y == 7)
+            if (framehistoryB.X == 6 && framehistoryB.Y == 7)
             {
-                M1.framehistoryB.X = 0;
-                M1.framehistoryB.Y = 0;
+                framehistoryB.X = 0;
+                framehistoryB.Y = 0;
             }
         }
 
-        public void FRAMEcombate(Menu M1)
+        public void FRAMEcombate()
         {
-            M1.framecombateB.X++;
-            if (M1.framecombateB.X >= M1.SpritesheetcombateB.X)
+            framecombateB.X++;
+            if (framecombateB.X >= SpritesheetcombateB.X)
             {
-                M1.framecombateB.X = 0;
-                M1.framecombateB.Y++;
+                framecombateB.X = 0;
+                framecombateB.Y++;
             }
-            if (M1.framecombateB.X == 2 && M1.framecombateB.Y == 14)
+            if (framecombateB.X == 2 && framecombateB.Y == 14)
             {
-                M1.framecombateB.X = 0;
-                M1.framecombateB.Y = 0;
+                framecombateB.X = 0;
+                framecombateB.Y = 0;
+            }
+        }
+
+        public void menu01GAME(int WidthTela, int HeightTela)
+        {
+            var mouseState = Mouse.GetState();
+            var mousePosition = new Point(mouseState.X, mouseState.Y);
+
+
+            if (HistoryBotao.Contains(mousePosition))
+            {
+                FRAMEhistory();
+
+                HistoryBotao.X = 0;
+                HistoryBotao.Y = HeightTela / 3 - HeightTela / 30;
+                HistoryBotao.Width = WidthTela / 2;
+                HistoryBotao.Height = HeightTela / 6;
+
+            }
+            else
+            {
+                if (HistoryBotao.Y != HeightTela / 3)
+                {
+                    HistoryBotao.X = 0;
+                    HistoryBotao.Y = HeightTela / 3;
+                    HistoryBotao.Width = WidthTela / 3;
+                    HistoryBotao.Height = HeightTela / 8;
+                    framehistoryB.X = 0;
+                    framehistoryB.Y = 0;
+                }
+            }
+
+            //combate
+            if (CombateBotao.Contains(mousePosition))
+            {
+                FRAMEcombate();
+
+                CombateBotao.X = WidthTela - WidthTela / 2;
+                CombateBotao.Y = HeightTela / 3 - HeightTela / 30;
+                CombateBotao.Width = WidthTela / 2;
+                CombateBotao.Height = HeightTela / 6;
+
+
+            }
+            else
+            {
+                CombateBotao.X = WidthTela - WidthTela / 3;
+                CombateBotao.Y = HeightTela / 3;
+                CombateBotao.Width = WidthTela / 3;
+                CombateBotao.Height = HeightTela / 8;
+                framecombateB.X = 0;
+                framecombateB.Y = 0;
             }
         }
     }
