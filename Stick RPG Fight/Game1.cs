@@ -261,8 +261,8 @@ namespace Stick_RPG_Fight
 
                             P1.vida = 200;
                             P1.vidaTOTAL = 200;
-                            P1.energia = 150;
-                            P1.energiaTOTAL = 150;
+                            P1.energia = 200;
+                            P1.energiaTOTAL = 200;
                             P1.mana = 120;
                             P1.manaTOTAL = 120;
 
@@ -430,7 +430,7 @@ namespace Stick_RPG_Fight
                     P1.BarraMana.Width = (int)((float)(P1.mana) / P1.manaTOTAL * WidthTela / 3);
 
                     //constantes
-                    if (P1.energia <= 150 && !P1.CORRENDO && !P1.PULANDOcorrendo)
+                    if (P1.energia <= 200 && !P1.CORRENDO && !P1.PULANDOcorrendo)
                     {
                         P1.energia += 2;
                     }
