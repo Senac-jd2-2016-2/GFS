@@ -3,7 +3,7 @@ Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio 2013
 VisualStudioVersion = 12.0.40629.0
 MinimumVisualStudioVersion = 10.0.40219.1
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Stick RPG Fight", "Stick RPG Fight\Stick RPG Fight.csproj", "{215C6D8B-C5E9-468A-9E9F-86A7C594B54D}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Lethal Milker", "Stick RPG Fight\Lethal Milker.csproj", "{215C6D8B-C5E9-468A-9E9F-86A7C594B54D}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
