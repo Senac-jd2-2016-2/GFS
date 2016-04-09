@@ -31,14 +31,23 @@ namespace Stick_RPG_Fight
 
         //GERAL DOS RETANGLES
         public Rectangle individuo = new Rectangle();
+        public Rectangle meio = new Rectangle();
         public Rectangle cima = new Rectangle();
         public Rectangle pernas = new Rectangle();
 
+        //barra
+        public Rectangle VIDA = new Rectangle();
+        public Rectangle MANA = new Rectangle();
+        public Rectangle ENERGIA = new Rectangle();
+
         //GERAL int
         public int opç = 1;
-        public int life;
+        public int vida;
+        public int mana;
         public int energia;
-        public int poder;
+        public int vidaT;
+        public int manaT;
+        public int energiaT;
 
         // GERAL DOS MOVIMENTOS
         public bool DIREITA = true;
@@ -51,6 +60,7 @@ namespace Stick_RPG_Fight
         public bool PULANDOcorrendo;
         public bool ANDANDO = true;
         public bool CORRENDO;
+        public bool DEFENDENDO;
 
         public bool subindo;
         public bool descendo;
@@ -66,18 +76,24 @@ namespace Stick_RPG_Fight
             if (i1.opç == 1)
             {
                 i1.individuo = new Rectangle(Contexto.Fundo.fase.X + Contexto.Fundo.fase.Width + Vx, HeightTela - HeightTela / 3, WidthTela / 14, HeightTela / 4);
+                i1.meio = new Rectangle(i1.individuo.X + i1.individuo.Width / 4, i1.individuo.Y, i1.individuo.Width / 2, i1.individuo.Height);
                 i1.DIREITA = false;
                 i1.ESQUERDA = true;
             }
             else if (i1.opç == 2)
             {
                 i1.individuo = new Rectangle(Contexto.Fundo.fase.X + Vx - WidthTela / 14, HeightTela - HeightTela / 3, WidthTela / 14, HeightTela / 4);
+                i1.meio = new Rectangle(i1.individuo.X + i1.individuo.Width / 4, i1.individuo.Y, i1.individuo.Width / 2, i1.individuo.Height);
                 i1.DIREITA = true;
                 i1.ESQUERDA = false;
             }
 
             i1.Vx = 0;
             i1.Vy = 0;
+            i1.vidaT = 50;
+            i1.manaT = 20;
+            i1.energiaT = 100;
+            i1.vida = 50;
             
             listai1.Insert(listai1.Count, i1);
         }
@@ -105,9 +121,9 @@ namespace Stick_RPG_Fight
 
         public void INTELIGENCIA(int WidthTela, int HeightTela, Personagem P1, List<Inimigo> listai1)
         {
-            if (!individuo.Intersects(P1.individuo)) // caso nao estejam tocando
+            if (!meio.Intersects(P1.meio)) // caso nao estejam tocando
             {
-                if (individuo.X + individuo.Width < P1.individuo.X && !DIREITA) //se o bot estiver na esquerda do personagem
+                if (meio.X + meio.Width < P1.meio.X && !DIREITA) //se o bot estiver na esquerda do personagem
                 {
                     DIREITA = true;
                     ESQUERDA = false;
@@ -118,7 +134,7 @@ namespace Stick_RPG_Fight
                     frameAndari1.X = 19;
                     frameAndari1.Y = 0;
                 }
-                else if (individuo.X > P1.individuo.X + P1.individuo.Width && !ESQUERDA) //se o bot estiver na direita do personagem
+                else if (meio.X > P1.meio.X + P1.meio.Width && !ESQUERDA) //se o bot estiver na direita do personagem
                 {
                     DIREITA = false;
                     ESQUERDA = true;
@@ -132,7 +148,7 @@ namespace Stick_RPG_Fight
                 }
                 
             }
-            else if (individuo.Intersects(P1.individuo))//se estiver tocando
+            else if (meio.Intersects(P1.meio))//se estiver tocando
             {
                 PARADO = true;
                 DIREITA = false;
@@ -144,7 +160,7 @@ namespace Stick_RPG_Fight
             {
                 for (int outro = atual + 1; outro < listai1.Count; outro++)
                 {
-                    if (listai1[atual].individuo.X > P1.individuo.X && listai1[atual].individuo.X < listai1[outro].individuo.X && listai1[atual].individuo.Intersects(listai1[outro].individuo))
+                    if (listai1[atual].meio.X > P1.individuo.X && listai1[atual].meio.X < listai1[outro].meio.X && listai1[atual].meio.Intersects(listai1[outro].meio))
                     {
                         listai1[outro].PARADO = true;
                         listai1[outro].DIREITA = false;
@@ -152,7 +168,7 @@ namespace Stick_RPG_Fight
                         listai1[outro].ANDANDO = false;
 
                     }
-                    if (listai1[atual].individuo.X < P1.individuo.X && listai1[atual].individuo.X > listai1[outro].individuo.X && listai1[atual].individuo.Intersects(listai1[outro].individuo))
+                    if (listai1[atual].meio.X < P1.individuo.X && listai1[atual].meio.X > listai1[outro].meio.X && listai1[atual].meio.Intersects(listai1[outro].meio))
                     {
                         listai1[outro].PARADO = true;
                         listai1[outro].DIREITA = false;
@@ -163,10 +179,36 @@ namespace Stick_RPG_Fight
                     
                 }
             }//fim da colisao
+
+            //empurrar
+            if (P1.ATACANDO)
+            {
+                if (P1.meio.X < meio.X && P1.individuo.Intersects(meio) && P1.PARTE3 && P1.COMBO1)
+                {
+                    Vx += HeightTela / 100;
+                }
+                if (P1.meio.X < meio.X && P1.individuo.Intersects(meio) && P1.PARTE4 && P1.COMBO1)
+                {
+                    Vx += HeightTela / 90;
+                }
+
+                if (P1.meio.X > meio.X && P1.individuo.Intersects(meio) && P1.PARTE3 && P1.COMBO1)
+                {
+                    Vx -= HeightTela / 100;
+                }
+                if (P1.meio.X > meio.X && P1.individuo.Intersects(meio) && P1.PARTE4 && P1.COMBO1)
+                {
+                    Vx -= HeightTela / 90;
+                }
+            }
         }
 
         public void MOV(int WidthTela, int HeightTela, Random aleatório)
         {
+            meio.X = individuo.X + individuo.Width / 4;
+            meio.Y = individuo.Y;
+            meio.Width = individuo.Width / 2;
+            meio.Height = individuo.Height;
             if (PARADO)//PARADO
             {
                 individuo.Width = WidthTela / 10;
@@ -218,6 +260,37 @@ namespace Stick_RPG_Fight
                 }
             }
             
+        }//fim
+
+        public void HP(int WidthTela, int HeightTela)
+        {
+            VIDA.Width = (int)(((float)(vida) / vidaT) * individuo.Width);
+
+            VIDA.X = individuo.X;
+            VIDA.Height = HeightTela / 10;
+            VIDA.Y = individuo.Y - HeightTela / 10;
+
+            MANA.Width = (int)(((float)(mana) / manaT) * individuo.Width);
+
+            MANA.X = individuo.X;
+            MANA.Height = HeightTela / 10;
+            MANA.Y = individuo.Y - HeightTela / 10;
+
+            ENERGIA.Width = (int)(((float)(energia) / energiaT) * individuo.Width);
+
+            ENERGIA.X = individuo.X;
+            ENERGIA.Height = HeightTela / 10;
+            ENERGIA.Y = individuo.Y - HeightTela / 10;
+
+            
+            if (mana < manaT)
+            {
+                mana++;
+            }
+            if (energia < energiaT)
+            {
+                energia++;
+            }
         }
 
     }

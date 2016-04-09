@@ -25,3 +25,9 @@
 /processorParam:Quality=Best
 /build:Dreamland.mp3
 
+#begin HUD.spritefont
+/importer:FontDescriptionImporter
+/processor:FontDescriptionProcessor
+/processorParam:TextureFormat=Compressed
+/build:HUD.spritefont
+

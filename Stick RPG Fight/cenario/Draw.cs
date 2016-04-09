@@ -13,7 +13,7 @@ namespace Stick_RPG_Fight
 {
     class Draw
     {
-        public void DrawCombate(SpriteBatch spriteBatch, Personagem P1, List<Inimigo> listai1, Rectangle TELACHEIA, Rectangle FlechaD, Rectangle FlechaE, Texture2D imgFlechaD, Texture2D imgFlechaE)
+        public void DrawCombate(SpriteBatch spriteBatch, Personagem P1, List<Inimigo> listai1, Rectangle TELACHEIA, Rectangle FlechaD, Rectangle FlechaE, Texture2D imgFlechaD, Texture2D imgFlechaE, SpriteFont menu, SpriteFont HUDfont, int WidthTela, int HeightTela)
         {
             spriteBatch.Draw(Contexto.Fundo.imgfase1, Contexto.Fundo.fase, Color.White); // fundo
 
@@ -78,6 +78,49 @@ namespace Stick_RPG_Fight
                                                    P1.tamanhoSpriteSheetpular.X, P1.tamanhoSpriteSheetpular.Y),
                                                    Color.White);
                 }
+
+
+                //ATAQUE
+                if (P1.ATACANDO)
+                {
+                    if (P1.DIREITA)
+                    {
+                        if (P1.PARTE1)
+                        {
+                            spriteBatch.Draw(P1.imgsoco1, P1.individuo,
+                                        new Rectangle(P1.frameLUTA.X * P1.tamanhosoco1.X, P1.frameLUTA.Y * P1.tamanhosoco1.Y,
+                                                      P1.tamanhosoco1.X, P1.tamanhosoco1.Y),
+                                                      Color.White);
+                        }
+                        if (P1.COMBO1)
+                        {
+                            if (P1.PARTE2)
+                            {
+                                spriteBatch.Draw(P1.imgsoco2C1, P1.individuo,
+                                        new Rectangle(P1.frameLUTA.X * P1.tamanhosoco2C1.X, P1.frameLUTA.Y * P1.tamanhosoco2C1.Y,
+                                                      P1.tamanhosoco2C1.X, P1.tamanhosoco2C1.Y),
+                                                      Color.White);
+                            }
+                            if (P1.PARTE3)
+                            {
+                                spriteBatch.Draw(P1.imgsoco3C1, P1.individuo,
+                                        new Rectangle(P1.frameLUTA.X * P1.tamanhosoco3C1.X, P1.frameLUTA.Y * P1.tamanhosoco3C1.Y,
+                                                      P1.tamanhosoco3C1.X, P1.tamanhosoco3C1.Y),
+                                                      Color.White);
+                            }
+                            if (P1.PARTE4)
+                            {
+                                spriteBatch.Draw(P1.imgjoelhada4C1, P1.individuo,
+                                        new Rectangle(P1.frameLUTA.X * P1.tamanhojoelhada4C1.X, P1.frameLUTA.Y * P1.tamanhojoelhada4C1.Y,
+                                                      P1.tamanhojoelhada4C1.X, P1.tamanhojoelhada4C1.Y),
+                                                      Color.White);
+                            }
+                        }//combo 1
+                        
+                    }//fim D
+
+                   
+                }
             }
 
 
@@ -129,11 +172,47 @@ namespace Stick_RPG_Fight
                                                    P1.tamanhoSpriteSheetpular.X, P1.tamanhoSpriteSheetpular.Y),
                                                    Color.White);
                 }
+
+                if (P1.ESQUERDA)
+                {
+                    if (P1.PARTE1)
+                    {
+                        spriteBatch.Draw(P1.imgsoco1E, P1.individuo,
+                                    new Rectangle(P1.frameLUTA.X * P1.tamanhosoco1.X, P1.frameLUTA.Y * P1.tamanhosoco1.Y,
+                                                  P1.tamanhosoco1.X, P1.tamanhosoco1.Y),
+                                                  Color.White);
+                    }
+                    if (P1.COMBO1)
+                    {
+                        if (P1.PARTE2)
+                        {
+                            spriteBatch.Draw(P1.imgsoco2C1E, P1.individuo,
+                                    new Rectangle(P1.frameLUTA.X * P1.tamanhosoco2C1.X, P1.frameLUTA.Y * P1.tamanhosoco2C1.Y,
+                                                  P1.tamanhosoco2C1.X, P1.tamanhosoco2C1.Y),
+                                                  Color.White);
+                        }
+                        if (P1.PARTE3)
+                        {
+                            spriteBatch.Draw(P1.imgsoco3C1E, P1.individuo,
+                                    new Rectangle(P1.frameLUTA.X * P1.tamanhosoco3C1.X, P1.frameLUTA.Y * P1.tamanhosoco3C1.Y,
+                                                  P1.tamanhosoco3C1.X, P1.tamanhosoco3C1.Y),
+                                                  Color.White);
+                        }
+                        if (P1.PARTE4)
+                        {
+                            spriteBatch.Draw(P1.imgjoelhada4C1E, P1.individuo,
+                                    new Rectangle(P1.frameLUTA.X * P1.tamanhojoelhada4C1.X, P1.frameLUTA.Y * P1.tamanhojoelhada4C1.Y,
+                                                  P1.tamanhojoelhada4C1.X, P1.tamanhojoelhada4C1.Y),
+                                                  Color.White);
+                        }
+                    }//fim combo1
+                }//fim esquerda
             }
 
             //INIMIGO 1
             for (int i = 0; i < listai1.Count; i++)
             {
+                //movimentos
                 if (listai1[i].PARADO)
                 {
                     spriteBatch.Draw(listai1[0].imgParadoi1, listai1[i].individuo,
@@ -152,6 +231,10 @@ namespace Stick_RPG_Fight
                         new Rectangle(listai1[i].frameAndari1.X * listai1[i].tamanhoAndari1.X, listai1[i].frameAndari1.Y * listai1[i].tamanhoAndari1.Y,
                                                    listai1[i].tamanhoAndari1.X, listai1[i].tamanhoAndari1.Y), Color.White);
                 }
+                //barras
+                spriteBatch.Draw(P1.imgVIDA, listai1[i].VIDA, Color.White);
+                spriteBatch.Draw(P1.imgMANA, listai1[i].MANA, Color.White);
+                spriteBatch.Draw(P1.imgENERGIA, listai1[i].ENERGIA, Color.White);
 
                 if (listai1[i].individuo.X > TELACHEIA.X + TELACHEIA.Width)
                 {
@@ -168,14 +251,19 @@ namespace Stick_RPG_Fight
                 spriteBatch.Draw(Contexto.Fundo.imgfundopoder, TELACHEIA, Color.White);
             }
 
-            //HUD
+            //HUD P1
             spriteBatch.Draw(P1.imgBARRA, P1.Barra, Color.White);
             spriteBatch.Draw(P1.imgVIDA, P1.BarraVida, Color.White);
-            spriteBatch.Draw(P1.imgENERGIA, P1.BarraEnergia, Color.White);
+            spriteBatch.DrawString(HUDfont, "HP " + P1.vida, new Vector2(P1.BarraVida.X + 5, P1.BarraVida.Y + HeightTela / 100 + HeightTela / 200), Color.Black);
             spriteBatch.Draw(P1.imgMANA, P1.BarraMana, Color.White);
+            spriteBatch.DrawString(HUDfont, "PODER " + P1.mana, new Vector2(P1.BarraMana.X + 5, P1.BarraMana.Y + (HeightTela / 100 * 5) + HeightTela / 200), Color.Black);
+            spriteBatch.Draw(P1.imgENERGIA, P1.BarraEnergia, Color.White);
+            spriteBatch.DrawString(HUDfont, "ENERGIA " + P1.energia, new Vector2(P1.BarraEnergia.X + 8, P1.BarraEnergia.Y + (HeightTela / 100 * 8)), Color.Black);
             spriteBatch.Draw(P1.imgSOBRE, P1.Barra, Color.White);
 
-            
+            spriteBatch.Draw(P1.imgXP, P1.XPrec, Color.White);
+            spriteBatch.DrawString(HUDfont, "XP " + P1.XP, new Vector2(P1.XPrec.X + HeightTela / 100, P1.XPrec.Y + HeightTela / 100), Color.Black);
+            spriteBatch.Draw(P1.imgXPT, P1.XPTrec, Color.White);
 
         }//fim draw combate
         //--------------------------------------------------------------------------------------------------
@@ -377,6 +465,7 @@ namespace Stick_RPG_Fight
                 }
 
             }
+
         }//fim do draw BOTOES ESTATICOS
         //--------------------------------------------------------------------------------------------------
         //--------------------------------------------------------------------------------------------------
@@ -443,6 +532,37 @@ namespace Stick_RPG_Fight
                                                        P1.clonelistaPoder[i].tamanhoSpriteSheetpular.X, P1.clonelistaPoder[i].tamanhoSpriteSheetpular.Y),
                                                        Color.White);
                     }
+                    if (P1.clonelistaPoder[i].PARTE1)
+                    {
+                        spriteBatch.Draw(P1.imgsoco1, P1.clonelistaPoder[i].individuo,
+                                    new Rectangle(P1.clonelistaPoder[i].frameLUTA.X * P1.clonelistaPoder[i].tamanhosoco1.X, P1.clonelistaPoder[i].frameLUTA.Y * P1.clonelistaPoder[i].tamanhosoco1.Y,
+                                                  P1.clonelistaPoder[i].tamanhosoco1.X, P1.clonelistaPoder[i].tamanhosoco1.Y),
+                                                  Color.White);
+                    }
+                    if (P1.clonelistaPoder[i].COMBO1)
+                    {
+                        if (P1.clonelistaPoder[i].PARTE2)
+                        {
+                            spriteBatch.Draw(P1.imgsoco2C1, P1.clonelistaPoder[i].individuo,
+                                    new Rectangle(P1.clonelistaPoder[i].frameLUTA.X * P1.clonelistaPoder[i].tamanhosoco2C1.X, P1.clonelistaPoder[i].frameLUTA.Y * P1.clonelistaPoder[i].tamanhosoco2C1.Y,
+                                                  P1.clonelistaPoder[i].tamanhosoco2C1.X, P1.clonelistaPoder[i].tamanhosoco2C1.Y),
+                                                  Color.White);
+                        }
+                        if (P1.clonelistaPoder[i].PARTE3)
+                        {
+                            spriteBatch.Draw(P1.imgsoco3C1, P1.clonelistaPoder[i].individuo,
+                                    new Rectangle(P1.clonelistaPoder[i].frameLUTA.X * P1.clonelistaPoder[i].tamanhosoco3C1.X, P1.clonelistaPoder[i].frameLUTA.Y * P1.clonelistaPoder[i].tamanhosoco3C1.Y,
+                                                  P1.clonelistaPoder[i].tamanhosoco3C1.X, P1.clonelistaPoder[i].tamanhosoco3C1.Y),
+                                                  Color.White);
+                        }
+                        if (P1.clonelistaPoder[i].PARTE4)
+                        {
+                            spriteBatch.Draw(P1.imgjoelhada4C1, P1.clonelistaPoder[i].individuo,
+                                    new Rectangle(P1.clonelistaPoder[i].frameLUTA.X * P1.clonelistaPoder[i].tamanhojoelhada4C1.X, P1.clonelistaPoder[i].frameLUTA.Y * P1.clonelistaPoder[i].tamanhojoelhada4C1.Y,
+                                                  P1.clonelistaPoder[i].tamanhojoelhada4C1.X, P1.clonelistaPoder[i].tamanhojoelhada4C1.Y),
+                                                  Color.White);
+                        }
+                    }//fim combo1
                 }
 
 
@@ -494,6 +614,39 @@ namespace Stick_RPG_Fight
                                                        P1.clonelistaPoder[i].tamanhoSpriteSheetpular.X, P1.clonelistaPoder[i].tamanhoSpriteSheetpular.Y),
                                                        Color.White);
                     }
+
+                    if (P1.clonelistaPoder[i].PARTE1)
+                    {
+                        spriteBatch.Draw(P1.imgsoco1E, P1.clonelistaPoder[i].individuo,
+                                    new Rectangle(P1.clonelistaPoder[i].frameLUTA.X * P1.clonelistaPoder[i].tamanhosoco1.X, P1.clonelistaPoder[i].frameLUTA.Y * P1.clonelistaPoder[i].tamanhosoco1.Y,
+                                                  P1.clonelistaPoder[i].tamanhosoco1.X, P1.clonelistaPoder[i].tamanhosoco1.Y),
+                                                  Color.White);
+                    }
+                    if (P1.clonelistaPoder[i].COMBO1)
+                    {
+                        if (P1.clonelistaPoder[i].PARTE2)
+                        {
+                            spriteBatch.Draw(P1.imgsoco2C1E, P1.clonelistaPoder[i].individuo,
+                                    new Rectangle(P1.clonelistaPoder[i].frameLUTA.X * P1.clonelistaPoder[i].tamanhosoco2C1.X, P1.clonelistaPoder[i].frameLUTA.Y * P1.clonelistaPoder[i].tamanhosoco2C1.Y,
+                                                  P1.clonelistaPoder[i].tamanhosoco2C1.X, P1.clonelistaPoder[i].tamanhosoco2C1.Y),
+                                                  Color.White);
+                        }
+                        if (P1.clonelistaPoder[i].PARTE3)
+                        {
+                            spriteBatch.Draw(P1.imgsoco3C1E, P1.clonelistaPoder[i].individuo,
+                                    new Rectangle(P1.clonelistaPoder[i].frameLUTA.X * P1.clonelistaPoder[i].tamanhosoco3C1.X, P1.clonelistaPoder[i].frameLUTA.Y * P1.clonelistaPoder[i].tamanhosoco3C1.Y,
+                                                  P1.clonelistaPoder[i].tamanhosoco3C1.X, P1.clonelistaPoder[i].tamanhosoco3C1.Y),
+                                                  Color.White);
+                        }
+                        if (P1.clonelistaPoder[i].PARTE4)
+                        {
+                            spriteBatch.Draw(P1.imgjoelhada4C1E, P1.clonelistaPoder[i].individuo,
+                                    new Rectangle(P1.clonelistaPoder[i].frameLUTA.X * P1.clonelistaPoder[i].tamanhojoelhada4C1.X, P1.clonelistaPoder[i].frameLUTA.Y * P1.clonelistaPoder[i].tamanhojoelhada4C1.Y,
+                                                  P1.clonelistaPoder[i].tamanhojoelhada4C1.X, P1.clonelistaPoder[i].tamanhojoelhada4C1.Y),
+                                                  Color.White);
+                        }
+                    }//fim combo1
+                
                 }
             }
         }

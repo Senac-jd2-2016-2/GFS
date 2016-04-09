@@ -31,6 +31,7 @@ namespace Stick_RPG_Fight
 
         //fonte escrita do jogo
         SpriteFont menu;
+        SpriteFont HUDfont;
 
         //imagens de itens fora das classes
         Texture2D imgB1, imgB2, imgAPPLY2, imgAPPLY, imgAPPLY3, imgteste, imgFlechaD, imgFlechaE;
@@ -91,6 +92,10 @@ namespace Stick_RPG_Fight
             //novo inimigo
 
             Inimigo i1 = new Inimigo();
+            i1.vidaT = 50;
+            i1.manaT = 20;
+            i1.energiaT = 100;
+            i1.vida = 50;
             listai1.Add(i1);
 
             base.Initialize();
@@ -104,6 +109,7 @@ namespace Stick_RPG_Fight
             Contexto.inicializar(Content, M1, AUDIO, P1, Botao, listai1); // classe contexto
 
             menu = Content.Load<SpriteFont>("menu");
+            HUDfont = Content.Load<SpriteFont>("HUD");
 
             imgB1 = Content.Load<Texture2D>("B1");
             imgB2 = Content.Load<Texture2D>("B2");
@@ -254,17 +260,25 @@ namespace Stick_RPG_Fight
                             
                             //HUD
                             //barra
-                            P1.Barra = new Rectangle(Botao.HOMEquadrado.X + Botao.HOMEquadrado.Width + Window.ClientBounds.Height / 100, Botao.HOMEquadrado.Y, Window.ClientBounds.Width / 3, Window.ClientBounds.Height / 10);
-                            P1.BarraEnergia = new Rectangle(Botao.HOMEquadrado.X + Botao.HOMEquadrado.Width + Window.ClientBounds.Height / 100, Botao.HOMEquadrado.Y, Window.ClientBounds.Width / 3, Window.ClientBounds.Height / 10);
-                            P1.BarraVida = new Rectangle(Botao.HOMEquadrado.X + Botao.HOMEquadrado.Width + Window.ClientBounds.Height / 100, Botao.HOMEquadrado.Y, Window.ClientBounds.Width / 3, Window.ClientBounds.Height / 10);
-                            P1.BarraMana = new Rectangle(Botao.HOMEquadrado.X + Botao.HOMEquadrado.Width + Window.ClientBounds.Height / 100, Botao.HOMEquadrado.Y, Window.ClientBounds.Width / 3, Window.ClientBounds.Height / 10);
+                            P1.XPrec = new Rectangle(Botao.HOMEquadrado.X + Botao.HOMEquadrado.Width + Window.ClientBounds.Height / 100, Botao.HOMEquadrado.Y, 0, Window.ClientBounds.Height / 12);
+                            P1.XPTrec = new Rectangle(Botao.HOMEquadrado.X + Botao.HOMEquadrado.Width + Window.ClientBounds.Height / 100, Botao.HOMEquadrado.Y, Window.ClientBounds.Width - Window.ClientBounds.Height / 10 - Window.ClientBounds.Height / 50, Window.ClientBounds.Height / 12);
+
+                            P1.Barra = new Rectangle(Botao.HOMEquadrado.X + Botao.HOMEquadrado.Width + Window.ClientBounds.Height / 100, Botao.HOMEquadrado.Y + Window.ClientBounds.Height / 12 + Window.ClientBounds.Height / 100, Window.ClientBounds.Width / 3, Window.ClientBounds.Height / 10);
+                            P1.BarraEnergia = new Rectangle(Botao.HOMEquadrado.X + Botao.HOMEquadrado.Width + Window.ClientBounds.Height / 100, Botao.HOMEquadrado.Y + Window.ClientBounds.Height / 12 + Window.ClientBounds.Height / 100, Window.ClientBounds.Width / 3, Window.ClientBounds.Height / 10);
+                            P1.BarraVida = new Rectangle(Botao.HOMEquadrado.X + Botao.HOMEquadrado.Width + Window.ClientBounds.Height / 100, Botao.HOMEquadrado.Y + Window.ClientBounds.Height / 12 + Window.ClientBounds.Height / 100, Window.ClientBounds.Width / 3, Window.ClientBounds.Height / 10);
+                            P1.BarraMana = new Rectangle(Botao.HOMEquadrado.X + Botao.HOMEquadrado.Width + Window.ClientBounds.Height / 100, Botao.HOMEquadrado.Y + Window.ClientBounds.Height / 12 + Window.ClientBounds.Height / 100, Window.ClientBounds.Width / 3, Window.ClientBounds.Height / 10);
 
                             P1.vida = 200;
                             P1.vidaTOTAL = 200;
-                            P1.energia = 200;
-                            P1.energiaTOTAL = 200;
+                            P1.energia = 150;
+                            P1.energiaTOTAL = 150;
                             P1.mana = 120;
                             P1.manaTOTAL = 120;
+
+                            P1.XP = 0;
+                            P1.XPT = 100;
+                            P1.LVL = 1;
+                            P1.moeda = 0;
 
                             //tela
                             TELACHEIA = new Rectangle(0, 0, Window.ClientBounds.Width, Window.ClientBounds.Height);
@@ -326,13 +340,18 @@ namespace Stick_RPG_Fight
                     Exit();
                 else
                 {
-                    //mov do personagem
-                    P1.MOV(WidthTela, HeightTela, aleatório);
+                    //TUDO do personagem
+                    P1.MOV(WidthTela, HeightTela, aleatório, listai1); // tudo sobre movimentação
+                    P1.RPGatualização(WidthTela, HeightTela); //atualiza os dados
+                    P1.Luta(WidthTela, HeightTela, aleatório); // atualiza a posição, tamanho, frames
+                    
 
                     //posiçao do bot
                     for (int i = 0; i < listai1.Count; i++) // atualização de todos os inimigos
                     {
                         listai1[i].PosiçãoINIMIGO(WidthTela, HeightTela);
+                        //barras
+                        listai1[i].HP(WidthTela, HeightTela);
                     }
 
                     // SEPARADO --- PARA PODER USAR O PODER DE SLOW MOTION + CLONES
@@ -348,6 +367,15 @@ namespace Stick_RPG_Fight
 
                         P1.POSIÇÃOdoCLONE(P1);
 
+                        //se eu atacar, eless vao reagir , mesmo no slowmotiom
+                        for (int i = 0; i < listai1.Count; i++)
+                        {
+                            if (P1.individuo.Intersects(listai1[i].individuo) && P1.ATACANDO)
+                            {
+                                listai1[i].INTELIGENCIA(WidthTela, HeightTela, P1, listai1);
+                            }
+                        }
+                        
 
 
                         //açao
@@ -430,11 +458,11 @@ namespace Stick_RPG_Fight
                     P1.BarraMana.Width = (int)((float)(P1.mana) / P1.manaTOTAL * WidthTela / 3);
 
                     //constantes
-                    if (P1.energia <= 200 && !P1.CORRENDO && !P1.PULANDOcorrendo)
+                    if (P1.energia <= P1.energiaTOTAL && !P1.CORRENDO && !P1.PULANDOcorrendo && !P1.ATACANDO)
                     {
                         P1.energia += 2;
                     }
-                    if (P1.mana <= 120 && !P1.PODER)
+                    if (P1.mana <= P1.manaTOTAL && !P1.PODER)
                     {
                         if (contagemREGEN == 2)
                         {
@@ -447,7 +475,7 @@ namespace Stick_RPG_Fight
                         }
                     }
 
-                    if (Keyboard.GetState().IsKeyDown(Keys.R) && !P1.PODER && P1.mana >= 75)
+                    if (Keyboard.GetState().IsKeyDown(Keys.NumPad5) && !P1.PODER && P1.mana >= 75)
                     {
                         P1.PODER = true;
                     }
@@ -498,7 +526,7 @@ namespace Stick_RPG_Fight
 
             if (M1.COMBATE)
             {
-                DRAW.DrawCombate(spriteBatch,P1,listai1, TELACHEIA, FlechaD, FlechaE, imgFlechaD, imgFlechaE); //RESUMAO
+                DRAW.DrawCombate(spriteBatch, P1, listai1, TELACHEIA, FlechaD, FlechaE, imgFlechaD, imgFlechaE, menu, HUDfont, WidthTela, HeightTela); //RESUMAO
                 DRAW.DrawCLONES(spriteBatch, P1); // PODER
 
                 spriteBatch.DrawString(menu, "LISTA: " + listai1.Count , new Vector2(0, Window.ClientBounds.Height - 15), Color.Black); //teste
