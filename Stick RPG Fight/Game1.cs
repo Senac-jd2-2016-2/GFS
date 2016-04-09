@@ -36,6 +36,9 @@ namespace Stick_RPG_Fight
         //imagens de itens fora das classes
         Texture2D imgB1, imgB2, imgAPPLY2, imgAPPLY, imgAPPLY3, imgteste, imgFlechaD, imgFlechaE, imgSangue;
 
+        //LISTA DE CLASSES------
+        //LISTA DE CLASSES
+        //LISTA DE CLASSES
         //intro
         intromenu Entrada = new intromenu();
 
@@ -52,9 +55,13 @@ namespace Stick_RPG_Fight
         //nova lista de i1
         List<Inimigo> listai1 = new List<Inimigo>();
 
+        Agua DefineAgua = new Agua();
+        //LISTA DE CLASSES
+        //LISTA DE CLASSES
+        //LISTA DE CLASSES --------
+
         //tempo para gerar 1/++ inimigo 
         int TempoParaInimigos = 100;
-
         //slow motion
         public static int slowmotion = 0;
 
@@ -65,6 +72,8 @@ namespace Stick_RPG_Fight
         Draw DRAW = new Draw();
         Inimigo i1 = new Inimigo();
        
+        //MAPAS
+        bool Fase1, Fase2, Fase3, Fase4;
 
         public Game1()
         {
@@ -101,7 +110,7 @@ namespace Stick_RPG_Fight
         {
             spriteBatch = new SpriteBatch(GraphicsDevice);
 
-            Contexto.inicializar(Content, M1, AUDIO, P1, Botao, i1); // classe contexto
+            Contexto.inicializar(Content, M1, AUDIO, P1, Botao, i1, DefineAgua); // classe contexto
 
             menu = Content.Load<SpriteFont>("menu");
             HUDfont = Content.Load<SpriteFont>("HUD");
@@ -148,27 +157,30 @@ namespace Stick_RPG_Fight
                 M1.HISTORY = false;
             }
 
-            //clicando
-            //----  HOME
+            
+            //clicando pra entrar no combate
             if (Mouse.GetState().LeftButton == ButtonState.Pressed && M1.CombateBotao.Contains(mousePosition))
             {
                 BOTAO = true;
                 M1.COMBATEativado = true;
             }
 
-            if (!M1.CombateBotao.Contains(mousePosition))
+            if (!M1.CombateBotao.Contains(mousePosition))//se nao estiver encima, desativa
             {
                 M1.COMBATEativado = false;
             }
 
-            if (!BOTAO && M1.COMBATEativado)
+            if (!BOTAO && M1.COMBATEativado) //se soltar o botao apos ter clicado encima
             {
                 MENU = false;
                 M1.COMBATE = true;
+                Fase1 = true;
                 Botao.HOME = false;
             }
             
             //
+            //clicando
+            //----  HOME
             if (!Botao.HOME)
             {
 
@@ -180,6 +192,7 @@ namespace Stick_RPG_Fight
                 if (Botao.HOMEb && !BOTAO)
                 {
                     Botao.HOME = true;
+                    Fase1 = false;
                 }
                 if (!Botao.HOMEquadrado.Contains(mousePosition))
                 {
@@ -341,14 +354,16 @@ namespace Stick_RPG_Fight
                     P1.MOV(WidthTela, HeightTela, aleatório, listai1); // tudo sobre movimentação
                     P1.RPGatualização(WidthTela, HeightTela); //atualiza os dados
                     P1.Luta(WidthTela, HeightTela, aleatório); // atualiza a posição, tamanho, frames
-                    
+                    P1.SubirAgua(WidthTela, HeightTela, aleatório, Fase1);
 
                     //posiçao do bot
                     for (int i = 0; i < listai1.Count; i++) // atualização de todos os inimigos
                     {
                         listai1[i].PosiçãoINIMIGO(WidthTela, HeightTela);
-                        //barras
+                        //FISICA + EMBELEZAR
+                        listai1[i].SubirAgua(WidthTela, HeightTela, aleatório, Fase1);
                         listai1[i].Sangrar(WidthTela, HeightTela, P1, aleatório);
+                        //barras
                         listai1[i].HP(WidthTela, HeightTela, listai1, P1);
                        
                     }
@@ -525,7 +540,7 @@ namespace Stick_RPG_Fight
 
             if (M1.COMBATE)
             {
-                DRAW.DrawCombate(spriteBatch, P1, listai1, TELACHEIA, FlechaD, FlechaE, imgFlechaD, imgFlechaE, menu, HUDfont, WidthTela, HeightTela, imgSangue, i1); //RESUMAO
+                DRAW.DrawCombate(spriteBatch, P1, listai1, TELACHEIA, FlechaD, FlechaE, imgFlechaD, imgFlechaE, menu, HUDfont, WidthTela, HeightTela, imgSangue, i1, DefineAgua); //RESUMAO
                 DRAW.DrawCLONES(spriteBatch, P1); // PODER
 
                 spriteBatch.DrawString(menu, "LISTA: " + listai1.Count , new Vector2(0, Window.ClientBounds.Height - 15), Color.Black); //teste

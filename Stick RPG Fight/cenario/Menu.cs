@@ -69,8 +69,9 @@ namespace Stick_RPG_Fight
 
             if (HistoryBotao.Contains(mousePosition))
             {
-                FRAMEhistory();
-
+                
+                framehistoryB.X = 0;
+                framehistoryB.Y = 0;
                 HistoryBotao.X = 0;
                 HistoryBotao.Y = HeightTela / 3 - HeightTela / 30;
                 HistoryBotao.Width = WidthTela / 2;
@@ -79,22 +80,23 @@ namespace Stick_RPG_Fight
             }
             else
             {
+                FRAMEhistory();
                 if (HistoryBotao.Y != HeightTela / 3)
                 {
                     HistoryBotao.X = 0;
                     HistoryBotao.Y = HeightTela / 3;
                     HistoryBotao.Width = WidthTela / 3;
                     HistoryBotao.Height = HeightTela / 8;
-                    framehistoryB.X = 0;
-                    framehistoryB.Y = 0;
+                    
                 }
             }
 
             //combate
             if (CombateBotao.Contains(mousePosition))
             {
-                FRAMEcombate();
 
+                framecombateB.X = 0;
+                framecombateB.Y = 0;
                 CombateBotao.X = WidthTela - WidthTela / 2;
                 CombateBotao.Y = HeightTela / 3 - HeightTela / 30;
                 CombateBotao.Width = WidthTela / 2;
@@ -104,12 +106,12 @@ namespace Stick_RPG_Fight
             }
             else
             {
+                FRAMEcombate();
                 CombateBotao.X = WidthTela - WidthTela / 3;
                 CombateBotao.Y = HeightTela / 3;
                 CombateBotao.Width = WidthTela / 3;
                 CombateBotao.Height = HeightTela / 8;
-                framecombateB.X = 0;
-                framecombateB.Y = 0;
+                
             }
         }
     }

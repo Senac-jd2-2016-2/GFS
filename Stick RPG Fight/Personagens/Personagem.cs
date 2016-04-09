@@ -21,6 +21,7 @@ namespace Stick_RPG_Fight
         public Texture2D imgSOBRE;
         public Texture2D imgXP;
         public Texture2D imgXPT;
+        public Texture2D imgpino;
 
         public Rectangle BarraVida = new Rectangle();
         public Rectangle BarraEnergia = new Rectangle();
@@ -28,6 +29,7 @@ namespace Stick_RPG_Fight
         public Rectangle Barra = new Rectangle();
         public Rectangle XPTrec = new Rectangle();
         public Rectangle XPrec = new Rectangle();
+        public Rectangle Pino = new Rectangle();
 
         public Texture2D imgSpriteSheetparado1E; // parado fora de combate (E)
         public Texture2D imgSpriteSheetandandoE;// andando (E)
@@ -174,6 +176,7 @@ namespace Stick_RPG_Fight
         public int moeda;
 
         public List<Personagem> clonelistaPoder = new List<Personagem>();
+        public List<Agua> listadeagua = new List<Agua>();
         //===========================================================================================================================================================================
         //===========================================================================================================================================================================
         //===========================================================================================================================================================================
@@ -195,7 +198,17 @@ namespace Stick_RPG_Fight
 
 
             XPrec.Width = (int)(((float)(XP) / XPT) * WidthTela - HeightTela / 10 - HeightTela / 50);
-
+            if (XPrec.Width > 0)
+            {
+                Pino.X = XPTrec.X + XPrec.Width;
+            }
+            if (XPrec.Width <= 0)
+            {
+                Pino.X = XPTrec.X;
+            }
+            Pino.Y = XPrec.Y;
+            Pino.Height = XPrec.Height;
+            Pino.Width = HeightTela / 90;
 
         }
         //===========================================================================================================================================================================
@@ -228,7 +241,7 @@ namespace Stick_RPG_Fight
                                 frameLUTA.X = 0;
                                 frameLUTA.Y++;
                             }
-                            if (frameLUTA.X >= 2 && frameLUTA.Y == 1  || frameLUTA.Y == 2 && frameLUTA.X < 3) // caso ataque nesse periodo
+                            if (frameLUTA.X >= 7 && frameLUTA.Y == 1  || frameLUTA.Y == 2 && frameLUTA.X < 3) // caso ataque nesse periodo
                             {
                                 if (Keyboard.GetState().IsKeyDown(Keys.NumPad4) && !Keyboard.GetState().IsKeyDown(Keys.NumPad8) && !Keyboard.GetState().IsKeyDown(Keys.NumPad6) && !Keyboard.GetState().IsKeyDown(Keys.NumPad2) && energia >= 10)
                                 {
@@ -291,7 +304,7 @@ namespace Stick_RPG_Fight
                             frameLUTA.Y = 0;
                         }
 
-                        if (frameLUTA.X >= 7 && frameLUTA.Y == 2 || frameLUTA.Y == 3 || frameLUTA.Y == 4 && frameLUTA.X < 5) // caso ataque nesse periodo
+                        if (frameLUTA.Y == 3 || frameLUTA.Y == 4 && frameLUTA.X < 5) // caso ataque nesse periodo
                         {
                             if (Keyboard.GetState().IsKeyDown(Keys.NumPad4) && !Keyboard.GetState().IsKeyDown(Keys.NumPad8) && !Keyboard.GetState().IsKeyDown(Keys.NumPad6) && !Keyboard.GetState().IsKeyDown(Keys.NumPad2) && energia >= 25)
                             {
@@ -325,7 +338,7 @@ namespace Stick_RPG_Fight
                             frameLUTA.Y = 0;
                         }
 
-                        if (frameLUTA.Y == 3 && frameLUTA.X >= 5 || frameLUTA.Y == 4 && frameLUTA.X < 5) // caso ataque nesse periodo
+                        if (frameLUTA.Y == 3 && frameLUTA.X >= 7 || frameLUTA.Y == 4 && frameLUTA.X < 5) // caso ataque nesse periodo
                         {
                             if (Keyboard.GetState().IsKeyDown(Keys.NumPad6) && Keyboard.GetState().IsKeyDown(Keys.W) && !Keyboard.GetState().IsKeyDown(Keys.NumPad8) && !Keyboard.GetState().IsKeyDown(Keys.NumPad4) && !Keyboard.GetState().IsKeyDown(Keys.NumPad2) && energia >= 30)
                             {
@@ -384,7 +397,7 @@ namespace Stick_RPG_Fight
                                 frameLUTA.X = 7;
                                 frameLUTA.Y++;
                             }
-                            if (frameLUTA.X <= 5 && frameLUTA.Y == 1 || frameLUTA.Y == 2 && frameLUTA.X > 3) // caso ataque nesse periodo
+                            if (frameLUTA.X <= 0 && frameLUTA.Y == 1 || frameLUTA.Y == 2 && frameLUTA.X > 3) // caso ataque nesse periodo
                             {
                                 if (Keyboard.GetState().IsKeyDown(Keys.NumPad4) && !Keyboard.GetState().IsKeyDown(Keys.NumPad8) && !Keyboard.GetState().IsKeyDown(Keys.NumPad6) && !Keyboard.GetState().IsKeyDown(Keys.NumPad2) && energia >= 10)
                                 {
@@ -447,7 +460,7 @@ namespace Stick_RPG_Fight
                             frameLUTA.Y = 0;
                         }
 
-                        if (frameLUTA.X <= 2 && frameLUTA.Y == 2 || frameLUTA.Y == 3 || frameLUTA.Y == 4 && frameLUTA.X > 3) // caso ataque nesse periodo
+                        if (frameLUTA.Y == 3 || frameLUTA.Y == 4 && frameLUTA.X > 3) // caso ataque nesse periodo
                         {
                             if (Keyboard.GetState().IsKeyDown(Keys.NumPad4) && !Keyboard.GetState().IsKeyDown(Keys.NumPad8) && !Keyboard.GetState().IsKeyDown(Keys.NumPad6) && !Keyboard.GetState().IsKeyDown(Keys.NumPad2) && energia >= 25)
                             {
@@ -481,7 +494,7 @@ namespace Stick_RPG_Fight
                             frameLUTA.Y = 0;
                         }
 
-                        if (frameLUTA.Y == 3 && frameLUTA.X <= 3 || frameLUTA.Y == 4 && frameLUTA.X > 3) // caso ataque nesse periodo
+                        if (frameLUTA.Y == 3 && frameLUTA.X <= 0 || frameLUTA.Y == 4 && frameLUTA.X > 3) // caso ataque nesse periodo
                         {
                             if (Keyboard.GetState().IsKeyDown(Keys.NumPad6) && Keyboard.GetState().IsKeyDown(Keys.W) && !Keyboard.GetState().IsKeyDown(Keys.NumPad8) && !Keyboard.GetState().IsKeyDown(Keys.NumPad4) && !Keyboard.GetState().IsKeyDown(Keys.NumPad2) && energia >= 30)
                             {
@@ -1657,5 +1670,67 @@ namespace Stick_RPG_Fight
 
             }
         }
+
+        public void SubirAgua(int WidthTela, int HeightTela, Random aleatório, bool fase1)
+        {
+            if (fase1)
+            {
+                if ((ANDANDO || CORRENDO || ATACANDO))
+                {
+                    Agua A1 = new Agua();
+
+
+                    A1.AguaR.Width = HeightTela / 70;
+                    A1.AguaR.Height = HeightTela / 70;
+                    if (DIREITA)
+                    {
+                        A1.AguaR.X = individuo.X + individuo.Width;
+                        A1.Px = individuo.X + individuo.Width + (-Contexto.Fundo.fase.X); // posiçao do jogar + a posição mapa = posição universal
+                        A1.direita = true;
+                    }
+                    if (ESQUERDA)
+                    {
+                        A1.AguaR.X = individuo.X;
+                        A1.Px = individuo.X + (-Contexto.Fundo.fase.X); // posiçao do jogar + a posição mapa = posição universal
+                        A1.esquerda = true;
+                    }
+                    A1.Py = individuo.Y + individuo.Height - HeightTela / 70 + (-Contexto.Fundo.fase.Y);
+                    A1.g = 0;
+
+                    listadeagua.Add(A1);
+                }//fim da criação
+
+                if (listadeagua.Count >= 0)
+                {
+                    for (int i = 0; i < listadeagua.Count; i++)
+                    {
+                        listadeagua[i].AguaR.X = listadeagua[i].Px + Contexto.Fundo.fase.X + listadeagua[i].Vx; // posição definida (não variável)
+                        listadeagua[i].AguaR.Y = listadeagua[i].Py + Contexto.Fundo.fase.Y + listadeagua[i].g + listadeagua[i].Vy;
+
+                        //velocidade gravidade
+                        listadeagua[i].g += HeightTela / 300;
+
+                        if (listadeagua[i].Vy == 0)
+                        {
+                            listadeagua[i].Vy = aleatório.Next(-HeightTela / 20, -HeightTela / 100);
+                        }
+                        if (listadeagua[i].esquerda)
+                        {
+                            listadeagua[i].Vx += aleatório.Next(HeightTela / 200, HeightTela / 150);
+                        }
+                        if (listadeagua[i].direita)
+                        {
+                            listadeagua[i].Vx -= aleatório.Next(HeightTela / 200, HeightTela / 150);
+                        }
+
+                        if (listadeagua[i].AguaR.Intersects(Contexto.Fundo.chao))
+                        {
+                            listadeagua.Remove(listadeagua[i]);
+                        }
+                    }//fim do array
+
+                }//fim da mov
+            }//fim da fase 1
+        }//fim
     }
 }

@@ -61,6 +61,7 @@ namespace Stick_RPG_Fight
         public bool ANDANDO = true;
         public bool CORRENDO;
         public bool DEFENDENDO;
+        public bool LEVANDOHIT;
 
         public bool subindo;
         public bool descendo;
@@ -70,6 +71,7 @@ namespace Stick_RPG_Fight
         public int g = 0; // gravidade
 
         public List<Sangue> listadesangue = new List<Sangue>();
+        public List<Agua> listadeagua = new List<Agua>();
 
 
         public void GERARi1(List<Inimigo> listai1, int WidthTela, int HeightTela, Random aleatório)
@@ -108,17 +110,17 @@ namespace Stick_RPG_Fight
             {
                 individuo.X = Contexto.Fundo.fase.X + Contexto.Fundo.fase.Width + Vx;
                 if (ANDANDO)
-                    individuo.Y = Contexto.Fundo.fase.Y + Contexto.Fundo.fase.Height - HeightTela / 3 + Vy - HeightTela / 70;
+                    individuo.Y = Contexto.Fundo.fase.Y + Contexto.Fundo.fase.Height - HeightTela / 3 + Vy - HeightTela / 70 - HeightTela / 60;
                 if (PARADO)
-                    individuo.Y = Contexto.Fundo.fase.Y + Contexto.Fundo.fase.Height - HeightTela / 3 - HeightTela / 45 + Vy; //27 = 40
+                    individuo.Y = Contexto.Fundo.fase.Y + Contexto.Fundo.fase.Height - HeightTela / 3 - HeightTela / 45 + Vy - HeightTela / 60; //27 = 40
             }
             else if (opç == 2)
             {
                 individuo.X = Contexto.Fundo.fase.X + Vx - WidthTela / 14;
                 if (ANDANDO)
-                    individuo.Y = Contexto.Fundo.fase.Y + Contexto.Fundo.fase.Height - HeightTela / 3 + Vy - HeightTela / 70;
+                    individuo.Y = Contexto.Fundo.fase.Y + Contexto.Fundo.fase.Height - HeightTela / 3 + Vy - HeightTela / 70 - HeightTela / 60;
                 if (PARADO)
-                    individuo.Y = Contexto.Fundo.fase.Y + Contexto.Fundo.fase.Height - HeightTela / 3 - HeightTela / 45 + Vy; //27 = 40
+                    individuo.Y = Contexto.Fundo.fase.Y + Contexto.Fundo.fase.Height - HeightTela / 3 - HeightTela / 45 + Vy - HeightTela / 60; //27 = 40
             }
         }
 
@@ -215,7 +217,7 @@ namespace Stick_RPG_Fight
             if (PARADO)//PARADO
             {
                 individuo.Width = WidthTela / 10;
-                individuo.Height = HeightTela / 4 + HeightTela / 27;
+                individuo.Height = HeightTela / 4 + HeightTela / 27; //tamanho
                 frameparadoi1.X++;
                 if (frameparadoi1.X >= SpriteSheetAndari1.X)
                 {
@@ -270,20 +272,20 @@ namespace Stick_RPG_Fight
             VIDA.Width = (int)(((float)(vida) / vidaT) * individuo.Width);
 
             VIDA.X = individuo.X;
-            VIDA.Height = HeightTela / 10;
-            VIDA.Y = individuo.Y - HeightTela / 10;
+            VIDA.Height = HeightTela / 30;
+            VIDA.Y = individuo.Y - HeightTela / 30;
 
             MANA.Width = (int)(((float)(mana) / manaT) * individuo.Width);
 
             MANA.X = individuo.X;
-            MANA.Height = HeightTela / 10;
-            MANA.Y = individuo.Y - HeightTela / 10;
+            MANA.Height = HeightTela / 30;
+            MANA.Y = individuo.Y - HeightTela / 30;
 
             ENERGIA.Width = (int)(((float)(energia) / energiaT) * individuo.Width);
 
             ENERGIA.X = individuo.X;
-            ENERGIA.Height = HeightTela / 10;
-            ENERGIA.Y = individuo.Y - HeightTela / 10;
+            ENERGIA.Height = HeightTela / 30;
+            ENERGIA.Y = individuo.Y - HeightTela / 30;
 
             
             if (mana < manaT)
@@ -304,6 +306,76 @@ namespace Stick_RPG_Fight
                 }
             }
         }
+
+
+        //
+        public void SubirAgua(int WidthTela, int HeightTela, Random aleatório, bool fase1)
+        {
+            if (fase1)
+            {
+                if ((ANDANDO || CORRENDO || ATACANDO))
+                {
+                    Agua A1 = new Agua();
+
+
+                    A1.AguaR.Width = HeightTela / 70;
+                    A1.AguaR.Height = HeightTela / 70;
+                    if (DIREITA)
+                    {
+                        A1.AguaR.X = individuo.X + individuo.Width;
+                        A1.Px = individuo.X + individuo.Width + (-Contexto.Fundo.fase.X); // posiçao do jogar + a posição mapa = posição universal
+                        A1.direita = true;
+                    }
+                    if (ESQUERDA)
+                    {
+                        A1.AguaR.X = individuo.X ;
+                        A1.Px = individuo.X + (-Contexto.Fundo.fase.X); // posiçao do jogar + a posição mapa = posição universal
+                        A1.esquerda = true;
+                    }
+                    A1.Py = individuo.Y + individuo.Height - HeightTela / 70 + (-Contexto.Fundo.fase.Y);
+                    A1.g = 0;
+
+                    listadeagua.Add(A1);
+                }//fim da criação
+
+                if (listadeagua.Count >= 0)
+                {
+                    for (int i = 0; i < listadeagua.Count; i++)
+                    {
+                        listadeagua[i].AguaR.X = listadeagua[i].Px + Contexto.Fundo.fase.X + listadeagua[i].Vx; // posição definida (não variável)
+                        listadeagua[i].AguaR.Y = listadeagua[i].Py + Contexto.Fundo.fase.Y + listadeagua[i].g + listadeagua[i].Vy;
+
+                        //velocidade gravidade
+                        listadeagua[i].g += HeightTela / 300;
+
+                        if (listadeagua[i].Vy == 0)
+                        {
+                            listadeagua[i].Vy = aleatório.Next(-HeightTela / 20, -HeightTela / 100);
+                        }
+                        if (listadeagua[i].esquerda)
+                        {
+                            listadeagua[i].Vx += aleatório.Next(HeightTela / 200, HeightTela / 150);
+                        }
+                        if (listadeagua[i].direita)
+                        {
+                            listadeagua[i].Vx -= aleatório.Next(HeightTela / 200, HeightTela / 150);
+                        }
+
+                        if (listadeagua[i].AguaR.Intersects(Contexto.Fundo.chao))
+                        {
+                            listadeagua.Remove(listadeagua[i]);
+                        }
+                    }//fim do array
+
+                }//fim da mov
+            }//fim da fase 1
+        }//fim
+
+
+
+
+
+        //
 
         public void Sangrar(int WidthTela, int HeightTela,Personagem P1, Random aleatório)
         {
@@ -333,19 +405,19 @@ namespace Stick_RPG_Fight
                         S1.Vy = P1.individuo.Y + P1.individuo.Height / 3 + (-Contexto.Fundo.fase.Y);
                     }
                     S1.g = 0;
-                    S1.ON = true;
 
                     listadesangue.Add(S1);
                 }
-            }
+            }//fim da criação de sangue (SANGRAR)
+
 
             if (!DEFENDENDO && P1.individuo.Intersects(meio) && P1.ATACANDO && (P1.individuo.X < individuo.X && P1.DIREITA || P1.individuo.X > individuo.X && P1.ESQUERDA))
             {
-                if (((P1.DIREITA && (P1.PARTE1 && P1.frameLUTA.Y == 1 && P1.frameLUTA.X == 3)) || (P1.ESQUERDA && (P1.PARTE1 && P1.frameLUTA.Y >= 1 && P1.frameLUTA.X == 5))) && !P1.INVERSO)
+                if (((P1.DIREITA && (P1.PARTE1 && P1.frameLUTA.Y == 1 && P1.frameLUTA.X == 1)) || (P1.ESQUERDA && (P1.PARTE1 && P1.frameLUTA.Y >= 1 && P1.frameLUTA.X == 6))) && !P1.INVERSO)
                 {//para sangrar / tomar dano apenas qnd estiver em tal parte do ataque
                     vida-= 10;
                 }
-                if (((P1.DIREITA && (P1.PARTE2 && P1.frameLUTA.X == 5 && P1.frameLUTA.Y == 2)) || P1.ESQUERDA && (P1.PARTE2 && P1.frameLUTA.X == 2 && P1.frameLUTA.Y == 2)) && P1.COMBO1)
+                if (((P1.DIREITA && (P1.PARTE2 && P1.frameLUTA.X == 4 && P1.frameLUTA.Y == 2)) || P1.ESQUERDA && (P1.PARTE2 && P1.frameLUTA.X == 2 && P1.frameLUTA.Y == 2)) && P1.COMBO1)
                 {
                     vida -= 20;
                 }
@@ -353,7 +425,7 @@ namespace Stick_RPG_Fight
                 {
                     vida -= 30;
                 }
-                if ((P1.DIREITA && P1.PARTE4 && P1.frameLUTA.Y == 3 && P1.frameLUTA.X == 0 || P1.ESQUERDA && P1.PARTE4 && P1.frameLUTA.Y == 3 && P1.frameLUTA.X == 7) && P1.COMBO1)
+                if ((P1.DIREITA && P1.PARTE4 && P1.frameLUTA.Y == 4 && P1.frameLUTA.X == 0 || P1.ESQUERDA && P1.PARTE4 && P1.frameLUTA.Y == 4 && P1.frameLUTA.X == 7) && P1.COMBO1)
                 {
                     vida -= 30;
                 }
@@ -372,11 +444,11 @@ namespace Stick_RPG_Fight
                         //direita ou esquerda
                         if (P1.individuo.Intersects(meio)  && P1.individuo.X < individuo.X && P1.DIREITA)
                         {
-                            listadesangue[i].VariavelX += aleatório.Next(HeightTela / 200, HeightTela / 100);
+                            listadesangue[i].VariavelX += aleatório.Next(HeightTela / 300, HeightTela / 50);
                         }
                         if (P1.individuo.Intersects(meio) && P1.individuo.X > individuo.X && P1.ESQUERDA)
                         {
-                            listadesangue[i].VariavelX -= aleatório.Next(HeightTela / 200, HeightTela / 100);
+                            listadesangue[i].VariavelX -= aleatório.Next(HeightTela / 300, HeightTela / 50);
                         }
 
                         if (listadesangue[i].sangueR.Intersects(Contexto.Fundo.chao) || listadesangue[i].sangueR.Y > Contexto.Fundo.chao.Y + Contexto.Fundo.chao.Height)

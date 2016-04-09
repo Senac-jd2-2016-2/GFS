@@ -18,7 +18,6 @@ namespace Stick_RPG_Fight
         public int VariavelX = 0;
         public int Vy;
         public int g = 0;
-        public bool ON = false;
         public int contagem = 0;
     }
 }

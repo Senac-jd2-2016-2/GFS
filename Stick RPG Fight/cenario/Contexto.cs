@@ -17,7 +17,7 @@ namespace Stick_RPG_Fight
         public static Background Fundo = new Background();
 
 
-        public static void inicializar(ContentManager content, Menu M1, Audio AUDIO, Personagem P1, Botoes Botao,  Inimigo i1) // carregar imagens quando a fase começa (não no começo)
+        public static void inicializar(ContentManager content, Menu M1, Audio AUDIO, Personagem P1, Botoes Botao,  Inimigo i1, Agua DefineAgua) // carregar imagens quando a fase começa (não no começo)
         {
             //Direito
             P1.imgSpriteSheetparado1 = content.Load<Texture2D>("spritesheet p1 parado1"); // só imagem, logo posso usar isso também pros inimigos.
@@ -76,6 +76,10 @@ namespace Stick_RPG_Fight
             P1.imgMANA = content.Load<Texture2D>("MANA");
             P1.imgXP = content.Load<Texture2D>("xp");
             P1.imgXPT = content.Load<Texture2D>("xptotal");
+            P1.imgpino = content.Load<Texture2D>("pino");
+
+            DefineAgua.imgAgua = content.Load<Texture2D>("agua");
+            DefineAgua.imgOndas = content.Load<Texture2D>("SSH");
         }
     }
 }

@@ -13,7 +13,7 @@ namespace Stick_RPG_Fight
 {
     class Draw
     {
-        public void DrawCombate(SpriteBatch spriteBatch, Personagem P1, List<Inimigo> listai1, Rectangle TELACHEIA, Rectangle FlechaD, Rectangle FlechaE, Texture2D imgFlechaD, Texture2D imgFlechaE, SpriteFont menu, SpriteFont HUDfont, int WidthTela, int HeightTela, Texture2D imgSangue, Inimigo i1)
+        public void DrawCombate(SpriteBatch spriteBatch, Personagem P1, List<Inimigo> listai1, Rectangle TELACHEIA, Rectangle FlechaD, Rectangle FlechaE, Texture2D imgFlechaD, Texture2D imgFlechaE, SpriteFont menu, SpriteFont HUDfont, int WidthTela, int HeightTela, Texture2D imgSangue, Inimigo i1, Agua DefineAgua)
         {
             spriteBatch.Draw(Contexto.Fundo.imgfase1, Contexto.Fundo.fase, Color.White); // fundo
 
@@ -21,6 +21,71 @@ namespace Stick_RPG_Fight
             //--------------------------------------------------------------------------------------------------
             //--------------------------------------------------------------------------------------------------
 
+            //                      INIMIGOS - - 
+
+            //INIMIGO 1
+            for (int i = 0; i < listai1.Count; i++)
+            {
+                for (int a = 0; a < listai1[i].listadesangue.Count; a++)// APARECER SANGUE
+                {
+                    spriteBatch.Draw(imgSangue, listai1[i].listadesangue[a].sangueR, Color.White);
+                    
+                }
+                for (int a = 0; a < listai1[i].listadeagua.Count; a++ )
+                {
+                    spriteBatch.Draw(DefineAgua.imgAgua, listai1[i].listadeagua[a].AguaR, Color.White);
+                }
+                
+
+                    //movimentos
+                    if (listai1[i].PARADO)
+                    {
+                        spriteBatch.Draw(i1.imgParadoi1, listai1[i].individuo,
+                            new Rectangle(listai1[i].frameparadoi1.X * listai1[i].tamanhoparadoi1.X, listai1[i].frameparadoi1.Y * listai1[i].tamanhoparadoi1.Y,
+                                                       listai1[i].tamanhoparadoi1.X, listai1[i].tamanhoparadoi1.Y), Color.White);
+                    }
+                if (listai1[i].DIREITA)
+                {
+                    spriteBatch.Draw(i1.imgAndarDi1, listai1[i].individuo,
+                        new Rectangle(listai1[i].frameAndari1.X * listai1[i].tamanhoAndari1.X, listai1[i].frameAndari1.Y * listai1[i].tamanhoAndari1.Y,
+                                                   listai1[i].tamanhoAndari1.X, listai1[i].tamanhoAndari1.Y), Color.White);
+                }
+                if (listai1[i].ESQUERDA)
+                {
+                    spriteBatch.Draw(i1.imgAndarEi1, listai1[i].individuo,
+                        new Rectangle(listai1[i].frameAndari1.X * listai1[i].tamanhoAndari1.X, listai1[i].frameAndari1.Y * listai1[i].tamanhoAndari1.Y,
+                                                   listai1[i].tamanhoAndari1.X, listai1[i].tamanhoAndari1.Y), Color.White);
+                }
+            }
+            for (int i = 0; i < listai1.Count; i++)
+            {
+                //barras
+                spriteBatch.Draw(P1.imgVIDA, listai1[i].VIDA, Color.White);
+                spriteBatch.Draw(P1.imgMANA, listai1[i].MANA, Color.White);
+                spriteBatch.Draw(P1.imgENERGIA, listai1[i].ENERGIA, Color.White);
+
+                if (listai1[i].individuo.X > TELACHEIA.X + TELACHEIA.Width)
+                {
+                    spriteBatch.Draw(imgFlechaD, FlechaD, Color.White);
+                }
+                if (listai1[i].individuo.X < TELACHEIA.X)
+                {
+                    spriteBatch.Draw(imgFlechaE, FlechaE, Color.White);
+                }
+
+
+            }
+
+
+
+
+            //--------------------------------------------------------------------------------------------------
+            //--------------------------------------------------------------------------------------------------
+            for (int a = 0; a < P1.listadeagua.Count; a++)
+            {
+                spriteBatch.Draw(DefineAgua.imgAgua, P1.listadeagua[a].AguaR, Color.SteelBlue);
+            }
+            /// ----------------
             if (P1.DIREITA)
             {
                 if (!P1.COMBATE) // fora de combate
@@ -209,53 +274,7 @@ namespace Stick_RPG_Fight
                 }//fim esquerda
             }
 
-            //INIMIGO 1
-            for (int i = 0; i < listai1.Count; i++)
-            {
-                //movimentos
-                if (listai1[i].PARADO)
-                {
-                    spriteBatch.Draw(i1.imgParadoi1, listai1[i].individuo,
-                        new Rectangle(listai1[i].frameparadoi1.X * listai1[i].tamanhoparadoi1.X, listai1[i].frameparadoi1.Y * listai1[i].tamanhoparadoi1.Y,
-                                                   listai1[i].tamanhoparadoi1.X, listai1[i].tamanhoparadoi1.Y), Color.White);
-                }
-                if (listai1[i].DIREITA)
-                {
-                    spriteBatch.Draw(i1.imgAndarDi1, listai1[i].individuo,
-                        new Rectangle(listai1[i].frameAndari1.X * listai1[i].tamanhoAndari1.X, listai1[i].frameAndari1.Y * listai1[i].tamanhoAndari1.Y,
-                                                   listai1[i].tamanhoAndari1.X, listai1[i].tamanhoAndari1.Y), Color.White);
-                }
-                if (listai1[i].ESQUERDA)
-                {
-                    spriteBatch.Draw(i1.imgAndarEi1, listai1[i].individuo,
-                        new Rectangle(listai1[i].frameAndari1.X * listai1[i].tamanhoAndari1.X, listai1[i].frameAndari1.Y * listai1[i].tamanhoAndari1.Y,
-                                                   listai1[i].tamanhoAndari1.X, listai1[i].tamanhoAndari1.Y), Color.White);
-                }
-            }
-            for (int i = 0; i < listai1.Count; i++)
-            {
-                //barras
-                spriteBatch.Draw(P1.imgVIDA, listai1[i].VIDA, Color.White);
-                spriteBatch.Draw(P1.imgMANA, listai1[i].MANA, Color.White);
-                spriteBatch.Draw(P1.imgENERGIA, listai1[i].ENERGIA, Color.White);
-
-                if (listai1[i].individuo.X > TELACHEIA.X + TELACHEIA.Width)
-                {
-                    spriteBatch.Draw(imgFlechaD, FlechaD, Color.White);
-                }
-                if (listai1[i].individuo.X < TELACHEIA.X)
-                {
-                    spriteBatch.Draw(imgFlechaE, FlechaE, Color.White);
-                }
-
-                for (int a = 0; a < listai1[i].listadesangue.Count; a++)// APARECER SANGUE
-                {
-                    
-                        spriteBatch.Draw(imgSangue, listai1[i].listadesangue[a].sangueR, Color.White);
-                    
-
-                }
-            }
+            
 
             if (P1.PODER)
             {
@@ -275,6 +294,7 @@ namespace Stick_RPG_Fight
             spriteBatch.Draw(P1.imgXP, P1.XPrec, Color.White);
             spriteBatch.DrawString(HUDfont, "XP " + P1.XP, new Vector2(P1.XPrec.X + HeightTela / 100, P1.XPrec.Y + HeightTela / 100), Color.Black);
             spriteBatch.Draw(P1.imgXPT, P1.XPTrec, Color.White);
+            spriteBatch.Draw(P1.imgpino, P1.Pino, Color.White);
 
         }//fim draw combate
         //--------------------------------------------------------------------------------------------------
