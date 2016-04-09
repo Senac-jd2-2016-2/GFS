@@ -69,6 +69,9 @@ namespace Stick_RPG_Fight
         public int Vy = 0;
         public int g = 0; // gravidade
 
+        public List<Sangue> listadesangue = new List<Sangue>();
+
+
         public void GERARi1(List<Inimigo> listai1, int WidthTela, int HeightTela, Random aleatório)
         {
             Inimigo i1 = new Inimigo(); // gera um novo
@@ -95,7 +98,7 @@ namespace Stick_RPG_Fight
             i1.energiaT = 100;
             i1.vida = 50;
             
-            listai1.Insert(listai1.Count, i1);
+            listai1.Add(i1);
         }
 
         public void PosiçãoINIMIGO(int WidthTela, int HeightTela)
@@ -183,20 +186,20 @@ namespace Stick_RPG_Fight
             //empurrar
             if (P1.ATACANDO)
             {
-                if (P1.meio.X < meio.X && P1.individuo.Intersects(meio) && P1.PARTE3 && P1.COMBO1)
+                if (P1.meio.X < meio.X && P1.individuo.Intersects(meio) && P1.PARTE3 && P1.COMBO1 && P1.DIREITA)
                 {
                     Vx += HeightTela / 100;
                 }
-                if (P1.meio.X < meio.X && P1.individuo.Intersects(meio) && P1.PARTE4 && P1.COMBO1)
+                if (P1.meio.X < meio.X && P1.individuo.Intersects(meio) && P1.PARTE4 && P1.COMBO1 && P1.DIREITA)
                 {
                     Vx += HeightTela / 90;
                 }
 
-                if (P1.meio.X > meio.X && P1.individuo.Intersects(meio) && P1.PARTE3 && P1.COMBO1)
+                if (P1.meio.X > meio.X && P1.individuo.Intersects(meio) && P1.PARTE3 && P1.COMBO1 && P1.ESQUERDA)
                 {
                     Vx -= HeightTela / 100;
                 }
-                if (P1.meio.X > meio.X && P1.individuo.Intersects(meio) && P1.PARTE4 && P1.COMBO1)
+                if (P1.meio.X > meio.X && P1.individuo.Intersects(meio) && P1.PARTE4 && P1.COMBO1 && P1.ESQUERDA)
                 {
                     Vx -= HeightTela / 90;
                 }
@@ -262,7 +265,7 @@ namespace Stick_RPG_Fight
             
         }//fim
 
-        public void HP(int WidthTela, int HeightTela)
+        public void HP(int WidthTela, int HeightTela, List<Inimigo> listai1, Personagem P1)
         {
             VIDA.Width = (int)(((float)(vida) / vidaT) * individuo.Width);
 
@@ -291,7 +294,100 @@ namespace Stick_RPG_Fight
             {
                 energia++;
             }
+
+            for (int i = 0; i < listai1.Count; i++)
+            {
+                if (listai1[i].vida <= 0)
+                {
+                    listai1.Remove(listai1[i]);
+                    P1.XP += 10;
+                }
+            }
         }
+
+        public void Sangrar(int WidthTela, int HeightTela,Personagem P1, Random aleatório)
+        {
+            if (P1.individuo.Intersects(meio) && P1.ATACANDO && (P1.individuo.X < individuo.X && P1.DIREITA || P1.individuo.X > individuo.X && P1.ESQUERDA) && !DEFENDENDO)
+            {
+                if ((P1.DIREITA && ((P1.PARTE1 && P1.frameLUTA.Y >= 1) || (P1.PARTE2 && (P1.frameLUTA.X >= 5 && P1.frameLUTA.Y == 2) || P1.frameLUTA.Y >= 2) || (P1.PARTE3 && (P1.frameLUTA.X >= 4 && P1.frameLUTA.Y == 3) || P1.frameLUTA.Y == 4) || (P1.PARTE4 && P1.frameLUTA.Y >= 3))) || (P1.ESQUERDA && ((P1.PARTE1 && P1.frameLUTA.Y >= 1) || (P1.PARTE2 && (P1.frameLUTA.X <= 2 && P1.frameLUTA.Y == 2) || P1.frameLUTA.Y >= 2) || (P1.PARTE3 && (P1.frameLUTA.X <= 3 && P1.frameLUTA.Y == 3) || P1.frameLUTA.Y == 4) || (P1.PARTE4 && P1.frameLUTA.Y >= 3))))
+                {//para sangrar / tomar dano apenas qnd estiver em tal parte do ataque
+                    Sangue S1 = new Sangue();
+
+
+
+                    S1.sangueR.Width = HeightTela / 100;
+                    S1.sangueR.Height = HeightTela / 100;
+                    if (P1.PARTE4 && P1.COMBO1)
+                    {
+                        S1.Vx = individuo.X + individuo.Width / 2 + (-Contexto.Fundo.fase.X); // posiçao do jogar + a posição mapa = posição universal
+                        S1.Vy = P1.individuo.Y + P1.individuo.Height / 2 + (-Contexto.Fundo.fase.Y);
+                    }
+                    if ((P1.PARTE2 || P1.PARTE3) && P1.COMBO1)
+                    {
+                        S1.Vx = individuo.X + individuo.Width / 2 + (-Contexto.Fundo.fase.X); // posiçao do jogar + a posição mapa = posição universal
+                        S1.Vy = P1.individuo.Y + P1.individuo.Height / 3 + (-Contexto.Fundo.fase.Y);
+                    }
+                    if (P1.PARTE1)
+                    {
+                        S1.Vx = individuo.X + individuo.Width / 2 + (-Contexto.Fundo.fase.X); // posiçao do jogar + a posição mapa = posição universal
+                        S1.Vy = P1.individuo.Y + P1.individuo.Height / 3 + (-Contexto.Fundo.fase.Y);
+                    }
+                    S1.g = 0;
+                    S1.ON = true;
+
+                    listadesangue.Add(S1);
+                }
+            }
+
+            if (!DEFENDENDO && P1.individuo.Intersects(meio) && P1.ATACANDO && (P1.individuo.X < individuo.X && P1.DIREITA || P1.individuo.X > individuo.X && P1.ESQUERDA))
+            {
+                if (((P1.DIREITA && (P1.PARTE1 && P1.frameLUTA.Y == 1 && P1.frameLUTA.X == 3)) || (P1.ESQUERDA && (P1.PARTE1 && P1.frameLUTA.Y >= 1 && P1.frameLUTA.X == 5))) && !P1.INVERSO)
+                {//para sangrar / tomar dano apenas qnd estiver em tal parte do ataque
+                    vida-= 10;
+                }
+                if (((P1.DIREITA && (P1.PARTE2 && P1.frameLUTA.X == 5 && P1.frameLUTA.Y == 2)) || P1.ESQUERDA && (P1.PARTE2 && P1.frameLUTA.X == 2 && P1.frameLUTA.Y == 2)) && P1.COMBO1)
+                {
+                    vida -= 20;
+                }
+                if ((P1.DIREITA && (P1.PARTE3 && P1.frameLUTA.X == 4 && P1.frameLUTA.Y == 3) || P1.ESQUERDA && (P1.PARTE3 && (P1.frameLUTA.X == 3 && P1.frameLUTA.Y == 3))) && P1.COMBO1)
+                {
+                    vida -= 30;
+                }
+                if ((P1.DIREITA && P1.PARTE4 && P1.frameLUTA.Y == 3 && P1.frameLUTA.X == 0 || P1.ESQUERDA && P1.PARTE4 && P1.frameLUTA.Y == 3 && P1.frameLUTA.X == 7) && P1.COMBO1)
+                {
+                    vida -= 30;
+                }
+            }
+
+            if (listadesangue.Count > 0) // se nao for nulo a qntdd
+            {
+                for (int i = 0; i < listadesangue.Count; i++)
+                {
+                    
+                    listadesangue[i].sangueR.X = listadesangue[i].Vx + Contexto.Fundo.fase.X + listadesangue[i].VariavelX; // posição definida (não variável)
+                    listadesangue[i].sangueR.Y = listadesangue[i].Vy + Contexto.Fundo.fase.Y + listadesangue[i].g;
+                    //velocidade gravidade
+                    listadesangue[i].g += aleatório.Next(HeightTela / 250, HeightTela / 100);
+                    
+                        //direita ou esquerda
+                        if (P1.individuo.Intersects(meio)  && P1.individuo.X < individuo.X && P1.DIREITA)
+                        {
+                            listadesangue[i].VariavelX += aleatório.Next(HeightTela / 200, HeightTela / 100);
+                        }
+                        if (P1.individuo.Intersects(meio) && P1.individuo.X > individuo.X && P1.ESQUERDA)
+                        {
+                            listadesangue[i].VariavelX -= aleatório.Next(HeightTela / 200, HeightTela / 100);
+                        }
+
+                        if (listadesangue[i].sangueR.Intersects(Contexto.Fundo.chao) || listadesangue[i].sangueR.Y > Contexto.Fundo.chao.Y + Contexto.Fundo.chao.Height)
+                        {
+                            listadesangue.Remove(listadesangue[i]);
+                        }
+                   
+                }
+            }
+        }
+
 
     }
 

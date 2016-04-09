@@ -406,7 +406,7 @@ namespace Stick_RPG_Fight
                         else if (INVERSO)
                         {
                             frameLUTA.X++;
-                            if (frameLUTA.X <= 7 && frameLUTA.Y == 0)
+                            if (frameLUTA.X >= 7 && frameLUTA.Y == 0)
                             {
                                 //TERMINAR A SEQUENCIA:
 
@@ -1610,7 +1610,7 @@ namespace Stick_RPG_Fight
             clone.individuo.Y = P1.individuo.Y;
             clone.individuo.Width = P1.individuo.Width;
             clone.individuo.Height = P1.individuo.Height;
-            clone.Vx = P1.individuo.X + (-Contexto.Fundo.fase.X); // posiçao do jogar + a posição mapa = posição universal
+            clone.Vx = P1.individuo.X + (-Contexto.Fundo.fase.X); // posiçao do jogador + a posição mapa = posição universal
             clone.Vy = P1.individuo.Y + (-Contexto.Fundo.fase.Y);
 
             //boleaveis
@@ -1654,6 +1654,7 @@ namespace Stick_RPG_Fight
             {
                 P1.clonelistaPoder[i].individuo.X = P1.clonelistaPoder[i].Vx + Contexto.Fundo.fase.X; // posição definida (não variável)
                 P1.clonelistaPoder[i].individuo.Y = P1.clonelistaPoder[i].Vy + Contexto.Fundo.fase.Y;
+
             }
         }
     }

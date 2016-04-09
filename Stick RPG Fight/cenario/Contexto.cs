@@ -17,7 +17,7 @@ namespace Stick_RPG_Fight
         public static Background Fundo = new Background();
 
 
-        public static void inicializar(ContentManager content, Menu M1, Audio AUDIO, Personagem P1, Botoes Botao, List<Inimigo> listai1) // carregar imagens quando a fase começa (não no começo)
+        public static void inicializar(ContentManager content, Menu M1, Audio AUDIO, Personagem P1, Botoes Botao,  Inimigo i1) // carregar imagens quando a fase começa (não no começo)
         {
             //Direito
             P1.imgSpriteSheetparado1 = content.Load<Texture2D>("spritesheet p1 parado1"); // só imagem, logo posso usar isso também pros inimigos.
@@ -63,9 +63,11 @@ namespace Stick_RPG_Fight
             Botao.imghomeOFFTP = content.Load<Texture2D>("homeOFFTP");
             Botao.imghomeON = content.Load<Texture2D>("homeON");
 
-            listai1[0].imgAndarDi1 = content.Load<Texture2D>("i1 - andar DIREITA");
-            listai1[0].imgAndarEi1 = content.Load<Texture2D>("i1 - andar");
-            listai1[0].imgParadoi1 = content.Load<Texture2D>("i1 - parado");
+            
+                i1.imgAndarDi1 = content.Load<Texture2D>("i1 - andar DIREITA");
+                i1.imgAndarEi1 = content.Load<Texture2D>("i1 - andar");
+                i1.imgParadoi1 = content.Load<Texture2D>("i1 - parado");
+            
 
             P1.imgBARRA = content.Load<Texture2D>("BARRA");
             P1.imgSOBRE = content.Load<Texture2D>("SOBRE");
