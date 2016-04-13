@@ -26,6 +26,12 @@ namespace Stick_RPG_Fight
             //INIMIGO 1
             for (int i = 0; i < listai1.Count; i++)
             {
+                //SANGUE E AGUA
+                //SANGUE E AGUA
+                //SANGUE E AGUA
+                //SANGUE E AGUA
+                //SANGUE E AGUA
+                //SANGUE E AGUA
                 for (int a = 0; a < listai1[i].listadesangue.Count; a++)// APARECER SANGUE
                 {
                     spriteBatch.Draw(imgSangue, listai1[i].listadesangue[a].sangueR, Color.White);
@@ -37,6 +43,12 @@ namespace Stick_RPG_Fight
                 }
                 
 
+                //PARADO
+                //PARADO
+                //PARADO
+                //PARADO
+                //PARADO
+                //PARADO
                     //movimentos
                     if (listai1[i].PARADO)
                     {
@@ -44,17 +56,91 @@ namespace Stick_RPG_Fight
                             new Rectangle(listai1[i].frameparadoi1.X * listai1[i].tamanhoparadoi1.X, listai1[i].frameparadoi1.Y * listai1[i].tamanhoparadoi1.Y,
                                                        listai1[i].tamanhoparadoi1.X, listai1[i].tamanhoparadoi1.Y), Color.White);
                     }
+
+                //DIREITA
+                    //DIREITA
+                    //DIREITA
+                    //DIREITA
+                    //DIREITA
+                    //DIREITA
                 if (listai1[i].DIREITA)
                 {
-                    spriteBatch.Draw(i1.imgAndarDi1, listai1[i].individuo,
-                        new Rectangle(listai1[i].frameAndari1.X * listai1[i].tamanhoAndari1.X, listai1[i].frameAndari1.Y * listai1[i].tamanhoAndari1.Y,
-                                                   listai1[i].tamanhoAndari1.X, listai1[i].tamanhoAndari1.Y), Color.White);
+                    if (listai1[i].ANDANDO)
+                    {
+                        spriteBatch.Draw(i1.imgAndarDi1, listai1[i].individuo,
+                            new Rectangle(listai1[i].frameAndari1.X * listai1[i].tamanhoAndari1.X, listai1[i].frameAndari1.Y * listai1[i].tamanhoAndari1.Y,
+                                                       listai1[i].tamanhoAndari1.X, listai1[i].tamanhoAndari1.Y), Color.White);
+                    }
+                    ///TOMANDO HIT
+                    /////TOMANDO HIT
+                    //TOMANDO HIT
+                    //TOMANDO HIT
+                    //TOMANDO HIT
+                    if (listai1[i].TOMANDOHIT)
+                    {
+                        if (listai1[i].HIT1)
+                        {
+                            spriteBatch.Draw(i1.imgHit1Di1, listai1[i].individuo,
+                            new Rectangle(listai1[i].frameALLi1.X * listai1[i].tamanhoHit1i1.X, listai1[i].frameALLi1.Y * listai1[i].tamanhoHit1i1.Y,
+                                                       listai1[i].tamanhoHit1i1.X, listai1[i].tamanhoHit1i1.Y), Color.White);
+                        }
+                        if (listai1[i].HIT2)
+                        {
+                            spriteBatch.Draw(i1.imgHit2Di1, listai1[i].individuo,
+                            new Rectangle(listai1[i].frameALLi1.X * listai1[i].tamanhoHit2i1.X, listai1[i].frameALLi1.Y * listai1[i].tamanhoHit2i1.Y,
+                                                       listai1[i].tamanhoHit1i1.X, listai1[i].tamanhoHit1i1.Y), Color.White);
+
+                        }
+                        if (listai1[i].HIT3)
+                        {
+                            spriteBatch.Draw(i1.imgHit3Di1, listai1[i].individuo,
+                            new Rectangle(listai1[i].frameALLi1.X * listai1[i].tamanhoHit3i1.X, listai1[i].frameALLi1.Y * listai1[i].tamanhoHit3i1.Y,
+                                                       listai1[i].tamanhoHit1i1.X, listai1[i].tamanhoHit1i1.Y), Color.White);
+                        }
+                    }
+
                 }
+                //ESQUUERDA
+                //ESQUUERDA
+                //ESQUUERDA
+                //ESQUUERDA
+                //ESQUUERDA
+                //ESQUUERDA
                 if (listai1[i].ESQUERDA)
                 {
-                    spriteBatch.Draw(i1.imgAndarEi1, listai1[i].individuo,
-                        new Rectangle(listai1[i].frameAndari1.X * listai1[i].tamanhoAndari1.X, listai1[i].frameAndari1.Y * listai1[i].tamanhoAndari1.Y,
-                                                   listai1[i].tamanhoAndari1.X, listai1[i].tamanhoAndari1.Y), Color.White);
+                    if (listai1[i].ANDANDO)
+                    {
+                        spriteBatch.Draw(i1.imgAndarEi1, listai1[i].individuo,
+                            new Rectangle(listai1[i].frameAndari1.X * listai1[i].tamanhoAndari1.X, listai1[i].frameAndari1.Y * listai1[i].tamanhoAndari1.Y,
+                                                       listai1[i].tamanhoAndari1.X, listai1[i].tamanhoAndari1.Y), Color.White);
+                    }
+                    ///TOMANDO HIT
+                    /////TOMANDO HIT
+                    //TOMANDO HIT
+                    //TOMANDO HIT
+                    //TOMANDO HIT
+                    if (listai1[i].TOMANDOHIT)
+                    {
+                        if (listai1[i].HIT1)
+                        {
+                            spriteBatch.Draw(i1.imgHit1Ei1, listai1[i].individuo,
+                            new Rectangle(listai1[i].frameALLi1.X * listai1[i].tamanhoHit1i1.X, listai1[i].frameALLi1.Y * listai1[i].tamanhoHit1i1.Y,
+                                                       listai1[i].tamanhoHit1i1.X, listai1[i].tamanhoHit1i1.Y), Color.White);
+                        }
+                        if (listai1[i].HIT2)
+                        {
+                            spriteBatch.Draw(i1.imgHit2Ei1, listai1[i].individuo,
+                            new Rectangle(listai1[i].frameALLi1.X * listai1[i].tamanhoHit2i1.X, listai1[i].frameALLi1.Y * listai1[i].tamanhoHit2i1.Y,
+                                                       listai1[i].tamanhoHit1i1.X, listai1[i].tamanhoHit1i1.Y), Color.White);
+
+                        }
+                        if (listai1[i].HIT3)
+                        {
+                            spriteBatch.Draw(i1.imgHit3Ei1, listai1[i].individuo,
+                            new Rectangle(listai1[i].frameALLi1.X * listai1[i].tamanhoHit3i1.X, listai1[i].frameALLi1.Y * listai1[i].tamanhoHit3i1.Y,
+                                                       listai1[i].tamanhoHit1i1.X, listai1[i].tamanhoHit1i1.Y), Color.White);
+                        }
+                    }
                 }
             }
             for (int i = 0; i < listai1.Count; i++)

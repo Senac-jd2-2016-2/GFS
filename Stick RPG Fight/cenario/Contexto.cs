@@ -64,9 +64,33 @@ namespace Stick_RPG_Fight
             Botao.imghomeON = content.Load<Texture2D>("homeON");
 
             
-                i1.imgAndarDi1 = content.Load<Texture2D>("i1 - andar DIREITA");
-                i1.imgAndarEi1 = content.Load<Texture2D>("i1 - andar");
-                i1.imgParadoi1 = content.Load<Texture2D>("i1 - parado");
+            // inimigo 1
+            i1.imgAndarDi1 = content.Load<Texture2D>("i1 - andar DIREITA");
+            i1.imgAndarEi1 = content.Load<Texture2D>("i1 - andar");
+            i1.imgParadoi1 = content.Load<Texture2D>("i1 - parado");
+            //D
+            i1.imgDEFDi1 = content.Load<Texture2D>("i1 - defesaD");
+            i1.imgFacaDi1 = content.Load<Texture2D>("FacaD");
+            i1.imgAgacharDi1 = content.Load<Texture2D>("i1 - agacharD");
+            i1.imgAgacharDEFDi1 = content.Load<Texture2D>("i1 - agachar defendendoD");
+            i1.imgCaidoDi1 = content.Load<Texture2D>("i1 - caidoD");
+            i1.imgJogarFacaDi1 = content.Load<Texture2D>("i1 - jogando facaD");
+            i1.imgHit1Di1 = content.Load<Texture2D>("i1 - hit1D");
+            i1.imgHit2Di1 = content.Load<Texture2D>("i1 - hit2D");
+            i1.imgHit3Di1 = content.Load<Texture2D>("i1 - hit3D");
+            i1.imgLevantarDi1 = content.Load<Texture2D>("i1 - levantarD");
+            //E
+            i1.imgDEFEi1 = content.Load<Texture2D>("i1 - defesa");
+            i1.imgFacaEi1 = content.Load<Texture2D>("FacaE");
+            i1.imgAgacharEi1 = content.Load<Texture2D>("i1 - agachar");
+            i1.imgAgacharDEFEi1 = content.Load<Texture2D>("i1 - agachar defendendo");
+            i1.imgCaidoEi1 = content.Load<Texture2D>("i1 - caido");
+            i1.imgJogarFacaEi1 = content.Load<Texture2D>("i1 - jogando faca");
+            i1.imgHit1Ei1 = content.Load<Texture2D>("i1 - hit1");
+            i1.imgHit2Ei1 = content.Load<Texture2D>("i1 - hit2");
+            i1.imgHit3Ei1 = content.Load<Texture2D>("i1 - hit3");
+            i1.imgLevantarEi1 = content.Load<Texture2D>("i1 - levantar");
+
             
 
             P1.imgBARRA = content.Load<Texture2D>("BARRA");
