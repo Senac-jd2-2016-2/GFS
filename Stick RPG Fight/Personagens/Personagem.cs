@@ -120,8 +120,7 @@ namespace Stick_RPG_Fight
 
         public Rectangle individuo = new Rectangle();
         public Rectangle meio = new Rectangle();
-        public Rectangle cima = new Rectangle();
-        public Rectangle pernas = new Rectangle();
+        public Rectangle DistanciadeLuta = new Rectangle();
 
         public bool DIREITA;
         public bool ESQUERDA;
@@ -136,6 +135,8 @@ namespace Stick_RPG_Fight
         public bool CORRENDO;
         public bool PODER = false;
         public bool DESCANSANDO;
+
+        public bool ATAQUELANÇADO;
 
         //LUTA
         //frame voltando
@@ -218,6 +219,7 @@ namespace Stick_RPG_Fight
         //=========================================================================================FRAMES DA LUTA====================================================================
         public void FRAMESluta()
         {
+            ATAQUELANÇADO = false;
             if (ATACANDO)
             {
                 if (DIREITA)
@@ -247,11 +249,13 @@ namespace Stick_RPG_Fight
                                 {
                                     PARTE1 = false;
                                     PARTE2 = true;
-                                    
+
+                                    ATAQUELANÇADO = true;
                                     COMBO1 = true;
                                     frameLUTA.X = 0;
                                     frameLUTA.Y = 0;
                                     energia -= 10;
+
                                 }
                             }
 
@@ -308,6 +312,7 @@ namespace Stick_RPG_Fight
                         {
                             if (Keyboard.GetState().IsKeyDown(Keys.NumPad4) && !Keyboard.GetState().IsKeyDown(Keys.NumPad8) && !Keyboard.GetState().IsKeyDown(Keys.NumPad6) && !Keyboard.GetState().IsKeyDown(Keys.NumPad2) && energia >= 25)
                             {
+                                ATAQUELANÇADO = true;
                                 PARTE2 = false;
                                 PARTE3 = true;
 
@@ -342,6 +347,7 @@ namespace Stick_RPG_Fight
                         {
                             if (Keyboard.GetState().IsKeyDown(Keys.NumPad6) && Keyboard.GetState().IsKeyDown(Keys.W) && !Keyboard.GetState().IsKeyDown(Keys.NumPad8) && !Keyboard.GetState().IsKeyDown(Keys.NumPad4) && !Keyboard.GetState().IsKeyDown(Keys.NumPad2) && energia >= 30)
                             {
+                                ATAQUELANÇADO = true;
                                 PARTE3 = false;
                                 PARTE4 = true;
 
@@ -757,6 +763,7 @@ namespace Stick_RPG_Fight
             {
                 if (Keyboard.GetState().IsKeyDown(Keys.NumPad8) && !PARTE1 && !PARTE2 && !PARTE3 && !PARTE4 && !Keyboard.GetState().IsKeyDown(Keys.LeftShift) && !ATACANDO && !PULANDOparado && !PULANDOandando && !PULANDOcorrendo && energia >= 20)
                 {
+                    ATAQUELANÇADO = true;
                     PARTE1 = true;
                     frameLUTA.X = 0;
                     frameLUTA.Y = 0;
@@ -846,6 +853,7 @@ namespace Stick_RPG_Fight
             {
                 if (Keyboard.GetState().IsKeyDown(Keys.NumPad8) && !PARTE1 && !PARTE2 && !PARTE3 && !PARTE4 && !Keyboard.GetState().IsKeyDown(Keys.LeftShift) && !ATACANDO && !PULANDOparado && !PULANDOandando && !PULANDOcorrendo && energia >= 20)
                 {
+                    ATAQUELANÇADO = true;
                     PARTE1 = true;
                     frameLUTA.X = 7;
                     frameLUTA.Y = 0;
@@ -947,10 +955,16 @@ namespace Stick_RPG_Fight
             //mov do personagem
             individuo.X += Vx;
             individuo.Y += (Vy + g);
+
             meio.X = individuo.X + individuo.Width / 4;
             meio.Y = individuo.Y;
             meio.Width = individuo.Width / 2;
             meio.Height = individuo.Height;
+
+            DistanciadeLuta.X = individuo.X - ((individuo.Width / 4) / 2);
+            DistanciadeLuta.Y = individuo.Y;
+            DistanciadeLuta.Width = individuo.Width / 4;
+            DistanciadeLuta.Height = individuo.Height;
 
             //chao empurra pra cima
             if (individuo.Intersects(Contexto.Fundo.chao))

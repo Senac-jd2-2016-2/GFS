@@ -90,6 +90,7 @@ namespace Stick_RPG_Fight
 
         //GERAL int
         public int opç = 1;
+        public int opçluta;
         public int vida;
         public int mana;
         public int energia;
@@ -103,6 +104,7 @@ namespace Stick_RPG_Fight
         public bool AGACHADO;
         public bool ATACANDO;
         public bool PARADO;
+        public bool PODER;
         public bool PULANDOparado;
         public bool PULANDOandando;
         public bool PULANDOcorrendo;
@@ -110,6 +112,7 @@ namespace Stick_RPG_Fight
         public bool CORRENDO;
         public bool DEFENDENDO;
         public bool ROLAR;
+        public bool AGARRAR;
 
         //hit
         public bool TOMANDOHIT; //tomando hit
@@ -226,13 +229,106 @@ namespace Stick_RPG_Fight
         //INTELIGENCIA ARTIFICIAL
         //INTELIGENCIA ARTIFICIAL
         //INTELIGENCIA ARTIFICIAL
-        public void INTELIGENCIA(int WidthTela, int HeightTela, Personagem P1, List<Inimigo> listai1)
+        public void INTELIGENCIA(int WidthTela, int HeightTela, Personagem P1, List<Inimigo> listai1, Random aleatório)
         {
+
+
+            //INTELIGENCIA DA LUTA//INTELIGENCIA DA LUTA
+            //INTELIGENCIA DA LUTA
+            //INTELIGENCIA DA LUTA
+            //INTELIGENCIA DA LUTA
+            //INTELIGENCIA DA LUTA
+            //INTELIGENCIA DA LUTA
+
+            //INTELIGENCIA DA LUTA
+            //INTELIGENCIA DA LUTA//INTELIGENCIA DA LUTA
+            /*
+            public bool DIREITA = true;
+            ESQUERDA;
+            AGACHADO;
+            ATACANDO;
+            PARADO;
+            PODER;
+            PULANDOparado;
+            PULANDOandando;
+            PULANDOcorrendo;
+            ANDANDO = true;
+            CORRENDO;
+            DEFENDENDO;
+            ROLAR;
+            */
+            if (P1.ATACANDO && !P1.AGACHADO && !ATACANDO && !PODER && P1.ATAQUELANÇADO)
+            {
+                int[] a = {1,2,3,5};
+                opçluta = aleatório.Next(a.Length);
+            }
+
+            if (P1.ATACANDO)
+
+            if (!TOMANDOHIT)
+            {
+                if (opçluta == 1 && !ATACANDO)
+                {
+                    ATACANDO = true;
+                    DEFENDENDO = false;
+                    ANDANDO = false;
+                    PARADO = false;
+                }
+                if (opçluta == 2 && !ATACANDO)
+                {
+                    DEFENDENDO = true;
+
+                }
+                if (opçluta == 3)
+                {
+                    AGACHADO = true;
+                }
+                if (opçluta == 4)
+                {
+                    ROLAR = true;
+                }
+                if (opçluta == 5)
+                {
+                    AGACHADO = true;
+                    DEFENDENDO = true;
+                }
+                if (opçluta == 6)
+                {
+                    PODER = true;
+                }
+                if (opçluta == 7)
+                {
+                    AGARRAR = true;
+                }
+            }
+
+            /*
+            public bool DIREITA = true;
+            ESQUERDA;
+            AGACHADO;
+            ATACANDO;
+            PARADO;
+            PODER;
+            PULANDOparado;
+            PULANDOandando;
+            PULANDOcorrendo;
+            ANDANDO = true;
+            CORRENDO;
+            DEFENDENDO;
+            ROLAR;
+            */
+
+
+
+
+
+
+
             //CASO NAO ENCOSTE
             //CASO NAO ENCOSTE//CASO NAO ENCOSTE
             //CASO NAO ENCOSTE
             //CASO NAO ENCOSTE
-            if (!meio.Intersects(P1.meio) && !TOMANDOHIT) // caso nao estejam tocando
+            if (!meio.Intersects(P1.meio) && !TOMANDOHIT && !meio.Intersects(P1.DistanciadeLuta)) // caso nao estejam tocando
             {
                 if (meio.X + meio.Width < P1.meio.X && !DIREITA) //se o bot estiver na esquerda do personagem
                 {
@@ -263,7 +359,7 @@ namespace Stick_RPG_Fight
             //se estiver tocando
             //se estiver tocando
             //se estiver tocando
-            if (meio.Intersects(P1.meio) && !TOMANDOHIT)//se estiver tocando
+            if (meio.Intersects(P1.DistanciadeLuta) && !TOMANDOHIT && !ATACANDO && !DEFENDENDO && !ROLAR && !PODER && !AGACHADO)//se estiver tocando
             {
                 PARADO = true;
                 ANDANDO = false;
@@ -709,7 +805,7 @@ namespace Stick_RPG_Fight
                 //COMBO1
                 //COMBO1
                 //COMBO1
-                if (((P1.DIREITA && (P1.PARTE1 && P1.frameLUTA.Y == 1 && P1.frameLUTA.X == 1)) || (P1.ESQUERDA && (P1.PARTE1 && P1.frameLUTA.Y >= 1 && P1.frameLUTA.X == 6))) && !P1.INVERSO)
+                if (((P1.DIREITA && (P1.PARTE1 && P1.frameLUTA.Y == 1 && P1.frameLUTA.X == 1)) || (P1.ESQUERDA && (P1.PARTE1 && P1.frameLUTA.Y >= 1 && P1.frameLUTA.X == 6))) && !P1.INVERSO && !AGACHADO && !DEFENDENDO)
                 {//para sangrar / tomar dano apenas qnd estiver em tal parte do ataque
                     vida-= 10;
                     HIT1 = true;
@@ -732,7 +828,7 @@ namespace Stick_RPG_Fight
                         DIREITA = true;
                     }
                 }
-                if (((P1.DIREITA && (P1.PARTE2 && P1.frameLUTA.X == 4 && P1.frameLUTA.Y == 2)) || P1.ESQUERDA && (P1.PARTE2 && P1.frameLUTA.X == 2 && P1.frameLUTA.Y == 2)) && P1.COMBO1)
+                if (((P1.DIREITA && (P1.PARTE2 && P1.frameLUTA.X == 4 && P1.frameLUTA.Y == 2)) || P1.ESQUERDA && (P1.PARTE2 && P1.frameLUTA.X == 2 && P1.frameLUTA.Y == 2)) && P1.COMBO1 && !AGACHADO && !DEFENDENDO)
                 {
                     vida -= 20;
                     HIT1 = true;
@@ -756,7 +852,7 @@ namespace Stick_RPG_Fight
                     }
 
                 }
-                if ((P1.DIREITA && (P1.PARTE3 && P1.frameLUTA.X == 4 && P1.frameLUTA.Y == 3) || P1.ESQUERDA && (P1.PARTE3 && (P1.frameLUTA.X == 3 && P1.frameLUTA.Y == 3))) && P1.COMBO1)
+                if ((P1.DIREITA && (P1.PARTE3 && P1.frameLUTA.X == 4 && P1.frameLUTA.Y == 3) || P1.ESQUERDA && (P1.PARTE3 && (P1.frameLUTA.X == 3 && P1.frameLUTA.Y == 3))) && P1.COMBO1 && !DEFENDENDO)
                 {
                     vida -= 30;
                     HIT2 = true;
@@ -779,7 +875,7 @@ namespace Stick_RPG_Fight
                         DIREITA = true;
                     }
                 }
-                if ((P1.DIREITA && P1.PARTE4 && P1.frameLUTA.Y == 4 && P1.frameLUTA.X == 0 || P1.ESQUERDA && P1.PARTE4 && P1.frameLUTA.Y == 4 && P1.frameLUTA.X == 7) && P1.COMBO1)
+                if ((P1.DIREITA && P1.PARTE4 && P1.frameLUTA.Y == 4 && P1.frameLUTA.X == 0 || P1.ESQUERDA && P1.PARTE4 && P1.frameLUTA.Y == 4 && P1.frameLUTA.X == 7) && P1.COMBO1 && !DEFENDENDO)
                 {
                     vida -= 30;
                     HIT2 = true;

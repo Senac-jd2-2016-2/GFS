@@ -386,7 +386,7 @@ namespace Stick_RPG_Fight
                         {
                             if (P1.individuo.Intersects(listai1[i].individuo) && P1.ATACANDO)
                             {
-                                listai1[i].INTELIGENCIA(WidthTela, HeightTela, P1, listai1);
+                                listai1[i].INTELIGENCIA(WidthTela, HeightTela, P1, listai1, aleatório);
                             }
                         }
                         
