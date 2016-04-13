@@ -45,6 +45,7 @@
     <Compile Include="cenario\Contexto.cs" />
     <Compile Include="cenario\Draw.cs" />
     <Compile Include="Game1.cs" />
+    <Compile Include="ObjLançado.cs" />
     <Compile Include="Personagens\Inimigo.cs" />
     <Compile Include="cenario\intromenu.cs" />
     <Compile Include="cenario\Menu.cs" />
@@ -160,6 +161,9 @@
     <Content Include="Content\i1 - andar.png">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
+    <Content Include="Content\i1 - caido.png">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
     <Content Include="Content\i1 - caidoD.png">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
@@ -185,6 +189,9 @@
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
     <Content Include="Content\i1 - jogando facaD.png">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Content\i1 - levantar.png">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
     <Content Include="Content\i1 - levantarD.png">

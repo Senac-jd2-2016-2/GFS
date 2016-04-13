@@ -384,7 +384,7 @@ namespace Stick_RPG_Fight
                         //se eu atacar, eless vao reagir , mesmo no slowmotiom
                         for (int i = 0; i < listai1.Count; i++)
                         {
-                            if (P1.individuo.Intersects(listai1[i].individuo) && P1.ATACANDO)
+                            if (P1.individuo.Intersects(listai1[i].individuo) && P1.ATACANDO && listai1[i].TOMANDOHIT)
                             {
                                 listai1[i].INTELIGENCIA(WidthTela, HeightTela, P1, listai1, aleatório);
                             }
@@ -400,7 +400,7 @@ namespace Stick_RPG_Fight
                             {
                                 
                                 listai1[i].MOV(WidthTela, HeightTela, aleatório);
-                                listai1[i].INTELIGENCIA(WidthTela, HeightTela, P1, listai1);
+                                listai1[i].INTELIGENCIA(WidthTela, HeightTela, P1, listai1, aleatório);
                             }
                             //gerador de inimigos
                             if (TempoParaInimigos == 120)
@@ -436,7 +436,7 @@ namespace Stick_RPG_Fight
                         {
                             
                             listai1[i].MOV(WidthTela, HeightTela, aleatório);
-                            listai1[i].INTELIGENCIA(WidthTela, HeightTela, P1, listai1);
+                            listai1[i].INTELIGENCIA(WidthTela, HeightTela, P1, listai1, aleatório);
                         }
                         //gerador de inimigos
                         if (TempoParaInimigos == 120)

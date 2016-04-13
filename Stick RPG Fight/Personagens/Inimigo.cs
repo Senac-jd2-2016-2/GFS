@@ -46,7 +46,7 @@ namespace Stick_RPG_Fight
         public Point tamanhoparadoi1 = new Point(225, 383); //Dimensões do sprite
         public Point tamanhoAndari1 = new Point(166, 367); //Dimensões do sprite
 
-        public Point tamanhoFacai1 = new Point(123, 123); //Dimensões do sprite
+        
         public Point tamanhoAgachari1 = new Point(195, 363); //Dimensões do sprite
         public Point tamanhoAgacharDEFi1 = new Point(214, 363); //Dimensões do sprite
         public Point tamanhoCaidoi1 = new Point(357, 178); //Dimensões do sprite
@@ -54,14 +54,14 @@ namespace Stick_RPG_Fight
         public Point tamanhoJogarFacai1 = new Point(260, 389); //Dimensões do sprite
         public Point tamanhoHit1i1 = new Point(193, 362); //Dimensões do sprite
         public Point tamanhoHit2i1 = new Point(221, 365); //Dimensões do sprite
-        public Point tamanhoHit3i1 = new Point(343, 361); //Dimensões do sprite
+        public Point tamanhoHit3i1 = new Point(343, 361); //Dimensões do sprite // ( mesmo do levantar )
         public Point tamanhoLevantari1 = new Point(355, 359); //Dimensões do sprite
 
         //qnts sprites
         public Point SpriteSheetparadoi1 = new Point(20, 10); //Dimensões da spritesheet
         public Point SpriteSheetAndari1 = new Point(20, 4); //Dimensões da spritesheet
 
-        public Point SpriteSheetFacai1 = new Point(8, 3); //Dimensões do spritesheet
+        
         public Point SpriteSheetAgachari1 = new Point(8, 3); //Dimensões do spritesheet
         public Point SpriteSheetAgacharDEFi1 = new Point(8, 3); //Dimensões do spritesheet
         public Point SpriteSheetCaidoi1 = new Point(4, 8); //Dimensões do spritesheet
@@ -77,6 +77,8 @@ namespace Stick_RPG_Fight
         public Point frameAndari1 = new Point(0, 0); //Marca o frame a ser utilizado
         //FRAME para TUDO (menos parado e andar)
         public Point frameALLi1 = new Point(0, 0); //Marca o frame a ser utilizado
+
+        
         //
 
         //GERAL DOS RETANGLES
@@ -91,6 +93,7 @@ namespace Stick_RPG_Fight
         //GERAL int
         public int opç = 1;
         public int opçluta;
+        public int opç_Atk;
         public int vida;
         public int mana;
         public int energia;
@@ -111,8 +114,14 @@ namespace Stick_RPG_Fight
         public bool ANDANDO = true;
         public bool CORRENDO;
         public bool DEFENDENDO;
-        public bool ROLAR;
+        public bool RASTEIRA;
         public bool AGARRAR;
+        public bool MORRENDO;
+        public bool CAIDO;
+        public bool LEVANTANDO;
+
+        public bool faca_voando;
+        public bool Jogar_Faca;
 
         //hit
         public bool TOMANDOHIT; //tomando hit
@@ -129,6 +138,7 @@ namespace Stick_RPG_Fight
 
         public List<Sangue> listadesangue = new List<Sangue>();
         public List<Agua> listadeagua = new List<Agua>();
+        public List<ObjLançado> listadefacas = new List<ObjLançado>();
 
         //CRIANDO NOVO INIMIGO (1)
         //CRIANDO NOVO INIMIGO (1)
@@ -243,7 +253,7 @@ namespace Stick_RPG_Fight
             //INTELIGENCIA DA LUTA
             //INTELIGENCIA DA LUTA//INTELIGENCIA DA LUTA
             /*
-            public bool DIREITA = true;
+            DIREITA;
             ESQUERDA;
             AGACHADO;
             ATACANDO;
@@ -257,49 +267,180 @@ namespace Stick_RPG_Fight
             DEFENDENDO;
             ROLAR;
             */
-            if (P1.ATACANDO && !P1.AGACHADO && !ATACANDO && !PODER && P1.ATAQUELANÇADO)
-            {
-                int[] a = {1,2,3,5};
-                opçluta = aleatório.Next(a.Length);
-            }
 
-            if (P1.ATACANDO)
-
-            if (!TOMANDOHIT)
+            if (!TOMANDOHIT && !ATACANDO && !PODER && !RASTEIRA && !MORRENDO)
             {
-                if (opçluta == 1 && !ATACANDO)
+                // SE P1 atacar de pe
+                if (P1.ATACANDO && !P1.AGACHADO && P1.ATAQUELANÇADO && opçluta != 1 && opçluta != 2 && opçluta != 3 && opçluta != 5)
                 {
-                    ATACANDO = true;
-                    DEFENDENDO = false;
-                    ANDANDO = false;
-                    PARADO = false;
+                    int[] a = { 1, 2, 3, 5 };
+                    opçluta = aleatório.Next(a.Length);
                 }
-                if (opçluta == 2 && !ATACANDO)
+
+                //se p1 atacar agachado
+                if (P1.ATACANDO && P1.AGACHADO && P1.ATAQUELANÇADO && opçluta != 2 && opçluta != 4 && opçluta != 5)
+                {
+                    int[] b = { 2, 4, 5 };
+                    opçluta = aleatório.Next(b.Length);
+                }
+                //qnd o P1 terminar o combo, o inimigo dá contraataque.
+                if (P1.LEVARCONTRAATAQUE && opçluta != 1)
+                {
+                    opçluta = 1;
+                }
+                //qnd o P1 fica parado demais:
+                if (P1.DefesaCONTAGEM >= 120)
+                {
+                    if (!meio.Intersects(P1.individuo) && (meio.X < P1.individuo.X || meio.X > P1.individuo.X))
+                    {
+                        ANDANDO = true;
+                    }
+                    if (meio.Intersects(P1.individuo))
+                    {
+                        AGARRAR = true;
+                    }
+                }
+                //se defender por muito tempo
+                if (P1.ParadoCONTAGEM >= 120 && opçluta != 1 && opçluta != 4 && opçluta != 6)
+                {
+                    int[] c = { 1, 4 , 6};
+                    opçluta = aleatório.Next(c.Length);
+                    
+                    if (meio.Intersects(P1.individuo))
+                    {
+                        AGARRAR = true;
+                    }
+                }
+                if (P1.AgachadoDEFCONTAGEM >= 120 && opçluta != 6)
+                {
+                    opçluta = 6;
+                }
+                //caso o inimigo fique NA DIREITA ou ESQUERDA do P1
+                if (meio.X < P1.individuo.X )
+                {
+                    DIREITA = true;
+                    ESQUERDA = false;
+                }
+                if (meio.X > P1.individuo.X )
+                {
+                    ESQUERDA = true;
+                    DIREITA = false ;
+                }
+
+                //caso P1 use poder
+                if (P1.PODER && opçluta != 2 && opçluta != 4 && opçluta != 5)
+                {
+                    int[] d = { 2, 4, 5 };
+                    opçluta = aleatório.Next(d.Length);
+                }
+                //caso P1 pule
+                if (P1.PULANDOandando || P1.PULANDOparado && opçluta != 1 && opçluta != 2 && opçluta != 3 && opçluta != 5)
+                {
+                    int[] e = { 1, 2, 3, 5 };
+                    opçluta = aleatório.Next(e.Length);
+                }
+                //caso pule correndo
+                if (P1.PULANDOcorrendo && opçluta != 2 && opçluta != 3 && opçluta != 4 && opçluta != 5)
+                {
+                    int[] f = { 2, 3, 4, 5 };
+                    opçluta = aleatório.Next(f.Length);
+                }
+                //ações do inimigo
+                //ações do inimigo
+                //ações do inimigo
+                //ações do inimigo
+                //ações do inimigo
+                //ações do inimigo (OPÇÕES DA LUTA)
+                if (opçluta == 1)
+                {
+                    if (!meio.Intersects(P1.individuo) && (meio.X < P1.individuo.X || meio.X > P1.individuo.X))
+                    {
+                        ANDANDO = true;
+                    }
+                    if (meio.Intersects(P1.individuo) && energia >= 10 && !ATACANDO)
+                    {
+                        ATACANDO = true;
+                        opç_Atk = 1;
+                        //para com os basicos
+                        DEFENDENDO = false;
+                        ANDANDO = false;
+                        PARADO = false;
+                    }
+                }
+                if (opçluta == 2 )
                 {
                     DEFENDENDO = true;
-
+                    //para com os basicos
+                    PARADO = false;
+                    AGACHADO = false;
+                    ANDANDO = false;
                 }
                 if (opçluta == 3)
                 {
                     AGACHADO = true;
+                    //para com os basicos
+                    DEFENDENDO = false;
+                    ANDANDO = false;
+                    PARADO = false;
                 }
-                if (opçluta == 4)
+                if (opçluta == 4 )
                 {
-                    ROLAR = true;
+                    RASTEIRA = true;
+                    //para com os basicos
+                    DEFENDENDO = false;
+                    ANDANDO = false;
+                    PARADO = false;
                 }
                 if (opçluta == 5)
                 {
                     AGACHADO = true;
                     DEFENDENDO = true;
+                    //para com os basicos
+                    DEFENDENDO = false;
+                    ANDANDO = false;
+                    PARADO = false;
                 }
-                if (opçluta == 6)
+                if (opçluta == 6 && mana >= 20)
                 {
                     PODER = true;
+                    //para com os basicos
+                    DEFENDENDO = false;
+                    ANDANDO = false;
+                    PARADO = false;
                 }
-                if (opçluta == 7)
+                if (opçluta == 7 )
                 {
-                    AGARRAR = true;
+                    if (!meio.Intersects(P1.individuo) && (meio.X < P1.individuo.X || meio.X > P1.individuo.X))
+                    {
+                        ANDANDO = true;
+                    }
+                    if (meio.Intersects(P1.individuo))
+                    {
+                        AGARRAR = true;
+                        DEFENDENDO = false;
+                        ANDANDO = false;
+                        PARADO = false;
+                    }
+                    //para com os basicos
+                    DEFENDENDO = false;
+                    ANDANDO = false;
+                    PARADO = false;
                 }
+
+
+
+
+                //OPÇOES DE ATAQUE
+                //OPÇOES DE ATAQUE
+                //OPÇOES DE ATAQUE
+                //OPÇOES DE ATAQUE
+                if (opç_Atk == 1)
+                {
+                    Jogar_Faca = true;
+                }
+
+
+
             }
 
             /*
@@ -318,9 +459,17 @@ namespace Stick_RPG_Fight
             ROLAR;
             */
 
+            
 
 
 
+
+            //se nao tiver nada, ele para:
+            if (!DIREITA && !ESQUERDA && !ATACANDO && !PODER && !AGACHADO && !DEFENDENDO && !TOMANDOHIT)
+            {
+                PARADO = true;
+            }
+            
 
 
 
@@ -359,7 +508,7 @@ namespace Stick_RPG_Fight
             //se estiver tocando
             //se estiver tocando
             //se estiver tocando
-            if (meio.Intersects(P1.DistanciadeLuta) && !TOMANDOHIT && !ATACANDO && !DEFENDENDO && !ROLAR && !PODER && !AGACHADO)//se estiver tocando
+            if (meio.Intersects(P1.DistanciadeLuta) && !TOMANDOHIT && !ATACANDO && !DEFENDENDO && !RASTEIRA && !PODER && !AGACHADO)//se estiver tocando
             {
                 PARADO = true;
                 ANDANDO = false;
@@ -440,7 +589,7 @@ namespace Stick_RPG_Fight
         //MOVIMENTAÇÃO -------------------------------------------------------------
         //MOVIMENTAÇÃO -------------------------------------------------------------
         //MOVIMENTAÇÃO -------------------------------------------------------------
-        public void MOV(int WidthTela, int HeightTela, Random aleatório)
+        public void MOV(int WidthTela, int HeightTela, Random aleatório, Personagem P1)
         {
             meio.X = individuo.X + individuo.Width / 4;
             meio.Y = individuo.Y;
@@ -541,6 +690,120 @@ namespace Stick_RPG_Fight
                             TOMANDOHIT = false;
                         }
                     }
+                    if (HIT3)//Pernas (cair)
+                    {
+                        individuo.Width = WidthTela / 10 + HeightTela / 9;//(+120)
+                        individuo.Height = HeightTela / 4 + (2 * HeightTela / 70);
+                        frameALLi1.X--;
+                        if (frameALLi1.X <= -1)
+                        {
+                            frameALLi1.X = 7;
+                            frameALLi1.Y++;
+                        }
+                        if (frameALLi1.X == 4 && frameALLi1.Y == 5)
+                        {
+                            HIT3 = false;
+                            TOMANDOHIT = false;
+                            CAIDO = true;
+                        }
+                    }
+                }//fim tomando hit
+
+                //OUTROS MOVIMENTOS
+                //OUTROS MOVIMENTOS
+                //OUTROS MOVIMENTOS
+                //OUTROS MOVIMENTOS
+                if (DEFENDENDO && !AGACHADO)
+                {
+                    frameALLi1.X--;
+                    if (frameALLi1.X <= -1)
+                    {
+                        frameALLi1.X = 7;
+                        frameALLi1.Y++;
+                    }
+                    if (frameALLi1.X == 6 && frameALLi1.Y == 2)
+                    {
+                        frameALLi1.X++;
+                        if (opçluta != 2)
+                        {
+                            DEFENDENDO = false;
+                        }
+                    }
+                }
+                //defendendo e agachando
+                if (DEFENDENDO && AGACHADO)
+                {
+                    frameALLi1.X--;
+                    if (frameALLi1.X <= -1)
+                    {
+                        frameALLi1.X = 7;
+                        frameALLi1.Y++;
+                    }
+                    if (frameALLi1.X == 6 && frameALLi1.Y == 2)
+                    {
+                        frameALLi1.X++;
+                        if (opçluta != 5)
+                        {
+                            DEFENDENDO = false;
+                            AGACHADO = false;
+                        }
+                    }
+                }
+                //agachando sem defender
+                if (!DEFENDENDO && AGACHADO)
+                {
+                    frameALLi1.X--;
+                    if (frameALLi1.X <= -1)
+                    {
+                        frameALLi1.X = 7;
+                        frameALLi1.Y++;
+                    }
+                    if (frameALLi1.X == 6 && frameALLi1.Y == 2)
+                    {
+                        frameALLi1.X++;
+                        if (opçluta != 3)
+                        {
+                            DEFENDENDO = false;
+                            AGACHADO = false;
+                        }
+                    }
+                }
+
+                //jogar faca
+                if (Jogar_Faca)
+                {
+                    frameALLi1.X--;
+                    if (frameALLi1.X <= -1 )
+                    {
+                        frameALLi1.X = 0;
+                        frameALLi1.Y++;
+                    }
+                    if (frameALLi1.X == 1 && frameALLi1.Y == 7)
+                    {
+                        Jogar_Faca = false;
+                        ATACANDO = false;
+                    }
+                    if (frameALLi1.X == 5 && frameALLi1.Y == 5)
+                    {
+                        faca_voando = true;
+                        GerarFacas(WidthTela, HeightTela);
+                    }
+                }
+
+                //APOS LEVAR HIT3
+                if (CAIDO)
+                {
+                    frameALLi1.X--;
+                    if (frameALLi1.X <= -1)
+                    {
+                        frameALLi1.X = 3;
+                        frameALLi1.Y++;
+                    }
+                    if (frameALLi1.X == 0 && frameALLi1.Y == 7)
+                    {
+                        frameALLi1.X = 3;
+                        frameALLi1.Y = 0;
+                    }
                 }
             }
             //ESQUERDA
@@ -613,10 +876,175 @@ namespace Stick_RPG_Fight
                             TOMANDOHIT = false;
                         }
                     }
+                    if (HIT3)//Pernas (cair)
+                    {
+                        individuo.Width = WidthTela / 10 + HeightTela / 9;//(+120)
+                        individuo.Height = HeightTela / 4 + (2 * HeightTela / 70);
+                        frameALLi1.X++;
+                        if (frameALLi1.X >= SpriteSheetHit3i1.X)
+                        {
+                            frameALLi1.X = 0;
+                            frameALLi1.Y++;
+                        }
+                        if (frameALLi1.X == 3 && frameALLi1.Y == 5)
+                        {
+                            HIT3 = false;
+                            TOMANDOHIT = false;
+                            CAIDO = true;
+                        }
+                    }
+                }
+
+                //OUTROS MOVIMENTOS
+                //OUTROS MOVIMENTOS
+                //OUTROS MOVIMENTOS
+                //OUTROS MOVIMENTOS
+                //OUTROS MOVIMENTOS
+                //ñ agachar e defender
+                if (DEFENDENDO && !AGACHADO)
+                {
+                    frameALLi1.X++;
+                    if (frameALLi1.X >= SpriteSheetDEFi1.X)
+                    {
+                        frameALLi1.X = 0;
+                        frameALLi1.Y++;
+                    }
+                    if (frameALLi1.X == 1 && frameALLi1.Y == 2)
+                    {
+                        frameALLi1.X--;
+                        if (opçluta != 2)
+                        {
+                            DEFENDENDO = false;
+                        }
+                    }
+                }
+                //agachando e defedendo
+                if (DEFENDENDO && AGACHADO)
+                {
+                    frameALLi1.X++;
+                    if (frameALLi1.X >= SpriteSheetAgacharDEFi1.X)
+                    {
+                        frameALLi1.X = 0;
+                        frameALLi1.Y++;
+                    }
+                    if (frameALLi1.X == 1 && frameALLi1.Y == 2)
+                    {
+                        frameALLi1.X--;
+                        if (opçluta != 5)
+                        {
+                            DEFENDENDO = false;
+                            AGACHADO = false;
+                        }
+                    }
+                }
+
+                //agachando e sem defeder
+                if (!DEFENDENDO && AGACHADO)
+                {
+                    frameALLi1.X++;
+                    if (frameALLi1.X >= SpriteSheetAgachari1.X)
+                    {
+                        frameALLi1.X = 0;
+                        frameALLi1.Y++;
+                    }
+                    if (frameALLi1.X == 1 && frameALLi1.Y == 2)
+                    {
+                        frameALLi1.X--;
+                        if (opçluta != 3)
+                        {
+                            
+                            AGACHADO = false;
+                        }
+                    }
+                }
+
+                if (Jogar_Faca)
+                {
+                    frameALLi1.X++;
+                    if (frameALLi1.X >= SpriteSheetJogarFacai1.X)
+                    {
+                        frameALLi1.X = 0;
+                        frameALLi1.Y++;
+                    }
+                    if (frameALLi1.X == 6 && frameALLi1.Y == 7)
+                    {
+                        Jogar_Faca = false;
+                        ATACANDO = false;
+                    }
+                    if (frameALLi1.X == 2 && frameALLi1.Y == 5)
+                    {
+                        faca_voando = true;
+                        GerarFacas(WidthTela, HeightTela);
+                    }
+                }//fim do jogar faca
+
+                //APOS LEVAR HIT3
+                if (CAIDO)
+                {
+                    frameALLi1.X++;
+                    if (frameALLi1.X >= SpriteSheetCaidoi1.X)
+                    {
+                        frameALLi1.X = 0;
+                        frameALLi1.Y++;
+                    }
+                    if (frameALLi1.X == 3 && frameALLi1.Y == 7)
+                    {
+                        frameALLi1.X = 0;
+                        frameALLi1.Y = 0;
+                    }
                 }
             }
             
-        }//fim
+            //POSIÇÃO DA FACA // OUTRO OBJETO
+            //POSIÇÃO DA FACA // OUTRO OBJETO
+            //POSIÇÃO DA FACA // OUTRO OBJETO
+            //POSIÇÃO DA FACA // OUTRO OBJETO
+            PosiçãoOBJLançado(WidthTela, HeightTela, P1);
+
+            //SPRITESHEET DA FACA
+            //SPRITESHEET DA FACA
+            //SPRITESHEET DA FACA
+            //SPRITESHEET DA FACA
+            //SPRITESHEET DA FACA
+            if (faca_voando)
+            {
+                for (int i = 0; i < listadefacas.Count; i++)
+                {
+                    if (listadefacas[i].esquerda)
+                    {
+                        listadefacas[i].frameFACA.X++;
+                        if (listadefacas[i].frameFACA.X >= listadefacas[i].SpriteSheetFacai1.X)
+                        {
+                            listadefacas[i].frameFACA.X = 0;
+                            listadefacas[i].frameFACA.Y++;
+                        }
+                        if ( listadefacas[i].frameFACA.X == 2 &&  listadefacas[i].frameFACA.Y == 2)
+                        {
+                            listadefacas[i].frameFACA.X = 0;
+                            listadefacas[i].frameFACA.Y = 0;
+                        }
+                    }
+
+                    if (listadefacas[i].direita)
+                    {
+                        listadefacas[i].frameFACA.X--;
+                        if (listadefacas[i].frameFACA.X <= -1)
+                        {
+                            listadefacas[i].frameFACA.X = 7;
+                            listadefacas[i].frameFACA.Y++;
+                        }
+                        if (listadefacas[i].frameFACA.X == 5 && listadefacas[i].frameFACA.Y == 2)
+                        {
+                            listadefacas[i].frameFACA.X = 7;
+                            listadefacas[i].frameFACA.Y = 0;
+                        }
+                    }
+                }
+            }
+        }//fim do MOV (que recebe o SLOW MOTION)
+
+
+
 
         //HP
         //HP
@@ -667,8 +1095,89 @@ namespace Stick_RPG_Fight
                 }
             }
         }
+        //NOVA FACA
+        //NOVA FACA
+        //NOVA FACA
+        //NOVA FACA
+        //NOVA FACA
+        //NOVA FACA
+        public void GerarFacas(int WidthTela, int HeightTela)
+        {
+            ObjLançado O1 = new ObjLançado();
+            
+            //tamanho
+            O1.OBJ.Width = HeightTela / 10;
+            O1.OBJ.Height = HeightTela / 10;
+            if (DIREITA)
+            {
+                O1.OBJ.X = individuo.X + individuo.Width;
+                O1.PosX = individuo.X + individuo.Width + (-Contexto.Fundo.fase.X); // posiçao do jogar + a posição mapa = posição universal
+                O1.direita = true;
 
+                //frames da faca
+                O1.frameFACA.X = 7;
+            }
+            if (ESQUERDA)
+            {
+                O1.OBJ.X = individuo.X;
+                O1.PosX = individuo.X + (-Contexto.Fundo.fase.X) - O1.OBJ.Width; // posiçao do jogar + a posição mapa = posição universal
+                O1.esquerda = true;
 
+                //frames da faca
+                O1.frameFACA.X = 0;
+            }
+
+            O1.Vy = 0;
+            O1.Vx = HeightTela / 9;//velocidade inicial
+            O1.PosY = individuo.Y + individuo.Height / 2 - O1.OBJ.Height + (-Contexto.Fundo.fase.Y);
+
+            
+
+            //colocar na lista de faca, caso seja faca.
+            listadefacas.Add(O1);
+
+            
+        }
+        //posição da faca
+        //posição da faca
+        //posição da faca
+        //posição da faca
+        //posição da faca
+
+        //posição da faca
+        public void PosiçãoOBJLançado(int WidthTela, int HeightTela, Personagem P1)
+        {
+            //posição da faca
+            if (listadefacas.Count >= 0)
+            {
+                for (int i = 0; i < listadefacas.Count; i++)
+                {
+                    listadefacas[i].OBJ.X = listadefacas[i].PosX + Contexto.Fundo.fase.X + listadefacas[i].Vx; // posição definida (não variável)
+                    listadefacas[i].OBJ.Y = listadefacas[i].PosY + Contexto.Fundo.fase.Y + listadefacas[i].Vy;
+
+                    if (listadefacas[i].esquerda)
+                    {
+                        listadefacas[i].Vx += HeightTela / 200;
+                    }
+                    if (listadefacas[i].direita)
+                    {
+                        listadefacas[i].Vx -= HeightTela / 200;
+                    }
+                    listadefacas[i].Vy += HeightTela / 200;
+
+                    if (P1.meio.Intersects(listadefacas[i].OBJ))
+                    {
+                        P1.vida -= HeightTela / 50; //(21 de vida)
+                        listadefacas.Remove(listadefacas[i]);
+                    }
+                    if ( Contexto.Fundo.chao.Intersects(listadefacas[i].OBJ))
+                    {
+                        listadefacas.Remove(listadefacas[i]);
+                    }
+                }
+            }
+        }
+        
         //AGUA]
         //AGUA
         //AGUA
@@ -714,15 +1223,15 @@ namespace Stick_RPG_Fight
                         listadeagua[i].AguaR.Y = listadeagua[i].Py + Contexto.Fundo.fase.Y + listadeagua[i].g + listadeagua[i].Vy;
 
                         //velocidade gravidade
-                        listadeagua[i].g += HeightTela / 300;
+                        listadeagua[i].g += HeightTela / 300; // pra baixo
 
                         if (listadeagua[i].Vy == 0)
                         {
-                            listadeagua[i].Vy = aleatório.Next(-HeightTela / 20, -HeightTela / 100);
+                            listadeagua[i].Vy = aleatório.Next(-HeightTela / 20, -HeightTela / 100); // pra cima
                         }
                         if (listadeagua[i].esquerda)
                         {
-                            listadeagua[i].Vx += aleatório.Next(HeightTela / 200, HeightTela / 150);
+                            listadeagua[i].Vx += aleatório.Next(HeightTela / 200, HeightTela / 150); // para os lados
                         }
                         if (listadeagua[i].direita)
                         {
@@ -753,6 +1262,7 @@ namespace Stick_RPG_Fight
         //SANGRAR
         public void Sangrar(int WidthTela, int HeightTela,Personagem P1, Random aleatório)
         {
+            //sangra apenas se acertar no inimigo E quando acertar, se nao defender
             if (P1.individuo.Intersects(meio) && P1.ATACANDO && (P1.individuo.X < individuo.X && P1.DIREITA || P1.individuo.X > individuo.X && P1.ESQUERDA) && !DEFENDENDO)
             {
                 if ((P1.DIREITA && ((P1.PARTE1 && P1.frameLUTA.Y >= 1) || (P1.PARTE2 && (P1.frameLUTA.X >= 5 && P1.frameLUTA.Y == 2) || P1.frameLUTA.Y >= 2) || (P1.PARTE3 && (P1.frameLUTA.X >= 4 && P1.frameLUTA.Y == 3) || P1.frameLUTA.Y == 4) || (P1.PARTE4 && P1.frameLUTA.Y >= 3))) || (P1.ESQUERDA && ((P1.PARTE1 && P1.frameLUTA.Y >= 1) || (P1.PARTE2 && (P1.frameLUTA.X <= 2 && P1.frameLUTA.Y == 2) || P1.frameLUTA.Y >= 2) || (P1.PARTE3 && (P1.frameLUTA.X <= 3 && P1.frameLUTA.Y == 3) || P1.frameLUTA.Y == 4) || (P1.PARTE4 && P1.frameLUTA.Y >= 3))))
@@ -813,7 +1323,7 @@ namespace Stick_RPG_Fight
                     PARADO = false;
                     ANDANDO = false;
                     ATACANDO = false;
-                    ROLAR = false;
+                    RASTEIRA = false;
                     
                     if (P1.DIREITA)
                     {
@@ -837,7 +1347,9 @@ namespace Stick_RPG_Fight
                     PARADO = false;
                     ANDANDO = false;
                     ATACANDO = false;
-                    ROLAR = false;
+                    RASTEIRA = false;
+                    Jogar_Faca = false;
+                    
                     if (P1.DIREITA)
                     {
                         frameALLi1.X = 0;
@@ -861,7 +1373,7 @@ namespace Stick_RPG_Fight
                     PARADO = false;
                     ANDANDO = false;
                     ATACANDO = false;
-                    ROLAR = false;
+                    RASTEIRA = false;
                     if (P1.DIREITA)
                     {
                         frameALLi1.X = 0;
@@ -884,7 +1396,7 @@ namespace Stick_RPG_Fight
                     PARADO = false;
                     ANDANDO = false;
                     ATACANDO = false;
-                    ROLAR = false;
+                    RASTEIRA = false;
                     if (P1.DIREITA)
                     {
                         frameALLi1.X = 0;

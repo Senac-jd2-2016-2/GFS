@@ -133,10 +133,20 @@ namespace Stick_RPG_Fight
         public bool PULANDOcorrendo;
         public bool ANDANDO;
         public bool CORRENDO;
-        public bool PODER = false;
+        public bool DEFENDENDO;
+        public bool PODER;
         public bool DESCANSANDO;
 
         public bool ATAQUELANÇADO;
+
+        public bool TOMANDOHIT;
+        public bool HIT1;
+        public bool HIT2;
+        public bool HIT3;
+
+        public bool LEVARCONTRAATAQUE;
+
+        public bool UsarArma;
 
         //LUTA
         //frame voltando
@@ -166,6 +176,11 @@ namespace Stick_RPG_Fight
         public int XP;
         public int XPT;
         public int LVL;
+
+        //para inteligencia artificial inimiga
+        public int DefesaCONTAGEM = 0;
+        public int AgachadoDEFCONTAGEM = 0;
+        public int ParadoCONTAGEM = 0;
 
         public int vidaTOTAL;
         public int energiaTOTAL;
@@ -219,7 +234,39 @@ namespace Stick_RPG_Fight
         //=========================================================================================FRAMES DA LUTA====================================================================
         public void FRAMESluta()
         {
+            //ATUALIZAÇÃO PRA INTELIGENCIA ARTIFICIAL INIMIGA
             ATAQUELANÇADO = false;
+            LEVARCONTRAATAQUE = false;
+
+            //CASO O JOGADOR FIQUE SÓ NA RETAGUARDA: (IA inimiga)
+            if (PARADO)
+            {
+                ParadoCONTAGEM++;
+            }
+            else
+            {
+                ParadoCONTAGEM = 0;
+            }
+            //CASO FIQUE APENAS DEFENDENDO: (IA inimiga)
+            if (DEFENDENDO)
+            {
+                DefesaCONTAGEM++;
+            }
+            else
+            {
+                DefesaCONTAGEM = 0;
+            }
+            //CASO FIQUE AGACHADO DEFENDENDO: : (IA inimiga)
+            if (DEFENDENDO && AGACHADO)
+            {
+                AgachadoDEFCONTAGEM++;
+            }
+            else
+            {
+                AgachadoDEFCONTAGEM = 0;
+            }
+
+            //SKILLS P1
             if (ATACANDO)
             {
                 if (DIREITA)
@@ -377,6 +424,9 @@ namespace Stick_RPG_Fight
                             PARADO = true;
                             frameLUTA.X = 0;
                             frameLUTA.Y = 0;
+
+                            // inimigo contrataca no final
+                            LEVARCONTRAATAQUE = true;
                         }
                     }
 
