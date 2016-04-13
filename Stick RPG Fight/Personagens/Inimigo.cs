@@ -61,7 +61,7 @@ namespace Stick_RPG_Fight
         public Point SpriteSheetparadoi1 = new Point(20, 10); //Dimensões da spritesheet
         public Point SpriteSheetAndari1 = new Point(20, 4); //Dimensões da spritesheet
 
-        public Point tamanhoFacai1 = new Point(8, 3); //Dimensões do spritesheet
+        public Point SpriteSheetFacai1 = new Point(8, 3); //Dimensões do spritesheet
         public Point SpriteSheetAgachari1 = new Point(8, 3); //Dimensões do spritesheet
         public Point SpriteSheetAgacharDEFi1 = new Point(8, 3); //Dimensões do spritesheet
         public Point SpriteSheetCaidoi1 = new Point(4, 8); //Dimensões do spritesheet
@@ -109,6 +109,7 @@ namespace Stick_RPG_Fight
         public bool ANDANDO = true;
         public bool CORRENDO;
         public bool DEFENDENDO;
+        public bool ROLAR;
 
         //hit
         public bool TOMANDOHIT; //tomando hit
@@ -194,6 +195,8 @@ namespace Stick_RPG_Fight
                     individuo.Y = Contexto.Fundo.fase.Y + Contexto.Fundo.fase.Height - HeightTela / 3 + Vy - HeightTela / 70 - HeightTela / 60;
                 if (PARADO)
                     individuo.Y = Contexto.Fundo.fase.Y + Contexto.Fundo.fase.Height - HeightTela / 3 - HeightTela / 45 + Vy - HeightTela / 60; //27 = 40
+                if (HIT1 || HIT2)
+                    individuo.Y = Contexto.Fundo.fase.Y + Contexto.Fundo.fase.Height - HeightTela / 3 - HeightTela / 45 + Vy - HeightTela / 100; 
             }
             else if (opç == 2)
             {
@@ -202,6 +205,8 @@ namespace Stick_RPG_Fight
                     individuo.Y = Contexto.Fundo.fase.Y + Contexto.Fundo.fase.Height - HeightTela / 3 + Vy - HeightTela / 70 - HeightTela / 60;
                 if (PARADO)
                     individuo.Y = Contexto.Fundo.fase.Y + Contexto.Fundo.fase.Height - HeightTela / 3 - HeightTela / 45 + Vy - HeightTela / 60; //27 = 40
+                if (HIT1 || HIT2)
+                    individuo.Y = Contexto.Fundo.fase.Y + Contexto.Fundo.fase.Height - HeightTela / 3 - HeightTela / 45 + Vy - HeightTela / 100; 
             }
         }
 
@@ -227,7 +232,7 @@ namespace Stick_RPG_Fight
             //CASO NAO ENCOSTE//CASO NAO ENCOSTE
             //CASO NAO ENCOSTE
             //CASO NAO ENCOSTE
-            if (!meio.Intersects(P1.meio)) // caso nao estejam tocando
+            if (!meio.Intersects(P1.meio) && !TOMANDOHIT) // caso nao estejam tocando
             {
                 if (meio.X + meio.Width < P1.meio.X && !DIREITA) //se o bot estiver na esquerda do personagem
                 {
@@ -258,43 +263,47 @@ namespace Stick_RPG_Fight
             //se estiver tocando
             //se estiver tocando
             //se estiver tocando
-            else if (meio.Intersects(P1.meio))//se estiver tocando
+            if (meio.Intersects(P1.meio) && !TOMANDOHIT)//se estiver tocando
             {
                 PARADO = true;
+                ANDANDO = false;
                 DIREITA = false;
                 ESQUERDA = false;
-                ANDANDO = false;
             }
 
             //COLISAO ENTRE ELES
-
-            // formula pra colidir com os multiplicados (entre eles e contra qlq outra coisa)
-            // formula pra colidir com os multiplicados (entre eles e contra qlq outra coisa)
-            // formula pra colidir com os multiplicados (entre eles e contra qlq outra coisa)
-            // formula pra colidir com os multiplicados (entre eles e contra qlq outra coisa)
-            for (int atual = 0; atual < listai1.Count - 1; atual++) // formula pra colidir com os multiplicados (entre eles e contra qlq outra coisa)
+            if (!TOMANDOHIT)
             {
-                for (int outro = atual + 1; outro < listai1.Count; outro++)
+                // formula pra colidir com os multiplicados (entre eles e contra qlq outra coisa)
+                // formula pra colidir com os multiplicados (entre eles e contra qlq outra coisa)
+                // formula pra colidir com os multiplicados (entre eles e contra qlq outra coisa)
+                // formula pra colidir com os multiplicados (entre eles e contra qlq outra coisa)
+                /*
+                for (int atual = 0; atual < listai1.Count - 1; atual++) // formula pra colidir com os multiplicados (entre eles e contra qlq outra coisa)
                 {
-                    if (listai1[atual].meio.X > P1.individuo.X && listai1[atual].meio.X < listai1[outro].meio.X && listai1[atual].meio.Intersects(listai1[outro].meio))
+                    for (int outro = atual + 1; outro < listai1.Count; outro++)
                     {
-                        listai1[outro].PARADO = true;
-                        listai1[outro].DIREITA = false;
-                        listai1[outro].ESQUERDA = false;
-                        listai1[outro].ANDANDO = false;
+                        if (listai1[atual].meio.X > P1.individuo.X && listai1[atual].meio.X < listai1[outro].meio.X && listai1[atual].meio.Intersects(listai1[outro].meio))
+                        {
+                            listai1[outro].PARADO = true;
+                            listai1[outro].DIREITA = false;
+                            listai1[outro].ESQUERDA = false;
+                            listai1[outro].ANDANDO = false;
+
+                        }
+                        if (listai1[atual].meio.X < P1.individuo.X && listai1[atual].meio.X > listai1[outro].meio.X && listai1[atual].meio.Intersects(listai1[outro].meio))
+                        {
+                            listai1[outro].PARADO = true;
+                            listai1[outro].DIREITA = false;
+                            listai1[outro].ESQUERDA = false;
+                            listai1[outro].ANDANDO = false;
+
+                        }
 
                     }
-                    if (listai1[atual].meio.X < P1.individuo.X && listai1[atual].meio.X > listai1[outro].meio.X && listai1[atual].meio.Intersects(listai1[outro].meio))
-                    {
-                        listai1[outro].PARADO = true;
-                        listai1[outro].DIREITA = false;
-                        listai1[outro].ESQUERDA = false;
-                        listai1[outro].ANDANDO = false;
-
-                    }
-                    
-                }
-            }//fim da colisao
+                }//fim da colisao
+                 */ 
+            }
 
             //empurrar
             //empurrar//empurrar
@@ -406,13 +415,15 @@ namespace Stick_RPG_Fight
                 {
                     if (HIT1)//CABEÇA
                     {
+                        individuo.Height = HeightTela / 4 + (2 * HeightTela / 70);
+                        individuo.Width = WidthTela / 12;
                         frameALLi1.X--;
-                        if (frameALLi1.X >= SpriteSheetHit1i1.X)
+                        if (frameALLi1.X <= -1)
                         {
                             frameALLi1.X = 8;
                             frameALLi1.Y++;
                         }
-                        if (frameALLi1.X == 1 && frameALLi1.X == 2)
+                        if (frameALLi1.X == 1 && frameALLi1.Y == 2)
                         {
                             HIT1 = false;
                             TOMANDOHIT = false;
@@ -420,13 +431,15 @@ namespace Stick_RPG_Fight
                     }
                     if (HIT2)//PEITO
                     {
+                        individuo.Width = WidthTela / 10;
+                        individuo.Height = HeightTela / 4 + (2 * HeightTela / 70);
                         frameALLi1.X--;
-                        if (frameALLi1.X >= SpriteSheetHit1i1.X)
+                        if (frameALLi1.X <= -1)
                         {
                             frameALLi1.X = 8;
                             frameALLi1.Y++;
                         }
-                        if (frameALLi1.X == 1 && frameALLi1.X == 2)
+                        if (frameALLi1.X == 1 && frameALLi1.Y == 2)
                         {
                             HIT2 = false;
                             TOMANDOHIT = false;
@@ -471,29 +484,34 @@ namespace Stick_RPG_Fight
                 //TOMANDO HIT
                 if (TOMANDOHIT)
                 {
+                   
                     if (HIT1)//CABEÇA
                     {
+                        individuo.Width = WidthTela / 12;
+                        individuo.Height = HeightTela / 4 + (2 * HeightTela / 70);
                         frameALLi1.X++;
                         if (frameALLi1.X >= SpriteSheetHit1i1.X)
                         {
                             frameALLi1.X = 0;
                             frameALLi1.Y++;
                         }
-                        if (frameALLi1.X == 6 && frameALLi1.X == 2)
+                        if (frameALLi1.X == 6 && frameALLi1.Y == 2)
                         {
                             HIT1 = false;
                             TOMANDOHIT = false;
                         }
                     }
-                    if (HIT1)//PEITO
+                    if (HIT2)//PEITO
                     {
+                        individuo.Width = WidthTela / 10;
+                        individuo.Height = HeightTela / 4 + (2 * HeightTela / 70);
                         frameALLi1.X++;
-                        if (frameALLi1.X >= SpriteSheetHit1i1.X)
+                        if (frameALLi1.X >= SpriteSheetHit2i1.X)
                         {
                             frameALLi1.X = 0;
                             frameALLi1.Y++;
                         }
-                        if (frameALLi1.X == 6 && frameALLi1.X == 2)
+                        if (frameALLi1.X == 6 && frameALLi1.Y == 2)
                         {
                             HIT2 = false;
                             TOMANDOHIT = false;
@@ -696,15 +714,22 @@ namespace Stick_RPG_Fight
                     vida-= 10;
                     HIT1 = true;
                     TOMANDOHIT = true;
+                    PARADO = false;
+                    ANDANDO = false;
+                    ATACANDO = false;
+                    ROLAR = false;
+                    
                     if (P1.DIREITA)
                     {
                         frameALLi1.X = 0;
                         frameALLi1.Y = 0;
+                        ESQUERDA = true;
                     }
                     if (P1.ESQUERDA)
                     {
                         frameALLi1.X = 8;
                         frameALLi1.Y = 0;
+                        DIREITA = true;
                     }
                 }
                 if (((P1.DIREITA && (P1.PARTE2 && P1.frameLUTA.X == 4 && P1.frameLUTA.Y == 2)) || P1.ESQUERDA && (P1.PARTE2 && P1.frameLUTA.X == 2 && P1.frameLUTA.Y == 2)) && P1.COMBO1)
@@ -712,15 +737,22 @@ namespace Stick_RPG_Fight
                     vida -= 20;
                     HIT1 = true;
                     TOMANDOHIT = true;
+
+                    PARADO = false;
+                    ANDANDO = false;
+                    ATACANDO = false;
+                    ROLAR = false;
                     if (P1.DIREITA)
                     {
                         frameALLi1.X = 0;
                         frameALLi1.Y = 0;
+                        ESQUERDA = true;
                     }
                     if (P1.ESQUERDA)
                     {
                         frameALLi1.X = 8;
                         frameALLi1.Y = 0;
+                        DIREITA = true;
                     }
 
                 }
@@ -729,15 +761,22 @@ namespace Stick_RPG_Fight
                     vida -= 30;
                     HIT2 = true;
                     TOMANDOHIT = true;
+
+                    PARADO = false;
+                    ANDANDO = false;
+                    ATACANDO = false;
+                    ROLAR = false;
                     if (P1.DIREITA)
                     {
                         frameALLi1.X = 0;
                         frameALLi1.Y = 0;
+                        ESQUERDA = true;
                     }
                     if (P1.ESQUERDA)
                     {
                         frameALLi1.X = 8;
                         frameALLi1.Y = 0;
+                        DIREITA = true;
                     }
                 }
                 if ((P1.DIREITA && P1.PARTE4 && P1.frameLUTA.Y == 4 && P1.frameLUTA.X == 0 || P1.ESQUERDA && P1.PARTE4 && P1.frameLUTA.Y == 4 && P1.frameLUTA.X == 7) && P1.COMBO1)
@@ -745,15 +784,22 @@ namespace Stick_RPG_Fight
                     vida -= 30;
                     HIT2 = true;
                     TOMANDOHIT = true;
+
+                    PARADO = false;
+                    ANDANDO = false;
+                    ATACANDO = false;
+                    ROLAR = false;
                     if (P1.DIREITA)
                     {
                         frameALLi1.X = 0;
                         frameALLi1.Y = 0;
+                        ESQUERDA = true;
                     }
                     if (P1.ESQUERDA)
                     {
                         frameALLi1.X = 8;
                         frameALLi1.Y = 0;
+                        DIREITA = true;
                     }
                 }
                 //

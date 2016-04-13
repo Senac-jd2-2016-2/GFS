@@ -88,14 +88,14 @@ namespace Stick_RPG_Fight
                         {
                             spriteBatch.Draw(i1.imgHit2Di1, listai1[i].individuo,
                             new Rectangle(listai1[i].frameALLi1.X * listai1[i].tamanhoHit2i1.X, listai1[i].frameALLi1.Y * listai1[i].tamanhoHit2i1.Y,
-                                                       listai1[i].tamanhoHit1i1.X, listai1[i].tamanhoHit1i1.Y), Color.White);
+                                                       listai1[i].tamanhoHit2i1.X, listai1[i].tamanhoHit2i1.Y), Color.White);
 
                         }
                         if (listai1[i].HIT3)
                         {
                             spriteBatch.Draw(i1.imgHit3Di1, listai1[i].individuo,
                             new Rectangle(listai1[i].frameALLi1.X * listai1[i].tamanhoHit3i1.X, listai1[i].frameALLi1.Y * listai1[i].tamanhoHit3i1.Y,
-                                                       listai1[i].tamanhoHit1i1.X, listai1[i].tamanhoHit1i1.Y), Color.White);
+                                                       listai1[i].tamanhoHit3i1.X, listai1[i].tamanhoHit3i1.Y), Color.White);
                         }
                     }
 
@@ -131,14 +131,14 @@ namespace Stick_RPG_Fight
                         {
                             spriteBatch.Draw(i1.imgHit2Ei1, listai1[i].individuo,
                             new Rectangle(listai1[i].frameALLi1.X * listai1[i].tamanhoHit2i1.X, listai1[i].frameALLi1.Y * listai1[i].tamanhoHit2i1.Y,
-                                                       listai1[i].tamanhoHit1i1.X, listai1[i].tamanhoHit1i1.Y), Color.White);
+                                                       listai1[i].tamanhoHit2i1.X, listai1[i].tamanhoHit2i1.Y), Color.White);
 
                         }
                         if (listai1[i].HIT3)
                         {
                             spriteBatch.Draw(i1.imgHit3Ei1, listai1[i].individuo,
                             new Rectangle(listai1[i].frameALLi1.X * listai1[i].tamanhoHit3i1.X, listai1[i].frameALLi1.Y * listai1[i].tamanhoHit3i1.Y,
-                                                       listai1[i].tamanhoHit1i1.X, listai1[i].tamanhoHit1i1.Y), Color.White);
+                                                       listai1[i].tamanhoHit3i1.X, listai1[i].tamanhoHit3i1.Y), Color.White);
                         }
                     }
                 }
