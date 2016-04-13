@@ -106,6 +106,7 @@
     <Content Include="Content\ENERGIA.png">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
+    <Content Include="Content\facaE.png" />
     <Content Include="Content\Fase de luta.png">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
@@ -136,12 +137,17 @@
     <Content Include="Content\homeON.png">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
+    <Content Include="Content\i1 - agachar defendendo.png" />
+    <Content Include="Content\i1 - agachar.png" />
     <Content Include="Content\i1 - andar DIREITA.png">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
     <Content Include="Content\i1 - andar.png">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
+    <Content Include="Content\i1 - defesa.png" />
+    <Content Include="Content\i1 - hit3.png" />
+    <Content Include="Content\i1 - jogando faca.png" />
     <Content Include="Content\i1 - parado.png">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
@@ -241,6 +247,8 @@
     <Content Include="Content\teste.png">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
+    <Content Include="Content\u1 - hit1.png" />
+    <Content Include="Content\u1 - hit2.png" />
     <Content Include="Content\VIDA.png">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
