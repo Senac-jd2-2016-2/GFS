@@ -398,8 +398,7 @@ namespace Stick_RPG_Fight
                             //mov do bot
                             for (int i = 0; i < listai1.Count; i++) // atualização de todos os inimigos
                             {
-                                
-                                listai1[i].MOV(WidthTela, HeightTela, aleatório);
+                                listai1[i].MOV(WidthTela, HeightTela, aleatório, P1);
                                 listai1[i].INTELIGENCIA(WidthTela, HeightTela, P1, listai1, aleatório);
                             }
                             //gerador de inimigos
@@ -435,7 +434,7 @@ namespace Stick_RPG_Fight
                         for (int i = 0; i < listai1.Count; i++) // atualização de todos os inimigos
                         {
                             
-                            listai1[i].MOV(WidthTela, HeightTela, aleatório);
+                            listai1[i].MOV(WidthTela, HeightTela, aleatório, P1);
                             listai1[i].INTELIGENCIA(WidthTela, HeightTela, P1, listai1, aleatório);
                         }
                         //gerador de inimigos
