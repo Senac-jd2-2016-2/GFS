@@ -200,6 +200,12 @@
     <Content Include="Content\i1 - parado.png">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
+    <Content Include="Content\i1 - rasteira.png">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Content\i1 - rasteiraD.png">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
     <Content Include="Content\MANA.png">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
