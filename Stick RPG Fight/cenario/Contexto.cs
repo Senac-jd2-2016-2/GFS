@@ -79,6 +79,9 @@ namespace Stick_RPG_Fight
             i1.imgHit2Di1 = content.Load<Texture2D>("i1 - hit2D");
             i1.imgHit3Di1 = content.Load<Texture2D>("i1 - hit3D");
             i1.imgLevantarDi1 = content.Load<Texture2D>("i1 - levantarD");
+            i1.imgATK1Di1 = content.Load<Texture2D>("i1 - ataque1D");
+            i1.imgAgarrarDi1 = content.Load<Texture2D>("i1 - agarrarD");
+            i1.imgRasteiraDi1 = content.Load<Texture2D>("i1 - rasteiraD");
             //E
             i1.imgDEFEi1 = content.Load<Texture2D>("i1 - defesa");
             i1.imgFacaEi1 = content.Load<Texture2D>("FacaE");
@@ -90,6 +93,9 @@ namespace Stick_RPG_Fight
             i1.imgHit2Ei1 = content.Load<Texture2D>("i1 - hit2");
             i1.imgHit3Ei1 = content.Load<Texture2D>("i1 - hit3");
             i1.imgLevantarEi1 = content.Load<Texture2D>("i1 - levantar");
+            i1.imgATK1Ei1 = content.Load<Texture2D>("i1 - ataque1");
+            i1.imgAgarrarEi1 = content.Load<Texture2D>("i1 - agarrar");
+            i1.imgRasteiraEi1 = content.Load<Texture2D>("i1 - rasteira");
 
             
 

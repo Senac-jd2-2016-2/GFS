@@ -30,6 +30,9 @@ namespace Stick_RPG_Fight
         public Texture2D imgHit2Di1;
         public Texture2D imgHit3Di1;
         public Texture2D imgLevantarDi1;
+        public Texture2D imgATK1Di1;
+        public Texture2D imgAgarrarDi1;
+        public Texture2D imgRasteiraDi1;
         //E
         public Texture2D imgFacaEi1;
         public Texture2D imgAgacharEi1;
@@ -41,21 +44,28 @@ namespace Stick_RPG_Fight
         public Texture2D imgHit2Ei1;
         public Texture2D imgHit3Ei1;
         public Texture2D imgLevantarEi1;
+        public Texture2D imgATK1Ei1;
+        public Texture2D imgAgarrarEi1;
+        public Texture2D imgRasteiraEi1;
 
         //tamanho do sprite
         public Point tamanhoparadoi1 = new Point(225, 383); //Dimensões do sprite
         public Point tamanhoAndari1 = new Point(166, 367); //Dimensões do sprite
 
         
-        public Point tamanhoAgachari1 = new Point(195, 363); //Dimensões do sprite
-        public Point tamanhoAgacharDEFi1 = new Point(214, 363); //Dimensões do sprite
+        public Point tamanhoAgachari1 = new Point(198, 362); //Dimensões do sprite
+        public Point tamanhoAgacharDEFi1 = new Point(215, 362); //Dimensões do sprite
         public Point tamanhoCaidoi1 = new Point(357, 178); //Dimensões do sprite
         public Point tamanhoDEFi1 = new Point(197, 361); //Dimensões do sprite
         public Point tamanhoJogarFacai1 = new Point(260, 389); //Dimensões do sprite
         public Point tamanhoHit1i1 = new Point(193, 362); //Dimensões do sprite
         public Point tamanhoHit2i1 = new Point(221, 365); //Dimensões do sprite
-        public Point tamanhoHit3i1 = new Point(343, 361); //Dimensões do sprite // ( mesmo do levantar )
-        public Point tamanhoLevantari1 = new Point(355, 359); //Dimensões do sprite
+        public Point tamanhoHit3i1 = new Point(448, 371); //Dimensões do sprite //
+        public Point tamanhoLevantari1 = new Point(371, 368); //Dimensões do sprite
+
+        public Point tamanhoATK1i1 = new Point(217, 365); //Dimensões do sprite // (MESMO ALTURA DO AGARRAR / HIT 2 / AGACHAR / DEF) (MESMO QUE O X do HIT2 / Agachar DEF)
+        public Point tamanhoAgarrari1 = new Point(266, 365); //Dimensões do sprite // (mesma altura do ATAK1)
+        public Point tamanhoRasteirai1 = new Point(294, 372); //Dimensões do sprite // (mesma altura do Hit3)
 
         //qnts sprites
         public Point SpriteSheetparadoi1 = new Point(20, 10); //Dimensões da spritesheet
@@ -71,6 +81,10 @@ namespace Stick_RPG_Fight
         public Point SpriteSheetHit2i1 = new Point(9, 3); //Dimensões do spritesheet
         public Point SpriteSheetHit3i1 = new Point(8, 6); //Dimensões do spritesheet
         public Point SpriteSheetLevantari1 = new Point(8, 7); //Dimensões do spritesheet
+
+        public Point SpriteSheetATK1i1 = new Point(8, 4); //Dimensões do spritesheet
+        public Point SpriteSheetAgarrari1 = new Point(8, 13); //Dimensões do spritesheet
+        public Point SpriteSheetRasteirai1 = new Point(8, 8); //Dimensões do spritesheet
 
         //frame de posição momentanea do sprite
         public Point frameparadoi1 = new Point(0, 0); //Marca o frame a ser utilizado
@@ -119,6 +133,7 @@ namespace Stick_RPG_Fight
         public bool MORRENDO;
         public bool CAIDO;
         public bool LEVANTANDO;
+        public bool ATACK1;
 
         public bool faca_voando;
         public bool Jogar_Faca;
@@ -1213,7 +1228,7 @@ namespace Stick_RPG_Fight
 
                 //frames da faca
                 O1.frameFACA.X = 7;
-                O1.Vx = HeightTela / 5;//velocidade inicial
+                O1.Vx = 0;//velocidade inicial
             }
             if (ESQUERDA)
             {
@@ -1223,7 +1238,7 @@ namespace Stick_RPG_Fight
 
                 //frames da faca
                 O1.frameFACA.X = 0;
-                O1.Vx = -HeightTela / 5;//velocidade inicial
+                O1.Vx = 0;//velocidade inicial
             }
 
             O1.Vy = 0;
@@ -1256,11 +1271,11 @@ namespace Stick_RPG_Fight
 
                     if (listadefacas[i].esquerda && listadefacas[i].Vx < 0)
                     {
-                        listadefacas[i].Vx += HeightTela / 300;
+                        listadefacas[i].Vx -= HeightTela / 120;
                     }
                     if (listadefacas[i].direita && listadefacas[i].Vx > 0)
                     {
-                        listadefacas[i].Vx -= HeightTela / 300;
+                        listadefacas[i].Vx += HeightTela / 120;
                     }
                     listadefacas[i].Vy += HeightTela / 200;
 

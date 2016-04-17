@@ -1011,9 +1011,9 @@ namespace Stick_RPG_Fight
             meio.Width = individuo.Width / 2;
             meio.Height = individuo.Height;
 
-            DistanciadeLuta.X = individuo.X - ((individuo.Width / 4) / 2);
+            DistanciadeLuta.X = individuo.X - WidthTela / 8;
             DistanciadeLuta.Y = individuo.Y;
-            DistanciadeLuta.Width = individuo.Width / 4;
+            DistanciadeLuta.Width = WidthTela / 4;
             DistanciadeLuta.Height = individuo.Height;
 
             //chao empurra pra cima

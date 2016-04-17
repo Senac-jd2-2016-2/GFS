@@ -177,6 +177,43 @@ namespace Stick_RPG_Fight
                             new Rectangle(listai1[i].frameALLi1.X * listai1[i].tamanhoLevantari1.X, listai1[i].frameALLi1.Y * listai1[i].tamanhoLevantari1.Y,
                                                        listai1[i].tamanhoLevantari1.X, listai1[i].tamanhoLevantari1.Y), Color.White);
                     }
+                    //RASTEIRA
+                    //RASTEIRA
+                    //RASTEIRA
+                    //RASTEIRA
+                    if (listai1[i].RASTEIRA)
+                    {
+                        spriteBatch.Draw(i1.imgRasteiraDi1, listai1[i].individuo,
+                            new Rectangle(listai1[i].frameALLi1.X * listai1[i].tamanhoRasteirai1.X, listai1[i].frameALLi1.Y * listai1[i].tamanhoRasteirai1.Y,
+                                                       listai1[i].tamanhoRasteirai1.X, listai1[i].tamanhoRasteirai1.Y), Color.White);
+                    }
+                    //ATAQUE
+                    //ATAQUE
+                    //ATAQUE
+                    //ATAQUE
+                    //ATAQUE
+                    if (listai1[i].ATACANDO)
+                    {
+                        if (listai1[i].ATACK1)
+                        {
+                             spriteBatch.Draw(i1.imgATK1Di1, listai1[i].individuo,
+                            new Rectangle(listai1[i].frameALLi1.X * listai1[i].tamanhoATK1i1.X, listai1[i].frameALLi1.Y * listai1[i].tamanhoATK1i1.Y,
+                                                       listai1[i].tamanhoATK1i1.X, listai1[i].tamanhoATK1i1.Y), Color.White);
+                    
+                        }
+                    }
+                    //AGARRAR
+                    //AGARRAR
+                    //AGARRAR
+                    //AGARRAR
+                    //AGARRAR
+                    if (listai1[i].AGARRAR)
+                    {
+                        spriteBatch.Draw(i1.imgAgarrarDi1, listai1[i].individuo,
+                       new Rectangle(listai1[i].frameALLi1.X * listai1[i].tamanhoAgarrari1.X, listai1[i].frameALLi1.Y * listai1[i].tamanhoAgarrari1.Y,
+                                                  listai1[i].tamanhoAgarrari1.X, listai1[i].tamanhoAgarrari1.Y), Color.White);
+
+                    }
                 }
                 //ESQUUERDA
                 //ESQUUERDA
@@ -286,6 +323,43 @@ namespace Stick_RPG_Fight
                         spriteBatch.Draw(i1.imgLevantarEi1, listai1[i].individuo,
                             new Rectangle(listai1[i].frameALLi1.X * listai1[i].tamanhoLevantari1.X, listai1[i].frameALLi1.Y * listai1[i].tamanhoLevantari1.Y,
                                                        listai1[i].tamanhoLevantari1.X, listai1[i].tamanhoLevantari1.Y), Color.White);
+                    }
+                    //RASTEIRA
+                    //RASTEIRA
+                    //RASTEIRA
+                    //RASTEIRA
+                    if (listai1[i].RASTEIRA)
+                    {
+                        spriteBatch.Draw(i1.imgRasteiraEi1, listai1[i].individuo,
+                            new Rectangle(listai1[i].frameALLi1.X * listai1[i].tamanhoRasteirai1.X, listai1[i].frameALLi1.Y * listai1[i].tamanhoRasteirai1.Y,
+                                                       listai1[i].tamanhoRasteirai1.X, listai1[i].tamanhoRasteirai1.Y), Color.White);
+                    }
+                    //ATAQUE
+                    //ATAQUE
+                    //ATAQUE
+                    //ATAQUE
+                    //ATAQUE
+                    if (listai1[i].ATACANDO)
+                    {
+                        if (listai1[i].ATACK1)
+                        {
+                            spriteBatch.Draw(i1.imgATK1Ei1, listai1[i].individuo,
+                           new Rectangle(listai1[i].frameALLi1.X * listai1[i].tamanhoATK1i1.X, listai1[i].frameALLi1.Y * listai1[i].tamanhoATK1i1.Y,
+                                                      listai1[i].tamanhoATK1i1.X, listai1[i].tamanhoATK1i1.Y), Color.White);
+
+                        }
+                    }
+                    //AGARRAR
+                    //AGARRAR
+                    //AGARRAR
+                    //AGARRAR
+                    //AGARRAR
+                    if (listai1[i].AGARRAR)
+                    {
+                        spriteBatch.Draw(i1.imgAgarrarDi1, listai1[i].individuo,
+                       new Rectangle(listai1[i].frameALLi1.X * listai1[i].tamanhoAgarrari1.X, listai1[i].frameALLi1.Y * listai1[i].tamanhoAgarrari1.Y,
+                                                  listai1[i].tamanhoAgarrari1.X, listai1[i].tamanhoAgarrari1.Y), Color.White);
+
                     }
                 }//fim ESQUERDA
             }
