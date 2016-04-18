@@ -22,6 +22,7 @@ namespace Stick_RPG_Fight
 
         public bool direita;
         public bool esquerda;
+        public bool CAINDO;
 
         //item
         //(FACA)

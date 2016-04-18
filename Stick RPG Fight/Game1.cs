@@ -402,7 +402,7 @@ namespace Stick_RPG_Fight
                                 listai1[i].INTELIGENCIA(WidthTela, HeightTela, P1, listai1, aleatório);
                             }
                             //gerador de inimigos
-                            if (TempoParaInimigos == 120)
+                            if (TempoParaInimigos == 320)
                             {
                                 i1.GERARi1(listai1, WidthTela, HeightTela, aleatório);
                                 TempoParaInimigos = 0;
@@ -438,7 +438,7 @@ namespace Stick_RPG_Fight
                             listai1[i].INTELIGENCIA(WidthTela, HeightTela, P1, listai1, aleatório);
                         }
                         //gerador de inimigos
-                        if (TempoParaInimigos == 120)
+                        if (TempoParaInimigos == 320)
                         {
                             i1.GERARi1(listai1, WidthTela, HeightTela, aleatório);
                             TempoParaInimigos = 0;
@@ -470,7 +470,7 @@ namespace Stick_RPG_Fight
                     P1.BarraEnergia.Width = (int)((float)(P1.energia) / P1.energiaTOTAL * WidthTela / 3);
                     P1.BarraMana.Width = (int)((float)(P1.mana) / P1.manaTOTAL * WidthTela / 3);
 
-                    //constantes
+                    //constantes (AUMENTA ENERGIA OU MANA COM O TEMPO)
                     if (P1.energia <= P1.energiaTOTAL && !P1.CORRENDO && !P1.PULANDOcorrendo && !P1.ATACANDO)
                     {
                         P1.energia += 2;
@@ -543,6 +543,11 @@ namespace Stick_RPG_Fight
                 DRAW.DrawCLONES(spriteBatch, P1); // PODER
 
                 spriteBatch.DrawString(menu, "LISTA: " + listai1.Count , new Vector2(0, Window.ClientBounds.Height - 15), Color.Black); //teste
+                if (listai1.Count > 1)
+                {
+                    spriteBatch.DrawString(menu, "frame: X " + listai1[1].frameALLi1.X + " frame: Y " + listai1[1].frameALLi1.Y, new Vector2(0, Window.ClientBounds.Height - 45), Color.Black); //teste
+
+                }
             }//FIM DO COMBATE
 
             //botao menu e comercio

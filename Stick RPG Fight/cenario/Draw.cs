@@ -145,18 +145,7 @@ namespace Stick_RPG_Fight
 
                     }
 
-                    //LANÇAR FACA
-                    //LANÇAR FACA
-                    //LANÇAR FACA
-                    //LANÇAR FACA
-                    //LANÇAR FACA
-                    if (listai1[i].Jogar_Faca)
-                    {
-                        spriteBatch.Draw(i1.imgJogarFacaDi1, listai1[i].individuo,
-                            new Rectangle(listai1[i].frameALLi1.X * listai1[i].tamanhoJogarFacai1.X, listai1[i].frameALLi1.Y * listai1[i].tamanhoJogarFacai1.Y,
-                                                       listai1[i].tamanhoJogarFacai1.X, listai1[i].tamanhoJogarFacai1.Y), Color.White);
-
-                    }
+                    
                     //CAIDO
                     //CAIDO
                     //CAIDO
@@ -201,6 +190,19 @@ namespace Stick_RPG_Fight
                                                        listai1[i].tamanhoATK1i1.X, listai1[i].tamanhoATK1i1.Y), Color.White);
                     
                         }
+
+                        //LANÇAR FACA
+                        //LANÇAR FACA
+                        //LANÇAR FACA
+                        //LANÇAR FACA
+                        //LANÇAR FACA
+                        if (listai1[i].Jogar_Faca)
+                        {
+                            spriteBatch.Draw(i1.imgJogarFacaDi1, listai1[i].individuo,
+                                new Rectangle(listai1[i].frameALLi1.X * listai1[i].tamanhoJogarFacai1.X, listai1[i].frameALLi1.Y * listai1[i].tamanhoJogarFacai1.Y,
+                                                           listai1[i].tamanhoJogarFacai1.X, listai1[i].tamanhoJogarFacai1.Y), Color.White);
+
+                        }
                     }
                     //AGARRAR
                     //AGARRAR
@@ -214,8 +216,23 @@ namespace Stick_RPG_Fight
                                                   listai1[i].tamanhoAgarrari1.X, listai1[i].tamanhoAgarrari1.Y), Color.White);
 
                     }
+                    //PODER
+                    //PODER
+                    //PODER
+                    //PODER
+                    if (listai1[i].PODER)
+                    {
+                        spriteBatch.Draw(i1.imgPODERDi1, listai1[i].individuo,
+                       new Rectangle(listai1[i].frameALLi1.X * listai1[i].tamanhoPODERi1.X, listai1[i].frameALLi1.Y * listai1[i].tamanhoPODERi1.Y,
+                                                  listai1[i].tamanhoPODERi1.X, listai1[i].tamanhoPODERi1.Y), Color.White);
+
+                    }
                 }
-                //ESQUUERDA
+
+
+
+
+                //ESQUUERDA/ESQUUERDA/ESQUUERDA/ESQUUERDA/ESQUUERDA/ESQUUERDA/ESQUUERDA/ESQUUERDA/ESQUUERDA
                 //ESQUUERDA
                 //ESQUUERDA
                 //ESQUUERDA
@@ -292,18 +309,8 @@ namespace Stick_RPG_Fight
                                                        listai1[i].tamanhoAgachari1.X, listai1[i].tamanhoAgachari1.Y), Color.White);
 
                     }
-                    //LANÇAR FACA
-                    //LANÇAR FACA
-                    //LANÇAR FACA
-                    //LANÇAR FACA
-                    //LANÇAR FACA
-                    if (listai1[i].Jogar_Faca)
-                    {
-                        spriteBatch.Draw(i1.imgJogarFacaEi1, listai1[i].individuo,
-                            new Rectangle(listai1[i].frameALLi1.X * listai1[i].tamanhoJogarFacai1.X, listai1[i].frameALLi1.Y * listai1[i].tamanhoJogarFacai1.Y,
-                                                       listai1[i].tamanhoJogarFacai1.X, listai1[i].tamanhoJogarFacai1.Y), Color.White);
-
-                    }
+                    
+                    
                     //CAIDO
                     //CAIDO
                     //CAIDO
@@ -348,6 +355,18 @@ namespace Stick_RPG_Fight
                                                       listai1[i].tamanhoATK1i1.X, listai1[i].tamanhoATK1i1.Y), Color.White);
 
                         }
+                        //LANÇAR FACA
+                        //LANÇAR FACA
+                        //LANÇAR FACA
+                        //LANÇAR FACA
+                        //LANÇAR FACA
+                        if (listai1[i].Jogar_Faca)
+                        {
+                            spriteBatch.Draw(i1.imgJogarFacaEi1, listai1[i].individuo,
+                                new Rectangle(listai1[i].frameALLi1.X * listai1[i].tamanhoJogarFacai1.X, listai1[i].frameALLi1.Y * listai1[i].tamanhoJogarFacai1.Y,
+                                                           listai1[i].tamanhoJogarFacai1.X, listai1[i].tamanhoJogarFacai1.Y), Color.White);
+
+                        }
                     }
                     //AGARRAR
                     //AGARRAR
@@ -356,9 +375,21 @@ namespace Stick_RPG_Fight
                     //AGARRAR
                     if (listai1[i].AGARRAR)
                     {
-                        spriteBatch.Draw(i1.imgAgarrarDi1, listai1[i].individuo,
+                        spriteBatch.Draw(i1.imgAgarrarEi1, listai1[i].individuo,
                        new Rectangle(listai1[i].frameALLi1.X * listai1[i].tamanhoAgarrari1.X, listai1[i].frameALLi1.Y * listai1[i].tamanhoAgarrari1.Y,
                                                   listai1[i].tamanhoAgarrari1.X, listai1[i].tamanhoAgarrari1.Y), Color.White);
+
+                    }
+
+                    //PODER
+                    //PODER
+                    //PODER
+                    //PODER
+                    if (listai1[i].PODER)
+                    {
+                        spriteBatch.Draw(i1.imgPODEREi1, listai1[i].individuo,
+                       new Rectangle(listai1[i].frameALLi1.X * listai1[i].tamanhoPODERi1.X, listai1[i].frameALLi1.Y * listai1[i].tamanhoPODERi1.Y,
+                                                  listai1[i].tamanhoPODERi1.X, listai1[i].tamanhoPODERi1.Y), Color.White);
 
                     }
                 }//fim ESQUERDA

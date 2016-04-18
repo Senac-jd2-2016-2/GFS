@@ -138,6 +138,7 @@ namespace Stick_RPG_Fight
         public bool DESCANSANDO;
 
         public bool ATAQUELANÇADO;
+        public bool SENDOAGARRADO;
 
         public bool TOMANDOHIT;
         public bool HIT1;
@@ -243,7 +244,7 @@ namespace Stick_RPG_Fight
             {
                 ParadoCONTAGEM++;
             }
-            else
+            else if (!PARADO)
             {
                 ParadoCONTAGEM = 0;
             }
@@ -252,7 +253,7 @@ namespace Stick_RPG_Fight
             {
                 DefesaCONTAGEM++;
             }
-            else
+            else if (!DEFENDENDO)
             {
                 DefesaCONTAGEM = 0;
             }
@@ -261,7 +262,7 @@ namespace Stick_RPG_Fight
             {
                 AgachadoDEFCONTAGEM++;
             }
-            else
+            else if (!DEFENDENDO && AGACHADO || !AGACHADO && DEFENDENDO || !DEFENDENDO && !AGACHADO)
             {
                 AgachadoDEFCONTAGEM = 0;
             }
@@ -297,12 +298,12 @@ namespace Stick_RPG_Fight
                                     PARTE1 = false;
                                     PARTE2 = true;
 
-                                    ATAQUELANÇADO = true;
+                                    
                                     COMBO1 = true;
                                     frameLUTA.X = 0;
                                     frameLUTA.Y = 0;
                                     energia -= 10;
-
+                                    ATAQUELANÇADO = true; // mostrar q ele atacou
                                 }
                             }
 
@@ -359,7 +360,7 @@ namespace Stick_RPG_Fight
                         {
                             if (Keyboard.GetState().IsKeyDown(Keys.NumPad4) && !Keyboard.GetState().IsKeyDown(Keys.NumPad8) && !Keyboard.GetState().IsKeyDown(Keys.NumPad6) && !Keyboard.GetState().IsKeyDown(Keys.NumPad2) && energia >= 25)
                             {
-                                ATAQUELANÇADO = true;
+                                
                                 PARTE2 = false;
                                 PARTE3 = true;
 
@@ -367,6 +368,7 @@ namespace Stick_RPG_Fight
                                 frameLUTA.X = 0;
                                 frameLUTA.Y = 0;
                                 energia -= 25;
+                                ATAQUELANÇADO = true; // mostrar q ele atacou
                             }
                         }
                     }//parte 2
@@ -394,7 +396,7 @@ namespace Stick_RPG_Fight
                         {
                             if (Keyboard.GetState().IsKeyDown(Keys.NumPad6) && Keyboard.GetState().IsKeyDown(Keys.W) && !Keyboard.GetState().IsKeyDown(Keys.NumPad8) && !Keyboard.GetState().IsKeyDown(Keys.NumPad4) && !Keyboard.GetState().IsKeyDown(Keys.NumPad2) && energia >= 30)
                             {
-                                ATAQUELANÇADO = true;
+                                
                                 PARTE3 = false;
                                 PARTE4 = true;
 
@@ -402,6 +404,7 @@ namespace Stick_RPG_Fight
                                 frameLUTA.X = 0;
                                 frameLUTA.Y = 0;
                                 energia -= 30;
+                                ATAQUELANÇADO = true; // mostrar q ele atacou
                             }
                         }
                     }//fim parte 3
@@ -464,6 +467,7 @@ namespace Stick_RPG_Fight
                                     frameLUTA.X = 7;
                                     frameLUTA.Y = 0;
                                     energia -= 10;
+                                    ATAQUELANÇADO = true; // mostrar q ele atacou
                                 }
                             }
 
@@ -527,6 +531,7 @@ namespace Stick_RPG_Fight
                                 frameLUTA.X = 7;
                                 frameLUTA.Y = 0;
                                 energia -= 25;
+                                ATAQUELANÇADO = true; // mostrar q ele atacou
                             }
                         }
                     }//parte 2
@@ -561,6 +566,7 @@ namespace Stick_RPG_Fight
                                 frameLUTA.X = 7;
                                 frameLUTA.Y = 0;
                                 energia -= 30;
+                                ATAQUELANÇADO = true; // mostrar q ele atacou
                             }
                         }
                     }//fim parte 3
@@ -583,6 +589,7 @@ namespace Stick_RPG_Fight
                             PARADO = true;
                             frameLUTA.X = 0;
                             frameLUTA.Y = 0;
+                            LEVARCONTRAATAQUE = true;
                         }
                     }
 
@@ -1049,630 +1056,632 @@ namespace Stick_RPG_Fight
                 Contexto.Fundo.fase.Y = -HeightTela / 10;
             }
 
-
-            //pulando parado
-            if (Keyboard.GetState().IsKeyDown(Keys.Space) && !Keyboard.GetState().IsKeyDown(Keys.D) && !Keyboard.GetState().IsKeyDown(Keys.A) && !AGACHADO && !ATACANDO && !PULANDOparado && !PULANDOandando && !PULANDOcorrendo)
+            if (!SENDOAGARRADO) // PARALIZADO
             {
-                PULANDOparado = true;
-                PARADO = false;
-                CORRENDO = false;
-                ANDANDO = false;
-                subindo = true;
-                Vy = aleatório.Next(-HeightTela / 15, -HeightTela / 25);
-                if (ESQUERDA)
+                //pulando parado
+                if (Keyboard.GetState().IsKeyDown(Keys.Space) && !Keyboard.GetState().IsKeyDown(Keys.D) && !Keyboard.GetState().IsKeyDown(Keys.A) && !AGACHADO && !ATACANDO && !PULANDOparado && !PULANDOandando && !PULANDOcorrendo)
                 {
-                    framepular.X = 7;
-                    framepular.Y = 0;
-                }
-                descendo = false;
-            }
-
-            //pulando andando
-            if (Keyboard.GetState().IsKeyDown(Keys.Space) && (Keyboard.GetState().IsKeyDown(Keys.D) || Keyboard.GetState().IsKeyDown(Keys.A)) && !Keyboard.GetState().IsKeyDown(Keys.LeftShift) && !AGACHADO && !ATACANDO && !PULANDOparado && !PULANDOandando && !PULANDOcorrendo)
-            {
-                PULANDOandando = true;
-                PARADO = false;
-                CORRENDO = false;
-                ANDANDO = false;
-                subindo = true;
-
-                Vy = aleatório.Next(-HeightTela / 15, -HeightTela / 25);
-                if (ESQUERDA)
-                {
-                    framepular.X = 7;
-                    framepular.Y = 0;
-                }
-                descendo = false;
-            }
-
-            //pulando andando
-            if (Keyboard.GetState().IsKeyDown(Keys.Space) && (Keyboard.GetState().IsKeyDown(Keys.D) || Keyboard.GetState().IsKeyDown(Keys.A)) && Keyboard.GetState().IsKeyDown(Keys.LeftShift) && !AGACHADO && !ATACANDO && !PULANDOparado && !PULANDOandando && !PULANDOcorrendo && energia >= 35)
-            {
-                PULANDOcorrendo = true;
-                PARADO = false;
-                CORRENDO = false;
-                ANDANDO = false;
-                subindo = true;
-                Vy = aleatório.Next(-HeightTela / 15, -HeightTela / 25);
-                if (ESQUERDA)
-                {
-                    framepular.X = 7;
-                    framepular.Y = 0;
-                }
-                descendo = false;
-
-                if (energia > 0)
-                    energia -= 25;
-            }
-
-            if (PULANDOparado || PULANDOcorrendo || PULANDOandando) // A T U A L I Z A Ç Ã O
-            {
-                //em ordem de acontecimentos
-                //pula
-
-                //gravidade
-                if (subindo || (descendo && !individuo.Intersects(Contexto.Fundo.chao)))
-                {
-                    g += HeightTela / 300;
-                }
-                if (descendo && individuo.Intersects(Contexto.Fundo.chao) && !subindo)
-                {
-                    g = 0;
-                    Vy = 0;
-                }
-                //cair
-
-                //nao colidir com inimigo
-                COLIDINDOdireita = false;
-                COLIDINDOesquerda = false;
-                PARADO = false;
-
-            }
-
-
-
-
-            //parar de correr
-            if (energia < 7)
-            {
-                DESCANSANDO = true;
-            }
-            else if (energia >= 50)
-            {
-                DESCANSANDO = false;
-            }
-
-            //colisao com inimigo
-            for (int i = 0; i < listai1.Count; i++)
-            {
-                if (meio.Intersects(listai1[i].meio) && listai1[i].meio.X > meio.X && !ATACANDO)
-                {
-                    COLIDINDOdireita = true;
-                    Vx = 0;
-                    ANDANDO = false;
+                    PULANDOparado = true;
+                    PARADO = false;
                     CORRENDO = false;
-                    PARADO = true;
+                    ANDANDO = false;
+                    subindo = true;
+                    Vy = aleatório.Next(-HeightTela / 15, -HeightTela / 25);
+                    if (ESQUERDA)
+                    {
+                        framepular.X = 7;
+                        framepular.Y = 0;
+                    }
+                    descendo = false;
                 }
-                else if (!meio.Intersects(listai1[i].meio) && listai1[i].meio.X > meio.X)
+
+                //pulando andando
+                if (Keyboard.GetState().IsKeyDown(Keys.Space) && (Keyboard.GetState().IsKeyDown(Keys.D) || Keyboard.GetState().IsKeyDown(Keys.A)) && !Keyboard.GetState().IsKeyDown(Keys.LeftShift) && !AGACHADO && !ATACANDO && !PULANDOparado && !PULANDOandando && !PULANDOcorrendo)
                 {
+                    PULANDOandando = true;
+                    PARADO = false;
+                    CORRENDO = false;
+                    ANDANDO = false;
+                    subindo = true;
+
+                    Vy = aleatório.Next(-HeightTela / 15, -HeightTela / 25);
+                    if (ESQUERDA)
+                    {
+                        framepular.X = 7;
+                        framepular.Y = 0;
+                    }
+                    descendo = false;
+                }
+
+                //pulando andando
+                if (Keyboard.GetState().IsKeyDown(Keys.Space) && (Keyboard.GetState().IsKeyDown(Keys.D) || Keyboard.GetState().IsKeyDown(Keys.A)) && Keyboard.GetState().IsKeyDown(Keys.LeftShift) && !AGACHADO && !ATACANDO && !PULANDOparado && !PULANDOandando && !PULANDOcorrendo && energia >= 35)
+                {
+                    PULANDOcorrendo = true;
+                    PARADO = false;
+                    CORRENDO = false;
+                    ANDANDO = false;
+                    subindo = true;
+                    Vy = aleatório.Next(-HeightTela / 15, -HeightTela / 25);
+                    if (ESQUERDA)
+                    {
+                        framepular.X = 7;
+                        framepular.Y = 0;
+                    }
+                    descendo = false;
+
+                    if (energia > 0)
+                        energia -= 25;
+                }
+
+                if (PULANDOparado || PULANDOcorrendo || PULANDOandando) // A T U A L I Z A Ç Ã O
+                {
+                    //em ordem de acontecimentos
+                    //pula
+
+                    //gravidade
+                    if (subindo || (descendo && !individuo.Intersects(Contexto.Fundo.chao)))
+                    {
+                        g += HeightTela / 300;
+                    }
+                    if (descendo && individuo.Intersects(Contexto.Fundo.chao) && !subindo)
+                    {
+                        g = 0;
+                        Vy = 0;
+                    }
+                    //cair
+
+                    //nao colidir com inimigo
                     COLIDINDOdireita = false;
-                }
-
-                if (meio.Intersects(listai1[i].meio) && listai1[i].meio.X < meio.X && !ATACANDO)
-                {
-                    COLIDINDOesquerda = true;
-                    Vx = 0;
-                    ANDANDO = false;
-                    CORRENDO = false;
-                    PARADO = true;
-                }
-                else if (!meio.Intersects(listai1[i].meio) && listai1[i].meio.X < meio.X)
-                {
                     COLIDINDOesquerda = false;
-                }
-            }
-           
-
-
-
-
-            //parado
-            if (!Keyboard.GetState().IsKeyDown(Keys.D) && !Keyboard.GetState().IsKeyDown(Keys.A) && !PULANDOparado && !PULANDOandando && !PULANDOcorrendo && !AGACHADO && !ATACANDO)
-            {
-                PARADO = true;
-                Vx = 0;
-                Vy = 0;
-                ANDANDO = false;
-                CORRENDO = false;
-                //atualização de spritesheet
-                framemovendo.X = 0;
-                framemovendo.Y = 0;
-            }// fim do parado
-
-            if (Keyboard.GetState().IsKeyDown(Keys.D) && Keyboard.GetState().IsKeyDown(Keys.A) && !PULANDOparado && !AGACHADO && !ATACANDO && !PULANDOandando && !PULANDOcorrendo) // qnd apertar os dois botoes
-            {
-                PARADO = true;
-                ANDANDO = false;
-                CORRENDO = false;
-                Vx = 0;
-            }
-
-
-
-
-
-
-
-            if (DIREITA) /// POSIÇÃO (CORPO) estiver olhando para --  DIREITA
-            {
-                //andar DIREITA
-                if (Keyboard.GetState().IsKeyDown(Keys.D) && !Keyboard.GetState().IsKeyDown(Keys.A) && (!Keyboard.GetState().IsKeyDown(Keys.LeftShift) || DESCANSANDO) && !PULANDOparado && !PULANDOandando && !PULANDOcorrendo && !AGACHADO && !ATACANDO && !COLIDINDOdireita)
-                {
-                    //atualizando o frame parado
-                    frameparado1.X = 0;
-                    frameparado1.Y = 0;
-                    frameparado2.X = 0;
-                    frameparado2.Y = 0;
-
-                    //mov DIREITA
-                    if (individuo.X + individuo.Width < WidthTela) //movimento do individuo dentro da tela
-                    {
-                        Vx = HeightTela / 130; // = 8
-                    }
-                    else if (individuo.X + individuo.Width >= WidthTela)//se chegar no final para de andar
-                    {
-                        Vx = 0;
-                        //tirar o personagem do nada
-                        if (individuo.X + individuo.Width > WidthTela + HeightTela / 100)
-                            individuo.X -= 5;
-
-                    }
-                    if (Contexto.Fundo.fase.X + Contexto.Fundo.fase.Width > WidthTela) // se a fase chegar no final ela nao anda mais
-                    {
-                        if (individuo.X + individuo.Width >= WidthTela - HeightTela / 80) // HeightTela/80 = 13 , se o individuo passar do final da tela - 10 = movimento;
-                        {
-                            Contexto.Fundo.fase.X -= HeightTela / 130; // = 8
-                        }
-                        //tirar o fundo do vacuo
-                        if (Contexto.Fundo.fase.X + Contexto.Fundo.fase.Width <= WidthTela)
-                        {
-                            Contexto.Fundo.fase.X += HeightTela / 130; // = 8
-                        }
-                    }
-
                     PARADO = false;
-                    ANDANDO = true;
-                    CORRENDO = false;
+
                 }
 
-                //correr DIREITA
 
-                else if (Keyboard.GetState().IsKeyDown(Keys.D) && !Keyboard.GetState().IsKeyDown(Keys.A) && Keyboard.GetState().IsKeyDown(Keys.LeftShift) && !PULANDOparado && !PULANDOandando && !PULANDOcorrendo && !AGACHADO && !ATACANDO && !DESCANSANDO && !COLIDINDOdireita)
+
+
+                //parar de correr
+                if (energia < 7)
                 {
+                    DESCANSANDO = true;
+                }
+                else if (energia >= 50)
+                {
+                    DESCANSANDO = false;
+                }
 
-                    //atualizando o frame parado
-                    frameparado1.X = 0;
-                    frameparado1.Y = 0;
-                    frameparado2.X = 0;
-                    frameparado2.Y = 0;
-
-                    //gastando energia ao correr
-                    if (energia > 0)
-                        energia -= 3;
-
-                    //mov DIREITA
-                    if (individuo.X + individuo.Width < WidthTela) //movimento do individuo dentro da tela
+                //colisao com inimigo
+                for (int i = 0; i < listai1.Count; i++)
+                {
+                    if (meio.Intersects(listai1[i].meio) && listai1[i].meio.X > meio.X && !ATACANDO)
                     {
-                        Vx = HeightTela / 54; // = 20
-                    }
-                    else if (individuo.X + individuo.Width >= WidthTela)//se encostar no final para de correr
-                    {
+                        COLIDINDOdireita = true;
                         Vx = 0;
-                        //tirar o personagem do nada
-                        if (individuo.X + individuo.Width > WidthTela + HeightTela / 100)
-                            individuo.X -= 5;
+                        ANDANDO = false;
+                        CORRENDO = false;
+                        PARADO = true;
                     }
-                    if (Contexto.Fundo.fase.X + Contexto.Fundo.fase.Width > WidthTela) // se a fase chegar no final ela nao anda mais
+                    else if (!meio.Intersects(listai1[i].meio) && listai1[i].meio.X > meio.X)
                     {
-                        if (individuo.X + individuo.Width >= WidthTela - HeightTela / 80) // HeightTela/80 = 13 , se o individuo passar do final da tela - 10 = movimento;
-                        {
-                            Contexto.Fundo.fase.X -= HeightTela / 54; // = 20
-                        }
-                        //tirar o fundo do vacuo
-                        if (Contexto.Fundo.fase.X + Contexto.Fundo.fase.Width <= WidthTela)
-                        {
-                            Contexto.Fundo.fase.X += HeightTela / 54; // = 20
-                        }
+                        COLIDINDOdireita = false;
                     }
 
-                    PARADO = false;
+                    if (meio.Intersects(listai1[i].meio) && listai1[i].meio.X < meio.X && !ATACANDO)
+                    {
+                        COLIDINDOesquerda = true;
+                        Vx = 0;
+                        ANDANDO = false;
+                        CORRENDO = false;
+                        PARADO = true;
+                    }
+                    else if (!meio.Intersects(listai1[i].meio) && listai1[i].meio.X < meio.X)
+                    {
+                        COLIDINDOesquerda = false;
+                    }
+                }
+
+
+
+
+
+                //parado
+                if (!Keyboard.GetState().IsKeyDown(Keys.D) && !Keyboard.GetState().IsKeyDown(Keys.A) && !PULANDOparado && !PULANDOandando && !PULANDOcorrendo && !AGACHADO && !ATACANDO)
+                {
+                    PARADO = true;
+                    Vx = 0;
+                    Vy = 0;
                     ANDANDO = false;
-                    CORRENDO = true;
-                }
-
-               //desabilitar
-                else if (Keyboard.GetState().IsKeyDown(Keys.A) && !Keyboard.GetState().IsKeyDown(Keys.D) && !PULANDOparado && !PULANDOandando && !PULANDOcorrendo && !AGACHADO && !ATACANDO)
-                {
-                    DIREITA = false;
-                    ESQUERDA = true;
-                }
-
-
-                if (PULANDOandando)
-                {
-                    //mov DIREITA
-                    if (individuo.X + individuo.Width < WidthTela) //movimento do individuo dentro da tela
-                    {
-                        Vx = HeightTela / 130; // = 8
-                    }
-                    else if (individuo.X + individuo.Width >= WidthTela)//se chegar no final para de andar
-                    {
-                        Vx = 0;
-                        //tirar o personagem do nada
-                        if (individuo.X + individuo.Width > WidthTela + HeightTela / 100)
-                            individuo.X -= 5;
-
-                    }
-                    if (Contexto.Fundo.fase.X + Contexto.Fundo.fase.Width > WidthTela) // se a fase chegar no final ela nao anda mais
-                    {
-                        if (individuo.X + individuo.Width >= WidthTela - HeightTela / 80) // HeightTela/80 = 13 , se o individuo passar do final da tela - 10 = movimento;
-                        {
-                            Contexto.Fundo.fase.X -= HeightTela / 130; // = 8
-                        }
-                        //tirar o fundo do vacuo
-                        if (Contexto.Fundo.fase.X + Contexto.Fundo.fase.Width <= WidthTela)
-                        {
-                            Contexto.Fundo.fase.X += HeightTela / 130; // = 8
-                        }
-                    }
-                }
-
-                if (PULANDOcorrendo)
-                {
-                    //mov DIREITA
-                    if (individuo.X + individuo.Width < WidthTela) //movimento do individuo dentro da tela
-                    {
-                        Vx = HeightTela / 54; // = 20
-                    }
-                    else if (individuo.X + individuo.Width >= WidthTela)//se encostar no final para de correr
-                    {
-                        Vx = 0;
-                        //tirar o personagem do nada
-                        if (individuo.X + individuo.Width > WidthTela + HeightTela / 100)
-                            individuo.X -= 5;
-                    }
-                    if (Contexto.Fundo.fase.X + Contexto.Fundo.fase.Width > WidthTela) // se a fase chegar no final ela nao anda mais
-                    {
-                        if (individuo.X + individuo.Width >= WidthTela - HeightTela / 80) // HeightTela/80 = 13 , se o individuo passar do final da tela - 10 = movimento;
-                        {
-                            Contexto.Fundo.fase.X -= HeightTela / 54; // = 20
-                        }
-                        //tirar o fundo do vacuo
-                        if (Contexto.Fundo.fase.X + Contexto.Fundo.fase.Width <= WidthTela)
-                        {
-                            Contexto.Fundo.fase.X += HeightTela / 54; // = 20
-                        }
-                    }
-                }
-
-            }//fim direita##
-
-
-
-
-
-
-
-
-
-            if (ESQUERDA) /// POSIÇÃO (CORPO) estiver olhando para --  ESQUERDA
-            {
-                //Andando ESQUERDA
-                if (Keyboard.GetState().IsKeyDown(Keys.A) && !Keyboard.GetState().IsKeyDown(Keys.D) && (!Keyboard.GetState().IsKeyDown(Keys.LeftShift) || DESCANSANDO) && !PULANDOparado && !PULANDOandando && !PULANDOcorrendo && !AGACHADO && !ATACANDO && !COLIDINDOesquerda)
-                {
-                    //atualizando o frame parado
-                    frameparado1.X = 0;
-                    frameparado1.Y = 0;
-                    frameparado2.X = 0;
-                    frameparado2.Y = 0;
-
-                    //mov ESQUERDA
-                    if (individuo.X > 0) // se o individuo estiver maior que 0 ele pode correr pra esquerda
-                    {
-                        Vx = -HeightTela / 130; // = 8
-                    }
-                    else if (individuo.X <= 0) // se colidir com o começo ele para
-                    {
-                        Vx = 0;
-
-                    }
-                    if (Contexto.Fundo.fase.X < 0) // se o fundo estiver no 0 ele para
-                    {
-                        if (individuo.X <= HeightTela / 80) // se o individuo estiver menor ou igual a 13 ele começa a ir pra esquerda (fundo)
-                        {
-                            Contexto.Fundo.fase.X += HeightTela / 130; // = 8
-                        }
-                        //tirar o fundo do vacuo
-                        if (Contexto.Fundo.fase.X >= 0)
-                        {
-                            Contexto.Fundo.fase.X -= HeightTela / 130; // = 8
-                        }
-                    }
-
-                    PARADO = false;
-                    ANDANDO = true;
                     CORRENDO = false;
-                }
+                    //atualização de spritesheet
+                    framemovendo.X = 0;
+                    framemovendo.Y = 0;
+                }// fim do parado
 
-                //Correndo ESQUERDA
-                else if (!Keyboard.GetState().IsKeyDown(Keys.D) && Keyboard.GetState().IsKeyDown(Keys.A) && Keyboard.GetState().IsKeyDown(Keys.LeftShift) && !PULANDOparado && !PULANDOandando && !PULANDOcorrendo && !AGACHADO && !ATACANDO && !DESCANSANDO && !COLIDINDOesquerda)
+                if (Keyboard.GetState().IsKeyDown(Keys.D) && Keyboard.GetState().IsKeyDown(Keys.A) && !PULANDOparado && !AGACHADO && !ATACANDO && !PULANDOandando && !PULANDOcorrendo) // qnd apertar os dois botoes
                 {
-                    //atualizando o frame parado
-                    frameparado1.X = 0;
-                    frameparado1.Y = 0;
-                    frameparado2.X = 0;
-                    frameparado2.Y = 0;
-
-                    //gastando a energia
-                    if (energia > 0)
-                        energia -= 3;
-
-                    //mov ESQUERDA
-                    if (individuo.X > 0) // se o individuo estiver maior que 0 ele pode correr pra esquerda
-                    {
-                        Vx = -HeightTela / 54; // = 20
-                    }
-                    else if (individuo.X <= 0) // se colidir com o começo ele para
-                    {
-                        Vx = 0;
-
-                    }
-                    if (Contexto.Fundo.fase.X < 0) // se o fundo estiver no 0 ele para
-                    {
-                        if (individuo.X <= HeightTela / 80) // se o individuo estiver menor ou igual a 13 ele começa a ir pra esquerda (fundo)
-                        {
-                            Contexto.Fundo.fase.X += HeightTela / 54; // = 20
-                        }
-                        //tirar o fundo do vacuo
-                        if (Contexto.Fundo.fase.X >= 0)
-                        {
-                            Contexto.Fundo.fase.X -= HeightTela / 54; // = 20
-                        }
-                    }
-
-
-
-                    PARADO = false;
+                    PARADO = true;
                     ANDANDO = false;
-                    CORRENDO = true;
+                    CORRENDO = false;
+                    Vx = 0;
                 }
 
-                //desabilitar lado
-                else if (Keyboard.GetState().IsKeyDown(Keys.D) && !Keyboard.GetState().IsKeyDown(Keys.A) && !PULANDOparado && !PULANDOandando && !PULANDOcorrendo && !AGACHADO && !ATACANDO)
+
+
+
+
+
+
+                if (DIREITA) /// POSIÇÃO (CORPO) estiver olhando para --  DIREITA
                 {
-                    DIREITA = true;
-                    ESQUERDA = false;
-                }
+                    //andar DIREITA
+                    if (Keyboard.GetState().IsKeyDown(Keys.D) && !Keyboard.GetState().IsKeyDown(Keys.A) && (!Keyboard.GetState().IsKeyDown(Keys.LeftShift) || DESCANSANDO) && !PULANDOparado && !PULANDOandando && !PULANDOcorrendo && !AGACHADO && !ATACANDO && !COLIDINDOdireita)
+                    {
+                        //atualizando o frame parado
+                        frameparado1.X = 0;
+                        frameparado1.Y = 0;
+                        frameparado2.X = 0;
+                        frameparado2.Y = 0;
 
-                if (PULANDOandando)
+                        //mov DIREITA
+                        if (individuo.X + individuo.Width < WidthTela) //movimento do individuo dentro da tela
+                        {
+                            Vx = HeightTela / 130; // = 8
+                        }
+                        else if (individuo.X + individuo.Width >= WidthTela)//se chegar no final para de andar
+                        {
+                            Vx = 0;
+                            //tirar o personagem do nada
+                            if (individuo.X + individuo.Width > WidthTela + HeightTela / 100)
+                                individuo.X -= 5;
+
+                        }
+                        if (Contexto.Fundo.fase.X + Contexto.Fundo.fase.Width > WidthTela) // se a fase chegar no final ela nao anda mais
+                        {
+                            if (individuo.X + individuo.Width >= WidthTela - HeightTela / 80) // HeightTela/80 = 13 , se o individuo passar do final da tela - 10 = movimento;
+                            {
+                                Contexto.Fundo.fase.X -= HeightTela / 130; // = 8
+                            }
+                            //tirar o fundo do vacuo
+                            if (Contexto.Fundo.fase.X + Contexto.Fundo.fase.Width <= WidthTela)
+                            {
+                                Contexto.Fundo.fase.X += HeightTela / 130; // = 8
+                            }
+                        }
+
+                        PARADO = false;
+                        ANDANDO = true;
+                        CORRENDO = false;
+                    }
+
+                    //correr DIREITA
+
+                    else if (Keyboard.GetState().IsKeyDown(Keys.D) && !Keyboard.GetState().IsKeyDown(Keys.A) && Keyboard.GetState().IsKeyDown(Keys.LeftShift) && !PULANDOparado && !PULANDOandando && !PULANDOcorrendo && !AGACHADO && !ATACANDO && !DESCANSANDO && !COLIDINDOdireita)
+                    {
+
+                        //atualizando o frame parado
+                        frameparado1.X = 0;
+                        frameparado1.Y = 0;
+                        frameparado2.X = 0;
+                        frameparado2.Y = 0;
+
+                        //gastando energia ao correr
+                        if (energia > 0)
+                            energia -= 3;
+
+                        //mov DIREITA
+                        if (individuo.X + individuo.Width < WidthTela) //movimento do individuo dentro da tela
+                        {
+                            Vx = HeightTela / 54; // = 20
+                        }
+                        else if (individuo.X + individuo.Width >= WidthTela)//se encostar no final para de correr
+                        {
+                            Vx = 0;
+                            //tirar o personagem do nada
+                            if (individuo.X + individuo.Width > WidthTela + HeightTela / 100)
+                                individuo.X -= 5;
+                        }
+                        if (Contexto.Fundo.fase.X + Contexto.Fundo.fase.Width > WidthTela) // se a fase chegar no final ela nao anda mais
+                        {
+                            if (individuo.X + individuo.Width >= WidthTela - HeightTela / 80) // HeightTela/80 = 13 , se o individuo passar do final da tela - 10 = movimento;
+                            {
+                                Contexto.Fundo.fase.X -= HeightTela / 54; // = 20
+                            }
+                            //tirar o fundo do vacuo
+                            if (Contexto.Fundo.fase.X + Contexto.Fundo.fase.Width <= WidthTela)
+                            {
+                                Contexto.Fundo.fase.X += HeightTela / 54; // = 20
+                            }
+                        }
+
+                        PARADO = false;
+                        ANDANDO = false;
+                        CORRENDO = true;
+                    }
+
+                   //desabilitar
+                    else if (Keyboard.GetState().IsKeyDown(Keys.A) && !Keyboard.GetState().IsKeyDown(Keys.D) && !PULANDOparado && !PULANDOandando && !PULANDOcorrendo && !AGACHADO && !ATACANDO)
+                    {
+                        DIREITA = false;
+                        ESQUERDA = true;
+                    }
+
+
+                    if (PULANDOandando)
+                    {
+                        //mov DIREITA
+                        if (individuo.X + individuo.Width < WidthTela) //movimento do individuo dentro da tela
+                        {
+                            Vx = HeightTela / 130; // = 8
+                        }
+                        else if (individuo.X + individuo.Width >= WidthTela)//se chegar no final para de andar
+                        {
+                            Vx = 0;
+                            //tirar o personagem do nada
+                            if (individuo.X + individuo.Width > WidthTela + HeightTela / 100)
+                                individuo.X -= 5;
+
+                        }
+                        if (Contexto.Fundo.fase.X + Contexto.Fundo.fase.Width > WidthTela) // se a fase chegar no final ela nao anda mais
+                        {
+                            if (individuo.X + individuo.Width >= WidthTela - HeightTela / 80) // HeightTela/80 = 13 , se o individuo passar do final da tela - 10 = movimento;
+                            {
+                                Contexto.Fundo.fase.X -= HeightTela / 130; // = 8
+                            }
+                            //tirar o fundo do vacuo
+                            if (Contexto.Fundo.fase.X + Contexto.Fundo.fase.Width <= WidthTela)
+                            {
+                                Contexto.Fundo.fase.X += HeightTela / 130; // = 8
+                            }
+                        }
+                    }
+
+                    if (PULANDOcorrendo)
+                    {
+                        //mov DIREITA
+                        if (individuo.X + individuo.Width < WidthTela) //movimento do individuo dentro da tela
+                        {
+                            Vx = HeightTela / 54; // = 20
+                        }
+                        else if (individuo.X + individuo.Width >= WidthTela)//se encostar no final para de correr
+                        {
+                            Vx = 0;
+                            //tirar o personagem do nada
+                            if (individuo.X + individuo.Width > WidthTela + HeightTela / 100)
+                                individuo.X -= 5;
+                        }
+                        if (Contexto.Fundo.fase.X + Contexto.Fundo.fase.Width > WidthTela) // se a fase chegar no final ela nao anda mais
+                        {
+                            if (individuo.X + individuo.Width >= WidthTela - HeightTela / 80) // HeightTela/80 = 13 , se o individuo passar do final da tela - 10 = movimento;
+                            {
+                                Contexto.Fundo.fase.X -= HeightTela / 54; // = 20
+                            }
+                            //tirar o fundo do vacuo
+                            if (Contexto.Fundo.fase.X + Contexto.Fundo.fase.Width <= WidthTela)
+                            {
+                                Contexto.Fundo.fase.X += HeightTela / 54; // = 20
+                            }
+                        }
+                    }
+
+                }//fim direita##
+
+
+
+
+
+
+
+
+
+                if (ESQUERDA) /// POSIÇÃO (CORPO) estiver olhando para --  ESQUERDA
                 {
-                    //mov ESQUERDA
-                    if (individuo.X > 0) // se o individuo estiver maior que 0 ele pode correr pra esquerda
+                    //Andando ESQUERDA
+                    if (Keyboard.GetState().IsKeyDown(Keys.A) && !Keyboard.GetState().IsKeyDown(Keys.D) && (!Keyboard.GetState().IsKeyDown(Keys.LeftShift) || DESCANSANDO) && !PULANDOparado && !PULANDOandando && !PULANDOcorrendo && !AGACHADO && !ATACANDO && !COLIDINDOesquerda)
                     {
-                        Vx = -HeightTela / 130; // = 8
-                    }
-                    else if (individuo.X <= 0) // se colidir com o começo ele para
-                    {
-                        Vx = 0;
+                        //atualizando o frame parado
+                        frameparado1.X = 0;
+                        frameparado1.Y = 0;
+                        frameparado2.X = 0;
+                        frameparado2.Y = 0;
 
-                    }
-                    if (Contexto.Fundo.fase.X < 0) // se o fundo estiver no 0 ele para
-                    {
-                        if (individuo.X <= HeightTela / 80) // se o individuo estiver menor ou igual a 13 ele começa a ir pra esquerda (fundo)
+                        //mov ESQUERDA
+                        if (individuo.X > 0) // se o individuo estiver maior que 0 ele pode correr pra esquerda
                         {
-                            Contexto.Fundo.fase.X += HeightTela / 130; // = 8
+                            Vx = -HeightTela / 130; // = 8
                         }
-                        //tirar o fundo do vacuo
-                        if (Contexto.Fundo.fase.X >= 0)
+                        else if (individuo.X <= 0) // se colidir com o começo ele para
                         {
-                            Contexto.Fundo.fase.X -= HeightTela / 130; // = 8
-                        }
-                    }
-                }
+                            Vx = 0;
 
-                if (PULANDOcorrendo)
+                        }
+                        if (Contexto.Fundo.fase.X < 0) // se o fundo estiver no 0 ele para
+                        {
+                            if (individuo.X <= HeightTela / 80) // se o individuo estiver menor ou igual a 13 ele começa a ir pra esquerda (fundo)
+                            {
+                                Contexto.Fundo.fase.X += HeightTela / 130; // = 8
+                            }
+                            //tirar o fundo do vacuo
+                            if (Contexto.Fundo.fase.X >= 0)
+                            {
+                                Contexto.Fundo.fase.X -= HeightTela / 130; // = 8
+                            }
+                        }
+
+                        PARADO = false;
+                        ANDANDO = true;
+                        CORRENDO = false;
+                    }
+
+                    //Correndo ESQUERDA
+                    else if (!Keyboard.GetState().IsKeyDown(Keys.D) && Keyboard.GetState().IsKeyDown(Keys.A) && Keyboard.GetState().IsKeyDown(Keys.LeftShift) && !PULANDOparado && !PULANDOandando && !PULANDOcorrendo && !AGACHADO && !ATACANDO && !DESCANSANDO && !COLIDINDOesquerda)
+                    {
+                        //atualizando o frame parado
+                        frameparado1.X = 0;
+                        frameparado1.Y = 0;
+                        frameparado2.X = 0;
+                        frameparado2.Y = 0;
+
+                        //gastando a energia
+                        if (energia > 0)
+                            energia -= 3;
+
+                        //mov ESQUERDA
+                        if (individuo.X > 0) // se o individuo estiver maior que 0 ele pode correr pra esquerda
+                        {
+                            Vx = -HeightTela / 54; // = 20
+                        }
+                        else if (individuo.X <= 0) // se colidir com o começo ele para
+                        {
+                            Vx = 0;
+
+                        }
+                        if (Contexto.Fundo.fase.X < 0) // se o fundo estiver no 0 ele para
+                        {
+                            if (individuo.X <= HeightTela / 80) // se o individuo estiver menor ou igual a 13 ele começa a ir pra esquerda (fundo)
+                            {
+                                Contexto.Fundo.fase.X += HeightTela / 54; // = 20
+                            }
+                            //tirar o fundo do vacuo
+                            if (Contexto.Fundo.fase.X >= 0)
+                            {
+                                Contexto.Fundo.fase.X -= HeightTela / 54; // = 20
+                            }
+                        }
+
+
+
+                        PARADO = false;
+                        ANDANDO = false;
+                        CORRENDO = true;
+                    }
+
+                    //desabilitar lado
+                    else if (Keyboard.GetState().IsKeyDown(Keys.D) && !Keyboard.GetState().IsKeyDown(Keys.A) && !PULANDOparado && !PULANDOandando && !PULANDOcorrendo && !AGACHADO && !ATACANDO)
+                    {
+                        DIREITA = true;
+                        ESQUERDA = false;
+                    }
+
+                    if (PULANDOandando)
+                    {
+                        //mov ESQUERDA
+                        if (individuo.X > 0) // se o individuo estiver maior que 0 ele pode correr pra esquerda
+                        {
+                            Vx = -HeightTela / 130; // = 8
+                        }
+                        else if (individuo.X <= 0) // se colidir com o começo ele para
+                        {
+                            Vx = 0;
+
+                        }
+                        if (Contexto.Fundo.fase.X < 0) // se o fundo estiver no 0 ele para
+                        {
+                            if (individuo.X <= HeightTela / 80) // se o individuo estiver menor ou igual a 13 ele começa a ir pra esquerda (fundo)
+                            {
+                                Contexto.Fundo.fase.X += HeightTela / 130; // = 8
+                            }
+                            //tirar o fundo do vacuo
+                            if (Contexto.Fundo.fase.X >= 0)
+                            {
+                                Contexto.Fundo.fase.X -= HeightTela / 130; // = 8
+                            }
+                        }
+                    }
+
+                    if (PULANDOcorrendo)
+                    {
+                        //mov ESQUERDA
+                        if (individuo.X > 0) // se o individuo estiver maior que 0 ele pode correr pra esquerda
+                        {
+                            Vx = -HeightTela / 54; // = 20
+                        }
+                        else if (individuo.X <= 0) // se colidir com o começo ele para
+                        {
+                            Vx = 0;
+
+                        }
+                        if (Contexto.Fundo.fase.X < 0) // se o fundo estiver no 0 ele para
+                        {
+                            if (individuo.X <= HeightTela / 80) // se o individuo estiver menor ou igual a 13 ele começa a ir pra esquerda (fundo)
+                            {
+                                Contexto.Fundo.fase.X += HeightTela / 54; // = 20
+                            }
+                            //tirar o fundo do vacuo
+                            if (Contexto.Fundo.fase.X >= 0)
+                            {
+                                Contexto.Fundo.fase.X -= HeightTela / 54; // = 20
+                            }
+                        }
+                    }
+                }//fim esquerda##
+
+                //PERSONAGEM - > SPRITES E POSIÇÃO (DRAW / UPDATE)
+                //PERSONAGEM
+                if (DIREITA) // olhando pra direita
                 {
-                    //mov ESQUERDA
-                    if (individuo.X > 0) // se o individuo estiver maior que 0 ele pode correr pra esquerda
+                    if (!COMBATE) // fora de combate
                     {
-                        Vx = -HeightTela / 54; // = 20
-                    }
-                    else if (individuo.X <= 0) // se colidir com o começo ele para
-                    {
-                        Vx = 0;
-
-                    }
-                    if (Contexto.Fundo.fase.X < 0) // se o fundo estiver no 0 ele para
-                    {
-                        if (individuo.X <= HeightTela / 80) // se o individuo estiver menor ou igual a 13 ele começa a ir pra esquerda (fundo)
+                        if (PARADO)
                         {
-                            Contexto.Fundo.fase.X += HeightTela / 54; // = 20
-                        }
-                        //tirar o fundo do vacuo
-                        if (Contexto.Fundo.fase.X >= 0)
-                        {
-                            Contexto.Fundo.fase.X -= HeightTela / 54; // = 20
+                            //frame
+                            FRAMESparado1();
+                            //tamanho do personagem
+                            individuo.Width = WidthTela / 18;
                         }
                     }
-                }
-            }//fim esquerda##
-
-            //PERSONAGEM - > SPRITES E POSIÇÃO (DRAW / UPDATE)
-            //PERSONAGEM
-            if (DIREITA) // olhando pra direita
-            {
-                if (!COMBATE) // fora de combate
-                {
-                    if (PARADO)
+                    else if (COMBATE) //dentro de combate
+                    {
+                        if (PARADO)
+                        {
+                            //frame
+                            FRAMESparado2();
+                            //tamanho do personagem
+                            individuo.Width = WidthTela / 11;
+                        }
+                    }
+                    if (ANDANDO)
                     {
                         //frame
-                        FRAMESparado1();
+                        FRAMESmovendo();
                         //tamanho do personagem
-                        individuo.Width = WidthTela / 18;
+                        individuo.Width = WidthTela / 13;
+
                     }
-                }
-                else if (COMBATE) //dentro de combate
-                {
-                    if (PARADO)
+
+                    if (CORRENDO)
                     {
                         //frame
-                        FRAMESparado2();
+                        FRAMESmovendo();
                         //tamanho do personagem
-                        individuo.Width = WidthTela / 11;
-                    }
-                }
-                if (ANDANDO)
-                {
-                    //frame
-                    FRAMESmovendo();
-                    //tamanho do personagem
-                    individuo.Width = WidthTela / 13;
-
-                }
-
-                if (CORRENDO)
-                {
-                    //frame
-                    FRAMESmovendo();
-                    //tamanho do personagem
-                    individuo.Width = WidthTela / 9 + WidthTela / 120; //16
-                }
-
-                if (PULANDOparado)
-                {
-                    //frame
-                    if (!ATACANDO)
-                    {
-                        FRAMESpular(WidthTela, HeightTela);
+                        individuo.Width = WidthTela / 9 + WidthTela / 120; //16
                     }
 
-                    //tamanho do personagem
-                    individuo.Width = WidthTela / 10;
-                }
-
-                if (PULANDOandando)
-                {
-
-                    //frame
-                    if (!ATACANDO)
-                    {
-                        FRAMESpular(WidthTela, HeightTela);
-                    }
-
-
-
-                    //tamanho do personagem
-                    individuo.Width = WidthTela / 10;
-                }
-
-                if (PULANDOcorrendo)
-                {
-
-                    //frame
-                    if (!ATACANDO)
-                    {
-                        FRAMESpular(WidthTela, HeightTela);
-                    }
-
-
-
-                    //tamanho do personagem
-                    individuo.Width = WidthTela / 9;
-                }
-
-            }//fim da direita
-
-            if (ESQUERDA) // olhando pra esquerda
-            {
-                if (!COMBATE) // fora de combate
-                {
-                    if (PARADO)
+                    if (PULANDOparado)
                     {
                         //frame
-                        FRAMESparado1E();
+                        if (!ATACANDO)
+                        {
+                            FRAMESpular(WidthTela, HeightTela);
+                        }
+
                         //tamanho do personagem
-                        individuo.Width = WidthTela / 18;
+                        individuo.Width = WidthTela / 10;
                     }
-                }
-                else if (COMBATE)
+
+                    if (PULANDOandando)
+                    {
+
+                        //frame
+                        if (!ATACANDO)
+                        {
+                            FRAMESpular(WidthTela, HeightTela);
+                        }
+
+
+
+                        //tamanho do personagem
+                        individuo.Width = WidthTela / 10;
+                    }
+
+                    if (PULANDOcorrendo)
+                    {
+
+                        //frame
+                        if (!ATACANDO)
+                        {
+                            FRAMESpular(WidthTela, HeightTela);
+                        }
+
+
+
+                        //tamanho do personagem
+                        individuo.Width = WidthTela / 9;
+                    }
+
+                }//fim da direita
+
+                if (ESQUERDA) // olhando pra esquerda
                 {
-                    if (PARADO) // em combate
+                    if (!COMBATE) // fora de combate
+                    {
+                        if (PARADO)
+                        {
+                            //frame
+                            FRAMESparado1E();
+                            //tamanho do personagem
+                            individuo.Width = WidthTela / 18;
+                        }
+                    }
+                    else if (COMBATE)
+                    {
+                        if (PARADO) // em combate
+                        {
+                            //frame
+                            FRAMESparado2E();
+                            //tamanho do personagem
+                            individuo.Width = WidthTela / 11;
+                        }
+                    }
+                    if (ANDANDO)
                     {
                         //frame
-                        FRAMESparado2E();
+                        FRAMESmovendoE();
                         //tamanho do personagem
-                        individuo.Width = WidthTela / 11;
+                        individuo.Width = WidthTela / 13;
+
                     }
-                }
-                if (ANDANDO)
-                {
-                    //frame
-                    FRAMESmovendoE();
-                    //tamanho do personagem
-                    individuo.Width = WidthTela / 13;
 
-                }
-
-                if (CORRENDO)
-                {
-                    //frame
-                    FRAMESmovendoE();
-                    //tamanho do personagem
-                    individuo.Width = WidthTela / 9 + WidthTela / 120; //16
-                }
-
-                if (PULANDOparado)
-                {
-                    //frame
-                    if (!ATACANDO)
+                    if (CORRENDO)
                     {
-                        FRAMESpularE(WidthTela, HeightTela);
+                        //frame
+                        FRAMESmovendoE();
+                        //tamanho do personagem
+                        individuo.Width = WidthTela / 9 + WidthTela / 120; //16
                     }
 
-                    //tamanho do personagem
-                    individuo.Width = WidthTela / 10;
-                }
-
-                if (PULANDOandando)
-                {
-
-                    //frame
-                    if (!ATACANDO)
+                    if (PULANDOparado)
                     {
-                        FRAMESpularE(WidthTela, HeightTela);
+                        //frame
+                        if (!ATACANDO)
+                        {
+                            FRAMESpularE(WidthTela, HeightTela);
+                        }
+
+                        //tamanho do personagem
+                        individuo.Width = WidthTela / 10;
                     }
 
-
-
-                    //tamanho do personagem
-                    individuo.Width = WidthTela / 10;
-                }
-
-                if (PULANDOcorrendo)
-                {
-
-                    //frame
-                    if (!ATACANDO)
+                    if (PULANDOandando)
                     {
-                        FRAMESpularE(WidthTela, HeightTela);
+
+                        //frame
+                        if (!ATACANDO)
+                        {
+                            FRAMESpularE(WidthTela, HeightTela);
+                        }
+
+
+
+                        //tamanho do personagem
+                        individuo.Width = WidthTela / 10;
                     }
 
+                    if (PULANDOcorrendo)
+                    {
+
+                        //frame
+                        if (!ATACANDO)
+                        {
+                            FRAMESpularE(WidthTela, HeightTela);
+                        }
 
 
-                    //tamanho do personagem
-                    individuo.Width = WidthTela / 9;
-                }
-            }//fim da direita
+
+                        //tamanho do personagem
+                        individuo.Width = WidthTela / 9;
+                    }
+                }//fim da direita
+            } // FIM DO SENDO AGARRADO / PARALIZADO (é dizer q o personagem n pode se mecher)
         }//fim do MOV
 
 
