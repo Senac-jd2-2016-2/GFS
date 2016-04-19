@@ -54,7 +54,9 @@ namespace Stick_RPG_Fight
             M1.imghistory = content.Load<Texture2D>("history");
             M1.imgcombate = content.Load<Texture2D>("combate");
 
-            AUDIO.menusong = content.Load<Song>("Dreamland");
+            AUDIO.menusong = content.Load<Song>("Base4");
+            AUDIO.combatesong = content.Load<Song>("Base1");
+            AUDIO.PODERsong = content.Load<Song>("coração LENTO");
 
             Botao.imgcomercioOFF = content.Load<Texture2D>("comercioOFF");
             Botao.imgcomercioOFFTP = content.Load<Texture2D>("comercioOFFTP");

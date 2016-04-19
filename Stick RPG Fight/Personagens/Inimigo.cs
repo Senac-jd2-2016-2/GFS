@@ -339,7 +339,7 @@ namespace Stick_RPG_Fight
                             DIREITA = false;
                         }
 
-                    } while ((opçluta == 1 || opçluta == 4) && energia < 15 || opçluta == 2 || opçluta == 3 || opçluta == 5);
+                    } while ((opçluta == 4) && energia < 15 || opçluta == 2 || opçluta == 3 || opçluta == 5);
                 }
             }
 

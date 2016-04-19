@@ -636,7 +636,8 @@ namespace Stick_RPG_Fight
             spriteBatch.Draw(P1.imgSOBRE, P1.Barra, Color.White);
 
             spriteBatch.Draw(P1.imgXP, P1.XPrec, Color.White);
-            spriteBatch.DrawString(HUDfont, "XP " + P1.XP, new Vector2(P1.XPrec.X + HeightTela / 100, P1.XPrec.Y + HeightTela / 100), Color.Black);
+            spriteBatch.DrawString(HUDfont, "XP " + P1.XP, new Vector2(P1.XPrec.X + HeightTela / 100, P1.XPrec.Y + HeightTela / 100), Color.Black);//dentro da barra de xp
+            spriteBatch.DrawString(HUDfont, "LVL " + P1.LVL, new Vector2(P1.XPrec.X + HeightTela / 100, P1.XPrec.Y + P1.XPrec.Height + HeightTela / 100), Color.GreenYellow); // LVL
             spriteBatch.Draw(P1.imgXPT, P1.XPTrec, Color.White);
             spriteBatch.Draw(P1.imgpino, P1.Pino, Color.White);
 

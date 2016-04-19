@@ -14,5 +14,7 @@ namespace Stick_RPG_Fight
     class Audio
     {
         public Song menusong;
+        public Song combatesong;
+        public Song PODERsong;
     }
 }

@@ -96,7 +96,8 @@ namespace Stick_RPG_Fight
             }
             APPLY = new Rectangle(Window.ClientBounds.Width / 4, Window.ClientBounds.Height / 8, Window.ClientBounds.Width / 3, Window.ClientBounds.Width / 3);
             Bfull = new Rectangle(B1[4].X, Window.ClientBounds.Height - Window.ClientBounds.Height / 4, Window.ClientBounds.Width / 16, Window.ClientBounds.Height / 12);
-            
+
+            MediaPlayer.IsRepeating = true;
 
             //novo inimigo
 
@@ -173,10 +174,12 @@ namespace Stick_RPG_Fight
 
             if (!BOTAO && M1.COMBATEativado) //se soltar o botao apos ter clicado encima
             {
+
                 MENU = false;
                 M1.COMBATE = true;
                 Fase1 = true;
                 Botao.HOME = false;
+                MediaPlayer.Play(AUDIO.combatesong);
             }
             
             //
@@ -184,22 +187,24 @@ namespace Stick_RPG_Fight
             //----  HOME
             if (!Botao.HOME)
             {
-
                 if (Botao.HOMEquadrado.Contains(mousePosition) && Mouse.GetState().LeftButton == ButtonState.Pressed) // botao home
                 {
                     BOTAO = true;
                     Botao.HOMEb = true;
                 }
-                if (Botao.HOMEb && !BOTAO)
-                {
-                    Botao.HOME = true;
-                    Fase1 = false;
-                }
+                
+                //se passar mouse fora
                 if (!Botao.HOMEquadrado.Contains(mousePosition))
                 {
                     Botao.HOMEb = false;
                 }
-
+                //passagem
+                if (Botao.HOMEb && !BOTAO)
+                {
+                    MediaPlayer.Play(AUDIO.menusong);
+                    Botao.HOME = true;
+                    Fase1 = false;
+                }
             }
            //                                                           menu
 
@@ -261,7 +266,7 @@ namespace Stick_RPG_Fight
                             Contexto.Fundo.fase = new Rectangle(0, -Window.ClientBounds.Height / 10, Window.ClientBounds.Width * 3, Window.ClientBounds.Height + Window.ClientBounds.Height / 10);
                             Contexto.Fundo.chao = new Rectangle(Contexto.Fundo.fase.X, Contexto.Fundo.fase.Y + Window.ClientBounds.Height / 4 + Contexto.Fundo.fase.Height - Window.ClientBounds.Height / 3 - 1, Contexto.Fundo.fase.Width, Window.ClientBounds.Height / 3 - Window.ClientBounds.Height / 4);
 
-                            //MediaPlayer.Play(AUDIO.menusong);
+                            MediaPlayer.Play(AUDIO.menusong);
 
                             //botao
                             Botao.HOME = true;
@@ -378,6 +383,7 @@ namespace Stick_RPG_Fight
                         else if (P1.mana <= 0)
                         {
                             P1.PODER = false;
+                            MediaPlayer.Play(AUDIO.combatesong);
                         }
 
                         P1.POSIÇÃOdoCLONE(P1);
@@ -492,6 +498,7 @@ namespace Stick_RPG_Fight
                     if (Keyboard.GetState().IsKeyDown(Keys.NumPad5) && !P1.PODER && P1.mana >= 75)
                     {
                         P1.PODER = true;
+                        MediaPlayer.Play(AUDIO.PODERsong);
                     }
 
                 }//fim do jogo
