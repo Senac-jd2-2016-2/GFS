@@ -151,8 +151,8 @@ namespace Stick_RPG_Fight
         public bool subindo;
         public bool descendo;
 
-        public int Vx = 0;
-        public int Vy = 0;
+        public int Px = 0;
+        public int Py = 0;
         public int g = 0; // gravidade
 
         public List<Sangue> listadesangue = new List<Sangue>();
@@ -177,21 +177,21 @@ namespace Stick_RPG_Fight
             i1.opç = aleatório.Next(1,3);
             if (i1.opç == 1)
             {
-                i1.individuo = new Rectangle(Contexto.Fundo.fase.X + Contexto.Fundo.fase.Width + Vx, HeightTela - HeightTela / 3, WidthTela / 14, HeightTela / 4);
+                i1.individuo = new Rectangle(Contexto.Fundo.fase.X + Contexto.Fundo.fase.Width + Px, HeightTela - HeightTela / 3, WidthTela / 14, HeightTela / 4);
                 i1.meio = new Rectangle(i1.individuo.X + i1.individuo.Width / 4, i1.individuo.Y, i1.individuo.Width / 2, i1.individuo.Height);
                 i1.DIREITA = false;
                 i1.ESQUERDA = true;
             }
             else if (i1.opç == 2)
             {
-                i1.individuo = new Rectangle(Contexto.Fundo.fase.X + Vx - WidthTela / 14, HeightTela - HeightTela / 3, WidthTela / 14, HeightTela / 4);
+                i1.individuo = new Rectangle(Contexto.Fundo.fase.X + Px - WidthTela / 14, HeightTela - HeightTela / 3, WidthTela / 14, HeightTela / 4);
                 i1.meio = new Rectangle(i1.individuo.X + i1.individuo.Width / 4, i1.individuo.Y, i1.individuo.Width / 2, i1.individuo.Height);
                 i1.DIREITA = true;
                 i1.ESQUERDA = false;
             }
 
-            i1.Vx = 0;
-            i1.Vy = 0;
+            i1.Px = 0;
+            i1.Py = 0;
             i1.vidaT = 100;
             i1.manaT = 20;
             i1.energiaT = 100;
@@ -217,41 +217,41 @@ namespace Stick_RPG_Fight
             //posição no mapa
             if (opç == 1)
             {
-                individuo.X = Contexto.Fundo.fase.X + Contexto.Fundo.fase.Width + Vx;
+                individuo.X = Contexto.Fundo.fase.X + Contexto.Fundo.fase.Width + Px;
                 if (ANDANDO)
-                    individuo.Y = Contexto.Fundo.fase.Y + Contexto.Fundo.fase.Height - HeightTela / 3 + Vy - HeightTela / 70 - HeightTela / 60;
+                    individuo.Y = Contexto.Fundo.fase.Y + Contexto.Fundo.fase.Height - HeightTela / 3 + Py - HeightTela / 70 - HeightTela / 60;
                 if (PARADO)
-                    individuo.Y = Contexto.Fundo.fase.Y + Contexto.Fundo.fase.Height - HeightTela / 3 - HeightTela / 45 + Vy - HeightTela / 60; //27 = 40
+                    individuo.Y = Contexto.Fundo.fase.Y + Contexto.Fundo.fase.Height - HeightTela / 3 - HeightTela / 45 + Py - HeightTela / 60; //27 = 40
                 if (HIT1 || HIT2 || HIT3 || LEVANTANDO || (AGACHADO && DEFENDENDO) || (AGACHADO && !DEFENDENDO) || (DEFENDENDO && !AGACHADO))
-                    individuo.Y = Contexto.Fundo.fase.Y + Contexto.Fundo.fase.Height - HeightTela / 3 - HeightTela / 45 + Vy - HeightTela / 100;
+                    individuo.Y = Contexto.Fundo.fase.Y + Contexto.Fundo.fase.Height - HeightTela / 3 - HeightTela / 45 + Py - HeightTela / 100;
                 if (Jogar_Faca)
-                    individuo.Y = Contexto.Fundo.fase.Y + Contexto.Fundo.fase.Height - HeightTela / 3 - HeightTela / 45 + Vy - HeightTela / 80;
+                    individuo.Y = Contexto.Fundo.fase.Y + Contexto.Fundo.fase.Height - HeightTela / 3 - HeightTela / 45 + Py - HeightTela / 80;
                 if (CAIDO)
-                    individuo.Y = Contexto.Fundo.fase.Y + Contexto.Fundo.fase.Height - HeightTela / 3 - HeightTela / 45 + Vy - HeightTela / 80 + HeightTela / 10;
+                    individuo.Y = Contexto.Fundo.fase.Y + Contexto.Fundo.fase.Height - HeightTela / 3 - HeightTela / 45 + Py - HeightTela / 80 + HeightTela / 10;
                 if (ATACK1 || AGARRAR || PODER)
-                    individuo.Y = Contexto.Fundo.fase.Y + Contexto.Fundo.fase.Height - HeightTela / 3 - HeightTela / 45 + Vy - HeightTela / 100;
+                    individuo.Y = Contexto.Fundo.fase.Y + Contexto.Fundo.fase.Height - HeightTela / 3 - HeightTela / 45 + Py - HeightTela / 100;
                 if (RASTEIRA)
-                    individuo.Y = Contexto.Fundo.fase.Y + Contexto.Fundo.fase.Height - HeightTela / 3 - HeightTela / 45 + Vy - HeightTela / 50;
+                    individuo.Y = Contexto.Fundo.fase.Y + Contexto.Fundo.fase.Height - HeightTela / 3 - HeightTela / 45 + Py - HeightTela / 50;
                 
                
             }
             else if (opç == 2)
             {
-                individuo.X = Contexto.Fundo.fase.X + Vx - WidthTela / 14;
+                individuo.X = Contexto.Fundo.fase.X + Px - WidthTela / 14;
                 if (ANDANDO)
-                    individuo.Y = Contexto.Fundo.fase.Y + Contexto.Fundo.fase.Height - HeightTela / 3 + Vy - HeightTela / 70 - HeightTela / 60;
+                    individuo.Y = Contexto.Fundo.fase.Y + Contexto.Fundo.fase.Height - HeightTela / 3 + Py - HeightTela / 70 - HeightTela / 60;
                 if (PARADO)
-                    individuo.Y = Contexto.Fundo.fase.Y + Contexto.Fundo.fase.Height - HeightTela / 3 - HeightTela / 45 + Vy - HeightTela / 60; //27 = 40
+                    individuo.Y = Contexto.Fundo.fase.Y + Contexto.Fundo.fase.Height - HeightTela / 3 - HeightTela / 45 + Py - HeightTela / 60; //27 = 40
                 if (HIT1 || HIT2 || HIT3 || LEVANTANDO || (AGACHADO && DEFENDENDO) || (AGACHADO && !DEFENDENDO) || (DEFENDENDO && !AGACHADO))
-                    individuo.Y = Contexto.Fundo.fase.Y + Contexto.Fundo.fase.Height - HeightTela / 3 - HeightTela / 45 + Vy - HeightTela / 100;
+                    individuo.Y = Contexto.Fundo.fase.Y + Contexto.Fundo.fase.Height - HeightTela / 3 - HeightTela / 45 + Py - HeightTela / 100;
                 if (Jogar_Faca)
-                    individuo.Y = Contexto.Fundo.fase.Y + Contexto.Fundo.fase.Height - HeightTela / 3 - HeightTela / 45 + Vy - HeightTela / 80;
+                    individuo.Y = Contexto.Fundo.fase.Y + Contexto.Fundo.fase.Height - HeightTela / 3 - HeightTela / 45 + Py - HeightTela / 80;
                 if (CAIDO)
-                    individuo.Y = Contexto.Fundo.fase.Y + Contexto.Fundo.fase.Height - HeightTela / 3 - HeightTela / 45 + Vy - HeightTela / 80 + HeightTela / 10;
+                    individuo.Y = Contexto.Fundo.fase.Y + Contexto.Fundo.fase.Height - HeightTela / 3 - HeightTela / 45 + Py - HeightTela / 80 + HeightTela / 10;
                 if (ATACK1 || AGARRAR || PODER)
-                    individuo.Y = Contexto.Fundo.fase.Y + Contexto.Fundo.fase.Height - HeightTela / 3 - HeightTela / 45 + Vy - HeightTela / 100;
+                    individuo.Y = Contexto.Fundo.fase.Y + Contexto.Fundo.fase.Height - HeightTela / 3 - HeightTela / 45 + Py - HeightTela / 100;
                 if (RASTEIRA)
-                    individuo.Y = Contexto.Fundo.fase.Y + Contexto.Fundo.fase.Height - HeightTela / 3 - HeightTela / 45 + Vy - HeightTela / 50;
+                    individuo.Y = Contexto.Fundo.fase.Y + Contexto.Fundo.fase.Height - HeightTela / 3 - HeightTela / 45 + Py - HeightTela / 50;
             }
         }
 
@@ -299,12 +299,52 @@ namespace Stick_RPG_Fight
             DEFENDENDO;
             RASTEIRA;
             */
-            if (!TOMANDOHIT && !ATACANDO && !PODER && !RASTEIRA && !MORRENDO && !CAIDO && !LEVANTANDO && (P1.DistanciadeLutaADistancia.X > individuo.X && P1.DistanciadeLutaADistancia.X < individuo.X + individuo.Width || P1.DistanciadeLutaADistancia.X + P1.DistanciadeLutaADistancia.Width > individuo.X && P1.DistanciadeLutaADistancia.X + P1.DistanciadeLutaADistancia.Width < individuo.X + individuo.Width) && opçluta == 0)
+            if (!TOMANDOHIT && !ATACANDO && !PODER && !RASTEIRA && !MORRENDO && !CAIDO && !LEVANTANDO && opçluta == 0 && (P1.DistanciadeLutaADistancia.X > individuo.X && P1.DistanciadeLutaADistancia.X < individuo.X + individuo.Width || P1.DistanciadeLutaADistancia.X + P1.DistanciadeLutaADistancia.Width > individuo.X && P1.DistanciadeLutaADistancia.X + P1.DistanciadeLutaADistancia.Width < individuo.X + individuo.Width) && opçluta == 0)
             {
+                if (energia >= 15 && mana >= 20)
+                {
+                    do
+                    {
+                        opçluta = aleatório.Next(1, 7);
 
+                        opç_Atk = 1;
+                        if (DIREITA)
+                        {
+                            frameALLi1.X = 7;
+                            frameALLi1.Y = 0;
+                        }
+                        if (ESQUERDA)
+                        {
+                            frameALLi1.X = 0;
+                            frameALLi1.Y = 0;
+                        }
+                        if ((opçluta == 1 || opçluta == 4) && energia >= 15) // se a opção for a 1 (atacar) / 4 (rasteira) inimigo perde 15 de energia
+                        {
+                            energia -= 15;
+                        }
+                        if (opçluta == 6 && mana >= 20)
+                        {
+                            mana -= 20;
+                        }
+
+                        //OLHAR PRO INIMIGO
+                        if (meio.X < P1.individuo.X)
+                        {
+                            DIREITA = true;
+                            ESQUERDA = false;
+                        }
+                        if (meio.X > P1.individuo.X)
+                        {
+                            ESQUERDA = true;
+                            DIREITA = false;
+                        }
+
+                    } while ((opçluta == 1 || opçluta == 4) && energia < 15 || opçluta == 2 || opçluta == 3 || opçluta == 5);
+                }
             }
 
 
+            //COMEÇO DAS TENTATIVAS DENTRO DO ESPAÇO LUTA
             if (!TOMANDOHIT && !ATACANDO && !PODER && !RASTEIRA && !MORRENDO && !CAIDO && !LEVANTANDO && meio.Intersects(P1.DistanciadeLuta))
             {
                 // SE P1 atacar de pe //caso P1 pule
@@ -329,36 +369,63 @@ namespace Stick_RPG_Fight
                         {
                             energia -= 15;
                         }
-                    } while ((opçluta == 1 || opçluta == 4) && energia < 10);
+
+                        //OLHAR PRO INIMIGO
+                        if (meio.X < P1.individuo.X)
+                        {
+                            DIREITA = true;
+                            ESQUERDA = false;
+                        }
+                        if (meio.X > P1.individuo.X)
+                        {
+                            ESQUERDA = true;
+                            DIREITA = false;
+                        }
+                    } while ((opçluta == 1 || opçluta == 4) && energia < 15);
                 }
 
                 //se p1 atacar agachado
                 if (P1.ATACANDO && P1.AGACHADO && opçluta == 0)
                 {
-                    do
+                    if (energia >= 10)
                     {
-                        opçluta = aleatório.Next(2, 6);
-                        if (DIREITA)
+                        do
                         {
-                            frameALLi1.X = 7;
-                            frameALLi1.Y = 0;
-                        }
-                        if (ESQUERDA)
-                        {
-                            frameALLi1.X = 0;
-                            frameALLi1.Y = 0;
-                        }
-                        if (opçluta == 4 && energia >= 15)
-                        {
-                            energia -= 15;
-                        }
+                            opçluta = aleatório.Next(2, 6);
+                            if (DIREITA)
+                            {
+                                frameALLi1.X = 7;
+                                frameALLi1.Y = 0;
+                            }
+                            if (ESQUERDA)
+                            {
+                                frameALLi1.X = 0;
+                                frameALLi1.Y = 0;
+                            }
+                            if (opçluta == 4 && energia >= 15)
+                            {
+                                energia -= 15;
+                            }
 
-                    } while (opçluta == 4 && energia < 15);
+                            //OLHAR PRO INIMIGO
+                            if (meio.X < P1.individuo.X)
+                            {
+                                DIREITA = true;
+                                ESQUERDA = false;
+                            }
+                            if (meio.X > P1.individuo.X)
+                            {
+                                ESQUERDA = true;
+                                DIREITA = false;
+                            }
+
+                        } while (opçluta == 4 && energia < 15);
+                    }
                 }
                 //qnd o P1 terminar o combo, o inimigo dá contraataque.
                 if (P1.LEVARCONTRAATAQUE && opçluta == 0)
                 {
-                    if (energia >= 10)
+                    if (energia >= 15)
                     {
                         opçluta = 1;
 
@@ -374,163 +441,243 @@ namespace Stick_RPG_Fight
                             frameALLi1.Y = 0;
                         }
 
-                        energia -= 10;
+                        energia -= 15;
+
+                        //OLHAR PRO INIMIGO
+                        if (meio.X < P1.individuo.X)
+                        {
+                            DIREITA = true;
+                            ESQUERDA = false;
+                        }
+                        if (meio.X > P1.individuo.X)
+                        {
+                            ESQUERDA = true;
+                            DIREITA = false;
+                        }
                     }
                 }
 
                 //qnd o P1 fica parado demais:
                 if (P1.DefesaCONTAGEM >= 30 && opçluta == 0)
                 {
-                    do
+                    if (energia >= 15 && mana >= 20)
                     {
-                        opçluta = aleatório.Next(6, 8);
-                        //atualizar o frame do PODER // MOVIMENTOS
-                        if (DIREITA && opç != 6)
+                        do
                         {
-                            frameALLi1.X = 7;
-                            frameALLi1.Y = 0;
-                        }
-                        if (ESQUERDA && opç != 6)
-                        {
-                            frameALLi1.X = 0;
-                            frameALLi1.Y = 0;
-                        }
-                        if (DIREITA && opç == 6)
-                        {
-                            frameALLi1.X = 7;
-                            frameALLi1.Y = 0;
-                        }
-                        if (ESQUERDA && opç == 6)
-                        {
-                            frameALLi1.X = 0;
-                            frameALLi1.Y = 0;
-                        }
-                        if (opçluta == 6 && mana >= 20)
-                        {
-                            mana -= 20;
-                        }
-                        if (opçluta == 7 && energia >= 15)
-                        {
-                            energia -= 15;
-                        }
-                    } while (opçluta == 6 && mana < 20 || opçluta == 7 && energia < 15);
+                            opçluta = aleatório.Next(6, 8);
+                            //atualizar o frame do PODER // MOVIMENTOS
+                            if (DIREITA && opç != 6)
+                            {
+                                frameALLi1.X = 7;
+                                frameALLi1.Y = 0;
+                            }
+                            if (ESQUERDA && opç != 6)
+                            {
+                                frameALLi1.X = 0;
+                                frameALLi1.Y = 0;
+                            }
+                            if (DIREITA && opç == 6)
+                            {
+                                frameALLi1.X = 7;
+                                frameALLi1.Y = 0;
+                            }
+                            if (ESQUERDA && opç == 6)
+                            {
+                                frameALLi1.X = 0;
+                                frameALLi1.Y = 0;
+                            }
+                            if (opçluta == 6 && mana >= 20)
+                            {
+                                mana -= 20;
+                            }
+                            if (opçluta == 7 && energia >= 15)
+                            {
+                                energia -= 15;
+                            }
+                            //OLHAR PRO INIMIGO
+                            if (meio.X < P1.individuo.X)
+                            {
+                                DIREITA = true;
+                                ESQUERDA = false;
+                            }
+                            if (meio.X > P1.individuo.X)
+                            {
+                                ESQUERDA = true;
+                                DIREITA = false;
+                            }
+                        } while (opçluta == 7 && energia < 15);
+                    }
                 }
                 //se defender por muito tempo
                 if (P1.ParadoCONTAGEM >= 30 && opçluta == 0)
                 {
-                    do
+                    if (energia >= 15 && mana >= 20)
                     {
+                        do
+                        {
+                            opçluta = aleatório.Next(1, 8);
 
-                        opçluta = aleatório.Next(1, 8);
+                            opç_Atk = aleatório.Next(1, 3);
+                            if ((opçluta == 1 || opçluta == 4 || opçluta == 7) && energia >= 15)
+                            {
+                                energia -= 15;
+                            }
+                            if (opçluta == 6 && mana >= 20)
+                            {
+                                mana -= 20;
+                            }
 
-                        opç_Atk = aleatório.Next(1, 3);
-                        if ((opçluta == 1 || opçluta == 4 || opçluta == 7) && energia >= 15)
-                        {
-                            energia -= 15;
-                        }
-                        if (opçluta == 6 && mana >= 20)
-                        {
-                            mana -= 20;
-                        }
-
-                        //atualizar o frame do PODER // MOVIMENTOS
-                        if (DIREITA && opç != 6)
-                        {
-                            frameALLi1.X = 7;
-                            frameALLi1.Y = 0;
-                        }
-                        if (ESQUERDA && opç != 6)
-                        {
-                            frameALLi1.X = 0;
-                            frameALLi1.Y = 0;
-                        }
-                        if (DIREITA && opç == 6)
-                        {
-                            frameALLi1.X = 7;
-                            frameALLi1.Y = 0;
-                        }
-                        if (ESQUERDA && opç == 6)
-                        {
-                            frameALLi1.X = 0;
-                            frameALLi1.Y = 0;
-                        }
-                    } while (opçluta == 2 || opçluta == 3 || opçluta == 5 || opçluta == 1 && energia < 15 || (opçluta == 4 || opçluta == 7) && energia < 15 || opçluta == 6 && mana < 20); // n quero q ele def , agache, nem agache e defenda
-
+                            //atualizar o frame do PODER // MOVIMENTOS
+                            if (DIREITA && opç != 6)
+                            {
+                                frameALLi1.X = 7;
+                                frameALLi1.Y = 0;
+                            }
+                            if (ESQUERDA && opç != 6)
+                            {
+                                frameALLi1.X = 0;
+                                frameALLi1.Y = 0;
+                            }
+                            if (DIREITA && opç == 6)
+                            {
+                                frameALLi1.X = 7;
+                                frameALLi1.Y = 0;
+                            }
+                            if (ESQUERDA && opç == 6)
+                            {
+                                frameALLi1.X = 0;
+                                frameALLi1.Y = 0;
+                            }
+                            //OLHAR PRO INIMIGO
+                            if (meio.X < P1.individuo.X)
+                            {
+                                DIREITA = true;
+                                ESQUERDA = false;
+                            }
+                            if (meio.X > P1.individuo.X)
+                            {
+                                ESQUERDA = true;
+                                DIREITA = false;
+                            }
+                        } while (opçluta == 2 || opçluta == 3 || opçluta == 5 || opçluta == 1 && energia < 15 || (opçluta == 4 || opçluta == 7) && energia < 15); // n quero q ele def , agache, nem agache e defenda
+                    }
 
                 }
                 //QND ESTIVER MT TEMPO AGACHADO E DEFENDENDO
                 if (P1.AgachadoDEFCONTAGEM >= 30 && opçluta == 0)
                 {
-                    do
+                    if (energia >= 15)
                     {
-                        opçluta = 7;
-                        if (DIREITA)
+                        do
                         {
-                            frameALLi1.X = 7;
-                            frameALLi1.Y = 0;
-                        }
-                        if (ESQUERDA)
-                        {
-                            frameALLi1.X = 0;
-                            frameALLi1.Y = 0;
-                        }
-                        if (opçluta == 7 && energia >= 15)
-                        {
-                            energia -= 15;
-                        }
-                    } while (opçluta == 7 && energia < 15); ;
+                            opçluta = 7;
+                            if (DIREITA)
+                            {
+                                frameALLi1.X = 7;
+                                frameALLi1.Y = 0;
+                            }
+                            if (ESQUERDA)
+                            {
+                                frameALLi1.X = 0;
+                                frameALLi1.Y = 0;
+                            }
+                            if (opçluta == 7 && energia >= 15)
+                            {
+                                energia -= 15;
+                            }
+                            //OLHAR PRO INIMIGO
+                            if (meio.X < P1.individuo.X)
+                            {
+                                DIREITA = true;
+                                ESQUERDA = false;
+                            }
+                            if (meio.X > P1.individuo.X)
+                            {
+                                ESQUERDA = true;
+                                DIREITA = false;
+                            }
+                        } while (opçluta == 7 && energia < 15);
+                    }
                 }
 
 
                 //caso P1 use poder
                 if (P1.PODER && opçluta == 0)
                 {
-                    do
+                    if (energia >= 15 && mana >= 20)
                     {
-                        opçluta = aleatório.Next(2, 7);
-                        if (DIREITA)
+                        do
                         {
-                            frameALLi1.X = 7;
-                            frameALLi1.Y = 0;
-                        }
-                        if (ESQUERDA)
-                        {
-                            frameALLi1.X = 0;
-                            frameALLi1.Y = 0;
-                        }
-                        if (opçluta == 4 && energia >= 15)
-                        {
-                            energia -= 15;
-                        }
-                        if (opçluta == 6 && mana >= 20)
-                        {
-                            mana -= 20;
-                        }
-                    } while (opçluta == 3 || opçluta == 4 && energia < 15 || opçluta == 6 && mana < 20);
+                            opçluta = aleatório.Next(2, 7);
+                            if (DIREITA)
+                            {
+                                frameALLi1.X = 7;
+                                frameALLi1.Y = 0;
+                            }
+                            if (ESQUERDA)
+                            {
+                                frameALLi1.X = 0;
+                                frameALLi1.Y = 0;
+                            }
+                            if (opçluta == 4 && energia >= 15)
+                            {
+                                energia -= 15;
+                            }
+                            if (opçluta == 6 && mana >= 20)
+                            {
+                                mana -= 20;
+                            }
+
+                            //OLHAR PRO INIMIGO
+                            if (meio.X < P1.individuo.X)
+                            {
+                                DIREITA = true;
+                                ESQUERDA = false;
+                            }
+                            if (meio.X > P1.individuo.X)
+                            {
+                                ESQUERDA = true;
+                                DIREITA = false;
+                            }
+                        } while (opçluta == 3 || opçluta == 4 && energia < 15 );
+                    }
                 }
 
                 //caso pule correndo
                 if (P1.PULANDOcorrendo && opçluta == 0)
                 {
-                    do
+                    if (energia >= 15)
                     {
-                        opçluta = aleatório.Next(2, 6);
-                        if (DIREITA)
+                        do
                         {
-                            frameALLi1.X = 7;
-                            frameALLi1.Y = 0;
-                        }
-                        if (ESQUERDA)
-                        {
-                            frameALLi1.X = 0;
-                            frameALLi1.Y = 0;
-                        }
-                        if (opçluta == 4 && energia >= 15)
-                        {
-                            energia -= 15;
-                        }
-
-                    } while (opçluta == 4 && energia < 15);
+                            opçluta = aleatório.Next(2, 6);
+                            if (DIREITA)
+                            {
+                                frameALLi1.X = 7;
+                                frameALLi1.Y = 0;
+                            }
+                            if (ESQUERDA)
+                            {
+                                frameALLi1.X = 0;
+                                frameALLi1.Y = 0;
+                            }
+                            if (opçluta == 4 && energia >= 15)
+                            {
+                                energia -= 15;
+                            }
+                            //OLHAR PRO INIMIGO
+                            if (meio.X < P1.individuo.X)
+                            {
+                                DIREITA = true;
+                                ESQUERDA = false;
+                            }
+                            if (meio.X > P1.individuo.X)
+                            {
+                                ESQUERDA = true;
+                                DIREITA = false;
+                            }
+                        } while (opçluta == 4 && energia < 15);
+                    }
                 }
             }//FIM DAS ESCOLHAS DO INIMIGO PARA SE DEFENDER (contraataque e ataque)                #@$#%&$#@$#%&$#@$#%&$#@$#%&$
 
@@ -544,12 +691,13 @@ namespace Stick_RPG_Fight
             //ações do inimigo (OPÇÕES DA LUTA)
             if (opçluta == 1) //ATK
             {
-                if (!meio.Intersects(P1.individuo) && opç_Atk == 1)
+                if (!meio.Intersects(P1.individuo) && opç_Atk == 1)//ele vai chegar perto pra dps atacar
                 {
                     ANDANDO = true;
                     DEFENDENDO = false;
                     AGACHADO = false;
                     PARADO = false;
+                    RASTEIRA = false;
                     if (meio.X < P1.individuo.X)
                     {
                         DIREITA = true;
@@ -561,15 +709,16 @@ namespace Stick_RPG_Fight
                         DIREITA = false;
                     }
                 }
-                if ((meio.Intersects(P1.individuo) || opç_Atk == 2) && energia >= 10 && !ATACANDO)
+                if (meio.Intersects(P1.individuo) || opç_Atk == 2)//se for ataque de longe, ele vai atacar sem precisar chegar perto
                 {
 
                     //para com os basicos
+                    RASTEIRA = false;
                     DEFENDENDO = false;
                     ANDANDO = false;
                     PARADO = false;
                     AGACHADO = false;
-                    ATACANDO = true;
+                    ATACANDO = true; // <==
                 }
             }
             if (opçluta == 2)//DEF
@@ -579,7 +728,8 @@ namespace Stick_RPG_Fight
                 PARADO = false;
                 AGACHADO = false;
                 ANDANDO = false;
-
+                RASTEIRA = false;
+                AGARRAR = false;
             }
             if (opçluta == 3)//AGACH
             {
@@ -588,7 +738,8 @@ namespace Stick_RPG_Fight
                 DEFENDENDO = false;
                 ANDANDO = false;
                 PARADO = false;
-
+                RASTEIRA = false;
+                AGARRAR = false;
             }
             if (opçluta == 4)//RASTEIRA
             {
@@ -598,6 +749,8 @@ namespace Stick_RPG_Fight
                 ANDANDO = false;
                 PARADO = false;
                 AGACHADO = false;
+                PODER = false;
+                AGARRAR = false;
             }
             if (opçluta == 5)//AGACH + DEF
             {
@@ -606,6 +759,8 @@ namespace Stick_RPG_Fight
                 //para com os basicos
                 ANDANDO = false;
                 PARADO = false;
+                RASTEIRA = false;
+                AGARRAR = false;
             }
             if (opçluta == 6)//PODER
             {
@@ -646,17 +801,32 @@ namespace Stick_RPG_Fight
                 DEFENDENDO = false;
                 PARADO = false;
                 AGACHADO = false;
+                RASTEIRA = false;
+            }
+            if (opçluta == 10) // TOMANDO HIT (PARA TUDO PRA PODER RECEBER)
+            {
+                TOMANDOHIT = true;
+
+                PARADO = false;
+                ANDANDO = false;
+                ATACANDO = false;
+                AGACHADO = false;
+                DEFENDENDO = false;
+                RASTEIRA = false;
+                AGARRAR = false;
+                PODER = false;
+                opç_Atk = 0;
             }
             // ==== FIM DAS OPÇluta
 
             //AJUDA NA OPÇluta
             //caso o inimigo fique NA DIREITA ou ESQUERDA do P1
-            if (meio.X < P1.individuo.X)
+            if (meio.X < P1.individuo.X && opçluta == 0)
             {
                 DIREITA = true;
                 ESQUERDA = false;
             }
-            if (meio.X > P1.individuo.X)
+            if (meio.X > P1.individuo.X && opçluta == 0)
             {
                 ESQUERDA = true;
                 DIREITA = false;
@@ -667,11 +837,17 @@ namespace Stick_RPG_Fight
             //OPÇOES DE ATAQUE
             //OPÇOES DE ATAQUE
             //OPÇOES DE ATAQUE
-            if (opç_Atk == 1)
+            if (opç_Atk == 0)
+            {
+                Jogar_Faca = false;
+                ATACK1 = false;
+                ATACANDO = false;
+            }
+            else if (opç_Atk == 1)
             {
                 Jogar_Faca = true;
             }
-            if (opç_Atk == 2)
+            else if (opç_Atk == 2)
             {
                 ATACK1 = true;
             }
@@ -708,7 +884,7 @@ namespace Stick_RPG_Fight
                 if (P1.PULANDOcorrendo || P1.ESQUERDA && P1.individuo.X < individuo.X || P1.DIREITA && P1.individuo.X > individuo.X || P1.AGACHADO && P1.DEFENDENDO || P1.DEFENDENDO)
                 {
                     CAIDO = false;
-                    LEVANTANDO = true;
+                    LEVANTANDO = true; // <=
                     if (DIREITA)
                     {
                         frameALLi1.X = 7;
@@ -722,35 +898,23 @@ namespace Stick_RPG_Fight
                 }
             }
 
-
-
-
-            //se nao tiver nada, ele para:
-            /*
-            if (!DIREITA && !ESQUERDA && !ATACANDO && !PODER && !AGACHADO && !DEFENDENDO && !TOMANDOHIT && !AGARRAR && !RASTEIRA && !ANDANDO && opçluta == 0)
-            {
-                PARADO = true;
-            }*/
-
-
-
-
-            //CASO NAO ENCOSTE
-            //CASO NAO ENCOSTE//CASO NAO ENCOSTE
-            //CASO NAO ENCOSTE
-            //CASO NAO ENCOSTE
-            if (!TOMANDOHIT && !meio.Intersects(P1.DistanciadeLuta) && !ATACANDO && !PODER && !AGARRAR && !RASTEIRA) // caso nao estejam tocando
+            
+           //SEGUE O PERSONAGEM - MAS APENAS QND ESTA LONGE, Também não segue pos ataque, caso esteja longe.
+            if (!TOMANDOHIT && !meio.Intersects(P1.DistanciadeLuta) && !ATACANDO && !PODER && !AGARRAR && !RASTEIRA && opçluta == 0) // caso nao estejam tocando
             {
                 if (meio.X + meio.Width < P1.meio.X && !DIREITA) //se o bot estiver na esquerda do personagem
                 {
                     DIREITA = true;
                     ESQUERDA = false;
                     PARADO = false;
-                    ANDANDO = true;
+                    ANDANDO = true; // <=
+
                     ATACANDO = false;
                     AGACHADO = false;
                     DEFENDENDO = false;
-
+                    RASTEIRA = false;
+                    AGARRAR = false;
+                    PODER = false;
 
                     //frame
                     frameAndari1.X = 19;
@@ -761,10 +925,15 @@ namespace Stick_RPG_Fight
                     DIREITA = false;
                     ESQUERDA = true;
                     PARADO = false;
-                    ANDANDO = true;
+                    ANDANDO = true; // <=
+                    
                     ATACANDO = false;
                     AGACHADO = false;
                     DEFENDENDO = false;
+                    RASTEIRA = false;
+                    AGARRAR = false;
+                    PODER = false;
+                     
                     //frame
                     frameAndari1.X = 0;
                     frameAndari1.Y = 0;
@@ -772,17 +941,8 @@ namespace Stick_RPG_Fight
                 }
 
             }
-            //se estiver tocando
-            //se estiver tocando
-            //se estiver tocando
-            //se estiver tocando
-            if (meio.Intersects(P1.DistanciadeLuta) && !TOMANDOHIT && !ATACANDO && !DEFENDENDO && !RASTEIRA && !PODER && !AGACHADO && !AGARRAR && opçluta == 0)//se estiver tocando
-            {
-                PARADO = true;
-                ANDANDO = false;
-                DIREITA = false;
-                ESQUERDA = false;
-            }
+            
+            
 
             /*
             //COLISAO ENTRE ELES
@@ -824,24 +984,24 @@ namespace Stick_RPG_Fight
             //empurrar
             //empurrar
             //empurrar
-            if (P1.ATACANDO)
+            if (P1.ATACANDO && !RASTEIRA)
             {
                 if (P1.meio.X < meio.X && P1.individuo.Intersects(meio) && P1.PARTE3 && P1.COMBO1 && P1.DIREITA)
                 {
-                    Vx += HeightTela / 100;
+                    Px += HeightTela / 100;
                 }
                 if (P1.meio.X < meio.X && P1.individuo.Intersects(meio) && P1.PARTE4 && P1.COMBO1 && P1.DIREITA)
                 {
-                    Vx += HeightTela / 90;
+                    Px += HeightTela / 90;
                 }
 
                 if (P1.meio.X > meio.X && P1.individuo.Intersects(meio) && P1.PARTE3 && P1.COMBO1 && P1.ESQUERDA)
                 {
-                    Vx -= HeightTela / 100;
+                    Px -= HeightTela / 100;
                 }
                 if (P1.meio.X > meio.X && P1.individuo.Intersects(meio) && P1.PARTE4 && P1.COMBO1 && P1.ESQUERDA)
                 {
-                    Vx -= HeightTela / 90;
+                    Px -= HeightTela / 90;
                 }
             }
         }// fim da INTELIGENCIA ARTIFICIAL
@@ -904,7 +1064,7 @@ namespace Stick_RPG_Fight
                 //ANDANDO
                 if (ANDANDO)
                 {
-                    Vx += aleatório.Next(HeightTela / 300, HeightTela / 150);
+                    Px += aleatório.Next(HeightTela / 300, HeightTela / 150);
                     individuo.Width = WidthTela / 14;
                     individuo.Height = HeightTela / 4 + (2 * HeightTela / 70);
                     frameAndari1.X--;
@@ -942,6 +1102,7 @@ namespace Stick_RPG_Fight
                         if (frameALLi1.X <= 1 && frameALLi1.Y == 2)
                         {
                             HIT1 = false;
+                            PARADO = true;
                             TOMANDOHIT = false;
                             opçluta = 0;
                         }
@@ -962,6 +1123,7 @@ namespace Stick_RPG_Fight
                         {
                             HIT2 = false;
                             TOMANDOHIT = false;
+                            PARADO = true;
                             opçluta = 0;
                         }
                     }
@@ -1047,6 +1209,7 @@ namespace Stick_RPG_Fight
                 {
                     if (Jogar_Faca)
                     {
+                        ANDANDO = false;
                         individuo.Width = WidthTela / 8;
                         individuo.Height = HeightTela / 4 + (3 * HeightTela / 70);
                         frameALLi1.X--;
@@ -1061,6 +1224,7 @@ namespace Stick_RPG_Fight
                             ATACANDO = false;
                             opçluta = 0;
                             opç_Atk = 0;
+                            PARADO = true; // FAZER COM QUE NAO DESAPAREÇA
                         }
                         if (frameALLi1.X == 5 && frameALLi1.Y == 5)
                         {
@@ -1084,12 +1248,13 @@ namespace Stick_RPG_Fight
                             ATACANDO = false;
                             opçluta = 0;
                             opç_Atk = 0;
+                            PARADO = true; // FAZER COM QUE NAO DESAPAREÇA
                         }
                         //SE ENCOSTAR NO INIMIGO ELE TOMA HIT
                         if (frameALLi1.X == 0 && frameALLi1.Y == 2 && (!P1.DEFENDENDO && P1.ESQUERDA || P1.DIREITA) && P1.meio.Intersects(individuo))
                         {
                             P1.vida -= 10;
-                            P1.Vx += HeightTela / 100;
+                            P1.Vx += HeightTela / 20;
 
                             //FALTA MOSTRAR VC TOMANDO HIT
                         }
@@ -1127,6 +1292,7 @@ namespace Stick_RPG_Fight
                     }
                     if (frameALLi1.X <= 5 && frameALLi1.Y == 6)
                     {
+                        PARADO = true; // FAZER COM QUE NAO DESAPAREÇA
                         LEVANTANDO = false;
                         opçluta = 0;
                     }
@@ -1152,6 +1318,7 @@ namespace Stick_RPG_Fight
                     //fim do mov poder
                     if (frameALLi1.X <= 4 && frameALLi1.Y == 12 || frameALLi1.Y > 12)
                     {
+                        PARADO = true; // FAZER COM QUE NAO DESAPAREÇA
                         PODER = false;
                         opçluta = 0;
                     }
@@ -1171,13 +1338,14 @@ namespace Stick_RPG_Fight
                     //criando facas
                     if (frameALLi1.X <= 1 && frameALLi1.Y == 7 || frameALLi1.Y > 7)
                     {
+                        PARADO = true; // FAZER COM QUE NAO DESAPAREÇA
                         RASTEIRA = false;
                         opçluta = 0;
                     }
                     //movimento
                     if (frameALLi1.X >= 1 && frameALLi1.Y < 7)
                     {
-                        Vx += HeightTela / 150;
+                        Px += HeightTela / 70;
                     }
                     if (individuo.Intersects(P1.meio) && (!P1.DEFENDENDO && !P1.AGACHADO && P1.ESQUERDA) && P1.meio.X > individuo.X && frameALLi1.Y >= 2 && frameALLi1.Y <= 5)
                     {
@@ -1198,11 +1366,16 @@ namespace Stick_RPG_Fight
                         frameALLi1.Y++;
                     }
                     //se agarrar
-                    if (P1.meio.Intersects(individuo) && P1.meio.X > individuo.X && frameALLi1.Y >= 3 && frameALLi1.Y < 12)
+                    if (P1.meio.Intersects(individuo) && P1.meio.X > individuo.X && frameALLi1.Y >= 3 && frameALLi1.Y < 12 && (P1.DEFENDENDO && P1.AGACHADO || P1.DEFENDENDO && !P1.AGACHADO || !P1.DEFENDENDO && P1.AGACHADO || P1.PARADO || P1.CORRENDO || P1.ANDANDO) && !P1.ATACANDO)
                     {
                         P1.Vx = 0;
                         P1.Vy = 0;
                         P1.SENDOAGARRADO = true;
+                        P1.ANDANDO = false;
+                        P1.CORRENDO = false;
+                        P1.DEFENDENDO = false;
+                        P1.AGACHADO = false;
+                        P1.PARADO = true; // <=
                     }
                     //TOMANDO HIT (qnd FOR PEGO e esteja em TAL FRAME)
                     if (frameALLi1.X == 6 && P1.meio.X > individuo.X && frameALLi1.Y == 5 && P1.meio.Intersects(individuo))
@@ -1218,6 +1391,7 @@ namespace Stick_RPG_Fight
                     {
                         AGARRAR = false;
                         opçluta = 0;
+                        PARADO = true; // FAZER COM QUE NAO DESAPAREÇA
                         P1.SENDOAGARRADO = false;
                     }
                 }
@@ -1239,7 +1413,7 @@ namespace Stick_RPG_Fight
                 //ANDANDO
                 if (ANDANDO)
                 {
-                    Vx -= aleatório.Next(HeightTela / 140, HeightTela / 130);
+                    Px -= aleatório.Next(HeightTela / 140, HeightTela / 130);
                     individuo.Width = WidthTela / 14;
                     individuo.Height = HeightTela / 4 + (2 * HeightTela / 70);
                     frameAndari1.X++;
@@ -1276,6 +1450,8 @@ namespace Stick_RPG_Fight
                         {
                             HIT1 = false;
                             TOMANDOHIT = false;
+                            opçluta = 0;
+                            PARADO = true;
                         }
                     }
                     if (HIT2)//PEITO
@@ -1292,6 +1468,8 @@ namespace Stick_RPG_Fight
                         {
                             HIT2 = false;
                             TOMANDOHIT = false;
+                            opçluta = 0;
+                            PARADO = true;
                         }
                     }
                     if (HIT3)//Pernas (cair)
@@ -1377,6 +1555,7 @@ namespace Stick_RPG_Fight
                 {
                     if (Jogar_Faca)
                     {
+                        ANDANDO = false;
                         individuo.Width = WidthTela / 8;
                         individuo.Height = HeightTela / 4 + (3 * HeightTela / 70);
                         frameALLi1.X++;
@@ -1391,6 +1570,7 @@ namespace Stick_RPG_Fight
                             ATACANDO = false;
                             opçluta = 0;
                             opç_Atk = 0;
+                            PARADO = true; // FAZER COM QUE NAO DESAPAREÇA
                         }
                         if (frameALLi1.X == 2 && frameALLi1.Y == 5 )
                         {
@@ -1415,12 +1595,13 @@ namespace Stick_RPG_Fight
                             ATACANDO = false;
                             opçluta = 0;
                             opç_Atk = 0;
+                            PARADO = true; // FAZER COM QUE NAO DESAPAREÇA
                         }
                         //SE ENCOSTAR NO INIMIGO ELE TOMA HIT
                         if (frameALLi1.X == 7 && frameALLi1.Y == 2 && (!P1.DEFENDENDO && P1.DIREITA || P1.ESQUERDA) && P1.meio.Intersects(individuo))
                         {
                             P1.vida -= 10;
-                            P1.Vx -= HeightTela / 100;
+                            P1.Vx -= HeightTela / 20;
                         }
                     }//fim atack1
                 }
@@ -1458,6 +1639,7 @@ namespace Stick_RPG_Fight
                     {
                         LEVANTANDO = false;
                         opçluta = 0;
+                        PARADO = true; // FAZER COM QUE NAO DESAPAREÇA
                     }
                 }
 
@@ -1483,6 +1665,7 @@ namespace Stick_RPG_Fight
                     {
                         PODER = false;
                         opçluta = 0;
+                        PARADO = true; // FAZER COM QUE NAO DESAPAREÇA
                     }
                 }
 
@@ -1501,11 +1684,12 @@ namespace Stick_RPG_Fight
                     if (frameALLi1.X >= 6 && frameALLi1.Y == 7 || frameALLi1.Y > 7)
                     {
                         RASTEIRA = false;
+                        PARADO = true; // FAZER COM QUE NAO DESAPAREÇA
                         opçluta = 0;
                     }
                     if (frameALLi1.X >= 1 && frameALLi1.Y < 7)
                     {
-                        Vx -= HeightTela / 150;
+                        Px -= HeightTela / 70;
                     }
                     if (individuo.Intersects(P1.meio) && (!P1.DEFENDENDO && !P1.AGACHADO && P1.DIREITA) && P1.meio.X < individuo.X && frameALLi1.Y >= 2 && frameALLi1.Y <= 5)
                     {
@@ -1526,11 +1710,16 @@ namespace Stick_RPG_Fight
                         frameALLi1.Y++;
                     }
                     //se agarrar
-                    if (P1.meio.Intersects(individuo) && P1.meio.X < individuo.X && frameALLi1.Y >= 3 && frameALLi1.Y < 12)
+                    if (P1.meio.Intersects(individuo) && P1.meio.X < individuo.X && frameALLi1.Y >= 3 && frameALLi1.Y < 12 && (P1.DEFENDENDO && P1.AGACHADO || P1.DEFENDENDO && !P1.AGACHADO || !P1.DEFENDENDO && P1.AGACHADO || P1.PARADO || P1.CORRENDO || P1.ANDANDO) && !P1.ATACANDO)
                     {
                         P1.Vx = 0;
                         P1.Vy = 0;
                         P1.SENDOAGARRADO = true;
+                        P1.ANDANDO = false;
+                        P1.CORRENDO = false;
+                        P1.DEFENDENDO = false;
+                        P1.AGACHADO = false;
+                        P1.PARADO = true;
                     }
                     //TOMANDO HIT (qnd FOR PEGO e esteja em TAL FRAME)
                     if (frameALLi1.X == 2 && P1.meio.X < individuo.X && frameALLi1.Y == 5 && P1.meio.Intersects(individuo))
@@ -1547,6 +1736,7 @@ namespace Stick_RPG_Fight
                         AGARRAR = false;
                         opçluta = 0;
                         P1.SENDOAGARRADO = false;
+                        PARADO = true; // FAZER COM QUE NAO DESAPAREÇA
                     }
                 }
             }//fim da esquerda
@@ -1898,7 +2088,7 @@ namespace Stick_RPG_Fight
             //sangra apenas se acertar no inimigo E quando acertar, se nao defender
             if (P1.individuo.Intersects(meio) && P1.ATACANDO && (P1.individuo.X < individuo.X && P1.DIREITA || P1.individuo.X > individuo.X && P1.ESQUERDA) && !DEFENDENDO)
             {
-                if ((P1.DIREITA && ((P1.PARTE1 && P1.frameLUTA.Y >= 1) || (P1.PARTE2 && (P1.frameLUTA.X >= 5 && P1.frameLUTA.Y == 2) || P1.frameLUTA.Y >= 2) || (P1.PARTE3 && (P1.frameLUTA.X >= 4 && P1.frameLUTA.Y == 3) || P1.frameLUTA.Y == 4) || (P1.PARTE4 && P1.frameLUTA.Y >= 3))) || (P1.ESQUERDA && ((P1.PARTE1 && P1.frameLUTA.Y >= 1) || (P1.PARTE2 && (P1.frameLUTA.X <= 2 && P1.frameLUTA.Y == 2) || P1.frameLUTA.Y >= 2) || (P1.PARTE3 && (P1.frameLUTA.X <= 3 && P1.frameLUTA.Y == 3) || P1.frameLUTA.Y == 4) || (P1.PARTE4 && P1.frameLUTA.Y >= 3))))
+                if (!RASTEIRA && ((P1.DIREITA && ((P1.PARTE1 && P1.frameLUTA.Y >= 1) || (P1.PARTE2 && (P1.frameLUTA.X >= 5 && P1.frameLUTA.Y == 2) || P1.frameLUTA.Y >= 2) || (P1.PARTE3 && (P1.frameLUTA.X >= 4 && P1.frameLUTA.Y == 3) || P1.frameLUTA.Y == 4) || (P1.PARTE4 && P1.frameLUTA.Y >= 3))) || (P1.ESQUERDA && ((P1.PARTE1 && P1.frameLUTA.Y >= 1) || (P1.PARTE2 && (P1.frameLUTA.X <= 2 && P1.frameLUTA.Y == 2) || P1.frameLUTA.Y >= 2) || (P1.PARTE3 && (P1.frameLUTA.X <= 3 && P1.frameLUTA.Y == 3) || P1.frameLUTA.Y == 4) || (P1.PARTE4 && P1.frameLUTA.Y >= 3)))))
                 {//para sangrar / tomar dano apenas qnd estiver em tal parte do ataque
                     Sangue S1 = new Sangue();
 
@@ -1948,17 +2138,24 @@ namespace Stick_RPG_Fight
                 //COMBO1
                 //COMBO1
                 //COMBO1
-                if (((P1.DIREITA && (P1.PARTE1 && P1.frameLUTA.Y == 1 && P1.frameLUTA.X == 1) && (!DEFENDENDO && ESQUERDA)) || (P1.ESQUERDA && (P1.PARTE1 && P1.frameLUTA.Y >= 1 && P1.frameLUTA.X == 6) && (!DEFENDENDO && DIREITA))) && !P1.INVERSO && !AGACHADO && !RASTEIRA)
+                if (((P1.DIREITA && (P1.PARTE1 && P1.frameLUTA.Y == 1 && P1.frameLUTA.X == 1) && (!DEFENDENDO && ESQUERDA || DIREITA)) || (P1.ESQUERDA && (P1.PARTE1 && P1.frameLUTA.Y >= 1 && P1.frameLUTA.X == 6) && (!DEFENDENDO && DIREITA || ESQUERDA))) && !P1.INVERSO && !AGACHADO && !RASTEIRA)
                 {//para sangrar / tomar dano apenas qnd estiver em tal parte do ataque
                     vida-= 10;
                     HIT1 = true;
-                    TOMANDOHIT = true;
-                    PARADO = false;
-                    ANDANDO = false;
-                    ATACANDO = false;
-                    ATACK1 = false;
-                    AGARRAR = false;
-                    PODER = false;
+                    opçluta = 10; //faz tomar hit e parar tudo
+
+                    //FORMA PRO INIMIGO SEMPRE RECEBER O HIT DE FRENTE
+                    if (P1.DIREITA)
+                    {
+                        DIREITA = false;
+                        ESQUERDA = true;
+                    }
+                    if (P1.ESQUERDA)
+                    {
+                        ESQUERDA = false;
+                        DIREITA = true;
+                    }
+                    
                     if (P1.DIREITA)
                     {
                         frameALLi1.X = 0;
@@ -1972,19 +2169,25 @@ namespace Stick_RPG_Fight
                         DIREITA = true;
                     }
                 }
-                if (((P1.DIREITA && (P1.PARTE2 && P1.frameLUTA.X == 4 && P1.frameLUTA.Y == 2) && (!DEFENDENDO && ESQUERDA)) || P1.ESQUERDA && (P1.PARTE2 && P1.frameLUTA.X == 2 && P1.frameLUTA.Y == 2) && (!DEFENDENDO && DIREITA)) && P1.COMBO1 && !AGACHADO && !RASTEIRA)
+                if (((P1.DIREITA && (P1.PARTE2 && P1.frameLUTA.X == 4 && P1.frameLUTA.Y == 2) && (!DEFENDENDO && ESQUERDA || DIREITA)) || P1.ESQUERDA && (P1.PARTE2 && P1.frameLUTA.X == 2 && P1.frameLUTA.Y == 2) && (!DEFENDENDO && DIREITA || ESQUERDA)) && P1.COMBO1 && !AGACHADO && !RASTEIRA)
                 {
                     vida -= 20;
                     HIT1 = true;
                     TOMANDOHIT = true;
 
-                    PARADO = false;
-                    ANDANDO = false;
-                    ATACANDO = false;
-                    Jogar_Faca = false;
-                    ATACK1 = false;
-                    AGARRAR = false;
-                    PODER = false;
+                    //FORMA PRO INIMIGO SEMPRE RECEBER O HIT DE FRENTE
+                    if (P1.DIREITA)
+                    {
+                        DIREITA = false;
+                        ESQUERDA = true;
+                    }
+                    if (P1.ESQUERDA)
+                    {
+                        ESQUERDA = false;
+                        DIREITA = true;
+                    }
+
+                    opçluta = 10; //faz tomar hit e parar tudo
                     if (P1.DIREITA)
                     {
                         frameALLi1.X = 0;
@@ -1999,19 +2202,25 @@ namespace Stick_RPG_Fight
                     }
 
                 }
-                if ((P1.DIREITA && (P1.PARTE3 && P1.frameLUTA.X == 4 && P1.frameLUTA.Y == 3) && (!DEFENDENDO && ESQUERDA) || P1.ESQUERDA && (P1.PARTE3 && (P1.frameLUTA.X == 3 && P1.frameLUTA.Y == 3) && (!DEFENDENDO && DIREITA))) && P1.COMBO1 && !RASTEIRA)
+                if ((P1.DIREITA && (P1.PARTE3 && P1.frameLUTA.X == 4 && P1.frameLUTA.Y == 3) && (!DEFENDENDO && ESQUERDA || DIREITA) || P1.ESQUERDA && (P1.PARTE3 && (P1.frameLUTA.X == 3 && P1.frameLUTA.Y == 3) && (!DEFENDENDO && DIREITA || ESQUERDA))) && P1.COMBO1 && !RASTEIRA)
                 {
                     vida -= 30;
                     HIT2 = true;
                     TOMANDOHIT = true;
 
-                    PARADO = false;
-                    ANDANDO = false;
-                    ATACANDO = false;
-                    AGACHADO = false;
-                    ATACK1 = false;
-                    AGARRAR = false;
-                    PODER = false;
+                    //FORMA PRO INIMIGO SEMPRE RECEBER O HIT DE FRENTE
+                    if (P1.DIREITA)
+                    {
+                        DIREITA = false;
+                        ESQUERDA = true;
+                    }
+                    if (P1.ESQUERDA)
+                    {
+                        ESQUERDA = false;
+                        DIREITA = true;
+                    }
+
+                    opçluta = 10; //faz tomar hit e parar tudo
                     if (P1.DIREITA)
                     {
                         frameALLi1.X = 0;
@@ -2025,19 +2234,25 @@ namespace Stick_RPG_Fight
                         DIREITA = true;
                     }
                 }
-                if ((P1.DIREITA && P1.PARTE4 && P1.frameLUTA.Y == 4 && P1.frameLUTA.X == 0 && (!DEFENDENDO && ESQUERDA) || P1.ESQUERDA && P1.PARTE4 && P1.frameLUTA.Y == 4 && P1.frameLUTA.X == 7 && (!DEFENDENDO && DIREITA)) && P1.COMBO1 && !RASTEIRA)
+                if ((P1.DIREITA && P1.PARTE4 && P1.frameLUTA.Y == 4 && P1.frameLUTA.X == 0 && (!DEFENDENDO && ESQUERDA || DIREITA) || P1.ESQUERDA && P1.PARTE4 && P1.frameLUTA.Y == 4 && P1.frameLUTA.X == 7 && (!DEFENDENDO && DIREITA || ESQUERDA)) && P1.COMBO1 && !RASTEIRA)
                 {
                     vida -= 30;
                     HIT2 = true;
-                    TOMANDOHIT = true;
 
-                    PARADO = false;
-                    ANDANDO = false;
-                    ATACANDO = false;
-                    AGACHADO = false;
-                    ATACK1 = false;
-                    AGARRAR = false;
-                    PODER = false;
+
+                    //FORMA PRO INIMIGO SEMPRE RECEBER O HIT DE FRENTE
+                    if (P1.DIREITA)
+                    {
+                        DIREITA = false;
+                        ESQUERDA = true;
+                    }
+                    if (P1.ESQUERDA)
+                    {
+                        ESQUERDA = false;
+                        DIREITA = true;
+                    }
+
+                    opçluta = 10; //faz tomar hit e parar tudo
                     if (P1.DIREITA)
                     {
                         frameALLi1.X = 0;

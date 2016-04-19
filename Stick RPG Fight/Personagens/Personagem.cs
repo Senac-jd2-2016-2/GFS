@@ -1062,7 +1062,13 @@ namespace Stick_RPG_Fight
                 Contexto.Fundo.fase.Y = -HeightTela / 10;
             }
 
-            if (!SENDOAGARRADO) // PARALIZADO
+            if (SENDOAGARRADO)
+            {
+                Vx = 0;
+                Vy = 0;
+                g = 0;
+            }
+            else if (!SENDOAGARRADO) // PARALIZADO
             {
                 //pulando parado
                 if (Keyboard.GetState().IsKeyDown(Keys.Space) && !Keyboard.GetState().IsKeyDown(Keys.D) && !Keyboard.GetState().IsKeyDown(Keys.A) && !AGACHADO && !ATACANDO && !PULANDOparado && !PULANDOandando && !PULANDOcorrendo)
@@ -1468,6 +1474,8 @@ namespace Stick_RPG_Fight
                         ESQUERDA = false;
                     }
 
+
+
                     if (PULANDOandando)
                     {
                         //mov ESQUERDA
@@ -1532,7 +1540,7 @@ namespace Stick_RPG_Fight
                             //frame
                             FRAMESparado1();
                             //tamanho do personagem
-                            individuo.Width = WidthTela / 18;
+                            individuo.Width = WidthTela / 22;
                         }
                     }
                     else if (COMBATE) //dentro de combate
