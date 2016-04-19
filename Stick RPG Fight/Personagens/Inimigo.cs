@@ -1321,14 +1321,14 @@ namespace Stick_RPG_Fight
                             frameALLi1.X = 0;
                             frameALLi1.Y++;
                         }
-                        if (frameALLi1.X >= 6 && frameALLi1.Y == 7)
+                        if (frameALLi1.X >= 6 && frameALLi1.Y == 7 || frameALLi1.Y > 7)
                         {
                             Jogar_Faca = false;
                             ATACANDO = false;
                             opçluta = 0;
                             opç_Atk = 0;
                         }
-                        if (frameALLi1.X == 2 && frameALLi1.Y == 5 || frameALLi1.Y > 5)
+                        if (frameALLi1.X == 2 && frameALLi1.Y == 5 )
                         {
                             faca_voando = true;
                             GerarFacas(WidthTela, HeightTela);
