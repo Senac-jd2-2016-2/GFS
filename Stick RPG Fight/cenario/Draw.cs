@@ -13,7 +13,7 @@ namespace Stick_RPG_Fight
 {
     class Draw
     {
-        public void DrawCombate(SpriteBatch spriteBatch, Personagem P1, List<Inimigo> listai1, Rectangle TELACHEIA, Rectangle FlechaD, Rectangle FlechaE, Texture2D imgFlechaD, Texture2D imgFlechaE, SpriteFont menu, SpriteFont HUDfont, int WidthTela, int HeightTela, Texture2D imgSangue, Inimigo i1, Agua DefineAgua)
+        public void DrawCombate(SpriteBatch spriteBatch, Personagem P1, List<Inimigo> listai1, Rectangle TELACHEIA, Rectangle FlechaD, Rectangle FlechaE, Texture2D imgFlechaD, Texture2D imgFlechaE, SpriteFont menu, SpriteFont HUDfont, int WidthTela, int HeightTela, Texture2D imgSangue, Inimigo i1, Agua DefineAgua, SpriteFont BARfont)
         {
             spriteBatch.Draw(Contexto.Fundo.imgfase1, Contexto.Fundo.fase, Color.White); // fundo
 
@@ -400,6 +400,13 @@ namespace Stick_RPG_Fight
                 spriteBatch.Draw(P1.imgVIDA, listai1[i].VIDA, Color.White);
                 spriteBatch.Draw(P1.imgMANA, listai1[i].MANA, Color.White);
                 spriteBatch.Draw(P1.imgENERGIA, listai1[i].ENERGIA, Color.White);
+
+
+                spriteBatch.DrawString(BARfont, "HP " + listai1[i].vida, new Vector2(listai1[i].VIDA.X + 5, listai1[i].VIDA.Y + listai1[i].VIDA.Height / 8), Color.Black);
+
+                spriteBatch.DrawString(BARfont, "PODER " + listai1[i].mana, new Vector2(listai1[i].VIDA.X + 5, listai1[i].VIDA.Y + listai1[i].VIDA.Height / 2), Color.Black);
+
+                spriteBatch.DrawString(BARfont, "ENERGIA " + listai1[i].energia, new Vector2(listai1[i].VIDA.X + 8, listai1[i].VIDA.Y + listai1[i].VIDA.Height / 2 + listai1[i].VIDA.Height / 4), Color.Black);
 
                 if (listai1[i].individuo.X > TELACHEIA.X + TELACHEIA.Width)
                 {

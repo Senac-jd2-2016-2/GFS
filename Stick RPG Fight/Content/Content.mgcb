@@ -55,3 +55,9 @@
 /processorParam:Quality=Best
 /build:coração LENTO.wav
 
+#begin BAR.spritefont
+/importer:FontDescriptionImporter
+/processor:FontDescriptionProcessor
+/processorParam:TextureFormat=Compressed
+/build:BAR.spritefont
+

@@ -45,7 +45,7 @@
     <Compile Include="cenario\Contexto.cs" />
     <Compile Include="cenario\Draw.cs" />
     <Compile Include="Game1.cs" />
-    <Compile Include="ObjLançado.cs" />
+    <Compile Include="Personagens\ObjLançado.cs" />
     <Compile Include="Personagens\Inimigo.cs" />
     <Compile Include="cenario\intromenu.cs" />
     <Compile Include="cenario\Menu.cs" />

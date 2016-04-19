@@ -31,7 +31,7 @@ namespace Stick_RPG_Fight
 
         //fonte escrita do jogo
         SpriteFont menu;
-        SpriteFont HUDfont;
+        SpriteFont HUDfont, BARfont;
 
         //imagens de itens fora das classes
         Texture2D imgB1, imgB2, imgAPPLY2, imgAPPLY, imgAPPLY3, imgteste, imgFlechaD, imgFlechaE, imgSangue;
@@ -114,6 +114,7 @@ namespace Stick_RPG_Fight
 
             menu = Content.Load<SpriteFont>("menu");
             HUDfont = Content.Load<SpriteFont>("HUD");
+            BARfont = Content.Load<SpriteFont>("BAR");
 
             imgB1 = Content.Load<Texture2D>("B1");
             imgB2 = Content.Load<Texture2D>("B2");
@@ -539,7 +540,7 @@ namespace Stick_RPG_Fight
 
             if (M1.COMBATE)
             {
-                DRAW.DrawCombate(spriteBatch, P1, listai1, TELACHEIA, FlechaD, FlechaE, imgFlechaD, imgFlechaE, menu, HUDfont, WidthTela, HeightTela, imgSangue, i1, DefineAgua); //RESUMAO
+                DRAW.DrawCombate(spriteBatch, P1, listai1, TELACHEIA, FlechaD, FlechaE, imgFlechaD, imgFlechaE, menu, HUDfont, WidthTela, HeightTela, imgSangue, i1, DefineAgua, BARfont); //RESUMAO
                 DRAW.DrawCLONES(spriteBatch, P1); // PODER
 
                 spriteBatch.DrawString(menu, "LISTA: " + listai1.Count , new Vector2(0, Window.ClientBounds.Height - 15), Color.Black); //teste

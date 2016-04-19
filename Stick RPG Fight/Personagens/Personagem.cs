@@ -121,6 +121,7 @@ namespace Stick_RPG_Fight
         public Rectangle individuo = new Rectangle();
         public Rectangle meio = new Rectangle();
         public Rectangle DistanciadeLuta = new Rectangle();
+        public Rectangle DistanciadeLutaADistancia = new Rectangle();
 
         public bool DIREITA;
         public bool ESQUERDA;
@@ -1022,6 +1023,11 @@ namespace Stick_RPG_Fight
             DistanciadeLuta.Y = individuo.Y;
             DistanciadeLuta.Width = WidthTela / 4;
             DistanciadeLuta.Height = individuo.Height;
+
+            DistanciadeLutaADistancia.X = individuo.X - WidthTela / 4;
+            DistanciadeLutaADistancia.Y = individuo.Y;
+            DistanciadeLutaADistancia.Width = WidthTela / 2;
+            DistanciadeLutaADistancia.Height = individuo.Height;
 
             //chao empurra pra cima
             if (individuo.Intersects(Contexto.Fundo.chao))
