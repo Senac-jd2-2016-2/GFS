@@ -1178,6 +1178,7 @@ namespace Stick_RPG_Fight
                         frameALLi1.X = 7;
                         frameALLi1.Y++;
                     }
+                    MediaPlayer.Resume();
                     if (frameALLi1.Y < 2)
                     {
                         frameALLi1.X--;

@@ -25,11 +25,11 @@
 /processorParam:Quality=Best
 /build:Dreamland.mp3
 
-#begin HUD.spritefont
+#begin BAR.spritefont
 /importer:FontDescriptionImporter
 /processor:FontDescriptionProcessor
 /processorParam:TextureFormat=Compressed
-/build:HUD.spritefont
+/build:BAR.spritefont
 
 #begin Base1 reverb.wav
 /importer:WavImporter
@@ -55,9 +55,9 @@
 /processorParam:Quality=Best
 /build:coração LENTO.wav
 
-#begin BAR.spritefont
+#begin HUD.spritefont
 /importer:FontDescriptionImporter
 /processor:FontDescriptionProcessor
 /processorParam:TextureFormat=Compressed
-/build:BAR.spritefont
+/build:HUD.spritefont
 

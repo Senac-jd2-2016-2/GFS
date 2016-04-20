@@ -38,7 +38,7 @@
     <ApplicationIcon>Icon.ico</ApplicationIcon>
   </PropertyGroup>
   <ItemGroup>
-    <Compile Include="Agua.cs" />
+    <Compile Include="Personagens\Agua.cs" />
     <Compile Include="cenario\Audio.cs" />
     <Compile Include="cenario\Background.cs" />
     <Compile Include="cenario\Botoes.cs" />
@@ -93,6 +93,12 @@
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
     <Content Include="Content\combate.png">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Content\COMBOS OFF.png">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Content\COMBOS ON.png">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
     <Content Include="Content\comercioOFF.png">
