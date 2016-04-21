@@ -18,7 +18,7 @@ namespace Stick_RPG_Fight
     {
         GraphicsDeviceManager graphics;
         SpriteBatch spriteBatch;
-
+        
         //inicio
         //gerador de numero randomico
         Random aleatório;

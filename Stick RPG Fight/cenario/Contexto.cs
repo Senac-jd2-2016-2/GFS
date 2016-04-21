@@ -15,7 +15,7 @@ namespace Stick_RPG_Fight
     {
         
         public static Background Fundo = new Background();
-
+        
 
         public static void inicializar(ContentManager content, Menu M1, Audio AUDIO, Personagem P1, Botoes Botao,  Inimigo i1, Agua DefineAgua) // carregar imagens quando a fase começa (não no começo)
         {
@@ -53,7 +53,7 @@ namespace Stick_RPG_Fight
 
             M1.imghistory = content.Load<Texture2D>("history");
             M1.imgcombate = content.Load<Texture2D>("combate");
-
+            
             AUDIO.menusong = content.Load<Song>("Base4");
             AUDIO.combatesong = content.Load<Song>("Base1");
             AUDIO.PODERsong = content.Load<Song>("coração LENTO");
