@@ -71,6 +71,10 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Content Include="Arquivos do content\Base1 reverb.wav" />
+    <Content Include="Arquivos do content\Base1.wav" />
+    <Content Include="Arquivos do content\Base4.wav" />
+    <Content Include="Arquivos do content\coração LENTO.wav" />
     <Content Include="Content\agua.png">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
@@ -412,6 +416,8 @@
     </EmbeddedResource>
   </ItemGroup>
   <ItemGroup>
+    <None Include="Arquivos do content\BAR.spritefont" />
+    <None Include="Arquivos do content\HUD.spritefont" />
     <None Include="Content\AbstractClassicFont.ttf" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
