@@ -193,8 +193,12 @@ namespace Stick_RPG_Fight
         //DINHEIRO
         public int moeda;
 
+        //Fase 1 cenario
+        public int ONDAcontagem = 0;
+
         public List<Personagem> clonelistaPoder = new List<Personagem>();
         public List<Agua> listadeagua = new List<Agua>();
+        public List<OndasdeAgua> listadeondadeagua = new List<OndasdeAgua>();
         //===========================================================================================================================================================================
         //===========================================================================================================================================================================
         //===========================================================================================================================================================================
@@ -1819,6 +1823,61 @@ namespace Stick_RPG_Fight
                 }//fim da mov
             }//fim da fase 1
         }//fim de subir agua
+
+        public void OndasH2O(int WidthTela, int HeightTela)
+        {
+            ONDAcontagem++;//forma de reprodução da onda
+
+            if (Contexto.Fase1 && (!PULANDOandando || !PULANDOcorrendo || !PULANDOparado) && ONDAcontagem == 30)
+            {
+                ONDAcontagem = 0;
+
+                OndasdeAgua A1 = new OndasdeAgua();
+
+                //tamanho
+                A1.R.Width = HeightTela / 6; // 90 / 2
+                A1.R.Height = HeightTela / 13; // 41
+
+                //posição que nasce
+                A1.R.X = individuo.X;
+                A1.R.Y = meio.Y + meio.Height;
+
+                //posição no mapa
+                A1.Px = individuo.X + (-Contexto.Fundo.fase.X);
+                A1.Py = meio.Y + meio.Height - HeightTela / 26 + (-Contexto.Fundo.fase.Y);
+
+                //tornando a real
+                A1.ONDA = true;
+
+                listadeondadeagua.Add(A1);
+            }
+
+            if (Contexto.Fase1 && listadeondadeagua.Count > 0)//se existir
+            {
+                for (int i = 0; i < listadeondadeagua.Count; i++)//vezes
+                {
+                    if (listadeondadeagua[i].ONDA)//caso esteja on
+                    {
+                        //posição do ponto dela no mapa
+                        listadeondadeagua[i].R.X = listadeondadeagua[i].Px + Contexto.Fundo.fase.X;
+                        listadeondadeagua[i].R.Y = listadeondadeagua[i].Py + Contexto.Fundo.fase.Y;
+
+                        listadeondadeagua[i].frame.X++;
+                        if (listadeondadeagua[i].frame.X > 7)
+                        {
+                            listadeondadeagua[i].frame.X = 0;
+                            listadeondadeagua[i].frame.Y++;
+                        }
+
+                        if (listadeondadeagua[i].frame.X == 6 && listadeondadeagua[i].frame.Y == 7) // apagando a onda
+                        {
+                            listadeondadeagua.Remove(listadeondadeagua[i]);
+                        }
+                    }
+                }
+            }
+
+        }//fim da onda
 
         public void PersonagemGAMEZERADO()
         {

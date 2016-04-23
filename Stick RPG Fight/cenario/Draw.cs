@@ -41,9 +41,18 @@ namespace Stick_RPG_Fight
                     spriteBatch.Draw(imgSangue, listai1[i].listadesangue[a].sangueR, Color.White);
 
                 }
-                for (int a = 0; a < listai1[i].listadeagua.Count; a++)
+                if (Contexto.Fase1) //APENAS NA FASE 1
                 {
-                    spriteBatch.Draw(DefineAgua.imgAgua, listai1[i].listadeagua[a].AguaR, Color.White);
+                    for (int a = 0; a < listai1[i].listadeagua.Count; a++)
+                    {
+                        spriteBatch.Draw(DefineAgua.imgAgua, listai1[i].listadeagua[a].AguaR, Color.White);
+                       
+                    }
+                    for (int a = 0; a < listai1[i].listadeondadeagua.Count; a++)
+                    {
+                        spriteBatch.Draw(DefineAgua.imgOndas, listai1[i].listadeondadeagua[a].R, new Rectangle(listai1[i].listadeondadeagua[a].frame.X * listai1[i].listadeondadeagua[a].tamanho.X, listai1[i].listadeondadeagua[a].frame.Y * listai1[i].listadeondadeagua[a].tamanho.Y,
+                                                    listai1[i].listadeondadeagua[a].tamanho.X, listai1[i].listadeondadeagua[a].tamanho.Y), Color.White);
+                    }
                 }
 
                 for (int a = 0; a < listai1[i].listadefacas.Count; a++)
@@ -429,9 +438,18 @@ namespace Stick_RPG_Fight
 
             //--------------------------------------------------------------------------------------------------
             //--------------------------------------------------------------------------------------------------
-            for (int a = 0; a < P1.listadeagua.Count; a++)
+            if (Contexto.Fase1) //APENAS NA FASE 1
             {
-                spriteBatch.Draw(DefineAgua.imgAgua, P1.listadeagua[a].AguaR, Color.SteelBlue);
+                for (int a = 0; a < P1.listadeagua.Count; a++)
+                {
+                    spriteBatch.Draw(DefineAgua.imgAgua, P1.listadeagua[a].AguaR, Color.SteelBlue);
+                    
+                }
+                for (int a = 0; a < P1.listadeondadeagua.Count; a++)
+                {
+                    spriteBatch.Draw(DefineAgua.imgOndas, P1.listadeondadeagua[a].R, new Rectangle(P1.listadeondadeagua[a].frame.X * P1.listadeondadeagua[a].tamanho.X, P1.listadeondadeagua[a].frame.Y * P1.listadeondadeagua[a].tamanho.Y,
+                                                    P1.listadeondadeagua[a].tamanho.X, P1.listadeondadeagua[a].tamanho.Y), Color.White);
+                }
             }
             /// ----------------
             if (P1.DIREITA)

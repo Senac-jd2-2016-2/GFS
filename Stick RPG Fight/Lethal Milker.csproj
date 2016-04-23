@@ -38,6 +38,7 @@
     <ApplicationIcon>Icon.ico</ApplicationIcon>
   </PropertyGroup>
   <ItemGroup>
+    <Compile Include="OndasdeAgua.cs" />
     <Compile Include="Personagens\Agua.cs" />
     <Compile Include="cenario\Audio.cs" />
     <Compile Include="cenario\Background.cs" />

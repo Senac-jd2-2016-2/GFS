@@ -348,14 +348,23 @@ namespace Stick_RPG_Fight
                     P1.MOV(WidthTela, HeightTela, aleatório, listai1); // tudo sobre movimentação
                     P1.RPGatualização(WidthTela, HeightTela); //atualiza os dados
                     P1.Luta(WidthTela, HeightTela, aleatório); // atualiza a posição, tamanho, frames
-                    P1.SubirAgua(WidthTela, HeightTela, aleatório);
+
+                    if (Contexto.Fase1)
+                    {
+                        P1.SubirAgua(WidthTela, HeightTela, aleatório);
+                        P1.OndasH2O(WidthTela, HeightTela);
+                    }
 
                     //posiçao do bot
                     for (int i = 0; i < listai1.Count; i++) // atualização de todos os inimigos
                     {
                         listai1[i].PosiçãoINIMIGO(WidthTela, HeightTela);
                         //FISICA + EMBELEZAR
-                        listai1[i].SubirAgua(WidthTela, HeightTela, aleatório);
+                        if (Contexto.Fase1)
+                        {
+                            listai1[i].SubirAgua(WidthTela, HeightTela, aleatório);
+                            listai1[i].OndasH2O(WidthTela, HeightTela);
+                        }
                         listai1[i].Sangrar(WidthTela, HeightTela, P1, aleatório);
                         //barras
                         listai1[i].HP(WidthTela, HeightTela, listai1, P1);
