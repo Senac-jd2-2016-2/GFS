@@ -15,7 +15,11 @@ namespace Stick_RPG_Fight
     {
         public void DrawCombate(SpriteBatch spriteBatch, Personagem P1, List<Inimigo> listai1, Rectangle TELACHEIA, Rectangle FlechaD, Rectangle FlechaE, Texture2D imgFlechaD, Texture2D imgFlechaE, SpriteFont menu, SpriteFont HUDfont, int WidthTela, int HeightTela, Texture2D imgSangue, Inimigo i1, Agua DefineAgua, SpriteFont BARfont)
         {
-            spriteBatch.Draw(Contexto.Fundo.imgfase1, Contexto.Fundo.fase, Color.White); // fundo
+            if (Contexto.Fase1)
+            {
+                spriteBatch.Draw(Contexto.Fundo.imgfase1, Contexto.Fundo.fase, Color.White); // fundo
+            }
+            
 
             //--------------------------------------------------------------------------------------------------
             //--------------------------------------------------------------------------------------------------
@@ -662,12 +666,12 @@ namespace Stick_RPG_Fight
         //--------------------------------------------------------------------------------------------------
         //--------------------------------------------------------------------------------------------------
         //--------------------------------------------------------------------------------------------------
-        public void Drawmenu00(int WidthTela, int HeightTela, SpriteBatch spriteBatch, Texture2D imgAPPLY2, Texture2D imgAPPLY3, Texture2D imgAPPLY, Rectangle APPLY, bool Bapply, Rectangle[] B1, Texture2D imgB1, Texture2D imgB2, bool[] b1, bool BFULL, SpriteFont menu, Rectangle Bfull)
+        public void Drawmenu00(int WidthTela, int HeightTela, SpriteBatch spriteBatch, Texture2D imgAPPLY2, Texture2D imgAPPLY3, Texture2D imgAPPLY, Rectangle APPLY, bool Bapply, Rectangle[] B1, Texture2D imgB1, Texture2D imgB2, bool[] b1, bool BFULL, SpriteFont menu, Rectangle Bfull,Menu M1)
         {
             var mouseState = Mouse.GetState();
             var mousePosition = new Point(mouseState.X, mouseState.Y);
 
-            spriteBatch.Draw(Contexto.Fundo.menu00fundo, new Rectangle(0, 0, WidthTela, HeightTela), Color.White);
+            spriteBatch.Draw(M1.imgintromenu_comtraçado, new Rectangle(0, 0, WidthTela, HeightTela), Color.White);
 
             if (!APPLY.Contains(mousePosition))
             {
@@ -737,6 +741,8 @@ namespace Stick_RPG_Fight
         //--------------------------------------------------------------------------------------------------
         public void Drawmenu01(SpriteBatch spriteBatch, Menu M1, int WidthTela, int HeightTela, SpriteFont menu)
         {
+            spriteBatch.Draw(M1.imgintromenu_semtraçado, new Rectangle(0, 0, WidthTela, HeightTela), Color.White);
+
             spriteBatch.Draw(M1.imghistory, M1.HistoryBotao,
                                    new Rectangle(M1.framehistoryB.X * M1.TamanhoSpritesheethistoryB.X, M1.framehistoryB.Y * M1.TamanhoSpritesheethistoryB.Y,
                                                  M1.TamanhoSpritesheethistoryB.X, M1.TamanhoSpritesheethistoryB.Y),

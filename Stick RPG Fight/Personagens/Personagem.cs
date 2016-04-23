@@ -1758,9 +1758,9 @@ namespace Stick_RPG_Fight
             }
         }
 
-        public void SubirAgua(int WidthTela, int HeightTela, Random aleatório, bool fase1)
+        public void SubirAgua(int WidthTela, int HeightTela, Random aleatório)
         {
-            if (fase1)
+            if (Contexto.Fase1)
             {
                 if ((ANDANDO || CORRENDO || ATACANDO))
                 {
@@ -1818,6 +1818,26 @@ namespace Stick_RPG_Fight
 
                 }//fim da mov
             }//fim da fase 1
-        }//fim
-    }
+        }//fim de subir agua
+
+        public void PersonagemGAMEZERADO()
+        {
+            //personagem
+            DIREITA = true;
+            PARADO = true;
+            COMBATE = false;
+
+            vida = 200;
+            vidaTOTAL = 200;
+            energia = 150;
+            energiaTOTAL = 150;
+            mana = 120;
+            manaTOTAL = 120;
+
+            XP = 0;
+            XPT = 100;
+            LVL = 1;
+            moeda = 0;
+        }
+    }//fim da classe
 }

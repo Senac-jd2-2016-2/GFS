@@ -2010,9 +2010,9 @@ namespace Stick_RPG_Fight
         //AGUA
         //AGUA
         //AGUA
-        public void SubirAgua(int WidthTela, int HeightTela, Random aleatório, bool fase1)
+        public void SubirAgua(int WidthTela, int HeightTela, Random aleatório)
         {
-            if (fase1)
+            if (Contexto.Fase1)
             {
                 if ((ANDANDO || CORRENDO || ATACANDO))
                 {

@@ -31,6 +31,11 @@ namespace Stick_RPG_Fight
         public bool COMBATE;
         public bool COMBATEativado;
 
+        //fundo
+        public Texture2D imgintromenu_semtraçado;
+        public Texture2D imgintromenu_comtraçado;
+        public Texture2D imgpredio_do_P1;
+
         public void FRAMEhistory()
         {
             framehistoryB.X++;

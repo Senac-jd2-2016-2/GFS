@@ -73,7 +73,6 @@ namespace Stick_RPG_Fight
         Inimigo i1 = new Inimigo();
        
         //MAPAS
-        bool Fase1, Fase2, Fase3, Fase4;
 
         public Game1()
         {
@@ -177,7 +176,7 @@ namespace Stick_RPG_Fight
 
                 MENU = false;
                 M1.COMBATE = true;
-                Fase1 = true;
+                Contexto.Fase1 = true;
                 Botao.HOME = false;
                 MediaPlayer.Play(AUDIO.combatesong);
             }
@@ -203,7 +202,7 @@ namespace Stick_RPG_Fight
                 {
                     MediaPlayer.Play(AUDIO.menusong);
                     Botao.HOME = true;
-                    Fase1 = false;
+                    Contexto.Fase1 = false;
                 }
             }
            //                                                           menu
@@ -252,10 +251,7 @@ namespace Stick_RPG_Fight
 
                             // atualização
 
-                            //personagem
-                            P1.DIREITA = true;
-                            P1.PARADO = true;
-                            P1.COMBATE = false;
+                           
                             
                             //dimensão dos BOTÕES
                             M1.HistoryBotao = new Rectangle(0, Window.ClientBounds.Height / 3, Window.ClientBounds.Width / 3, Window.ClientBounds.Height / 8);
@@ -284,17 +280,9 @@ namespace Stick_RPG_Fight
                             P1.BarraVida = new Rectangle(Botao.HOMEquadrado.X + Botao.HOMEquadrado.Width + Window.ClientBounds.Height / 100, Botao.COMERCIOquadrado.Y , Window.ClientBounds.Width / 3, Window.ClientBounds.Height / 10);
                             P1.BarraMana = new Rectangle(Botao.HOMEquadrado.X + Botao.HOMEquadrado.Width + Window.ClientBounds.Height / 100, Botao.COMERCIOquadrado.Y , Window.ClientBounds.Width / 3, Window.ClientBounds.Height / 10);
 
-                            P1.vida = 200;
-                            P1.vidaTOTAL = 200;
-                            P1.energia = 150;
-                            P1.energiaTOTAL = 150;
-                            P1.mana = 120;
-                            P1.manaTOTAL = 120;
 
-                            P1.XP = 0;
-                            P1.XPT = 100;
-                            P1.LVL = 1;
-                            P1.moeda = 0;
+                            //se não salvou o game (COMEÇO DO GAME)
+                            P1.PersonagemGAMEZERADO(); // zera tudo
 
                             //tela
                             TELACHEIA = new Rectangle(0, 0, Window.ClientBounds.Width, Window.ClientBounds.Height);
@@ -360,14 +348,14 @@ namespace Stick_RPG_Fight
                     P1.MOV(WidthTela, HeightTela, aleatório, listai1); // tudo sobre movimentação
                     P1.RPGatualização(WidthTela, HeightTela); //atualiza os dados
                     P1.Luta(WidthTela, HeightTela, aleatório); // atualiza a posição, tamanho, frames
-                    P1.SubirAgua(WidthTela, HeightTela, aleatório, Fase1);
+                    P1.SubirAgua(WidthTela, HeightTela, aleatório);
 
                     //posiçao do bot
                     for (int i = 0; i < listai1.Count; i++) // atualização de todos os inimigos
                     {
                         listai1[i].PosiçãoINIMIGO(WidthTela, HeightTela);
                         //FISICA + EMBELEZAR
-                        listai1[i].SubirAgua(WidthTela, HeightTela, aleatório, Fase1);
+                        listai1[i].SubirAgua(WidthTela, HeightTela, aleatório);
                         listai1[i].Sangrar(WidthTela, HeightTela, P1, aleatório);
                         //barras
                         listai1[i].HP(WidthTela, HeightTela, listai1, P1);
@@ -526,13 +514,10 @@ namespace Stick_RPG_Fight
             if (MENU)
             {
 
-                spriteBatch.Draw(Contexto.Fundo.menu00fundo, new Rectangle(0, 0, Window.ClientBounds.Width, Window.ClientBounds.Height), Color.White);
-
-
                 if (menu00)
                 {
 
-                    DRAW.Drawmenu00(WidthTela, HeightTela, spriteBatch, imgAPPLY2, imgAPPLY3, imgAPPLY, APPLY, Bapply, B1, imgB1, imgB2, b1, BFULL, menu, Bfull); // resumao
+                    DRAW.Drawmenu00(WidthTela, HeightTela, spriteBatch, imgAPPLY2, imgAPPLY3, imgAPPLY, APPLY, Bapply, B1, imgB1, imgB2, b1, BFULL, menu, Bfull, M1); // resumao
 
 
                 }
