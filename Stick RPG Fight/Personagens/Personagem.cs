@@ -1828,7 +1828,7 @@ namespace Stick_RPG_Fight
         {
             ONDAcontagem++;//forma de reprodução da onda
 
-            if (Contexto.Fase1 && (!PULANDOandando || !PULANDOcorrendo || !PULANDOparado) && ONDAcontagem == 30)
+            if (Contexto.Fase1 && (!PULANDOandando || !PULANDOcorrendo || !PULANDOparado) && ONDAcontagem >= 30 && individuo.Y >= HeightTela - HeightTela / 3 - HeightTela / 30)
             {
                 ONDAcontagem = 0;
 

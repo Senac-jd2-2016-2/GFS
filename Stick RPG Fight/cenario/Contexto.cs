@@ -61,12 +61,16 @@ namespace Stick_RPG_Fight
             AUDIO.combatesong = content.Load<Song>("Base1");
             AUDIO.PODERsong = content.Load<Song>("coração LENTO");
 
+            //botoes statics
             Botao.imgcomercioOFF = content.Load<Texture2D>("comercioOFF");
             Botao.imgcomercioOFFTP = content.Load<Texture2D>("comercioOFFTP");
             Botao.imgcomercioON = content.Load<Texture2D>("comercioON");
             Botao.imghomeOFF = content.Load<Texture2D>("homeOFF");
             Botao.imghomeOFFTP = content.Load<Texture2D>("homeOFFTP");
             Botao.imghomeON = content.Load<Texture2D>("homeON");
+            Botao.imgcombosOFF = content.Load<Texture2D>("COMBOS OFF");
+            Botao.imgcombosOFFTP = content.Load<Texture2D>("COMBOS OFFTP");
+            Botao.imgcombosON = content.Load<Texture2D>("COMBOS ON");
 
             
             // inimigo 1
@@ -117,6 +121,23 @@ namespace Stick_RPG_Fight
 
             DefineAgua.imgAgua = content.Load<Texture2D>("agua");
             DefineAgua.imgOndas = content.Load<Texture2D>("SSH");
+
+            //JANELA SPRITES
+            JANELA.J.imgbotaoArmasOFF = content.Load<Texture2D>("botao armas OFF");
+            JANELA.J.imgbotaoArmasON = content.Load<Texture2D>("botao armas ON");
+            JANELA.J.imgbotaoCombosOFF = content.Load<Texture2D>("botao combos OFF");
+            JANELA.J.imgbotaoCombosON = content.Load<Texture2D>("botao combos ON");
+            JANELA.J.imgbotaoComercioOFF = content.Load<Texture2D>("botao comercio OFF");
+            JANELA.J.imgbotaoComercioON = content.Load<Texture2D>("botao comercio ON");
+            JANELA.J.imgbotaoPetOFF = content.Load<Texture2D>("botao pet OFF");
+            JANELA.J.imgbotaoPetON = content.Load<Texture2D>("botao pet ON");
+            JANELA.J.imgbotaoPoderesOFF = content.Load<Texture2D>("botao poderes OFF");
+            JANELA.J.imgbotaoPoderesON = content.Load<Texture2D>("botao poderes ON");
+            JANELA.J.imgbotaoX = content.Load<Texture2D>("bX");
+            JANELA.J.imgbotaoXred = content.Load<Texture2D>("bX red");
+            JANELA.J.imgjanelacinzaopç1 = content.Load<Texture2D>("janela cinza (opç1)");
+            JANELA.J.imgjanelacombo = content.Load<Texture2D>("janela combo");
+            JANELA.J.imgjanelacomercio = content.Load<Texture2D>("janela comercio");
         }
     }
 }

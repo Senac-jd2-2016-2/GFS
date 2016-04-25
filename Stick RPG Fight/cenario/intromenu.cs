@@ -35,7 +35,7 @@ namespace Stick_RPG_Fight
 
             if (b1[2])
             {
-                graphics.PreferredBackBufferWidth = 1366;
+                graphics.PreferredBackBufferWidth = 1360;
                 graphics.PreferredBackBufferHeight = 768;
 
             }

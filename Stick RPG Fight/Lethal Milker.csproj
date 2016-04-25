@@ -38,6 +38,7 @@
     <ApplicationIcon>Icon.ico</ApplicationIcon>
   </PropertyGroup>
   <ItemGroup>
+    <Compile Include="cenario\JANELA.cs" />
     <Compile Include="OndasdeAgua.cs" />
     <Compile Include="Personagens\Agua.cs" />
     <Compile Include="cenario\Audio.cs" />
@@ -137,6 +138,9 @@
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
     <Content Include="Content\COMBOS OFF.png">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Content\COMBOS OFFTP.png">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
     <Content Include="Content\COMBOS ON.png">

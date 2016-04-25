@@ -721,7 +721,7 @@ namespace Stick_RPG_Fight
 
             spriteBatch.DrawString(menu, "1440x900p", new Vector2(B1[1].X, B1[1].Y - 15), Color.White);
 
-            spriteBatch.DrawString(menu, "1366x768p", new Vector2(B1[2].X, B1[2].Y - 15), Color.White);
+            spriteBatch.DrawString(menu, "1360x768p", new Vector2(B1[2].X, B1[2].Y - 15), Color.White);
 
             spriteBatch.DrawString(menu, "1280x960p", new Vector2(B1[3].X, B1[3].Y - 15), Color.White);
 
@@ -780,7 +780,66 @@ namespace Stick_RPG_Fight
 
 
 
-
+        //--------------------------------------------------------------------------------------------------
+        //--------------------------------------------------------------------------------------------------
+        //--------------------------------------------------------------------------------------------------
+        public void DrawJANELA(Botoes Botao, SpriteBatch spriteBatch)
+        {
+            var mouseState = Mouse.GetState();
+            var mousePosition = new Point(mouseState.X, mouseState.Y);
+            if (JANELA.J.JANELACOMBO)
+            {
+                spriteBatch.Draw(JANELA.J.imgjanelacombo, JANELA.J.R, Color.White);
+                spriteBatch.Draw(JANELA.J.imgbotaoCombosON, JANELA.J.Bcombos, Color.White);
+                spriteBatch.Draw(JANELA.J.imgbotaoComercioOFF, JANELA.J.Bcomercio, Color.White);
+            }
+            if (JANELA.J.JANELACOMERCIO)
+            {
+                spriteBatch.Draw(JANELA.J.imgjanelacomercio, JANELA.J.R, Color.White);
+                spriteBatch.Draw(JANELA.J.imgbotaoCombosOFF, JANELA.J.Bcombos, Color.White);
+                spriteBatch.Draw(JANELA.J.imgbotaoComercioON, JANELA.J.Bcomercio, Color.White);
+            }
+            spriteBatch.Draw(JANELA.J.imgjanelacinzaopç1, JANELA.J.CAPAopç1, Color.White);
+            //pet
+            if (!JANELA.J.PET)
+            {
+                spriteBatch.Draw(JANELA.J.imgbotaoPetOFF, JANELA.J.Bpet, Color.White);
+            }
+            else if (JANELA.J.PET)
+            {
+                spriteBatch.Draw(JANELA.J.imgbotaoPetON, JANELA.J.Bpet, Color.White);
+            }
+            //poderes
+            if (!JANELA.J.PODERES)
+            {
+                spriteBatch.Draw(JANELA.J.imgbotaoPoderesOFF, JANELA.J.Bpoderes, Color.White);
+            }
+            else if (JANELA.J.PODERES)
+            {
+                spriteBatch.Draw(JANELA.J.imgbotaoPoderesON, JANELA.J.Bpoderes, Color.White);
+            }
+            //armas
+            if (!JANELA.J.ARMAS)
+            {
+                spriteBatch.Draw(JANELA.J.imgbotaoArmasOFF, JANELA.J.Barmas, Color.White);
+            }
+            else if (JANELA.J.ARMAS)
+            {
+                spriteBatch.Draw(JANELA.J.imgbotaoArmasON, JANELA.J.Barmas, Color.White);
+            }
+            
+            if (JANELA.J.xis.Contains(mousePosition))
+            {
+                spriteBatch.Draw(JANELA.J.imgbotaoXred, JANELA.J.xis, Color.White);
+            }
+            else if (!JANELA.J.xis.Contains(mousePosition))
+            {
+                spriteBatch.Draw(JANELA.J.imgbotaoX, JANELA.J.xis, Color.White);
+            }
+        }
+        //--------------------------------------------------------------------------------------------------
+        //--------------------------------------------------------------------------------------------------
+        //--------------------------------------------------------------------------------------------------
 
 
 
@@ -797,7 +856,11 @@ namespace Stick_RPG_Fight
             var mouseState = Mouse.GetState();
             var mousePosition = new Point(mouseState.X, mouseState.Y);
 
-
+            //HOME
+            //HOME
+            //HOME
+            //HOME
+            //HOME
             if (Botao.HOME)
             {
 
@@ -832,7 +895,12 @@ namespace Stick_RPG_Fight
 
             }
 
-            if (Botao.COMERCIO)
+            //COMERCIO
+            //COMERCIO
+            //COMERCIO
+            //COMERCIO
+            //COMERCIO
+            if (JANELA.J.JANELACOMERCIO)
             {
                 if (Botao.COMERCIOquadrado.Contains(mousePosition))
                 {
@@ -844,7 +912,7 @@ namespace Stick_RPG_Fight
                 }
 
             }
-            else if (!Botao.COMERCIO)
+            else if (!JANELA.J.JANELACOMERCIO)
             {
                 if (Botao.COMERCIOquadrado.Contains(mousePosition))
                 {
@@ -863,8 +931,45 @@ namespace Stick_RPG_Fight
                         spriteBatch.Draw(Botao.imgcomercioOFFTP, Botao.COMERCIOquadrado, Color.White);
                     }
                 }
+            }//fim
+
+            //COMBOS
+            //COMBOS
+            //COMBOS
+            //COMBOS
+            //COMBOS
+            if (JANELA.J.JANELACOMBO)
+            {
+                if (Botao.COMBOSquadrado.Contains(mousePosition))
+                {
+                    spriteBatch.Draw(Botao.imgcombosON, Botao.COMBOSquadrado, Color.Green);
+                }
+                else
+                {
+                    spriteBatch.Draw(Botao.imgcombosON, Botao.COMBOSquadrado, Color.White);
+                }
 
             }
+            else if (!JANELA.J.JANELACOMBO)
+            {
+                if (Botao.COMBOSquadrado.Contains(mousePosition))
+                {
+                    spriteBatch.Draw(Botao.imgcombosOFF, Botao.COMBOSquadrado, Color.LightGoldenrodYellow);
+                    if (Mouse.GetState().LeftButton == ButtonState.Pressed)
+                    {
+                        spriteBatch.Draw(Botao.imgcombosON, Botao.COMBOSquadrado, Color.LightGoldenrodYellow);
+                    }
+                }
+                else
+                {
+                    if (MENU)
+                        spriteBatch.Draw(Botao.imgcombosOFF, Botao.COMBOSquadrado, Color.White);
+                    else if (M1.COMBATE || M1.HISTORY) //diferença entre game e menu
+                    {
+                        spriteBatch.Draw(Botao.imgcombosOFFTP, Botao.COMBOSquadrado, Color.White);
+                    }
+                }
+            }//fim
 
         }//fim do draw BOTOES ESTATICOS
         //--------------------------------------------------------------------------------------------------
