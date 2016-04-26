@@ -1054,6 +1054,7 @@ namespace Stick_RPG_Fight
             meio.Width = individuo.Width / 2;
             meio.Height = individuo.Height;
 
+
             //COLISÃO COM O PERSONAGEM
             //COLISÃO COM O PERSONAGEM
             //COLISÃO COM O PERSONAGEM
