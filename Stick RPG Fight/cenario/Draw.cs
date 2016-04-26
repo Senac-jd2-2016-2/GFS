@@ -30,17 +30,25 @@ namespace Stick_RPG_Fight
             //INIMIGO 1
             for (int i = 0; i < listai1.Count; i++)
             {
+                //SANGUE E AGUA E OBJLANÇADO E EFEITOVISUAL
                 //SANGUE E AGUA E OBJLANÇADO
                 //SANGUE E AGUA E OBJLANÇADO
                 //SANGUE E AGUA E OBJLANÇADO
                 //SANGUE E AGUA E OBJLANÇADO
                 //SANGUE E AGUA E OBJLANÇADO
-                //SANGUE E AGUA E OBJLANÇADO
-                for (int a = 0; a < listai1[i].listadesangue.Count; a++)// APARECER SANGUE
-                {
-                    spriteBatch.Draw(imgSangue, listai1[i].listadesangue[a].sangueR, Color.White);
 
+                //visu efect
+                for (int a = 0; a < listai1[i].listadevisualPOWER.Count; a++ )
+                {
+                    spriteBatch.Draw(Poder_Visual.p.imgcirculo, listai1[i].listadevisualPOWER[a].R, Color.Red);
                 }
+                    //sangue
+                    for (int a = 0; a < listai1[i].listadesangue.Count; a++)// APARECER SANGUE
+                    {
+                        spriteBatch.Draw(imgSangue, listai1[i].listadesangue[a].sangueR, Color.White);
+
+                    }
+
                 if (Contexto.Fase1) //APENAS NA FASE 1
                 {
                     for (int a = 0; a < listai1[i].listadeagua.Count; a++)
@@ -75,7 +83,7 @@ namespace Stick_RPG_Fight
                 //PARADO
                 //PARADO
                 //movimentos
-                if (listai1[i].PARADO)
+                if (listai1[i].PARADO && !listai1[i].MORRENDO && !listai1[i].ATACANDO)
                 {
                     spriteBatch.Draw(i1.imgParadoi1, listai1[i].individuo,
                         new Rectangle(listai1[i].frameparadoi1.X * listai1[i].tamanhoparadoi1.X, listai1[i].frameparadoi1.Y * listai1[i].tamanhoparadoi1.Y,
@@ -238,6 +246,18 @@ namespace Stick_RPG_Fight
                         spriteBatch.Draw(i1.imgPODERDi1, listai1[i].individuo,
                        new Rectangle(listai1[i].frameALLi1.X * listai1[i].tamanhoPODERi1.X, listai1[i].frameALLi1.Y * listai1[i].tamanhoPODERi1.Y,
                                                   listai1[i].tamanhoPODERi1.X, listai1[i].tamanhoPODERi1.Y), Color.White);
+
+                    }
+
+                    //morrendo
+                    //morrendo
+                    //morrendo
+                    //morrendo
+                    if (listai1[i].MORRENDO)
+                    {
+                        spriteBatch.Draw(i1.imgMORTEDi1, listai1[i].individuo,
+                       new Rectangle(listai1[i].frameALLi1.X * listai1[i].tamanhoMORTEi1.X, listai1[i].frameALLi1.Y * listai1[i].tamanhoMORTEi1.Y,
+                                                  listai1[i].tamanhoMORTEi1.X, listai1[i].tamanhoMORTEi1.Y), Color.White);
 
                     }
                 }
@@ -405,6 +425,17 @@ namespace Stick_RPG_Fight
                                                   listai1[i].tamanhoPODERi1.X, listai1[i].tamanhoPODERi1.Y), Color.White);
 
                     }
+                    //morrendo
+                    //morrendo
+                    //morrendo
+                    //morrendo
+                    if (listai1[i].MORRENDO)
+                    {
+                        spriteBatch.Draw(i1.imgMORTEi1, listai1[i].individuo,
+                       new Rectangle(listai1[i].frameALLi1.X * listai1[i].tamanhoMORTEi1.X, listai1[i].frameALLi1.Y * listai1[i].tamanhoMORTEi1.Y,
+                                                  listai1[i].tamanhoMORTEi1.X, listai1[i].tamanhoMORTEi1.Y), Color.White);
+
+                    }
                 }//fim ESQUERDA
             }
             for (int i = 0; i < listai1.Count; i++)
@@ -438,13 +469,25 @@ namespace Stick_RPG_Fight
 
             //--------------------------------------------------------------------------------------------------
             //--------------------------------------------------------------------------------------------------
+            // ------------------------------------ ( LISTAS DO P1 )--------------------------------------------
+            // ------------------------------------ ( LISTAS DO P1 )--------------------------------------------
+            // ------------------------------------ ( LISTAS DO P1 )--------------------------------------------
+            // ------------------------------------ ( LISTAS DO P1 )--------------------------------------------
+            // ------------------------------------ ( LISTAS DO P1 )--------------------------------------------
+            //visu efect
+            for (int a = 0; a < P1.listadevisualPOWER.Count; a++)
+            {
+                spriteBatch.Draw(Poder_Visual.p.imgcirculo, P1.listadevisualPOWER[a].R, Color.White);
+            }
             if (Contexto.Fase1) //APENAS NA FASE 1
             {
+                //agua
                 for (int a = 0; a < P1.listadeagua.Count; a++)
                 {
                     spriteBatch.Draw(DefineAgua.imgAgua, P1.listadeagua[a].AguaR, Color.SteelBlue);
                     
                 }
+                //onda de agua
                 for (int a = 0; a < P1.listadeondadeagua.Count; a++)
                 {
                     spriteBatch.Draw(DefineAgua.imgOndas, P1.listadeondadeagua[a].R, new Rectangle(P1.listadeondadeagua[a].frame.X * P1.listadeondadeagua[a].tamanho.X, P1.listadeondadeagua[a].frame.Y * P1.listadeondadeagua[a].tamanho.Y,

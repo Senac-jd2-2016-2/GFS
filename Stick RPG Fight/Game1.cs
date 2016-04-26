@@ -434,7 +434,7 @@ namespace Stick_RPG_Fight
                     else
                     {
                         //TUDO do personagem
-                        P1.MOV(WidthTela, HeightTela, aleatório, listai1); // tudo sobre movimentação
+                        P1.MOV(WidthTela, HeightTela, aleatório); // tudo sobre movimentação (+metodos)
                         P1.RPGatualização(WidthTela, HeightTela); //atualiza os dados
                         P1.Luta(WidthTela, HeightTela, aleatório); // atualiza a posição, tamanho, frames
 
@@ -447,17 +447,7 @@ namespace Stick_RPG_Fight
                         //posiçao do bot
                         for (int i = 0; i < listai1.Count; i++) // atualização de todos os inimigos
                         {
-                            listai1[i].PosiçãoINIMIGO(WidthTela, HeightTela);
-                            //FISICA + EMBELEZAR
-                            if (Contexto.Fase1)
-                            {
-                                listai1[i].SubirAgua(WidthTela, HeightTela, aleatório);
-                                listai1[i].OndasH2O(WidthTela, HeightTela);
-                            }
-                            listai1[i].Sangrar(WidthTela, HeightTela, P1, aleatório);
-                            //barras
-                            listai1[i].HP(WidthTela, HeightTela, listai1, P1);
-
+                            listai1[i].PosiçãoINIMIGO(WidthTela, HeightTela, aleatório, P1, listai1); ///NELA CONTEM TODOS OS OUTROS MÉTODOS DO INIMIGO <-
                         }
 
                         // SEPARADO --- PARA PODER USAR O PODER DE SLOW MOTION + CLONES
@@ -484,7 +474,10 @@ namespace Stick_RPG_Fight
                             }
 
 
-
+                            
+                            //açao
+                            //açao
+                            //açao
                             //açao
                             if (slowmotion == 7)
                             {
@@ -520,13 +513,18 @@ namespace Stick_RPG_Fight
                                 contagemGERADOR++;
                             }
 
+
+                            //POSIÇÃO DO EFEITO VISUAL
+                            //POSIÇÃO DO EFEITO VISUAL
+                            //POSIÇÃO DO EFEITO VISUAL
+
+
                         }
                         else if (!P1.PODER)
                         {
                             //mov do bot
                             for (int i = 0; i < listai1.Count; i++) // atualização de todos os inimigos
                             {
-
                                 listai1[i].MOV(WidthTela, HeightTela, aleatório, P1);
                                 listai1[i].INTELIGENCIA(WidthTela, HeightTela, P1, listai1, aleatório);
                             }
@@ -581,10 +579,14 @@ namespace Stick_RPG_Fight
                             }
                         }
 
+                        //ATIVAR PODER QUE ESTIVER DESTRAVADO
                         if (Keyboard.GetState().IsKeyDown(Keys.NumPad5) && !P1.PODER && P1.mana >= 75)
                         {
                             P1.PODER = true;
                             MediaPlayer.Play(AUDIO.PODERsong);
+                            P1.VISUPODER(); // criar efeito especial
+                            P1.COLIDINDOdireita = false; // não ter colisao
+                            P1.COLIDINDOesquerda = false;
                         }
 
                     }//fim do jogo

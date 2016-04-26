@@ -92,6 +92,7 @@ namespace Stick_RPG_Fight
             i1.imgAgarrarDi1 = content.Load<Texture2D>("i1 - agarrarD");
             i1.imgRasteiraDi1 = content.Load<Texture2D>("i1 - rasteiraD");
             i1.imgPODERDi1 = content.Load<Texture2D>("i1 - poderD");
+            i1.imgMORTEDi1 = content.Load<Texture2D>("i1 - morteD");
             //E
             i1.imgDEFEi1 = content.Load<Texture2D>("i1 - defesa");
             i1.imgFacaEi1 = content.Load<Texture2D>("FacaE");
@@ -107,6 +108,7 @@ namespace Stick_RPG_Fight
             i1.imgAgarrarEi1 = content.Load<Texture2D>("i1 - agarrar");
             i1.imgRasteiraEi1 = content.Load<Texture2D>("i1 - rasteira");
             i1.imgPODEREi1 = content.Load<Texture2D>("i1 - poder");
+            i1.imgMORTEi1 = content.Load<Texture2D>("i1 - morte");
 
             
 
@@ -138,6 +140,9 @@ namespace Stick_RPG_Fight
             JANELA.J.imgjanelacinzaopç1 = content.Load<Texture2D>("janela cinza (opç1)");
             JANELA.J.imgjanelacombo = content.Load<Texture2D>("janela combo");
             JANELA.J.imgjanelacomercio = content.Load<Texture2D>("janela comercio");
+
+            //visual do poder lançado
+            Poder_Visual.p.imgcirculo = content.Load<Texture2D>("poder");
         }
     }
 }

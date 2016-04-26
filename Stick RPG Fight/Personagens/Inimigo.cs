@@ -34,6 +34,7 @@ namespace Stick_RPG_Fight
         public Texture2D imgAgarrarDi1;
         public Texture2D imgRasteiraDi1;
         public Texture2D imgPODERDi1;
+        public Texture2D imgMORTEDi1;
         //E
         public Texture2D imgFacaEi1;
         public Texture2D imgAgacharEi1;
@@ -49,10 +50,12 @@ namespace Stick_RPG_Fight
         public Texture2D imgAgarrarEi1;
         public Texture2D imgRasteiraEi1;
         public Texture2D imgPODEREi1;
+        public Texture2D imgMORTEi1;
 
         //tamanho do sprite
         public Point tamanhoparadoi1 = new Point(225, 383); //Dimensões do sprite
         public Point tamanhoAndari1 = new Point(166, 367); //Dimensões do sprite
+        public Point tamanhoMORTEi1 = new Point(343, 378); //Dimensões do sprite (tamanho do levantar, + 10)
 
         
         public Point tamanhoAgachari1 = new Point(198, 362); //Dimensões do sprite
@@ -89,6 +92,7 @@ namespace Stick_RPG_Fight
         public Point SpriteSheetAgarrari1 = new Point(8, 13); //Dimensões do spritesheet
         public Point SpriteSheetRasteirai1 = new Point(8, 8); //Dimensões do spritesheet
         public Point SpriteSheetPODERi1 = new Point(10, 13); //Dimensões do spritesheet
+        public Point SpriteSheetMORTEi1 = new Point(8, 13); //Dimensões do spritesheet
 
         //frame de posição momentanea do sprite
         public Point frameparadoi1 = new Point(0, 0); //Marca o frame a ser utilizado
@@ -162,6 +166,7 @@ namespace Stick_RPG_Fight
         public List<Agua> listadeagua = new List<Agua>();
         public List<ObjLançado> listadefacas = new List<ObjLançado>();
         public List<OndasdeAgua> listadeondadeagua = new List<OndasdeAgua>();
+        public List<Poder_Visual> listadevisualPOWER = new List<Poder_Visual>();
 
         //CRIANDO NOVO INIMIGO (1)
         //CRIANDO NOVO INIMIGO (1)
@@ -216,7 +221,7 @@ namespace Stick_RPG_Fight
         //POSICIONAMENTO DO INIMIGO
         //POSICIONAMENTO DO INIMIGO
         //POSICIONAMENTO DO INIMIGO
-        public void PosiçãoINIMIGO(int WidthTela, int HeightTela)
+        public void PosiçãoINIMIGO(int WidthTela, int HeightTela, Random aleatório, Personagem P1, List<Inimigo> listai1)
         {
             //posição no mapa
             if (opç == 1)
@@ -236,6 +241,8 @@ namespace Stick_RPG_Fight
                     individuo.Y = Contexto.Fundo.fase.Y + Contexto.Fundo.fase.Height - HeightTela / 3 - HeightTela / 45 + Py - HeightTela / 100;
                 if (RASTEIRA)
                     individuo.Y = Contexto.Fundo.fase.Y + Contexto.Fundo.fase.Height - HeightTela / 3 - HeightTela / 45 + Py - HeightTela / 50;
+                if (MORRENDO)
+                    individuo.Y = Contexto.Fundo.fase.Y + Contexto.Fundo.fase.Height - HeightTela / 3 - HeightTela / 45 + Py ;
                 
                
             }
@@ -256,7 +263,24 @@ namespace Stick_RPG_Fight
                     individuo.Y = Contexto.Fundo.fase.Y + Contexto.Fundo.fase.Height - HeightTela / 3 - HeightTela / 45 + Py - HeightTela / 100;
                 if (RASTEIRA)
                     individuo.Y = Contexto.Fundo.fase.Y + Contexto.Fundo.fase.Height - HeightTela / 3 - HeightTela / 45 + Py - HeightTela / 50;
+                if (MORRENDO)
+                    individuo.Y = Contexto.Fundo.fase.Y + Contexto.Fundo.fase.Height - HeightTela / 3 - HeightTela / 45 + Py;
+
+            }//opç2 fim
+
+
+            //DEIXAR TODOS OS METODOS INIMIGO DENTRO DA POSIÇÃO ===> PARA NÃO OCUPAR ESPAÇO
+            //FISICA + EMBELEZAR
+            if (Contexto.Fase1)
+            {
+                SubirAgua(WidthTela, HeightTela, aleatório);
+                OndasH2O(WidthTela, HeightTela);
             }
+            Sangrar(WidthTela, HeightTela, P1, aleatório);
+            //barras
+            HP(WidthTela, HeightTela, listai1, P1);
+            //usar a lista de inimigos para expandir o tamanho e apagar
+            REMOVERVISUPODER(WidthTela, HeightTela);
         }
 
 
@@ -470,22 +494,22 @@ namespace Stick_RPG_Fight
                         {
                             opçluta = aleatório.Next(6, 8);
                             //atualizar o frame do PODER // MOVIMENTOS
-                            if (DIREITA && opç != 6)
+                            if (DIREITA && opçluta != 6)
                             {
                                 frameALLi1.X = 7;
                                 frameALLi1.Y = 0;
                             }
-                            if (ESQUERDA && opç != 6)
+                            if (ESQUERDA && opçluta != 6)
                             {
                                 frameALLi1.X = 0;
                                 frameALLi1.Y = 0;
                             }
-                            if (DIREITA && opç == 6)
+                            if (DIREITA && opçluta == 6)
                             {
                                 frameALLi1.X = 7;
                                 frameALLi1.Y = 0;
                             }
-                            if (ESQUERDA && opç == 6)
+                            if (ESQUERDA && opçluta == 6)
                             {
                                 frameALLi1.X = 0;
                                 frameALLi1.Y = 0;
@@ -532,22 +556,22 @@ namespace Stick_RPG_Fight
                             }
 
                             //atualizar o frame do PODER // MOVIMENTOS
-                            if (DIREITA && opç != 6)
+                            if (DIREITA && opçluta != 6)
                             {
                                 frameALLi1.X = 7;
                                 frameALLi1.Y = 0;
                             }
-                            if (ESQUERDA && opç != 6)
+                            if (ESQUERDA && opçluta != 6)
                             {
                                 frameALLi1.X = 0;
                                 frameALLi1.Y = 0;
                             }
-                            if (DIREITA && opç == 6)
+                            if (DIREITA && opçluta == 6)
                             {
                                 frameALLi1.X = 7;
                                 frameALLi1.Y = 0;
                             }
-                            if (ESQUERDA && opç == 6)
+                            if (ESQUERDA && opçluta == 6)
                             {
                                 frameALLi1.X = 0;
                                 frameALLi1.Y = 0;
@@ -825,12 +849,12 @@ namespace Stick_RPG_Fight
 
             //AJUDA NA OPÇluta
             //caso o inimigo fique NA DIREITA ou ESQUERDA do P1
-            if (meio.X < P1.individuo.X && opçluta == 0)
+            if (meio.X < P1.individuo.X && opçluta == 0 && !MORRENDO)
             {
                 DIREITA = true;
                 ESQUERDA = false;
             }
-            if (meio.X > P1.individuo.X && opçluta == 0)
+            if (meio.X >= P1.individuo.X && opçluta == 0 && !MORRENDO)
             {
                 ESQUERDA = true;
                 DIREITA = false;
@@ -883,7 +907,7 @@ namespace Stick_RPG_Fight
             //LEVANTANDO e CAIDO
             //LEVANTANDO e CAIDO
             //LEVANTANDO e CAIDO
-            if (CAIDO)//nao recebe dano ate nao se levantar.
+            if (CAIDO && !MORRENDO)//nao recebe dano ate nao se levantar.
             {
                 if (P1.PULANDOcorrendo || P1.ESQUERDA && P1.individuo.X < individuo.X || P1.DIREITA && P1.individuo.X > individuo.X || P1.AGACHADO && P1.DEFENDENDO || P1.DEFENDENDO)
                 {
@@ -904,7 +928,7 @@ namespace Stick_RPG_Fight
 
             
            //SEGUE O PERSONAGEM - MAS APENAS QND ESTA LONGE, Também não segue pos ataque, caso esteja longe.
-            if (!TOMANDOHIT && !meio.Intersects(P1.DistanciadeLuta) && !ATACANDO && !PODER && !AGARRAR && !RASTEIRA && opçluta == 0) // caso nao estejam tocando
+            if (!TOMANDOHIT && !meio.Intersects(P1.DistanciadeLuta) && !ATACANDO && !PODER && !AGARRAR && !RASTEIRA && opçluta == 0 && !MORRENDO) // caso nao estejam tocando
             {
                 if (meio.X + meio.Width < P1.meio.X && !DIREITA) //se o bot estiver na esquerda do personagem
                 {
@@ -988,7 +1012,7 @@ namespace Stick_RPG_Fight
             //empurrar
             //empurrar
             //empurrar
-            if (P1.ATACANDO && !RASTEIRA)
+            if (P1.ATACANDO && !RASTEIRA && !MORRENDO && !CAIDO && !LEVANTANDO)
             {
                 if (P1.meio.X < meio.X && P1.individuo.Intersects(meio) && P1.PARTE3 && P1.COMBO1 && P1.DIREITA)
                 {
@@ -1024,10 +1048,56 @@ namespace Stick_RPG_Fight
         //MOVIMENTAÇÃO -------------------------------------------------------------
         public void MOV(int WidthTela, int HeightTela, Random aleatório, Personagem P1)
         {
+            //posição do meio
             meio.X = individuo.X + individuo.Width / 4;
             meio.Y = individuo.Y;
             meio.Width = individuo.Width / 2;
             meio.Height = individuo.Height;
+
+            //COLISÃO COM O PERSONAGEM
+            //COLISÃO COM O PERSONAGEM
+            //COLISÃO COM O PERSONAGEM
+            //COLISÃO COM O PERSONAGEM
+            //COLISÃO COM O PERSONAGEM
+            //COLISÃO COM O PERSONAGEM
+            if (!MORRENDO && P1.g == 0)
+            {
+                if (P1.meio.Intersects(meio) && meio.X > P1.meio.X && !P1.ATACANDO && (!P1.PULANDOandando || !P1.PULANDOcorrendo || !P1.PULANDOparado) && !P1.PODER)
+                {
+                    P1.COLIDINDOdireita = true;
+                    P1.Vx = 0;
+                    P1.ANDANDO = false;
+                    P1.CORRENDO = false;
+                    P1.PARADO = true;
+                }
+                else if (!meio.Intersects(meio) && meio.X > P1.meio.X)
+                {
+                    P1.COLIDINDOdireita = false;
+                }
+                if (P1.meio.Intersects(meio) && meio.X < P1.meio.X && !P1.ATACANDO && (!P1.PULANDOandando || !P1.PULANDOcorrendo || !P1.PULANDOparado) && !P1.PODER)
+                {
+                    P1.COLIDINDOesquerda = true;
+                    P1.Vx = 0;
+                    P1.ANDANDO = false;
+                    P1.CORRENDO = false;
+                    P1.PARADO = true;
+                }
+                else if (!P1.meio.Intersects(meio) && meio.X < P1.meio.X)
+                {
+                    P1.COLIDINDOesquerda = false;
+                }
+
+            }
+            if (!P1.meio.Intersects(meio) && meio.X > P1.meio.X)
+            {
+                P1.COLIDINDOdireita = false;
+            }
+            if (!meio.Intersects(meio) && meio.X < P1.meio.X)
+            {
+                P1.COLIDINDOesquerda = false;
+            }
+
+            //-------------------------------------------------------- FRAMES (parte de DRAW + EFEITOS UPDATE)
             //PARADO
             //PARADO
             //PARADO
@@ -1036,7 +1106,7 @@ namespace Stick_RPG_Fight
             //PARADO
             //PARADO
             //PARADO
-            if (PARADO)//PARADO
+            if (PARADO && !MORRENDO)//PARADO
             {
                 individuo.Width = WidthTela / 10;
                 individuo.Height = HeightTela / 4 + HeightTela / 27; //tamanho
@@ -1212,6 +1282,7 @@ namespace Stick_RPG_Fight
                 //jogar faca
                 if (ATACANDO)
                 {
+                    ANDANDO = false;
                     if (Jogar_Faca)
                     {
                         ANDANDO = false;
@@ -1303,6 +1374,20 @@ namespace Stick_RPG_Fight
                     }
                 }
 
+                //se morrer (MORRENDO)
+                if (MORRENDO)
+                {
+                    individuo.Width = WidthTela / 6;
+                    individuo.Height = HeightTela / 4 + (2 * HeightTela / 70) + HeightTela / 100;
+                    frameALLi1.X--;
+                    if (frameALLi1.X <= -1)
+                    {
+                        frameALLi1.X = 7;
+                        frameALLi1.Y++;
+                    }
+                    PARADO = false;
+                }
+
                 //PODERRRR
                 if (PODER)
                 {
@@ -1319,6 +1404,7 @@ namespace Stick_RPG_Fight
                     {
                         GerarFacasPoder(WidthTela, HeightTela);
                         faca_voando = true;
+                        VISUPODER();//CRIA UM EFEITO VISUAL
                     }
                     //fim do mov poder
                     if (frameALLi1.X <= 4 && frameALLi1.Y == 12 || frameALLi1.Y > 12)
@@ -1371,10 +1457,11 @@ namespace Stick_RPG_Fight
                         frameALLi1.Y++;
                     }
                     //se agarrar
-                    if (P1.meio.Intersects(individuo) && P1.meio.X > individuo.X && frameALLi1.Y >= 3 && frameALLi1.Y < 12 && (P1.DEFENDENDO && P1.AGACHADO || P1.DEFENDENDO && !P1.AGACHADO || !P1.DEFENDENDO && P1.AGACHADO || P1.PARADO || P1.CORRENDO || P1.ANDANDO) && !P1.ATACANDO)
+                    if (P1.meio.Intersects(individuo) && P1.meio.X > individuo.X && frameALLi1.Y >= 3 && frameALLi1.Y < 12 && (P1.DEFENDENDO && P1.AGACHADO || P1.DEFENDENDO && !P1.AGACHADO || !P1.DEFENDENDO && P1.AGACHADO || P1.PARADO || P1.CORRENDO || P1.ANDANDO) && !P1.ATACANDO && (!P1.PULANDOandando || !P1.PULANDOcorrendo || !P1.PULANDOparado) && g == 0)
                     {
                         P1.Vx = 0;
                         P1.Vy = 0;
+                        P1.g = 0;
                         P1.SENDOAGARRADO = true;
                         P1.ANDANDO = false;
                         P1.CORRENDO = false;
@@ -1558,6 +1645,7 @@ namespace Stick_RPG_Fight
                 //ATACANDOoooooooooooooooo
                 if (ATACANDO)
                 {
+                    ANDANDO = false;
                     if (Jogar_Faca)
                     {
                         ANDANDO = false;
@@ -1648,6 +1736,20 @@ namespace Stick_RPG_Fight
                     }
                 }
 
+                //MORRENDO - morte (invunerável)
+                if (MORRENDO)
+                {
+                    individuo.Width = WidthTela / 6;
+                    individuo.Height = HeightTela / 4 + (2 * HeightTela / 70) + HeightTela / 100;
+                    frameALLi1.X++;
+                    if (frameALLi1.X >= SpriteSheetMORTEi1.X)
+                    {
+                        frameALLi1.X = 0;
+                        frameALLi1.Y++;
+                    }
+                    PARADO = false;
+                }
+
                 //PODERRRR
                 if (PODER)
                 {
@@ -1664,6 +1766,7 @@ namespace Stick_RPG_Fight
                     {
                         GerarFacasPoder(WidthTela, HeightTela);
                         faca_voando = true;
+                        VISUPODER();//CRIA UM EFEITO VISUAL
                     }
                     //fim do mov poder
                     if (frameALLi1.X >= 5 && frameALLi1.Y == 12 || frameALLi1.Y > 12)
@@ -1715,10 +1818,11 @@ namespace Stick_RPG_Fight
                         frameALLi1.Y++;
                     }
                     //se agarrar
-                    if (P1.meio.Intersects(individuo) && P1.meio.X < individuo.X && frameALLi1.Y >= 3 && frameALLi1.Y < 12 && (P1.DEFENDENDO && P1.AGACHADO || P1.DEFENDENDO && !P1.AGACHADO || !P1.DEFENDENDO && P1.AGACHADO || P1.PARADO || P1.CORRENDO || P1.ANDANDO) && !P1.ATACANDO)
+                    if (P1.meio.Intersects(individuo) && P1.meio.X < individuo.X && frameALLi1.Y >= 3 && frameALLi1.Y < 12 && (P1.DEFENDENDO && P1.AGACHADO || P1.DEFENDENDO && !P1.AGACHADO || !P1.DEFENDENDO && P1.AGACHADO || P1.PARADO || P1.CORRENDO || P1.ANDANDO) && !P1.ATACANDO && (!P1.PULANDOandando || !P1.PULANDOcorrendo || !P1.PULANDOparado) && g == 0)
                     {
                         P1.Vx = 0;
                         P1.Vy = 0;
+                        P1.g = 0;
                         P1.SENDOAGARRADO = true;
                         P1.ANDANDO = false;
                         P1.CORRENDO = false;
@@ -1841,7 +1945,40 @@ namespace Stick_RPG_Fight
 
             for (int i = 0; i < listai1.Count; i++)
             {
-                if (listai1[i].vida <= 0)
+                if (listai1[i].vida <= 0 && !listai1[i].MORRENDO)
+                {
+                    
+                    listai1[i].PARADO = false;
+                    listai1[i].ANDANDO = false;
+                    listai1[i].ATACANDO = false;
+                    listai1[i].AGACHADO = false;
+                    listai1[i].DEFENDENDO = false;
+                    listai1[i].RASTEIRA = false;
+                    listai1[i].AGARRAR = false;
+                    listai1[i].PODER = false;
+                    listai1[i].opç_Atk = 0;
+
+                    listai1[i].MORRENDO = true;
+                    listai1[i].opçluta = 0;
+
+                    if (P1.meio.X < listai1[i].individuo.X)
+                    {
+                        listai1[i].DIREITA = false;
+                        listai1[i].ESQUERDA = true;
+                        listai1[i].frameALLi1.X = 7;
+                        listai1[i].frameALLi1.Y = 0;
+                    }
+                    if (P1.meio.X >= listai1[i].individuo.X)
+                    {
+                        listai1[i].DIREITA = true;
+                        listai1[i].ESQUERDA = false;
+                        listai1[i].frameALLi1.X = 0;
+                        listai1[i].frameALLi1.Y = 0;
+                    }
+
+                }
+
+                if (listai1[i].frameALLi1.X <= 3 && listai1[i].frameALLi1.Y >= 12 && listai1[i].MORRENDO)
                 {
                     listai1.Remove(listai1[i]);
                     P1.XP += 10;
@@ -2091,7 +2228,7 @@ namespace Stick_RPG_Fight
         public void Sangrar(int WidthTela, int HeightTela,Personagem P1, Random aleatório)
         {
             //sangra apenas se acertar no inimigo E quando acertar, se nao defender
-            if (P1.individuo.Intersects(meio) && P1.ATACANDO && (P1.individuo.X < individuo.X && P1.DIREITA || P1.individuo.X > individuo.X && P1.ESQUERDA) && !DEFENDENDO)
+            if (P1.individuo.Intersects(meio) && P1.ATACANDO && (P1.individuo.X < individuo.X && P1.DIREITA || P1.individuo.X > individuo.X && P1.ESQUERDA) && !DEFENDENDO && !MORRENDO)
             {
                 if (!RASTEIRA && ((P1.DIREITA && ((P1.PARTE1 && P1.frameLUTA.Y >= 1) || (P1.PARTE2 && (P1.frameLUTA.X >= 5 && P1.frameLUTA.Y == 2) || P1.frameLUTA.Y >= 2) || (P1.PARTE3 && (P1.frameLUTA.X >= 4 && P1.frameLUTA.Y == 3) || P1.frameLUTA.Y == 4) || (P1.PARTE4 && P1.frameLUTA.Y >= 3))) || (P1.ESQUERDA && ((P1.PARTE1 && P1.frameLUTA.Y >= 1) || (P1.PARTE2 && (P1.frameLUTA.X <= 2 && P1.frameLUTA.Y == 2) || P1.frameLUTA.Y >= 2) || (P1.PARTE3 && (P1.frameLUTA.X <= 3 && P1.frameLUTA.Y == 3) || P1.frameLUTA.Y == 4) || (P1.PARTE4 && P1.frameLUTA.Y >= 3)))))
                 {//para sangrar / tomar dano apenas qnd estiver em tal parte do ataque
@@ -2137,7 +2274,7 @@ namespace Stick_RPG_Fight
             //RECEBENDO ATAQUE
             //RECEBENDO ATAQUE
             //RECEBENDO ATAQUE
-            if (P1.individuo.Intersects(meio) && P1.ATACANDO && (P1.individuo.X < individuo.X && P1.DIREITA || P1.individuo.X > individuo.X && P1.ESQUERDA) && !CAIDO)
+            if (P1.individuo.Intersects(meio) && P1.ATACANDO && (P1.individuo.X < individuo.X && P1.DIREITA || P1.individuo.X > individuo.X && P1.ESQUERDA) && !CAIDO && !MORRENDO)
             {
                 //COMBO1
                 //COMBO1
@@ -2357,6 +2494,35 @@ namespace Stick_RPG_Fight
             }
 
         }//fim da onda
+
+        //criar visual poder
+        public void VISUPODER()
+        {
+            Poder_Visual A1 = new Poder_Visual();
+
+            A1.R.Width = 1;
+            A1.R.Height = 1;
+            A1.R.X = individuo.X + individuo.Width / 2;
+            A1.R.Y = individuo.Y + individuo.Height / 2;
+            A1.Px = individuo.X + individuo.Width / 2 + (-Contexto.Fundo.fase.X);
+            A1.Py = individuo.Y + individuo.Height / 2 + (-Contexto.Fundo.fase.Y);
+
+            listadevisualPOWER.Add(A1);
+        }//fim criação do visu
+        public void REMOVERVISUPODER(int WidthTela, int HeightTela)
+        {
+            if (listadevisualPOWER.Count > 0)
+            {
+                for (int i = 0; i < listadevisualPOWER.Count; i++)
+                {
+                    listadevisualPOWER[i].CRESCER(HeightTela);
+                    if (listadevisualPOWER[i].R.Width >= WidthTela * 3)//qnd ele sair da tela, o personagem elimina tal visual efeito
+                    {
+                        listadevisualPOWER.Remove(listadevisualPOWER[i]);
+                    }
+                }
+            }
+        }//fim do remover efeito
 
 
     }

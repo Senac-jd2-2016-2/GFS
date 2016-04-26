@@ -52,6 +52,7 @@
     <Compile Include="cenario\intromenu.cs" />
     <Compile Include="cenario\Menu.cs" />
     <Compile Include="Personagens\Personagem.cs" />
+    <Compile Include="Poder_Visual.cs" />
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Properties\Resources.Designer.cs">
@@ -258,6 +259,12 @@
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
     <Content Include="Content\i1 - levantarD.png">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Content\i1 - morte.png">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Content\i1 - morteD.png">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
     <Content Include="Content\i1 - parado.png">

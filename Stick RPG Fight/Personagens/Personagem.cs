@@ -199,6 +199,7 @@ namespace Stick_RPG_Fight
         public List<Personagem> clonelistaPoder = new List<Personagem>();
         public List<Agua> listadeagua = new List<Agua>();
         public List<OndasdeAgua> listadeondadeagua = new List<OndasdeAgua>();
+        public List<Poder_Visual> listadevisualPOWER = new List<Poder_Visual>();
         //===========================================================================================================================================================================
         //===========================================================================================================================================================================
         //===========================================================================================================================================================================
@@ -823,7 +824,7 @@ namespace Stick_RPG_Fight
             // ----------------------
             if (DIREITA && !ESQUERDA)
             {
-                if (Keyboard.GetState().IsKeyDown(Keys.NumPad8) && !PARTE1 && !PARTE2 && !PARTE3 && !PARTE4 && !Keyboard.GetState().IsKeyDown(Keys.LeftShift) && !ATACANDO && !PULANDOparado && !PULANDOandando && !PULANDOcorrendo && energia >= 20)
+                if (Keyboard.GetState().IsKeyDown(Keys.NumPad8) && !PARTE1 && !PARTE2 && !PARTE3 && !PARTE4 && !Keyboard.GetState().IsKeyDown(Keys.LeftShift) && !ATACANDO && !PULANDOparado && !PULANDOandando && !PULANDOcorrendo && energia >= 20 && !SENDOAGARRADO)
                 {
                     ATAQUELANÇADO = true;
                     PARTE1 = true;
@@ -913,7 +914,7 @@ namespace Stick_RPG_Fight
             }
             if (ESQUERDA && !DIREITA)
             {
-                if (Keyboard.GetState().IsKeyDown(Keys.NumPad8) && !PARTE1 && !PARTE2 && !PARTE3 && !PARTE4 && !Keyboard.GetState().IsKeyDown(Keys.LeftShift) && !ATACANDO && !PULANDOparado && !PULANDOandando && !PULANDOcorrendo && energia >= 20)
+                if (Keyboard.GetState().IsKeyDown(Keys.NumPad8) && !PARTE1 && !PARTE2 && !PARTE3 && !PARTE4 && !Keyboard.GetState().IsKeyDown(Keys.LeftShift) && !ATACANDO && !PULANDOparado && !PULANDOandando && !PULANDOcorrendo && energia >= 20 && !SENDOAGARRADO)
                 {
                     ATAQUELANÇADO = true;
                     PARTE1 = true;
@@ -1012,8 +1013,12 @@ namespace Stick_RPG_Fight
         //===========================================================================================================================================================================
         //===========================================================================================================================================================================
         //===========================================================================================================================================================================
-        public void MOV(int WidthTela, int HeightTela, Random aleatório, List<Inimigo> listai1)
+        public void MOV(int WidthTela, int HeightTela, Random aleatório)
         {
+            //METODOS
+            //visual efeito
+            REMOVERVISUPODER(WidthTela, HeightTela);//METODO DE REMOVER O EFEITO (QND CHEGAR EM TAL TAMANHO)
+
             //mov do personagem
             individuo.X += Vx;
             individuo.Y += (Vy + g);
@@ -1075,7 +1080,7 @@ namespace Stick_RPG_Fight
             else if (!SENDOAGARRADO) // PARALIZADO
             {
                 //pulando parado
-                if (Keyboard.GetState().IsKeyDown(Keys.Space) && !Keyboard.GetState().IsKeyDown(Keys.D) && !Keyboard.GetState().IsKeyDown(Keys.A) && !AGACHADO && !ATACANDO && !PULANDOparado && !PULANDOandando && !PULANDOcorrendo)
+                if (Keyboard.GetState().IsKeyDown(Keys.W) && !Keyboard.GetState().IsKeyDown(Keys.D) && !Keyboard.GetState().IsKeyDown(Keys.A) && !AGACHADO && !ATACANDO && !PULANDOparado && !PULANDOandando && !PULANDOcorrendo)
                 {
                     PULANDOparado = true;
                     PARADO = false;
@@ -1092,7 +1097,7 @@ namespace Stick_RPG_Fight
                 }
 
                 //pulando andando
-                if (Keyboard.GetState().IsKeyDown(Keys.Space) && (Keyboard.GetState().IsKeyDown(Keys.D) || Keyboard.GetState().IsKeyDown(Keys.A)) && !Keyboard.GetState().IsKeyDown(Keys.LeftShift) && !AGACHADO && !ATACANDO && !PULANDOparado && !PULANDOandando && !PULANDOcorrendo)
+                if (Keyboard.GetState().IsKeyDown(Keys.W) && (Keyboard.GetState().IsKeyDown(Keys.D) || Keyboard.GetState().IsKeyDown(Keys.A)) && !Keyboard.GetState().IsKeyDown(Keys.LeftShift) && !AGACHADO && !ATACANDO && !PULANDOparado && !PULANDOandando && !PULANDOcorrendo)
                 {
                     PULANDOandando = true;
                     PARADO = false;
@@ -1110,7 +1115,7 @@ namespace Stick_RPG_Fight
                 }
 
                 //pulando andando
-                if (Keyboard.GetState().IsKeyDown(Keys.Space) && (Keyboard.GetState().IsKeyDown(Keys.D) || Keyboard.GetState().IsKeyDown(Keys.A)) && Keyboard.GetState().IsKeyDown(Keys.LeftShift) && !AGACHADO && !ATACANDO && !PULANDOparado && !PULANDOandando && !PULANDOcorrendo && energia >= 35)
+                if (Keyboard.GetState().IsKeyDown(Keys.W) && (Keyboard.GetState().IsKeyDown(Keys.D) || Keyboard.GetState().IsKeyDown(Keys.A)) && Keyboard.GetState().IsKeyDown(Keys.LeftShift) && !AGACHADO && !ATACANDO && !PULANDOparado && !PULANDOandando && !PULANDOcorrendo && energia >= 35)
                 {
                     PULANDOcorrendo = true;
                     PARADO = false;
@@ -1166,35 +1171,7 @@ namespace Stick_RPG_Fight
                     DESCANSANDO = false;
                 }
 
-                //colisao com inimigo
-                for (int i = 0; i < listai1.Count; i++)
-                {
-                    if (meio.Intersects(listai1[i].meio) && listai1[i].meio.X > meio.X && !ATACANDO)
-                    {
-                        COLIDINDOdireita = true;
-                        Vx = 0;
-                        ANDANDO = false;
-                        CORRENDO = false;
-                        PARADO = true;
-                    }
-                    else if (!meio.Intersects(listai1[i].meio) && listai1[i].meio.X > meio.X)
-                    {
-                        COLIDINDOdireita = false;
-                    }
-
-                    if (meio.Intersects(listai1[i].meio) && listai1[i].meio.X < meio.X && !ATACANDO)
-                    {
-                        COLIDINDOesquerda = true;
-                        Vx = 0;
-                        ANDANDO = false;
-                        CORRENDO = false;
-                        PARADO = true;
-                    }
-                    else if (!meio.Intersects(listai1[i].meio) && listai1[i].meio.X < meio.X)
-                    {
-                        COLIDINDOesquerda = false;
-                    }
-                }
+                
 
 
 
@@ -1897,6 +1874,36 @@ namespace Stick_RPG_Fight
             XPT = 100;
             LVL = 1;
             moeda = 0;
+        }//fim do GAMEZERADO
+
+        //criar visual poder
+        public void VISUPODER()
+        {
+            Poder_Visual A1 = new Poder_Visual();
+
+            A1.R.Width = 1;
+            A1.R.Height = 1;
+            A1.R.X = individuo.X + individuo.Width / 2;
+            A1.R.Y = individuo.Y + individuo.Height / 2;
+            A1.Px = individuo.X + individuo.Width / 2 + (-Contexto.Fundo.fase.X);
+            A1.Py = individuo.Y + individuo.Height / 2 + (-Contexto.Fundo.fase.Y);
+
+            listadevisualPOWER.Add(A1);
+        }//fim da criação do visual poder
+
+        public void REMOVERVISUPODER(int WidthTela, int HeightTela)
+        {
+            if (listadevisualPOWER.Count > 0)
+            {
+                for (int i = 0; i < listadevisualPOWER.Count; i++)
+                {
+                    listadevisualPOWER[i].CRESCER(HeightTela);
+                    if (listadevisualPOWER[i].R.Width >= WidthTela * 3)//qnd ele sair da tela, o personagem elimina tal visual efeito
+                    {
+                        listadevisualPOWER.Remove(listadevisualPOWER[i]);
+                    }
+                }
+            }
         }
     }//fim da classe
 }
