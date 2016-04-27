@@ -78,6 +78,14 @@
     <Content Include="Arquivos do content\Base1.wav" />
     <Content Include="Arquivos do content\Base4.wav" />
     <Content Include="Arquivos do content\coração LENTO.wav" />
+    <Content Include="arquivos PAUSE X MENU\botao resume 1.png" />
+    <Content Include="arquivos PAUSE X MENU\botao resume 2.png" />
+    <Content Include="arquivos PAUSE X MENU\botao sair 1.png" />
+    <Content Include="arquivos PAUSE X MENU\botao sair 2.png" />
+    <Content Include="arquivos PAUSE X MENU\janela PAUSE x MENU.png" />
+    <Content Include="arquivos PAUSE X MENU\posição do menu sair.txt" />
+    <Content Include="arquivos PAUSE X MENU\posição X Y - botao resume.png" />
+    <Content Include="arquivos PAUSE X MENU\posição X Y - botao sair.png" />
     <Content Include="Content\agua.png">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
@@ -127,6 +135,18 @@
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
     <Content Include="Content\botao poderes ON.png">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Content\botao resume 1.png">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Content\botao resume 2.png">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Content\botao sair 1.png">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Content\botao sair 2.png">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
     <Content Include="Content\bX red.png">
@@ -297,6 +317,9 @@
     <Content Include="Content\janela comercio.png">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
+    <Content Include="Content\janela PAUSE x MENU.png">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
     <Content Include="Content\MANA.png">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
@@ -430,6 +453,7 @@
   <ItemGroup>
     <None Include="Arquivos do content\BAR.spritefont" />
     <None Include="Arquivos do content\HUD.spritefont" />
+    <None Include="arquivos PAUSE X MENU\PAUSE x MENU.psd" />
     <None Include="Content\AbstractClassicFont.ttf" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />

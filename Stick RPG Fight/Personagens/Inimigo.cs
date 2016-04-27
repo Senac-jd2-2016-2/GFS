@@ -2517,7 +2517,7 @@ namespace Stick_RPG_Fight
                 for (int i = 0; i < listadevisualPOWER.Count; i++)
                 {
                     listadevisualPOWER[i].CRESCER(HeightTela);
-                    if (listadevisualPOWER[i].R.Width >= WidthTela * 3)//qnd ele sair da tela, o personagem elimina tal visual efeito
+                    if (listadevisualPOWER[i].R.Width >= WidthTela)//qnd ele sair da tela, o personagem elimina tal visual efeito
                     {
                         listadevisualPOWER.Remove(listadevisualPOWER[i]);
                     }

@@ -194,7 +194,7 @@ namespace Stick_RPG_Fight
                         M1.COMBATE = true;
                         Contexto.Fase1 = true;
                         Botao.HOME = false;
-                        MediaPlayer.Play(AUDIO.combatesong);
+                        //MediaPlayer.Play(AUDIO.combatesong);
                     }
 
                     //
@@ -223,7 +223,7 @@ namespace Stick_RPG_Fight
                         //passagem
                         if (Botao.HOMEb && !BOTAO)
                         {
-                            MediaPlayer.Play(AUDIO.menusong);
+                            //MediaPlayer.Play(AUDIO.menusong);
                             Botao.HOME = true;
                             Contexto.Fase1 = false;
                             Contexto.Fase2 = false;
@@ -349,7 +349,7 @@ namespace Stick_RPG_Fight
                                 Contexto.Fundo.fase = new Rectangle(0, -Window.ClientBounds.Height / 10, Window.ClientBounds.Width * 3, Window.ClientBounds.Height + Window.ClientBounds.Height / 10);
                                 Contexto.Fundo.chao = new Rectangle(Contexto.Fundo.fase.X, Contexto.Fundo.fase.Y + Window.ClientBounds.Height / 4 + Contexto.Fundo.fase.Height - Window.ClientBounds.Height / 3 - 1, Contexto.Fundo.fase.Width, Window.ClientBounds.Height / 3 - Window.ClientBounds.Height / 4);
 
-                                MediaPlayer.Play(AUDIO.menusong);
+                                //MediaPlayer.Play(AUDIO.menusong);
 
                                 //botao
                                 Botao.HOME = true;
@@ -459,7 +459,7 @@ namespace Stick_RPG_Fight
                             else if (P1.mana <= 0)
                             {
                                 P1.PODER = false;
-                                MediaPlayer.Play(AUDIO.combatesong);
+                                //MediaPlayer.Play(AUDIO.combatesong);
                             }
 
                             P1.POSIÇÃOdoCLONE(P1);
@@ -583,7 +583,7 @@ namespace Stick_RPG_Fight
                         if (Keyboard.GetState().IsKeyDown(Keys.NumPad5) && !P1.PODER && P1.mana >= 75)
                         {
                             P1.PODER = true;
-                            MediaPlayer.Play(AUDIO.PODERsong);
+                            //MediaPlayer.Play(AUDIO.PODERsong);
                             P1.VISUPODER(); // criar efeito especial
                             P1.COLIDINDOdireita = false; // não ter colisao
                             P1.COLIDINDOesquerda = false;
