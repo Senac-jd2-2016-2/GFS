@@ -25,11 +25,31 @@ namespace Stick_RPG_Fight
         public Rectangle Barmas = new Rectangle();
         public Rectangle Bpet = new Rectangle();
 
+        //PAUSE
+        public Rectangle pauseJANELA = new Rectangle();
+        public Rectangle Bsair = new Rectangle();
+        public Rectangle Bresume = new Rectangle();
+
         public Texture2D imgjanelacombo, imgjanelacinzaopç1, imgjanelacomercio, imgbotaoComercioOFF, imgbotaoComercioON;
         public Texture2D imgbotaoPoderesOFF, imgbotaoPoderesON, imgbotaoX, imgbotaoXred;
         public Texture2D imgbotaoArmasOFF, imgbotaoArmasON, imgbotaoCombosOFF, imgbotaoCombosON, imgbotaoPetON, imgbotaoPetOFF;
 
         public bool JANELACOMBO = false, JANELACOMERCIO = false, ARMAS, COMBOS, PET, PODERES, bXIS, bCOMBO, bCOMERCIO, bARMAS, bPET, bPODERES;
+
+        public void POSIÇÃOPAUSE(int WidthTela, int HeightTela)
+        {
+            JANELA.J.pauseJANELA.X = WidthTela / 2 - ((HeightTela / 2 + HeightTela / 9 + HeightTela / 150) / 2);
+            JANELA.J.pauseJANELA.Y = HeightTela / 2 - ((HeightTela / 5 + HeightTela / 37) / 2);
+            JANELA.J.pauseJANELA.Width = HeightTela / 2 + HeightTela / 9 + HeightTela / 150;//540 + 120 + 7 = 667
+            JANELA.J.pauseJANELA.Height = HeightTela / 5 + HeightTela / 37;//216 + 29 = 245
+
+            JANELA.J.Bsair.X = HeightTela / 60; //18
+            JANELA.J.Bsair.Y = HeightTela / 10 - HeightTela / HeightTela; //108 - 1;
+            JANELA.J.Bsair.Width = ((HeightTela / 2 + HeightTela / 9 + HeightTela / 150) / 2) - HeightTela / 52;//313 = 333 - 20
+            JANELA.J.Bsair.Height = HeightTela / 18 - HeightTela / HeightTela;//59 (58 - 1)
+
+
+        }
 
         public void FUNÇÕES(bool BOTAO)
         {
@@ -167,6 +187,8 @@ namespace Stick_RPG_Fight
             JANELA.J.Bpoderes.Y = JANELA.J.R.Y + JANELA.J.R.Height / 27; // = 30
             JANELA.J.Bpoderes.X = JANELA.J.R.X + 1 + ((JANELA.J.Bcomercio.Width) * 4);
         }
+
+       
         
     }
 }
