@@ -53,6 +53,11 @@ namespace Stick_RPG_Fight
             P1.individuo = new Rectangle(0, H - H / 3, W / 16, W / 4);
             Contexto.Fundo.fase = new Rectangle(0, -H / 10, W * 3, H + H / 10);
             //MediaPlayer.Play(AUDIO.menusong);
+
+            //perder progresso
+            P1.moedarepositório = 0;
+            P1.honrarepositório = 0;
+            P1.qntdcombosrepositório = 0;
         }
 
         public void FUNÇÕESPAUSE(bool BOTAO, List<Inimigo> listai1, Personagem P1, Botoes Botao, int W, int H)

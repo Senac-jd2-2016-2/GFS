@@ -154,6 +154,9 @@ namespace Stick_RPG_Fight
             {
                 if (menu01 || M1.COMBATE || M1.HISTORY)
                 {
+                      var WidthTela = Window.ClientBounds.Width;
+                        var HeightTela = Window.ClientBounds.Height;
+
                     //HOME 
                     //  HOME
                     //  HOME
@@ -174,7 +177,7 @@ namespace Stick_RPG_Fight
                     //PAUSADO
                     if (JANELA.J.JANELAPAUSE)
                     {
-
+                        JANELA.J.FUNÇÕESPAUSE(BOTAO, listai1, P1, Botao, WidthTela, HeightTela);
                     }
 
                     //clicando pra entrar no MODO combate (DENTRO DO MENU)

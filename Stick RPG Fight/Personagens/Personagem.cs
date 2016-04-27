@@ -192,6 +192,11 @@ namespace Stick_RPG_Fight
 
         //DINHEIRO
         public int moeda;
+        public int moedarepositório;
+        public int honra;
+        public int honrarepositório;
+        public int qntdcombos;
+        public int qntdcombosrepositório;
 
         //Fase 1 cenario
         public int ONDAcontagem = 0;
