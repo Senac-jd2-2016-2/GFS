@@ -323,6 +323,9 @@
     <Content Include="Content\MANA.png">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
+    <Content Include="Content\menu capa.png">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
     <Content Include="Content\menu1.png">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
