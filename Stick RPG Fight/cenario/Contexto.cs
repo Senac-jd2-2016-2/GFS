@@ -141,6 +141,21 @@ namespace Stick_RPG_Fight
             JANELA.J.imgjanelacombo = content.Load<Texture2D>("janela combo");
             JANELA.J.imgjanelacomercio = content.Load<Texture2D>("janela comercio");
 
+            //resume
+            JANELA.J.imgpauseJANELA = content.Load<Texture2D>("janela PAUXE x MENU");
+
+            JANELA.J.imgBsair1 = content.Load<Texture2D>("bota sair 1");
+
+            JANELA.J.imgBsair2 = content.Load<Texture2D>("bota sair 2");
+
+            JANELA.J.imgBsair3 = content.Load<Texture2D>("bota sair 3");
+
+            JANELA.J.imgBresume1 = content.Load<Texture2D>("bota resume 1");
+
+            JANELA.J.imgBresume2 = content.Load<Texture2D>("bota resume 2");
+
+            JANELA.J.imgBresume3 = content.Load<Texture2D>("bota resume 3");
+
             //visual do poder lançado
             Poder_Visual.p.imgcirculo = content.Load<Texture2D>("poder");
         }

@@ -80,12 +80,12 @@
     <Content Include="Arquivos do content\coração LENTO.wav" />
     <Content Include="arquivos PAUSE X MENU\botao resume 1.png" />
     <Content Include="arquivos PAUSE X MENU\botao resume 2.png" />
+    <Content Include="arquivos PAUSE X MENU\botao resume 3.png" />
     <Content Include="arquivos PAUSE X MENU\botao sair 1.png" />
     <Content Include="arquivos PAUSE X MENU\botao sair 2.png" />
+    <Content Include="arquivos PAUSE X MENU\botao sair 3.png" />
     <Content Include="arquivos PAUSE X MENU\janela PAUSE x MENU.png" />
     <Content Include="arquivos PAUSE X MENU\posição do menu sair.txt" />
-    <Content Include="arquivos PAUSE X MENU\posição X Y - botao resume.png" />
-    <Content Include="arquivos PAUSE X MENU\posição X Y - botao sair.png" />
     <Content Include="Content\agua.png">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
@@ -143,10 +143,16 @@
     <Content Include="Content\botao resume 2.png">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
+    <Content Include="Content\botao resume 3.png">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
     <Content Include="Content\botao sair 1.png">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
     <Content Include="Content\botao sair 2.png">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Content\botao sair 3.png">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
     <Content Include="Content\bX red.png">

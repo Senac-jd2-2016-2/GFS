@@ -168,6 +168,14 @@ namespace Stick_RPG_Fight
                         M1.COMBATE = false;
                         M1.HISTORY = false;
                     }
+                    //PAUSADO
+                    //PAUSADO
+                    //PAUSADO
+                    //PAUSADO
+                    if (JANELA.J.JANELAPAUSE)
+                    {
+
+                    }
 
                     //clicando pra entrar no MODO combate (DENTRO DO MENU)
                     //clicando pra entrar no combate
@@ -223,12 +231,8 @@ namespace Stick_RPG_Fight
                         //passagem
                         if (Botao.HOMEb && !BOTAO)
                         {
-                            //MediaPlayer.Play(AUDIO.menusong);
-                            Botao.HOME = true;
-                            Contexto.Fase1 = false;
-                            Contexto.Fase2 = false;
-                            Contexto.Fase3 = false;
-                            Contexto.Fase4 = false;
+                            
+                            JANELA.J.JANELAPAUSE = true;
                         }
                     }
 

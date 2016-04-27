@@ -30,11 +30,73 @@ namespace Stick_RPG_Fight
         public Rectangle Bsair = new Rectangle();
         public Rectangle Bresume = new Rectangle();
 
+        public Texture2D imgpauseJANELA;
+        public Texture2D imgBsair1, imgBsair2, imgBsair3;
+        public Texture2D imgBresume1, imgBresume2, imgBresume3, imgFUNDOmenu;
+
         public Texture2D imgjanelacombo, imgjanelacinzaopç1, imgjanelacomercio, imgbotaoComercioOFF, imgbotaoComercioON;
         public Texture2D imgbotaoPoderesOFF, imgbotaoPoderesON, imgbotaoX, imgbotaoXred;
         public Texture2D imgbotaoArmasOFF, imgbotaoArmasON, imgbotaoCombosOFF, imgbotaoCombosON, imgbotaoPetON, imgbotaoPetOFF;
 
         public bool JANELACOMBO = false, JANELACOMERCIO = false, ARMAS, COMBOS, PET, PODERES, bXIS, bCOMBO, bCOMERCIO, bARMAS, bPET, bPODERES;
+        //pause
+        public bool JANELAPAUSE, bSAIR, bRESUME;
+
+        public void ZERARFASE(List<Inimigo> listai1, Personagem P1, Botoes Botao, int W, int H)
+        {
+            Botao.HOME = true;
+            Contexto.Fase1 = false;
+            Contexto.Fase2 = false;
+            Contexto.Fase3 = false;
+            Contexto.Fase4 = false;
+            listai1.Clear();
+            P1.individuo = new Rectangle(0, H - H / 3, W / 16, W / 4);
+            Contexto.Fundo.fase = new Rectangle(0, -H / 10, W * 3, H + H / 10);
+            //MediaPlayer.Play(AUDIO.menusong);
+        }
+
+        public void FUNÇÕESPAUSE(bool BOTAO, List<Inimigo> listai1, Personagem P1, Botoes Botao, int W, int H)
+        {
+            var mouseState = Mouse.GetState();
+            var mousePosition = new Point(mouseState.X, mouseState.Y);
+            if (Mouse.GetState().LeftButton != ButtonState.Pressed) // BOTAO não pressionado
+            {
+                BOTAO = false;
+            }
+            //--------------------------------------------------------------------------------
+            //BOTAO SAIR
+            if (JANELA.J.Bsair.Contains(mousePosition) && Mouse.GetState().LeftButton == ButtonState.Pressed)
+            {
+                BOTAO = true;
+                JANELA.J.bSAIR = true;
+            }
+            if (!JANELA.J.Bsair.Contains(mousePosition))
+                JANELA.J.bSAIR = false;
+            if (JANELA.J.bSAIR && !BOTAO)
+            {
+                //posição volta pro começo e os inimigos somem (SAI DA FASE)
+                JANELA.J.ZERARFASE(listai1, P1, Botao, W, H);
+
+                JANELA.J.JANELAPAUSE = false;
+                JANELA.J.bSAIR = false;
+            }
+            //BOTAO RESUME
+            if (JANELA.J.Bresume.Contains(mousePosition) && Mouse.GetState().LeftButton == ButtonState.Pressed)
+            {
+                BOTAO = true;
+                JANELA.J.bRESUME = true;
+            }
+            if (!JANELA.J.Bresume.Contains(mousePosition))
+                JANELA.J.bRESUME = false;
+            if (JANELA.J.bRESUME && !BOTAO)
+            {
+                JANELA.J.JANELAPAUSE = false;
+                JANELA.J.bRESUME = false;
+                MediaPlayer.Resume();
+            }
+
+            POSIÇÃOPAUSE(W, H);
+        }
 
         public void POSIÇÃOPAUSE(int WidthTela, int HeightTela)
         {
@@ -48,7 +110,10 @@ namespace Stick_RPG_Fight
             JANELA.J.Bsair.Width = ((HeightTela / 2 + HeightTela / 9 + HeightTela / 150) / 2) - HeightTela / 52;//313 = 333 - 20
             JANELA.J.Bsair.Height = HeightTela / 18 - HeightTela / HeightTela;//59 (58 - 1)
 
-
+            JANELA.J.Bresume.X = ((HeightTela / 2 + HeightTela / 9 + HeightTela / 150) / 2) + HeightTela / 350; //333 + 3 = 336;
+            JANELA.J.Bresume.Y = HeightTela / 10 - HeightTela / HeightTela; //108 - 1;
+            JANELA.J.Bresume.Width = ((HeightTela / 2 + HeightTela / 9 + HeightTela / 150) / 2) - HeightTela / 52;//313 = 333 - 20
+            JANELA.J.Bresume.Height = HeightTela / 18 - HeightTela / HeightTela;//59 (58 - 1)
         }
 
         public void FUNÇÕES(bool BOTAO)
