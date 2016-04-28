@@ -144,18 +144,22 @@ namespace Stick_RPG_Fight
             
             var mouseState = Mouse.GetState();
             var mousePosition = new Point(mouseState.X, mouseState.Y);
+           
 
             if (Mouse.GetState().LeftButton != ButtonState.Pressed) // BOTAO não pressionado
             {
                 BOTAO = false;
             }
+           
 
-            if (!JANELA.J.JANELACOMBO && !JANELA.J.JANELACOMERCIO)
+
+            //GAME
+            if (!JANELA.J.JANELACOMBO && !JANELA.J.JANELACOMERCIO && !JANELA.J.JANELAPAUSE)
             {
                 if (menu01 || M1.COMBATE || M1.HISTORY)
                 {
-                      var WidthTela = Window.ClientBounds.Width;
-                        var HeightTela = Window.ClientBounds.Height;
+                    var WidthTela = Window.ClientBounds.Width;
+                    var HeightTela = Window.ClientBounds.Height;
 
                     //HOME 
                     //  HOME
@@ -171,15 +175,7 @@ namespace Stick_RPG_Fight
                         M1.COMBATE = false;
                         M1.HISTORY = false;
                     }
-                    //PAUSADO
-                    //PAUSADO
-                    //PAUSADO
-                    //PAUSADO
-                    if (JANELA.J.JANELAPAUSE)
-                    {
-                        JANELA.J.FUNÇÕESPAUSE(BOTAO, listai1, P1, Botao, WidthTela, HeightTela);
-                    }
-
+                    
                     //clicando pra entrar no MODO combate (DENTRO DO MENU)
                     //clicando pra entrar no combate
                     //clicando pra entrar no combate
@@ -222,6 +218,7 @@ namespace Stick_RPG_Fight
                             BOTAO = true;
                             Botao.HOMEb = true;
                             MediaPlayer.Pause();
+                            JANELA.J.POSIÇÃOPAUSE(WidthTela, HeightTela);
                         }
                         //se passar mouse fora
                         //se passar mouse fora
@@ -605,9 +602,20 @@ namespace Stick_RPG_Fight
                 //PAUSE
                 //PAUSE
             }//FIM DO QUE PAUSA A TELA (botões: COMBATE E COMERCIO)
-            if (JANELA.J.JANELACOMBO || JANELA.J.JANELACOMERCIO)
+            if (JANELA.J.JANELACOMBO || JANELA.J.JANELACOMERCIO || JANELA.J.JANELAPAUSE)
             {
-                JANELA.J.FUNÇÕES(BOTAO);
+                var WidthTela = Window.ClientBounds.Width;
+                var HeightTela = Window.ClientBounds.Height;
+
+                JANELA.J.FUNÇÕES(BOTAO); // janelas
+
+                //PAUSADO
+                //PAUSADO
+                //PAUSADO
+                //PAUSADO
+
+                JANELA.J.FUNÇÕESPAUSE(BOTAO, listai1, P1, Botao, WidthTela, HeightTela); // pause
+
             }
             
 
@@ -664,6 +672,10 @@ namespace Stick_RPG_Fight
                 DRAW.DrawJANELA(Botao, spriteBatch);
             }
 
+            if (JANELA.J.JANELAPAUSE)
+            {
+                DRAW.DrawMENUPAUSE(spriteBatch, WidthTela, HeightTela);
+            }
 
             spriteBatch.End();
 

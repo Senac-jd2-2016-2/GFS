@@ -886,7 +886,49 @@ namespace Stick_RPG_Fight
 
 
 
+        //--------------------------------------------------------------------------------------------------
+        //--------------------------------------------------------------------------------------------------
+        //--------------------------------------------------------------------------------------------------
 
+        public void DrawMENUPAUSE(SpriteBatch spriteBatch, int W, int H)
+        {
+            var mouseState = Mouse.GetState();
+            var mousePosition = new Point(mouseState.X, mouseState.Y);
+
+            spriteBatch.Draw(JANELA.J.imgFUNDOmenu, JANELA.J.FUNDO, Color.White);
+            spriteBatch.Draw(JANELA.J.imgpauseJANELA, JANELA.J.pauseJANELA, Color.White);
+
+            if (!JANELA.J.Bsair.Contains(mousePosition))//sem
+            {
+                spriteBatch.Draw(JANELA.J.imgBsair1, JANELA.J.Bsair, Color.White);
+            }
+            if (JANELA.J.Bsair.Contains(mousePosition) && Mouse.GetState().LeftButton != ButtonState.Pressed)//encima
+            {
+                spriteBatch.Draw(JANELA.J.imgBsair2, JANELA.J.Bsair, Color.White);
+            }
+            if (JANELA.J.Bsair.Contains(mousePosition) && Mouse.GetState().LeftButton == ButtonState.Pressed)//click
+            {
+                spriteBatch.Draw(JANELA.J.imgBsair3, JANELA.J.Bsair, Color.White);
+            }
+
+            if (!JANELA.J.Bresume.Contains(mousePosition))//sem
+            {
+                spriteBatch.Draw(JANELA.J.imgBresume1, JANELA.J.Bresume, Color.White);
+            }
+            if (JANELA.J.Bresume.Contains(mousePosition) && Mouse.GetState().LeftButton != ButtonState.Pressed)//encima
+            {
+                spriteBatch.Draw(JANELA.J.imgBresume2, JANELA.J.Bresume, Color.White);
+            }
+            if (JANELA.J.Bresume.Contains(mousePosition) && Mouse.GetState().LeftButton == ButtonState.Pressed)//click
+            {
+                spriteBatch.Draw(JANELA.J.imgBresume3, JANELA.J.Bresume, Color.White);
+            }
+
+        }
+
+        //--------------------------------------------------------------------------------------------------
+        //--------------------------------------------------------------------------------------------------
+        //--------------------------------------------------------------------------------------------------
 
 
 
@@ -947,7 +989,7 @@ namespace Stick_RPG_Fight
             {
                 if (Botao.COMERCIOquadrado.Contains(mousePosition))
                 {
-                    spriteBatch.Draw(Botao.imgcomercioON, Botao.COMERCIOquadrado, Color.Green);
+                    spriteBatch.Draw(Botao.imgcomercioON, Botao.COMERCIOquadrado, Color.Gold);
                 }
                 else
                 {
@@ -959,10 +1001,10 @@ namespace Stick_RPG_Fight
             {
                 if (Botao.COMERCIOquadrado.Contains(mousePosition))
                 {
-                    spriteBatch.Draw(Botao.imgcomercioOFF, Botao.COMERCIOquadrado, Color.LightGoldenrodYellow);
+                    spriteBatch.Draw(Botao.imgcomercioOFF, Botao.COMERCIOquadrado, Color.Violet);
                     if (Mouse.GetState().LeftButton == ButtonState.Pressed)
                     {
-                        spriteBatch.Draw(Botao.imgcomercioON, Botao.COMERCIOquadrado, Color.LightGoldenrodYellow);
+                        spriteBatch.Draw(Botao.imgcomercioON, Botao.COMERCIOquadrado, Color.Yellow);
                     }
                 }
                 else
@@ -985,7 +1027,7 @@ namespace Stick_RPG_Fight
             {
                 if (Botao.COMBOSquadrado.Contains(mousePosition))
                 {
-                    spriteBatch.Draw(Botao.imgcombosON, Botao.COMBOSquadrado, Color.Green);
+                    spriteBatch.Draw(Botao.imgcombosON, Botao.COMBOSquadrado, Color.CornflowerBlue);
                 }
                 else
                 {
@@ -997,10 +1039,10 @@ namespace Stick_RPG_Fight
             {
                 if (Botao.COMBOSquadrado.Contains(mousePosition))
                 {
-                    spriteBatch.Draw(Botao.imgcombosOFF, Botao.COMBOSquadrado, Color.LightGoldenrodYellow);
+                    spriteBatch.Draw(Botao.imgcombosOFF, Botao.COMBOSquadrado, Color.Pink);
                     if (Mouse.GetState().LeftButton == ButtonState.Pressed)
                     {
-                        spriteBatch.Draw(Botao.imgcombosON, Botao.COMBOSquadrado, Color.LightGoldenrodYellow);
+                        spriteBatch.Draw(Botao.imgcombosON, Botao.COMBOSquadrado, Color.CornflowerBlue);
                     }
                 }
                 else

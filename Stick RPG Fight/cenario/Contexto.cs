@@ -142,19 +142,21 @@ namespace Stick_RPG_Fight
             JANELA.J.imgjanelacomercio = content.Load<Texture2D>("janela comercio");
 
             //resume
-            JANELA.J.imgpauseJANELA = content.Load<Texture2D>("janela PAUXE x MENU");
+            JANELA.J.imgpauseJANELA = content.Load<Texture2D>("janela PAUSE x MENU");
 
-            JANELA.J.imgBsair1 = content.Load<Texture2D>("bota sair 1");
+            JANELA.J.imgBsair1 = content.Load<Texture2D>("botao sair 1");
 
-            JANELA.J.imgBsair2 = content.Load<Texture2D>("bota sair 2");
+            JANELA.J.imgBsair2 = content.Load<Texture2D>("botao sair 2");
 
-            JANELA.J.imgBsair3 = content.Load<Texture2D>("bota sair 3");
+            JANELA.J.imgBsair3 = content.Load<Texture2D>("botao sair 3");
 
-            JANELA.J.imgBresume1 = content.Load<Texture2D>("bota resume 1");
+            JANELA.J.imgBresume1 = content.Load<Texture2D>("botao resume 1");
 
-            JANELA.J.imgBresume2 = content.Load<Texture2D>("bota resume 2");
+            JANELA.J.imgBresume2 = content.Load<Texture2D>("botao resume 2");
 
-            JANELA.J.imgBresume3 = content.Load<Texture2D>("bota resume 3");
+            JANELA.J.imgBresume3 = content.Load<Texture2D>("botao resume 3");
+
+            JANELA.J.imgFUNDOmenu = content.Load<Texture2D>("menu capa");
 
             //visual do poder lançado
             Poder_Visual.p.imgcirculo = content.Load<Texture2D>("poder");

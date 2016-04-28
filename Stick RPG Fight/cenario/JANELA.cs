@@ -29,6 +29,7 @@ namespace Stick_RPG_Fight
         public Rectangle pauseJANELA = new Rectangle();
         public Rectangle Bsair = new Rectangle();
         public Rectangle Bresume = new Rectangle();
+        public Rectangle FUNDO = new Rectangle();
 
         public Texture2D imgpauseJANELA;
         public Texture2D imgBsair1, imgBsair2, imgBsair3;
@@ -44,13 +45,18 @@ namespace Stick_RPG_Fight
 
         public void ZERARFASE(List<Inimigo> listai1, Personagem P1, Botoes Botao, int W, int H)
         {
+            //sai pro menu
             Botao.HOME = true;
             Contexto.Fase1 = false;
             Contexto.Fase2 = false;
             Contexto.Fase3 = false;
             Contexto.Fase4 = false;
+            //todos os inimigos desaparecem
             listai1.Clear();
-            P1.individuo = new Rectangle(0, H - H / 3, W / 16, W / 4);
+            //
+            
+            P1.individuo.X = 0;
+            P1.individuo.Y = H - H / 3;
             Contexto.Fundo.fase = new Rectangle(0, -H / 10, W * 3, H + H / 10);
             //MediaPlayer.Play(AUDIO.menusong);
 
@@ -58,6 +64,11 @@ namespace Stick_RPG_Fight
             P1.moedarepositório = 0;
             P1.honrarepositório = 0;
             P1.qntdcombosrepositório = 0;
+            //regenerar
+            P1.vida = P1.vidaTOTAL;
+            P1.energia = P1.energiaTOTAL;
+            P1.mana = P1.manaTOTAL;
+
         }
 
         public void FUNÇÕESPAUSE(bool BOTAO, List<Inimigo> listai1, Personagem P1, Botoes Botao, int W, int H)
@@ -99,6 +110,8 @@ namespace Stick_RPG_Fight
                 JANELA.J.bRESUME = false;
                 MediaPlayer.Resume();
             }
+            
+
 
             POSIÇÃOPAUSE(W, H);
         }
@@ -110,15 +123,23 @@ namespace Stick_RPG_Fight
             JANELA.J.pauseJANELA.Width = HeightTela / 2 + HeightTela / 9 + HeightTela / 150;//540 + 120 + 7 = 667
             JANELA.J.pauseJANELA.Height = HeightTela / 5 + HeightTela / 37;//216 + 29 = 245
 
-            JANELA.J.Bsair.X = HeightTela / 60; //18
-            JANELA.J.Bsair.Y = HeightTela / 10 - HeightTela / HeightTela; //108 - 1;
+            JANELA.J.Bsair.X = JANELA.J.pauseJANELA.X + HeightTela / 60; //18
+            JANELA.J.Bsair.Y = JANELA.J.pauseJANELA.Y + HeightTela / 10 - HeightTela / HeightTela; //108 - 1;
             JANELA.J.Bsair.Width = ((HeightTela / 2 + HeightTela / 9 + HeightTela / 150) / 2) - HeightTela / 52;//313 = 333 - 20
             JANELA.J.Bsair.Height = HeightTela / 18 - HeightTela / HeightTela;//59 (58 - 1)
 
-            JANELA.J.Bresume.X = ((HeightTela / 2 + HeightTela / 9 + HeightTela / 150) / 2) + HeightTela / 350; //333 + 3 = 336;
-            JANELA.J.Bresume.Y = HeightTela / 10 - HeightTela / HeightTela; //108 - 1;
+            JANELA.J.Bresume.X = JANELA.J.pauseJANELA.X + ((HeightTela / 2 + HeightTela / 9 + HeightTela / 150) / 2) + HeightTela / 350; //333 + 3 = 336;
+            JANELA.J.Bresume.Y = JANELA.J.pauseJANELA.Y + HeightTela / 10 - HeightTela / HeightTela; //108 - 1;
             JANELA.J.Bresume.Width = ((HeightTela / 2 + HeightTela / 9 + HeightTela / 150) / 2) - HeightTela / 52;//313 = 333 - 20
             JANELA.J.Bresume.Height = HeightTela / 18 - HeightTela / HeightTela;//59 (58 - 1)
+
+            //// --- fundo
+            JANELA.J.FUNDO.X = 0;
+            JANELA.J.FUNDO.Y = 0;
+            JANELA.J.FUNDO.Width = WidthTela;
+            JANELA.J.FUNDO.Height = HeightTela;
+
+            
         }
 
         public void FUNÇÕES(bool BOTAO)
@@ -222,7 +243,7 @@ namespace Stick_RPG_Fight
             JANELA.J.R.Width = WidthTela / 2 + WidthTela / 4;
             JANELA.J.R.Height = HeightTela / 2 + HeightTela / 4;
 
-            JANELA.J.xis.X = JANELA.J.R.X + JANELA.J.R.Width - JANELA.J.R.Height / 18 + JANELA.J.R.Height / 240; //fim da tela
+            JANELA.J.xis.X = JANELA.J.R.X + JANELA.J.R.Width - JANELA.J.R.Height / 18 - JANELA.J.R.Height / 240; //fim da tela
             JANELA.J.xis.Y = JANELA.J.R.Y;
             JANELA.J.xis.Width = JANELA.J.R.Height / 18 + JANELA.J.R.Height / 240; // = 45 + 3 = 48
             JANELA.J.xis.Height = JANELA.J.R.Height / 27; // = 30
