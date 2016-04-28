@@ -39,7 +39,18 @@ namespace Stick_RPG_Fight
         public Texture2D imgbotaoPoderesOFF, imgbotaoPoderesON, imgbotaoX, imgbotaoXred;
         public Texture2D imgbotaoArmasOFF, imgbotaoArmasON, imgbotaoCombosOFF, imgbotaoCombosON, imgbotaoPetON, imgbotaoPetOFF;
 
-        public bool JANELACOMBO = false, JANELACOMERCIO = false, ARMAS, COMBOS, PET, PODERES, bXIS, bCOMBO, bCOMERCIO, bARMAS, bPET, bPODERES;
+        //ESCOLHA DE FASE
+        public Texture2D imgPbranco, fase1;
+
+        public Rectangle Rfase1 = new Rectangle();
+        public Rectangle Rfase2 = new Rectangle();
+        public Rectangle Rfase3 = new Rectangle();
+        public Rectangle Rfase4 = new Rectangle();
+        public List<Rectangle> listadelinha = new List<Rectangle>();
+
+        
+        //janela normal de compras e combo
+        public bool JANELACOMBO = false, JANELACOMERCIO = false, ARMAS, PET, PODERES, bXIS, bCOMBO, bCOMERCIO, bARMAS, bPET, bPODERES;
         //pause
         public bool JANELAPAUSE, bSAIR, bRESUME;
 

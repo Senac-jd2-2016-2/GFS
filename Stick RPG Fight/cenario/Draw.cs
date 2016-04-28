@@ -830,6 +830,8 @@ namespace Stick_RPG_Fight
         {
             var mouseState = Mouse.GetState();
             var mousePosition = new Point(mouseState.X, mouseState.Y);
+            spriteBatch.Draw(JANELA.J.imgFUNDOmenu, JANELA.J.FUNDO, Color.White);
+
             if (JANELA.J.JANELACOMBO)
             {
                 spriteBatch.Draw(JANELA.J.imgjanelacombo, JANELA.J.R, Color.White);
