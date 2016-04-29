@@ -1749,7 +1749,7 @@ namespace Stick_RPG_Fight
 
         public void SubirAgua(int WidthTela, int HeightTela, Random aleatório)
         {
-            if (Contexto.Fase1)
+            if (Contexto.Fase[0])
             {
                 if ((ANDANDO || CORRENDO || ATACANDO))
                 {
@@ -1813,7 +1813,7 @@ namespace Stick_RPG_Fight
         {
             ONDAcontagem++;//forma de reprodução da onda
 
-            if (Contexto.Fase1 && (!PULANDOandando || !PULANDOcorrendo || !PULANDOparado) && ONDAcontagem >= 30 && individuo.Y >= HeightTela - HeightTela / 3 - HeightTela / 30)
+            if (Contexto.Fase[0] && (!PULANDOandando || !PULANDOcorrendo || !PULANDOparado) && ONDAcontagem >= 30 && individuo.Y >= HeightTela - HeightTela / 3 - HeightTela / 30)
             {
                 ONDAcontagem = 0;
 
@@ -1837,7 +1837,7 @@ namespace Stick_RPG_Fight
                 listadeondadeagua.Add(A1);
             }
 
-            if (Contexto.Fase1 && listadeondadeagua.Count > 0)//se existir
+            if (Contexto.Fase[0] && listadeondadeagua.Count > 0)//se existir
             {
                 for (int i = 0; i < listadeondadeagua.Count; i++)//vezes
                 {

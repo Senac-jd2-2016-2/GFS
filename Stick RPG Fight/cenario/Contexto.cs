@@ -15,12 +15,14 @@ namespace Stick_RPG_Fight
     {
         
         public static Background Fundo = new Background();
-        public static bool Fase1, Fase2, Fase3, Fase4; // qual fase usar
+        public static bool[] Fase = new bool[4]; // qual fase usar
 
         public static void inicializar(ContentManager content, Menu M1, Audio AUDIO, Personagem P1, Botoes Botao,  Inimigo i1, Agua DefineAgua) // carregar imagens quando a fase começa (não no começo)
         {
-            //Direito
-            P1.imgSpriteSheetparado1 = content.Load<Texture2D>("spritesheet p1 parado1"); // só imagem, logo posso usar isso também pros inimigos.
+           
+
+                //Direito
+                P1.imgSpriteSheetparado1 = content.Load<Texture2D>("spritesheet p1 parado1"); // só imagem, logo posso usar isso também pros inimigos.
             P1.imgSpriteSheetparado2 = content.Load<Texture2D>("spritesheet p1 parado2");
             P1.imgSpriteSheetandando = content.Load<Texture2D>("spritesheet p1 andando");
             P1.imgSpriteSheetATIRARarco = content.Load<Texture2D>("spritesheet p1 atirar (arco)");
@@ -157,6 +159,11 @@ namespace Stick_RPG_Fight
             JANELA.J.imgBresume3 = content.Load<Texture2D>("botao resume 3");
 
             JANELA.J.imgFUNDOmenu = content.Load<Texture2D>("menu capa");
+
+            //opç fase
+
+            JANELA.J.imgPbranco = content.Load<Texture2D>("ponto branco");
+            JANELA.J.imgfaseB1 = content.Load<Texture2D>("fase B1");
 
             //visual do poder lançado
             Poder_Visual.p.imgcirculo = content.Load<Texture2D>("poder");

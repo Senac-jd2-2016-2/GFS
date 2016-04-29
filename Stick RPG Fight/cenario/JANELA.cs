@@ -40,28 +40,98 @@ namespace Stick_RPG_Fight
         public Texture2D imgbotaoArmasOFF, imgbotaoArmasON, imgbotaoCombosOFF, imgbotaoCombosON, imgbotaoPetON, imgbotaoPetOFF;
 
         //ESCOLHA DE FASE
-        public Texture2D imgPbranco, fase1;
+        public Texture2D imgPbranco, imgfaseB1, imgfaseB2, imgfaseB3, imgfaseB4;
 
-        public Rectangle Rfase1 = new Rectangle();
-        public Rectangle Rfase2 = new Rectangle();
-        public Rectangle Rfase3 = new Rectangle();
-        public Rectangle Rfase4 = new Rectangle();
-        public List<Rectangle> listadelinha = new List<Rectangle>();
+        public Rectangle[] Rfase = new Rectangle[4];
+        public Rectangle[] linhas = new Rectangle[4];
+        public Point Prolar = new Point(0, 0);
 
+        public bool OPÇFASES, PRIMEIROclick;
+        public bool[] Bfase = new bool[4];
+        public bool[] FASEdestravada = new bool[4];
         
-        //janela normal de compras e combo
+        //janela normal de compras e combo 
         public bool JANELACOMBO = false, JANELACOMERCIO = false, ARMAS, PET, PODERES, bXIS, bCOMBO, bCOMERCIO, bARMAS, bPET, bPODERES;
         //pause
         public bool JANELAPAUSE, bSAIR, bRESUME;
+
+        //
+        public void CRIARlinhas()
+        {
+            for (int i = 0; i < linhas.Length; i++)
+            {
+                linhas[i] = new Rectangle();
+            }
+            for (int i = 0; i < Rfase.Length; i++)
+            {
+                Rfase[i] = new Rectangle();
+                Bfase[i] = false;
+            }
+        }
+       
+        public void FUNÇÕESOPÇFASE(int W, int H, Botoes Botao, Menu M1, bool MENU, bool BOTAO)
+        {
+            
+            var mouseState = Mouse.GetState();
+            var mousePosition = new Point(mouseState.X, mouseState.Y);
+            if (Mouse.GetState().LeftButton != ButtonState.Pressed) // BOTAO não pressionado
+            {
+                BOTAO = false;
+            }
+            //--------------------------------------------------------------------------------
+            for (int i = 0; i < Rfase.Length; i++)
+            {
+                if (Rfase[i].Contains(mousePosition) && Mouse.GetState().LeftButton == ButtonState.Pressed)
+                {
+                    BOTAO = true;
+                    JANELA.J.Bfase[i] = true;
+                }
+                if (!JANELA.J.Rfase[i].Contains(mousePosition))
+                    JANELA.J.Bfase[i] = false;
+                if (JANELA.J.Bfase[i] && !BOTAO)
+                {
+                    MENU = false;
+                    M1.COMBATE = true;
+                    Contexto.Fase[i] = true;
+                    Botao.HOME = false;
+                    JANELA.J.OPÇFASES = false;
+                }
+            }
+        }
+
+        public void POSopçfase(int W, int H)
+        {
+           
+            var PULO = W / 2;
+            for (int i = 0; i < Rfase.Length; i++)
+            {
+                //FASE ((TODAS))
+                Rfase[i].Width = H / 3 + H / 10 - H / 400;// de lei
+                Rfase[i].Height = H / 6 + H / 250;// de lei 
+                Rfase[i].X = Prolar.X + W / 8 + (PULO * i);
+                Rfase[i].Y = Prolar.Y + H / 8;
+
+                if (i < Rfase.Length)
+                {
+                    //LINHAS (TODAS)
+                    linhas[i].X = Rfase[i].X + Rfase[i].Width;
+                    linhas[i].Y = Rfase[i].Y + Rfase[i].Height / 2;
+                    linhas[i].Width = PULO - Rfase[i].Width;
+                    linhas[i].Height = H / 300; // = 3
+                }
+               
+            }
+        }
+
+        //
 
         public void ZERARFASE(List<Inimigo> listai1, Personagem P1, Botoes Botao, int W, int H)
         {
             //sai pro menu
             Botao.HOME = true;
-            Contexto.Fase1 = false;
-            Contexto.Fase2 = false;
-            Contexto.Fase3 = false;
-            Contexto.Fase4 = false;
+            for (int i = 0; i < Bfase.Length; i++ )
+                Contexto.Fase[i] = false;
+            
             //todos os inimigos desaparecem
             listai1.Clear();
             //
@@ -273,7 +343,7 @@ namespace Stick_RPG_Fight
             JANELA.J.Bcombos.Width = JANELA.J.R.Height / 9 + JANELA.J.R.Height / 240; // = 90 + 3
             JANELA.J.Bcombos.Y = JANELA.J.R.Y + JANELA.J.R.Height / 27; // = 30
             JANELA.J.Bcombos.X = JANELA.J.R.X + 1 + JANELA.J.Bcomercio.Width;
-
+            
             JANELA.J.Barmas.Height = JANELA.J.R.Height / 30 - JANELA.J.R.Height / JANELA.J.R.Height; // = 27 - 1
             JANELA.J.Barmas.Width = JANELA.J.R.Height / 9 + JANELA.J.R.Height / 240; // = 90 + 3
             JANELA.J.Barmas.Y = JANELA.J.R.Y + JANELA.J.R.Height / 27; // = 30
@@ -292,5 +362,7 @@ namespace Stick_RPG_Fight
 
        
         
-    }
+    }//fim da classe.......................... 
+
+    
 }

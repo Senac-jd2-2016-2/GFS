@@ -98,9 +98,12 @@ namespace Stick_RPG_Fight
 
             MediaPlayer.IsRepeating = true;
 
-            //novo inimigo
+            for (int i = 0; i < Contexto.Fase.Length; i++)
+            {
+                Contexto.Fase[i] = false;
+            }
 
-            
+            JANELA.J.CRIARlinhas();
 
             base.Initialize();
         }
@@ -154,7 +157,7 @@ namespace Stick_RPG_Fight
 
 
             //GAME
-            if (!JANELA.J.JANELACOMBO && !JANELA.J.JANELACOMERCIO && !JANELA.J.JANELAPAUSE)
+            if (!JANELA.J.JANELACOMBO && !JANELA.J.JANELACOMERCIO && !JANELA.J.JANELAPAUSE && !JANELA.J.OPÇFASES)
             {
                 if (menu01 || M1.COMBATE || M1.HISTORY)
                 {
@@ -186,6 +189,7 @@ namespace Stick_RPG_Fight
                         BOTAO = true;
                         M1.COMBATEativado = true;
                         MediaPlayer.Pause();
+                       
                     }
 
                     if (!M1.CombateBotao.Contains(mousePosition))//se nao estiver encima, desativa
@@ -197,10 +201,7 @@ namespace Stick_RPG_Fight
                     if (!BOTAO && M1.COMBATEativado) //se soltar o botao apos ter clicado encima
                     {
 
-                        MENU = false;
-                        M1.COMBATE = true;
-                        Contexto.Fase1 = true;
-                        Botao.HOME = false;
+                        JANELA.J.OPÇFASES = true;
                         //MediaPlayer.Play(AUDIO.combatesong);
                     }
 
@@ -442,7 +443,7 @@ namespace Stick_RPG_Fight
                         P1.RPGatualização(WidthTela, HeightTela); //atualiza os dados
                         P1.Luta(WidthTela, HeightTela, aleatório); // atualiza a posição, tamanho, frames
 
-                        if (Contexto.Fase1)
+                        if (Contexto.Fase[0])
                         {
                             P1.SubirAgua(WidthTela, HeightTela, aleatório);
                             P1.OndasH2O(WidthTela, HeightTela);
@@ -601,21 +602,34 @@ namespace Stick_RPG_Fight
                 //PAUSE
                 //PAUSE
                 //PAUSE
-            }//FIM DO QUE PAUSA A TELA (botões: COMBATE E COMERCIO)
-            if (JANELA.J.JANELACOMBO || JANELA.J.JANELACOMERCIO || JANELA.J.JANELAPAUSE)
+            }//FIM DO QUE PAUSA A TELA (botões: COMBATE E COMERCIO || PAUSE || OPÇ das fases)
+            if (JANELA.J.JANELACOMBO || JANELA.J.JANELACOMERCIO)
             {
                 var WidthTela = Window.ClientBounds.Width;
                 var HeightTela = Window.ClientBounds.Height;
 
                 JANELA.J.FUNÇÕES(BOTAO); // janelas
 
-                //PAUSADO
+               
+
+            }
+            if (JANELA.J.JANELAPAUSE)
+            {
+                var WidthTela = Window.ClientBounds.Width;
+                var HeightTela = Window.ClientBounds.Height;
+                 //PAUSADO
                 //PAUSADO
                 //PAUSADO
                 //PAUSADO
 
                 JANELA.J.FUNÇÕESPAUSE(BOTAO, listai1, P1, Botao, WidthTela, HeightTela); // pause
-
+            }
+            if (JANELA.J.OPÇFASES)
+            {
+                var WidthTela = Window.ClientBounds.Width;
+                var HeightTela = Window.ClientBounds.Height;
+                JANELA.J.FUNÇÕESOPÇFASE(WidthTela, HeightTela, Botao, M1, MENU, BOTAO);
+                JANELA.J.POSopçfase(WidthTela, HeightTela);
             }
             
 
@@ -675,6 +689,10 @@ namespace Stick_RPG_Fight
             if (JANELA.J.JANELAPAUSE)
             {
                 DRAW.DrawMENUPAUSE(spriteBatch, WidthTela, HeightTela);
+            }
+            if (JANELA.J.OPÇFASES)
+            {
+                DRAW.DrawJANELAopçfase(Botao, spriteBatch, MENU, M1);
             }
 
             spriteBatch.End();

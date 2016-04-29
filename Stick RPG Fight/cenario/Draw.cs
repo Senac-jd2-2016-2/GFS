@@ -15,7 +15,7 @@ namespace Stick_RPG_Fight
     {
         public void DrawCombate(SpriteBatch spriteBatch, Personagem P1, List<Inimigo> listai1, Rectangle TELACHEIA, Rectangle FlechaD, Rectangle FlechaE, Texture2D imgFlechaD, Texture2D imgFlechaE, SpriteFont menu, SpriteFont HUDfont, int WidthTela, int HeightTela, Texture2D imgSangue, Inimigo i1, Agua DefineAgua, SpriteFont BARfont)
         {
-            if (Contexto.Fase1)
+            if (Contexto.Fase[0])
             {
                 spriteBatch.Draw(Contexto.Fundo.imgfase1, Contexto.Fundo.fase, Color.White); // fundo
             }
@@ -49,7 +49,7 @@ namespace Stick_RPG_Fight
 
                     }
 
-                if (Contexto.Fase1) //APENAS NA FASE 1
+                if (Contexto.Fase[0]) //APENAS NA FASE 1
                 {
                     for (int a = 0; a < listai1[i].listadeagua.Count; a++)
                     {
@@ -479,7 +479,7 @@ namespace Stick_RPG_Fight
             {
                 spriteBatch.Draw(Poder_Visual.p.imgcirculo, P1.listadevisualPOWER[a].R, Color.White);
             }
-            if (Contexto.Fase1) //APENAS NA FASE 1
+            if (Contexto.Fase[0]) //APENAS NA FASE 1
             {
                 //agua
                 for (int a = 0; a < P1.listadeagua.Count; a++)
@@ -932,6 +932,26 @@ namespace Stick_RPG_Fight
         //--------------------------------------------------------------------------------------------------
         //--------------------------------------------------------------------------------------------------
 
+
+        //--------------------------------------------------------------------------------------------------
+        //--------------------------------------------------------------------------------------------------
+        //--------------------------------------------------------------------------------------------------
+        public void DrawJANELAopçfase(Botoes Botao, SpriteBatch spriteBatch, bool MENU, Menu M1)
+        {
+            spriteBatch.Draw(JANELA.J.imgFUNDOmenu, JANELA.J.FUNDO, Color.White);
+            spriteBatch.Draw(JANELA.J.imgfaseB1, JANELA.J.Rfase[0], Color.White);
+
+            for (int i = 0; i < JANELA.J.Rfase.Length; i++)
+            {
+                spriteBatch.Draw(JANELA.J.imgPbranco, JANELA.J.linhas[i], Color.Red);
+            }
+        }
+
+
+
+        //--------------------------------------------------------------------------------------------------
+        //--------------------------------------------------------------------------------------------------
+        //--------------------------------------------------------------------------------------------------
 
 
 
