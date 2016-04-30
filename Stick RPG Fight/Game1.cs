@@ -184,25 +184,28 @@ namespace Stick_RPG_Fight
                     //clicando pra entrar no combate
                     //clicando pra entrar no combate
                     //clicando pra entrar no combate
-                    if (Mouse.GetState().LeftButton == ButtonState.Pressed && M1.CombateBotao.Contains(mousePosition))
+                    if (!M1.COMBATE && !M1.HISTORY)
                     {
-                        BOTAO = true;
-                        M1.COMBATEativado = true;
-                        MediaPlayer.Pause();
-                       
-                    }
+                        if (Mouse.GetState().LeftButton == ButtonState.Pressed && M1.CombateBotao.Contains(mousePosition))
+                        {
+                            BOTAO = true;
+                            M1.COMBATEativado = true;
+                            MediaPlayer.Pause();
 
-                    if (!M1.CombateBotao.Contains(mousePosition))//se nao estiver encima, desativa
-                    {
-                        M1.COMBATEativado = false;
-                        MediaPlayer.Resume();
-                    }
+                        }
 
-                    if (!BOTAO && M1.COMBATEativado) //se soltar o botao apos ter clicado encima
-                    {
+                        if (!M1.CombateBotao.Contains(mousePosition))//se nao estiver encima, desativa
+                        {
+                            M1.COMBATEativado = false;
+                            MediaPlayer.Resume();
+                        }
 
-                        JANELA.J.OPÇFASES = true;
-                        //MediaPlayer.Play(AUDIO.combatesong);
+                        if (!BOTAO && M1.COMBATEativado) //se soltar o botao apos ter clicado encima
+                        {
+
+                            JANELA.J.OPÇFASES = true;
+                            //MediaPlayer.Play(AUDIO.combatesong);
+                        }
                     }
 
                     //
@@ -408,7 +411,7 @@ namespace Stick_RPG_Fight
                         {
 
                             M1.menu01GAME(WidthTela, HeightTela); //RESUMAO 
-
+                            JANELA.J.POSIÇÃOPAUSE(WidthTela, HeightTela);
                         }
                     }
                 }// FIM DO INICIO
@@ -672,8 +675,11 @@ namespace Stick_RPG_Fight
 
             if (M1.COMBATE)
             {
+                
                 DRAW.DrawCombate(spriteBatch, P1, listai1, TELACHEIA, FlechaD, FlechaE, imgFlechaD, imgFlechaE, menu, HUDfont, WidthTela, HeightTela, imgSangue, i1, DefineAgua, BARfont); //RESUMAO
+                DRAW.DrawDano(spriteBatch, P1);// dano na tela (ou cura)
                 DRAW.DrawCLONES(spriteBatch, P1); // PODER
+                
 
                 spriteBatch.DrawString(menu, "LISTA: " + listai1.Count , new Vector2(0, Window.ClientBounds.Height - 15), Color.Black); //teste
                 

@@ -1101,6 +1101,7 @@ namespace Stick_RPG_Fight
                         {
                             faca_voando = true;
                             GerarFacas(WidthTela, HeightTela);
+                            
                         }
                     }
                     if (ATACK1)
@@ -1126,9 +1127,11 @@ namespace Stick_RPG_Fight
                         {
                             P1.vida -= 10;
                             P1.Vx += HeightTela / 20;
-
-                            //FALTA MOSTRAR VC TOMANDO HIT
+                            P1.GERARdano(P1.individuo.X, P1.individuo.Y, P1.individuo.Width, P1.individuo.Height, this.DIREITA, this.ESQUERDA, 10, WidthTela, HeightTela, 2); // personagem leva hit
                         }
+                    
+                            //FALTA MOSTRAR VC TOMANDO HIT
+                        
                     }//fim atack1
                 }
 
@@ -1236,6 +1239,7 @@ namespace Stick_RPG_Fight
                     if (individuo.Intersects(P1.meio) && (!P1.DEFENDENDO && !P1.AGACHADO && P1.ESQUERDA) && P1.meio.X > individuo.X && frameALLi1.Y >= 2 && frameALLi1.Y <= 5)
                     {
                         P1.vida -= 1;
+                        P1.GERARdano(P1.individuo.X, P1.individuo.Y, P1.individuo.Width, P1.individuo.Height, this.DIREITA, this.ESQUERDA, 1, WidthTela, HeightTela, 2); // personagem leva hit
                     }
                     //falta fz P1 cair (hit)
                 }
@@ -1268,10 +1272,13 @@ namespace Stick_RPG_Fight
                     if (frameALLi1.X == 6 && P1.meio.X > individuo.X && frameALLi1.Y == 5 && P1.meio.Intersects(individuo))
                     {
                         P1.vida -= 10;
+                        P1.GERARdano(P1.individuo.X, P1.individuo.Y, P1.individuo.Width, P1.individuo.Height, this.DIREITA, this.ESQUERDA, 10, WidthTela, HeightTela, 2); // personagem leva hit
+                        
                     }
                     if (frameALLi1.Y == 10 && P1.meio.X > individuo.X && P1.meio.Intersects(individuo))
                     {
                         P1.vida -= 2;
+                        P1.GERARdano(P1.individuo.X, P1.individuo.Y, P1.individuo.Width, P1.individuo.Height, this.DIREITA, this.ESQUERDA, 2, WidthTela, HeightTela, 2); // personagem leva hit
                     }
                     //fim do agarrar
                     if (frameALLi1.X <= 3 && frameALLi1.Y == 12 || frameALLi1.Y > 12)
@@ -1490,6 +1497,7 @@ namespace Stick_RPG_Fight
                         {
                             P1.vida -= 10;
                             P1.Vx -= HeightTela / 20;
+                            P1.GERARdano(P1.individuo.X, P1.individuo.Y, P1.individuo.Width, P1.individuo.Height, this.DIREITA, this.ESQUERDA, 10, WidthTela, HeightTela, 2); // personagem leva hit
                         }
                     }//fim atack1
                 }
@@ -1597,6 +1605,7 @@ namespace Stick_RPG_Fight
                     if (individuo.Intersects(P1.meio) && (!P1.DEFENDENDO && !P1.AGACHADO && P1.DIREITA) && P1.meio.X < individuo.X && frameALLi1.Y >= 2 && frameALLi1.Y <= 5)
                     {
                         P1.vida -= 1;
+                        P1.GERARdano(P1.individuo.X, P1.individuo.Y, P1.individuo.Width, P1.individuo.Height, this.DIREITA, this.ESQUERDA, 1, WidthTela, HeightTela, 2); // personagem leva hit
                     }
                     //falta fz P1 cair (hit)
                 }
@@ -1629,10 +1638,12 @@ namespace Stick_RPG_Fight
                     if (frameALLi1.X == 2 && P1.meio.X < individuo.X && frameALLi1.Y == 5 && P1.meio.Intersects(individuo))
                     {
                         P1.vida -= 10;
+                        P1.GERARdano(P1.individuo.X, P1.individuo.Y, P1.individuo.Width, P1.individuo.Height, this.DIREITA, this.ESQUERDA, 10, WidthTela, HeightTela, 2); // personagem leva hit
                     }
                     if (frameALLi1.Y == 10 && P1.meio.X < individuo.X && P1.meio.Intersects(individuo))
                     {
                         P1.vida -= 2;
+                        P1.GERARdano(P1.individuo.X, P1.individuo.Y, P1.individuo.Width, P1.individuo.Height, this.DIREITA, this.ESQUERDA, 2, WidthTela, HeightTela, 2); // personagem leva hit
                     }
                     //fim do agarrar
                     if (frameALLi1.X >= 4 && frameALLi1.Y == 12 || frameALLi1.Y > 12)
@@ -1918,6 +1929,7 @@ namespace Stick_RPG_Fight
                         if (P1.meio.Intersects(listadefacas[i].OBJ))
                         {
                             P1.vida -= HeightTela / 70; //(15 de vida)
+                            P1.GERARdano(P1.individuo.X, P1.individuo.Y, P1.individuo.Width, P1.individuo.Height, this.DIREITA, this.ESQUERDA, 15, WidthTela, HeightTela, 2); // personagem leva hit
                             listadefacas.Remove(listadefacas[i]);
                         }
                     }
@@ -1936,6 +1948,7 @@ namespace Stick_RPG_Fight
                         if (P1.meio.Intersects(listadefacas[i].OBJ))
                         {
                             P1.vida -= HeightTela / 70; //(15 de vida)
+                            P1.GERARdano(P1.individuo.X, P1.individuo.Y, P1.individuo.Width, P1.individuo.Height, this.DIREITA, this.ESQUERDA, 15, WidthTela, HeightTela, 2); // personagem leva hit
                             listadefacas.Remove(listadefacas[i]);
                         }
                     }
@@ -2036,7 +2049,7 @@ namespace Stick_RPG_Fight
             //sangra apenas se acertar no inimigo E quando acertar, se nao defender
             if (P1.individuo.Intersects(meio) && P1.ATACANDO && (P1.individuo.X < individuo.X && P1.DIREITA || P1.individuo.X > individuo.X && P1.ESQUERDA) && !DEFENDENDO && !MORRENDO)
             {
-                if (!RASTEIRA && ((P1.DIREITA && ((P1.PARTE1 && P1.frameLUTA.Y >= 1) || (P1.PARTE2 && (P1.frameLUTA.X >= 5 && P1.frameLUTA.Y == 2) || P1.frameLUTA.Y >= 2) || (P1.PARTE3 && (P1.frameLUTA.X >= 4 && P1.frameLUTA.Y == 3) || P1.frameLUTA.Y == 4) || (P1.PARTE4 && P1.frameLUTA.Y >= 3))) || (P1.ESQUERDA && ((P1.PARTE1 && P1.frameLUTA.Y >= 1) || (P1.PARTE2 && (P1.frameLUTA.X <= 2 && P1.frameLUTA.Y == 2) || P1.frameLUTA.Y >= 2) || (P1.PARTE3 && (P1.frameLUTA.X <= 3 && P1.frameLUTA.Y == 3) || P1.frameLUTA.Y == 4) || (P1.PARTE4 && P1.frameLUTA.Y >= 3)))))
+                if (!RASTEIRA && ((P1.DIREITA && ((P1.PARTE1 && !AGACHADO && P1.frameLUTA.Y >= 1) || (P1.PARTE2 && !AGACHADO && (P1.frameLUTA.X >= 5 && P1.frameLUTA.Y == 2) || P1.frameLUTA.Y >= 2) || (P1.PARTE3 && (P1.frameLUTA.X >= 4 && P1.frameLUTA.Y == 3) || P1.frameLUTA.Y == 4) || (P1.PARTE4 && P1.frameLUTA.Y >= 3))) || (P1.ESQUERDA && ((P1.PARTE1 && !AGACHADO && P1.frameLUTA.Y >= 1) || (P1.PARTE2 && !AGACHADO && (P1.frameLUTA.X <= 2 && P1.frameLUTA.Y == 2) || P1.frameLUTA.Y >= 2) || (P1.PARTE3 && (P1.frameLUTA.X <= 3 && P1.frameLUTA.Y == 3) || P1.frameLUTA.Y == 4) || (P1.PARTE4 && P1.frameLUTA.Y >= 3)))))
                 {//para sangrar / tomar dano apenas qnd estiver em tal parte do ataque
                     Sangue S1 = new Sangue();
 
@@ -2089,6 +2102,7 @@ namespace Stick_RPG_Fight
                 if (((P1.DIREITA && (P1.PARTE1 && P1.frameLUTA.Y == 1 && P1.frameLUTA.X == 1) && (!DEFENDENDO && ESQUERDA || DIREITA)) || (P1.ESQUERDA && (P1.PARTE1 && P1.frameLUTA.Y >= 1 && P1.frameLUTA.X == 6) && (!DEFENDENDO && DIREITA || ESQUERDA))) && !P1.INVERSO && !AGACHADO && !RASTEIRA)
                 {//para sangrar / tomar dano apenas qnd estiver em tal parte do ataque
                     vida-= 10;
+                    P1.GERARdano(this.individuo.X, this.individuo.Y, this.individuo.Width, this.individuo.Height, P1.DIREITA, P1.ESQUERDA, 10, WidthTela, HeightTela, 1); // personagem leva dano (do personagem)
                     HIT1 = true;
                     opçluta = 10; //faz tomar hit e parar tudo
 
@@ -2120,6 +2134,7 @@ namespace Stick_RPG_Fight
                 if (((P1.DIREITA && (P1.PARTE2 && P1.frameLUTA.X == 4 && P1.frameLUTA.Y == 2) && (!DEFENDENDO && ESQUERDA || DIREITA)) || P1.ESQUERDA && (P1.PARTE2 && P1.frameLUTA.X == 2 && P1.frameLUTA.Y == 2) && (!DEFENDENDO && DIREITA || ESQUERDA)) && P1.COMBO1 && !AGACHADO && !RASTEIRA)
                 {
                     vida -= 20;
+                    P1.GERARdano(this.individuo.X, this.individuo.Y, this.individuo.Width, this.individuo.Height, P1.DIREITA, P1.ESQUERDA, 20, WidthTela, HeightTela, 1); // personagem leva dano (do personagem)
                     HIT1 = true;
                     TOMANDOHIT = true;
 
@@ -2153,6 +2168,7 @@ namespace Stick_RPG_Fight
                 if ((P1.DIREITA && (P1.PARTE3 && P1.frameLUTA.X == 4 && P1.frameLUTA.Y == 3) && (!DEFENDENDO && ESQUERDA || DIREITA) || P1.ESQUERDA && (P1.PARTE3 && (P1.frameLUTA.X == 3 && P1.frameLUTA.Y == 3) && (!DEFENDENDO && DIREITA || ESQUERDA))) && P1.COMBO1 && !RASTEIRA)
                 {
                     vida -= 30;
+                    P1.GERARdano(this.individuo.X, this.individuo.Y, this.individuo.Width, this.individuo.Height, P1.DIREITA, P1.ESQUERDA, 30, WidthTela, HeightTela, 1); // personagem leva dano (do personagem)
                     HIT2 = true;
                     TOMANDOHIT = true;
 
@@ -2185,6 +2201,7 @@ namespace Stick_RPG_Fight
                 if ((P1.DIREITA && P1.PARTE4 && P1.frameLUTA.Y == 4 && P1.frameLUTA.X == 0 && (!DEFENDENDO && ESQUERDA || DIREITA) || P1.ESQUERDA && P1.PARTE4 && P1.frameLUTA.Y == 4 && P1.frameLUTA.X == 7 && (!DEFENDENDO && DIREITA || ESQUERDA)) && P1.COMBO1 && !RASTEIRA)
                 {
                     vida -= 30;
+                    P1.GERARdano(this.individuo.X, this.individuo.Y, this.individuo.Width, this.individuo.Height, P1.DIREITA, P1.ESQUERDA, 30, WidthTela, HeightTela, 1); // personagem leva dano (do personagem)
                     HIT2 = true;
 
 

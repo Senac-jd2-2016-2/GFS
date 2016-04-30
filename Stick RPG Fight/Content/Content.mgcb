@@ -61,3 +61,15 @@
 /processorParam:TextureFormat=Compressed
 /build:HUD.spritefont
 
+#begin Neon.spritefont
+/importer:FontDescriptionImporter
+/processor:FontDescriptionProcessor
+/processorParam:TextureFormat=Compressed
+/build:Neon.spritefont
+
+#begin FIRESTARTER.spritefont
+/importer:FontDescriptionImporter
+/processor:FontDescriptionProcessor
+/processorParam:TextureFormat=Compressed
+/build:FIRESTARTER.spritefont
+

@@ -1026,6 +1026,7 @@ namespace Stick_RPG_Fight
             //METODOS
             //visual efeito
             REMOVERVISUPODER(WidthTela, HeightTela);//METODO DE REMOVER O EFEITO (QND CHEGAR EM TAL TAMANHO)
+            PosDANO(WidthTela, HeightTela);// posição da informação do dano
 
             //mov do personagem
             individuo.X += Vx;
@@ -1909,6 +1910,72 @@ namespace Stick_RPG_Fight
                     if (listadevisualPOWER[i].R.Width >= WidthTela * 3)//qnd ele sair da tela, o personagem elimina tal visual efeito
                     {
                         listadevisualPOWER.Remove(listadevisualPOWER[i]);
+                    }
+                }
+            }
+        }
+
+        // gerar dano
+        public void GERARdano(int PosX, int PosY, int PosWidth, int PosHeight, bool D, bool E, int qtd, int W, int H, int opção)
+        {
+            Dano D1 = new Dano();
+
+            D1.P.X = PosX + PosWidth / 2;
+            D1.P.Y = PosY + PosHeight / 2;
+
+            //fazendo dano inimigo
+            if (E)
+            {
+                D1.esquerda = true;
+                D1.direita = false;
+            }
+            if (D)
+            {
+                D1.direita = true;
+                D1.esquerda = false;
+            }
+            
+
+            if (D1.direita)
+            {
+                D1.V.X += H / 400;
+            }
+            if (D1.esquerda)
+            {
+                D1.V.X -= H / 400;
+            }
+            D1.V.Y = -H / 60;
+
+            D1.qntd = qtd;
+
+            D1.opç = opção;
+            
+            // OPÇ 1 = DANO / 2 = HIT / 3 = HEAL
+
+            this.listadedano.Add(D1);
+        }
+
+        public void PosDANO(int W, int H)
+        {
+            if (listadedano.Count > 0)
+            {
+                for (int i = 0; i < listadedano.Count; i++)
+                {
+                    listadedano[i].contagem++;
+                    listadedano[i].delay++;
+                    if (listadedano[i].delay >= 3)
+                    {
+                        listadedano[i].g += H / 400;
+                        listadedano[i].delay = 0;
+                    }
+
+
+                    listadedano[i].P.X = (listadedano[i].P.X + listadedano[i].V.X);
+                    listadedano[i].P.Y = (listadedano[i].P.Y + listadedano[i].V.Y) + listadedano[i].g;
+
+                    if (listadedano[i].contagem >= 120)
+                    {
+                        listadedano.Remove(listadedano[i]);
                     }
                 }
             }

@@ -13,8 +13,11 @@ namespace Stick_RPG_Fight
 {
     class Dano
     {
-        public int Px, Py, qntd, Vx, Vy, g;
+        public int qntd, g;
         public bool direita, esquerda;
-        public Vector2 POS = new Vector2();
+        public int contagem = 0, opç, delay = 0;
+        
+        public Point P = new Point();
+        public Point V = new Point(0,0);
     }
 }

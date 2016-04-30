@@ -15,6 +15,9 @@ namespace Stick_RPG_Fight
     {
         public static JANELA J = new JANELA();
 
+        //escrita
+        public SpriteFont Neon, Firefont;
+
         //parte dos retangulos
         public Rectangle R = new Rectangle();
         public Rectangle xis = new Rectangle();
@@ -49,6 +52,7 @@ namespace Stick_RPG_Fight
         public bool OPÇFASES, PRIMEIROclick;
         public bool[] Bfase = new bool[4];
         public bool[] FASEdestravada = new bool[4];
+        
         
         //janela normal de compras e combo 
         public bool JANELACOMBO = false, JANELACOMERCIO = false, ARMAS, PET, PODERES, bXIS, bCOMBO, bCOMERCIO, bARMAS, bPET, bPODERES;
@@ -149,7 +153,10 @@ namespace Stick_RPG_Fight
             P1.vida = P1.vidaTOTAL;
             P1.energia = P1.energiaTOTAL;
             P1.mana = P1.manaTOTAL;
-
+            P1.SENDOAGARRADO = false;
+            P1.COLIDINDOdireita = false;
+            P1.COLIDINDOesquerda = false;
+            P1.listadedano.Clear();
         }
 
         public void FUNÇÕESPAUSE(bool BOTAO, List<Inimigo> listai1, Personagem P1, Botoes Botao, int W, int H)

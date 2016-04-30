@@ -165,6 +165,10 @@ namespace Stick_RPG_Fight
             JANELA.J.imgPbranco = content.Load<Texture2D>("ponto branco");
             JANELA.J.imgfaseB1 = content.Load<Texture2D>("fase B1");
 
+            //spritefonte
+            JANELA.J.Neon = content.Load<SpriteFont>("Neon");
+            JANELA.J.Firefont = content.Load<SpriteFont>("FIRESTARTER");
+
             //visual do poder lançado
             Poder_Visual.p.imgcirculo = content.Load<Texture2D>("poder");
         }
