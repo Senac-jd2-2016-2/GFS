@@ -43,15 +43,16 @@ namespace Stick_RPG_Fight
         public Texture2D imgbotaoArmasOFF, imgbotaoArmasON, imgbotaoCombosOFF, imgbotaoCombosON, imgbotaoPetON, imgbotaoPetOFF;
 
         //ESCOLHA DE FASE
-        public Texture2D imgPbranco, imgfaseB1, imgfaseB2, imgfaseB3, imgfaseB4;
+        public Texture2D imgPbranco;
+        public Texture2D[] imgfaseB = new Texture2D[2];
 
-        public Rectangle[] Rfase = new Rectangle[4];
-        public Rectangle[] linhas = new Rectangle[4];
+        public Rectangle[] Rfase = new Rectangle[2];
+        public Rectangle[] linhas = new Rectangle[2];
         public Point Prolar = new Point(0, 0);
 
         public bool OPÇFASES, PRIMEIROclick;
-        public bool[] Bfase = new bool[4];
-        public bool[] FASEdestravada = new bool[4];
+        public bool[] Bfase = new bool[2];
+        public bool[] FASEdestravada = new bool[2];
         
         
         //janela normal de compras e combo 
@@ -71,6 +72,7 @@ namespace Stick_RPG_Fight
                 Rfase[i] = new Rectangle();
                 Bfase[i] = false;
             }
+            JANELA.J.FASEdestravada[0] = true;
         }
        
         public void FUNÇÕESOPÇFASE(int W, int H, Botoes Botao, Menu M1, bool MENU, bool BOTAO)
@@ -85,20 +87,23 @@ namespace Stick_RPG_Fight
             //--------------------------------------------------------------------------------
             for (int i = 0; i < Rfase.Length; i++)
             {
-                if (Rfase[i].Contains(mousePosition) && Mouse.GetState().LeftButton == ButtonState.Pressed)
+                if (FASEdestravada[i])
                 {
-                    BOTAO = true;
-                    JANELA.J.Bfase[i] = true;
-                }
-                if (!JANELA.J.Rfase[i].Contains(mousePosition))
-                    JANELA.J.Bfase[i] = false;
-                if (JANELA.J.Bfase[i] && !BOTAO)
-                {
-                    MENU = false;
-                    M1.COMBATE = true;
-                    Contexto.Fase[i] = true;
-                    Botao.HOME = false;
-                    JANELA.J.OPÇFASES = false;
+                    if (Rfase[i].Contains(mousePosition) && Mouse.GetState().LeftButton == ButtonState.Pressed)
+                    {
+                        BOTAO = true;
+                        JANELA.J.Bfase[i] = true;
+                    }
+                    if (!JANELA.J.Rfase[i].Contains(mousePosition))
+                        JANELA.J.Bfase[i] = false;
+                    if (JANELA.J.Bfase[i] && !BOTAO)
+                    {
+                        MENU = false;
+                        M1.COMBATE = true;
+                        Contexto.Fase[i] = true;
+                        Botao.HOME = false;
+                        JANELA.J.OPÇFASES = false;
+                    }
                 }
             }
         }

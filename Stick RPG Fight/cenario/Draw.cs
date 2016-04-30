@@ -19,7 +19,7 @@ namespace Stick_RPG_Fight
             {
                 spriteBatch.Draw(Contexto.Fundo.imgfase1, Contexto.Fundo.fase, Color.White); // fundo
             }
-            
+
 
             //--------------------------------------------------------------------------------------------------
             //--------------------------------------------------------------------------------------------------
@@ -38,23 +38,23 @@ namespace Stick_RPG_Fight
                 //SANGUE E AGUA E OBJLANÇADO
 
                 //visu efect
-                for (int a = 0; a < listai1[i].listadevisualPOWER.Count; a++ )
+                for (int a = 0; a < listai1[i].listadevisualPOWER.Count; a++)
                 {
                     spriteBatch.Draw(Poder_Visual.p.imgcirculo, listai1[i].listadevisualPOWER[a].R, Color.Red);
                 }
-                    //sangue
-                    for (int a = 0; a < listai1[i].listadesangue.Count; a++)// APARECER SANGUE
-                    {
-                        spriteBatch.Draw(imgSangue, listai1[i].listadesangue[a].sangueR, Color.White);
+                //sangue
+                for (int a = 0; a < listai1[i].listadesangue.Count; a++)// APARECER SANGUE
+                {
+                    spriteBatch.Draw(imgSangue, listai1[i].listadesangue[a].sangueR, Color.White);
 
-                    }
+                }
 
                 if (Contexto.Fase[0]) //APENAS NA FASE 1
                 {
                     for (int a = 0; a < listai1[i].listadeagua.Count; a++)
                     {
                         spriteBatch.Draw(DefineAgua.imgAgua, listai1[i].listadeagua[a].AguaR, Color.White);
-                       
+
                     }
                     for (int a = 0; a < listai1[i].listadeondadeagua.Count; a++)
                     {
@@ -166,7 +166,7 @@ namespace Stick_RPG_Fight
 
                     }
 
-                    
+
                     //CAIDO
                     //CAIDO
                     //CAIDO
@@ -206,10 +206,10 @@ namespace Stick_RPG_Fight
                     {
                         if (listai1[i].ATACK1)
                         {
-                             spriteBatch.Draw(i1.imgATK1Di1, listai1[i].individuo,
-                            new Rectangle(listai1[i].frameALLi1.X * listai1[i].tamanhoATK1i1.X, listai1[i].frameALLi1.Y * listai1[i].tamanhoATK1i1.Y,
-                                                       listai1[i].tamanhoATK1i1.X, listai1[i].tamanhoATK1i1.Y), Color.White);
-                    
+                            spriteBatch.Draw(i1.imgATK1Di1, listai1[i].individuo,
+                           new Rectangle(listai1[i].frameALLi1.X * listai1[i].tamanhoATK1i1.X, listai1[i].frameALLi1.Y * listai1[i].tamanhoATK1i1.Y,
+                                                      listai1[i].tamanhoATK1i1.X, listai1[i].tamanhoATK1i1.Y), Color.White);
+
                         }
 
                         //LANÇAR FACA
@@ -316,7 +316,7 @@ namespace Stick_RPG_Fight
                         spriteBatch.Draw(i1.imgAgacharDEFEi1, listai1[i].individuo,
                             new Rectangle(listai1[i].frameALLi1.X * listai1[i].tamanhoAgacharDEFi1.X, listai1[i].frameALLi1.Y * listai1[i].tamanhoAgacharDEFi1.Y,
                                                        listai1[i].tamanhoAgacharDEFi1.X, listai1[i].tamanhoAgacharDEFi1.Y), Color.White);
-                        
+
                     }
                     //DEFENDENDO
                     //DEFENDENDO
@@ -342,8 +342,8 @@ namespace Stick_RPG_Fight
                                                        listai1[i].tamanhoAgachari1.X, listai1[i].tamanhoAgachari1.Y), Color.White);
 
                     }
-                    
-                    
+
+
                     //CAIDO
                     //CAIDO
                     //CAIDO
@@ -442,6 +442,14 @@ namespace Stick_RPG_Fight
             {
                 //barras
                 spriteBatch.Draw(P1.imgVIDA, listai1[i].VIDA, Color.White);
+                //vida perdida
+                for (int a = 0; a < listai1[i].listavidaperdida.Count; a++)
+                {
+                    if (listai1[i].listavidaperdida.Count > 0 && listai1[i].vida >= 0)
+                    {
+                        spriteBatch.Draw(P1.imgVIDA2, listai1[i].listavidaperdida[a].R, Color.White);
+                    }
+                }
                 spriteBatch.Draw(P1.imgMANA, listai1[i].MANA, Color.White);
                 spriteBatch.Draw(P1.imgENERGIA, listai1[i].ENERGIA, Color.White);
 
@@ -485,7 +493,7 @@ namespace Stick_RPG_Fight
                 for (int a = 0; a < P1.listadeagua.Count; a++)
                 {
                     spriteBatch.Draw(DefineAgua.imgAgua, P1.listadeagua[a].AguaR, Color.SteelBlue);
-                    
+
                 }
                 //onda de agua
                 for (int a = 0; a < P1.listadeondadeagua.Count; a++)
@@ -590,10 +598,10 @@ namespace Stick_RPG_Fight
                                                       Color.White);
                             }
                         }//combo 1
-                        
+
                     }//fim D
 
-                   
+
                 }
             }
 
@@ -683,7 +691,7 @@ namespace Stick_RPG_Fight
                 }//fim esquerda
             }
 
-            
+
 
             if (P1.PODER)
             {
@@ -693,6 +701,14 @@ namespace Stick_RPG_Fight
             //HUD P1
             spriteBatch.Draw(P1.imgBARRA, P1.Barra, Color.White);
             spriteBatch.Draw(P1.imgVIDA, P1.BarraVida, Color.White);
+            //vida perdida
+            for (int i = 0; i < P1.listavidaperdida.Count; i++)
+            {
+                if (P1.listavidaperdida.Count > 0 && P1.vida >= 0)
+                {
+                    spriteBatch.Draw(P1.imgVIDA2, P1.listavidaperdida[i].R, Color.White);
+                }
+            }
             spriteBatch.DrawString(HUDfont, "HP " + P1.vida, new Vector2(P1.BarraVida.X + 5, P1.BarraVida.Y + HeightTela / 100 + HeightTela / 200), Color.Black);
             spriteBatch.Draw(P1.imgMANA, P1.BarraMana, Color.White);
             spriteBatch.DrawString(HUDfont, "PODER " + P1.mana, new Vector2(P1.BarraMana.X + 5, P1.BarraMana.Y + (HeightTela / 100 * 5) + HeightTela / 200), Color.Black);
@@ -936,14 +952,48 @@ namespace Stick_RPG_Fight
         //--------------------------------------------------------------------------------------------------
         //--------------------------------------------------------------------------------------------------
         //--------------------------------------------------------------------------------------------------
-        public void DrawJANELAopçfase(Botoes Botao, SpriteBatch spriteBatch, bool MENU, Menu M1)
+        public void DrawJANELAopçfase(Botoes Botao, SpriteBatch spriteBatch, bool MENU, Menu M1, bool BOTAO)
         {
+            var mouseState = Mouse.GetState();
+            var mousePosition = new Point(mouseState.X, mouseState.Y);
+
             spriteBatch.Draw(JANELA.J.imgFUNDOmenu, JANELA.J.FUNDO, Color.White);
-            spriteBatch.Draw(JANELA.J.imgfaseB1, JANELA.J.Rfase[0], Color.White);
+
 
             for (int i = 0; i < JANELA.J.Rfase.Length; i++)
             {
-                spriteBatch.Draw(JANELA.J.imgPbranco, JANELA.J.linhas[i], Color.Red);
+
+                
+                if (!JANELA.J.Rfase[i].Contains(mousePosition))
+                {
+                    spriteBatch.Draw(JANELA.J.imgfaseB[i], JANELA.J.Rfase[i], Color.White);
+                }
+                if (JANELA.J.Rfase[i].Contains(mousePosition) && Mouse.GetState().LeftButton != ButtonState.Pressed && !JANELA.J.FASEdestravada[i])
+                {
+                    spriteBatch.Draw(JANELA.J.imgfaseB[i], JANELA.J.Rfase[i], Color.Red);
+                }
+                if (JANELA.J.Rfase[i].Contains(mousePosition) && Mouse.GetState().LeftButton != ButtonState.Pressed && JANELA.J.FASEdestravada[i])
+                {
+                    spriteBatch.Draw(JANELA.J.imgfaseB[i], JANELA.J.Rfase[i], Color.Green);
+                }
+                if (JANELA.J.Rfase[i].Contains(mousePosition) && Mouse.GetState().LeftButton == ButtonState.Pressed && JANELA.J.FASEdestravada[i])
+                {
+                    spriteBatch.Draw(JANELA.J.imgfaseB[i], JANELA.J.Rfase[i], Color.DarkCyan);
+                }
+
+
+                //ponto
+                if (JANELA.J.Rfase.Length - 1 > i)
+                {
+                    if (JANELA.J.FASEdestravada[i + 1])
+                    {
+                        spriteBatch.Draw(JANELA.J.imgPbranco, JANELA.J.linhas[i], Color.Green);
+                    }
+                    if (!JANELA.J.FASEdestravada[i + 1])
+                    {
+                        spriteBatch.Draw(JANELA.J.imgPbranco, JANELA.J.linhas[i], Color.Red);
+                    }
+                }
             }
         }
 
@@ -1121,93 +1171,93 @@ namespace Stick_RPG_Fight
 
         public void DrawCLONES(SpriteBatch spriteBatch, Personagem P1)
         {
-            for (int i = 0; i < P1.clonelistaPoder.Count; i++)
+            for (int i = 0; i < P1.listaclonePoder.Count; i++)
             {
-                if (P1.clonelistaPoder[i].DIREITA)
+                if (P1.listaclonePoder[i].DIREITA)
                 {
-                    if (!P1.clonelistaPoder[i].COMBATE) // fora de combate
+                    if (!P1.listaclonePoder[i].COMBATE) // fora de combate
                     {
-                        if (P1.clonelistaPoder[i].PARADO) // parado fora de luta
+                        if (P1.listaclonePoder[i].PARADO) // parado fora de luta
                         {
-                            spriteBatch.Draw(P1.imgSpriteSheetparado1, P1.clonelistaPoder[i].individuo,
-                                          new Rectangle(P1.clonelistaPoder[i].frameparado1.X * P1.clonelistaPoder[i].tamanhoSpriteSheetparado1.X, P1.clonelistaPoder[i].frameparado1.Y * P1.clonelistaPoder[i].tamanhoSpriteSheetparado1.Y,
-                                                        P1.clonelistaPoder[i].tamanhoSpriteSheetparado1.X, P1.clonelistaPoder[i].tamanhoSpriteSheetparado1.Y),
+                            spriteBatch.Draw(P1.imgSpriteSheetparado1, P1.listaclonePoder[i].individuo,
+                                          new Rectangle(P1.listaclonePoder[i].frameparado1.X * P1.listaclonePoder[i].tamanhoSpriteSheetparado1.X, P1.listaclonePoder[i].frameparado1.Y * P1.listaclonePoder[i].tamanhoSpriteSheetparado1.Y,
+                                                        P1.listaclonePoder[i].tamanhoSpriteSheetparado1.X, P1.listaclonePoder[i].tamanhoSpriteSheetparado1.Y),
                                                         Color.White);
                         }
                     }
-                    else if (P1.clonelistaPoder[i].COMBATE)
+                    else if (P1.listaclonePoder[i].COMBATE)
                     {
-                        if (P1.clonelistaPoder[i].PARADO)
+                        if (P1.listaclonePoder[i].PARADO)
                         {
-                            spriteBatch.Draw(P1.imgSpriteSheetparado2, P1.clonelistaPoder[i].individuo,
-                                          new Rectangle(P1.clonelistaPoder[i].frameparado2.X * P1.clonelistaPoder[i].tamanhoSpriteSheetparado2.X, P1.clonelistaPoder[i].frameparado2.Y * P1.clonelistaPoder[i].tamanhoSpriteSheetparado2.Y,
-                                                        P1.clonelistaPoder[i].tamanhoSpriteSheetparado2.X, P1.clonelistaPoder[i].tamanhoSpriteSheetparado2.Y),
-                                                        Color.White);
-                        }
-                    }
-
-                    if (P1.clonelistaPoder[i].COMBATE) // em combate
-                    {
-                        if (P1.clonelistaPoder[i].PARADO) // parado na luta
-                        {
-                            spriteBatch.Draw(P1.imgSpriteSheetparado2, P1.clonelistaPoder[i].individuo,
-                                          new Rectangle(P1.clonelistaPoder[i].frameparado2.X * P1.clonelistaPoder[i].tamanhoSpriteSheetparado2.X, P1.clonelistaPoder[i].frameparado2.Y * P1.clonelistaPoder[i].tamanhoSpriteSheetparado2.Y,
-                                                        P1.clonelistaPoder[i].tamanhoSpriteSheetparado2.X, P1.clonelistaPoder[i].tamanhoSpriteSheetparado2.Y),
+                            spriteBatch.Draw(P1.imgSpriteSheetparado2, P1.listaclonePoder[i].individuo,
+                                          new Rectangle(P1.listaclonePoder[i].frameparado2.X * P1.listaclonePoder[i].tamanhoSpriteSheetparado2.X, P1.listaclonePoder[i].frameparado2.Y * P1.listaclonePoder[i].tamanhoSpriteSheetparado2.Y,
+                                                        P1.listaclonePoder[i].tamanhoSpriteSheetparado2.X, P1.listaclonePoder[i].tamanhoSpriteSheetparado2.Y),
                                                         Color.White);
                         }
                     }
 
-                    if (P1.clonelistaPoder[i].ANDANDO) // se movimentando pra direita
+                    if (P1.listaclonePoder[i].COMBATE) // em combate
                     {
-                        spriteBatch.Draw(P1.imgSpriteSheetandando, P1.clonelistaPoder[i].individuo,
-                                          new Rectangle(P1.clonelistaPoder[i].framemovendo.X * P1.clonelistaPoder[i].tamanhoSpriteSheetandando.X, P1.clonelistaPoder[i].framemovendo.Y * P1.clonelistaPoder[i].tamanhoSpriteSheetandando.Y,
-                                                        P1.clonelistaPoder[i].tamanhoSpriteSheetandando.X, P1.clonelistaPoder[i].tamanhoSpriteSheetandando.Y),
+                        if (P1.listaclonePoder[i].PARADO) // parado na luta
+                        {
+                            spriteBatch.Draw(P1.imgSpriteSheetparado2, P1.listaclonePoder[i].individuo,
+                                          new Rectangle(P1.listaclonePoder[i].frameparado2.X * P1.listaclonePoder[i].tamanhoSpriteSheetparado2.X, P1.listaclonePoder[i].frameparado2.Y * P1.listaclonePoder[i].tamanhoSpriteSheetparado2.Y,
+                                                        P1.listaclonePoder[i].tamanhoSpriteSheetparado2.X, P1.listaclonePoder[i].tamanhoSpriteSheetparado2.Y),
+                                                        Color.White);
+                        }
+                    }
+
+                    if (P1.listaclonePoder[i].ANDANDO) // se movimentando pra direita
+                    {
+                        spriteBatch.Draw(P1.imgSpriteSheetandando, P1.listaclonePoder[i].individuo,
+                                          new Rectangle(P1.listaclonePoder[i].framemovendo.X * P1.listaclonePoder[i].tamanhoSpriteSheetandando.X, P1.listaclonePoder[i].framemovendo.Y * P1.listaclonePoder[i].tamanhoSpriteSheetandando.Y,
+                                                        P1.listaclonePoder[i].tamanhoSpriteSheetandando.X, P1.listaclonePoder[i].tamanhoSpriteSheetandando.Y),
                                                         Color.White);
                     }
 
-                    if (P1.clonelistaPoder[i].CORRENDO)
+                    if (P1.listaclonePoder[i].CORRENDO)
                     {
-                        spriteBatch.Draw(P1.imgSpriteSheetcorrendo, P1.clonelistaPoder[i].individuo,
-                                          new Rectangle(P1.clonelistaPoder[i].framemovendo.X * P1.clonelistaPoder[i].tamanhoSpriteSheetcorrendo.X, P1.clonelistaPoder[i].framemovendo.Y * P1.clonelistaPoder[i].tamanhoSpriteSheetcorrendo.Y,
-                                                        P1.clonelistaPoder[i].tamanhoSpriteSheetcorrendo.X, P1.clonelistaPoder[i].tamanhoSpriteSheetcorrendo.Y),
+                        spriteBatch.Draw(P1.imgSpriteSheetcorrendo, P1.listaclonePoder[i].individuo,
+                                          new Rectangle(P1.listaclonePoder[i].framemovendo.X * P1.listaclonePoder[i].tamanhoSpriteSheetcorrendo.X, P1.listaclonePoder[i].framemovendo.Y * P1.listaclonePoder[i].tamanhoSpriteSheetcorrendo.Y,
+                                                        P1.listaclonePoder[i].tamanhoSpriteSheetcorrendo.X, P1.listaclonePoder[i].tamanhoSpriteSheetcorrendo.Y),
                                                         Color.White);
                     }
 
-                    if (P1.clonelistaPoder[i].PULANDOandando || P1.clonelistaPoder[i].PULANDOcorrendo || P1.clonelistaPoder[i].PULANDOparado)
+                    if (P1.listaclonePoder[i].PULANDOandando || P1.listaclonePoder[i].PULANDOcorrendo || P1.listaclonePoder[i].PULANDOparado)
                     {
-                        spriteBatch.Draw(P1.imgSpriteSheetpular, P1.clonelistaPoder[i].individuo,
-                                         new Rectangle(P1.clonelistaPoder[i].framepular.X * P1.clonelistaPoder[i].tamanhoSpriteSheetpular.X, P1.clonelistaPoder[i].framepular.Y * P1.clonelistaPoder[i].tamanhoSpriteSheetpular.Y,
-                                                       P1.clonelistaPoder[i].tamanhoSpriteSheetpular.X, P1.clonelistaPoder[i].tamanhoSpriteSheetpular.Y),
+                        spriteBatch.Draw(P1.imgSpriteSheetpular, P1.listaclonePoder[i].individuo,
+                                         new Rectangle(P1.listaclonePoder[i].framepular.X * P1.listaclonePoder[i].tamanhoSpriteSheetpular.X, P1.listaclonePoder[i].framepular.Y * P1.listaclonePoder[i].tamanhoSpriteSheetpular.Y,
+                                                       P1.listaclonePoder[i].tamanhoSpriteSheetpular.X, P1.listaclonePoder[i].tamanhoSpriteSheetpular.Y),
                                                        Color.White);
                     }
-                    if (P1.clonelistaPoder[i].PARTE1)
+                    if (P1.listaclonePoder[i].PARTE1)
                     {
-                        spriteBatch.Draw(P1.imgsoco1, P1.clonelistaPoder[i].individuo,
-                                    new Rectangle(P1.clonelistaPoder[i].frameLUTA.X * P1.clonelistaPoder[i].tamanhosoco1.X, P1.clonelistaPoder[i].frameLUTA.Y * P1.clonelistaPoder[i].tamanhosoco1.Y,
-                                                  P1.clonelistaPoder[i].tamanhosoco1.X, P1.clonelistaPoder[i].tamanhosoco1.Y),
+                        spriteBatch.Draw(P1.imgsoco1, P1.listaclonePoder[i].individuo,
+                                    new Rectangle(P1.listaclonePoder[i].frameLUTA.X * P1.listaclonePoder[i].tamanhosoco1.X, P1.listaclonePoder[i].frameLUTA.Y * P1.listaclonePoder[i].tamanhosoco1.Y,
+                                                  P1.listaclonePoder[i].tamanhosoco1.X, P1.listaclonePoder[i].tamanhosoco1.Y),
                                                   Color.White);
                     }
-                    if (P1.clonelistaPoder[i].COMBO1)
+                    if (P1.listaclonePoder[i].COMBO1)
                     {
-                        if (P1.clonelistaPoder[i].PARTE2)
+                        if (P1.listaclonePoder[i].PARTE2)
                         {
-                            spriteBatch.Draw(P1.imgsoco2C1, P1.clonelistaPoder[i].individuo,
-                                    new Rectangle(P1.clonelistaPoder[i].frameLUTA.X * P1.clonelistaPoder[i].tamanhosoco2C1.X, P1.clonelistaPoder[i].frameLUTA.Y * P1.clonelistaPoder[i].tamanhosoco2C1.Y,
-                                                  P1.clonelistaPoder[i].tamanhosoco2C1.X, P1.clonelistaPoder[i].tamanhosoco2C1.Y),
+                            spriteBatch.Draw(P1.imgsoco2C1, P1.listaclonePoder[i].individuo,
+                                    new Rectangle(P1.listaclonePoder[i].frameLUTA.X * P1.listaclonePoder[i].tamanhosoco2C1.X, P1.listaclonePoder[i].frameLUTA.Y * P1.listaclonePoder[i].tamanhosoco2C1.Y,
+                                                  P1.listaclonePoder[i].tamanhosoco2C1.X, P1.listaclonePoder[i].tamanhosoco2C1.Y),
                                                   Color.White);
                         }
-                        if (P1.clonelistaPoder[i].PARTE3)
+                        if (P1.listaclonePoder[i].PARTE3)
                         {
-                            spriteBatch.Draw(P1.imgsoco3C1, P1.clonelistaPoder[i].individuo,
-                                    new Rectangle(P1.clonelistaPoder[i].frameLUTA.X * P1.clonelistaPoder[i].tamanhosoco3C1.X, P1.clonelistaPoder[i].frameLUTA.Y * P1.clonelistaPoder[i].tamanhosoco3C1.Y,
-                                                  P1.clonelistaPoder[i].tamanhosoco3C1.X, P1.clonelistaPoder[i].tamanhosoco3C1.Y),
+                            spriteBatch.Draw(P1.imgsoco3C1, P1.listaclonePoder[i].individuo,
+                                    new Rectangle(P1.listaclonePoder[i].frameLUTA.X * P1.listaclonePoder[i].tamanhosoco3C1.X, P1.listaclonePoder[i].frameLUTA.Y * P1.listaclonePoder[i].tamanhosoco3C1.Y,
+                                                  P1.listaclonePoder[i].tamanhosoco3C1.X, P1.listaclonePoder[i].tamanhosoco3C1.Y),
                                                   Color.White);
                         }
-                        if (P1.clonelistaPoder[i].PARTE4)
+                        if (P1.listaclonePoder[i].PARTE4)
                         {
-                            spriteBatch.Draw(P1.imgjoelhada4C1, P1.clonelistaPoder[i].individuo,
-                                    new Rectangle(P1.clonelistaPoder[i].frameLUTA.X * P1.clonelistaPoder[i].tamanhojoelhada4C1.X, P1.clonelistaPoder[i].frameLUTA.Y * P1.clonelistaPoder[i].tamanhojoelhada4C1.Y,
-                                                  P1.clonelistaPoder[i].tamanhojoelhada4C1.X, P1.clonelistaPoder[i].tamanhojoelhada4C1.Y),
+                            spriteBatch.Draw(P1.imgjoelhada4C1, P1.listaclonePoder[i].individuo,
+                                    new Rectangle(P1.listaclonePoder[i].frameLUTA.X * P1.listaclonePoder[i].tamanhojoelhada4C1.X, P1.listaclonePoder[i].frameLUTA.Y * P1.listaclonePoder[i].tamanhojoelhada4C1.Y,
+                                                  P1.listaclonePoder[i].tamanhojoelhada4C1.X, P1.listaclonePoder[i].tamanhojoelhada4C1.Y),
                                                   Color.White);
                         }
                     }//fim combo1
@@ -1217,80 +1267,80 @@ namespace Stick_RPG_Fight
                 //--------------------------------------------------------------------------------------------------
                 //--------------------------------------------------------------------------------------------------
                 //--------------------------------------------------------------------------------------------------
-                if (P1.clonelistaPoder[i].ESQUERDA)
+                if (P1.listaclonePoder[i].ESQUERDA)
                 {
-                    if (!P1.clonelistaPoder[i].COMBATE) // fora de combate
+                    if (!P1.listaclonePoder[i].COMBATE) // fora de combate
                     {
-                        if (P1.clonelistaPoder[i].PARADO) // parado fora de luta
+                        if (P1.listaclonePoder[i].PARADO) // parado fora de luta
                         {
-                            spriteBatch.Draw(P1.imgSpriteSheetparado1E, P1.clonelistaPoder[i].individuo,
-                                          new Rectangle(P1.clonelistaPoder[i].frameparado1.X * P1.clonelistaPoder[i].tamanhoSpriteSheetparado1.X, P1.clonelistaPoder[i].frameparado1.Y * P1.clonelistaPoder[i].tamanhoSpriteSheetparado1.Y,
-                                                        P1.clonelistaPoder[i].tamanhoSpriteSheetparado1.X, P1.clonelistaPoder[i].tamanhoSpriteSheetparado1.Y),
+                            spriteBatch.Draw(P1.imgSpriteSheetparado1E, P1.listaclonePoder[i].individuo,
+                                          new Rectangle(P1.listaclonePoder[i].frameparado1.X * P1.listaclonePoder[i].tamanhoSpriteSheetparado1.X, P1.listaclonePoder[i].frameparado1.Y * P1.listaclonePoder[i].tamanhoSpriteSheetparado1.Y,
+                                                        P1.listaclonePoder[i].tamanhoSpriteSheetparado1.X, P1.listaclonePoder[i].tamanhoSpriteSheetparado1.Y),
                                                         Color.White);
                         }
                     }
-                    else if (P1.clonelistaPoder[i].COMBATE)
+                    else if (P1.listaclonePoder[i].COMBATE)
                     {
-                        if (P1.clonelistaPoder[i].PARADO)
+                        if (P1.listaclonePoder[i].PARADO)
                         {
-                            spriteBatch.Draw(P1.imgSpriteSheetparado2E, P1.clonelistaPoder[i].individuo,
-                                          new Rectangle(P1.clonelistaPoder[i].frameparado2.X * P1.clonelistaPoder[i].tamanhoSpriteSheetparado2.X, P1.clonelistaPoder[i].frameparado2.Y * P1.clonelistaPoder[i].tamanhoSpriteSheetparado2.Y,
-                                                        P1.clonelistaPoder[i].tamanhoSpriteSheetparado2.X, P1.clonelistaPoder[i].tamanhoSpriteSheetparado2.Y),
+                            spriteBatch.Draw(P1.imgSpriteSheetparado2E, P1.listaclonePoder[i].individuo,
+                                          new Rectangle(P1.listaclonePoder[i].frameparado2.X * P1.listaclonePoder[i].tamanhoSpriteSheetparado2.X, P1.listaclonePoder[i].frameparado2.Y * P1.listaclonePoder[i].tamanhoSpriteSheetparado2.Y,
+                                                        P1.listaclonePoder[i].tamanhoSpriteSheetparado2.X, P1.listaclonePoder[i].tamanhoSpriteSheetparado2.Y),
                                                         Color.White);
                         }
                     }
-                    if (P1.clonelistaPoder[i].ANDANDO) // se movimentando pra esquerda
+                    if (P1.listaclonePoder[i].ANDANDO) // se movimentando pra esquerda
                     {
-                        spriteBatch.Draw(P1.imgSpriteSheetandandoE, P1.clonelistaPoder[i].individuo,
-                                          new Rectangle(P1.clonelistaPoder[i].framemovendo.X * P1.clonelistaPoder[i].tamanhoSpriteSheetandando.X, P1.clonelistaPoder[i].framemovendo.Y * P1.clonelistaPoder[i].tamanhoSpriteSheetandando.Y,
-                                                        P1.clonelistaPoder[i].tamanhoSpriteSheetandando.X, P1.clonelistaPoder[i].tamanhoSpriteSheetandando.Y),
+                        spriteBatch.Draw(P1.imgSpriteSheetandandoE, P1.listaclonePoder[i].individuo,
+                                          new Rectangle(P1.listaclonePoder[i].framemovendo.X * P1.listaclonePoder[i].tamanhoSpriteSheetandando.X, P1.listaclonePoder[i].framemovendo.Y * P1.listaclonePoder[i].tamanhoSpriteSheetandando.Y,
+                                                        P1.listaclonePoder[i].tamanhoSpriteSheetandando.X, P1.listaclonePoder[i].tamanhoSpriteSheetandando.Y),
                                                         Color.White);
                     }
 
-                    if (P1.clonelistaPoder[i].CORRENDO)
+                    if (P1.listaclonePoder[i].CORRENDO)
                     {
-                        spriteBatch.Draw(P1.imgSpriteSheetcorrendoE, P1.clonelistaPoder[i].individuo,
-                                          new Rectangle(P1.clonelistaPoder[i].framemovendo.X * P1.clonelistaPoder[i].tamanhoSpriteSheetcorrendo.X, P1.clonelistaPoder[i].framemovendo.Y * P1.clonelistaPoder[i].tamanhoSpriteSheetcorrendo.Y,
-                                                        P1.clonelistaPoder[i].tamanhoSpriteSheetcorrendo.X, P1.clonelistaPoder[i].tamanhoSpriteSheetcorrendo.Y),
+                        spriteBatch.Draw(P1.imgSpriteSheetcorrendoE, P1.listaclonePoder[i].individuo,
+                                          new Rectangle(P1.listaclonePoder[i].framemovendo.X * P1.listaclonePoder[i].tamanhoSpriteSheetcorrendo.X, P1.listaclonePoder[i].framemovendo.Y * P1.listaclonePoder[i].tamanhoSpriteSheetcorrendo.Y,
+                                                        P1.listaclonePoder[i].tamanhoSpriteSheetcorrendo.X, P1.listaclonePoder[i].tamanhoSpriteSheetcorrendo.Y),
                                                         Color.White);
                     }
 
-                    if (P1.clonelistaPoder[i].PULANDOandando || P1.clonelistaPoder[i].PULANDOcorrendo || P1.clonelistaPoder[i].PULANDOparado)
+                    if (P1.listaclonePoder[i].PULANDOandando || P1.listaclonePoder[i].PULANDOcorrendo || P1.listaclonePoder[i].PULANDOparado)
                     {
-                        spriteBatch.Draw(P1.imgSpriteSheetpularE, P1.clonelistaPoder[i].individuo,
-                                         new Rectangle(P1.clonelistaPoder[i].framepular.X * P1.clonelistaPoder[i].tamanhoSpriteSheetpular.X, P1.clonelistaPoder[i].framepular.Y * P1.clonelistaPoder[i].tamanhoSpriteSheetpular.Y,
-                                                       P1.clonelistaPoder[i].tamanhoSpriteSheetpular.X, P1.clonelistaPoder[i].tamanhoSpriteSheetpular.Y),
+                        spriteBatch.Draw(P1.imgSpriteSheetpularE, P1.listaclonePoder[i].individuo,
+                                         new Rectangle(P1.listaclonePoder[i].framepular.X * P1.listaclonePoder[i].tamanhoSpriteSheetpular.X, P1.listaclonePoder[i].framepular.Y * P1.listaclonePoder[i].tamanhoSpriteSheetpular.Y,
+                                                       P1.listaclonePoder[i].tamanhoSpriteSheetpular.X, P1.listaclonePoder[i].tamanhoSpriteSheetpular.Y),
                                                        Color.White);
                     }
 
-                    if (P1.clonelistaPoder[i].PARTE1)
+                    if (P1.listaclonePoder[i].PARTE1)
                     {
-                        spriteBatch.Draw(P1.imgsoco1E, P1.clonelistaPoder[i].individuo,
-                                    new Rectangle(P1.clonelistaPoder[i].frameLUTA.X * P1.clonelistaPoder[i].tamanhosoco1.X, P1.clonelistaPoder[i].frameLUTA.Y * P1.clonelistaPoder[i].tamanhosoco1.Y,
-                                                  P1.clonelistaPoder[i].tamanhosoco1.X, P1.clonelistaPoder[i].tamanhosoco1.Y),
+                        spriteBatch.Draw(P1.imgsoco1E, P1.listaclonePoder[i].individuo,
+                                    new Rectangle(P1.listaclonePoder[i].frameLUTA.X * P1.listaclonePoder[i].tamanhosoco1.X, P1.listaclonePoder[i].frameLUTA.Y * P1.listaclonePoder[i].tamanhosoco1.Y,
+                                                  P1.listaclonePoder[i].tamanhosoco1.X, P1.listaclonePoder[i].tamanhosoco1.Y),
                                                   Color.White);
                     }
-                    if (P1.clonelistaPoder[i].COMBO1)
+                    if (P1.listaclonePoder[i].COMBO1)
                     {
-                        if (P1.clonelistaPoder[i].PARTE2)
+                        if (P1.listaclonePoder[i].PARTE2)
                         {
-                            spriteBatch.Draw(P1.imgsoco2C1E, P1.clonelistaPoder[i].individuo,
-                                    new Rectangle(P1.clonelistaPoder[i].frameLUTA.X * P1.clonelistaPoder[i].tamanhosoco2C1.X, P1.clonelistaPoder[i].frameLUTA.Y * P1.clonelistaPoder[i].tamanhosoco2C1.Y,
-                                                  P1.clonelistaPoder[i].tamanhosoco2C1.X, P1.clonelistaPoder[i].tamanhosoco2C1.Y),
+                            spriteBatch.Draw(P1.imgsoco2C1E, P1.listaclonePoder[i].individuo,
+                                    new Rectangle(P1.listaclonePoder[i].frameLUTA.X * P1.listaclonePoder[i].tamanhosoco2C1.X, P1.listaclonePoder[i].frameLUTA.Y * P1.listaclonePoder[i].tamanhosoco2C1.Y,
+                                                  P1.listaclonePoder[i].tamanhosoco2C1.X, P1.listaclonePoder[i].tamanhosoco2C1.Y),
                                                   Color.White);
                         }
-                        if (P1.clonelistaPoder[i].PARTE3)
+                        if (P1.listaclonePoder[i].PARTE3)
                         {
-                            spriteBatch.Draw(P1.imgsoco3C1E, P1.clonelistaPoder[i].individuo,
-                                    new Rectangle(P1.clonelistaPoder[i].frameLUTA.X * P1.clonelistaPoder[i].tamanhosoco3C1.X, P1.clonelistaPoder[i].frameLUTA.Y * P1.clonelistaPoder[i].tamanhosoco3C1.Y,
-                                                  P1.clonelistaPoder[i].tamanhosoco3C1.X, P1.clonelistaPoder[i].tamanhosoco3C1.Y),
+                            spriteBatch.Draw(P1.imgsoco3C1E, P1.listaclonePoder[i].individuo,
+                                    new Rectangle(P1.listaclonePoder[i].frameLUTA.X * P1.listaclonePoder[i].tamanhosoco3C1.X, P1.listaclonePoder[i].frameLUTA.Y * P1.listaclonePoder[i].tamanhosoco3C1.Y,
+                                                  P1.listaclonePoder[i].tamanhosoco3C1.X, P1.listaclonePoder[i].tamanhosoco3C1.Y),
                                                   Color.White);
                         }
-                        if (P1.clonelistaPoder[i].PARTE4)
+                        if (P1.listaclonePoder[i].PARTE4)
                         {
-                            spriteBatch.Draw(P1.imgjoelhada4C1E, P1.clonelistaPoder[i].individuo,
-                                    new Rectangle(P1.clonelistaPoder[i].frameLUTA.X * P1.clonelistaPoder[i].tamanhojoelhada4C1.X, P1.clonelistaPoder[i].frameLUTA.Y * P1.clonelistaPoder[i].tamanhojoelhada4C1.Y,
-                                                  P1.clonelistaPoder[i].tamanhojoelhada4C1.X, P1.clonelistaPoder[i].tamanhojoelhada4C1.Y),
+                            spriteBatch.Draw(P1.imgjoelhada4C1E, P1.listaclonePoder[i].individuo,
+                                    new Rectangle(P1.listaclonePoder[i].frameLUTA.X * P1.listaclonePoder[i].tamanhojoelhada4C1.X, P1.listaclonePoder[i].frameLUTA.Y * P1.listaclonePoder[i].tamanhojoelhada4C1.Y,
+                                                  P1.listaclonePoder[i].tamanhojoelhada4C1.X, P1.listaclonePoder[i].tamanhojoelhada4C1.Y),
                                                   Color.White);
                         }
                     }//fim combo1

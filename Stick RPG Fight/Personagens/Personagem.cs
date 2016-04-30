@@ -16,6 +16,7 @@ namespace Stick_RPG_Fight
         //      img (ARQUIVO)
         public Texture2D imgBARRA;
         public Texture2D imgVIDA;
+        public Texture2D imgVIDA2;
         public Texture2D imgENERGIA;
         public Texture2D imgMANA;
         public Texture2D imgSOBRE;
@@ -201,10 +202,11 @@ namespace Stick_RPG_Fight
         //Fase 1 cenario
         public int ONDAcontagem = 0;
 
-        public List<Personagem> clonelistaPoder = new List<Personagem>();
+        public List<Personagem> listaclonePoder = new List<Personagem>();
         public List<Agua> listadeagua = new List<Agua>();
         public List<OndasdeAgua> listadeondadeagua = new List<OndasdeAgua>();
         public List<Poder_Visual> listadevisualPOWER = new List<Poder_Visual>();
+        public List<VIDAperdida> listavidaperdida = new List<VIDAperdida>();
         
         //dano
         public List<Dano> listadedano = new List<Dano>();
@@ -1027,6 +1029,7 @@ namespace Stick_RPG_Fight
             //visual efeito
             REMOVERVISUPODER(WidthTela, HeightTela);//METODO DE REMOVER O EFEITO (QND CHEGAR EM TAL TAMANHO)
             PosDANO(WidthTela, HeightTela);// posição da informação do dano
+            POSvidaperdida(); //barra vermelha
 
             //mov do personagem
             individuo.X += Vx;
@@ -1735,15 +1738,15 @@ namespace Stick_RPG_Fight
             clone.frameSACARarco = P1.frameSACARarco; //Marca o frame a ser utilizado 
             clone.frameLUTA = P1.frameLUTA;
 
-            P1.clonelistaPoder.Add(clone);
+            P1.listaclonePoder.Add(clone);
         }
 
         public void POSIÇÃOdoCLONE(Personagem P1)
         {
-            for (int i = 0; i < P1.clonelistaPoder.Count; i++)
+            for (int i = 0; i < P1.listaclonePoder.Count; i++)
             {
-                P1.clonelistaPoder[i].individuo.X = P1.clonelistaPoder[i].Vx + Contexto.Fundo.fase.X; // posição definida (não variável)
-                P1.clonelistaPoder[i].individuo.Y = P1.clonelistaPoder[i].Vy + Contexto.Fundo.fase.Y;
+                P1.listaclonePoder[i].individuo.X = P1.listaclonePoder[i].Vx + Contexto.Fundo.fase.X; // posição definida (não variável)
+                P1.listaclonePoder[i].individuo.Y = P1.listaclonePoder[i].Vy + Contexto.Fundo.fase.Y;
 
             }
         }
@@ -1976,6 +1979,47 @@ namespace Stick_RPG_Fight
                     if (listadedano[i].contagem >= 120)
                     {
                         listadedano.Remove(listadedano[i]);
+                    }
+                }
+            }
+        }// fim posiçao dano
+
+        public void gerarHUDVidaPerdida(int qtdd)
+        {
+            VIDAperdida V = new VIDAperdida();
+
+            V.qtdd = qtdd;
+            V.R.Width = qtdd;
+            V.R.Height = this.BarraVida.Height;
+            V.R.X = this.BarraVida.X + this.BarraVida.Width;
+            V.R.Y = this.BarraVida.Y;
+
+            this.listavidaperdida.Add(V);
+        }//fim gerar vida perdida
+
+        public void POSvidaperdida()
+        {
+            if (listavidaperdida.Count > 0)
+            {
+                for (int i = 0; i < listavidaperdida.Count; i++)
+                {
+                    if (i - 1 < 0)//1°
+                    {
+                        listavidaperdida[i].R.X = this.BarraVida.X + this.BarraVida.Width;
+                    }
+                    if (i - 1 >= 0) // se tiver na frente
+                    {
+                        listavidaperdida[i].R.X = listavidaperdida[i - 1].R.X + listavidaperdida[i - 1].R.Width;
+                    }
+
+                    listavidaperdida[i].R.Y = this.BarraVida.Y;
+                    listavidaperdida[i].R.Width = listavidaperdida[i].qtdd;
+                    listavidaperdida[i].R.Height = this.BarraVida.Height;
+
+                    listavidaperdida[i].contagem++;
+                    if (listavidaperdida[i].contagem == 120)
+                    {
+                        listavidaperdida.Remove(listavidaperdida[i]);
                     }
                 }
             }

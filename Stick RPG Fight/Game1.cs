@@ -346,7 +346,7 @@ namespace Stick_RPG_Fight
 
                                 // atualização
 
-
+                                
 
                                 //dimensão dos BOTÕES
                                 M1.HistoryBotao = new Rectangle(0, Window.ClientBounds.Height / 3, Window.ClientBounds.Width / 3, Window.ClientBounds.Height / 8);
@@ -547,7 +547,7 @@ namespace Stick_RPG_Fight
                                 TempoParaInimigos++;
                             }
 
-                            P1.clonelistaPoder.Clear();
+                            P1.listaclonePoder.Clear();
                         }
 
 
@@ -698,7 +698,7 @@ namespace Stick_RPG_Fight
             }
             if (JANELA.J.OPÇFASES)
             {
-                DRAW.DrawJANELAopçfase(Botao, spriteBatch, MENU, M1);
+                DRAW.DrawJANELAopçfase(Botao, spriteBatch, MENU, M1, BOTAO);
             }
 
             spriteBatch.End();

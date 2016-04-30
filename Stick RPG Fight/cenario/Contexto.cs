@@ -117,6 +117,7 @@ namespace Stick_RPG_Fight
             P1.imgBARRA = content.Load<Texture2D>("BARRA");
             P1.imgSOBRE = content.Load<Texture2D>("SOBRE");
             P1.imgVIDA = content.Load<Texture2D>("VIDA");
+            P1.imgVIDA2 = content.Load<Texture2D>("VIDA2");
             P1.imgENERGIA = content.Load<Texture2D>("ENERGIA");
             P1.imgMANA = content.Load<Texture2D>("MANA");
             P1.imgXP = content.Load<Texture2D>("xp");
@@ -163,7 +164,8 @@ namespace Stick_RPG_Fight
             //opç fase
 
             JANELA.J.imgPbranco = content.Load<Texture2D>("ponto branco");
-            JANELA.J.imgfaseB1 = content.Load<Texture2D>("fase B1");
+            JANELA.J.imgfaseB[0] = content.Load<Texture2D>("fase B1");
+            JANELA.J.imgfaseB[1] = content.Load<Texture2D>("fase B1");
 
             //spritefonte
             JANELA.J.Neon = content.Load<SpriteFont>("Neon");

@@ -57,7 +57,7 @@ namespace Stick_RPG_Fight
         public Point tamanhoAndari1 = new Point(166, 367); //Dimensões do sprite
         public Point tamanhoMORTEi1 = new Point(343, 378); //Dimensões do sprite (tamanho do levantar, + 10)
 
-        
+
         public Point tamanhoAgachari1 = new Point(198, 362); //Dimensões do sprite
         public Point tamanhoAgacharDEFi1 = new Point(215, 362); //Dimensões do sprite
         public Point tamanhoCaidoi1 = new Point(357, 178); //Dimensões do sprite
@@ -77,7 +77,7 @@ namespace Stick_RPG_Fight
         public Point SpriteSheetparadoi1 = new Point(20, 10); //Dimensões da spritesheet
         public Point SpriteSheetAndari1 = new Point(20, 4); //Dimensões da spritesheet
 
-        
+
         public Point SpriteSheetAgachari1 = new Point(8, 3); //Dimensões do spritesheet
         public Point SpriteSheetAgacharDEFi1 = new Point(8, 3); //Dimensões do spritesheet
         public Point SpriteSheetCaidoi1 = new Point(4, 8); //Dimensões do spritesheet
@@ -100,7 +100,7 @@ namespace Stick_RPG_Fight
         //FRAME para TUDO (menos parado e andar)
         public Point frameALLi1 = new Point(0, 0); //Marca o frame a ser utilizado
 
-        
+
         //
 
         //GERAL DOS RETANGLES
@@ -171,6 +171,7 @@ namespace Stick_RPG_Fight
         public List<ObjLançado> listadefacas = new List<ObjLançado>();
         public List<OndasdeAgua> listadeondadeagua = new List<OndasdeAgua>();
         public List<Poder_Visual> listadevisualPOWER = new List<Poder_Visual>();
+        public List<VIDAperdida> listavidaperdida = new List<VIDAperdida>();
 
         //CRIANDO NOVO INIMIGO (1)
         //CRIANDO NOVO INIMIGO (1)
@@ -187,7 +188,7 @@ namespace Stick_RPG_Fight
         public void GERARi1(List<Inimigo> listai1, int WidthTela, int HeightTela, Random aleatório)
         {
             Inimigo i1 = new Inimigo(); // gera um novo
-            i1.opç = aleatório.Next(1,3);
+            i1.opç = aleatório.Next(1, 3);
             if (i1.opç == 1)
             {
                 i1.individuo = new Rectangle(Contexto.Fundo.fase.X + Contexto.Fundo.fase.Width + Px, HeightTela - HeightTela / 3, WidthTela / 14, HeightTela / 4);
@@ -209,7 +210,7 @@ namespace Stick_RPG_Fight
             i1.manaT = 20;
             i1.energiaT = 100;
             i1.vida = 100;
-            
+
             listai1.Add(i1);
         }
 
@@ -246,9 +247,9 @@ namespace Stick_RPG_Fight
                 if (RASTEIRA)
                     individuo.Y = Contexto.Fundo.fase.Y + Contexto.Fundo.fase.Height - HeightTela / 3 - HeightTela / 45 + Py - HeightTela / 50;
                 if (MORRENDO)
-                    individuo.Y = Contexto.Fundo.fase.Y + Contexto.Fundo.fase.Height - HeightTela / 3 - HeightTela / 45 + Py ;
-                
-               
+                    individuo.Y = Contexto.Fundo.fase.Y + Contexto.Fundo.fase.Height - HeightTela / 3 - HeightTela / 45 + Py;
+
+
             }
             else if (opç == 2)
             {
@@ -285,6 +286,8 @@ namespace Stick_RPG_Fight
             HP(WidthTela, HeightTela, listai1, P1);
             //usar a lista de inimigos para expandir o tamanho e apagar
             REMOVERVISUPODER(WidthTela, HeightTela);
+            //posição da vida hud perdida
+            POSvidaperdida();
         }
 
         //diminuir codigo
@@ -354,7 +357,7 @@ namespace Stick_RPG_Fight
             //INTELIGENCIA DA LUTA//INTELIGENCIA DA LUTA
             if (!TOMANDOHIT && !ATACANDO && !PODER && !RASTEIRA && !MORRENDO && !CAIDO && !LEVANTANDO && opçluta == 0 && (P1.DistanciadeLutaADistancia.X > individuo.X && P1.DistanciadeLutaADistancia.X < individuo.X + individuo.Width || P1.DistanciadeLutaADistancia.X + P1.DistanciadeLutaADistancia.Width > individuo.X && P1.DistanciadeLutaADistancia.X + P1.DistanciadeLutaADistancia.Width < individuo.X + individuo.Width) && opçluta == 0)
             {
-                
+
                 if (mana >= 20)
                 {
                     opçluta = 7;
@@ -364,16 +367,16 @@ namespace Stick_RPG_Fight
                 else if (energia >= 15 && mana < 20)
                 {
 
-                    opçluta = aleatório.Next(4,6);
+                    opçluta = aleatório.Next(4, 6);
                     opç_Atk = 1;
 
                     D_E_frameALL(P1); // DIREITA ou ESQUERDA (frameall) e (olhar pro inimigo)
 
                     energia -= 15;
-                    
-                    
+
+
                 }
-                
+
             }
 
 
@@ -405,7 +408,7 @@ namespace Stick_RPG_Fight
                 }
 
                 //se p1 atacar agachado
-                if (P1.ATACANDO && P1.AGACHADO && opçluta == 0 && !DEFENDENDO && !AGACHADO || P1.PODER && opçluta == 0 && !DEFENDENDO && !AGACHADO )
+                if (P1.ATACANDO && P1.AGACHADO && opçluta == 0 && !DEFENDENDO && !AGACHADO || P1.PODER && opçluta == 0 && !DEFENDENDO && !AGACHADO)
                 {
 
                     opçluta = aleatório.Next(1, 4);
@@ -418,10 +421,10 @@ namespace Stick_RPG_Fight
                 {
                     if (energia >= 15)
                     {
-                        opçluta = aleatório.Next(4,7);
+                        opçluta = aleatório.Next(4, 7);
 
                         opç_Atk = 2;
-                        
+
 
                         energia -= 15;
 
@@ -452,14 +455,14 @@ namespace Stick_RPG_Fight
                 {
                     if (energia >= 15 && mana < 20)
                     {
-                        opçluta = aleatório.Next(4,7);
+                        opçluta = aleatório.Next(4, 7);
                         D_E_frameALL(P1);
                         energia -= 15;
                     }
                     //defesa caso n tenha mana nem energia
                     else if (energia < 15 && mana < 20 && !DEFENDENDO && !AGACHADO)
                     {
-                        opçluta = aleatório.Next(1,4);
+                        opçluta = aleatório.Next(1, 4);
                         D_E_frameALL(P1);
                     }
 
@@ -467,7 +470,7 @@ namespace Stick_RPG_Fight
                     {
                         opçluta = 7;
                         mana -= 20;
-                        D_E_frameALL(P1); 
+                        D_E_frameALL(P1);
                     }
                 }//fim parado
                 //
@@ -495,7 +498,7 @@ namespace Stick_RPG_Fight
                     }
                     else if (energia < 15)
                     {
-                        opçluta = aleatório.Next(1,4);
+                        opçluta = aleatório.Next(1, 4);
                         D_E_frameALL(P1); // DIREITA ou ESQUERDA (frameall) e (olhar pro inimigo)
                     }
                 }
@@ -617,7 +620,7 @@ namespace Stick_RPG_Fight
             }
             if (opçluta == 7)//PODER
             {
-                
+
                 PODER = true;
                 //para com os basicos
                 DEFENDENDO = false;
@@ -720,8 +723,8 @@ namespace Stick_RPG_Fight
                 }
             }
 
-            
-           //SEGUE O PERSONAGEM - MAS APENAS QND ESTA LONGE, Também não segue pos ataque, caso esteja longe.
+
+            //SEGUE O PERSONAGEM - MAS APENAS QND ESTA LONGE, Também não segue pos ataque, caso esteja longe.
             if (!TOMANDOHIT && !meio.Intersects(P1.DistanciadeLuta) && !ATACANDO && !PODER && !AGARRAR && !RASTEIRA && opçluta == 0 && !MORRENDO) // caso nao estejam tocando
             {
                 if (meio.X + meio.Width < P1.meio.X && !DIREITA) //se o bot estiver na esquerda do personagem
@@ -748,14 +751,14 @@ namespace Stick_RPG_Fight
                     ESQUERDA = true;
                     PARADO = false;
                     ANDANDO = true; // <=
-                    
+
                     ATACANDO = false;
                     AGACHADO = false;
                     DEFENDENDO = false;
                     RASTEIRA = false;
                     AGARRAR = false;
                     PODER = false;
-                     
+
                     //frame
                     frameAndari1.X = 0;
                     frameAndari1.Y = 0;
@@ -763,8 +766,8 @@ namespace Stick_RPG_Fight
                 }
 
             }
-            
-            
+
+
 
             /*
             //COLISAO ENTRE ELES
@@ -1035,7 +1038,7 @@ namespace Stick_RPG_Fight
                         frameALLi1.X--;
                     }
                     if (frameALLi1.Y >= 2)
-                        opçluta = 0; 
+                        opçluta = 0;
                 }
                 //defendendo e agachando
                 if (DEFENDENDO && AGACHADO)
@@ -1053,14 +1056,14 @@ namespace Stick_RPG_Fight
                         frameALLi1.X--;
                     }
                     if (frameALLi1.Y >= 2)
-                        opçluta = 0; 
+                        opçluta = 0;
                 }
                 //agachando sem defender
                 if (!DEFENDENDO && AGACHADO)
                 {
                     individuo.Width = WidthTela / 12;
                     individuo.Height = HeightTela / 4 + (2 * HeightTela / 70);
-                    
+
                     if (frameALLi1.X <= -1)
                     {
                         frameALLi1.X = 7;
@@ -1071,7 +1074,7 @@ namespace Stick_RPG_Fight
                         frameALLi1.X--;
                     }
                     if (frameALLi1.Y >= 2)
-                        opçluta = 0; 
+                        opçluta = 0;
                 }
 
                 //jogar faca
@@ -1101,7 +1104,7 @@ namespace Stick_RPG_Fight
                         {
                             faca_voando = true;
                             GerarFacas(WidthTela, HeightTela);
-                            
+
                         }
                     }
                     if (ATACK1)
@@ -1128,10 +1131,11 @@ namespace Stick_RPG_Fight
                             P1.vida -= 10;
                             P1.Vx += HeightTela / 20;
                             P1.GERARdano(P1.individuo.X, P1.individuo.Y, P1.individuo.Width, P1.individuo.Height, this.DIREITA, this.ESQUERDA, 10, WidthTela, HeightTela, 2); // personagem leva hit
+                            P1.gerarHUDVidaPerdida(HeightTela / 100); //10 de vida
                         }
-                    
-                            //FALTA MOSTRAR VC TOMANDO HIT
-                        
+
+                        //FALTA MOSTRAR VC TOMANDO HIT
+
                     }//fim atack1
                 }
 
@@ -1239,6 +1243,7 @@ namespace Stick_RPG_Fight
                     if (individuo.Intersects(P1.meio) && (!P1.DEFENDENDO && !P1.AGACHADO && P1.ESQUERDA) && P1.meio.X > individuo.X && frameALLi1.Y >= 2 && frameALLi1.Y <= 5)
                     {
                         P1.vida -= 1;
+                        P1.gerarHUDVidaPerdida(HeightTela / HeightTela); //1 de vida
                         P1.GERARdano(P1.individuo.X, P1.individuo.Y, P1.individuo.Width, P1.individuo.Height, this.DIREITA, this.ESQUERDA, 1, WidthTela, HeightTela, 2); // personagem leva hit
                     }
                     //falta fz P1 cair (hit)
@@ -1272,12 +1277,14 @@ namespace Stick_RPG_Fight
                     if (frameALLi1.X == 6 && P1.meio.X > individuo.X && frameALLi1.Y == 5 && P1.meio.Intersects(individuo))
                     {
                         P1.vida -= 10;
+                        P1.gerarHUDVidaPerdida(HeightTela / 100); //10 de vida
                         P1.GERARdano(P1.individuo.X, P1.individuo.Y, P1.individuo.Width, P1.individuo.Height, this.DIREITA, this.ESQUERDA, 10, WidthTela, HeightTela, 2); // personagem leva hit
-                        
+
                     }
                     if (frameALLi1.Y == 10 && P1.meio.X > individuo.X && P1.meio.Intersects(individuo))
                     {
                         P1.vida -= 2;
+                        P1.gerarHUDVidaPerdida(HeightTela / 400); //2 de vida
                         P1.GERARdano(P1.individuo.X, P1.individuo.Y, P1.individuo.Width, P1.individuo.Height, this.DIREITA, this.ESQUERDA, 2, WidthTela, HeightTela, 2); // personagem leva hit
                     }
                     //fim do agarrar
@@ -1329,7 +1336,7 @@ namespace Stick_RPG_Fight
                 //TOMANDO HIT
                 if (TOMANDOHIT)
                 {
-                   
+
                     if (HIT1)//CABEÇA
                     {
                         individuo.Width = WidthTela / 12;
@@ -1395,7 +1402,7 @@ namespace Stick_RPG_Fight
                 {
                     individuo.Height = HeightTela / 4 + (2 * HeightTela / 70);
                     individuo.Width = WidthTela / 12;
-                    
+
                     if (frameALLi1.X >= SpriteSheetDEFi1.X)
                     {
                         frameALLi1.X = 0;
@@ -1406,7 +1413,7 @@ namespace Stick_RPG_Fight
                         frameALLi1.X++;
                     }
                     if (frameALLi1.Y >= 2)
-                        opçluta = 0; 
+                        opçluta = 0;
                 }
                 //agachando e defedendo
                 if (DEFENDENDO && AGACHADO)
@@ -1423,7 +1430,7 @@ namespace Stick_RPG_Fight
                         frameALLi1.X++;
                     }
                     if (frameALLi1.Y >= 2)
-                        opçluta = 0; 
+                        opçluta = 0;
                 }
 
                 //agachando e sem defeder
@@ -1441,7 +1448,7 @@ namespace Stick_RPG_Fight
                         frameALLi1.X++;
                     }
                     if (frameALLi1.Y >= 2)
-                        opçluta = 0; 
+                        opçluta = 0;
                 }
 
                 //ATACANDOoooooooooooooooo
@@ -1467,7 +1474,7 @@ namespace Stick_RPG_Fight
                             opç_Atk = 0;
                             PARADO = true; // FAZER COM QUE NAO DESAPAREÇA
                         }
-                        if (frameALLi1.X == 2 && frameALLi1.Y == 5 )
+                        if (frameALLi1.X == 2 && frameALLi1.Y == 5)
                         {
                             faca_voando = true;
                             GerarFacas(WidthTela, HeightTela);
@@ -1497,6 +1504,7 @@ namespace Stick_RPG_Fight
                         {
                             P1.vida -= 10;
                             P1.Vx -= HeightTela / 20;
+                            P1.gerarHUDVidaPerdida(HeightTela / 100); //10 de vida
                             P1.GERARdano(P1.individuo.X, P1.individuo.Y, P1.individuo.Width, P1.individuo.Height, this.DIREITA, this.ESQUERDA, 10, WidthTela, HeightTela, 2); // personagem leva hit
                         }
                     }//fim atack1
@@ -1605,6 +1613,7 @@ namespace Stick_RPG_Fight
                     if (individuo.Intersects(P1.meio) && (!P1.DEFENDENDO && !P1.AGACHADO && P1.DIREITA) && P1.meio.X < individuo.X && frameALLi1.Y >= 2 && frameALLi1.Y <= 5)
                     {
                         P1.vida -= 1;
+                        P1.gerarHUDVidaPerdida(HeightTela / HeightTela); //1 de vida
                         P1.GERARdano(P1.individuo.X, P1.individuo.Y, P1.individuo.Width, P1.individuo.Height, this.DIREITA, this.ESQUERDA, 1, WidthTela, HeightTela, 2); // personagem leva hit
                     }
                     //falta fz P1 cair (hit)
@@ -1638,11 +1647,13 @@ namespace Stick_RPG_Fight
                     if (frameALLi1.X == 2 && P1.meio.X < individuo.X && frameALLi1.Y == 5 && P1.meio.Intersects(individuo))
                     {
                         P1.vida -= 10;
+                        P1.gerarHUDVidaPerdida(HeightTela / 100); //10 de vida
                         P1.GERARdano(P1.individuo.X, P1.individuo.Y, P1.individuo.Width, P1.individuo.Height, this.DIREITA, this.ESQUERDA, 10, WidthTela, HeightTela, 2); // personagem leva hit
                     }
                     if (frameALLi1.Y == 10 && P1.meio.X < individuo.X && P1.meio.Intersects(individuo))
                     {
                         P1.vida -= 2;
+                        P1.gerarHUDVidaPerdida(HeightTela / 400); //2 de vida
                         P1.GERARdano(P1.individuo.X, P1.individuo.Y, P1.individuo.Width, P1.individuo.Height, this.DIREITA, this.ESQUERDA, 2, WidthTela, HeightTela, 2); // personagem leva hit
                     }
                     //fim do agarrar
@@ -1655,8 +1666,8 @@ namespace Stick_RPG_Fight
                     }
                 }
             }//fim da esquerda
-            
-            
+
+
 
             //SPRITESHEET DA FACA
             //SPRITESHEET DA FACA
@@ -1675,7 +1686,7 @@ namespace Stick_RPG_Fight
                             listadefacas[i].frameFACA.X = 0;
                             listadefacas[i].frameFACA.Y++;
                         }
-                        if ( listadefacas[i].frameFACA.X == 2 &&  listadefacas[i].frameFACA.Y == 2)
+                        if (listadefacas[i].frameFACA.X == 2 && listadefacas[i].frameFACA.Y == 2)
                         {
                             listadefacas[i].frameFACA.X = 0;
                             listadefacas[i].frameFACA.Y = 0;
@@ -1741,7 +1752,7 @@ namespace Stick_RPG_Fight
 
             //regem
             contagemREGEN_Mana++;
-            if (contagemREGEN_Mana >= 22)
+            if (contagemREGEN_Mana >= 30)
             {
                 if (mana < manaT)
                 {
@@ -1750,7 +1761,7 @@ namespace Stick_RPG_Fight
                 contagemREGEN_Mana = 0;
             }
             contagemREGEN_Energia++;
-            if (contagemREGEN_Energia >= 9)
+            if (contagemREGEN_Energia >= 8)
             {
                 if (energia < energiaT)
                 {
@@ -1764,7 +1775,7 @@ namespace Stick_RPG_Fight
             {
                 if (listai1[i].vida <= 0 && !listai1[i].MORRENDO)
                 {
-                    
+
                     listai1[i].PARADO = false;
                     listai1[i].ANDANDO = false;
                     listai1[i].ATACANDO = false;
@@ -1840,7 +1851,7 @@ namespace Stick_RPG_Fight
 
                 O1.Vy = 0;
 
-                O1.PosY = 0 - HeightTela / 8 +(-Contexto.Fundo.fase.Y); // elas começam dentro do ceu e vai caindo
+                O1.PosY = 0 - HeightTela / 8 + (-Contexto.Fundo.fase.Y); // elas começam dentro do ceu e vai caindo
 
                 O1.CAINDO = true;
 
@@ -1860,7 +1871,7 @@ namespace Stick_RPG_Fight
         public void GerarFacas(int WidthTela, int HeightTela)
         {
             ObjLançado O1 = new ObjLançado();
-            
+
             //tamanho
             O1.OBJ.Width = HeightTela / 10;
             O1.OBJ.Height = HeightTela / 10;
@@ -1886,15 +1897,15 @@ namespace Stick_RPG_Fight
             }
 
             O1.Vy = 0;
-            
+
             O1.PosY = individuo.Y + individuo.Height / 2 - O1.OBJ.Height + (-Contexto.Fundo.fase.Y);
 
-            
+
 
             //colocar na lista de faca, caso seja faca.
             listadefacas.Add(O1);
 
-            
+
         }
         //posição da faca
         //posição da faca
@@ -1929,6 +1940,7 @@ namespace Stick_RPG_Fight
                         if (P1.meio.Intersects(listadefacas[i].OBJ))
                         {
                             P1.vida -= HeightTela / 70; //(15 de vida)
+                            P1.gerarHUDVidaPerdida(HeightTela / 70); //15 de vida
                             P1.GERARdano(P1.individuo.X, P1.individuo.Y, P1.individuo.Width, P1.individuo.Height, this.DIREITA, this.ESQUERDA, 15, WidthTela, HeightTela, 2); // personagem leva hit
                             listadefacas.Remove(listadefacas[i]);
                         }
@@ -1948,20 +1960,21 @@ namespace Stick_RPG_Fight
                         if (P1.meio.Intersects(listadefacas[i].OBJ))
                         {
                             P1.vida -= HeightTela / 70; //(15 de vida)
+                            P1.gerarHUDVidaPerdida(HeightTela / 70); //15 de vida
                             P1.GERARdano(P1.individuo.X, P1.individuo.Y, P1.individuo.Width, P1.individuo.Height, this.DIREITA, this.ESQUERDA, 15, WidthTela, HeightTela, 2); // personagem leva hit
                             listadefacas.Remove(listadefacas[i]);
                         }
                     }
 
                 }
-                
+
             }
             if (listadefacas.Count == 0)
             {
                 faca_voando = false;
             }
         }
-        
+
         //AGUA]
         //AGUA
         //AGUA
@@ -1989,7 +2002,7 @@ namespace Stick_RPG_Fight
                     }
                     if (ESQUERDA)
                     {
-                        A1.AguaR.X = individuo.X ;
+                        A1.AguaR.X = individuo.X;
                         A1.Px = individuo.X + (-Contexto.Fundo.fase.X); // posiçao do jogar + a posição mapa = posição universal
                         A1.esquerda = true;
                     }
@@ -2044,7 +2057,7 @@ namespace Stick_RPG_Fight
         //SANGRAR
         //SANGRAR
         //SANGRAR
-        public void Sangrar(int WidthTela, int HeightTela,Personagem P1, Random aleatório)
+        public void Sangrar(int WidthTela, int HeightTela, Personagem P1, Random aleatório)
         {
             //sangra apenas se acertar no inimigo E quando acertar, se nao defender
             if (P1.individuo.Intersects(meio) && P1.ATACANDO && (P1.individuo.X < individuo.X && P1.DIREITA || P1.individuo.X > individuo.X && P1.ESQUERDA) && !DEFENDENDO && !MORRENDO)
@@ -2101,7 +2114,8 @@ namespace Stick_RPG_Fight
                 //COMBO1
                 if (((P1.DIREITA && (P1.PARTE1 && P1.frameLUTA.Y == 1 && P1.frameLUTA.X == 1) && (!DEFENDENDO && ESQUERDA || DIREITA)) || (P1.ESQUERDA && (P1.PARTE1 && P1.frameLUTA.Y >= 1 && P1.frameLUTA.X == 6) && (!DEFENDENDO && DIREITA || ESQUERDA))) && !P1.INVERSO && !AGACHADO && !RASTEIRA)
                 {//para sangrar / tomar dano apenas qnd estiver em tal parte do ataque
-                    vida-= 10;
+                    vida -= 10;
+                    gerarHUDVidaPerdida(HeightTela/100);
                     P1.GERARdano(this.individuo.X, this.individuo.Y, this.individuo.Width, this.individuo.Height, P1.DIREITA, P1.ESQUERDA, 10, WidthTela, HeightTela, 1); // personagem leva dano (do personagem)
                     HIT1 = true;
                     opçluta = 10; //faz tomar hit e parar tudo
@@ -2117,7 +2131,7 @@ namespace Stick_RPG_Fight
                         ESQUERDA = false;
                         DIREITA = true;
                     }
-                    
+
                     if (P1.DIREITA)
                     {
                         frameALLi1.X = 0;
@@ -2134,6 +2148,7 @@ namespace Stick_RPG_Fight
                 if (((P1.DIREITA && (P1.PARTE2 && P1.frameLUTA.X == 4 && P1.frameLUTA.Y == 2) && (!DEFENDENDO && ESQUERDA || DIREITA)) || P1.ESQUERDA && (P1.PARTE2 && P1.frameLUTA.X == 2 && P1.frameLUTA.Y == 2) && (!DEFENDENDO && DIREITA || ESQUERDA)) && P1.COMBO1 && !AGACHADO && !RASTEIRA)
                 {
                     vida -= 20;
+                    gerarHUDVidaPerdida(HeightTela / 52);
                     P1.GERARdano(this.individuo.X, this.individuo.Y, this.individuo.Width, this.individuo.Height, P1.DIREITA, P1.ESQUERDA, 20, WidthTela, HeightTela, 1); // personagem leva dano (do personagem)
                     HIT1 = true;
                     TOMANDOHIT = true;
@@ -2168,6 +2183,7 @@ namespace Stick_RPG_Fight
                 if ((P1.DIREITA && (P1.PARTE3 && P1.frameLUTA.X == 4 && P1.frameLUTA.Y == 3) && (!DEFENDENDO && ESQUERDA || DIREITA) || P1.ESQUERDA && (P1.PARTE3 && (P1.frameLUTA.X == 3 && P1.frameLUTA.Y == 3) && (!DEFENDENDO && DIREITA || ESQUERDA))) && P1.COMBO1 && !RASTEIRA)
                 {
                     vida -= 30;
+                    gerarHUDVidaPerdida(HeightTela / 27);
                     P1.GERARdano(this.individuo.X, this.individuo.Y, this.individuo.Width, this.individuo.Height, P1.DIREITA, P1.ESQUERDA, 30, WidthTela, HeightTela, 1); // personagem leva dano (do personagem)
                     HIT2 = true;
                     TOMANDOHIT = true;
@@ -2201,6 +2217,7 @@ namespace Stick_RPG_Fight
                 if ((P1.DIREITA && P1.PARTE4 && P1.frameLUTA.Y == 4 && P1.frameLUTA.X == 0 && (!DEFENDENDO && ESQUERDA || DIREITA) || P1.ESQUERDA && P1.PARTE4 && P1.frameLUTA.Y == 4 && P1.frameLUTA.X == 7 && (!DEFENDENDO && DIREITA || ESQUERDA)) && P1.COMBO1 && !RASTEIRA)
                 {
                     vida -= 30;
+                    gerarHUDVidaPerdida(HeightTela / 27);
                     P1.GERARdano(this.individuo.X, this.individuo.Y, this.individuo.Width, this.individuo.Height, P1.DIREITA, P1.ESQUERDA, 30, WidthTela, HeightTela, 1); // personagem leva dano (do personagem)
                     HIT2 = true;
 
@@ -2238,27 +2255,27 @@ namespace Stick_RPG_Fight
             {
                 for (int i = 0; i < listadesangue.Count; i++)
                 {
-                    
+
                     listadesangue[i].sangueR.X = listadesangue[i].Vx + Contexto.Fundo.fase.X + listadesangue[i].VariavelX; // posição definida (não variável)
                     listadesangue[i].sangueR.Y = listadesangue[i].Vy + Contexto.Fundo.fase.Y + listadesangue[i].g;
                     //velocidade gravidade
                     listadesangue[i].g += aleatório.Next(HeightTela / 250, HeightTela / 100);
-                    
-                        //direita ou esquerda
-                        if (P1.individuo.Intersects(meio)  && P1.individuo.X < individuo.X && P1.DIREITA)
-                        {
-                            listadesangue[i].VariavelX += aleatório.Next(HeightTela / 300, HeightTela / 50);
-                        }
-                        if (P1.individuo.Intersects(meio) && P1.individuo.X > individuo.X && P1.ESQUERDA)
-                        {
-                            listadesangue[i].VariavelX -= aleatório.Next(HeightTela / 300, HeightTela / 50);
-                        }
 
-                        if (listadesangue[i].sangueR.Intersects(Contexto.Fundo.chao) || listadesangue[i].sangueR.Y > Contexto.Fundo.chao.Y + Contexto.Fundo.chao.Height)
-                        {
-                            listadesangue.Remove(listadesangue[i]);
-                        }
-                   
+                    //direita ou esquerda
+                    if (P1.individuo.Intersects(meio) && P1.individuo.X < individuo.X && P1.DIREITA)
+                    {
+                        listadesangue[i].VariavelX += aleatório.Next(HeightTela / 300, HeightTela / 50);
+                    }
+                    if (P1.individuo.Intersects(meio) && P1.individuo.X > individuo.X && P1.ESQUERDA)
+                    {
+                        listadesangue[i].VariavelX -= aleatório.Next(HeightTela / 300, HeightTela / 50);
+                    }
+
+                    if (listadesangue[i].sangueR.Intersects(Contexto.Fundo.chao) || listadesangue[i].sangueR.Y > Contexto.Fundo.chao.Y + Contexto.Fundo.chao.Height)
+                    {
+                        listadesangue.Remove(listadesangue[i]);
+                    }
+
                 }
             }
         }//fim do sangue
@@ -2347,8 +2364,46 @@ namespace Stick_RPG_Fight
             }
         }//fim do remover efeito
 
+        public void gerarHUDVidaPerdida(int qtdd)
+        {
+            VIDAperdida V = new VIDAperdida();
 
-    }
+            V.qtdd = qtdd;
+            V.R.Width = qtdd;
+            V.R.Height = this.VIDA.Height;
+            V.R.X = this.VIDA.X + this.VIDA.Width;
+            V.R.Y = this.VIDA.Y;
 
-   
+            this.listavidaperdida.Add(V);
+        }//fim gerar vida perdida
+
+        public void POSvidaperdida()
+        {
+            if (listavidaperdida.Count > 0)
+            {
+                for (int i = 0; i < listavidaperdida.Count; i++)
+                {
+                    if (i - 1 < 0)//1°
+                    {
+                        listavidaperdida[i].R.X = this.VIDA.X + this.VIDA.Width;
+                    }
+                    if (i - 1 >= 0) // se tiver na frente
+                    {
+                        listavidaperdida[i].R.X = listavidaperdida[i - 1].R.X + listavidaperdida[i - 1].R.Width;
+                    }
+
+                    listavidaperdida[i].R.Y = this.VIDA.Y;
+                    listavidaperdida[i].R.Width = listavidaperdida[i].qtdd;
+                    listavidaperdida[i].R.Height = this.VIDA.Height;
+
+                    listavidaperdida[i].contagem++;
+                    if (listavidaperdida[i].contagem == 120)
+                    {
+                        listavidaperdida.Remove(listavidaperdida[i]);
+                    }
+                }
+            }
+        }
+
+    }//fim da classe
 }
