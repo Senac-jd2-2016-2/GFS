@@ -333,6 +333,15 @@
     <Content Include="Content\menu1.png">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
+    <Content Include="Content\OK 1.png">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Content\OK 2.png">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Content\OK 3.png">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
     <Content Include="Content\p1 - joelhada4 combo1 E.png">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
@@ -367,6 +376,15 @@
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
     <Content Include="Content\predio.png">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Content\Q S.png">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Content\refresh 1.png">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Content\refresh 2.png">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
     <Content Include="Content\sangue.png">
@@ -464,6 +482,7 @@
     </EmbeddedResource>
   </ItemGroup>
   <ItemGroup>
+    <None Include="Arquivos do content\AlphaWood.ttf" />
     <None Include="Arquivos do content\BAR.spritefont" />
     <None Include="Arquivos do content\FIRESTARTER.spritefont" />
     <None Include="Arquivos do content\FIRESTARTER.TTF" />
@@ -471,7 +490,9 @@
     <None Include="Arquivos do content\Neon.spritefont" />
     <None Include="Arquivos do content\Neon.ttf" />
     <None Include="Content\AbstractClassicFont.ttf" />
-    <None Include="Content\FIRESTARTER.TTF" />
+    <None Include="Content\FIRESTARTER.TTF">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <Import Project="$(MSBuildExtensionsPath)\MonoGame\v3.0\MonoGame.Content.Builder.targets" />

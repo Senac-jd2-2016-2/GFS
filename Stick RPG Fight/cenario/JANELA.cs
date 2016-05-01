@@ -16,7 +16,8 @@ namespace Stick_RPG_Fight
         public static JANELA J = new JANELA();
 
         //escrita
-        public SpriteFont Neon, Firefont;
+        public SpriteFont Neon, Firefont, Woodfont;
+
 
         //parte dos retangulos
         public Rectangle R = new Rectangle();
@@ -27,6 +28,9 @@ namespace Stick_RPG_Fight
         public Rectangle Bpoderes = new Rectangle();
         public Rectangle Barmas = new Rectangle();
         public Rectangle Bpet = new Rectangle();
+        public Rectangle Brefresh = new Rectangle();
+        public Rectangle Bok = new Rectangle();
+        public Rectangle Quest = new Rectangle();
 
         //PAUSE
         public Rectangle pauseJANELA = new Rectangle();
@@ -41,6 +45,13 @@ namespace Stick_RPG_Fight
         public Texture2D imgjanelacombo, imgjanelacinzaopç1, imgjanelacomercio, imgbotaoComercioOFF, imgbotaoComercioON;
         public Texture2D imgbotaoPoderesOFF, imgbotaoPoderesON, imgbotaoX, imgbotaoXred;
         public Texture2D imgbotaoArmasOFF, imgbotaoArmasON, imgbotaoCombosOFF, imgbotaoCombosON, imgbotaoPetON, imgbotaoPetOFF;
+
+        //QUEST
+        public Texture2D imgQuest, imgRefresh1, imgRefresh2, imgOK1, imgOK2, imgOK3;
+        public bool RODAR, bREFRESH, bOK, JANELAQUEST;
+        public Point tamanhoQuest = new Point(788, 613);
+        public Point spriteQuest = new Point(8, 6);
+        public Point frameQuest = new Point(0, 0), POSquest = new Point(0,0);
 
         //ESCOLHA DE FASE
         public Texture2D imgPbranco;
@@ -59,6 +70,36 @@ namespace Stick_RPG_Fight
         public bool JANELACOMBO = false, JANELACOMERCIO = false, ARMAS, PET, PODERES, bXIS, bCOMBO, bCOMERCIO, bARMAS, bPET, bPODERES;
         //pause
         public bool JANELAPAUSE, bSAIR, bRESUME;
+
+        //
+        public void POSQUEST(int W, int H)
+        {
+            Quest.Width = H - W / 6 + H / 38; //1080 - 320 + 28 = 788
+            Quest.Height = W / 3 - H / 40;//640 - 27= 613
+            Quest.X = W / 2 - ((H - W / 6 + H / 38) / 2);
+            Quest.Y = POSquest.Y - (W / 3 - H / 40);
+
+            if (JANELAQUEST)
+            {
+                if (POSquest.Y > H / 2)
+                {
+                    POSquest.Y = H / 2;
+                }
+                if (POSquest.Y < H / 2)
+                {
+                    POSquest.Y += H / 20; //54
+                }
+                if (POSquest.Y = H / 2)
+                {
+
+                }
+            }
+            else if (!JANELAQUEST)
+            {
+                POSquest.Y = 0;
+            }
+        }
+
 
         //
         public void CRIARlinhas()
