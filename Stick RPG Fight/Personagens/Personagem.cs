@@ -229,8 +229,8 @@ namespace Stick_RPG_Fight
                 energia = energiaTOTAL;
             }
 
+            XPrec.Width = (int)(((float)(XP) / XPT) * XPTrec.Width);
 
-            XPrec.Width = (int)(((float)(XP) / XPT) * WidthTela - HeightTela / 10 - HeightTela / 50);
             if (XPrec.Width > 0)
             {
                 Pino.X = XPTrec.X + XPrec.Width;
@@ -242,6 +242,17 @@ namespace Stick_RPG_Fight
             Pino.Y = XPrec.Y;
             Pino.Height = XPrec.Height;
             Pino.Width = HeightTela / 90;
+
+            //HUD
+            BarraVida.Width = (int)((float)(vida) / vidaTOTAL * Barra.Width);
+            BarraEnergia.Width = (int)((float)(energia) / energiaTOTAL * Barra.Width);
+            BarraMana.Width = (int)((float)(mana) / manaTOTAL * Barra.Width);
+
+            if (vida <= 0)
+            {
+                vida = 0;
+            }
+
 
         }
         //===========================================================================================================================================================================
@@ -1874,6 +1885,9 @@ namespace Stick_RPG_Fight
             DIREITA = true;
             PARADO = true;
             COMBATE = false;
+            SENDOAGARRADO = false;
+            COLIDINDOdireita = false;
+            COLIDINDOesquerda = false;
 
             vida = 200;
             vidaTOTAL = 200;

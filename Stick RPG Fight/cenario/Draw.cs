@@ -13,7 +13,7 @@ namespace Stick_RPG_Fight
 {
     class Draw
     {
-        public void DrawCombate(SpriteBatch spriteBatch, Personagem P1, List<Inimigo> listai1, Rectangle TELACHEIA, Rectangle FlechaD, Rectangle FlechaE, Texture2D imgFlechaD, Texture2D imgFlechaE, SpriteFont menu, SpriteFont HUDfont, int WidthTela, int HeightTela, Texture2D imgSangue, Inimigo i1, Agua DefineAgua, SpriteFont BARfont)
+        public void DrawCombate(SpriteBatch spriteBatch, Personagem P1, List<Inimigo> listai1, Rectangle FlechaD, Rectangle FlechaE, Texture2D imgFlechaD, Texture2D imgFlechaE, SpriteFont menu, SpriteFont HUDfont, int WidthTela, int HeightTela, Texture2D imgSangue, Inimigo i1, Agua DefineAgua, SpriteFont BARfont)
         {
             if (Contexto.Fase[0])
             {
@@ -460,11 +460,11 @@ namespace Stick_RPG_Fight
 
                 spriteBatch.DrawString(BARfont, "ENERGIA " + listai1[i].energia, new Vector2(listai1[i].VIDA.X + 8, listai1[i].VIDA.Y + listai1[i].VIDA.Height / 2 + listai1[i].VIDA.Height / 4), Color.Black);
 
-                if (listai1[i].individuo.X > TELACHEIA.X + TELACHEIA.Width)
+                if (listai1[i].individuo.X > JANELA.J.FUNDO.X + JANELA.J.FUNDO.Width)
                 {
                     spriteBatch.Draw(imgFlechaD, FlechaD, Color.White);
                 }
-                if (listai1[i].individuo.X < TELACHEIA.X)
+                if (listai1[i].individuo.X < JANELA.J.FUNDO.X)
                 {
                     spriteBatch.Draw(imgFlechaE, FlechaE, Color.White);
                 }
@@ -695,7 +695,7 @@ namespace Stick_RPG_Fight
 
             if (P1.PODER)
             {
-                spriteBatch.Draw(Contexto.Fundo.imgfundopoder, TELACHEIA, Color.White);
+                spriteBatch.Draw(Contexto.Fundo.imgfundopoder, JANELA.J.FUNDO, Color.White);
             }
 
             //HUD P1

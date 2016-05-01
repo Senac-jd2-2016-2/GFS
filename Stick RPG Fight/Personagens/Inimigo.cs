@@ -1788,6 +1788,7 @@ namespace Stick_RPG_Fight
 
                     listai1[i].MORRENDO = true;
                     listai1[i].opçluta = 0;
+                    listai1[i].vida = 0;
 
                     if (P1.meio.X < listai1[i].individuo.X)
                     {

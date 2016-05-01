@@ -38,6 +38,7 @@
     <ApplicationIcon>Icon.ico</ApplicationIcon>
   </PropertyGroup>
   <ItemGroup>
+    <Compile Include="ATUALIZAÇÃO.cs" />
     <Compile Include="cenario\JANELA.cs" />
     <Compile Include="Personagens\Dano.cs" />
     <Compile Include="OndasdeAgua.cs" />

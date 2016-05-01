@@ -161,7 +161,14 @@ namespace Stick_RPG_Fight
             P1.SENDOAGARRADO = false;
             P1.COLIDINDOdireita = false;
             P1.COLIDINDOesquerda = false;
+
+            //limpando listas
             P1.listadedano.Clear();
+            P1.listaclonePoder.Clear();
+            P1.listadeagua.Clear();
+            P1.listadeondadeagua.Clear();
+            P1.listadevisualPOWER.Clear();
+            P1.listavidaperdida.Clear();
         }
 
         public void FUNÇÕESPAUSE(bool BOTAO, List<Inimigo> listai1, Personagem P1, Botoes Botao, int W, int H)

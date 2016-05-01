@@ -18,7 +18,7 @@ namespace Stick_RPG_Fight
     {
         GraphicsDeviceManager graphics;
         SpriteBatch spriteBatch;
-        
+
         //inicio
         //gerador de numero randomico
         Random aleatório;
@@ -27,7 +27,7 @@ namespace Stick_RPG_Fight
         bool MENU = true, menu00 = true, menu01, Bapply, BFULL, BOTAO;
         bool[] b1 = new bool[5];//botoes do menu
         Rectangle[] B1 = new Rectangle[5]; //botao
-        Rectangle Bfull, APPLY, TELACHEIA, FlechaE, FlechaD;
+        Rectangle Bfull, APPLY, FlechaE, FlechaD;
 
         //fonte escrita do jogo
         SpriteFont menu;
@@ -71,7 +71,7 @@ namespace Stick_RPG_Fight
         //fim
         Draw DRAW = new Draw();
         Inimigo i1 = new Inimigo();
-       
+
         //MAPAS
 
         public Game1()
@@ -80,12 +80,12 @@ namespace Stick_RPG_Fight
             Content.RootDirectory = "Content";
         }
 
-        
+
         protected override void Initialize()
         {
-           
+
             Window.Title = "Stick RPG Fight";
-            
+
             aleatório = new Random();
 
             //botão menu00
@@ -108,7 +108,7 @@ namespace Stick_RPG_Fight
             base.Initialize();
         }
 
-        
+
         protected override void LoadContent()
         {
             spriteBatch = new SpriteBatch(GraphicsDevice);
@@ -132,28 +132,28 @@ namespace Stick_RPG_Fight
             imgSangue = Content.Load<Texture2D>("sangue");
 
             imgteste = Content.Load<Texture2D>("teste");
-           //--
+            //--
         }
 
-       
+
         protected override void UnloadContent()
         {
-           
+
         }
 
         protected override void Update(GameTime gameTime)
         {
             //universal
-            
+
             var mouseState = Mouse.GetState();
             var mousePosition = new Point(mouseState.X, mouseState.Y);
-           
+
 
             if (Mouse.GetState().LeftButton != ButtonState.Pressed) // BOTAO não pressionado
             {
                 BOTAO = false;
             }
-           
+
 
 
             //GAME
@@ -178,7 +178,7 @@ namespace Stick_RPG_Fight
                         M1.COMBATE = false;
                         M1.HISTORY = false;
                     }
-                    
+
                     //clicando pra entrar no MODO combate (DENTRO DO MENU)
                     //clicando pra entrar no combate
                     //clicando pra entrar no combate
@@ -235,7 +235,7 @@ namespace Stick_RPG_Fight
                         //passagem
                         if (Botao.HOMEb && !BOTAO)
                         {
-                            
+
                             JANELA.J.JANELAPAUSE = true;
                         }
                     }
@@ -344,50 +344,6 @@ namespace Stick_RPG_Fight
                                 menu00 = false;//sai pro proximo menu
                                 menu01 = true;
 
-                                // atualização
-
-                                
-
-                                //dimensão dos BOTÕES
-                                M1.HistoryBotao = new Rectangle(0, Window.ClientBounds.Height / 3, Window.ClientBounds.Width / 3, Window.ClientBounds.Height / 8);
-                                M1.CombateBotao = new Rectangle(Window.ClientBounds.Width - Window.ClientBounds.Width / 3, Window.ClientBounds.Height / 3, Window.ClientBounds.Width / 3, Window.ClientBounds.Height / 8);
-
-                                P1.individuo = new Rectangle(0, Window.ClientBounds.Height - Window.ClientBounds.Height / 3, Window.ClientBounds.Width / 16, Window.ClientBounds.Height / 4);
-
-                                Contexto.Fundo.fase = new Rectangle(0, -Window.ClientBounds.Height / 10, Window.ClientBounds.Width * 3, Window.ClientBounds.Height + Window.ClientBounds.Height / 10);
-                                Contexto.Fundo.chao = new Rectangle(Contexto.Fundo.fase.X, Contexto.Fundo.fase.Y + Window.ClientBounds.Height / 4 + Contexto.Fundo.fase.Height - Window.ClientBounds.Height / 3 - 1, Contexto.Fundo.fase.Width, Window.ClientBounds.Height / 3 - Window.ClientBounds.Height / 4);
-
-                                //MediaPlayer.Play(AUDIO.menusong);
-
-                                //botao
-                                Botao.HOME = true;
-                                Botao.HOMEquadrado = new Rectangle(Window.ClientBounds.Height / 100, Window.ClientBounds.Height / 100, Window.ClientBounds.Height / 10, Window.ClientBounds.Height / 10);
-                                
-                                Botao.COMERCIOquadrado = new Rectangle(Window.ClientBounds.Height / 100, Window.ClientBounds.Height / 100 + Window.ClientBounds.Height / 10 + Window.ClientBounds.Height / 100, Window.ClientBounds.Height / 10, Window.ClientBounds.Height / 10);
-                                
-                                Botao.COMBOSquadrado = new Rectangle(Window.ClientBounds.Height / 100,  Window.ClientBounds.Height / 100 + Window.ClientBounds.Height / 10 + Window.ClientBounds.Height / 100 + Window.ClientBounds.Height / 10 + Window.ClientBounds.Height / 100, Window.ClientBounds.Height / 10, Window.ClientBounds.Height / 10);
-
-                                //HUD
-                                //barra
-                                P1.XPrec = new Rectangle(Botao.HOMEquadrado.X + Botao.HOMEquadrado.Width + Window.ClientBounds.Height / 100, Botao.HOMEquadrado.Y, 0, Window.ClientBounds.Height / 24);
-                                P1.XPTrec = new Rectangle(Botao.HOMEquadrado.X + Botao.HOMEquadrado.Width + Window.ClientBounds.Height / 100, Botao.HOMEquadrado.Y, Window.ClientBounds.Width - Window.ClientBounds.Height / 10 - Window.ClientBounds.Height / 50, Window.ClientBounds.Height / 24);
-
-                                P1.Barra = new Rectangle(Botao.HOMEquadrado.X + Botao.HOMEquadrado.Width + Window.ClientBounds.Height / 100, Botao.COMERCIOquadrado.Y, Window.ClientBounds.Width / 3, Window.ClientBounds.Height / 10);
-                                P1.BarraEnergia = new Rectangle(Botao.HOMEquadrado.X + Botao.HOMEquadrado.Width + Window.ClientBounds.Height / 100, Botao.COMERCIOquadrado.Y, Window.ClientBounds.Width / 3, Window.ClientBounds.Height / 10);
-                                P1.BarraVida = new Rectangle(Botao.HOMEquadrado.X + Botao.HOMEquadrado.Width + Window.ClientBounds.Height / 100, Botao.COMERCIOquadrado.Y, Window.ClientBounds.Width / 3, Window.ClientBounds.Height / 10);
-                                P1.BarraMana = new Rectangle(Botao.HOMEquadrado.X + Botao.HOMEquadrado.Width + Window.ClientBounds.Height / 100, Botao.COMERCIOquadrado.Y, Window.ClientBounds.Width / 3, Window.ClientBounds.Height / 10);
-
-
-                                //se não salvou o game (COMEÇO DO GAME)
-                                P1.PersonagemGAMEZERADO(); // zera tudo
-
-                                //tela
-                                TELACHEIA = new Rectangle(0, 0, Window.ClientBounds.Width, Window.ClientBounds.Height);
-
-                                //flecha D e E
-                                FlechaD = new Rectangle(Window.ClientBounds.Width - Window.ClientBounds.Height / 10, Window.ClientBounds.Height - Window.ClientBounds.Height / 10, Window.ClientBounds.Height / 10, Window.ClientBounds.Height / 10);
-                                FlechaE = new Rectangle(0, Window.ClientBounds.Height - Window.ClientBounds.Height / 10, Window.ClientBounds.Height / 10, Window.ClientBounds.Height / 10);
-
                             }//fim da transição
 
                         }
@@ -412,6 +368,7 @@ namespace Stick_RPG_Fight
 
                             M1.menu01GAME(WidthTela, HeightTela); //RESUMAO 
                             JANELA.J.POSIÇÃOPAUSE(WidthTela, HeightTela);
+                            ATUALIZAÇÃO.ATLZÇ.AtualizaTamanhoComeço(WidthTela, HeightTela, Botao, P1, M1, FlechaE, FlechaD); // retangulos
                         }
                     }
                 }// FIM DO INICIO
@@ -482,7 +439,7 @@ namespace Stick_RPG_Fight
                             }
 
 
-                            
+
                             //açao
                             //açao
                             //açao
@@ -521,12 +478,6 @@ namespace Stick_RPG_Fight
                                 contagemGERADOR++;
                             }
 
-
-                            //POSIÇÃO DO EFEITO VISUAL
-                            //POSIÇÃO DO EFEITO VISUAL
-                            //POSIÇÃO DO EFEITO VISUAL
-
-
                         }
                         else if (!P1.PODER)
                         {
@@ -554,7 +505,7 @@ namespace Stick_RPG_Fight
                         //definir o combate
                         for (int i = 0; i < listai1.Count; i++) // atualização de todos os inimigos
                         {
-                            if (listai1[i].individuo.Intersects(TELACHEIA)) // se ele estiver NA TELA
+                            if (listai1[i].individuo.Intersects(JANELA.J.FUNDO)) // se ele estiver NA TELA
                             {
                                 P1.COMBATE = true;
                             }
@@ -564,19 +515,15 @@ namespace Stick_RPG_Fight
                             }
                         }
 
-                        //HUD
-                        P1.BarraVida.Width = (int)((float)(P1.vida) / P1.vidaTOTAL * WidthTela / 3);
-                        P1.BarraEnergia.Width = (int)((float)(P1.energia) / P1.energiaTOTAL * WidthTela / 3);
-                        P1.BarraMana.Width = (int)((float)(P1.mana) / P1.manaTOTAL * WidthTela / 3);
 
                         //constantes (AUMENTA ENERGIA OU MANA COM O TEMPO)
-                        if (P1.energia <= P1.energiaTOTAL && !P1.CORRENDO && !P1.PULANDOcorrendo && !P1.ATACANDO)
+                        if (P1.energia < P1.energiaTOTAL && !P1.CORRENDO && !P1.PULANDOcorrendo && !P1.ATACANDO)
                         {
                             P1.energia += 2;
                         }
-                        if (P1.mana <= P1.manaTOTAL && !P1.PODER)
+                        if (P1.mana < P1.manaTOTAL && !P1.PODER)
                         {
-                            if (contagemREGEN == 2)
+                            if (contagemREGEN >= 2)
                             {
                                 P1.mana += 1;
                                 contagemREGEN = 0;
@@ -613,14 +560,14 @@ namespace Stick_RPG_Fight
 
                 JANELA.J.FUNÇÕES(BOTAO); // janelas
 
-               
+
 
             }
             if (JANELA.J.JANELAPAUSE)
             {
                 var WidthTela = Window.ClientBounds.Width;
                 var HeightTela = Window.ClientBounds.Height;
-                 //PAUSADO
+                //PAUSADO
                 //PAUSADO
                 //PAUSADO
                 //PAUSADO
@@ -634,12 +581,12 @@ namespace Stick_RPG_Fight
                 JANELA.J.FUNÇÕESOPÇFASE(WidthTela, HeightTela, Botao, M1, MENU, BOTAO);
                 JANELA.J.POSopçfase(WidthTela, HeightTela);
             }
-            
+
 
             base.Update(gameTime);
         }
 
-       
+
         protected override void Draw(GameTime gameTime)
         {
             GraphicsDevice.Clear(Color.Black);
@@ -651,7 +598,7 @@ namespace Stick_RPG_Fight
 
             spriteBatch.Begin();
 
-            
+
 
 
             if (MENU)
@@ -675,14 +622,14 @@ namespace Stick_RPG_Fight
 
             if (M1.COMBATE)
             {
-                
-                DRAW.DrawCombate(spriteBatch, P1, listai1, TELACHEIA, FlechaD, FlechaE, imgFlechaD, imgFlechaE, menu, HUDfont, WidthTela, HeightTela, imgSangue, i1, DefineAgua, BARfont); //RESUMAO
+
+                DRAW.DrawCombate(spriteBatch, P1, listai1, FlechaD, FlechaE, imgFlechaD, imgFlechaE, menu, HUDfont, WidthTela, HeightTela, imgSangue, i1, DefineAgua, BARfont); //RESUMAO
                 DRAW.DrawDano(spriteBatch, P1);// dano na tela (ou cura)
                 DRAW.DrawCLONES(spriteBatch, P1); // PODER
-                
 
-                spriteBatch.DrawString(menu, "LISTA: " + listai1.Count , new Vector2(0, Window.ClientBounds.Height - 15), Color.Black); //teste
-                
+
+                spriteBatch.DrawString(menu, "LISTA: " + listai1.Count, new Vector2(0, Window.ClientBounds.Height - 15), Color.Black); //teste
+
             }//FIM DO COMBATE
 
             //botao menu e comercio
