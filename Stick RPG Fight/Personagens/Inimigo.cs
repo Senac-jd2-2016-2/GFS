@@ -1809,8 +1809,16 @@ namespace Stick_RPG_Fight
 
                 if (listai1[i].frameALLi1.X <= 3 && listai1[i].frameALLi1.Y >= 12 && listai1[i].MORRENDO)
                 {
-                    listai1.Remove(listai1[i]);
+                    //+xp
                     P1.XP += 10;
+                    //quest
+                    if (JANELA.J.Qopç == 1)
+                    {
+                        JANELA.J.Qqtddcompletada++;
+                    }
+                    //remover
+                    listai1.Remove(listai1[i]);
+                   
                 }
             }
         }

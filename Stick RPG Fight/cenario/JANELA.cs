@@ -48,10 +48,11 @@ namespace Stick_RPG_Fight
 
         //QUEST
         public Texture2D imgQuest, imgRefresh1, imgRefresh2, imgOK1, imgOK2, imgOK3;
-        public bool RODAR, bREFRESH, bOK, JANELAQUEST;
+        public bool RODAR1, RODAR2, bREFRESH, bOK, JANELAQUEST, QUESTdisponivel;
         public Point tamanhoQuest = new Point(788, 613);
         public Point spriteQuest = new Point(8, 6);
         public Point frameQuest = new Point(0, 0), POSquest = new Point(0,0);
+        public int Qopç, Qqtdd, Qcompletadas, Qqtddcompletada, Qtempo;//opç de quest/ quantidade pra terminar quest/ quantas quests completadas/ quantidade de coisas feitas na quest/ tempo;
 
         //ESCOLHA DE FASE
         public Texture2D imgPbranco;
@@ -71,6 +72,138 @@ namespace Stick_RPG_Fight
         //pause
         public bool JANELAPAUSE, bSAIR, bRESUME;
 
+        public void COMPLETARQuest(Menu M1, Personagem P1, Botoes Botao, List<Inimigo> listai1, int W, int H)
+        {
+            if (M1.COMBATE)
+            {
+                if (Qqtddcompletada >= Qqtdd) // MISAO COMPLETADA
+                {
+                    Qcompletadas++;
+                    Qqtddcompletada = 0;
+
+                    P1.XP = P1.XP + 50 + (10 * Qcompletadas);
+                    
+                    //TERMINAR FASE
+                    M1.COMBATE = false;
+                    //posição volta pro começo e os inimigos somem (SAI DA FASE)
+                    JANELA.J.ZERARFASE(listai1, P1, Botao, W, H);
+                }
+                
+                if (Qopç == 2)
+                {
+                    Qtempo++;
+                    if (Qtempo >= 60)
+                    {
+                        Qtempo = 0;
+                        Qqtddcompletada++;
+                    }
+                }
+            
+            }
+            else if (!M1.COMBATE)
+            {
+                Qqtddcompletada = 0;
+                Qtempo = 0;
+            }
+        }
+
+        public void GERARQuest(Random A)
+        {
+            Qopç = A.Next(1, 3); // 2 opç
+            if (Qopç == 1)
+            {
+                Qqtdd = 10 + (3 * Qcompletadas); // qnt precisa pra completar
+            }
+            if (Qopç == 2)
+            {
+                Qqtdd = 30 + (5 * Qcompletadas);
+            }
+        }//fim gerar quest
+
+        //
+        public void FUNÇOESQUEST(bool BOTAO, Random A)
+        {
+
+            if (QUESTdisponivel)
+            {
+                var mouseState = Mouse.GetState();
+                var mousePosition = new Point(mouseState.X, mouseState.Y);
+                if (Mouse.GetState().LeftButton != ButtonState.Pressed) // BOTAO não pressionado
+                {
+                    BOTAO = false;
+                }
+                //--------------------------------------------------------------------------------
+
+                if (JANELA.J.Brefresh.Contains(mousePosition) && Mouse.GetState().LeftButton == ButtonState.Pressed && !RODAR1 && !RODAR2)
+                {
+                    BOTAO = true;
+                    JANELA.J.bREFRESH = true;
+                }
+                if (!JANELA.J.Brefresh.Contains(mousePosition))
+                    JANELA.J.bREFRESH = false;
+                //botao girar
+                if (JANELA.J.bREFRESH && !BOTAO && frameQuest.X == 0 && frameQuest.Y == 0 && !RODAR1 && !RODAR2)
+                {
+                    RODAR1 = true;
+                    JANELA.J.bREFRESH = false;
+                    GERARQuest(A);
+                }
+                if (JANELA.J.bREFRESH && !BOTAO && frameQuest.X == 2 && frameQuest.Y == 5 && !RODAR1 && !RODAR2)
+                {
+                    RODAR2 = true;
+                    JANELA.J.bREFRESH = false;
+                    GERARQuest(A);
+                }
+
+
+
+                //r
+                if (RODAR1)
+                {
+                    frameQuest.X++;
+                    if (frameQuest.X >= spriteQuest.X)
+                    {
+                        frameQuest.X = 0;
+                        frameQuest.Y++;
+                    }
+                    if (frameQuest.X == 2 && frameQuest.Y == 5)
+                    {
+                        RODAR1 = false;
+                    }
+                }
+                if (RODAR2)
+                {
+                    frameQuest.X--;
+                    if (frameQuest.X <= -1)
+                    {
+                        frameQuest.X = 7;
+                        frameQuest.Y--;
+                    }
+                    if (frameQuest.X == 0 && frameQuest.Y == 0)
+                    {
+                        RODAR2 = false;
+                    }
+                }
+
+
+
+                //aceitar missão
+                if (JANELA.J.Bok.Contains(mousePosition) && Mouse.GetState().LeftButton == ButtonState.Pressed && !RODAR1 && !RODAR2)
+                {
+                    BOTAO = true;
+                    JANELA.J.bOK = true;
+                }
+                if (!JANELA.J.Bok.Contains(mousePosition))
+                    JANELA.J.bOK = false;
+
+                if (JANELA.J.bOK && !BOTAO && !RODAR1 && !RODAR2)
+                {
+                    JANELAQUEST = false;
+                }
+            }
+
+        }//fim funções quest
+
         //
         public void POSQUEST(int W, int H)
         {
@@ -78,6 +211,16 @@ namespace Stick_RPG_Fight
             Quest.Height = W / 3 - H / 40;//640 - 27= 613
             Quest.X = W / 2 - ((H - W / 6 + H / 38) / 2);
             Quest.Y = POSquest.Y - (W / 3 - H / 40);
+
+            Brefresh.X = Quest.X + H / 3; //360
+            Brefresh.Y = Quest.Y + H / 4 + H / 37; //270 + 29 =299
+            Brefresh.Width = H / 13 - H / 300 ;// 83 - 3 = 80
+            Brefresh.Height = H / 13 - H / 400;// 83 - 2 = 81
+
+            Bok.X = Quest.X + H / 4 + H / 100; //270 + 10 = 280
+            Bok.Y = Quest.Y + H / 2 - H / 38; //540 - 28 = 512
+            Bok.Width = H / 5 + H / 40;// 216 + 27 =243
+            Bok.Height = H / 13 - H / 200;// 83 - 5 = 78
 
             if (JANELAQUEST)
             {
@@ -88,15 +231,17 @@ namespace Stick_RPG_Fight
                 if (POSquest.Y < H / 2)
                 {
                     POSquest.Y += H / 20; //54
+                    QUESTdisponivel = false;
                 }
-                if (POSquest.Y = H / 2)
+                if (POSquest.Y == H / 2)
                 {
-
+                    QUESTdisponivel = true;
                 }
             }
             else if (!JANELAQUEST)
             {
                 POSquest.Y = 0;
+                QUESTdisponivel = false;
             }
         }
 
@@ -144,6 +289,9 @@ namespace Stick_RPG_Fight
                         Contexto.Fase[i] = true;
                         Botao.HOME = false;
                         JANELA.J.OPÇFASES = false;
+
+                        //abre janela de quest
+                        JANELA.J.JANELAQUEST = true;
                     }
                 }
             }

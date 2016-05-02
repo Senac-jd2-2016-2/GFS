@@ -167,9 +167,19 @@ namespace Stick_RPG_Fight
             JANELA.J.imgfaseB[0] = content.Load<Texture2D>("fase B1");
             JANELA.J.imgfaseB[1] = content.Load<Texture2D>("fase B1");
 
+            //quests
+            JANELA.J.imgQuest = content.Load<Texture2D>("Q S");
+            JANELA.J.imgRefresh1 = content.Load<Texture2D>("refresh 1");
+            JANELA.J.imgRefresh2 = content.Load<Texture2D>("refresh 2");
+            JANELA.J.imgOK1 = content.Load<Texture2D>("OK 1");
+            JANELA.J.imgOK2 = content.Load<Texture2D>("OK 2");
+            JANELA.J.imgOK3 = content.Load<Texture2D>("OK 3");
+
+
             //spritefonte
             JANELA.J.Neon = content.Load<SpriteFont>("Neon");
             JANELA.J.Firefont = content.Load<SpriteFont>("FIRESTARTER");
+            JANELA.J.Woodfont = content.Load<SpriteFont>("Woodfont");
 
             //visual do poder lançado
             Poder_Visual.p.imgcirculo = content.Load<Texture2D>("poder");

@@ -52,8 +52,8 @@ namespace Stick_RPG_Fight
 
             
             //flecha D e E
-            FlechaD = new Rectangle(W - H / 11, H - H / 11, H / 11, H / 11);
-            FlechaE = new Rectangle(0, H - H / 11, H / 11, H / 11);
+            //FlechaD = new Rectangle(W - H / 11, H - H / 11, H / 11, H / 11);
+            //FlechaE = new Rectangle(0, H - H / 11, H / 11, H / 11);
         }
     }
 }

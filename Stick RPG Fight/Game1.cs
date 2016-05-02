@@ -24,7 +24,7 @@ namespace Stick_RPG_Fight
         Random aleatório;
 
         //booleaveis usuais comuns no game
-        bool MENU = true, menu00 = true, menu01, Bapply, BFULL, BOTAO;
+        bool MENU = true, menu00 = true, menu01, Bapply, BFULL, BOTAO, UMAVEZ = true;
         bool[] b1 = new bool[5];//botoes do menu
         Rectangle[] B1 = new Rectangle[5]; //botao
         Rectangle Bfull, APPLY, FlechaE, FlechaD;
@@ -157,7 +157,7 @@ namespace Stick_RPG_Fight
 
 
             //GAME
-            if (!JANELA.J.JANELACOMBO && !JANELA.J.JANELACOMERCIO && !JANELA.J.JANELAPAUSE && !JANELA.J.OPÇFASES)
+            if (!JANELA.J.JANELACOMBO && !JANELA.J.JANELACOMERCIO && !JANELA.J.JANELAPAUSE && !JANELA.J.OPÇFASES && !JANELA.J.JANELAQUEST)
             {
                 if (menu01 || M1.COMBATE || M1.HISTORY)
                 {
@@ -202,7 +202,7 @@ namespace Stick_RPG_Fight
 
                         if (!BOTAO && M1.COMBATEativado) //se soltar o botao apos ter clicado encima
                         {
-
+                            JANELA.J.GERARQuest(aleatório); //cria uma quest antes de entra na fase
                             JANELA.J.OPÇFASES = true;
                             //MediaPlayer.Play(AUDIO.combatesong);
                         }
@@ -344,6 +344,7 @@ namespace Stick_RPG_Fight
                                 menu00 = false;//sai pro proximo menu
                                 menu01 = true;
 
+
                             }//fim da transição
 
                         }
@@ -368,7 +369,18 @@ namespace Stick_RPG_Fight
 
                             M1.menu01GAME(WidthTela, HeightTela); //RESUMAO 
                             JANELA.J.POSIÇÃOPAUSE(WidthTela, HeightTela);
-                            ATUALIZAÇÃO.ATLZÇ.AtualizaTamanhoComeço(WidthTela, HeightTela, Botao, P1, M1, FlechaE, FlechaD); // retangulos
+                            if (UMAVEZ)
+                            {
+                                ATUALIZAÇÃO.ATLZÇ.AtualizaTamanhoComeço(WidthTela, HeightTela, Botao, P1, M1, FlechaE, FlechaD); // retangulos
+                                UMAVEZ = false;
+                            }
+
+                            P1.RPGatualização(WidthTela, HeightTela);
+                            JANELA.J.COMPLETARQuest(M1, P1, Botao, listai1, WidthTela, HeightTela);
+
+                            //flecha
+                            FlechaD = new Rectangle(WidthTela - HeightTela / 11, HeightTela - HeightTela / 11, HeightTela / 11, HeightTela / 11);
+                            FlechaE = new Rectangle(0, HeightTela - HeightTela / 11, HeightTela / 11, HeightTela / 11);
                         }
                     }
                 }// FIM DO INICIO
@@ -398,6 +410,10 @@ namespace Stick_RPG_Fight
                         Exit();
                     else
                     {
+                        //quest
+                        JANELA.J.COMPLETARQuest(M1, P1, Botao, listai1, WidthTela, HeightTela);
+                        JANELA.J.POSQUEST(WidthTela, HeightTela);
+
                         //TUDO do personagem
                         P1.MOV(WidthTela, HeightTela, aleatório); // tudo sobre movimentação (+metodos)
                         P1.RPGatualização(WidthTela, HeightTela); //atualiza os dados
@@ -581,7 +597,16 @@ namespace Stick_RPG_Fight
                 JANELA.J.FUNÇÕESOPÇFASE(WidthTela, HeightTela, Botao, M1, MENU, BOTAO);
                 JANELA.J.POSopçfase(WidthTela, HeightTela);
             }
-
+            if (JANELA.J.JANELAQUEST)
+            {
+                var WidthTela = Window.ClientBounds.Width;
+                var HeightTela = Window.ClientBounds.Height;
+                JANELA.J.POSQUEST(WidthTela, HeightTela);
+                JANELA.J.FUNÇOESQUEST(BOTAO, aleatório);
+            }
+            
+                
+           
 
             base.Update(gameTime);
         }
@@ -646,6 +671,10 @@ namespace Stick_RPG_Fight
             if (JANELA.J.OPÇFASES)
             {
                 DRAW.DrawJANELAopçfase(Botao, spriteBatch, MENU, M1, BOTAO);
+            }
+            if (JANELA.J.JANELAQUEST)
+            {
+                DRAW.DrawQUEST(spriteBatch, WidthTela, HeightTela);
             }
 
             spriteBatch.End();

@@ -980,6 +980,10 @@ namespace Stick_RPG_Fight
                 {
                     spriteBatch.Draw(JANELA.J.imgfaseB[i], JANELA.J.Rfase[i], Color.DarkCyan);
                 }
+                if (JANELA.J.Rfase[i].Contains(mousePosition) && Mouse.GetState().LeftButton == ButtonState.Pressed && !JANELA.J.FASEdestravada[i])
+                {
+                    spriteBatch.Draw(JANELA.J.imgfaseB[i], JANELA.J.Rfase[i], Color.DarkRed);
+                }
 
 
                 //ponto
@@ -1159,6 +1163,87 @@ namespace Stick_RPG_Fight
                 }
             }
         }//fim draw dano
+
+        //--------------------------------------------------------------------------------------------------
+        //--------------------------------------------------------------------------------------------------
+        //--------------------------------------------------------------------------------------------------
+
+        //--------------------------------------------------------------------------------------------------
+        //--------------------------------------------------------------------------------------------------
+        //--------------------------------------------------------------------------------------------------
+        public void DrawQUEST(SpriteBatch spriteBatch, int W, int H)
+        {
+            var mouseState = Mouse.GetState();
+            var mousePosition = new Point(mouseState.X, mouseState.Y);
+
+            //quest
+            spriteBatch.Draw(JANELA.J.imgQuest, JANELA.J.Quest,
+                               new Rectangle(JANELA.J.frameQuest.X * JANELA.J.tamanhoQuest.X, JANELA.J.frameQuest.Y * JANELA.J.tamanhoQuest.Y,
+                                                          JANELA.J.tamanhoQuest.X, JANELA.J.tamanhoQuest.Y), Color.White);
+
+            //botoes
+            if (JANELA.J.QUESTdisponivel && !JANELA.J.RODAR1 && !JANELA.J.RODAR2)
+            {
+
+                //refresh
+                if (!JANELA.J.Brefresh.Contains(mousePosition))
+                {
+                    spriteBatch.Draw(JANELA.J.imgRefresh1, JANELA.J.Brefresh, Color.White);
+                }
+                if (JANELA.J.Brefresh.Contains(mousePosition) && Mouse.GetState().LeftButton != ButtonState.Pressed)
+                {
+                    spriteBatch.Draw(JANELA.J.imgRefresh1, JANELA.J.Brefresh, Color.LightCyan);
+                }
+                if (JANELA.J.Brefresh.Contains(mousePosition) && Mouse.GetState().LeftButton == ButtonState.Pressed)
+                {
+                    spriteBatch.Draw(JANELA.J.imgRefresh2, JANELA.J.Brefresh, Color.White);
+                }
+
+                //OK
+                if (!JANELA.J.Bok.Contains(mousePosition))
+                {
+                    spriteBatch.Draw(JANELA.J.imgOK1, JANELA.J.Bok, Color.White);
+                }
+                if (JANELA.J.Bok.Contains(mousePosition) && Mouse.GetState().LeftButton != ButtonState.Pressed)
+                {
+                    spriteBatch.Draw(JANELA.J.imgOK2, JANELA.J.Bok, Color.White);
+                }
+                if (JANELA.J.Bok.Contains(mousePosition) && Mouse.GetState().LeftButton == ButtonState.Pressed)
+                {
+                    spriteBatch.Draw(JANELA.J.imgOK3, JANELA.J.Bok, Color.White);
+                }
+
+
+                //posição da escrita da quest
+                if (JANELA.J.frameQuest.X == 0 && JANELA.J.frameQuest.Y == 0)
+                {
+                    if (JANELA.J.Qopç == 1)
+                    {
+                        spriteBatch.DrawString(JANELA.J.Woodfont, "MISSAO Massacre ", new Vector2(JANELA.J.Brefresh.X, JANELA.J.Brefresh.Y + JANELA.J.Brefresh.Height + H / 100), Color.Black);
+                        spriteBatch.DrawString(JANELA.J.Woodfont, "MATE " + JANELA.J.Qqtdd + " inimigos", new Vector2(JANELA.J.Brefresh.X, JANELA.J.Brefresh.Y + JANELA.J.Brefresh.Height + H / 100 + 25), Color.Red);
+                    }
+                    if (JANELA.J.Qopç == 2)
+                    {
+                        spriteBatch.DrawString(JANELA.J.Woodfont, "MISSAO Sobrevivencia ", new Vector2(JANELA.J.Brefresh.X, JANELA.J.Brefresh.Y + JANELA.J.Brefresh.Height + H / 100), Color.Black);
+                        spriteBatch.DrawString(JANELA.J.Woodfont, "SOBREVIVA " + JANELA.J.Qqtdd + " segundos", new Vector2(JANELA.J.Brefresh.X, JANELA.J.Brefresh.Y + JANELA.J.Brefresh.Height + H / 100 + 25), Color.Red);
+                    }
+                }
+                if (JANELA.J.frameQuest.X == 2 && JANELA.J.frameQuest.Y == 5)
+                {
+                    if (JANELA.J.Qopç == 1)
+                    {
+                        spriteBatch.DrawString(JANELA.J.Woodfont, "MISSAO Massacre", new Vector2(JANELA.J.Brefresh.X - JANELA.J.Quest.Width / 4, JANELA.J.Brefresh.Y + JANELA.J.Brefresh.Height + H / 100), Color.Black);
+                        spriteBatch.DrawString(JANELA.J.Woodfont, "MATE " + JANELA.J.Qqtdd + " inimigos", new Vector2(JANELA.J.Brefresh.X - JANELA.J.Quest.Width / 4, JANELA.J.Brefresh.Y + JANELA.J.Brefresh.Height + H / 100 + 25), Color.Red);
+                    }
+                    if (JANELA.J.Qopç == 2)
+                    {
+                        spriteBatch.DrawString(JANELA.J.Woodfont, "MISSAO Sobrevivencia", new Vector2(JANELA.J.Brefresh.X - JANELA.J.Quest.Width / 4, JANELA.J.Brefresh.Y + JANELA.J.Brefresh.Height + H / 100), Color.Black);
+                        spriteBatch.DrawString(JANELA.J.Woodfont, "SOBREVIVA " + JANELA.J.Qqtdd + " segundos", new Vector2(JANELA.J.Brefresh.X - JANELA.J.Quest.Width / 4, JANELA.J.Brefresh.Y + JANELA.J.Brefresh.Height + H / 100 + 25), Color.Red);
+                    }
+                }
+
+            }//fim quest disponivel
+        }//DrawQUEST
 
         //--------------------------------------------------------------------------------------------------
         //--------------------------------------------------------------------------------------------------
@@ -1347,6 +1432,8 @@ namespace Stick_RPG_Fight
                 
                 }
             }
-        }
+        }//fim clone
+
+        
     }
 }

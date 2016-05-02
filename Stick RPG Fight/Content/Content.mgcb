@@ -73,3 +73,9 @@
 /processorParam:TextureFormat=Compressed
 /build:FIRESTARTER.spritefont
 
+#begin Woodfont.spritefont
+/importer:FontDescriptionImporter
+/processor:FontDescriptionProcessor
+/processorParam:TextureFormat=Compressed
+/build:Woodfont.spritefont
+
