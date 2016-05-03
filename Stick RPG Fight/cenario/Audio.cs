@@ -16,5 +16,8 @@ namespace Stick_RPG_Fight
         public Song menusong;
         public Song combatesong;
         public Song PODERsong;
+        public SoundEffect COINCOLLECT, GRITOVENCEDOR, RISADA, SUPERCHORO, PLACAREFFECT;
+
+        public static Audio A1 = new Audio();
     }
 }

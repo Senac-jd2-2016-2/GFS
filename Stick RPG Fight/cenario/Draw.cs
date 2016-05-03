@@ -98,7 +98,7 @@ namespace Stick_RPG_Fight
                 //DIREITA
                 if (listai1[i].DIREITA)
                 {
-                    if (listai1[i].ANDANDO)
+                    if (listai1[i].ANDANDO && !listai1[i].PARADO)
                     {
                         spriteBatch.Draw(i1.imgAndarDi1, listai1[i].individuo,
                             new Rectangle(listai1[i].frameAndari1.X * listai1[i].tamanhoAndari1.X, listai1[i].frameAndari1.Y * listai1[i].tamanhoAndari1.Y,
@@ -273,7 +273,7 @@ namespace Stick_RPG_Fight
                 //ESQUUERDA
                 if (listai1[i].ESQUERDA)
                 {
-                    if (listai1[i].ANDANDO)
+                    if (listai1[i].ANDANDO && !listai1[i].PARADO)
                     {
                         spriteBatch.Draw(i1.imgAndarEi1, listai1[i].individuo,
                             new Rectangle(listai1[i].frameAndari1.X * listai1[i].tamanhoAndari1.X, listai1[i].frameAndari1.Y * listai1[i].tamanhoAndari1.Y,
@@ -731,15 +731,6 @@ namespace Stick_RPG_Fight
 
 
 
-
-
-
-
-
-
-
-
-
         //--------------------------------------------------------------------------------------------------
         //--------------------------------------------------------------------------------------------------
         //--------------------------------------------------------------------------------------------------
@@ -800,14 +791,6 @@ namespace Stick_RPG_Fight
         //--------------------------------------------------------------------------------------------------
         //--------------------------------------------------------------------------------------------------
         //--------------------------------------------------------------------------------------------------
-
-
-
-
-
-
-
-
 
 
 
@@ -1175,6 +1158,7 @@ namespace Stick_RPG_Fight
         {
             var mouseState = Mouse.GetState();
             var mousePosition = new Point(mouseState.X, mouseState.Y);
+            spriteBatch.Draw(JANELA.J.imgFUNDOmenu, JANELA.J.FUNDO, Color.White);
 
             //quest
             spriteBatch.Draw(JANELA.J.imgQuest, JANELA.J.Quest,
@@ -1188,11 +1172,11 @@ namespace Stick_RPG_Fight
                 //refresh
                 if (!JANELA.J.Brefresh.Contains(mousePosition))
                 {
-                    spriteBatch.Draw(JANELA.J.imgRefresh1, JANELA.J.Brefresh, Color.White);
+                    spriteBatch.Draw(JANELA.J.imgRefresh1, JANELA.J.Brefresh, Color.Lime);
                 }
                 if (JANELA.J.Brefresh.Contains(mousePosition) && Mouse.GetState().LeftButton != ButtonState.Pressed)
                 {
-                    spriteBatch.Draw(JANELA.J.imgRefresh1, JANELA.J.Brefresh, Color.LightCyan);
+                    spriteBatch.Draw(JANELA.J.imgRefresh1, JANELA.J.Brefresh, Color.White);
                 }
                 if (JANELA.J.Brefresh.Contains(mousePosition) && Mouse.GetState().LeftButton == ButtonState.Pressed)
                 {
@@ -1249,6 +1233,65 @@ namespace Stick_RPG_Fight
         //--------------------------------------------------------------------------------------------------
         //--------------------------------------------------------------------------------------------------
 
+        //--------------------------------------------------------------------------------------------------
+        //--------------------------------------------------------------------------------------------------
+        //--------------------------------------------------------------------------------------------------
+        public void DrawPLACAR(SpriteBatch spriteBatch, int W, int H, Personagem P1)
+        {
+            var mouseState = Mouse.GetState();
+            var mousePosition = new Point(mouseState.X, mouseState.Y);
+            spriteBatch.Draw(JANELA.J.imgFUNDOmenu, JANELA.J.FUNDO, Color.White);
+
+            spriteBatch.Draw(JANELA.J.imgPlacar, JANELA.J.Placar, Color.White);
+
+            if (JANELA.J.PLACARdisponivel)
+            {
+                spriteBatch.DrawString(JANELA.J.Neon, "LEITE ganho: " + P1.leiterepositório, new Vector2(JANELA.J.Placar.X + JANELA.J.Placar.Width / 12, JANELA.J.Placar.Y + JANELA.J.Placar.Height / 4), Color.DarkGreen);
+                spriteBatch.DrawString(JANELA.J.Neon, "HONRA ganho: " + P1.honrarepositório, new Vector2(JANELA.J.Placar.X + JANELA.J.Placar.Width / 12, JANELA.J.Placar.Y + JANELA.J.Placar.Height / 4 + (30 * 1)), Color.DarkGreen);
+                spriteBatch.DrawString(JANELA.J.Neon, "COMBOS ganho: " + P1.qntdcombosrepositório, new Vector2(JANELA.J.Placar.X + JANELA.J.Placar.Width / 12, JANELA.J.Placar.Y + JANELA.J.Placar.Height / 4 + (30 * 2)), Color.DarkGreen);
+                spriteBatch.DrawString(JANELA.J.Neon, "XP ganho: " + (50 + (10 * JANELA.J.Qcompletadas)), new Vector2(JANELA.J.Placar.X + JANELA.J.Placar.Width / 12, JANELA.J.Placar.Y + JANELA.J.Placar.Height / 4 + (30 * 3)), Color.DarkGreen);
+
+                spriteBatch.DrawString(JANELA.J.Neon, "LEITE: " + P1.leite, new Vector2(JANELA.J.Placar.X + JANELA.J.Placar.Width / 2, JANELA.J.Placar.Y + JANELA.J.Placar.Height / 4), Color.DarkBlue);
+                spriteBatch.DrawString(JANELA.J.Neon, "HONRA: " + P1.honra, new Vector2(JANELA.J.Placar.X + JANELA.J.Placar.Width / 2, JANELA.J.Placar.Y + JANELA.J.Placar.Height / 4 + (30 * 1)), Color.DarkBlue);
+                spriteBatch.DrawString(JANELA.J.Neon, "COMBOS: " + P1.qntdcombos, new Vector2(JANELA.J.Placar.X + JANELA.J.Placar.Width / 2, JANELA.J.Placar.Y + JANELA.J.Placar.Height / 4 + (30 * 2)), Color.DarkBlue);
+                spriteBatch.DrawString(JANELA.J.Neon, "XP ATUAL: " + P1.XP, new Vector2(JANELA.J.Placar.X + JANELA.J.Placar.Width / 2, JANELA.J.Placar.Y + JANELA.J.Placar.Height / 4 + (30 * 3)), Color.DarkBlue);
+                
+                if (JANELA.J.TRANSFERIDO)
+                {
+                    //refresh
+                    if (!JANELA.J.Brefresh2.Contains(mousePosition))
+                    {
+                        spriteBatch.Draw(JANELA.J.imgRefresh1, JANELA.J.Brefresh2, Color.Lime);
+                    }
+                    if (JANELA.J.Brefresh2.Contains(mousePosition) && Mouse.GetState().LeftButton != ButtonState.Pressed)
+                    {
+                        spriteBatch.Draw(JANELA.J.imgRefresh1, JANELA.J.Brefresh2, Color.White);
+                    }
+                    if (JANELA.J.Brefresh2.Contains(mousePosition) && Mouse.GetState().LeftButton == ButtonState.Pressed)
+                    {
+                        spriteBatch.Draw(JANELA.J.imgRefresh2, JANELA.J.Brefresh2, Color.White);
+                    }
+
+                    //OK
+                    if (!JANELA.J.Bok2.Contains(mousePosition))
+                    {
+                        spriteBatch.Draw(JANELA.J.imgOK1, JANELA.J.Bok2, Color.White);
+                    }
+                    if (JANELA.J.Bok2.Contains(mousePosition) && Mouse.GetState().LeftButton != ButtonState.Pressed)
+                    {
+                        spriteBatch.Draw(JANELA.J.imgOK2, JANELA.J.Bok2, Color.White);
+                    }
+                    if (JANELA.J.Bok2.Contains(mousePosition) && Mouse.GetState().LeftButton == ButtonState.Pressed)
+                    {
+                        spriteBatch.Draw(JANELA.J.imgOK3, JANELA.J.Bok2, Color.White);
+                    }
+                }//transferido
+            }//placar disponivel
+        }
+
+        //--------------------------------------------------------------------------------------------------
+        //--------------------------------------------------------------------------------------------------
+        //--------------------------------------------------------------------------------------------------
 
         //--------------------------------------------------------------------------------------------------
         //--------------------------------------------------------------------------------------------------

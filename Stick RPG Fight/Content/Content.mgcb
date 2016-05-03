@@ -79,3 +79,33 @@
 /processorParam:TextureFormat=Compressed
 /build:Woodfont.spritefont
 
+#begin Grito de vencedor.mp3
+/importer:Mp3Importer
+/processor:SoundEffectProcessor
+/processorParam:Quality=Best
+/build:Grito de vencedor.mp3
+
+#begin Male Chuckling.mp3
+/importer:Mp3Importer
+/processor:SoundEffectProcessor
+/processorParam:Quality=Best
+/build:Male Chuckling.mp3
+
+#begin Male Dramatic Crying.mp3
+/importer:Mp3Importer
+/processor:SoundEffectProcessor
+/processorParam:Quality=Best
+/build:Male Dramatic Crying.mp3
+
+#begin COINS Collect.mp3
+/importer:Mp3Importer
+/processor:SoundEffectProcessor
+/processorParam:Quality=Best
+/build:COINS Collect.mp3
+
+#begin SUCCESS CHIME.wav
+/importer:WavImporter
+/processor:SoundEffectProcessor
+/processorParam:Quality=Best
+/build:SUCCESS CHIME.wav
+

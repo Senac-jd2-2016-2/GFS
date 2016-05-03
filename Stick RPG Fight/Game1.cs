@@ -27,7 +27,11 @@ namespace Stick_RPG_Fight
         bool MENU = true, menu00 = true, menu01, Bapply, BFULL, BOTAO, UMAVEZ = true;
         bool[] b1 = new bool[5];//botoes do menu
         Rectangle[] B1 = new Rectangle[5]; //botao
-        Rectangle Bfull, APPLY, FlechaE, FlechaD;
+        Rectangle Bfull, APPLY ;
+
+        public Rectangle FlechaE, FlechaD;
+        public bool Frenteflecha;
+        public Point posflecha = new Point(0, 0);
 
         //fonte escrita do jogo
         SpriteFont menu;
@@ -72,7 +76,7 @@ namespace Stick_RPG_Fight
         Draw DRAW = new Draw();
         Inimigo i1 = new Inimigo();
 
-        //MAPAS
+       
 
         public Game1()
         {
@@ -113,7 +117,7 @@ namespace Stick_RPG_Fight
         {
             spriteBatch = new SpriteBatch(GraphicsDevice);
 
-            Contexto.inicializar(Content, M1, AUDIO, P1, Botao, i1, DefineAgua); // classe contexto
+            Contexto.inicializar(Content, M1, P1, Botao, i1, DefineAgua); // classe contexto
 
             menu = Content.Load<SpriteFont>("menu");
             HUDfont = Content.Load<SpriteFont>("HUD");
@@ -157,7 +161,7 @@ namespace Stick_RPG_Fight
 
 
             //GAME
-            if (!JANELA.J.JANELACOMBO && !JANELA.J.JANELACOMERCIO && !JANELA.J.JANELAPAUSE && !JANELA.J.OPÇFASES && !JANELA.J.JANELAQUEST)
+            if (!JANELA.J.JANELACOMBO && !JANELA.J.JANELACOMERCIO && !JANELA.J.JANELAPAUSE && !JANELA.J.OPÇFASES && !JANELA.J.JANELAQUEST && !JANELA.J.JANELAPLACAR)
             {
                 if (menu01 || M1.COMBATE || M1.HISTORY)
                 {
@@ -373,14 +377,16 @@ namespace Stick_RPG_Fight
                             {
                                 ATUALIZAÇÃO.ATLZÇ.AtualizaTamanhoComeço(WidthTela, HeightTela, Botao, P1, M1, FlechaE, FlechaD); // retangulos
                                 UMAVEZ = false;
+
+                                //flecha
+                                FlechaD = new Rectangle(WidthTela - HeightTela / 11, HeightTela - HeightTela / 11, HeightTela / 11, HeightTela / 11);
+                                FlechaE = new Rectangle(0, HeightTela - HeightTela / 11, HeightTela / 11, HeightTela / 11);
                             }
 
                             P1.RPGatualização(WidthTela, HeightTela);
                             JANELA.J.COMPLETARQuest(M1, P1, Botao, listai1, WidthTela, HeightTela);
 
-                            //flecha
-                            FlechaD = new Rectangle(WidthTela - HeightTela / 11, HeightTela - HeightTela / 11, HeightTela / 11, HeightTela / 11);
-                            FlechaE = new Rectangle(0, HeightTela - HeightTela / 11, HeightTela / 11, HeightTela / 11);
+                           
                         }
                     }
                 }// FIM DO INICIO
@@ -410,9 +416,34 @@ namespace Stick_RPG_Fight
                         Exit();
                     else
                     {
+                        //METODOS
+                        //mov da flecha
+                        FlechaD.X += posflecha.X;
+                        FlechaE.X += posflecha.X;
+                        if (Frenteflecha)
+                        {
+                            posflecha.X++;
+                            if (posflecha.X >= Window.ClientBounds.Height / 300)// /3
+                            {
+                                Frenteflecha = false;
+                            }
+                        }
+                        else if (!Frenteflecha)
+                        {
+                            posflecha.X--;
+                            if (posflecha.X <= -Window.ClientBounds.Height / 300)// /3
+                            {
+                                Frenteflecha = true;
+                            }
+                        }
+
+                        
                         //quest
                         JANELA.J.COMPLETARQuest(M1, P1, Botao, listai1, WidthTela, HeightTela);
                         JANELA.J.POSQUEST(WidthTela, HeightTela);
+
+                        //placar
+                        JANELA.J.POSPLACAR(WidthTela, HeightTela);
 
                         //TUDO do personagem
                         P1.MOV(WidthTela, HeightTela, aleatório); // tudo sobre movimentação (+metodos)
@@ -471,8 +502,16 @@ namespace Stick_RPG_Fight
                                 //gerador de inimigos
                                 if (TempoParaInimigos == 320)
                                 {
-                                    i1.GERARi1(listai1, WidthTela, HeightTela, aleatório);
+                                    for (int G = 0; G < JANELA.J.qtddOLEADA; G++)
+                                    {
+                                        if (listai1.Count >= 70)
+                                        {
+                                            JANELA.J.qtddOLEADA = 1;
+                                        }
+                                        i1.GERARi1(listai1, WidthTela, HeightTela, aleatório);
+                                    }
                                     TempoParaInimigos = 0;
+                                    JANELA.J.qtddOLEADA++;
                                 }
                                 else
                                 {
@@ -506,7 +545,15 @@ namespace Stick_RPG_Fight
                             //gerador de inimigos
                             if (TempoParaInimigos == 320)
                             {
-                                i1.GERARi1(listai1, WidthTela, HeightTela, aleatório);
+                                for (int G = 0; G < JANELA.J.qtddOLEADA; G++)
+                                {
+                                    if (listai1.Count >= 70)
+                                    {
+                                        JANELA.J.qtddOLEADA = 1;
+                                    }
+                                    i1.GERARi1(listai1, WidthTela, HeightTela, aleatório);
+                                }
+                                JANELA.J.qtddOLEADA++;
                                 TempoParaInimigos = 0;
                             }
                             else
@@ -604,7 +651,13 @@ namespace Stick_RPG_Fight
                 JANELA.J.POSQUEST(WidthTela, HeightTela);
                 JANELA.J.FUNÇOESQUEST(BOTAO, aleatório);
             }
-            
+            if (JANELA.J.JANELAPLACAR)
+            {
+                var WidthTela = Window.ClientBounds.Width;
+                var HeightTela = Window.ClientBounds.Height;
+                JANELA.J.POSPLACAR(WidthTela, HeightTela);
+                JANELA.J.FUNÇOESPLACAR(BOTAO, P1, Botao, listai1, WidthTela, HeightTela, M1, aleatório);
+            }
                 
            
 
@@ -675,6 +728,10 @@ namespace Stick_RPG_Fight
             if (JANELA.J.JANELAQUEST)
             {
                 DRAW.DrawQUEST(spriteBatch, WidthTela, HeightTela);
+            }
+            if (JANELA.J.JANELAPLACAR)
+            {
+                DRAW.DrawPLACAR(spriteBatch, WidthTela, HeightTela, P1);
             }
 
             spriteBatch.End();

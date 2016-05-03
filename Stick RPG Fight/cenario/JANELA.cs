@@ -15,9 +15,14 @@ namespace Stick_RPG_Fight
     {
         public static JANELA J = new JANELA();
 
+        //qtd de inimigos (OLEADA)
+        public int qtddOLEADA = 1;
+
         //escrita
         public SpriteFont Neon, Firefont, Woodfont;
 
+        //separo todos os retangles, imagens, bool para preparar as janelas dentro do jogo, tambem utilizo a classe JANELA pra não criar classes pequenas com poucos codigos, pois a classe janela é estática.
+        //
 
         //parte dos retangulos
         public Rectangle R = new Rectangle();
@@ -31,6 +36,16 @@ namespace Stick_RPG_Fight
         public Rectangle Brefresh = new Rectangle();
         public Rectangle Bok = new Rectangle();
         public Rectangle Quest = new Rectangle();
+        //       PLACAR (ok e refresh 2x)
+        public Rectangle Bok2 = new Rectangle();
+        public Rectangle Brefresh2 = new Rectangle();
+        public Rectangle Placar = new Rectangle();
+
+        //placar
+        public Texture2D imgPlacar;
+        public Point POSplacar = new Point(0, 0);
+        public bool bREFRESH2, bOK2, JANELAPLACAR, PLACARdisponivel, MOSTRARpontos, TRANSFERIRpontos, TRANSFERIDO;
+        public int contagemMOSTRARPONTOS = 0, contagemTRANSFERIRPONTOS = 0;
 
         //PAUSE
         public Rectangle pauseJANELA = new Rectangle();
@@ -72,6 +87,162 @@ namespace Stick_RPG_Fight
         //pause
         public bool JANELAPAUSE, bSAIR, bRESUME;
 
+        public void FUNÇOESPLACAR(bool BOTAO, Personagem P1, Botoes Botao, List<Inimigo> listai1, int W, int H, Menu M1, Random A)
+        {
+            if (PLACARdisponivel)
+            {
+                var mouseState = Mouse.GetState();
+                var mousePosition = new Point(mouseState.X, mouseState.Y);
+                if (Mouse.GetState().LeftButton != ButtonState.Pressed) // BOTAO não pressionado
+                {
+                    BOTAO = false;
+                }
+                //--------------------------------------------------------------------------------
+
+                if (!TRANSFERIDO)
+                {
+                    if (!TRANSFERIRpontos)//vou mostrar os pontos, dps transferir, e quando transferido posso sair da tela
+                    {
+                        MOSTRARpontos = true;
+                        
+                        if (MOSTRARpontos)
+                        {
+                            contagemMOSTRARPONTOS++;
+                            if (contagemMOSTRARPONTOS >= 30)
+                            {
+                                contagemMOSTRARPONTOS = 0;
+                                TRANSFERIRpontos = true; // sai do laço
+                                //como só vou mostrar, não tem nenhuma função no update, apenas no DRAW.
+                                
+                                if (P1.leiterepositório == 0 && P1.honrarepositório == 0)
+                                {
+                                    Audio.A1.SUPERCHORO.Play();
+                                }
+                                if (P1.leiterepositório > 0 && P1.honrarepositório > 0 && P1.leiterepositório <= 10 && P1.honrarepositório <= 10)
+                                {
+                                    Audio.A1.RISADA.Play();
+                                }
+                                if (P1.leiterepositório > 10 && P1.honrarepositório > 10)
+                                {
+                                    Audio.A1.RISADA.Play();
+                                }
+                            }
+                        }
+                    }
+                    //
+                    if (TRANSFERIRpontos)
+                    {
+                        
+                        contagemTRANSFERIRPONTOS++;
+                        if (contagemTRANSFERIRPONTOS >= 60)
+                        {
+                            contagemTRANSFERIRPONTOS = 0;
+                            
+                            //VOU TRANSFERIR OS PONTOS AQUI => pra poder atualizar 1x só.
+                            P1.leite += P1.leiterepositório;
+                            P1.honra += P1.honrarepositório;
+                            P1.qntdcombos += P1.qntdcombosrepositório;
+                            P1.XP += 50 + (10 * Qcompletadas); // add XP
+
+                            //audio de dinheiro
+                            Audio.A1.COINCOLLECT.Play();
+
+                            TRANSFERIDO = true; //saida do laço
+                        }
+                    }
+                }
+
+                if (TRANSFERIDO)
+                {
+                    if (JANELA.J.Brefresh2.Contains(mousePosition) && Mouse.GetState().LeftButton == ButtonState.Pressed)
+                    {
+                        BOTAO = true;
+                        JANELA.J.bREFRESH2 = true;
+                    }
+                    if (!JANELA.J.Brefresh2.Contains(mousePosition))
+                        JANELA.J.bREFRESH2 = false;
+                    //botao girar
+                    if (JANELA.J.bREFRESH2 && !BOTAO)
+                    {
+                        //posição volta pro começo e os inimigos somem (SAI DA FASE)
+                        JANELA.J.ZERARFASE(listai1, P1, Botao, W, H);
+
+                        JANELA.J.JANELAPLACAR = false;
+                        JANELA.J.bREFRESH2 = false;
+
+                        GERARQuest(A); // cria uma quest e começa denovo
+                    }
+
+
+
+
+                    //aceitar missão
+                    if (JANELA.J.Bok2.Contains(mousePosition) && Mouse.GetState().LeftButton == ButtonState.Pressed)
+                    {
+                        BOTAO = true;
+                        JANELA.J.bOK2 = true;
+                    }
+                    if (!JANELA.J.Bok2.Contains(mousePosition))
+                        JANELA.J.bOK2 = false;
+
+                    if (JANELA.J.bOK2 && !BOTAO)
+                    {
+                        
+                        //TERMINAR FASE
+                        M1.COMBATE = false;
+                        //posição volta pro começo e os inimigos somem (SAI DA FASE)
+                        JANELA.J.JANELAPLACAR = false;
+                        JANELA.J.ZERARFASE(listai1, P1, Botao, W, H);
+
+                        for (int i = 0; i < Bfase.Length; i++)
+                            Contexto.Fase[i] = false;
+                    }
+                }//transferido
+            }//placar
+        }//fim das funções
+
+        public void POSPLACAR(int W, int H)
+        {
+            Placar.Width = H - W / 6 + H / 38; //1080 - 320 + 28 = 788
+            Placar.Height = W / 3 - H / 40;//640 - 27= 613
+            Placar.X = POSplacar.X + W / 2 - ((H - W / 6 + H / 38) / 2);
+            Placar.Y = POSplacar.Y - (W / 3 - H / 40);
+
+            Bok2.X = Placar.X + H / 4 + H / 100; //270 + 10 = 280
+            Bok2.Y = Placar.Y + H / 2 - H / 38; //540 - 28 = 512
+            Bok2.Width = H / 5 + H / 40;// 216 + 27 =243
+            Bok2.Height = H / 13 - H / 200;// 83 - 5 = 78
+
+            Brefresh2.X = Bok2.X + Bok2.Width + H / 100; //10
+            Brefresh2.Y = Bok2.Y; //
+            Brefresh2.Width = H / 13 - H / 300;// 83 - 3 = 80
+            Brefresh2.Height = H / 13 - H / 400;// 83 - 2 = 81
+
+            if (JANELAPLACAR)
+            {
+                if (POSplacar.Y > W / 3 + H / 40 )
+                {
+                    POSplacar.Y = W / 3 + H / 40;
+                    Audio.A1.PLACAREFFECT.Play();
+                    
+                }
+                if (POSplacar.Y < W / 3 + H / 40)
+                {
+                    POSplacar.Y += H / 20; //54
+                    PLACARdisponivel = false;
+                }
+                if (POSplacar.Y == W / 3 + H / 40)
+                {
+                    PLACARdisponivel = true;
+                }
+            }
+            else if (!JANELAPLACAR)
+            {
+                POSplacar.Y = 0;
+                PLACARdisponivel = false;
+            }
+        }
+
         public void COMPLETARQuest(Menu M1, Personagem P1, Botoes Botao, List<Inimigo> listai1, int W, int H)
         {
             if (M1.COMBATE)
@@ -81,12 +252,8 @@ namespace Stick_RPG_Fight
                     Qcompletadas++;
                     Qqtddcompletada = 0;
 
-                    P1.XP = P1.XP + 50 + (10 * Qcompletadas);
-                    
-                    //TERMINAR FASE
-                    M1.COMBATE = false;
-                    //posição volta pro começo e os inimigos somem (SAI DA FASE)
-                    JANELA.J.ZERARFASE(listai1, P1, Botao, W, H);
+                    //isto acontece 2x... Qnd morrer ou qnd terminar quest
+                    JANELAPLACAR = true; // leva até o placar (QND TERMINAR A QUEST)
                 }
                 
                 if (Qopç == 2)
@@ -209,7 +376,7 @@ namespace Stick_RPG_Fight
         {
             Quest.Width = H - W / 6 + H / 38; //1080 - 320 + 28 = 788
             Quest.Height = W / 3 - H / 40;//640 - 27= 613
-            Quest.X = W / 2 - ((H - W / 6 + H / 38) / 2);
+            Quest.X = POSquest.X + W / 2 - ((H - W / 6 + H / 38) / 2);
             Quest.Y = POSquest.Y - (W / 3 - H / 40);
 
             Brefresh.X = Quest.X + H / 3; //360
@@ -327,8 +494,11 @@ namespace Stick_RPG_Fight
         {
             //sai pro menu
             Botao.HOME = true;
-            for (int i = 0; i < Bfase.Length; i++ )
-                Contexto.Fase[i] = false;
+            if (!JANELAPLACAR && !JANELAQUEST)
+            {
+                for (int i = 0; i < Bfase.Length; i++)
+                    Contexto.Fase[i] = false;
+            }
             
             //todos os inimigos desaparecem
             listai1.Clear();
@@ -340,7 +510,7 @@ namespace Stick_RPG_Fight
             //MediaPlayer.Play(AUDIO.menusong);
 
             //perder progresso
-            P1.moedarepositório = 0;
+            P1.leiterepositório = 0;
             P1.honrarepositório = 0;
             P1.qntdcombosrepositório = 0;
             //regenerar
@@ -358,6 +528,10 @@ namespace Stick_RPG_Fight
             P1.listadeondadeagua.Clear();
             P1.listadevisualPOWER.Clear();
             P1.listavidaperdida.Clear();
+
+            
+            //oleada
+            qtddOLEADA = 1;
         }
 
         public void FUNÇÕESPAUSE(bool BOTAO, List<Inimigo> listai1, Personagem P1, Botoes Botao, int W, int H)

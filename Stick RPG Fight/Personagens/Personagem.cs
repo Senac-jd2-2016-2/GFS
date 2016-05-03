@@ -192,8 +192,8 @@ namespace Stick_RPG_Fight
         public int escudo;
 
         //DINHEIRO
-        public int moeda;
-        public int moedarepositório;
+        public int leite;
+        public int leiterepositório;
         public int honra;
         public int honrarepositório;
         public int qntdcombos;
@@ -1899,7 +1899,7 @@ namespace Stick_RPG_Fight
             XP = 0;
             XPT = 100;
             LVL = 1;
-            moeda = 0;
+            leite = 0;
         }//fim do GAMEZERADO
 
         //criar visual poder

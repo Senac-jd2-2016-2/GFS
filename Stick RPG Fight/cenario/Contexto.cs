@@ -17,12 +17,12 @@ namespace Stick_RPG_Fight
         public static Background Fundo = new Background();
         public static bool[] Fase = new bool[4]; // qual fase usar
 
-        public static void inicializar(ContentManager content, Menu M1, Audio AUDIO, Personagem P1, Botoes Botao,  Inimigo i1, Agua DefineAgua) // carregar imagens quando a fase começa (não no começo)
+        public static void inicializar(ContentManager content, Menu M1,Personagem P1, Botoes Botao,  Inimigo i1, Agua DefineAgua) // carregar imagens quando a fase começa (não no começo)
         {
            
 
                 //Direito
-                P1.imgSpriteSheetparado1 = content.Load<Texture2D>("spritesheet p1 parado1"); // só imagem, logo posso usar isso também pros inimigos.
+            P1.imgSpriteSheetparado1 = content.Load<Texture2D>("spritesheet p1 parado1"); // só imagem, logo posso usar isso também pros inimigos.
             P1.imgSpriteSheetparado2 = content.Load<Texture2D>("spritesheet p1 parado2");
             P1.imgSpriteSheetandando = content.Load<Texture2D>("spritesheet p1 andando");
             P1.imgSpriteSheetATIRARarco = content.Load<Texture2D>("spritesheet p1 atirar (arco)");
@@ -59,9 +59,14 @@ namespace Stick_RPG_Fight
             M1.imgintromenu_semtraçado = content.Load<Texture2D>("intro game sem traçado");
             //M1.imgpredio_do_P1 = content.Load<Texture2D>("predio");
             
-            AUDIO.menusong = content.Load<Song>("Base4");
-            AUDIO.combatesong = content.Load<Song>("Base1");
-            AUDIO.PODERsong = content.Load<Song>("coração LENTO");
+            Audio.A1.menusong = content.Load<Song>("Base4");
+            Audio.A1.combatesong = content.Load<Song>("Base1");
+            Audio.A1.PODERsong = content.Load<Song>("coração LENTO");
+            Audio.A1.COINCOLLECT = content.Load<SoundEffect>("COINS Collect");
+            Audio.A1.PLACAREFFECT = content.Load<SoundEffect>("SUCCESS CHIME");
+            Audio.A1.RISADA = content.Load<SoundEffect>("Male Chuckling");
+            Audio.A1.SUPERCHORO = content.Load<SoundEffect>("Male Dramatic Crying");
+            Audio.A1.GRITOVENCEDOR = content.Load<SoundEffect>("Grito de vencedor");
 
             //botoes statics
             Botao.imgcomercioOFF = content.Load<Texture2D>("comercioOFF");
@@ -174,6 +179,9 @@ namespace Stick_RPG_Fight
             JANELA.J.imgOK1 = content.Load<Texture2D>("OK 1");
             JANELA.J.imgOK2 = content.Load<Texture2D>("OK 2");
             JANELA.J.imgOK3 = content.Load<Texture2D>("OK 3");
+
+            //placar
+            JANELA.J.imgPlacar = content.Load<Texture2D>("Placar");
 
 
             //spritefonte

@@ -38,10 +38,10 @@
     <ApplicationIcon>Icon.ico</ApplicationIcon>
   </PropertyGroup>
   <ItemGroup>
-    <Compile Include="ATUALIZAÇÃO.cs" />
+    <Compile Include="cenario\ATUALIZAÇÃO.cs" />
     <Compile Include="cenario\JANELA.cs" />
     <Compile Include="Personagens\Dano.cs" />
-    <Compile Include="OndasdeAgua.cs" />
+    <Compile Include="Personagens\OndasdeAgua.cs" />
     <Compile Include="Personagens\Agua.cs" />
     <Compile Include="cenario\Audio.cs" />
     <Compile Include="cenario\Background.cs" />
@@ -63,7 +63,7 @@
       <DependentUpon>Resources.resx</DependentUpon>
     </Compile>
     <Compile Include="Personagens\Sangue.cs" />
-    <Compile Include="VIDAperdida.cs" />
+    <Compile Include="Personagens\VIDAperdida.cs" />
   </ItemGroup>
   <ItemGroup>
     <Reference Include="MonoGame.Framework">
@@ -80,7 +80,12 @@
     <Content Include="Arquivos do content\Base1 reverb.wav" />
     <Content Include="Arquivos do content\Base1.wav" />
     <Content Include="Arquivos do content\Base4.wav" />
+    <Content Include="Arquivos do content\COINS Collect.mp3" />
     <Content Include="Arquivos do content\coração LENTO.wav" />
+    <Content Include="Arquivos do content\Grito de vencedor.mp3" />
+    <Content Include="Arquivos do content\Male Chuckling.mp3" />
+    <Content Include="Arquivos do content\Male Dramatic Crying.mp3" />
+    <Content Include="Arquivos do content\SUCCESS CHIME.wav" />
     <Content Include="Content\agua.png">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
@@ -367,6 +372,9 @@
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
     <Content Include="Content\pino.png">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Content\Placar.png">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
     <Content Include="Content\poder.png">
