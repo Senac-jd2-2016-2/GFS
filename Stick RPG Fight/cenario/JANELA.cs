@@ -166,7 +166,7 @@ namespace Stick_RPG_Fight
                     {
                         //posição volta pro começo e os inimigos somem (SAI DA FASE)
                         JANELA.J.ZERARFASE(listai1, P1, Botao, W, H);
-
+                        JANELA.J.JANELAQUEST = true;
                         JANELA.J.JANELAPLACAR = false;
                         JANELA.J.bREFRESH2 = false;
 

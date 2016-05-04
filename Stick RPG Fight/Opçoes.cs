@@ -1,4 +1,5 @@
-﻿using Microsoft.Xna.Framework;
+﻿using System;
+using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
 using Microsoft.Xna.Framework.Input;
 using Microsoft.Xna.Framework.Audio;
@@ -11,13 +12,11 @@ using System.Text;
 
 namespace Stick_RPG_Fight
 {
-    class Audio
+    class Opçoes
     {
-        public Song menusong;
-        public Song combatesong;
-        public Song PODERsong;
-        public SoundEffect COINCOLLECT, GRITOVENCEDOR, RISADA, SUPERCHORO, PLACAREFFECT, pop, LEITEganho;
+        public static Opçoes o = new Opçoes();
 
-        public static Audio A1 = new Audio();
+        // LEQUE DE PROSSIBILIDADES
+        public int opçleite;
     }
 }

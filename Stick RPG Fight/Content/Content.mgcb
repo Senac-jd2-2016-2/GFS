@@ -109,3 +109,15 @@
 /processorParam:Quality=Best
 /build:SUCCESS CHIME.wav
 
+#begin POP Echo.wav
+/importer:WavImporter
+/processor:SoundEffectProcessor
+/processorParam:Quality=Best
+/build:POP Echo.wav
+
+#begin SPLAT Crush 01.wav
+/importer:WavImporter
+/processor:SoundEffectProcessor
+/processorParam:Quality=Best
+/build:SPLAT Crush 01.wav
+

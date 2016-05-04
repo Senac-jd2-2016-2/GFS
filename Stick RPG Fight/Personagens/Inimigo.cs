@@ -283,7 +283,7 @@ namespace Stick_RPG_Fight
             }
             Sangrar(WidthTela, HeightTela, P1, aleatório);
             //barras
-            HP(WidthTela, HeightTela, listai1, P1);
+            HP(WidthTela, HeightTela, listai1, P1, aleatório);
             //usar a lista de inimigos para expandir o tamanho e apagar
             REMOVERVISUPODER(WidthTela, HeightTela);
             //posição da vida hud perdida
@@ -1730,7 +1730,7 @@ namespace Stick_RPG_Fight
         //HP
         //HP
         //HP
-        public void HP(int WidthTela, int HeightTela, List<Inimigo> listai1, Personagem P1)
+        public void HP(int WidthTela, int HeightTela, List<Inimigo> listai1, Personagem P1, Random A)
         {
             VIDA.Width = (int)(((float)(vida) / vidaT) * individuo.Width);
 
@@ -1809,6 +1809,15 @@ namespace Stick_RPG_Fight
 
                 if (listai1[i].frameALLi1.X <= 3 && listai1[i].frameALLi1.Y >= 12 && listai1[i].MORRENDO)
                 {
+                    //opç pra ganhar leite
+                    Opçoes.o.opçleite = A.Next(1, 4);
+                    if (Opçoes.o.opçleite == 3)
+                    {
+                        P1.leiterepositório++;
+                        //representar com algo
+                        Audio.A1.LEITEganho.Play();
+                    }
+
                     //+xp
                     P1.XP += 10;
                     //quest
@@ -2097,6 +2106,7 @@ namespace Stick_RPG_Fight
                     S1.g = 0;
 
                     listadesangue.Add(S1);
+
                 }
             }//fim da criação de sangue (SANGRAR)
 
@@ -2153,6 +2163,8 @@ namespace Stick_RPG_Fight
                         frameALLi1.Y = 0;
                         DIREITA = true;
                     }
+
+                   
                 }
                 if (((P1.DIREITA && (P1.PARTE2 && P1.frameLUTA.X == 4 && P1.frameLUTA.Y == 2) && (!DEFENDENDO && ESQUERDA || DIREITA)) || P1.ESQUERDA && (P1.PARTE2 && P1.frameLUTA.X == 2 && P1.frameLUTA.Y == 2) && (!DEFENDENDO && DIREITA || ESQUERDA)) && P1.COMBO1 && !AGACHADO && !RASTEIRA)
                 {
@@ -2188,6 +2200,8 @@ namespace Stick_RPG_Fight
                         DIREITA = true;
                     }
 
+                   
+
                 }
                 if ((P1.DIREITA && (P1.PARTE3 && P1.frameLUTA.X == 4 && P1.frameLUTA.Y == 3) && (!DEFENDENDO && ESQUERDA || DIREITA) || P1.ESQUERDA && (P1.PARTE3 && (P1.frameLUTA.X == 3 && P1.frameLUTA.Y == 3) && (!DEFENDENDO && DIREITA || ESQUERDA))) && P1.COMBO1 && !RASTEIRA)
                 {
@@ -2222,6 +2236,8 @@ namespace Stick_RPG_Fight
                         frameALLi1.Y = 0;
                         DIREITA = true;
                     }
+
+                   
                 }
                 if ((P1.DIREITA && P1.PARTE4 && P1.frameLUTA.Y == 4 && P1.frameLUTA.X == 0 && (!DEFENDENDO && ESQUERDA || DIREITA) || P1.ESQUERDA && P1.PARTE4 && P1.frameLUTA.Y == 4 && P1.frameLUTA.X == 7 && (!DEFENDENDO && DIREITA || ESQUERDA)) && P1.COMBO1 && !RASTEIRA)
                 {
@@ -2258,7 +2274,9 @@ namespace Stick_RPG_Fight
                     }
                 }
                 //
-            }
+
+                
+            }//fim dos ATAQUES do personagem (PARTE HIT)
 
             if (listadesangue.Count > 0) // se nao for nulo a qntdd
             {
@@ -2384,6 +2402,14 @@ namespace Stick_RPG_Fight
             V.R.Y = this.VIDA.Y;
 
             this.listavidaperdida.Add(V);
+
+            //COMBOS
+            if (!COMBO.c.PONTUAÇÃO) // CASO ESTEJA PONTUANDO -> passou dos 2 segundos.
+            {
+                COMBO.c.HITS++;
+                COMBO.c.contagem = 0;
+                COMBO.c.ATIVO = true;
+            }
         }//fim gerar vida perdida
 
         public void POSvidaperdida()

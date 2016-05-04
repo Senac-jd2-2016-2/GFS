@@ -416,7 +416,6 @@ namespace Stick_RPG_Fight
                         Exit();
                     else
                     {
-                        //METODOS
                         //mov da flecha
                         FlechaD.X += posflecha.X;
                         FlechaE.X += posflecha.X;
@@ -437,6 +436,10 @@ namespace Stick_RPG_Fight
                             }
                         }
 
+                        //METODOS
+                        //METODOS
+                        //mostrar tamanho da janela do combo
+                        COMBO.c.TamanhoEatz(WidthTela, HeightTela, P1);
                         
                         //quest
                         JANELA.J.COMPLETARQuest(M1, P1, Botao, listai1, WidthTela, HeightTela);
@@ -500,7 +503,7 @@ namespace Stick_RPG_Fight
                                     listai1[i].INTELIGENCIA(WidthTela, HeightTela, P1, listai1, aleatório);
                                 }
                                 //gerador de inimigos
-                                if (TempoParaInimigos == 320)
+                                if (TempoParaInimigos == 500)
                                 {
                                     for (int G = 0; G < JANELA.J.qtddOLEADA; G++)
                                     {
@@ -543,7 +546,7 @@ namespace Stick_RPG_Fight
                                 listai1[i].INTELIGENCIA(WidthTela, HeightTela, P1, listai1, aleatório);
                             }
                             //gerador de inimigos
-                            if (TempoParaInimigos == 320)
+                            if (TempoParaInimigos == 500)
                             {
                                 for (int G = 0; G < JANELA.J.qtddOLEADA; G++)
                                 {
@@ -657,6 +660,9 @@ namespace Stick_RPG_Fight
                 var HeightTela = Window.ClientBounds.Height;
                 JANELA.J.POSPLACAR(WidthTela, HeightTela);
                 JANELA.J.FUNÇOESPLACAR(BOTAO, P1, Botao, listai1, WidthTela, HeightTela, M1, aleatório);
+
+                //mostrar tamanho da janela do combo
+                COMBO.c.TamanhoEatz(WidthTela, HeightTela, P1);
             }
                 
            
@@ -704,7 +710,7 @@ namespace Stick_RPG_Fight
                 DRAW.DrawCombate(spriteBatch, P1, listai1, FlechaD, FlechaE, imgFlechaD, imgFlechaE, menu, HUDfont, WidthTela, HeightTela, imgSangue, i1, DefineAgua, BARfont); //RESUMAO
                 DRAW.DrawDano(spriteBatch, P1);// dano na tela (ou cura)
                 DRAW.DrawCLONES(spriteBatch, P1); // PODER
-
+                DRAW.DrawCOMBOS(spriteBatch, WidthTela, HeightTela, P1); // face dos combos (mostrando)
 
                 spriteBatch.DrawString(menu, "LISTA: " + listai1.Count, new Vector2(0, Window.ClientBounds.Height - 15), Color.Black); //teste
 

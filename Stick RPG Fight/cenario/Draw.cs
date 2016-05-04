@@ -1255,6 +1255,7 @@ namespace Stick_RPG_Fight
                 spriteBatch.DrawString(JANELA.J.Neon, "HONRA: " + P1.honra, new Vector2(JANELA.J.Placar.X + JANELA.J.Placar.Width / 2, JANELA.J.Placar.Y + JANELA.J.Placar.Height / 4 + (30 * 1)), Color.DarkBlue);
                 spriteBatch.DrawString(JANELA.J.Neon, "COMBOS: " + P1.qntdcombos, new Vector2(JANELA.J.Placar.X + JANELA.J.Placar.Width / 2, JANELA.J.Placar.Y + JANELA.J.Placar.Height / 4 + (30 * 2)), Color.DarkBlue);
                 spriteBatch.DrawString(JANELA.J.Neon, "XP ATUAL: " + P1.XP, new Vector2(JANELA.J.Placar.X + JANELA.J.Placar.Width / 2, JANELA.J.Placar.Y + JANELA.J.Placar.Height / 4 + (30 * 3)), Color.DarkBlue);
+                spriteBatch.DrawString(JANELA.J.Neon, "LVL ATUAL: " + P1.LVL, new Vector2(JANELA.J.Placar.X + JANELA.J.Placar.Width / 2, JANELA.J.Placar.Y + JANELA.J.Placar.Height / 4 + (30 * 4)), Color.DarkBlue);
                 
                 if (JANELA.J.TRANSFERIDO)
                 {
@@ -1289,6 +1290,61 @@ namespace Stick_RPG_Fight
             }//placar disponivel
         }
 
+        //--------------------------------------------------------------------------------------------------
+        //--------------------------------------------------------------------------------------------------
+        //--------------------------------------------------------------------------------------------------
+
+        //--------------------------------------------------------------------------------------------------
+        //--------------------------------------------------------------------------------------------------
+        //--------------------------------------------------------------------------------------------------
+        public void DrawCOMBOS(SpriteBatch spriteBatch, int W, int H, Personagem P1)
+        {
+            spriteBatch.Draw(COMBO.c.img, COMBO.c.R, Color.White);
+
+            if (COMBO.c.MOSTRARHIT)
+            {
+                if (COMBO.c.PONTUAÇÃO)
+                {
+                    if (P1.qntdcombosrepositório < 10)
+                    {
+                        spriteBatch.DrawString(JANELA.J.Firefont, "HIT! " + COMBO.c.HITS + ",COMBOS: " + P1.qntdcombosrepositório, new Vector2(COMBO.c.R.X, COMBO.c.R.Y + COMBO.c.R.Height / 4), Color.Black);
+                    }
+                    if (P1.qntdcombosrepositório >= 10 && P1.qntdcombosrepositório < 100)
+                    {
+                        spriteBatch.DrawString(JANELA.J.Firefont, "HIT! " + COMBO.c.HITS + ",COMBOS: " + P1.qntdcombosrepositório, new Vector2(COMBO.c.R.X - (26 * 1), COMBO.c.R.Y + COMBO.c.R.Height / 4), Color.Black);
+                    }
+                    if (P1.qntdcombosrepositório >= 100 && P1.qntdcombosrepositório < 1000)
+                    {
+                        spriteBatch.DrawString(JANELA.J.Firefont, "HIT! " + COMBO.c.HITS + ",COMBOS: " + P1.qntdcombosrepositório, new Vector2(COMBO.c.R.X - (26 * 2), COMBO.c.R.Y + COMBO.c.R.Height / 4), Color.Black);
+                    }
+                    if (P1.qntdcombosrepositório >= 1000)
+                    {
+                        spriteBatch.DrawString(JANELA.J.Firefont, "HIT! " + COMBO.c.HITS + ",COMBOS: " + P1.qntdcombosrepositório, new Vector2(COMBO.c.R.X - (26 * 3), COMBO.c.R.Y + COMBO.c.R.Height / 4), Color.Black);
+                    }
+                }
+                else
+                {
+                    //mostrar os hits sendo feitos
+                    if (COMBO.c.HITS < 10)
+                    {
+                        spriteBatch.DrawString(JANELA.J.Firefont, "HIT! " + COMBO.c.HITS, new Vector2(COMBO.c.R.X + COMBO.c.R.Width / 2 - (26 * 1), COMBO.c.R.Y + COMBO.c.R.Height / 4), Color.White);
+                    }
+                    if (COMBO.c.HITS >= 10 && COMBO.c.HITS < 100)
+                    {
+                        spriteBatch.DrawString(JANELA.J.Firefont, "HIT! " + COMBO.c.HITS, new Vector2(COMBO.c.R.X + COMBO.c.R.Width / 2 - (26 * 2), COMBO.c.R.Y + COMBO.c.R.Height / 4), Color.White);
+                    }
+                    if (COMBO.c.HITS >= 100 && COMBO.c.HITS < 1000)
+                    {
+                        spriteBatch.DrawString(JANELA.J.Firefont, "HIT! " + COMBO.c.HITS, new Vector2(COMBO.c.R.X + COMBO.c.R.Width / 2 - (26 * 3), COMBO.c.R.Y + COMBO.c.R.Height / 4), Color.White);
+                    }
+                    if (COMBO.c.HITS >= 1000)
+                    {
+                        spriteBatch.DrawString(JANELA.J.Firefont, "HIT! " + COMBO.c.HITS, new Vector2(COMBO.c.R.X + COMBO.c.R.Width / 2 - (26 * 4), COMBO.c.R.Y + COMBO.c.R.Height / 4), Color.White);
+                    }
+                }
+                
+            }
+        }
         //--------------------------------------------------------------------------------------------------
         //--------------------------------------------------------------------------------------------------
         //--------------------------------------------------------------------------------------------------

@@ -40,6 +40,8 @@
   <ItemGroup>
     <Compile Include="cenario\ATUALIZAÇÃO.cs" />
     <Compile Include="cenario\JANELA.cs" />
+    <Compile Include="COMBO.cs" />
+    <Compile Include="Opçoes.cs" />
     <Compile Include="Personagens\Dano.cs" />
     <Compile Include="Personagens\OndasdeAgua.cs" />
     <Compile Include="Personagens\Agua.cs" />
@@ -85,6 +87,8 @@
     <Content Include="Arquivos do content\Grito de vencedor.mp3" />
     <Content Include="Arquivos do content\Male Chuckling.mp3" />
     <Content Include="Arquivos do content\Male Dramatic Crying.mp3" />
+    <Content Include="Arquivos do content\POP Echo.wav" />
+    <Content Include="Arquivos do content\SPLAT Crush 01.wav" />
     <Content Include="Arquivos do content\SUCCESS CHIME.wav" />
     <Content Include="Content\agua.png">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
@@ -213,6 +217,9 @@
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
     <Content Include="Content\history.png">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Content\HITSface.png">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
     <Content Include="Content\homeOFF.png">
@@ -491,7 +498,9 @@
   </ItemGroup>
   <ItemGroup>
     <None Include="Arquivos do content\AlphaWood.ttf" />
-    <None Include="Arquivos do content\BAR.spritefont" />
+    <None Include="Arquivos do content\BAR.spritefont">
+      <SubType>Designer</SubType>
+    </None>
     <None Include="Arquivos do content\FIRESTARTER.spritefont" />
     <None Include="Arquivos do content\FIRESTARTER.TTF" />
     <None Include="Arquivos do content\HUD.spritefont" />

@@ -67,6 +67,8 @@ namespace Stick_RPG_Fight
             Audio.A1.RISADA = content.Load<SoundEffect>("Male Chuckling");
             Audio.A1.SUPERCHORO = content.Load<SoundEffect>("Male Dramatic Crying");
             Audio.A1.GRITOVENCEDOR = content.Load<SoundEffect>("Grito de vencedor");
+            Audio.A1.pop = content.Load<SoundEffect>("POP Echo");
+            Audio.A1.LEITEganho = content.Load<SoundEffect>("SPLAT Crush 01");
 
             //botoes statics
             Botao.imgcomercioOFF = content.Load<Texture2D>("comercioOFF");
@@ -191,6 +193,9 @@ namespace Stick_RPG_Fight
 
             //visual do poder lançado
             Poder_Visual.p.imgcirculo = content.Load<Texture2D>("poder");
+
+            //combo
+            COMBO.c.img = content.Load<Texture2D>("HITSface");
         }
     }
 }
