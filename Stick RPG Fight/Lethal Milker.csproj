@@ -41,6 +41,7 @@
     <Compile Include="cenario\ATUALIZAÇÃO.cs" />
     <Compile Include="cenario\JANELA.cs" />
     <Compile Include="COMBO.cs" />
+    <Compile Include="Itens.cs" />
     <Compile Include="Opçoes.cs" />
     <Compile Include="Personagens\Dano.cs" />
     <Compile Include="Personagens\OndasdeAgua.cs" />
@@ -324,6 +325,33 @@
     <Content Include="Content\intro game.png">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
+    <Content Include="Content\item adaga 1.png">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Content\item adaga 2.png">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Content\item adaga 3.png">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Content\item espada 2H 1.png">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Content\item espada 2H 2.png">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Content\item espada 2H 3.png">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Content\item maos 1.png">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Content\item maos 2.png">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Content\janela all.png">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
     <Content Include="Content\janela cinza %28opç1%29.png">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
@@ -334,6 +362,9 @@
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
     <Content Include="Content\janela PAUSE x MENU.png">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Content\janela rolo.png">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
     <Content Include="Content\MANA.png">
@@ -402,7 +433,16 @@
     <Content Include="Content\refresh 2.png">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
+    <Content Include="Content\rolo.png">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
     <Content Include="Content\sangue.png">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Content\seta baixo.png">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Content\seta cima.png">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
     <Content Include="Content\SOBRE.png">
@@ -497,6 +537,7 @@
     </EmbeddedResource>
   </ItemGroup>
   <ItemGroup>
+    <None Include="Arquivos do content\AbstractClassicFont.ttf" />
     <None Include="Arquivos do content\AlphaWood.ttf" />
     <None Include="Arquivos do content\BAR.spritefont">
       <SubType>Designer</SubType>
@@ -507,7 +548,6 @@
     <None Include="Arquivos do content\Neon.spritefont" />
     <None Include="Arquivos do content\Neon.ttf" />
     <None Include="Arquivos do content\Woodfont.spritefont" />
-    <None Include="Content\AbstractClassicFont.ttf" />
     <None Include="Content\FIRESTARTER.TTF">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </None>

@@ -40,6 +40,18 @@ namespace Stick_RPG_Fight
         public Rectangle Bok2 = new Rectangle();
         public Rectangle Brefresh2 = new Rectangle();
         public Rectangle Placar = new Rectangle();
+        public Rectangle janelaall = new Rectangle();
+        public Rectangle janelaitens = new Rectangle();
+        //rolometro
+        public Rectangle setacima = new Rectangle();
+        public Rectangle setabaixo = new Rectangle();
+        public Rectangle janelarolo = new Rectangle();
+        public Rectangle rolo = new Rectangle();
+        //rolometro2
+        public Rectangle setacima2 = new Rectangle();
+        public Rectangle setabaixo2 = new Rectangle();
+        public Rectangle janelarolo2 = new Rectangle();
+        public Rectangle rolo2 = new Rectangle();
 
         //placar
         public Texture2D imgPlacar;
@@ -60,6 +72,7 @@ namespace Stick_RPG_Fight
         public Texture2D imgjanelacombo, imgjanelacinzaopç1, imgjanelacomercio, imgbotaoComercioOFF, imgbotaoComercioON;
         public Texture2D imgbotaoPoderesOFF, imgbotaoPoderesON, imgbotaoX, imgbotaoXred;
         public Texture2D imgbotaoArmasOFF, imgbotaoArmasON, imgbotaoCombosOFF, imgbotaoCombosON, imgbotaoPetON, imgbotaoPetOFF;
+        public Texture2D imgjanelaall, imgjanelarolo, imgrolo, imgsetacima, imgsetabaixo, imgadaga1, imgadaga2, imgadaga3, imgespada2H1, imgespada2H2, imgespada2H3, imgmao1, imgmao2;
 
         //QUEST
         public Texture2D imgQuest, imgRefresh1, imgRefresh2, imgOK1, imgOK2, imgOK3;
@@ -80,7 +93,8 @@ namespace Stick_RPG_Fight
         public bool OPÇFASES, PRIMEIROclick;
         public bool[] Bfase = new bool[2];
         public bool[] FASEdestravada = new bool[2];
-        
+
+        public List<Itens> listadeitens = new List<Itens>();
         
         //janela normal de compras e combo 
         public bool JANELACOMBO = false, JANELACOMERCIO = false, ARMAS, PET, PODERES, bXIS, bCOMBO, bCOMERCIO, bARMAS, bPET, bPODERES;
@@ -740,6 +754,10 @@ namespace Stick_RPG_Fight
             JANELA.J.Bpoderes.Width = JANELA.J.R.Height / 9 + JANELA.J.R.Height / 240; // = 90 + 3
             JANELA.J.Bpoderes.Y = JANELA.J.R.Y + JANELA.J.R.Height / 27; // = 30
             JANELA.J.Bpoderes.X = JANELA.J.R.X + 1 + ((JANELA.J.Bcomercio.Width) * 4);
+
+            janelaitens.X = Bcomercio.X;
+            janelaitens.Y = CAPAopç1.Y + CAPAopç1.Height;
+            janelaitens.Width = HeightTela / 3 - HeightTela / 100; //350
         }
 
        
