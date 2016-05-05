@@ -13,10 +13,14 @@ namespace Stick_RPG_Fight
 {
     class JANELA
     {
+        
         public static JANELA J = new JANELA();
 
         //qtd de inimigos (OLEADA)
         public int qtddOLEADA = 1;
+
+        //qntd de fases no jogo
+        public int qntddefases;
 
         //escrita
         public SpriteFont Neon, Firefont, Woodfont;
@@ -438,6 +442,7 @@ namespace Stick_RPG_Fight
             {
                 Rfase[i] = new Rectangle();
                 Bfase[i] = false;
+                qntddefases++;
             }
             JANELA.J.FASEdestravada[0] = true;
         }
@@ -758,6 +763,12 @@ namespace Stick_RPG_Fight
             janelaitens.X = Bcomercio.X;
             janelaitens.Y = CAPAopç1.Y + CAPAopç1.Height;
             janelaitens.Width = HeightTela / 3 - HeightTela / 100; //350
+            janelaitens.Height = 1;
+
+            janelaall.X = janelaitens.X + janelaitens.Width;
+            janelaall.Y = janelaitens.Y;
+            janelaall.Width = HeightTela - HeightTela / 30; // 1080 - 36 = 1044
+            janelaall.Height = WidthTela / 3 + HeightTela / 41; //640 + 26 = 666
         }
 
        

@@ -67,6 +67,7 @@
     </Compile>
     <Compile Include="Personagens\Sangue.cs" />
     <Compile Include="Personagens\VIDAperdida.cs" />
+    <Compile Include="Savegame.cs" />
   </ItemGroup>
   <ItemGroup>
     <Reference Include="MonoGame.Framework">
