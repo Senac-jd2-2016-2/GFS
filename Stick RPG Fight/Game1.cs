@@ -107,7 +107,10 @@ namespace Stick_RPG_Fight
                 Contexto.Fase[i] = false;
             }
 
-            JANELA.J.CRIARlinhas();
+            
+            JANELA.J.CRIARlinhas();//cria se linhas do menu
+            Itens.I.CRIARITENS();//cria se itens da janela cc
+            
 
             base.Initialize();
         }
@@ -624,9 +627,9 @@ namespace Stick_RPG_Fight
                 var WidthTela = Window.ClientBounds.Width;
                 var HeightTela = Window.ClientBounds.Height;
 
-                JANELA.J.FUNÇÕES(BOTAO); // janelas
+                JANELA.J.FUNÇÕESCC(BOTAO); // janelas
 
-
+                JANELA.J.POSIÇÃOCC(WidthTela, HeightTela);
 
             }
             if (JANELA.J.JANELAPAUSE)
@@ -720,7 +723,7 @@ namespace Stick_RPG_Fight
             DRAW.DrawBotaoEstatico(Botao, spriteBatch, MENU, M1); //resumo dos botoes
             if (JANELA.J.JANELACOMBO || JANELA.J.JANELACOMERCIO)
             {
-                DRAW.DrawJANELA(Botao, spriteBatch);
+                DRAW.DrawJANELACC(Botao, spriteBatch);
             }
 
             if (JANELA.J.JANELAPAUSE)

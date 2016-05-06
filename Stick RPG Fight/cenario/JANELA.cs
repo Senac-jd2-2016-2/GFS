@@ -16,8 +16,14 @@ namespace Stick_RPG_Fight
         
         public static JANELA J = new JANELA();
 
+        //1x
+        public bool UMAVEZ = true;
+
         //qtd de inimigos (OLEADA)
         public int qtddOLEADA = 1;
+
+        //posição de itens e qntd
+        public int POSyITEN = 0, QTDITENS = 12, QTDtotalITENSjanela = 9, TamanhodoPulodaSETA = 0; //quantidade q cabe na janela
 
         //qntd de fases no jogo
         public int qntddefases;
@@ -77,6 +83,9 @@ namespace Stick_RPG_Fight
         public Texture2D imgbotaoPoderesOFF, imgbotaoPoderesON, imgbotaoX, imgbotaoXred;
         public Texture2D imgbotaoArmasOFF, imgbotaoArmasON, imgbotaoCombosOFF, imgbotaoCombosON, imgbotaoPetON, imgbotaoPetOFF;
         public Texture2D imgjanelaall, imgjanelarolo, imgrolo, imgsetacima, imgsetabaixo, imgadaga1, imgadaga2, imgadaga3, imgespada2H1, imgespada2H2, imgespada2H3, imgmao1, imgmao2;
+
+        //janelacc
+        public bool ADAGATIVA, ESPADA2HATIVA, ADAGAselect, ESPADA2Hselect, MAOselect, setacimaB, setabaixoB, setacimaB2, setabaixoB2, ADAGAb, ESPADAb, MAOb;
 
         //QUEST
         public Texture2D imgQuest, imgRefresh1, imgRefresh2, imgOK1, imgOK2, imgOK3;
@@ -624,7 +633,7 @@ namespace Stick_RPG_Fight
             
         }
 
-        public void FUNÇÕES(bool BOTAO)
+        public void FUNÇÕESCC(bool BOTAO)
         {
             var mouseState = Mouse.GetState();
             var mousePosition = new Point(mouseState.X, mouseState.Y);
@@ -716,9 +725,132 @@ namespace Stick_RPG_Fight
                 JANELA.J.PODERES = true;
                 JANELA.J.PET = false;
             }
-        }
 
-        public void POSIÇÃO(int WidthTela, int HeightTela)
+            //new
+
+            //setinha
+            //1
+            if (QTDITENS > QTDtotalITENSjanela)
+            {
+                //att do qnt pular na seta (ela pula o tamanho de 1 iten inteiro)
+                TamanhodoPulodaSETA = rolo.Height / QTDtotalITENSjanela; // tamanho / qtdjanela
+                //baixo
+                if (setabaixo.Contains(mousePosition) && Mouse.GetState().LeftButton == ButtonState.Pressed)
+                {
+                    setabaixoB = true;
+                    BOTAO = true;
+                }
+                if (!setabaixo.Contains(mousePosition))
+                    setabaixoB = false;
+                if (setabaixoB && !BOTAO)
+                {
+                    if (rolo.Y + rolo.Height < janelarolo.Y + janelarolo.Height - TamanhodoPulodaSETA + 1) // so desce mais qnd tiver acima do espaço máximo - o qnt ele pode pular
+                    {
+                        rolo.Y += TamanhodoPulodaSETA;//rolo desce
+                        POSyITEN -= TamanhodoPulodaSETA;//e o item sobe
+                    }
+                    setabaixoB = false;
+                }
+                //cima
+                if (setacima.Contains(mousePosition) && Mouse.GetState().LeftButton == ButtonState.Pressed)
+                {
+                    setacimaB = true;
+                    BOTAO = true;
+                }
+                if (!setacima.Contains(mousePosition))
+                    setacimaB = false;
+                if (setacimaB && !BOTAO)
+                {
+                    if (rolo.Y > janelarolo.Y + TamanhodoPulodaSETA - 1) // so sobe mais qnd tiver embaixo do lugar menor + o qnt ele pode pular
+                    {
+                        rolo.Y -= TamanhodoPulodaSETA; //rolo sobe
+                        POSyITEN += TamanhodoPulodaSETA;//e o item desce
+                    }
+                    setacimaB = false;
+                }
+
+                //caso passe do limite
+                if (rolo.Y + rolo.Height > janelarolo.Y + janelarolo.Height)
+                {
+                    rolo.Y--;
+                }
+                if (rolo.Y < janelarolo.Y)
+                {
+                    rolo.Y++;
+                }
+            }//fim do rolo
+
+            //itens click
+            if (JANELA.J.ADAGATIVA)
+            {
+                if (!JANELA.J.ADAGAselect)
+                {
+                    
+                    if (JANELA.J.listadeitens[1].item.Contains(mousePosition) && Mouse.GetState().LeftButton == ButtonState.Pressed)
+                    {
+                        ADAGAb = true;
+                        BOTAO = true;
+                    }
+                    if (!JANELA.J.listadeitens[1].item.Contains(mousePosition))
+                        ADAGAb = false;
+                    if (ADAGAb && !BOTAO)
+                    {
+                        ADAGAselect = true;
+                        ADAGAb = false;
+
+                        //tirar os outros da seleção
+                        ESPADA2Hselect = false;
+                        MAOselect = false;
+                    }
+                }
+            }
+
+            if (JANELA.J.ESPADA2HATIVA)
+            {
+                if (!JANELA.J.ESPADA2Hselect)
+                {
+
+                    if (JANELA.J.listadeitens[2].item.Contains(mousePosition) && Mouse.GetState().LeftButton == ButtonState.Pressed)
+                    {
+                        ESPADAb = true;
+                        BOTAO = true;
+                    }
+                    if (!JANELA.J.listadeitens[2].item.Contains(mousePosition))
+                        ESPADAb = false;
+                    if (ESPADAb && !BOTAO)
+                    {
+                        ESPADA2Hselect = true;
+                        ESPADAb = false;
+
+                        //tirar os outros da seleção
+                        ADAGAselect = false;
+                        MAOselect = false;
+                    }
+                }
+            }
+
+            if (!MAOselect)
+            {
+                if (JANELA.J.listadeitens[0].item.Contains(mousePosition) && Mouse.GetState().LeftButton == ButtonState.Pressed)
+                {
+                    MAOb = true;
+                    BOTAO = true;
+                }
+                if (!JANELA.J.listadeitens[0].item.Contains(mousePosition))
+                    MAOb = false;
+                if (MAOb && !BOTAO)
+                {
+                    MAOselect = true;
+                    MAOb = false;
+
+                    //tirar os outros da seleção
+                    ADAGAselect = false;
+                    ESPADA2Hselect = false;
+                }
+            }
+        }//fim funçoes
+
+        public void POSIÇÃOCC(int WidthTela, int HeightTela)
         {
             JANELA.J.R.X = WidthTela / 8;
             JANELA.J.R.Y = HeightTela / 8;
@@ -763,13 +895,85 @@ namespace Stick_RPG_Fight
             janelaitens.X = Bcomercio.X;
             janelaitens.Y = CAPAopç1.Y + CAPAopç1.Height;
             janelaitens.Width = HeightTela / 3 - HeightTela / 100; //350
-            janelaitens.Height = 1;
+            janelaitens.Height = WidthTela / 3 + HeightTela / 41; //640 + 26 = 66
 
             janelaall.X = janelaitens.X + janelaitens.Width;
             janelaall.Y = janelaitens.Y;
             janelaall.Width = HeightTela - HeightTela / 30; // 1080 - 36 = 1044
             janelaall.Height = WidthTela / 3 + HeightTela / 41; //640 + 26 = 666
-        }
+
+            //rolo1
+            setacima.X = janelaitens.X + janelaitens.Width;
+            setacima.Y = janelaitens.Y;
+            setacima.Width = HeightTela / 47; //22
+            setacima.Height = HeightTela / 47; //22
+
+            setabaixo.X = janelaitens.X + janelaitens.Width;
+            setabaixo.Y = janelaitens.Y + janelaitens.Height - HeightTela / 47;
+            setabaixo.Width = HeightTela / 47; //22
+            setabaixo.Height = HeightTela / 47; //22
+
+            //rolometro2
+            setacima2.X = janelaall.X + janelaall.Width;
+            setacima2.Y = janelaitens.Y;
+            setacima2.Width = HeightTela / 47; //22
+            setacima2.Height = HeightTela / 47; //22
+
+            setabaixo2.X = janelaall.X + janelaall.Width;
+            setabaixo2.Y = janelaitens.Y + janelaitens.Height - HeightTela / 47;
+            setabaixo2.Width = HeightTela / 47; //22
+            setabaixo2.Height = HeightTela / 47; //22
+
+            janelarolo.X = setacima.X;
+            janelarolo.Y = setacima.Y + setacima.Height;
+            janelarolo.Width = HeightTela / 47; //22
+            janelarolo.Height = WidthTela / 3 - HeightTela / 60; //640 - 18 = 622;
+
+            janelarolo2.X = setacima2.X;
+            janelarolo2.Y = setacima2.Y + setacima2.Height;
+            janelarolo2.Width = HeightTela / 47; //22
+            janelarolo2.Height = WidthTela / 3 - HeightTela / 60; //640 - 18 = 622;
+
+            rolo.X = janelarolo.X;
+            rolo.Width = janelarolo.Width;
+
+            rolo2.X = janelarolo2.X;
+            rolo2.Width = janelarolo2.Width;
+
+            //rolo 1
+            if (QTDITENS <= QTDtotalITENSjanela)
+            {
+                rolo.Y = janelarolo.Y;
+                rolo.Height = janelarolo.Height;
+            }
+            if (QTDITENS > QTDtotalITENSjanela)
+            {
+                if (UMAVEZ)
+                {
+                    rolo.Y = janelarolo.Y;
+                    UMAVEZ = false;
+                }
+
+                rolo.Height = (int)(((float)(QTDtotalITENSjanela) / QTDITENS) * janelarolo.Height); // menor pelo meio e multiplica pelo tamanho que quero.
+            }
+
+            for (int i = 0; i < QTDITENS; i++)
+            {
+                //tamanho e x
+                listadeitens[i].item.X = janelaitens.X;
+                listadeitens[i].item.Width = janelaitens.Width;
+                listadeitens[i].item.Height = HeightTela / 15 + HeightTela / HeightTela; //72 + 1 = 73
+                if (i - 1 < 0)//1°
+                {
+                    listadeitens[i].item.Y = POSyITEN + janelaitens.Y;
+                }
+                if (i - 1 >= 0)//um embaixo do outro
+                {
+                    listadeitens[i].item.Y = listadeitens[i - 1].item.Y + listadeitens[i - 1].item.Height;
+                }
+            }
+
+        }//fim poss
 
        
         

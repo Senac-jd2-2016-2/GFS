@@ -150,6 +150,20 @@ namespace Stick_RPG_Fight
             JANELA.J.imgjanelacinzaopç1 = content.Load<Texture2D>("janela cinza (opç1)");
             JANELA.J.imgjanelacombo = content.Load<Texture2D>("janela combo");
             JANELA.J.imgjanelacomercio = content.Load<Texture2D>("janela comercio");
+            //new
+            JANELA.J.imgrolo = content.Load<Texture2D>("rolo");
+            JANELA.J.imgjanelarolo = content.Load<Texture2D>("janela rolo");
+            JANELA.J.imgsetabaixo = content.Load<Texture2D>("seta baixo");
+            JANELA.J.imgsetacima = content.Load<Texture2D>("seta cima");
+            JANELA.J.imgjanelaall = content.Load<Texture2D>("janela all");
+            JANELA.J.imgadaga1 = content.Load<Texture2D>("item adaga 1");
+            JANELA.J.imgadaga2 = content.Load<Texture2D>("item adaga 2");
+            JANELA.J.imgadaga3 = content.Load<Texture2D>("item adaga 3");
+            JANELA.J.imgespada2H1 = content.Load<Texture2D>("item espada 2H 1");
+            JANELA.J.imgespada2H2 = content.Load<Texture2D>("item espada 2H 2");
+            JANELA.J.imgespada2H3 = content.Load<Texture2D>("item espada 2H 3");
+            JANELA.J.imgmao1 = content.Load<Texture2D>("item maos 1");
+            JANELA.J.imgmao2 = content.Load<Texture2D>("item maos 2");
 
             //resume
             JANELA.J.imgpauseJANELA = content.Load<Texture2D>("janela PAUSE x MENU");

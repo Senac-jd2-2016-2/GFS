@@ -549,9 +549,6 @@
     <None Include="Arquivos do content\Neon.spritefont" />
     <None Include="Arquivos do content\Neon.ttf" />
     <None Include="Arquivos do content\Woodfont.spritefont" />
-    <None Include="Content\FIRESTARTER.TTF">
-      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
-    </None>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <Import Project="$(MSBuildExtensionsPath)\MonoGame\v3.0\MonoGame.Content.Builder.targets" />

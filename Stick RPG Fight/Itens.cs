@@ -14,14 +14,17 @@ namespace Stick_RPG_Fight
     class Itens
     {
         public Rectangle item = new Rectangle();
+        public static Itens I = new Itens();
 
         public void CRIARITENS()
         {
-            for (int a = 0; a < 3; a++)
+            for (int a = 0; a < JANELA.J.QTDITENS; a++)
             {
                 Itens i = new Itens();
                 JANELA.J.listadeitens.Add(i);
+               
             }
+            
         }
     }
 }

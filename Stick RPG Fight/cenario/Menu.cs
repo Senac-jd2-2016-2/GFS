@@ -71,7 +71,7 @@ namespace Stick_RPG_Fight
             var mouseState = Mouse.GetState();
             var mousePosition = new Point(mouseState.X, mouseState.Y);
 
-            JANELA.J.POSIÇÃO(WidthTela, HeightTela);
+            JANELA.J.POSIÇÃOCC(WidthTela, HeightTela);
 
             if (HistoryBotao.Contains(mousePosition))
             {
