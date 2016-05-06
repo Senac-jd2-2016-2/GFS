@@ -999,7 +999,7 @@ namespace Stick_RPG_Fight
             }
             if (JANELA.J.setacima.Contains(mousePosition) && Mouse.GetState().LeftButton != ButtonState.Pressed)
             {
-                spriteBatch.Draw(JANELA.J.imgsetacima, JANELA.J.setacima, Color.DarkGreen);
+                spriteBatch.Draw(JANELA.J.imgsetacima, JANELA.J.setacima, Color.DarkGray);
             }
             if (JANELA.J.setacima.Contains(mousePosition) && Mouse.GetState().LeftButton == ButtonState.Pressed)
             {
@@ -1012,7 +1012,7 @@ namespace Stick_RPG_Fight
             }
             if (JANELA.J.setacima2.Contains(mousePosition) && Mouse.GetState().LeftButton != ButtonState.Pressed)
             {
-                spriteBatch.Draw(JANELA.J.imgsetacima, JANELA.J.setacima2, Color.DarkGreen);
+                spriteBatch.Draw(JANELA.J.imgsetacima, JANELA.J.setacima2, Color.DarkGray);
             }
             if (JANELA.J.setacima2.Contains(mousePosition) && Mouse.GetState().LeftButton == ButtonState.Pressed)
             {
@@ -1025,7 +1025,7 @@ namespace Stick_RPG_Fight
             }
             if (JANELA.J.setabaixo.Contains(mousePosition) && Mouse.GetState().LeftButton != ButtonState.Pressed)
             {
-                spriteBatch.Draw(JANELA.J.imgsetabaixo, JANELA.J.setabaixo, Color.DarkGreen);
+                spriteBatch.Draw(JANELA.J.imgsetabaixo, JANELA.J.setabaixo, Color.DarkGray);
             }
             if (JANELA.J.setabaixo.Contains(mousePosition) && Mouse.GetState().LeftButton == ButtonState.Pressed)
             {
@@ -1345,7 +1345,7 @@ namespace Stick_RPG_Fight
                 //refresh
                 if (!JANELA.J.Brefresh.Contains(mousePosition))
                 {
-                    spriteBatch.Draw(JANELA.J.imgRefresh1, JANELA.J.Brefresh, Color.Lime);
+                    spriteBatch.Draw(JANELA.J.imgRefresh1, JANELA.J.Brefresh, Color.Gray);
                 }
                 if (JANELA.J.Brefresh.Contains(mousePosition) && Mouse.GetState().LeftButton != ButtonState.Pressed)
                 {
@@ -1435,7 +1435,7 @@ namespace Stick_RPG_Fight
                     //refresh
                     if (!JANELA.J.Brefresh2.Contains(mousePosition))
                     {
-                        spriteBatch.Draw(JANELA.J.imgRefresh1, JANELA.J.Brefresh2, Color.Lime);
+                        spriteBatch.Draw(JANELA.J.imgRefresh1, JANELA.J.Brefresh2, Color.Gray);
                     }
                     if (JANELA.J.Brefresh2.Contains(mousePosition) && Mouse.GetState().LeftButton != ButtonState.Pressed)
                     {
