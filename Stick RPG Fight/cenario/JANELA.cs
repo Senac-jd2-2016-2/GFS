@@ -23,7 +23,8 @@ namespace Stick_RPG_Fight
         public int qtddOLEADA = 1;
 
         //posição de itens e qntd
-        public int POSyITEN = 0, QTDITENS = 12, QTDtotalITENSjanela = 9, TamanhodoPulodaSETA = 0; //quantidade q cabe na janela
+        public int POSyITEN = 0, QTDITENS = 75, QTDtotalITENSjanela = 9, TamanhodoPulodaSETA = 0; //quantidade q cabe na janela
+        public int contagemMouseClickB = 0, contagemMouseClickC = 0, QuantidadeFaltaProFinalB, QuantidadeFaltaProFinalC;
 
         //qntd de fases no jogo
         public int qntddefases;
@@ -197,6 +198,11 @@ namespace Stick_RPG_Fight
                         JANELA.J.JANELAPLACAR = false;
                         JANELA.J.bREFRESH2 = false;
 
+                        //refazer
+                        TRANSFERIDO = false;
+                        TRANSFERIRpontos = false;
+                        MOSTRARpontos = false;
+
                         GERARQuest(A); // cria uma quest e começa denovo
                     }
 
@@ -220,6 +226,11 @@ namespace Stick_RPG_Fight
                         //posição volta pro começo e os inimigos somem (SAI DA FASE)
                         JANELA.J.JANELAPLACAR = false;
                         JANELA.J.ZERARFASE(listai1, P1, Botao, W, H);
+
+                        //
+                        TRANSFERIDO = false;
+                        TRANSFERIRpontos = false;
+                        MOSTRARpontos = false;
 
                         for (int i = 0; i < Bfase.Length; i++)
                             Contexto.Fase[i] = false;
@@ -521,11 +532,12 @@ namespace Stick_RPG_Fight
         public void ZERARFASE(List<Inimigo> listai1, Personagem P1, Botoes Botao, int W, int H)
         {
             //sai pro menu
-            Botao.HOME = true;
             if (!JANELAPLACAR && !JANELAQUEST)
             {
                 for (int i = 0; i < Bfase.Length; i++)
                     Contexto.Fase[i] = false;
+
+                Botao.HOME = true;
             }
             
             //todos os inimigos desaparecem
@@ -633,13 +645,111 @@ namespace Stick_RPG_Fight
             
         }
 
-        public void FUNÇÕESCC(bool BOTAO)
+        //usável pra qualquer jogo/programa (DINÂMICO) - (se for usar: Me avise, ficarei grato em saber)
+        public void Rolometro(bool BOTAO, int QTDITENS, int QTDtotalITENSjanela, int QuantidadeFaltaProFinalB, int QuantidadeFaltaProFinalC, int contagemMouseClickB, int contagemMouseClickC, Rectangle janelarolo, Rectangle rolo, Rectangle setabaixo, Rectangle setacima, int TamanhodoPulodaSETA, bool setabaixoB, bool setacimaB, int W, int H, int POSyITEN)
+        {
+            
+            var mouseState = Mouse.GetState();
+            var mousePosition = new Point(mouseState.X, mouseState.Y);
+            if (Mouse.GetState().LeftButton != ButtonState.Pressed) // BOTAO não pressionado
+            {
+                BOTAO = false;
+                contagemMouseClickB = 0; //baixo
+                contagemMouseClickC = 0; //cima
+            }
+            
+            if (QTDITENS > QTDtotalITENSjanela) //ATUALIZAÇÃO DO ROLOMETRO
+            {
+                //QUANTIDADES QUE FALTAM PRA CHEGAR EM CERTO LUGAR
+                QuantidadeFaltaProFinalB = (janelarolo.Y + janelarolo.Height) - (rolo.Y + rolo.Height);
+                QuantidadeFaltaProFinalC = rolo.Y - janelarolo.Y;
+                //att do qnt pular na seta (ela pula o tamanho de 1 iten inteiro)
+                TamanhodoPulodaSETA = rolo.Height / QTDtotalITENSjanela; // tamanho / qtdjanela
+                //baixo
+                if (setabaixo.Contains(mousePosition) && Mouse.GetState().LeftButton == ButtonState.Pressed)
+                {
+                    setabaixoB = true;
+                    BOTAO = true;
+                    contagemMouseClickB++;
+                }
+                if (!setabaixo.Contains(mousePosition))
+                    setabaixoB = false;
+                if (setabaixoB && !BOTAO || contagemMouseClickB >= 30)
+                {
+
+                    if (rolo.Y + rolo.Height < janelarolo.Y + janelarolo.Height - TamanhodoPulodaSETA) // so desce mais qnd tiver acima do espaço máximo - o qnt ele pode pular
+                    {
+                        rolo.Y += TamanhodoPulodaSETA;//rolo desce
+                        POSyITEN -= TamanhodoPulodaSETA;//e o item sobe
+                    }
+                    else if (rolo.Y + rolo.Height >= janelarolo.Y + janelarolo.Height - TamanhodoPulodaSETA && rolo.Y + rolo.Height < janelarolo.Y + janelarolo.Height)// se ele estiver entre o final e espaço q ele pula, vai igualar ao final;
+                    {
+                        rolo.Y += QuantidadeFaltaProFinalB;
+                        POSyITEN -= QuantidadeFaltaProFinalB;
+                    }
+                    setabaixoB = false;
+                }
+
+                if (!rolo.Contains(mousePosition) && janelarolo.Contains(mousePosition) && Mouse.GetState().LeftButton == ButtonState.Pressed && rolo.Y + rolo.Height < mouseState.Y && rolo.Y + rolo.Height < janelarolo.Y + janelarolo.Height - H / 250)
+                {
+                    rolo.Y += H / 200;
+                    POSyITEN -= H / 200;
+                }
+                //cima
+                if (setacima.Contains(mousePosition) && Mouse.GetState().LeftButton == ButtonState.Pressed)
+                {
+                    setacimaB = true;
+                    BOTAO = true;
+                    contagemMouseClickC++;
+                }
+                if (!setacima.Contains(mousePosition))
+                    setacimaB = false;
+                if (setacimaB && !BOTAO || contagemMouseClickC >= 30)
+                {
+
+                    if (rolo.Y > janelarolo.Y + TamanhodoPulodaSETA) // so sobe mais qnd tiver embaixo do lugar menor + o qnt ele pode pular
+                    {
+                        rolo.Y -= TamanhodoPulodaSETA; //rolo sobe
+                        POSyITEN += TamanhodoPulodaSETA;//e o item desce
+                    }
+                    else if (rolo.Y <= janelarolo.Y + TamanhodoPulodaSETA && rolo.Y > janelarolo.Y) // se ele estiver entre o final e espaço q ele pula, vai igualar ao final;
+                    {
+                        rolo.Y -= QuantidadeFaltaProFinalC;
+                        POSyITEN += QuantidadeFaltaProFinalC;
+                    }
+                    setacimaB = false;
+                }
+
+                if (!rolo.Contains(mousePosition) && janelarolo.Contains(mousePosition) && Mouse.GetState().LeftButton == ButtonState.Pressed && rolo.Y > mouseState.Y && rolo.Y > janelarolo.Y + H / 250)
+                {
+                    rolo.Y -= H / 200;
+                    POSyITEN += H / 200;
+                }
+
+                //caso passe do limite
+                if (rolo.Y + rolo.Height > janelarolo.Y + janelarolo.Height)
+                {
+                    rolo.Y--;
+                    POSyITEN++;
+                }
+                if (rolo.Y < janelarolo.Y)
+                {
+                    rolo.Y++;
+                    POSyITEN--;
+                }
+
+            }//fim do rolo
+        }
+
+        public void FUNÇÕESCC(bool BOTAO, int W, int H)
         {
             var mouseState = Mouse.GetState();
             var mousePosition = new Point(mouseState.X, mouseState.Y);
             if (Mouse.GetState().LeftButton != ButtonState.Pressed) // BOTAO não pressionado
             {
                 BOTAO = false;
+                contagemMouseClickB = 0; //baixo
+                contagemMouseClickC = 0; //cima
             }
 
             MediaPlayer.Pause();
@@ -726,12 +836,12 @@ namespace Stick_RPG_Fight
                 JANELA.J.PET = false;
             }
 
-            //new
-
-            //setinha
-            //1
-            if (QTDITENS > QTDtotalITENSjanela)
+            //Rolometro, dinamico.
+            if (QTDITENS > QTDtotalITENSjanela) //ATUALIZAÇÃO DO ROLOMETRO
             {
+                //QUANTIDADES QUE FALTAM PRA CHEGAR EM CERTO LUGAR
+                QuantidadeFaltaProFinalB = (janelarolo.Y + janelarolo.Height) - (rolo.Y + rolo.Height);
+                QuantidadeFaltaProFinalC = rolo.Y - janelarolo.Y;
                 //att do qnt pular na seta (ela pula o tamanho de 1 iten inteiro)
                 TamanhodoPulodaSETA = rolo.Height / QTDtotalITENSjanela; // tamanho / qtdjanela
                 //baixo
@@ -739,53 +849,81 @@ namespace Stick_RPG_Fight
                 {
                     setabaixoB = true;
                     BOTAO = true;
+                    contagemMouseClickB++;
                 }
                 if (!setabaixo.Contains(mousePosition))
                     setabaixoB = false;
-                if (setabaixoB && !BOTAO)
+                if (setabaixoB && !BOTAO || contagemMouseClickB >= 30)
                 {
-                    if (rolo.Y + rolo.Height < janelarolo.Y + janelarolo.Height - TamanhodoPulodaSETA + 1) // so desce mais qnd tiver acima do espaço máximo - o qnt ele pode pular
+
+                    if (rolo.Y + rolo.Height < janelarolo.Y + janelarolo.Height - TamanhodoPulodaSETA) // so desce mais qnd tiver acima do espaço máximo - o qnt ele pode pular
                     {
                         rolo.Y += TamanhodoPulodaSETA;//rolo desce
                         POSyITEN -= TamanhodoPulodaSETA;//e o item sobe
                     }
+                    else if (rolo.Y + rolo.Height >= janelarolo.Y + janelarolo.Height - TamanhodoPulodaSETA && rolo.Y + rolo.Height < janelarolo.Y + janelarolo.Height)// se ele estiver entre o final e espaço q ele pula, vai igualar ao final;
+                    {
+                        rolo.Y += QuantidadeFaltaProFinalB;
+                        POSyITEN -= QuantidadeFaltaProFinalB;
+                    }
                     setabaixoB = false;
+                }
+
+                if (!rolo.Contains(mousePosition) && janelarolo.Contains(mousePosition) && Mouse.GetState().LeftButton == ButtonState.Pressed && rolo.Y + rolo.Height < mouseState.Y && rolo.Y + rolo.Height < janelarolo.Y + janelarolo.Height - H / 250)
+                {
+                    rolo.Y += H / 200;
+                    POSyITEN -= H / 200;
                 }
                 //cima
                 if (setacima.Contains(mousePosition) && Mouse.GetState().LeftButton == ButtonState.Pressed)
                 {
                     setacimaB = true;
                     BOTAO = true;
+                    contagemMouseClickC++;
                 }
                 if (!setacima.Contains(mousePosition))
                     setacimaB = false;
-                if (setacimaB && !BOTAO)
+                if (setacimaB && !BOTAO || contagemMouseClickC >= 30)
                 {
-                    if (rolo.Y > janelarolo.Y + TamanhodoPulodaSETA - 1) // so sobe mais qnd tiver embaixo do lugar menor + o qnt ele pode pular
+
+                    if (rolo.Y > janelarolo.Y + TamanhodoPulodaSETA) // so sobe mais qnd tiver embaixo do lugar menor + o qnt ele pode pular
                     {
                         rolo.Y -= TamanhodoPulodaSETA; //rolo sobe
                         POSyITEN += TamanhodoPulodaSETA;//e o item desce
                     }
+                    else if (rolo.Y <= janelarolo.Y + TamanhodoPulodaSETA && rolo.Y > janelarolo.Y) // se ele estiver entre o final e espaço q ele pula, vai igualar ao final;
+                    {
+                        rolo.Y -= QuantidadeFaltaProFinalC;
+                        POSyITEN += QuantidadeFaltaProFinalC;
+                    }
                     setacimaB = false;
+                }
+
+                if (!rolo.Contains(mousePosition) && janelarolo.Contains(mousePosition) && Mouse.GetState().LeftButton == ButtonState.Pressed && rolo.Y > mouseState.Y && rolo.Y > janelarolo.Y + H / 250)
+                {
+                    rolo.Y -= H / 200;
+                    POSyITEN += H / 200;
                 }
 
                 //caso passe do limite
                 if (rolo.Y + rolo.Height > janelarolo.Y + janelarolo.Height)
                 {
                     rolo.Y--;
+                    POSyITEN++;
                 }
                 if (rolo.Y < janelarolo.Y)
                 {
                     rolo.Y++;
+                    POSyITEN--;
                 }
-            }//fim do rolo
+            }
 
             //itens click
             if (JANELA.J.ADAGATIVA)
             {
                 if (!JANELA.J.ADAGAselect)
                 {
-                    
+
                     if (JANELA.J.listadeitens[1].item.Contains(mousePosition) && Mouse.GetState().LeftButton == ButtonState.Pressed)
                     {
                         ADAGAb = true;

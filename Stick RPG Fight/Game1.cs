@@ -388,7 +388,7 @@ namespace Stick_RPG_Fight
 
                             P1.RPGatualização(WidthTela, HeightTela);
                             JANELA.J.COMPLETARQuest(M1, P1, Botao, listai1, WidthTela, HeightTela);
-
+                            JANELA.J.POSQUEST(WidthTela, HeightTela);
                            
                         }
                     }
@@ -627,7 +627,7 @@ namespace Stick_RPG_Fight
                 var WidthTela = Window.ClientBounds.Width;
                 var HeightTela = Window.ClientBounds.Height;
 
-                JANELA.J.FUNÇÕESCC(BOTAO); // janelas
+                JANELA.J.FUNÇÕESCC(BOTAO, WidthTela, HeightTela); // janelas
 
                 JANELA.J.POSIÇÃOCC(WidthTela, HeightTela);
 
