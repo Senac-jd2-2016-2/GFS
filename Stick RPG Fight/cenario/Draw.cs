@@ -801,7 +801,7 @@ namespace Stick_RPG_Fight
         //--------------------------------------------------------------------------------------------------
         public void Drawmenu01(SpriteBatch spriteBatch, Menu M1, int WidthTela, int HeightTela, SpriteFont menu)
         {
-            spriteBatch.Draw(M1.imgintromenu_semtraçado, new Rectangle(0, 0, WidthTela, HeightTela), Color.White);
+            spriteBatch.Draw(Contexto.Fundo.menu00fundo, new Rectangle(0, 0, WidthTela, HeightTela), Color.White);
 
             spriteBatch.Draw(M1.imghistory, M1.HistoryBotao,
                                    new Rectangle(M1.framehistoryB.X * M1.TamanhoSpritesheethistoryB.X, M1.framehistoryB.Y * M1.TamanhoSpritesheethistoryB.Y,
