@@ -19,7 +19,7 @@ namespace Stick_RPG_Fight
 
         public static void inicializar(ContentManager content, Menu M1,Personagem P1, Botoes Botao,  Inimigo i1, Agua DefineAgua) // carregar imagens quando a fase começa (não no começo)
         {
-           
+            Info.I.img = content.Load<Texture2D>("Info");
 
                 //Direito
             P1.imgSpriteSheetparado1 = content.Load<Texture2D>("spritesheet p1 parado1"); // só imagem, logo posso usar isso também pros inimigos.
@@ -164,6 +164,28 @@ namespace Stick_RPG_Fight
             JANELA.J.imgespada2H3 = content.Load<Texture2D>("item espada 2H 3");
             JANELA.J.imgmao1 = content.Load<Texture2D>("item maos 1");
             JANELA.J.imgmao2 = content.Load<Texture2D>("item maos 2");
+
+            JANELA.J.imgItemarco1 = content.Load<Texture2D>("item arco 1");
+            JANELA.J.imgItemarco2 = content.Load<Texture2D>("item arco 2");
+            JANELA.J.imgItemarco3 = content.Load<Texture2D>("item arco 3");
+            JANELA.J.imgItemtridente1 = content.Load<Texture2D>("item tridente 1");
+            JANELA.J.imgItemtridente2 = content.Load<Texture2D>("item tridente 2");
+            JANELA.J.imgItemtridente3 = content.Load<Texture2D>("item tridente 3");
+            JANELA.J.imgItemslow1 = content.Load<Texture2D>("item slow 1");
+            JANELA.J.imgItemslow1 = content.Load<Texture2D>("item slow 2");
+            JANELA.J.imgItemretroceder1 = content.Load<Texture2D>("item retroceder 1");
+            JANELA.J.imgItemretroceder2 = content.Load<Texture2D>("item retroceder 2");
+            JANELA.J.imgItemretroceder3 = content.Load<Texture2D>("item retroceder 3");
+            JANELA.J.imgItemescudo1 = content.Load<Texture2D>("item escudo 1");
+            JANELA.J.imgItemescudo2 = content.Load<Texture2D>("item escudo 2");
+            JANELA.J.imgItemescudo3 = content.Load<Texture2D>("item escudo 3");
+            JANELA.J.imgItemvento1 = content.Load<Texture2D>("item vento 1");
+            JANELA.J.imgItemvento2 = content.Load<Texture2D>("item vento 2");
+            JANELA.J.imgItemvento3 = content.Load<Texture2D>("item vento 3");
+            JANELA.J.imgItemraio1 = content.Load<Texture2D>("item raio 1");
+            JANELA.J.imgItemraio2 = content.Load<Texture2D>("item raio 2");
+            JANELA.J.imgItemraio3 = content.Load<Texture2D>("item raio 3");
+
 
             //resume
             JANELA.J.imgpauseJANELA = content.Load<Texture2D>("janela PAUSE x MENU");

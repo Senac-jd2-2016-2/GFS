@@ -41,6 +41,7 @@
     <Compile Include="cenario\ATUALIZAÇÃO.cs" />
     <Compile Include="cenario\JANELA.cs" />
     <Compile Include="COMBO.cs" />
+    <Compile Include="Info.cs" />
     <Compile Include="Itens.cs" />
     <Compile Include="Opçoes.cs" />
     <Compile Include="Personagens\Dano.cs" />
@@ -318,6 +319,9 @@
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
     <Content Include="Content\i1 - rasteiraD.png">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Content\Info.png">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
     <Content Include="Content\intro game sem traçado.png">

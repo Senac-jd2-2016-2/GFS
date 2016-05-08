@@ -23,7 +23,7 @@ namespace Stick_RPG_Fight
         public int qtddOLEADA = 1;
 
         //posição de itens e qntd
-        public int POSyITEN = 0, QTDITENS = 75, QTDtotalITENSjanela = 9, TamanhodoPulodaSETA = 0; //quantidade q cabe na janela
+        public int POSyITEN = 0, QTDITENS = 10, QTDtotalITENSjanela = 9, TamanhodoPulodaSETA = 0; //quantidade q cabe na janela
         public int contagemMouseClickB = 0, contagemMouseClickC = 0, QuantidadeFaltaProFinalB, QuantidadeFaltaProFinalC;
 
         //qntd de fases no jogo
@@ -89,7 +89,8 @@ namespace Stick_RPG_Fight
 
         //janelacc
         public bool ADAGATIVA, ESPADA2HATIVA, ADAGAselect, ESPADA2Hselect, MAOselect, setacimaB, setabaixoB, setacimaB2, setabaixoB2, ADAGAb, ESPADAb, MAOb;
-        public Texture2D imgItemarco1, imgItemarco2, imgItemarco3, imgItemescudo1, imgItemescudo2, imgItemescudo3, imgItemraio1, imgItemraio2, imgItemraio3, imgItemretroceder1, imgItemretroceder2, imgItemretroceder3, imgItemslow1, imgItemslow2, imgItemslow3, imgItemtridente1, imgItemtridente2, imgItemtridente3, imgItemvento1, imgItemvento2, imgItemvento3;
+        public bool ARCOATIVO, TRIDENTEATIVO, RETROCEDERATIVO, ESCUDOATIVO, VENTOATIVO, RAIOATIVO, ARCOselect, TRIDENTEselect, RETROCEDERselect, ESCUDOselect, VENTOselect, RAIOselect, ARCOb, TRIDENTE, b, RETROCEDERb, ESCUDOb, VENTOb, RAIOb;
+        public Texture2D imgItemarco1, imgItemarco2, imgItemarco3, imgItemescudo1, imgItemescudo2, imgItemescudo3, imgItemraio1, imgItemraio2, imgItemraio3, imgItemretroceder1, imgItemretroceder2, imgItemretroceder3, imgItemslow1, imgItemslow2, imgItemtridente1, imgItemtridente2, imgItemtridente3, imgItemvento1, imgItemvento2, imgItemvento3;
 
         //QUEST
         public Texture2D imgQuest, imgRefresh1, imgRefresh2, imgOK1, imgOK2, imgOK3;
@@ -1038,7 +1039,7 @@ namespace Stick_RPG_Fight
             janelaitens.Width = HeightTela / 3 - HeightTela / 100; //350
             janelaitens.Height = WidthTela / 3 + HeightTela / 41; //640 + 26 = 66
 
-            janelaall.X = janelaitens.X + janelaitens.Width;
+            janelaall.X = setacima.X + setacima.Width;
             janelaall.Y = janelaitens.Y;
             janelaall.Width = HeightTela - HeightTela / 30; // 1080 - 36 = 1044
             janelaall.Height = WidthTela / 3 + HeightTela / 41; //640 + 26 = 666
