@@ -85,8 +85,11 @@ namespace Stick_RPG_Fight
         public Texture2D imgbotaoArmasOFF, imgbotaoArmasON, imgbotaoCombosOFF, imgbotaoCombosON, imgbotaoPetON, imgbotaoPetOFF;
         public Texture2D imgjanelaall, imgjanelarolo, imgrolo, imgsetacima, imgsetabaixo, imgadaga1, imgadaga2, imgadaga3, imgespada2H1, imgespada2H2, imgespada2H3, imgmao1, imgmao2;
 
+        
+
         //janelacc
         public bool ADAGATIVA, ESPADA2HATIVA, ADAGAselect, ESPADA2Hselect, MAOselect, setacimaB, setabaixoB, setacimaB2, setabaixoB2, ADAGAb, ESPADAb, MAOb;
+        public Texture2D imgItemarco1, imgItemarco2, imgItemarco3, imgItemescudo1, imgItemescudo2, imgItemescudo3, imgItemraio1, imgItemraio2, imgItemraio3, imgItemretroceder1, imgItemretroceder2, imgItemretroceder3, imgItemslow1, imgItemslow2, imgItemslow3, imgItemtridente1, imgItemtridente2, imgItemtridente3, imgItemvento1, imgItemvento2, imgItemvento3;
 
         //QUEST
         public Texture2D imgQuest, imgRefresh1, imgRefresh2, imgOK1, imgOK2, imgOK3;
