@@ -236,6 +236,7 @@ namespace Stick_RPG_Fight
                         TRANSFERIDO = false;
                         TRANSFERIRpontos = false;
                         MOSTRARpontos = false;
+                        MediaPlayer.Play(Audio.A1.menusong);
 
                         for (int i = 0; i < Bfase.Length; i++)
                             Contexto.Fase[i] = false;
@@ -603,6 +604,9 @@ namespace Stick_RPG_Fight
 
                 JANELA.J.JANELAPAUSE = false;
                 JANELA.J.bSAIR = false;
+
+                //menu
+                MediaPlayer.Play(Audio.A1.menusong);
             }
             //BOTAO RESUME
             if (JANELA.J.Bresume.Contains(mousePosition) && Mouse.GetState().LeftButton == ButtonState.Pressed)

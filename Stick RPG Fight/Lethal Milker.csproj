@@ -93,6 +93,7 @@
     <Content Include="Arquivos do content\POP Echo.wav" />
     <Content Include="Arquivos do content\SPLAT Crush 01.wav" />
     <Content Include="Arquivos do content\SUCCESS CHIME.wav" />
+    <Content Include="Arquivos do content\Menu song.mp3" />
     <Content Include="Content\agua.png">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>

@@ -127,3 +127,9 @@
 /processorParam:TextureFormat=Compressed
 /build:Neon15.spritefont
 
+#begin Menu song.mp3
+/importer:Mp3Importer
+/processor:SongProcessor
+/processorParam:Quality=Best
+/build:Menu song.mp3
+

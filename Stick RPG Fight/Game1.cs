@@ -236,13 +236,13 @@ namespace Stick_RPG_Fight
                         if (!Botao.HOMEquadrado.Contains(mousePosition))
                         {
                             Botao.HOMEb = false;
-                            MediaPlayer.Resume();
+                            
                         }
                         //passagem (para o menu do jogo)
                         //passagem
                         if (Botao.HOMEb && !BOTAO)
                         {
-
+                            MediaPlayer.Play(Audio.A1.menusong);
                             JANELA.J.JANELAPAUSE = true;
                         }
                     }
@@ -255,13 +255,13 @@ namespace Stick_RPG_Fight
                     {
                         BOTAO = true;
                         Botao.COMERCIOb = true;
-                        MediaPlayer.Pause();
+                        
                     }
                     //se passar fora do mouse
                     if (!Botao.COMERCIOquadrado.Contains(mousePosition))
                     {
                         Botao.COMERCIOb = false;
-                        MediaPlayer.Resume();
+                        
                     }
                     //passagem (abrir janela)
                     if (Botao.COMERCIOb && !BOTAO)//
@@ -280,13 +280,13 @@ namespace Stick_RPG_Fight
                     {
                         BOTAO = true;
                         Botao.COMBOSb = true;
-                        MediaPlayer.Pause();
+                        
                     }
                     //se passar fora do mouse
                     if (!Botao.COMBOSquadrado.Contains(mousePosition))
                     {
                         Botao.COMBOSb = false;
-                        MediaPlayer.Resume();
+                       
                     }
                     //passagem (abrir janela)
                     if (Botao.COMBOSb && !BOTAO)//
@@ -346,7 +346,7 @@ namespace Stick_RPG_Fight
                             {
                                 //inimigo1.Add();
 
-
+                                MediaPlayer.Play(Audio.A1.menusong);
                                 graphics.ApplyChanges();
                                 menu00 = false;//sai pro proximo menu
                                 menu01 = true;

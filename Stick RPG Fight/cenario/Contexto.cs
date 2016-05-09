@@ -59,7 +59,7 @@ namespace Stick_RPG_Fight
             M1.imgintromenu_semtraçado = content.Load<Texture2D>("intro game sem traçado");
             //M1.imgpredio_do_P1 = content.Load<Texture2D>("predio");
             
-            Audio.A1.menusong = content.Load<Song>("Base4");
+            Audio.A1.menusong = content.Load<Song>("Menu song");
             Audio.A1.combatesong = content.Load<Song>("Base1");
             Audio.A1.PODERsong = content.Load<Song>("coração LENTO");
             Audio.A1.COINCOLLECT = content.Load<SoundEffect>("COINS Collect");
