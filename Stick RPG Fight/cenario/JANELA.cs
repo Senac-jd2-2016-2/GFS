@@ -25,12 +25,13 @@ namespace Stick_RPG_Fight
         //posição de itens e qntd
         public int POSyITEN = 0, QTDITENS = 10, QTDtotalITENSjanela = 9, TamanhodoPulodaSETA = 0; //quantidade q cabe na janela
         public int contagemMouseClickB = 0, contagemMouseClickC = 0, QuantidadeFaltaProFinalB, QuantidadeFaltaProFinalC;
+        public bool[] ATIVOS = new bool[10], SELECIONADOS = new bool[10]; // se mudar os itens, muda aqui tmb
 
         //qntd de fases no jogo
         public int qntddefases;
 
         //escrita
-        public SpriteFont Neon, Firefont, Woodfont;
+        public SpriteFont Neon, Firefont, Woodfont, Neon15;
 
         //separo todos os retangles, imagens, bool para preparar as janelas dentro do jogo, tambem utilizo a classe JANELA pra não criar classes pequenas com poucos codigos, pois a classe janela é estática.
         //
@@ -89,7 +90,7 @@ namespace Stick_RPG_Fight
 
         //janelacc
         public bool ADAGATIVA, ESPADA2HATIVA, ADAGAselect, ESPADA2Hselect, MAOselect, setacimaB, setabaixoB, setacimaB2, setabaixoB2, ADAGAb, ESPADAb, MAOb;
-        public bool ARCOATIVO, TRIDENTEATIVO, RETROCEDERATIVO, ESCUDOATIVO, VENTOATIVO, RAIOATIVO, ARCOselect, TRIDENTEselect, RETROCEDERselect, ESCUDOselect, VENTOselect, RAIOselect, ARCOb, TRIDENTE, b, RETROCEDERb, ESCUDOb, VENTOb, RAIOb;
+        public bool ARCOATIVO, TRIDENTEATIVO, RETROCEDERATIVO, ESCUDOATIVO, VENTOATIVO, RAIOATIVO, ARCOselect, TRIDENTEselect, SLOWselect, RETROCEDERselect, ESCUDOselect, VENTOselect, RAIOselect, ARCOb, TRIDENTEb, SLOWb, RETROCEDERb, ESCUDOb, VENTOb, RAIOb;
         public Texture2D imgItemarco1, imgItemarco2, imgItemarco3, imgItemescudo1, imgItemescudo2, imgItemescudo3, imgItemraio1, imgItemraio2, imgItemraio3, imgItemretroceder1, imgItemretroceder2, imgItemretroceder3, imgItemslow1, imgItemslow2, imgItemtridente1, imgItemtridente2, imgItemtridente3, imgItemvento1, imgItemvento2, imgItemvento3;
 
         //QUEST
@@ -923,54 +924,9 @@ namespace Stick_RPG_Fight
             }
 
             //itens click
-            if (JANELA.J.ADAGATIVA)
-            {
-                if (!JANELA.J.ADAGAselect)
-                {
-
-                    if (JANELA.J.listadeitens[1].item.Contains(mousePosition) && Mouse.GetState().LeftButton == ButtonState.Pressed)
-                    {
-                        ADAGAb = true;
-                        BOTAO = true;
-                    }
-                    if (!JANELA.J.listadeitens[1].item.Contains(mousePosition))
-                        ADAGAb = false;
-                    if (ADAGAb && !BOTAO)
-                    {
-                        ADAGAselect = true;
-                        ADAGAb = false;
-
-                        //tirar os outros da seleção
-                        ESPADA2Hselect = false;
-                        MAOselect = false;
-                    }
-                }
-            }
-
-            if (JANELA.J.ESPADA2HATIVA)
-            {
-                if (!JANELA.J.ESPADA2Hselect)
-                {
-
-                    if (JANELA.J.listadeitens[2].item.Contains(mousePosition) && Mouse.GetState().LeftButton == ButtonState.Pressed)
-                    {
-                        ESPADAb = true;
-                        BOTAO = true;
-                    }
-                    if (!JANELA.J.listadeitens[2].item.Contains(mousePosition))
-                        ESPADAb = false;
-                    if (ESPADAb && !BOTAO)
-                    {
-                        ESPADA2Hselect = true;
-                        ESPADAb = false;
-
-                        //tirar os outros da seleção
-                        ADAGAselect = false;
-                        MAOselect = false;
-                    }
-                }
-            }
-
+            // + INFO DELES
+            //0
+            ATIVOS[0] = true;
             if (!MAOselect)
             {
                 if (JANELA.J.listadeitens[0].item.Contains(mousePosition) && Mouse.GetState().LeftButton == ButtonState.Pressed)
@@ -984,20 +940,447 @@ namespace Stick_RPG_Fight
                 {
                     MAOselect = true;
                     MAOb = false;
+                    SELECIONADOS[0] = true;
 
                     //tirar os outros da seleção
                     ADAGAselect = false;
                     ESPADA2Hselect = false;
+                    ARCOselect = false;
+                    TRIDENTEselect = false;
+
+                    //descelecionar outros itens do mesmo grupo
+                    for (int i = 1; i < 5; i++)
+                    {
+                        SELECIONADOS[i] = false;
+                    }
                 }
             }
+            
+            //1
+            if (JANELA.J.ESPADA2HATIVA)
+            {
+                ATIVOS[1] = true;
+                if (!JANELA.J.ESPADA2Hselect)
+                {
+
+                    if (JANELA.J.listadeitens[1].item.Contains(mousePosition) && Mouse.GetState().LeftButton == ButtonState.Pressed)
+                    {
+                        ESPADAb = true;
+                        BOTAO = true;
+                    }
+                    if (!JANELA.J.listadeitens[1].item.Contains(mousePosition))
+                        ESPADAb = false;
+                    if (ESPADAb && !BOTAO)
+                    {
+                        ESPADA2Hselect = true;
+                        ESPADAb = false;
+                        SELECIONADOS[1] = true;
+
+                        //tirar os outros da seleção
+                        ADAGAselect = false;
+                        MAOselect = false;
+                        ARCOselect = false;
+                        TRIDENTEselect = false;
+
+                        SELECIONADOS[0] = false;
+                        //descelecionar outros itens do mesmo grupo
+                        for (int i = 2; i < 5; i++)
+                        {
+                            SELECIONADOS[i] = false;
+                        }
+                    }
+                }
+            }
+            else
+            {
+                ATIVOS[1] = false;
+                //se clicar encima e estiver bloqueado, ele vai ate o comercio
+                if (JANELA.J.listadeitens[1].item.Contains(mousePosition) && Mouse.GetState().LeftButton == ButtonState.Pressed)
+                {
+                    JANELACOMBO = false;
+                    JANELACOMERCIO = true;
+                    ARMAS = true;
+                    PODERES = false;
+                    PET = false;
+                }
+            }
+            //2
+            if (JANELA.J.ADAGATIVA)
+            {
+                ATIVOS[2] = true;
+                if (!JANELA.J.ADAGAselect)
+                {
+
+                    if (JANELA.J.listadeitens[2].item.Contains(mousePosition) && Mouse.GetState().LeftButton == ButtonState.Pressed)
+                    {
+                        ADAGAb = true;
+                        BOTAO = true;
+                    }
+                    if (!JANELA.J.listadeitens[2].item.Contains(mousePosition))
+                        ADAGAb = false;
+                    if (ADAGAb && !BOTAO)
+                    {
+                        ADAGAselect = true;
+                        ADAGAb = false;
+                        SELECIONADOS[2] = true;
+
+                        //tirar os outros da seleção
+                        ESPADA2Hselect = false;
+                        MAOselect = false;
+                        ARCOselect = false;
+                        TRIDENTEselect = false;
+
+                        SELECIONADOS[0] = false;
+                        SELECIONADOS[1] = false;
+                        //descelecionar outros itens do mesmo grupo
+                        for (int i = 3; i < 5; i++)
+                        {
+                            SELECIONADOS[i] = false;
+                        }
+                    }
+                }
+            }
+            else
+            {
+                ATIVOS[2] = false;
+                //se clicar encima e estiver bloqueado, ele vai ate o comercio
+                if (JANELA.J.listadeitens[2].item.Contains(mousePosition) && Mouse.GetState().LeftButton == ButtonState.Pressed)
+                {
+                    JANELACOMBO = false;
+                    JANELACOMERCIO = true;
+                    ARMAS = true;
+                    PODERES = false;
+                    PET = false;
+                }
+            }
+            //3
+            if (JANELA.J.ARCOATIVO)
+            {
+                ATIVOS[3] = true;
+                if (!JANELA.J.ARCOselect)
+                {
+                    
+                    if (JANELA.J.listadeitens[3].item.Contains(mousePosition) && Mouse.GetState().LeftButton == ButtonState.Pressed)
+                    {
+                        ARCOb = true;
+                        BOTAO = true;
+                    }
+                    if (!JANELA.J.listadeitens[3].item.Contains(mousePosition))
+                        ARCOb = false;
+                    if (ARCOb && !BOTAO)
+                    {
+                        ARCOselect = true;
+                        ARCOb = false;
+                        SELECIONADOS[3] = true;
+
+
+                        //tirar os outros da seleção
+                        ADAGAselect = false;
+                        MAOselect = false;
+                        ESPADA2Hselect = false;
+                        TRIDENTEselect = false;
+
+                        SELECIONADOS[0] = false;
+                        SELECIONADOS[1] = false;
+                        SELECIONADOS[2] = false;
+                        SELECIONADOS[4] = false;
+                        
+                    }
+                }
+            }
+            else
+            {
+                ATIVOS[3] = false;
+                //se clicar encima e estiver bloqueado, ele vai ate o comercio
+                if (JANELA.J.listadeitens[3].item.Contains(mousePosition) && Mouse.GetState().LeftButton == ButtonState.Pressed)
+                {
+                    JANELACOMBO = false;
+                    JANELACOMERCIO = true;
+                    ARMAS = true;
+                    PODERES = false;
+                    PET = false;
+                }
+            }
+            //4
+            if (JANELA.J.TRIDENTEATIVO)
+            {
+                ATIVOS[4] = true;
+                if (!JANELA.J.TRIDENTEselect)
+                {
+
+                    if (JANELA.J.listadeitens[4].item.Contains(mousePosition) && Mouse.GetState().LeftButton == ButtonState.Pressed)
+                    {
+                        TRIDENTEb = true;
+                        BOTAO = true;
+                    }
+                    if (!JANELA.J.listadeitens[4].item.Contains(mousePosition))
+                        TRIDENTEb = false;
+                    if (TRIDENTEb && !BOTAO)
+                    {
+                        TRIDENTEselect = true;
+                        TRIDENTEb = false;
+                        SELECIONADOS[4] = true;
+
+                        //tirar os outros da seleção
+                        ADAGAselect = false;
+                        MAOselect = false;
+                        ESPADA2Hselect = false;
+                        ARCOselect = false;
+
+                        SELECIONADOS[0] = false;
+                        SELECIONADOS[1] = false;
+                        SELECIONADOS[2] = false;
+                        SELECIONADOS[3] = false;
+                    }
+                }
+            }
+            else
+            {
+                ATIVOS[4] = false;
+                //se clicar encima e estiver bloqueado, ele vai ate o comercio
+                if (JANELA.J.listadeitens[4].item.Contains(mousePosition) && Mouse.GetState().LeftButton == ButtonState.Pressed)
+                {
+                    JANELACOMBO = false;
+                    JANELACOMERCIO = true;
+                    ARMAS = true;
+                    PODERES = false;
+                    PET = false;
+                }
+            }
+
+
+
+
+            if (!SLOWselect)
+            {
+                
+                ATIVOS[5] = true;
+                if (JANELA.J.listadeitens[5].item.Contains(mousePosition) && Mouse.GetState().LeftButton == ButtonState.Pressed)
+                {
+                    SLOWb = true;
+                    BOTAO = true;
+                }
+                if (!JANELA.J.listadeitens[5].item.Contains(mousePosition))
+                    SLOWb = false;
+                if (SLOWb && !BOTAO)
+                {
+                    SLOWselect = true;
+                    SLOWb = false;
+                    SELECIONADOS[5] = true;
+
+                    //tirar os outros da seleção
+                    RETROCEDERselect = false;
+                    ESCUDOselect = false;
+                    VENTOselect = false;
+                    RAIOselect = false;
+
+                    //descelecionar outros itens do mesmo grupo
+                    for (int i = 6; i < 10; i++)
+                    {
+                        SELECIONADOS[i] = false;
+                    }
+                }
+            }
+
+            if (JANELA.J.RETROCEDERATIVO)
+            {
+                ATIVOS[6] = true;
+                if (!JANELA.J.RETROCEDERselect)
+                {
+
+                    if (JANELA.J.listadeitens[6].item.Contains(mousePosition) && Mouse.GetState().LeftButton == ButtonState.Pressed)
+                    {
+                        RETROCEDERb = true;
+                        BOTAO = true;
+                    }
+                    if (!JANELA.J.listadeitens[6].item.Contains(mousePosition))
+                        RETROCEDERb = false;
+                    if (RETROCEDERb && !BOTAO)
+                    {
+                        RETROCEDERselect = true;
+                        RETROCEDERb = false;
+                        SELECIONADOS[6] = true;
+
+                        //tirar os outros da seleção
+                        SLOWselect = false;
+                        ESCUDOselect = false;
+                        VENTOselect = false;
+                        RAIOselect = false;
+
+                        //descelecionar outros itens do mesmo grupo
+                        SELECIONADOS[5] = false;
+                        for (int i = 7; i < 10; i++)
+                        {
+                            SELECIONADOS[i] = false;
+                        }
+                    }
+                }
+            }
+            else
+            {
+                ATIVOS[6] = false;
+                //se clicar encima e estiver bloqueado, ele vai ate o comercio
+                if (JANELA.J.listadeitens[6].item.Contains(mousePosition) && Mouse.GetState().LeftButton == ButtonState.Pressed)
+                {
+                    JANELACOMBO = false;
+                    JANELACOMERCIO = true;
+                    ARMAS = false;
+                    PODERES = true;
+                    PET = false;
+                }
+            }
+
+
+            if (JANELA.J.ESCUDOATIVO)
+            {
+                ATIVOS[7] = true;
+                if (!JANELA.J.ESCUDOselect)
+                {
+
+                    if (JANELA.J.listadeitens[7].item.Contains(mousePosition) && Mouse.GetState().LeftButton == ButtonState.Pressed)
+                    {
+                        ESCUDOb = true;
+                        BOTAO = true;
+                    }
+                    if (!JANELA.J.listadeitens[7].item.Contains(mousePosition))
+                        ESCUDOb = false;
+                    if (ESCUDOb && !BOTAO)
+                    {
+                        ESCUDOselect = true;
+                        ESCUDOb = false;
+                        SELECIONADOS[7] = true;
+
+                        //tirar os outros da seleção
+                        SLOWselect = false;
+                        RETROCEDERselect = false;
+                        VENTOselect = false;
+                        RAIOselect = false;
+
+                        //descelecionar outros itens do mesmo grupo
+                        SELECIONADOS[5] = false;
+                        SELECIONADOS[6] = false;
+                        for (int i = 8; i < 10; i++)
+                        {
+                            SELECIONADOS[i] = false;
+                        }
+                    }
+                }
+            }
+            else
+            { 
+                ATIVOS[7] = false;
+                //se clicar encima e estiver bloqueado, ele vai ate o comercio
+                if (JANELA.J.listadeitens[7].item.Contains(mousePosition) && Mouse.GetState().LeftButton == ButtonState.Pressed)
+                {
+                    JANELACOMBO = false;
+                    JANELACOMERCIO = true;
+                    ARMAS = false;
+                    PODERES = true;
+                    PET = false;
+                }
+            }
+
+            if (JANELA.J.VENTOATIVO)
+            {
+                ATIVOS[8] = true;
+                if (!JANELA.J.VENTOselect)
+                {
+
+                    if (JANELA.J.listadeitens[8].item.Contains(mousePosition) && Mouse.GetState().LeftButton == ButtonState.Pressed)
+                    {
+                        VENTOb = true;
+                        BOTAO = true;
+                    }
+                    if (!JANELA.J.listadeitens[8].item.Contains(mousePosition))
+                        VENTOb = false;
+                    if (VENTOb && !BOTAO)
+                    {
+                        VENTOselect = true;
+                        VENTOb = false;
+                        SELECIONADOS[8] = true;
+
+                        //tirar os outros da seleção
+                        SLOWselect = false;
+                        RETROCEDERselect = false;
+                        ESCUDOselect = false;
+                        RAIOselect = false;
+
+                        //descelecionar outros itens do mesmo grupo
+                        SELECIONADOS[5] = false;
+                        SELECIONADOS[6] = false;
+                        SELECIONADOS[7] = false;
+                        SELECIONADOS[9] = false;
+                    }
+                }
+            }
+            else
+            { 
+                ATIVOS[8] = false;
+                //se clicar encima e estiver bloqueado, ele vai ate o comercio
+                if (JANELA.J.listadeitens[8].item.Contains(mousePosition) && Mouse.GetState().LeftButton == ButtonState.Pressed)
+                {
+                    JANELACOMBO = false;
+                    JANELACOMERCIO = true;
+                    ARMAS = false;
+                    PODERES = true;
+                    PET = false;
+                }
+            }
+
+            if (JANELA.J.RAIOATIVO)
+            {
+                ATIVOS[9] = true;
+                if (!JANELA.J.RAIOselect)
+                {
+                    if (JANELA.J.listadeitens[9].item.Contains(mousePosition) && Mouse.GetState().LeftButton == ButtonState.Pressed)
+                    {
+                        RAIOb = true;
+                        BOTAO = true;
+                    }
+                    if (!JANELA.J.listadeitens[9].item.Contains(mousePosition))
+                        RAIOb = false;
+                    if (RAIOb && !BOTAO)
+                    {
+                        RAIOselect = true;
+                        RAIOb = false;
+                        SELECIONADOS[9] = true;
+
+                        //tirar os outros da seleção
+                        SLOWselect = false;
+                        RETROCEDERselect = false;
+                        ESCUDOselect = false;
+                        VENTOselect = false;
+
+                        //descelecionar outros itens do mesmo grupo
+                        SELECIONADOS[5] = false;
+                        SELECIONADOS[6] = false;
+                        SELECIONADOS[7] = false;
+                        SELECIONADOS[8] = false;
+                    }
+                }
+            }
+            else
+            { 
+                ATIVOS[9] = false;
+                //se clicar encima e estiver bloqueado, ele vai ate o comercio
+                if (JANELA.J.listadeitens[9].item.Contains(mousePosition) && Mouse.GetState().LeftButton == ButtonState.Pressed)
+                {
+                    JANELACOMBO = false;
+                    JANELACOMERCIO = true;
+                    ARMAS = false;
+                    PODERES = true;
+                    PET = false;
+                }
+            }
+
         }//fim funçoes
 
-        public void POSIÇÃOCC(int WidthTela, int HeightTela)
+        public void POSIÇÃOCC(int W, int H)
         {
-            JANELA.J.R.X = WidthTela / 8;
-            JANELA.J.R.Y = HeightTela / 8;
-            JANELA.J.R.Width = WidthTela / 2 + WidthTela / 4;
-            JANELA.J.R.Height = HeightTela / 2 + HeightTela / 4;
+            JANELA.J.R.X = W / 8;
+            JANELA.J.R.Y = H / 8;
+            JANELA.J.R.Width = W / 2 + W / 4;
+            JANELA.J.R.Height = H / 2 + H / 4;
 
             JANELA.J.xis.X = JANELA.J.R.X + JANELA.J.R.Width - JANELA.J.R.Height / 18 - JANELA.J.R.Height / 240; //fim da tela
             JANELA.J.xis.Y = JANELA.J.R.Y;
@@ -1036,45 +1419,45 @@ namespace Stick_RPG_Fight
 
             janelaitens.X = Bcomercio.X;
             janelaitens.Y = CAPAopç1.Y + CAPAopç1.Height;
-            janelaitens.Width = HeightTela / 3 - HeightTela / 100; //350
-            janelaitens.Height = WidthTela / 3 + HeightTela / 41; //640 + 26 = 66
+            janelaitens.Width = H / 3 - H / 100; //350
+            janelaitens.Height = W / 3 + H / 41; //640 + 26 = 66
 
             janelaall.X = setacima.X + setacima.Width;
             janelaall.Y = janelaitens.Y;
-            janelaall.Width = HeightTela - HeightTela / 30; // 1080 - 36 = 1044
-            janelaall.Height = WidthTela / 3 + HeightTela / 41; //640 + 26 = 666
+            janelaall.Width = H - H / 30; // 1080 - 36 = 1044
+            janelaall.Height = W / 3 + H / 41; //640 + 26 = 666
 
             //rolo1
             setacima.X = janelaitens.X + janelaitens.Width;
             setacima.Y = janelaitens.Y;
-            setacima.Width = HeightTela / 47; //22
-            setacima.Height = HeightTela / 47; //22
+            setacima.Width = H / 47; //22
+            setacima.Height = H / 47; //22
 
             setabaixo.X = janelaitens.X + janelaitens.Width;
-            setabaixo.Y = janelaitens.Y + janelaitens.Height - HeightTela / 47;
-            setabaixo.Width = HeightTela / 47; //22
-            setabaixo.Height = HeightTela / 47; //22
+            setabaixo.Y = janelaitens.Y + janelaitens.Height - H / 47;
+            setabaixo.Width = H / 47; //22
+            setabaixo.Height = H / 47; //22
 
             //rolometro2
             setacima2.X = janelaall.X + janelaall.Width;
             setacima2.Y = janelaitens.Y;
-            setacima2.Width = HeightTela / 47; //22
-            setacima2.Height = HeightTela / 47; //22
+            setacima2.Width = H / 47; //22
+            setacima2.Height = H / 47; //22
 
             setabaixo2.X = janelaall.X + janelaall.Width;
-            setabaixo2.Y = janelaitens.Y + janelaitens.Height - HeightTela / 47;
-            setabaixo2.Width = HeightTela / 47; //22
-            setabaixo2.Height = HeightTela / 47; //22
+            setabaixo2.Y = janelaitens.Y + janelaitens.Height - H / 47;
+            setabaixo2.Width = H / 47; //22
+            setabaixo2.Height = H / 47; //22
 
             janelarolo.X = setacima.X;
             janelarolo.Y = setacima.Y + setacima.Height;
-            janelarolo.Width = HeightTela / 47; //22
-            janelarolo.Height = WidthTela / 3 - HeightTela / 60; //640 - 18 = 622;
+            janelarolo.Width = H / 47; //22
+            janelarolo.Height = W / 3 - H / 60; //640 - 18 = 622;
 
             janelarolo2.X = setacima2.X;
             janelarolo2.Y = setacima2.Y + setacima2.Height;
-            janelarolo2.Width = HeightTela / 47; //22
-            janelarolo2.Height = WidthTela / 3 - HeightTela / 60; //640 - 18 = 622;
+            janelarolo2.Width = H / 47; //22
+            janelarolo2.Height = W / 3 - H / 60; //640 - 18 = 622;
 
             rolo.X = janelarolo.X;
             rolo.Width = janelarolo.Width;
@@ -1104,7 +1487,7 @@ namespace Stick_RPG_Fight
                 //tamanho e x
                 listadeitens[i].item.X = janelaitens.X;
                 listadeitens[i].item.Width = janelaitens.Width;
-                listadeitens[i].item.Height = HeightTela / 15 + HeightTela / HeightTela; //72 + 1 = 73
+                listadeitens[i].item.Height = H / 15 + H / H; //72 + 1 = 73
                 if (i - 1 < 0)//1°
                 {
                     listadeitens[i].item.Y = POSyITEN + janelaitens.Y;

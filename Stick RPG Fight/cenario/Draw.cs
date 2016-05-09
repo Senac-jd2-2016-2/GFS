@@ -870,69 +870,284 @@ namespace Stick_RPG_Fight
                 }
             }
 
-
-            //daga
-            if (JANELA.J.listadeitens[1].item.Y > JANELA.J.Bcombos.Y && JANELA.J.listadeitens[0].item.Y + JANELA.J.listadeitens[0].item.Height < JANELA.J.R.Y + JANELA.J.R.Height)
-            {
-                if (JANELA.J.ADAGATIVA)
-                {
-                    if (!JANELA.J.ADAGAselect)
-                    {
-                        if (!JANELA.J.listadeitens[1].item.Contains(mousePosition))
-                        {
-                            spriteBatch.Draw(JANELA.J.imgadaga1, JANELA.J.listadeitens[1].item, Color.White);
-                        }
-                        if (JANELA.J.listadeitens[1].item.Contains(mousePosition) && Mouse.GetState().LeftButton != ButtonState.Pressed)
-                        {
-                            spriteBatch.Draw(JANELA.J.imgadaga1, JANELA.J.listadeitens[1].item, Color.DarkSeaGreen);
-                        }
-                        if (JANELA.J.listadeitens[1].item.Contains(mousePosition) && Mouse.GetState().LeftButton == ButtonState.Pressed)
-                        {
-                            spriteBatch.Draw(JANELA.J.imgadaga1, JANELA.J.listadeitens[1].item, Color.DarkGreen);
-                        }
-                    }
-                    else if (JANELA.J.ADAGAselect)
-                    {
-                        spriteBatch.Draw(JANELA.J.imgadaga2, JANELA.J.listadeitens[1].item, Color.White);
-                    }
-                }
-                else if (!JANELA.J.ADAGATIVA)
-                {
-                    spriteBatch.Draw(JANELA.J.imgadaga3, JANELA.J.listadeitens[1].item, Color.White);
-                }
-            }
-
-
             //espada2h
-            if (JANELA.J.listadeitens[2].item.Y > JANELA.J.Bcombos.Y && JANELA.J.listadeitens[0].item.Y + JANELA.J.listadeitens[0].item.Height < JANELA.J.R.Y + JANELA.J.R.Height)//caso esteja dentro da janela
+            if (JANELA.J.listadeitens[1].item.Y > JANELA.J.Bcombos.Y && JANELA.J.listadeitens[1].item.Y + JANELA.J.listadeitens[9].item.Height < JANELA.J.R.Y + JANELA.J.R.Height)//caso esteja dentro da janela
             {
                 if (JANELA.J.ESPADA2HATIVA)
                 {
                     if (!JANELA.J.ESPADA2Hselect)
                     {
-                        if (!JANELA.J.listadeitens[2].item.Contains(mousePosition))
+                        if (!JANELA.J.listadeitens[1].item.Contains(mousePosition))
                         {
-                            spriteBatch.Draw(JANELA.J.imgespada2H1, JANELA.J.listadeitens[2].item, Color.White);
+                            spriteBatch.Draw(JANELA.J.imgespada2H1, JANELA.J.listadeitens[1].item, Color.White);
                         }
-                        if (JANELA.J.listadeitens[2].item.Contains(mousePosition) && Mouse.GetState().LeftButton != ButtonState.Pressed)
+                        if (JANELA.J.listadeitens[1].item.Contains(mousePosition) && Mouse.GetState().LeftButton != ButtonState.Pressed)
                         {
-                            spriteBatch.Draw(JANELA.J.imgespada2H1, JANELA.J.listadeitens[2].item, Color.DarkSeaGreen);
+                            spriteBatch.Draw(JANELA.J.imgespada2H1, JANELA.J.listadeitens[1].item, Color.DarkSeaGreen);
                         }
-                        if (JANELA.J.listadeitens[2].item.Contains(mousePosition) && Mouse.GetState().LeftButton == ButtonState.Pressed)
+                        if (JANELA.J.listadeitens[1].item.Contains(mousePosition) && Mouse.GetState().LeftButton == ButtonState.Pressed)
                         {
-                            spriteBatch.Draw(JANELA.J.imgespada2H1, JANELA.J.listadeitens[2].item, Color.DarkGreen);
+                            spriteBatch.Draw(JANELA.J.imgespada2H1, JANELA.J.listadeitens[1].item, Color.DarkGreen);
                         }
                     }
                     else if (JANELA.J.ESPADA2Hselect)
                     {
-                        spriteBatch.Draw(JANELA.J.imgespada2H2, JANELA.J.listadeitens[2].item, Color.White);
+                        spriteBatch.Draw(JANELA.J.imgespada2H2, JANELA.J.listadeitens[1].item, Color.White);
                     }
                 }
                 else if (!JANELA.J.ESPADA2HATIVA)
                 {
-                    spriteBatch.Draw(JANELA.J.imgespada2H3, JANELA.J.listadeitens[2].item, Color.White);
+                    spriteBatch.Draw(JANELA.J.imgespada2H3, JANELA.J.listadeitens[1].item, Color.White);
                 }
             }
+
+            //daga
+            if (JANELA.J.listadeitens[2].item.Y > JANELA.J.Bcombos.Y && JANELA.J.listadeitens[2].item.Y + JANELA.J.listadeitens[2].item.Height < JANELA.J.R.Y + JANELA.J.R.Height)
+            {
+                if (JANELA.J.ADAGATIVA)
+                {
+                    if (!JANELA.J.ADAGAselect)
+                    {
+                        if (!JANELA.J.listadeitens[2].item.Contains(mousePosition))
+                        {
+                            spriteBatch.Draw(JANELA.J.imgadaga1, JANELA.J.listadeitens[2].item, Color.White);
+                        }
+                        if (JANELA.J.listadeitens[2].item.Contains(mousePosition) && Mouse.GetState().LeftButton != ButtonState.Pressed)
+                        {
+                            spriteBatch.Draw(JANELA.J.imgadaga1, JANELA.J.listadeitens[2].item, Color.DarkSeaGreen);
+                        }
+                        if (JANELA.J.listadeitens[2].item.Contains(mousePosition) && Mouse.GetState().LeftButton == ButtonState.Pressed)
+                        {
+                            spriteBatch.Draw(JANELA.J.imgadaga1, JANELA.J.listadeitens[2].item, Color.DarkGreen);
+                        }
+                    }
+                    else if (JANELA.J.ADAGAselect)
+                    {
+                        spriteBatch.Draw(JANELA.J.imgadaga2, JANELA.J.listadeitens[2].item, Color.White);
+                    }
+                }
+                else if (!JANELA.J.ADAGATIVA)
+                {
+                    spriteBatch.Draw(JANELA.J.imgadaga3, JANELA.J.listadeitens[2].item, Color.White);
+                }
+            }
+
+
+
+            //arco
+            if (JANELA.J.listadeitens[3].item.Y > JANELA.J.Bcombos.Y && JANELA.J.listadeitens[3].item.Y + JANELA.J.listadeitens[3].item.Height < JANELA.J.R.Y + JANELA.J.R.Height)//caso esteja dentro da janela
+            {
+                if (JANELA.J.ARCOATIVO)
+                {
+                    if (!JANELA.J.ARCOselect)
+                    {
+                        if (!JANELA.J.listadeitens[3].item.Contains(mousePosition))
+                        {
+                            spriteBatch.Draw(JANELA.J.imgItemarco1, JANELA.J.listadeitens[3].item, Color.White);
+                        }
+                        if (JANELA.J.listadeitens[3].item.Contains(mousePosition) && Mouse.GetState().LeftButton != ButtonState.Pressed)
+                        {
+                            spriteBatch.Draw(JANELA.J.imgItemarco1, JANELA.J.listadeitens[3].item, Color.DarkSeaGreen);
+                        }
+                        if (JANELA.J.listadeitens[3].item.Contains(mousePosition) && Mouse.GetState().LeftButton == ButtonState.Pressed)
+                        {
+                            spriteBatch.Draw(JANELA.J.imgItemarco1, JANELA.J.listadeitens[3].item, Color.DarkGreen);
+                        }
+                    }
+                    else if (JANELA.J.ARCOselect)
+                    {
+                        spriteBatch.Draw(JANELA.J.imgItemarco2, JANELA.J.listadeitens[3].item, Color.White);
+                    }
+                }
+                else if (!JANELA.J.ARCOATIVO)
+                {
+                    spriteBatch.Draw(JANELA.J.imgItemarco3, JANELA.J.listadeitens[3].item, Color.White);
+                }
+            }
+
+            ///---------------------------
+
+            //tridente
+            if (JANELA.J.listadeitens[4].item.Y > JANELA.J.Bcombos.Y && JANELA.J.listadeitens[4].item.Y + JANELA.J.listadeitens[4].item.Height < JANELA.J.R.Y + JANELA.J.R.Height)//caso esteja dentro da janela
+            {
+                if (JANELA.J.TRIDENTEATIVO)
+                {
+                    if (!JANELA.J.TRIDENTEselect)
+                    {
+                        if (!JANELA.J.listadeitens[4].item.Contains(mousePosition))
+                        {
+                            spriteBatch.Draw(JANELA.J.imgItemtridente1, JANELA.J.listadeitens[4].item, Color.White);
+                        }
+                        if (JANELA.J.listadeitens[4].item.Contains(mousePosition) && Mouse.GetState().LeftButton != ButtonState.Pressed)
+                        {
+                            spriteBatch.Draw(JANELA.J.imgItemtridente1, JANELA.J.listadeitens[4].item, Color.DarkSeaGreen);
+                        }
+                        if (JANELA.J.listadeitens[4].item.Contains(mousePosition) && Mouse.GetState().LeftButton == ButtonState.Pressed)
+                        {
+                            spriteBatch.Draw(JANELA.J.imgItemtridente1, JANELA.J.listadeitens[4].item, Color.DarkGreen);
+                        }
+                    }
+                    else if (JANELA.J.TRIDENTEselect)
+                    {
+                        spriteBatch.Draw(JANELA.J.imgItemtridente2, JANELA.J.listadeitens[4].item, Color.White);
+                    }
+                }
+                else if (!JANELA.J.TRIDENTEATIVO)
+                {
+                    spriteBatch.Draw(JANELA.J.imgItemtridente3, JANELA.J.listadeitens[4].item, Color.White);
+                }
+            }
+
+            //slow motion
+            if (JANELA.J.listadeitens[5].item.Y > JANELA.J.Bcombos.Y && JANELA.J.listadeitens[5].item.Y + JANELA.J.listadeitens[5].item.Height < JANELA.J.R.Y + JANELA.J.R.Height)//caso esteja dentro da janela
+            {
+
+                if (!JANELA.J.SLOWselect)
+                {
+                    if (!JANELA.J.listadeitens[5].item.Contains(mousePosition))
+                    {
+                        spriteBatch.Draw(JANELA.J.imgItemslow1, JANELA.J.listadeitens[5].item, Color.White);
+                    }
+                    if (JANELA.J.listadeitens[5].item.Contains(mousePosition) && Mouse.GetState().LeftButton != ButtonState.Pressed)
+                    {
+                        spriteBatch.Draw(JANELA.J.imgItemslow1, JANELA.J.listadeitens[5].item, Color.DarkSeaGreen);
+                    }
+                    if (JANELA.J.listadeitens[5].item.Contains(mousePosition) && Mouse.GetState().LeftButton == ButtonState.Pressed)
+                    {
+                        spriteBatch.Draw(JANELA.J.imgItemslow1, JANELA.J.listadeitens[5].item, Color.DarkGreen);
+                    }
+                }
+                else if (JANELA.J.SLOWselect)
+                {
+                    spriteBatch.Draw(JANELA.J.imgItemslow2, JANELA.J.listadeitens[5].item, Color.White);
+                }
+
+
+            }
+            //retroceder
+            if (JANELA.J.listadeitens[6].item.Y > JANELA.J.Bcombos.Y && JANELA.J.listadeitens[6].item.Y + JANELA.J.listadeitens[6].item.Height < JANELA.J.R.Y + JANELA.J.R.Height)//caso esteja dentro da janela
+            {
+                if (JANELA.J.RETROCEDERATIVO)
+                {
+                    if (!JANELA.J.RETROCEDERselect)
+                    {
+                        if (!JANELA.J.listadeitens[6].item.Contains(mousePosition))
+                        {
+                            spriteBatch.Draw(JANELA.J.imgItemretroceder1, JANELA.J.listadeitens[6].item, Color.White);
+                        }
+                        if (JANELA.J.listadeitens[6].item.Contains(mousePosition) && Mouse.GetState().LeftButton != ButtonState.Pressed)
+                        {
+                            spriteBatch.Draw(JANELA.J.imgItemretroceder1, JANELA.J.listadeitens[6].item, Color.DarkSeaGreen);
+                        }
+                        if (JANELA.J.listadeitens[6].item.Contains(mousePosition) && Mouse.GetState().LeftButton == ButtonState.Pressed)
+                        {
+                            spriteBatch.Draw(JANELA.J.imgItemretroceder1, JANELA.J.listadeitens[6].item, Color.DarkGreen);
+                        }
+                    }
+                    else if (JANELA.J.RETROCEDERselect)
+                    {
+                        spriteBatch.Draw(JANELA.J.imgItemretroceder2, JANELA.J.listadeitens[6].item, Color.White);
+                    }
+                }
+                else if (!JANELA.J.RETROCEDERATIVO)
+                {
+                    spriteBatch.Draw(JANELA.J.imgItemretroceder3, JANELA.J.listadeitens[6].item, Color.White);
+                }
+            }
+            //escudo de chakra
+            if (JANELA.J.listadeitens[7].item.Y > JANELA.J.Bcombos.Y && JANELA.J.listadeitens[7].item.Y + JANELA.J.listadeitens[7].item.Height < JANELA.J.R.Y + JANELA.J.R.Height)//caso esteja dentro da janela
+            {
+                if (JANELA.J.ESCUDOATIVO)
+                {
+                    if (!JANELA.J.ESCUDOselect)
+                    {
+                        if (!JANELA.J.listadeitens[7].item.Contains(mousePosition))
+                        {
+                            spriteBatch.Draw(JANELA.J.imgItemescudo1, JANELA.J.listadeitens[7].item, Color.White);
+                        }
+                        if (JANELA.J.listadeitens[7].item.Contains(mousePosition) && Mouse.GetState().LeftButton != ButtonState.Pressed)
+                        {
+                            spriteBatch.Draw(JANELA.J.imgItemescudo1, JANELA.J.listadeitens[7].item, Color.DarkSeaGreen);
+                        }
+                        if (JANELA.J.listadeitens[7].item.Contains(mousePosition) && Mouse.GetState().LeftButton == ButtonState.Pressed)
+                        {
+                            spriteBatch.Draw(JANELA.J.imgItemescudo1, JANELA.J.listadeitens[7].item, Color.DarkGreen);
+                        }
+                    }
+                    else if (JANELA.J.ESCUDOselect)
+                    {
+                        spriteBatch.Draw(JANELA.J.imgItemescudo2, JANELA.J.listadeitens[7].item, Color.White);
+                    }
+                }
+                else if (!JANELA.J.ESCUDOATIVO)
+                {
+                    spriteBatch.Draw(JANELA.J.imgItemescudo3, JANELA.J.listadeitens[7].item, Color.White);
+                }
+            }
+            //vento
+            if (JANELA.J.listadeitens[8].item.Y > JANELA.J.Bcombos.Y && JANELA.J.listadeitens[8].item.Y + JANELA.J.listadeitens[8].item.Height < JANELA.J.R.Y + JANELA.J.R.Height)//caso esteja dentro da janela
+            {
+                if (JANELA.J.VENTOATIVO)
+                {
+                    if (!JANELA.J.VENTOselect)
+                    {
+                        if (!JANELA.J.listadeitens[8].item.Contains(mousePosition))
+                        {
+                            spriteBatch.Draw(JANELA.J.imgItemvento1, JANELA.J.listadeitens[8].item, Color.White);
+                        }
+                        if (JANELA.J.listadeitens[8].item.Contains(mousePosition) && Mouse.GetState().LeftButton != ButtonState.Pressed)
+                        {
+                            spriteBatch.Draw(JANELA.J.imgItemvento1, JANELA.J.listadeitens[8].item, Color.DarkSeaGreen);
+                        }
+                        if (JANELA.J.listadeitens[8].item.Contains(mousePosition) && Mouse.GetState().LeftButton == ButtonState.Pressed)
+                        {
+                            spriteBatch.Draw(JANELA.J.imgItemvento1, JANELA.J.listadeitens[8].item, Color.DarkGreen);
+                        }
+                    }
+                    else if (JANELA.J.VENTOselect)
+                    {
+                        spriteBatch.Draw(JANELA.J.imgItemvento2, JANELA.J.listadeitens[8].item, Color.White);
+                    }
+                }
+                else if (!JANELA.J.VENTOATIVO)
+                {
+                    spriteBatch.Draw(JANELA.J.imgItemvento3, JANELA.J.listadeitens[8].item, Color.White);
+                }
+            }
+            //rajada de raios
+            if (JANELA.J.listadeitens[9].item.Y > JANELA.J.Bcombos.Y && JANELA.J.listadeitens[9].item.Y + JANELA.J.listadeitens[9].item.Height < JANELA.J.R.Y + JANELA.J.R.Height + 1)//caso esteja dentro da janela
+            {
+                if (JANELA.J.RAIOATIVO)
+                {
+                    if (!JANELA.J.RAIOselect)
+                    {
+                        if (!JANELA.J.listadeitens[9].item.Contains(mousePosition))
+                        {
+                            spriteBatch.Draw(JANELA.J.imgItemraio1, JANELA.J.listadeitens[9].item, Color.White);
+                        }
+                        if (JANELA.J.listadeitens[9].item.Contains(mousePosition) && Mouse.GetState().LeftButton != ButtonState.Pressed)
+                        {
+                            spriteBatch.Draw(JANELA.J.imgItemraio1, JANELA.J.listadeitens[9].item, Color.DarkSeaGreen);
+                        }
+                        if (JANELA.J.listadeitens[9].item.Contains(mousePosition) && Mouse.GetState().LeftButton == ButtonState.Pressed)
+                        {
+                            spriteBatch.Draw(JANELA.J.imgItemraio1, JANELA.J.listadeitens[9].item, Color.DarkGreen);
+                        }
+                    }
+                    else if (JANELA.J.RAIOselect)
+                    {
+                        spriteBatch.Draw(JANELA.J.imgItemraio2, JANELA.J.listadeitens[9].item, Color.White);
+                    }
+                }
+                else if (!JANELA.J.RAIOATIVO)
+                {
+                    spriteBatch.Draw(JANELA.J.imgItemraio3, JANELA.J.listadeitens[9].item, Color.White);
+                }
+            }
+            
+            
+
+
             //FIM ITENS
 
 
@@ -1516,6 +1731,63 @@ namespace Stick_RPG_Fight
                     }
                 }
                 
+            }
+        }
+        //--------------------------------------------------------------------------------------------------
+        //--------------------------------------------------------------------------------------------------
+        //--------------------------------------------------------------------------------------------------
+
+        //--------------------------------------------------------------------------------------------------
+        //--------------------------------------------------------------------------------------------------
+        //--------------------------------------------------------------------------------------------------
+        public void DrawINFO(SpriteBatch spriteBatch, int W, int H)
+        {
+            var mouseState = Mouse.GetState();
+            var mousePosition = new Point(mouseState.X, mouseState.Y);
+
+            //DENTRO DA JANELA COMERCIO / COMBO
+            if (Info.I.AMOSTRAjanelacc && (JANELA.J.JANELACOMERCIO || JANELA.J.JANELACOMBO))
+            {
+                spriteBatch.Draw(Info.I.img, Info.I.R, Color.White);
+                for (int i = 0; i < JANELA.J.QTDITENS; i++) // todos os itens da lista
+                {
+                    if (!JANELA.J.Bcomercio.Contains(mousePosition) && !JANELA.J.Bcombos.Contains(mousePosition) && !JANELA.J.Barmas.Contains(mousePosition) && !JANELA.J.Bpet.Contains(mousePosition) && !JANELA.J.CAPAopç1.Contains(mousePosition) && mouseState.Y < JANELA.J.R.Y + JANELA.J.R.Height)//so mostra qnd encosta nos que estao à vista.
+                    {
+                        if (JANELA.J.listadeitens[i].item.Contains(mousePosition) && !JANELA.J.ATIVOS[i])
+                        {
+                            spriteBatch.DrawString(JANELA.J.Neon15, Info.I.itemV, new Vector2(Info.I.R.X + Info.I.distanciadeletra, Info.I.R.Y + Info.I.R.Height / 4), Color.Gray);
+                        }
+                        if (JANELA.J.listadeitens[i].item.Contains(mousePosition) && JANELA.J.ATIVOS[i] && !JANELA.J.SELECIONADOS[i])
+                        {
+                            spriteBatch.DrawString(JANELA.J.Neon15, Info.I.itemD, new Vector2(Info.I.R.X + Info.I.distanciadeletra, Info.I.R.Y + Info.I.R.Height / 4), Color.Gray);
+                        }
+                        if (JANELA.J.listadeitens[i].item.Contains(mousePosition) && JANELA.J.ATIVOS[i] && JANELA.J.SELECIONADOS[i])
+                        {
+                            spriteBatch.DrawString(JANELA.J.Neon15, Info.I.itemS, new Vector2(Info.I.R.X + Info.I.distanciadeletra, Info.I.R.Y + Info.I.R.Height / 4), Color.Gray);
+                        }
+                    }
+                }
+                if (JANELA.J.xis.Contains(mousePosition))
+                {
+                    spriteBatch.DrawString(JANELA.J.Neon15, Info.I.Sair, new Vector2(Info.I.R.X + Info.I.distanciadeletra, Info.I.R.Y + Info.I.R.Height / 4), Color.Gray);
+                }
+                if (JANELA.J.Bcomercio.Contains(mousePosition))
+                {
+                    spriteBatch.DrawString(JANELA.J.Neon15, Info.I.comercio, new Vector2(Info.I.R.X + Info.I.distanciadeletra, Info.I.R.Y + Info.I.R.Height / 4), Color.Gray);
+                }
+                if (JANELA.J.Bcombos.Contains(mousePosition))
+                {
+                    spriteBatch.DrawString(JANELA.J.Neon15, Info.I.combo, new Vector2(Info.I.R.X + Info.I.distanciadeletra, Info.I.R.Y + Info.I.R.Height / 4), Color.Gray);
+                }
+                //abas
+                if (JANELA.J.Barmas.Contains(mousePosition) || JANELA.J.Bpet.Contains(mousePosition) || JANELA.J.Bpoderes.Contains(mousePosition))
+                {
+                    if (JANELA.J.JANELACOMERCIO)
+                        spriteBatch.DrawString(JANELA.J.Neon15, Info.I.SeleçaoAbaComercio, new Vector2(Info.I.R.X + Info.I.distanciadeletra, Info.I.R.Y + Info.I.R.Height / 4), Color.Gray);
+
+                    if (JANELA.J.JANELACOMBO)
+                        spriteBatch.DrawString(JANELA.J.Neon15, Info.I.SeleçaoAbaCombo, new Vector2(Info.I.R.X + Info.I.distanciadeletra, Info.I.R.Y + Info.I.R.Height / 4), Color.Gray);
+                }
             }
         }
         //--------------------------------------------------------------------------------------------------

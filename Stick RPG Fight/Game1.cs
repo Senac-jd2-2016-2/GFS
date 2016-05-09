@@ -109,7 +109,7 @@ namespace Stick_RPG_Fight
 
             
             JANELA.J.CRIARlinhas();//cria se linhas do menu
-            Itens.I.CRIARITENS();//cria se itens da janela cc
+            Itens.IT.CRIARITENS();//cria se itens da janela cc
             
 
             base.Initialize();
@@ -630,6 +630,7 @@ namespace Stick_RPG_Fight
                 JANELA.J.FUNÇÕESCC(BOTAO, WidthTela, HeightTela); // janelas
 
                 JANELA.J.POSIÇÃOCC(WidthTela, HeightTela);
+                Info.I.POS(WidthTela, HeightTela);
 
             }
             if (JANELA.J.JANELAPAUSE)
@@ -742,6 +743,7 @@ namespace Stick_RPG_Fight
             {
                 DRAW.DrawPLACAR(spriteBatch, WidthTela, HeightTela, P1);
             }
+            DRAW.DrawINFO(spriteBatch, WidthTela, HeightTela);
 
             spriteBatch.End();
 

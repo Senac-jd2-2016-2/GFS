@@ -32,11 +32,11 @@ namespace Stick_RPG_Fight
                     {
                         Warquivo.Write(JANELA.J.FASEdestravada[i] + "@");
                     }
-                    Warquivo.WriteLine(P1.XP + "@" + P1.LVL);
+                    Warquivo.WriteLine(P1.XP + "@" + P1.LVL + "@" + JANELA.J.ESPADA2HATIVA + "@" + JANELA.J.ADAGATIVA + "@" + JANELA.J.ARCOATIVO + "@" + JANELA.J.TRIDENTEATIVO + "@" + JANELA.J.RETROCEDERATIVO + "@" + JANELA.J.ESCUDOATIVO + "@" + JANELA.J.VENTOATIVO + "@" + JANELA.J.RAIOATIVO);
                     Warquivo.Close();
                 }
             }
-            catch (Exception ex)
+            catch (Exception ex) //colocar em linguagem do monogame
             {
                 Console.WriteLine(ex.Message);
             }
@@ -63,11 +63,21 @@ namespace Stick_RPG_Fight
                         }
                         P1.XP = int.Parse(dados[g + 1]);
                         P1.LVL = int.Parse(dados[g + 2]);
+                        //todos os itens que a pessoa comprou
+                        JANELA.J.ESPADA2HATIVA = bool.Parse(dados[g + 3]);
+                        JANELA.J.ADAGATIVA = bool.Parse(dados[g + 4]);
+                        JANELA.J.ARCOATIVO = bool.Parse(dados[g + 5]);
+                        JANELA.J.TRIDENTEATIVO = bool.Parse(dados[g + 6]);
+                        JANELA.J.RETROCEDERATIVO = bool.Parse(dados[g + 7]);
+                        JANELA.J.ESCUDOATIVO = bool.Parse(dados[g + 8]);
+                        JANELA.J.VENTOATIVO = bool.Parse(dados[g + 9]);
+                        JANELA.J.RAIOATIVO = bool.Parse(dados[g + 10]);
+                       
                         Rarquivo.Close();
                     }
                 }
             }
-            catch (Exception ex)
+            catch (Exception ex) //colocar em linguagem do monogame
             {
                 Console.WriteLine(ex.Message);
             }

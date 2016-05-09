@@ -172,7 +172,7 @@ namespace Stick_RPG_Fight
             JANELA.J.imgItemtridente2 = content.Load<Texture2D>("item tridente 2");
             JANELA.J.imgItemtridente3 = content.Load<Texture2D>("item tridente 3");
             JANELA.J.imgItemslow1 = content.Load<Texture2D>("item slow 1");
-            JANELA.J.imgItemslow1 = content.Load<Texture2D>("item slow 2");
+            JANELA.J.imgItemslow2 = content.Load<Texture2D>("item slow 2");
             JANELA.J.imgItemretroceder1 = content.Load<Texture2D>("item retroceder 1");
             JANELA.J.imgItemretroceder2 = content.Load<Texture2D>("item retroceder 2");
             JANELA.J.imgItemretroceder3 = content.Load<Texture2D>("item retroceder 3");
@@ -223,6 +223,7 @@ namespace Stick_RPG_Fight
 
 
             //spritefonte
+            JANELA.J.Neon15 = content.Load<SpriteFont>("Neon15");
             JANELA.J.Neon = content.Load<SpriteFont>("Neon");
             JANELA.J.Firefont = content.Load<SpriteFont>("FIRESTARTER");
             JANELA.J.Woodfont = content.Load<SpriteFont>("Woodfont");

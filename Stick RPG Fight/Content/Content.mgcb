@@ -121,3 +121,9 @@
 /processorParam:Quality=Best
 /build:SPLAT Crush 01.wav
 
+#begin Neon15.spritefont
+/importer:FontDescriptionImporter
+/processor:FontDescriptionProcessor
+/processorParam:TextureFormat=Compressed
+/build:Neon15.spritefont
+

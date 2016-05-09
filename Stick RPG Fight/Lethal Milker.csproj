@@ -612,6 +612,7 @@
     <None Include="Arquivos do content\HUD.spritefont" />
     <None Include="Arquivos do content\Neon.spritefont" />
     <None Include="Arquivos do content\Neon.ttf" />
+    <None Include="Arquivos do content\Neon15.spritefont" />
     <None Include="Arquivos do content\Woodfont.spritefont" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />

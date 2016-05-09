@@ -14,7 +14,7 @@ namespace Stick_RPG_Fight
     class Itens
     {
         public Rectangle item = new Rectangle();
-        public static Itens I = new Itens();
+        public static Itens IT = new Itens();
 
         public void CRIARITENS()
         {
@@ -22,7 +22,10 @@ namespace Stick_RPG_Fight
             {
                 Itens i = new Itens();
                 JANELA.J.listadeitens.Add(i);
-               
+
+                //cria as boleanas que mostraram informações ao passar o mouse encima (está ligado a lista de obj)
+                JANELA.J.ATIVOS[a] = false;
+                JANELA.J.SELECIONADOS[a] = false;
             }
             
         }
