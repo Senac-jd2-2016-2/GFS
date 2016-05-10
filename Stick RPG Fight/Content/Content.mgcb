@@ -133,3 +133,9 @@
 /processorParam:Quality=Best
 /build:Menu song.mp3
 
+#begin Combate song.mp3
+/importer:Mp3Importer
+/processor:SongProcessor
+/processorParam:Quality=Best
+/build:Combate song.mp3
+

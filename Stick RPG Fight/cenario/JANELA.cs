@@ -29,7 +29,7 @@ namespace Stick_RPG_Fight
 
         //mov rolo
         public int NewpontoMouse, DistanciaMousePonto;
-        public bool Clickfeito = false;
+       
 
         //qntd de fases no jogo
         public int qntddefases;
@@ -422,6 +422,7 @@ namespace Stick_RPG_Fight
         //
         public void POSQUEST(int W, int H)
         {
+            
             Quest.Width = H - W / 6 + H / 38; //1080 - 320 + 28 = 788
             Quest.Height = W / 3 - H / 40;//640 - 27= 613
             Quest.X = POSquest.X + W / 2 - ((H - W / 6 + H / 38) / 2);
@@ -455,6 +456,7 @@ namespace Stick_RPG_Fight
             }
             else if (!JANELAQUEST)
             {
+                MediaPlayer.Pause();
                 POSquest.Y = 0;
                 QUESTdisponivel = false;
             }
@@ -669,7 +671,7 @@ namespace Stick_RPG_Fight
                 BOTAO = false;
                 contagemMouseClickB = 0; //baixo
                 contagemMouseClickC = 0; //cima
-                Clickfeito = false;
+                
             }
             
             if (QTDITENS > QTDtotalITENSjanela) //ATUALIZAÇÃO DO ROLOMETRO
@@ -752,6 +754,20 @@ namespace Stick_RPG_Fight
                     POSyITEN--;
                 }
 
+                //qnd estiver clicado, encima
+                if (rolo.Contains(mousePosition) && Mouse.GetState().LeftButton == ButtonState.Pressed)
+                {
+                    //cada segundo atualiza o ponto e a distancia entro ponto e o mouse. Logo add na posição do obj
+                    DistanciaMousePonto = mouseState.Y - NewpontoMouse;
+                    //adição de posição
+                    if (rolo.Y + rolo.Height + DistanciaMousePonto < janelarolo.Y + janelarolo.Height + 1 && rolo.Y + DistanciaMousePonto > janelarolo.Y - 1)
+                    {
+                        rolo.Y += DistanciaMousePonto;
+                        POSyITEN -= DistanciaMousePonto;
+                    }
+                    NewpontoMouse = mouseState.Y;
+                }
+
             }//fim do rolo
         }
 
@@ -764,6 +780,7 @@ namespace Stick_RPG_Fight
                 BOTAO = false;
                 contagemMouseClickB = 0; //baixo
                 contagemMouseClickC = 0; //cima
+                
             }
 
             MediaPlayer.Pause();
@@ -930,39 +947,20 @@ namespace Stick_RPG_Fight
                     rolo.Y++;
                     POSyITEN--;
                 }
-                
-                if (rolo.Contains(mousePosition) && Mouse.GetState().LeftButton == ButtonState.Pressed && !Clickfeito)
-                {
-                    Clickfeito = true;
-                    NewpontoMouse = mouseState.Y;
-                }
 
-                if (Clickfeito && rolo.Contains(mousePosition) && Mouse.GetState().LeftButton == ButtonState.Pressed)
-                {
-                    
-                    if (mouseState.Y > NewpontoMouse)
-                    {
-                        DistanciaMousePonto = mouseState.Y - NewpontoMouse;
-                    }
-                    else if (mouseState.Y == NewpontoMouse)
-                        DistanciaMousePonto = 0;
-                    else if (mouseState.Y < NewpontoMouse)
-                    {
-                        DistanciaMousePonto = NewpontoMouse - mouseState.Y;
-                    }
 
-                    //adição de tamanho
-                    if (DistanciaMousePonto > NewpontoMouse)
+                //qnd estiver clicado, encima
+                if (rolo.Contains(mousePosition) && Mouse.GetState().LeftButton == ButtonState.Pressed)
+                {
+                    //cada segundo atualiza o ponto e a distancia entro ponto e o mouse. Logo add na posição do obj
+                    DistanciaMousePonto = mouseState.Y - NewpontoMouse;
+                    //adição de posição
+                    if (rolo.Y + rolo.Height + DistanciaMousePonto < janelarolo.Y + janelarolo.Height + 1 && rolo.Y + DistanciaMousePonto > janelarolo.Y - 1)
                     {
                         rolo.Y += DistanciaMousePonto;
                         POSyITEN -= DistanciaMousePonto;
-                        
                     }
-                    if (DistanciaMousePonto < NewpontoMouse)
-                    {
-                        rolo.Y -= DistanciaMousePonto;
-                        POSyITEN += DistanciaMousePonto;
-                    }
+                    NewpontoMouse = mouseState.Y;//ele precisa atualizar no final, pra poder sempre reatualizar
                 }
 
             }//fim roda
