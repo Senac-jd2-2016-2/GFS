@@ -27,6 +27,10 @@ namespace Stick_RPG_Fight
         public int contagemMouseClickB = 0, contagemMouseClickC = 0, QuantidadeFaltaProFinalB, QuantidadeFaltaProFinalC;
         public bool[] ATIVOS = new bool[10], SELECIONADOS = new bool[10]; // se mudar os itens, muda aqui tmb
 
+        //mov rolo
+        public int NewpontoMouse, DistanciaMousePonto;
+        public bool Clickfeito = false;
+
         //qntd de fases no jogo
         public int qntddefases;
 
@@ -665,6 +669,7 @@ namespace Stick_RPG_Fight
                 BOTAO = false;
                 contagemMouseClickB = 0; //baixo
                 contagemMouseClickC = 0; //cima
+                Clickfeito = false;
             }
             
             if (QTDITENS > QTDtotalITENSjanela) //ATUALIZAÇÃO DO ROLOMETRO
@@ -925,7 +930,42 @@ namespace Stick_RPG_Fight
                     rolo.Y++;
                     POSyITEN--;
                 }
-            }
+                
+                if (rolo.Contains(mousePosition) && Mouse.GetState().LeftButton == ButtonState.Pressed && !Clickfeito)
+                {
+                    Clickfeito = true;
+                    NewpontoMouse = mouseState.Y;
+                }
+
+                if (Clickfeito && rolo.Contains(mousePosition) && Mouse.GetState().LeftButton == ButtonState.Pressed)
+                {
+                    
+                    if (mouseState.Y > NewpontoMouse)
+                    {
+                        DistanciaMousePonto = mouseState.Y - NewpontoMouse;
+                    }
+                    else if (mouseState.Y == NewpontoMouse)
+                        DistanciaMousePonto = 0;
+                    else if (mouseState.Y < NewpontoMouse)
+                    {
+                        DistanciaMousePonto = NewpontoMouse - mouseState.Y;
+                    }
+
+                    //adição de tamanho
+                    if (DistanciaMousePonto > NewpontoMouse)
+                    {
+                        rolo.Y += DistanciaMousePonto;
+                        POSyITEN -= DistanciaMousePonto;
+                        
+                    }
+                    if (DistanciaMousePonto < NewpontoMouse)
+                    {
+                        rolo.Y -= DistanciaMousePonto;
+                        POSyITEN += DistanciaMousePonto;
+                    }
+                }
+
+            }//fim roda
 
             //itens click
             // + INFO DELES
