@@ -74,34 +74,34 @@ namespace Stick_RPG_Fight
 
             CampanhaB.Width = H / 2 + H / 37 ;// 540 + 29 = 569
             CampanhaB.Height = H / 15 + H / 300;// 72 + 3 = 75
-            CampanhaB.X = W / 16;
+            CampanhaB.X = H / 52 + H / 10;
 
             CombateB.Width = H / 2 + H / 37;// 540 + 29 = 569
             CombateB.Height = H / 15 + H / 300;// 72 + 3 = 75
-            CombateB.X = W / 16;
+            CombateB.X = CampanhaB.X;
 
             CarregarB.Width = H / 2 + H / 37;// 540 + 29 = 569
             CarregarB.Height = H / 15 + H / 300;// 72 + 3 = 75
-            CarregarB.X = W / 16;
+            CarregarB.X = CampanhaB.X;
 
             SairB.Width = H / 2 + H / 37;// 540 + 29 = 569
             SairB.Height = H / 15 + H / 300;// 72 + 3 = 75
-            SairB.X = W / 16;
+            SairB.X = CampanhaB.X;
 
             OpçoesB.Width = H / 2 + H / 37;// 540 + 29 = 569
             OpçoesB.Height = H / 15 + H / 300;// 72 + 3 = 75
-            OpçoesB.X = W / 16;
+            OpçoesB.X = CampanhaB.X;
 
             SalvarB.Width = H / 2 + H / 37;// 540 + 29 = 569
             SalvarB.Height = H / 15 + H / 300;// 72 + 3 = 75
-            SalvarB.X = W / 16;
+            SalvarB.X = CampanhaB.X;
             //Y
-            CampanhaB.Y = H / 15 + H / 300;
-            CombateB.Y = CampanhaB.Y + (CampanhaB.Height * 2);
-            CarregarB.Y = CombateB.Y + (CombateB.Height * 2);
-            SalvarB.Y = CarregarB.Y + (CarregarB.Height * 2);
-            OpçoesB.Y = SalvarB.Y + (SalvarB.Height * 2);
-            SairB.Y = OpçoesB.Y + (OpçoesB.Height * 2);
+            CampanhaB.Y = H / 100;
+            CombateB.Y = CampanhaB.Y + H / 100 + H / 10;
+            CarregarB.Y = CombateB.Y + H / 100 + H / 10;
+            SalvarB.Y = CarregarB.Y + H / 100 + H / 10;
+            OpçoesB.Y = SalvarB.Y + H / 100 + H / 10;
+            SairB.Y = OpçoesB.Y + H / 100 + H / 10;
 
             
         }

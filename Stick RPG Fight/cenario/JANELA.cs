@@ -303,8 +303,8 @@ namespace Stick_RPG_Fight
                     //isto acontece 2x... Qnd morrer ou qnd terminar quest
                     JANELAPLACAR = true; // leva até o placar (QND TERMINAR A QUEST)
                 }
-                
-                if (Qopç == 2)
+
+                if (Qopç == 2 || Qopç == 3)
                 {
                     Qtempo++;
                     if (Qtempo >= 60)
@@ -327,15 +327,18 @@ namespace Stick_RPG_Fight
             Qopç = A.Next(1, 4); // 2 opç
             if (Qopç == 1)
             {
+                //MATE
                 Qqtdd = 10 + (3 * Qcompletadas); // qnt precisa pra completar
             }
             if (Qopç == 2)
             {
+                //SOBREVIVA
                 Qqtdd = 30 + (5 * Qcompletadas);
             }
             if (Qopç == 3)
             {
-
+                //DEFESA
+                Qqtdd = 30 + (5 * Qcompletadas);
             }
         }//fim gerar quest
 
