@@ -851,181 +851,184 @@ namespace Stick_RPG_Fight
             // ----------------------
             // ----------------------
             // ----------------------
-            if (DIREITA && !ESQUERDA)
+            if (JANELA.J.MAOselect)
             {
-                if (Keyboard.GetState().IsKeyDown(Keys.NumPad8) && !PARTE1 && !PARTE2 && !PARTE3 && !PARTE4 && !Keyboard.GetState().IsKeyDown(Keys.LeftShift) && !ATACANDO && !PULANDOparado && !PULANDOandando && !PULANDOcorrendo && energia >= 20 && !SENDOAGARRADO)
+                if (DIREITA && !ESQUERDA)
                 {
-                    ATAQUELANÇADO = true;
-                    PARTE1 = true;
-                    frameLUTA.X = 0;
-                    frameLUTA.Y = 0;
-                    ATACANDO = true;
-                    energia -= 20;
-                }
-
-                //atualização de tamanho do personagem
-                if (PARTE1)
-                {
-                    individuo.Width = WidthTela / 9;
-                }
-                if (COMBO1)
-                {
-                    if (PARTE2)
+                    if (Keyboard.GetState().IsKeyDown(Keys.NumPad8) && !PARTE1 && !PARTE2 && !PARTE3 && !PARTE4 && !Keyboard.GetState().IsKeyDown(Keys.LeftShift) && !ATACANDO && !PULANDOparado && !PULANDOandando && !PULANDOcorrendo && energia >= 20 && !SENDOAGARRADO)
                     {
-                        individuo.Width = WidthTela / 9 + HeightTela / 100;
+                        ATAQUELANÇADO = true;
+                        PARTE1 = true;
+                        frameLUTA.X = 0;
+                        frameLUTA.Y = 0;
+                        ATACANDO = true;
+                        energia -= 20;
                     }
-                    if (PARTE3)
+
+                    //atualização de tamanho do personagem
+                    if (PARTE1)
                     {
-                        //tamanhho
-                         individuo.Width = WidthTela / 8;
-
-                        //direita
-                         if (individuo.X + individuo.Width < WidthTela) //movimento do individuo dentro da tela
-                         {
-                             Vx = HeightTela / 100; // = 10
-                         }
-                         else if (individuo.X + individuo.Width >= WidthTela)//se chegar no final para de andar
-                         {
-                             Vx = 0;
-                             //tirar o personagem do nada
-                             if (individuo.X + individuo.Width > WidthTela + HeightTela / 100)
-                                 individuo.X -= 5;
-
-                         }
-                         if (Contexto.Fundo.fase.X + Contexto.Fundo.fase.Width > WidthTela) // se a fase chegar no final ela nao anda mais
-                         {
-                             if (individuo.X + individuo.Width >= WidthTela - HeightTela / 80) // HeightTela/80 = 13 , se o individuo passar do final da tela - 10 = movimento;
-                             {
-                                 Contexto.Fundo.fase.X -= HeightTela / 100; // = 10
-                             }
-                             //tirar o fundo do vacuo
-                             if (Contexto.Fundo.fase.X + Contexto.Fundo.fase.Width <= WidthTela)
-                             {
-                                 Contexto.Fundo.fase.X += HeightTela / 100; // = 10
-                             }
-                         }
-
-
-
-                        
+                        individuo.Width = WidthTela / 9;
                     }
-                    if (PARTE4)
+                    if (COMBO1)
                     {
-                        individuo.Width = WidthTela / 10;
-
-                        //direita
-                        if (individuo.X + individuo.Width < WidthTela) //movimento do individuo dentro da tela
+                        if (PARTE2)
                         {
-                            Vx = HeightTela / 90; // = 12
+                            individuo.Width = WidthTela / 9 + HeightTela / 100;
                         }
-                        else if (individuo.X + individuo.Width >= WidthTela)//se chegar no final para de andar
+                        if (PARTE3)
                         {
-                            Vx = 0;
-                            //tirar o personagem do nada
-                            if (individuo.X + individuo.Width > WidthTela + HeightTela / 100)
-                                individuo.X -= 5;
+                            //tamanhho
+                            individuo.Width = WidthTela / 8;
 
-                        }
-                        if (Contexto.Fundo.fase.X + Contexto.Fundo.fase.Width > WidthTela) // se a fase chegar no final ela nao anda mais
-                        {
-                            if (individuo.X + individuo.Width >= WidthTela - HeightTela / 80) // HeightTela/80 = 13 , se o individuo passar do final da tela - 10 = movimento;
+                            //direita
+                            if (individuo.X + individuo.Width < WidthTela) //movimento do individuo dentro da tela
                             {
-                                Contexto.Fundo.fase.X -= HeightTela / 90; // = 12
+                                Vx = HeightTela / 100; // = 10
                             }
-                            //tirar o fundo do vacuo
-                            if (Contexto.Fundo.fase.X + Contexto.Fundo.fase.Width <= WidthTela)
+                            else if (individuo.X + individuo.Width >= WidthTela)//se chegar no final para de andar
                             {
-                                Contexto.Fundo.fase.X += HeightTela / 90; // = 12
+                                Vx = 0;
+                                //tirar o personagem do nada
+                                if (individuo.X + individuo.Width > WidthTela + HeightTela / 100)
+                                    individuo.X -= 5;
+
                             }
-                        }
-                    }
-                }
-            }
-            if (ESQUERDA && !DIREITA)
-            {
-                if (Keyboard.GetState().IsKeyDown(Keys.NumPad8) && !PARTE1 && !PARTE2 && !PARTE3 && !PARTE4 && !Keyboard.GetState().IsKeyDown(Keys.LeftShift) && !ATACANDO && !PULANDOparado && !PULANDOandando && !PULANDOcorrendo && energia >= 20 && !SENDOAGARRADO)
-                {
-                    ATAQUELANÇADO = true;
-                    PARTE1 = true;
-                    frameLUTA.X = 7;
-                    frameLUTA.Y = 0;
-                    ATACANDO = true;
-                    energia -= 20;
-                }
-
-                //atualização de tamanho do personagem
-                if (PARTE1)
-                {
-                    individuo.Width = WidthTela / 9;
-                }
-                if (COMBO1)
-                {
-                    if (PARTE2)
-                    {
-                        individuo.Width = WidthTela / 9 + HeightTela / 100;
-                    }
-                    if (PARTE3)
-                    {
-
-                        //tamanho
-                        individuo.Width = WidthTela / 8;
-
-                        
-                        //esquerda
-                        if (individuo.X > 0) // se o individuo estiver maior que 0 ele pode correr pra esquerda
-                        {
-                            Vx = -HeightTela / 100; // = 10
-                        }
-                        else if (individuo.X <= 0) // se colidir com o começo ele para
-                        {
-                            Vx = 0;
-
-                        }
-                        if (Contexto.Fundo.fase.X < 0) // se o fundo estiver no 0 ele para
-                        {
-                            if (individuo.X <= HeightTela / 80) // se o individuo estiver menor ou igual a 13 ele começa a ir pra esquerda (fundo)
+                            if (Contexto.Fundo.fase.X + Contexto.Fundo.fase.Width > WidthTela) // se a fase chegar no final ela nao anda mais
                             {
-                                Contexto.Fundo.fase.X += HeightTela / 100; // = 10
+                                if (individuo.X + individuo.Width >= WidthTela - HeightTela / 80) // HeightTela/80 = 13 , se o individuo passar do final da tela - 10 = movimento;
+                                {
+                                    Contexto.Fundo.fase.X -= HeightTela / 100; // = 10
+                                }
+                                //tirar o fundo do vacuo
+                                if (Contexto.Fundo.fase.X + Contexto.Fundo.fase.Width <= WidthTela)
+                                {
+                                    Contexto.Fundo.fase.X += HeightTela / 100; // = 10
+                                }
                             }
-                            //tirar o fundo do vacuo
-                            if (Contexto.Fundo.fase.X >= 0)
+
+
+
+
+                        }
+                        if (PARTE4)
+                        {
+                            individuo.Width = WidthTela / 10;
+
+                            //direita
+                            if (individuo.X + individuo.Width < WidthTela) //movimento do individuo dentro da tela
                             {
-                                Contexto.Fundo.fase.X -= HeightTela / 100; // = 10
+                                Vx = HeightTela / 90; // = 12
                             }
-                        }
-
-
-                    }
-                    if (PARTE4)
-                    {
-                        individuo.Width = WidthTela / 10;
-
-                        //esquerda
-                        if (individuo.X > 0) // se o individuo estiver maior que 0 ele pode correr pra esquerda
-                        {
-                            Vx = -HeightTela / 90; // = 12
-                        }
-                        else if (individuo.X <= 0) // se colidir com o começo ele para
-                        {
-                            Vx = 0;
-
-                        }
-                        if (Contexto.Fundo.fase.X < 0) // se o fundo estiver no 0 ele para
-                        {
-                            if (individuo.X <= HeightTela / 80) // se o individuo estiver menor ou igual a 13 ele começa a ir pra esquerda (fundo)
+                            else if (individuo.X + individuo.Width >= WidthTela)//se chegar no final para de andar
                             {
-                                Contexto.Fundo.fase.X += HeightTela / 900; // = 12
+                                Vx = 0;
+                                //tirar o personagem do nada
+                                if (individuo.X + individuo.Width > WidthTela + HeightTela / 100)
+                                    individuo.X -= 5;
+
                             }
-                            //tirar o fundo do vacuo
-                            if (Contexto.Fundo.fase.X >= 0)
+                            if (Contexto.Fundo.fase.X + Contexto.Fundo.fase.Width > WidthTela) // se a fase chegar no final ela nao anda mais
                             {
-                                Contexto.Fundo.fase.X -= HeightTela / 90; // = 12
+                                if (individuo.X + individuo.Width >= WidthTela - HeightTela / 80) // HeightTela/80 = 13 , se o individuo passar do final da tela - 10 = movimento;
+                                {
+                                    Contexto.Fundo.fase.X -= HeightTela / 90; // = 12
+                                }
+                                //tirar o fundo do vacuo
+                                if (Contexto.Fundo.fase.X + Contexto.Fundo.fase.Width <= WidthTela)
+                                {
+                                    Contexto.Fundo.fase.X += HeightTela / 90; // = 12
+                                }
                             }
                         }
                     }
                 }
-            }
-        }
+                if (ESQUERDA && !DIREITA)
+                {
+                    if (Keyboard.GetState().IsKeyDown(Keys.NumPad8) && !PARTE1 && !PARTE2 && !PARTE3 && !PARTE4 && !Keyboard.GetState().IsKeyDown(Keys.LeftShift) && !ATACANDO && !PULANDOparado && !PULANDOandando && !PULANDOcorrendo && energia >= 20 && !SENDOAGARRADO)
+                    {
+                        ATAQUELANÇADO = true;
+                        PARTE1 = true;
+                        frameLUTA.X = 7;
+                        frameLUTA.Y = 0;
+                        ATACANDO = true;
+                        energia -= 20;
+                    }
+
+                    //atualização de tamanho do personagem
+                    if (PARTE1)
+                    {
+                        individuo.Width = WidthTela / 9;
+                    }
+                    if (COMBO1)
+                    {
+                        if (PARTE2)
+                        {
+                            individuo.Width = WidthTela / 9 + HeightTela / 100;
+                        }
+                        if (PARTE3)
+                        {
+
+                            //tamanho
+                            individuo.Width = WidthTela / 8;
+
+
+                            //esquerda
+                            if (individuo.X > 0) // se o individuo estiver maior que 0 ele pode correr pra esquerda
+                            {
+                                Vx = -HeightTela / 100; // = 10
+                            }
+                            else if (individuo.X <= 0) // se colidir com o começo ele para
+                            {
+                                Vx = 0;
+
+                            }
+                            if (Contexto.Fundo.fase.X < 0) // se o fundo estiver no 0 ele para
+                            {
+                                if (individuo.X <= HeightTela / 80) // se o individuo estiver menor ou igual a 13 ele começa a ir pra esquerda (fundo)
+                                {
+                                    Contexto.Fundo.fase.X += HeightTela / 100; // = 10
+                                }
+                                //tirar o fundo do vacuo
+                                if (Contexto.Fundo.fase.X >= 0)
+                                {
+                                    Contexto.Fundo.fase.X -= HeightTela / 100; // = 10
+                                }
+                            }
+
+
+                        }
+                        if (PARTE4)
+                        {
+                            individuo.Width = WidthTela / 10;
+
+                            //esquerda
+                            if (individuo.X > 0) // se o individuo estiver maior que 0 ele pode correr pra esquerda
+                            {
+                                Vx = -HeightTela / 90; // = 12
+                            }
+                            else if (individuo.X <= 0) // se colidir com o começo ele para
+                            {
+                                Vx = 0;
+
+                            }
+                            if (Contexto.Fundo.fase.X < 0) // se o fundo estiver no 0 ele para
+                            {
+                                if (individuo.X <= HeightTela / 80) // se o individuo estiver menor ou igual a 13 ele começa a ir pra esquerda (fundo)
+                                {
+                                    Contexto.Fundo.fase.X += HeightTela / 900; // = 12
+                                }
+                                //tirar o fundo do vacuo
+                                if (Contexto.Fundo.fase.X >= 0)
+                                {
+                                    Contexto.Fundo.fase.X -= HeightTela / 90; // = 12
+                                }
+                            }
+                        }
+                    }
+                }
+            }//fim da mao select
+        }//fim do void luta
 
 
 

@@ -640,13 +640,16 @@ namespace Stick_RPG_Fight
                     {
                         P1.PODER = true;
                         //MediaPlayer.Play(AUDIO.PODERsong);
-                        P1.VISUPODER(); // criar efeito especial
-                        P1.COLIDINDOdireita = false; // não ter colisao
-                        P1.COLIDINDOesquerda = false;
+                        
 
                         if (JANELA.J.SLOWselect)
                         {
                             P1.PODERslow = true;
+
+                            //
+                            P1.VISUPODER(); // criar efeito especial
+                            P1.COLIDINDOdireita = false; // não ter colisao
+                            P1.COLIDINDOesquerda = false;
                         }
                         else
                         {
@@ -660,6 +663,10 @@ namespace Stick_RPG_Fight
                         P1.PODERvento = false;
                         P1.PODERraio = false;
                         P1.PODERescudo = false;
+                    }
+                    if (!P1.PODERslow && !P1.PODERretroceder && !P1.PODERvento && !P1.PODERraio && !P1.PODERescudo)
+                    {
+                        P1.PODER = false;
                     }
 
 

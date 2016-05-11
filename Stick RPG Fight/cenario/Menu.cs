@@ -49,6 +49,7 @@ namespace Stick_RPG_Fight
         public Rectangle SairB = new Rectangle();
         public Texture2D imgsair1;
         public Texture2D imgsair2;
+
         public Texture2D imgsair3;
         public bool SAIRb;
         //opções
