@@ -37,18 +37,6 @@
 /processorParam:Quality=Best
 /build:Base1 reverb.wav
 
-#begin Base1.wav
-/importer:WavImporter
-/processor:SongProcessor
-/processorParam:Quality=Best
-/build:Base1.wav
-
-#begin Base4.wav
-/importer:WavImporter
-/processor:SongProcessor
-/processorParam:Quality=Best
-/build:Base4.wav
-
 #begin coração LENTO.wav
 /importer:WavImporter
 /processor:SongProcessor
