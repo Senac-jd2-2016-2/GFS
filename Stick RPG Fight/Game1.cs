@@ -238,7 +238,7 @@ namespace Stick_RPG_Fight
                     {
                         MediaPlayer.Pause();
                         JANELA.J.JANELACOMERCIO = true; // trava a tela
-                        //Botao.COMERCIOb = false;
+                        Botao.COMERCIOb = false;
                     }
 
 
@@ -286,6 +286,7 @@ namespace Stick_RPG_Fight
                             JANELA.J.OPÇFASES = true;
                             //MediaPlayer.Play(AUDIO.combatesong);
                             MediaPlayer.Pause();
+                            Menu.m.COMBATEb = false;
                         }
 
                         //sair
@@ -313,6 +314,7 @@ namespace Stick_RPG_Fight
                         if (Menu.m.CARREGARb && !BOTAO)
                         {
                             Savegame.S.Leitura(P1);
+                            Menu.m.CARREGARb = false;
                         }
                         //gravar
                         if (Menu.m.SalvarB.Contains(mousePosition) && Mouse.GetState().LeftButton == ButtonState.Pressed)
@@ -326,6 +328,7 @@ namespace Stick_RPG_Fight
                         if (Menu.m.SALVARb && !BOTAO)
                         {
                             Savegame.S.Gravacao(P1);
+                            Menu.m.SALVARb = false;
                         }
                     }//fim menu
 
@@ -498,7 +501,7 @@ namespace Stick_RPG_Fight
                     }
 
                     // SEPARADO --- PARA PODER USAR O PODER DE SLOW MOTION + CLONES
-                    if (P1.PODER)
+                    if (P1.PODERslow)
                     {
                         //preço
                         if (P1.mana > 0)
@@ -569,7 +572,7 @@ namespace Stick_RPG_Fight
                         }
 
                     }
-                    else if (!P1.PODER)
+                    else
                     {
                         //mov do bot
                         for (int i = 0; i < listai1.Count; i++) // atualização de todos os inimigos
@@ -640,6 +643,23 @@ namespace Stick_RPG_Fight
                         P1.VISUPODER(); // criar efeito especial
                         P1.COLIDINDOdireita = false; // não ter colisao
                         P1.COLIDINDOesquerda = false;
+
+                        if (JANELA.J.SLOWselect)
+                        {
+                            P1.PODERslow = true;
+                        }
+                        else
+                        {
+                            P1.PODERslow = false;
+                        }
+                    }
+                    if (!P1.PODER)
+                    {
+                        P1.PODERslow = false;
+                        P1.PODERretroceder = false;
+                        P1.PODERvento = false;
+                        P1.PODERraio = false;
+                        P1.PODERescudo = false;
                     }
 
 

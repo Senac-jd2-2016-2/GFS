@@ -49,8 +49,7 @@ namespace Stick_RPG_Fight
             {
                 try
                 {
-                    using (StreamReader Rarquivo = new
-                    StreamReader("savegame.txt"))
+                    using (StreamReader Rarquivo = new StreamReader("savegame.txt"))
                     {
                         string linha;
                         while ((linha = Rarquivo.ReadLine()) != null)
@@ -76,8 +75,9 @@ namespace Stick_RPG_Fight
                             JANELA.J.VENTOATIVO = bool.Parse(dados[g + 9]);
                             JANELA.J.RAIOATIVO = bool.Parse(dados[g + 10]);
                             Ex = "";
-                            Rarquivo.Close();
+                            
                         }
+                        Rarquivo.Close();
                     }
                 }
                 catch (Exception ex) //colocar em linguagem do monogame

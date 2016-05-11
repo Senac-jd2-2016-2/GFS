@@ -127,3 +127,9 @@
 /processorParam:Quality=Best
 /build:Combate song.mp3
 
+#begin Base4.wav
+/importer:WavImporter
+/processor:SoundEffectProcessor
+/processorParam:Quality=Best
+/build:Base4.wav
+

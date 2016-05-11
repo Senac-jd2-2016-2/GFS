@@ -93,7 +93,7 @@ namespace Stick_RPG_Fight
         
 
         //janelacc
-        public bool ADAGATIVA, ESPADA2HATIVA, ADAGAselect, ESPADA2Hselect, MAOselect, setacimaB, setabaixoB, setacimaB2, setabaixoB2, ADAGAb, ESPADAb, MAOb;
+        public bool ADAGATIVA, ESPADA2HATIVA, ADAGAselect, ESPADA2Hselect, MAOselect = true, setacimaB, setabaixoB, setacimaB2, setabaixoB2, ADAGAb, ESPADAb, MAOb;
         public bool ARCOATIVO, TRIDENTEATIVO, RETROCEDERATIVO, ESCUDOATIVO, VENTOATIVO, RAIOATIVO, ARCOselect, TRIDENTEselect, SLOWselect, RETROCEDERselect, ESCUDOselect, VENTOselect, RAIOselect, ARCOb, TRIDENTEb, SLOWb, RETROCEDERb, ESCUDOb, VENTOb, RAIOb;
         public Texture2D imgItemarco1, imgItemarco2, imgItemarco3, imgItemescudo1, imgItemescudo2, imgItemescudo3, imgItemraio1, imgItemraio2, imgItemraio3, imgItemretroceder1, imgItemretroceder2, imgItemretroceder3, imgItemslow1, imgItemslow2, imgItemtridente1, imgItemtridente2, imgItemtridente3, imgItemvento1, imgItemvento2, imgItemvento3;
 
@@ -324,7 +324,7 @@ namespace Stick_RPG_Fight
 
         public void GERARQuest(Random A)
         {
-            Qopç = A.Next(1, 3); // 2 opç
+            Qopç = A.Next(1, 4); // 2 opç
             if (Qopç == 1)
             {
                 Qqtdd = 10 + (3 * Qcompletadas); // qnt precisa pra completar
@@ -332,6 +332,10 @@ namespace Stick_RPG_Fight
             if (Qopç == 2)
             {
                 Qqtdd = 30 + (5 * Qcompletadas);
+            }
+            if (Qopç == 3)
+            {
+
             }
         }//fim gerar quest
 

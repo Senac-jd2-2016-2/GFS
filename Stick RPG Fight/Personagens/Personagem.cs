@@ -139,6 +139,9 @@ namespace Stick_RPG_Fight
         public bool PODER;
         public bool DESCANSANDO;
 
+        //poderes que se tem
+        public bool PODERslow, PODERvento, PODERraio, PODERretroceder, PODERescudo;
+
         public bool ATAQUELANÇADO;
         public bool SENDOAGARRADO;
 
@@ -219,8 +222,8 @@ namespace Stick_RPG_Fight
             if (XP >= XPT)//aumentar de lvl
             {
                 XP = 0;
-                XPT *= 2;
                 LVL++;
+                XPT = 100 * LVL;
                 vidaTOTAL += 10 * LVL;
                 manaTOTAL += 5 * LVL;
                 energiaTOTAL += 5 * LVL;
@@ -299,185 +302,240 @@ namespace Stick_RPG_Fight
             //SKILLS P1
             if (ATACANDO)
             {
-                if (DIREITA)
+                if (JANELA.J.MAOselect)
                 {
-                    //atualização
-                    PARADO = false;
-                    ANDANDO = false;
-                    CORRENDO = false;
-                    ATACANDO = true;
-
-                    if (PARTE1)//soco esquerdo
+                    if (DIREITA)
                     {
-                        Vx = 0;
-                        Vy = 0;
+                        //atualização
+                        PARADO = false;
+                        ANDANDO = false;
+                        CORRENDO = false;
+                        ATACANDO = true;
 
-                        if (!INVERSO)
+                        if (PARTE1)//soco esquerdo
+                        {
+                            Vx = 0;
+                            Vy = 0;
+
+                            if (!INVERSO)
+                            {
+                                frameLUTA.X++;
+                                if (frameLUTA.X >= SpriteSheetsoco1.X)
+                                {
+                                    frameLUTA.X = 0;
+                                    frameLUTA.Y++;
+                                }
+                                if (frameLUTA.X >= 7 && frameLUTA.Y == 1 || frameLUTA.Y == 2 && frameLUTA.X < 3) // caso ataque nesse periodo
+                                {
+                                    if (Keyboard.GetState().IsKeyDown(Keys.NumPad4) && !Keyboard.GetState().IsKeyDown(Keys.NumPad8) && !Keyboard.GetState().IsKeyDown(Keys.NumPad6) && !Keyboard.GetState().IsKeyDown(Keys.NumPad2) && energia >= 10)
+                                    {
+                                        PARTE1 = false;
+                                        PARTE2 = true;
+
+
+                                        COMBO1 = true;
+                                        frameLUTA.X = 0;
+                                        frameLUTA.Y = 0;
+                                        energia -= 10;
+                                        ATAQUELANÇADO = true; // mostrar q ele atacou
+                                    }
+                                }
+
+                                if (frameLUTA.X >= 4 && frameLUTA.Y == 2)
+                                {
+                                    INVERSO = true;
+                                }
+                            }
+                            else if (INVERSO)
+                            {
+                                frameLUTA.X--;
+                                if (frameLUTA.X <= 0 && frameLUTA.Y == 0)
+                                {
+                                    //TERMINAR A SEQUENCIA:
+
+                                    PARTE1 = false;
+                                    INVERSO = false;
+                                    ATACANDO = false;
+                                    COMBO1 = false;
+                                    PARADO = true;
+                                    frameLUTA.X = 0;
+                                    frameLUTA.Y = 0;
+
+                                }
+                                if (frameLUTA.X < 0)
+                                {
+                                    frameLUTA.X = 7;
+                                    frameLUTA.Y--;
+                                }
+
+                            }
+                        }//fim parte 1
+
+                        if (PARTE2 && COMBO1)//combo 1, 2° soco
                         {
                             frameLUTA.X++;
-                            if (frameLUTA.X >= SpriteSheetsoco1.X)
+                            if (frameLUTA.X >= SpriteSheetsoco2C1.X)
                             {
                                 frameLUTA.X = 0;
                                 frameLUTA.Y++;
                             }
-                            if (frameLUTA.X >= 7 && frameLUTA.Y == 1  || frameLUTA.Y == 2 && frameLUTA.X < 3) // caso ataque nesse periodo
+                            if (frameLUTA.X >= 5 && frameLUTA.Y == 4)//caso termine antes de continuar a sequencia
                             {
-                                if (Keyboard.GetState().IsKeyDown(Keys.NumPad4) && !Keyboard.GetState().IsKeyDown(Keys.NumPad8) && !Keyboard.GetState().IsKeyDown(Keys.NumPad6) && !Keyboard.GetState().IsKeyDown(Keys.NumPad2) && energia >= 10)
-                                {
-                                    PARTE1 = false;
-                                    PARTE2 = true;
+                                PARTE2 = false;
+                                COMBO1 = false;
+                                INVERSO = false;
+                                ATACANDO = false;
+                                PARADO = true;
+                                frameLUTA.X = 0;
+                                frameLUTA.Y = 0;
+                            }
 
-                                    
+                            if (frameLUTA.Y == 3 || frameLUTA.Y == 4 && frameLUTA.X < 5) // caso ataque nesse periodo
+                            {
+                                if (Keyboard.GetState().IsKeyDown(Keys.NumPad4) && !Keyboard.GetState().IsKeyDown(Keys.NumPad8) && !Keyboard.GetState().IsKeyDown(Keys.NumPad6) && !Keyboard.GetState().IsKeyDown(Keys.NumPad2) && energia >= 25)
+                                {
+
+                                    PARTE2 = false;
+                                    PARTE3 = true;
+
                                     COMBO1 = true;
                                     frameLUTA.X = 0;
                                     frameLUTA.Y = 0;
-                                    energia -= 10;
+                                    energia -= 25;
                                     ATAQUELANÇADO = true; // mostrar q ele atacou
                                 }
                             }
+                        }//parte 2
 
-                            if (frameLUTA.X >= 4 && frameLUTA.Y == 2)
-                            {
-                                INVERSO = true;
-                            }
-                        }
-                        else if (INVERSO)
+                        if (PARTE3 && COMBO1)//combo 1, 3° soco
                         {
-                            frameLUTA.X--;
-                            if (frameLUTA.X <= 0 && frameLUTA.Y == 0)
+                            frameLUTA.X++;
+                            if (frameLUTA.X >= SpriteSheetsoco3C1.X)
                             {
-                                //TERMINAR A SEQUENCIA:
-
-                                PARTE1 = false;
+                                frameLUTA.X = 0;
+                                frameLUTA.Y++;
+                            }
+                            if (frameLUTA.X >= 5 && frameLUTA.Y == 4)//caso termine antes de continuar a sequencia
+                            {
+                                PARTE3 = false;
+                                COMBO1 = false;
                                 INVERSO = false;
                                 ATACANDO = false;
+                                PARADO = true;
+                                frameLUTA.X = 0;
+                                frameLUTA.Y = 0;
+                            }
+
+                            if (frameLUTA.Y == 3 && frameLUTA.X >= 7 || frameLUTA.Y == 4 && frameLUTA.X < 5) // caso ataque nesse periodo
+                            {
+                                if (Keyboard.GetState().IsKeyDown(Keys.NumPad6) && Keyboard.GetState().IsKeyDown(Keys.W) && !Keyboard.GetState().IsKeyDown(Keys.NumPad8) && !Keyboard.GetState().IsKeyDown(Keys.NumPad4) && !Keyboard.GetState().IsKeyDown(Keys.NumPad2) && energia >= 30)
+                                {
+
+                                    PARTE3 = false;
+                                    PARTE4 = true;
+
+                                    COMBO1 = true;
+                                    frameLUTA.X = 0;
+                                    frameLUTA.Y = 0;
+                                    energia -= 30;
+                                    ATAQUELANÇADO = true; // mostrar q ele atacou
+                                }
+                            }
+                        }//fim parte 3
+
+                        if (PARTE4 && COMBO1)//combo 1, 4° joelhada
+                        {
+                            frameLUTA.X++;
+                            if (frameLUTA.X >= SpriteSheetsoco2C1.X)
+                            {
+                                frameLUTA.X = 0;
+                                frameLUTA.Y++;
+                            }
+
+                            if (frameLUTA.X >= 5 && frameLUTA.Y == 4)//FIM
+                            {
+                                PARTE4 = false;
                                 COMBO1 = false;
+                                INVERSO = false;
+                                ATACANDO = false;
                                 PARADO = true;
                                 frameLUTA.X = 0;
                                 frameLUTA.Y = 0;
 
+                                // inimigo contrataca no final
+                                LEVARCONTRAATAQUE = true;
                             }
-                            if (frameLUTA.X < 0)
+                        }
+
+                    }//FIM DIREITA
+
+                    if (ESQUERDA)
+                    {
+                        //atualização
+                        PARADO = false;
+                        ANDANDO = false;
+                        CORRENDO = false;
+                        ATACANDO = true;
+
+                        if (PARTE1)//soco esquerdo
+                        {
+                            Vx = 0;
+                            Vy = 0;
+
+                            if (!INVERSO)
                             {
-                                frameLUTA.X = 7;
-                                frameLUTA.Y--;
+                                frameLUTA.X--;
+                                if (frameLUTA.X < 0)
+                                {
+                                    frameLUTA.X = 7;
+                                    frameLUTA.Y++;
+                                }
+                                if (frameLUTA.X <= 0 && frameLUTA.Y == 1 || frameLUTA.Y == 2 && frameLUTA.X > 3) // caso ataque nesse periodo
+                                {
+                                    if (Keyboard.GetState().IsKeyDown(Keys.NumPad4) && !Keyboard.GetState().IsKeyDown(Keys.NumPad8) && !Keyboard.GetState().IsKeyDown(Keys.NumPad6) && !Keyboard.GetState().IsKeyDown(Keys.NumPad2) && energia >= 10)
+                                    {
+                                        PARTE1 = false;
+                                        PARTE2 = true;
+
+                                        COMBO1 = true;
+                                        frameLUTA.X = 7;
+                                        frameLUTA.Y = 0;
+                                        energia -= 10;
+                                        ATAQUELANÇADO = true; // mostrar q ele atacou
+                                    }
+                                }
+
+                                if (frameLUTA.X <= 3 && frameLUTA.Y == 2)
+                                {
+                                    INVERSO = true;
+                                }
                             }
-
-                        }
-                    }//fim parte 1
-
-                    if (PARTE2 && COMBO1)//combo 1, 2° soco
-                    {
-                        frameLUTA.X++;
-                        if (frameLUTA.X >= SpriteSheetsoco2C1.X)
-                        {
-                            frameLUTA.X = 0;
-                            frameLUTA.Y++;
-                        }
-                        if (frameLUTA.X >= 5 && frameLUTA.Y == 4)//caso termine antes de continuar a sequencia
-                        {
-                            PARTE2 = false;
-                            COMBO1 = false;
-                            INVERSO = false;
-                            ATACANDO = false;
-                            PARADO = true;
-                            frameLUTA.X = 0;
-                            frameLUTA.Y = 0;
-                        }
-
-                        if (frameLUTA.Y == 3 || frameLUTA.Y == 4 && frameLUTA.X < 5) // caso ataque nesse periodo
-                        {
-                            if (Keyboard.GetState().IsKeyDown(Keys.NumPad4) && !Keyboard.GetState().IsKeyDown(Keys.NumPad8) && !Keyboard.GetState().IsKeyDown(Keys.NumPad6) && !Keyboard.GetState().IsKeyDown(Keys.NumPad2) && energia >= 25)
+                            else if (INVERSO)
                             {
-                                
-                                PARTE2 = false;
-                                PARTE3 = true;
+                                frameLUTA.X++;
+                                if (frameLUTA.X >= 7 && frameLUTA.Y == 0)
+                                {
+                                    //TERMINAR A SEQUENCIA:
 
-                                COMBO1 = true;
-                                frameLUTA.X = 0;
-                                frameLUTA.Y = 0;
-                                energia -= 25;
-                                ATAQUELANÇADO = true; // mostrar q ele atacou
+                                    PARTE1 = false;
+                                    INVERSO = false;
+                                    ATACANDO = false;
+                                    COMBO1 = false;
+                                    PARADO = true;
+                                    frameLUTA.X = 0;
+                                    frameLUTA.Y = 0;
+
+                                }
+                                if (frameLUTA.X >= SpriteSheetsoco1.X)
+                                {
+                                    frameLUTA.X = 0;
+                                    frameLUTA.Y--;
+                                }
+
                             }
-                        }
-                    }//parte 2
+                        }//fim parte 1
 
-                    if (PARTE3 && COMBO1)//combo 1, 3° soco
-                    {
-                        frameLUTA.X++;
-                        if (frameLUTA.X >= SpriteSheetsoco3C1.X)
-                        {
-                            frameLUTA.X = 0;
-                            frameLUTA.Y++;
-                        }
-                        if (frameLUTA.X >= 5 && frameLUTA.Y == 4)//caso termine antes de continuar a sequencia
-                        {
-                            PARTE3 = false;
-                            COMBO1 = false;
-                            INVERSO = false;
-                            ATACANDO = false;
-                            PARADO = true;
-                            frameLUTA.X = 0;
-                            frameLUTA.Y = 0;
-                        }
-
-                        if (frameLUTA.Y == 3 && frameLUTA.X >= 7 || frameLUTA.Y == 4 && frameLUTA.X < 5) // caso ataque nesse periodo
-                        {
-                            if (Keyboard.GetState().IsKeyDown(Keys.NumPad6) && Keyboard.GetState().IsKeyDown(Keys.W) && !Keyboard.GetState().IsKeyDown(Keys.NumPad8) && !Keyboard.GetState().IsKeyDown(Keys.NumPad4) && !Keyboard.GetState().IsKeyDown(Keys.NumPad2) && energia >= 30)
-                            {
-                                
-                                PARTE3 = false;
-                                PARTE4 = true;
-
-                                COMBO1 = true;
-                                frameLUTA.X = 0;
-                                frameLUTA.Y = 0;
-                                energia -= 30;
-                                ATAQUELANÇADO = true; // mostrar q ele atacou
-                            }
-                        }
-                    }//fim parte 3
-
-                    if (PARTE4 && COMBO1)//combo 1, 4° joelhada
-                    {
-                        frameLUTA.X++;
-                        if (frameLUTA.X >= SpriteSheetsoco2C1.X)
-                        {
-                            frameLUTA.X = 0;
-                            frameLUTA.Y++;
-                        }
-
-                        if (frameLUTA.X >= 5 && frameLUTA.Y == 4)//FIM
-                        {
-                            PARTE4 = false;
-                            COMBO1 = false;
-                            INVERSO = false;
-                            ATACANDO = false;
-                            PARADO = true;
-                            frameLUTA.X = 0;
-                            frameLUTA.Y = 0;
-
-                            // inimigo contrataca no final
-                            LEVARCONTRAATAQUE = true;
-                        }
-                    }
-
-                }//FIM DIREITA
-
-                if (ESQUERDA)
-                {
-                    //atualização
-                    PARADO = false;
-                    ANDANDO = false;
-                    CORRENDO = false;
-                    ATACANDO = true;
-
-                    if (PARTE1)//soco esquerdo
-                    {
-                        Vx = 0;
-                        Vy = 0;
-
-                        if (!INVERSO)
+                        if (PARTE2 && COMBO1)//combo 1, 2° soco
                         {
                             frameLUTA.X--;
                             if (frameLUTA.X < 0)
@@ -485,144 +543,92 @@ namespace Stick_RPG_Fight
                                 frameLUTA.X = 7;
                                 frameLUTA.Y++;
                             }
-                            if (frameLUTA.X <= 0 && frameLUTA.Y == 1 || frameLUTA.Y == 2 && frameLUTA.X > 3) // caso ataque nesse periodo
+                            if (frameLUTA.X <= 3 && frameLUTA.Y == 4)//caso termine antes de continuar a sequencia
                             {
-                                if (Keyboard.GetState().IsKeyDown(Keys.NumPad4) && !Keyboard.GetState().IsKeyDown(Keys.NumPad8) && !Keyboard.GetState().IsKeyDown(Keys.NumPad6) && !Keyboard.GetState().IsKeyDown(Keys.NumPad2) && energia >= 10)
+                                PARTE2 = false;
+                                COMBO1 = false;
+                                INVERSO = false;
+                                ATACANDO = false;
+                                PARADO = true;
+                                frameLUTA.X = 0;
+                                frameLUTA.Y = 0;
+                            }
+
+                            if (frameLUTA.Y == 3 || frameLUTA.Y == 4 && frameLUTA.X > 3) // caso ataque nesse periodo
+                            {
+                                if (Keyboard.GetState().IsKeyDown(Keys.NumPad4) && !Keyboard.GetState().IsKeyDown(Keys.NumPad8) && !Keyboard.GetState().IsKeyDown(Keys.NumPad6) && !Keyboard.GetState().IsKeyDown(Keys.NumPad2) && energia >= 25)
                                 {
-                                    PARTE1 = false;
-                                    PARTE2 = true;
+                                    PARTE2 = false;
+                                    PARTE3 = true;
 
                                     COMBO1 = true;
                                     frameLUTA.X = 7;
                                     frameLUTA.Y = 0;
-                                    energia -= 10;
+                                    energia -= 25;
                                     ATAQUELANÇADO = true; // mostrar q ele atacou
                                 }
                             }
+                        }//parte 2
 
-                            if (frameLUTA.X <= 3 && frameLUTA.Y == 2)
-                            {
-                                INVERSO = true;
-                            }
-                        }
-                        else if (INVERSO)
+                        if (PARTE3 && COMBO1)//combo 1, 3° soco
                         {
-                            frameLUTA.X++;
-                            if (frameLUTA.X >= 7 && frameLUTA.Y == 0)
+                            frameLUTA.X--;
+                            if (frameLUTA.X < 0)
                             {
-                                //TERMINAR A SEQUENCIA:
-
-                                PARTE1 = false;
+                                frameLUTA.X = 7;
+                                frameLUTA.Y++;
+                            }
+                            if (frameLUTA.X <= 3 && frameLUTA.Y == 4)//caso termine antes de continuar a sequencia
+                            {
+                                PARTE3 = false;
+                                COMBO1 = false;
                                 INVERSO = false;
                                 ATACANDO = false;
-                                COMBO1 = false;
                                 PARADO = true;
                                 frameLUTA.X = 0;
                                 frameLUTA.Y = 0;
-
                             }
-                            if (frameLUTA.X >= SpriteSheetsoco1.X)
+
+                            if (frameLUTA.Y == 3 && frameLUTA.X <= 0 || frameLUTA.Y == 4 && frameLUTA.X > 3) // caso ataque nesse periodo
                             {
+                                if (Keyboard.GetState().IsKeyDown(Keys.NumPad6) && Keyboard.GetState().IsKeyDown(Keys.W) && !Keyboard.GetState().IsKeyDown(Keys.NumPad8) && !Keyboard.GetState().IsKeyDown(Keys.NumPad4) && !Keyboard.GetState().IsKeyDown(Keys.NumPad2) && energia >= 30)
+                                {
+                                    PARTE3 = false;
+                                    PARTE4 = true;
+
+                                    COMBO1 = true;
+                                    frameLUTA.X = 7;
+                                    frameLUTA.Y = 0;
+                                    energia -= 30;
+                                    ATAQUELANÇADO = true; // mostrar q ele atacou
+                                }
+                            }
+                        }//fim parte 3
+
+                        if (PARTE4 && COMBO1)//combo 1, 4° joelhada
+                        {
+                            frameLUTA.X--;
+                            if (frameLUTA.X < 0)
+                            {
+                                frameLUTA.X = 7;
+                                frameLUTA.Y++;
+                            }
+
+                            if (frameLUTA.X <= 1 && frameLUTA.Y == 4)//FIM
+                            {
+                                PARTE4 = false;
+                                COMBO1 = false;
+                                INVERSO = false;
+                                ATACANDO = false;
+                                PARADO = true;
                                 frameLUTA.X = 0;
-                                frameLUTA.Y--;
-                            }
-
-                        }
-                    }//fim parte 1
-
-                    if (PARTE2 && COMBO1)//combo 1, 2° soco
-                    {
-                        frameLUTA.X--;
-                        if (frameLUTA.X < 0)
-                        {
-                            frameLUTA.X = 7;
-                            frameLUTA.Y++;
-                        }
-                        if (frameLUTA.X <= 3 && frameLUTA.Y == 4)//caso termine antes de continuar a sequencia
-                        {
-                            PARTE2 = false;
-                            COMBO1 = false;
-                            INVERSO = false;
-                            ATACANDO = false;
-                            PARADO = true;
-                            frameLUTA.X = 0;
-                            frameLUTA.Y = 0;
-                        }
-
-                        if (frameLUTA.Y == 3 || frameLUTA.Y == 4 && frameLUTA.X > 3) // caso ataque nesse periodo
-                        {
-                            if (Keyboard.GetState().IsKeyDown(Keys.NumPad4) && !Keyboard.GetState().IsKeyDown(Keys.NumPad8) && !Keyboard.GetState().IsKeyDown(Keys.NumPad6) && !Keyboard.GetState().IsKeyDown(Keys.NumPad2) && energia >= 25)
-                            {
-                                PARTE2 = false;
-                                PARTE3 = true;
-
-                                COMBO1 = true;
-                                frameLUTA.X = 7;
                                 frameLUTA.Y = 0;
-                                energia -= 25;
-                                ATAQUELANÇADO = true; // mostrar q ele atacou
+                                LEVARCONTRAATAQUE = true;
                             }
                         }
-                    }//parte 2
 
-                    if (PARTE3 && COMBO1)//combo 1, 3° soco
-                    {
-                        frameLUTA.X--;
-                        if (frameLUTA.X < 0)
-                        {
-                            frameLUTA.X = 7;
-                            frameLUTA.Y++;
-                        }
-                        if (frameLUTA.X <= 3 && frameLUTA.Y == 4)//caso termine antes de continuar a sequencia
-                        {
-                            PARTE3 = false;
-                            COMBO1 = false;
-                            INVERSO = false;
-                            ATACANDO = false;
-                            PARADO = true;
-                            frameLUTA.X = 0;
-                            frameLUTA.Y = 0;
-                        }
-
-                        if (frameLUTA.Y == 3 && frameLUTA.X <= 0 || frameLUTA.Y == 4 && frameLUTA.X > 3) // caso ataque nesse periodo
-                        {
-                            if (Keyboard.GetState().IsKeyDown(Keys.NumPad6) && Keyboard.GetState().IsKeyDown(Keys.W) && !Keyboard.GetState().IsKeyDown(Keys.NumPad8) && !Keyboard.GetState().IsKeyDown(Keys.NumPad4) && !Keyboard.GetState().IsKeyDown(Keys.NumPad2) && energia >= 30)
-                            {
-                                PARTE3 = false;
-                                PARTE4 = true;
-
-                                COMBO1 = true;
-                                frameLUTA.X = 7;
-                                frameLUTA.Y = 0;
-                                energia -= 30;
-                                ATAQUELANÇADO = true; // mostrar q ele atacou
-                            }
-                        }
-                    }//fim parte 3
-
-                    if (PARTE4 && COMBO1)//combo 1, 4° joelhada
-                    {
-                        frameLUTA.X--;
-                        if (frameLUTA.X < 0)
-                        {
-                            frameLUTA.X = 7;
-                            frameLUTA.Y++;
-                        }
-
-                        if (frameLUTA.X <= 1 && frameLUTA.Y == 4)//FIM
-                        {
-                            PARTE4 = false;
-                            COMBO1 = false;
-                            INVERSO = false;
-                            ATACANDO = false;
-                            PARADO = true;
-                            frameLUTA.X = 0;
-                            frameLUTA.Y = 0;
-                            LEVARCONTRAATAQUE = true;
-                        }
                     }
-
-                }
+                }// se ele tiver selecionado o soco
             }//fim da LUTA frames (img)
         }
 

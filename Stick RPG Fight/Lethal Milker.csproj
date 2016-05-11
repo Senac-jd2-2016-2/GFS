@@ -40,9 +40,9 @@
   <ItemGroup>
     <Compile Include="cenario\ATUALIZAÇÃO.cs" />
     <Compile Include="cenario\JANELA.cs" />
-    <Compile Include="COMBO.cs" />
+    <Compile Include="cenario\COMBO.cs" />
     <Compile Include="Info.cs" />
-    <Compile Include="Itens.cs" />
+    <Compile Include="cenario\Itens.cs" />
     <Compile Include="Opçoes.cs" />
     <Compile Include="Personagens\Dano.cs" />
     <Compile Include="Personagens\OndasdeAgua.cs" />
