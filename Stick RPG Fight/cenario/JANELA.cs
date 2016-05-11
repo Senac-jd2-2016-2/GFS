@@ -124,7 +124,7 @@ namespace Stick_RPG_Fight
         //pause
         public bool JANELAPAUSE, bSAIR, bRESUME;
 
-        public void FUNÇOESPLACAR(bool BOTAO, Personagem P1, Botoes Botao, List<Inimigo> listai1, int W, int H, Menu M1, Random A)
+        public void FUNÇOESPLACAR(bool BOTAO, Personagem P1, Botoes Botao, List<Inimigo> listai1, int W, int H,Random A)
         {
             if (PLACARdisponivel)
             {
@@ -231,7 +231,7 @@ namespace Stick_RPG_Fight
                     {
                         
                         //TERMINAR FASE
-                        M1.COMBATE = false;
+                        Menu.m.COMBATES = false;
                         //posição volta pro começo e os inimigos somem (SAI DA FASE)
                         JANELA.J.JANELAPLACAR = false;
                         JANELA.J.ZERARFASE(listai1, P1, Botao, W, H);
@@ -291,9 +291,9 @@ namespace Stick_RPG_Fight
             }
         }
 
-        public void COMPLETARQuest(Menu M1, Personagem P1, Botoes Botao, List<Inimigo> listai1, int W, int H)
+        public void COMPLETARQuest(Personagem P1, Botoes Botao, List<Inimigo> listai1, int W, int H)
         {
-            if (M1.COMBATE)
+            if (Menu.m.COMBATES)
             {
                 if (Qqtddcompletada >= Qqtdd) // MISAO COMPLETADA
                 {
@@ -315,7 +315,7 @@ namespace Stick_RPG_Fight
                 }
             
             }
-            else if (!M1.COMBATE)
+            else if (!Menu.m.COMBATES)
             {
                 Qqtddcompletada = 0;
                 Qtempo = 0;
@@ -414,6 +414,7 @@ namespace Stick_RPG_Fight
                 if (JANELA.J.bOK && !BOTAO && !RODAR1 && !RODAR2)
                 {
                     JANELAQUEST = false;
+                    MediaPlayer.Play(Audio.A1.combatesong);
                 }
             }
 
@@ -456,7 +457,7 @@ namespace Stick_RPG_Fight
             }
             else if (!JANELAQUEST)
             {
-                MediaPlayer.Pause();
+                
                 POSquest.Y = 0;
                 QUESTdisponivel = false;
             }
@@ -479,7 +480,7 @@ namespace Stick_RPG_Fight
             JANELA.J.FASEdestravada[0] = true;
         }
        
-        public void FUNÇÕESOPÇFASE(int W, int H, Botoes Botao, Menu M1, bool MENU, bool BOTAO)
+        public void FUNÇÕESOPÇFASE(int W, int H, Botoes Botao, bool BOTAO)
         {
             
             var mouseState = Mouse.GetState();
@@ -502,8 +503,8 @@ namespace Stick_RPG_Fight
                         JANELA.J.Bfase[i] = false;
                     if (JANELA.J.Bfase[i] && !BOTAO)
                     {
-                        MENU = false;
-                        M1.COMBATE = true;
+                        Menu.m.MENU = false;
+                        Menu.m.COMBATES = true;
                         Contexto.Fase[i] = true;
                         Botao.HOME = false;
                         JANELA.J.OPÇFASES = false;
@@ -797,6 +798,7 @@ namespace Stick_RPG_Fight
             {
                 JANELA.J.JANELACOMBO = false;
                 JANELA.J.JANELACOMERCIO = false;
+                MediaPlayer.Resume();
             }
             //ALTERNAR ENTRE COMBO E COMERCIO DENTRO DA JANELA
             if (JANELA.J.Bcomercio.Contains(mousePosition) && JANELA.J.JANELACOMBO && Mouse.GetState().LeftButton == ButtonState.Pressed)

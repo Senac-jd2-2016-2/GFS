@@ -13,112 +13,96 @@ namespace Stick_RPG_Fight
 {
     class Menu
     {
+        public bool MENU = true, BOTAO;
+
         //botao historia
-        public Texture2D imghistory;
-        public bool HISTORY;
-        public bool HISTORYativado;
-        public Rectangle HistoryBotao = new Rectangle();
-        public Point TamanhoSpritesheethistoryB = new Point(952,281);
-        public Point SpritesheethistoryB = new Point(8, 8);
-        public Point framehistoryB = new Point(0, 0);
+        public Texture2D imgcampanha1;
+        public Texture2D imgcampanha2;
+        public Texture2D imgcampanha3;
+        public bool CAMPANHA;
+        public bool CAMPANHAb;
+        public Rectangle CampanhaB = new Rectangle();
+        
+        public static Menu m = new Menu();
 
         //combate
-        public Texture2D imgcombate;
-        public Rectangle CombateBotao = new Rectangle();
-        public Point TamanhoSpritesheetcombateB = new Point(1135, 275);
-        public Point SpritesheetcombateB = new Point(7, 15);
-        public Point framecombateB = new Point(0, 0);
-        public bool COMBATE;
-        public bool COMBATEativado;
+        public Texture2D imgcombates1;
+        public Texture2D imgcombates2;
+        public Texture2D imgcombates3;
+        public Rectangle CombateB = new Rectangle();
+       
+        public bool COMBATES;
+        public bool COMBATEb;
 
         //fundo
         public Texture2D imgintromenu_semtraçado;
         public Texture2D imgintromenu_comtraçado;
         public Texture2D imgpredio_do_P1;
 
-        public void FRAMEhistory()
-        {
-            framehistoryB.X++;
-            if (framehistoryB.X >= SpritesheethistoryB.X)
-            {
-                framehistoryB.X = 0;
-                framehistoryB.Y++;
-            }
-            if (framehistoryB.X == 6 && framehistoryB.Y == 7)
-            {
-                framehistoryB.X = 0;
-                framehistoryB.Y = 0;
-            }
-        }
+        //carregar
+        public Rectangle CarregarB = new Rectangle();
+        public Texture2D imgcarregar1;
+        public Texture2D imgcarregar2;
+        public Texture2D imgcarregar3;
+        public bool CARREGARb;
+       //sair
+        public Rectangle SairB = new Rectangle();
+        public Texture2D imgsair1;
+        public Texture2D imgsair2;
+        public Texture2D imgsair3;
+        public bool SAIRb;
+        //opções
+        public Rectangle OpçoesB = new Rectangle();
+        public Texture2D imgopçoes1;
+        public Texture2D imgopçoes2;
+        public Texture2D imgopçoes3;
+        public bool OPÇOESb;
+        //salvar
+        public Rectangle SalvarB = new Rectangle();
+        public Texture2D imgsalvar1;
+        public Texture2D imgsalvar2;
+        public Texture2D imgsalvar3;
+        public bool SALVARb;
 
-        public void FRAMEcombate()
-        {
-            framecombateB.X++;
-            if (framecombateB.X >= SpritesheetcombateB.X)
-            {
-                framecombateB.X = 0;
-                framecombateB.Y++;
-            }
-            if (framecombateB.X == 2 && framecombateB.Y == 14)
-            {
-                framecombateB.X = 0;
-                framecombateB.Y = 0;
-            }
-        }
-
-        public void menu01GAME(int WidthTela, int HeightTela)
+        public void menu01GAME(int W, int H, Personagem P1, Random A)
         {
             var mouseState = Mouse.GetState();
             var mousePosition = new Point(mouseState.X, mouseState.Y);
 
-            JANELA.J.POSIÇÃOCC(WidthTela, HeightTela);
+            JANELA.J.POSIÇÃOCC(W, H);
 
-            if (HistoryBotao.Contains(mousePosition))
-            {
-                
-                framehistoryB.X = 0;
-                framehistoryB.Y = 0;
-                HistoryBotao.X = 0;
-                HistoryBotao.Y = HeightTela / 3 - HeightTela / 30;
-                HistoryBotao.Width = WidthTela / 2;
-                HistoryBotao.Height = HeightTela / 6;
+            CampanhaB.Width = H / 2 + H / 37 ;// 540 + 29 = 569
+            CampanhaB.Height = H / 15 + H / 300;// 72 + 3 = 75
+            CampanhaB.X = W / 16;
 
-            }
-            else
-            {
-                FRAMEhistory();
-                if (HistoryBotao.Y != HeightTela / 3)
-                {
-                    HistoryBotao.X = 0;
-                    HistoryBotao.Y = HeightTela / 3;
-                    HistoryBotao.Width = WidthTela / 3;
-                    HistoryBotao.Height = HeightTela / 8;
-                    
-                }
-            }
+            CombateB.Width = H / 2 + H / 37;// 540 + 29 = 569
+            CombateB.Height = H / 15 + H / 300;// 72 + 3 = 75
+            CombateB.X = W / 16;
 
-            //combate
-            if (CombateBotao.Contains(mousePosition))
-            {
+            CarregarB.Width = H / 2 + H / 37;// 540 + 29 = 569
+            CarregarB.Height = H / 15 + H / 300;// 72 + 3 = 75
+            CarregarB.X = W / 16;
 
-                framecombateB.X = 0;
-                framecombateB.Y = 0;
-                CombateBotao.X = WidthTela - WidthTela / 2;
-                CombateBotao.Y = HeightTela / 3 - HeightTela / 30;
-                CombateBotao.Width = WidthTela / 2;
-                CombateBotao.Height = HeightTela / 6;
+            SairB.Width = H / 2 + H / 37;// 540 + 29 = 569
+            SairB.Height = H / 15 + H / 300;// 72 + 3 = 75
+            SairB.X = W / 16;
 
+            OpçoesB.Width = H / 2 + H / 37;// 540 + 29 = 569
+            OpçoesB.Height = H / 15 + H / 300;// 72 + 3 = 75
+            OpçoesB.X = W / 16;
 
-            }
-            else
-            {
-                FRAMEcombate();
-                CombateBotao.X = WidthTela - WidthTela / 3;
-                CombateBotao.Y = HeightTela / 3;
-                CombateBotao.Width = WidthTela / 3;
-                CombateBotao.Height = HeightTela / 8;
-                
-            }
+            SalvarB.Width = H / 2 + H / 37;// 540 + 29 = 569
+            SalvarB.Height = H / 15 + H / 300;// 72 + 3 = 75
+            SalvarB.X = W / 16;
+            //Y
+            CampanhaB.Y = H / 15 + H / 300;
+            CombateB.Y = CampanhaB.Y + (CampanhaB.Height * 2);
+            CarregarB.Y = CombateB.Y + (CombateB.Height * 2);
+            SalvarB.Y = CarregarB.Y + (CarregarB.Height * 2);
+            OpçoesB.Y = SalvarB.Y + (SalvarB.Height * 2);
+            SairB.Y = OpçoesB.Y + (OpçoesB.Height * 2);
+
+            
         }
     }
 }

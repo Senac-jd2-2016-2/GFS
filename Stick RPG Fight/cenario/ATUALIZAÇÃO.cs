@@ -14,12 +14,9 @@ namespace Stick_RPG_Fight
     class ATUALIZAÇÃO
     {
         public static ATUALIZAÇÃO ATLZÇ = new ATUALIZAÇÃO();
-        public void AtualizaTamanhoComeço(int W, int H, Botoes Botao, Personagem P1, Menu M1, Rectangle FlechaE, Rectangle FlechaD)
+        public void AtualizaTamanhoComeço(int W, int H, Botoes Botao, Personagem P1, Rectangle FlechaE, Rectangle FlechaD)
         {
-            //dimensão dos BOTÕES
-            M1.HistoryBotao = new Rectangle(0, H / 3, W / 3, H / 8);
-            M1.CombateBotao = new Rectangle(W - W / 3, H / 3, W / 3, H / 8);
-
+            
             //tamanho personagem
             P1.individuo = new Rectangle(0, H - H / 3, W / 16, H / 4);
 

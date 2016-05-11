@@ -24,7 +24,7 @@ namespace Stick_RPG_Fight
         Random aleatório;
 
         //booleaveis usuais comuns no game
-        bool MENU = true, menu00 = true, menu01, Bapply, BFULL, BOTAO, UMAVEZ = true;
+        bool menu00 = true, menu01, Bapply, BFULL, BOTAO, UMAVEZ = true;
         bool[] b1 = new bool[5];//botoes do menu
         Rectangle[] B1 = new Rectangle[5]; //botao
         Rectangle Bfull, APPLY ;
@@ -46,9 +46,7 @@ namespace Stick_RPG_Fight
         //intro
         intromenu Entrada = new intromenu();
 
-        //menu e o audio
-        Menu M1 = new Menu();
-        Audio AUDIO = new Audio();
+       
 
         // 1 personagem player só
         Personagem P1 = new Personagem();
@@ -120,7 +118,7 @@ namespace Stick_RPG_Fight
         {
             spriteBatch = new SpriteBatch(GraphicsDevice);
 
-            Contexto.inicializar(Content, M1, P1, Botao, i1, DefineAgua); // classe contexto
+            Contexto.inicializar(Content,  P1, Botao, i1, DefineAgua); // classe contexto
 
             menu = Content.Load<SpriteFont>("menu");
             HUDfont = Content.Load<SpriteFont>("HUD");
@@ -166,7 +164,7 @@ namespace Stick_RPG_Fight
             //GAME
             if (!JANELA.J.JANELACOMBO && !JANELA.J.JANELACOMERCIO && !JANELA.J.JANELAPAUSE && !JANELA.J.OPÇFASES && !JANELA.J.JANELAQUEST && !JANELA.J.JANELAPLACAR)
             {
-                if (menu01 || M1.COMBATE || M1.HISTORY)
+                if (menu01 || Menu.m.COMBATES || Menu.m.CAMPANHA)
                 {
                     var WidthTela = Window.ClientBounds.Width;
                     var HeightTela = Window.ClientBounds.Height;
@@ -178,43 +176,15 @@ namespace Stick_RPG_Fight
                     //  HOME
                     if (Botao.HOME == true) // caso eu esteja na HOME
                     {
-                        MENU = true;
+                        Menu.m.MENU = true;
 
 
                         //sai do modo COMBATE e do modo HISTORIA
-                        M1.COMBATE = false;
-                        M1.HISTORY = false;
+                        Menu.m.COMBATES = false;
+                        Menu.m.CAMPANHA = false;
                     }
 
-                    //clicando pra entrar no MODO combate (DENTRO DO MENU)
-                    //clicando pra entrar no combate
-                    //clicando pra entrar no combate
-                    //clicando pra entrar no combate
-                    //clicando pra entrar no combate
-                    if (!M1.COMBATE && !M1.HISTORY)
-                    {
-                        if (Mouse.GetState().LeftButton == ButtonState.Pressed && M1.CombateBotao.Contains(mousePosition))
-                        {
-                            BOTAO = true;
-                            M1.COMBATEativado = true;
-                            MediaPlayer.Pause();
-
-                        }
-
-                        if (!M1.CombateBotao.Contains(mousePosition))//se nao estiver encima, desativa
-                        {
-                            M1.COMBATEativado = false;
-                            MediaPlayer.Resume();
-                        }
-
-                        if (!BOTAO && M1.COMBATEativado) //se soltar o botao apos ter clicado encima
-                        {
-                            JANELA.J.GERARQuest(aleatório); //cria uma quest antes de entra na fase
-                            JANELA.J.OPÇFASES = true;
-                            //MediaPlayer.Play(AUDIO.combatesong);
-                        }
-                    }
-
+                   
                     //
                     //clicando
                     //----  HOME
@@ -228,7 +198,7 @@ namespace Stick_RPG_Fight
                         {
                             BOTAO = true;
                             Botao.HOMEb = true;
-                            MediaPlayer.Pause();
+                            
                             JANELA.J.POSIÇÃOPAUSE(WidthTela, HeightTela);
                         }
                         //se passar mouse fora
@@ -236,14 +206,14 @@ namespace Stick_RPG_Fight
                         if (!Botao.HOMEquadrado.Contains(mousePosition))
                         {
                             Botao.HOMEb = false;
-                            
+
                         }
                         //passagem (para o menu do jogo)
                         //passagem
                         if (Botao.HOMEb && !BOTAO)
                         {
-                            MediaPlayer.Play(Audio.A1.menusong);
                             JANELA.J.JANELAPAUSE = true;
+                            MediaPlayer.Pause();
                         }
                     }
 
@@ -255,13 +225,13 @@ namespace Stick_RPG_Fight
                     {
                         BOTAO = true;
                         Botao.COMERCIOb = true;
-                        
+
                     }
                     //se passar fora do mouse
                     if (!Botao.COMERCIOquadrado.Contains(mousePosition))
                     {
                         Botao.COMERCIOb = false;
-                        
+
                     }
                     //passagem (abrir janela)
                     if (Botao.COMERCIOb && !BOTAO)//
@@ -280,21 +250,84 @@ namespace Stick_RPG_Fight
                     {
                         BOTAO = true;
                         Botao.COMBOSb = true;
-                        
+
                     }
                     //se passar fora do mouse
                     if (!Botao.COMBOSquadrado.Contains(mousePosition))
                     {
                         Botao.COMBOSb = false;
-                       
+
                     }
                     //passagem (abrir janela)
                     if (Botao.COMBOSb && !BOTAO)//
                     {
                         MediaPlayer.Pause();
                         JANELA.J.JANELACOMBO = true; // trava a tela
-                        //Botao.COMBOSb = false;
+                        Botao.COMBOSb = false;
                     }
+
+                    //FORA DE GAME (menu)
+                    if (!Menu.m.COMBATES && !Menu.m.CAMPANHA)
+                    {
+                        if (Mouse.GetState().LeftButton == ButtonState.Pressed && Menu.m.CombateB.Contains(mousePosition))
+                        {
+                            BOTAO = true;
+                            Menu.m.COMBATEb = true;
+                        }
+                        if (!Menu.m.CombateB.Contains(mousePosition))//se nao estiver encima, desativa
+                        {
+                            Menu.m.COMBATEb = false;
+                            
+                        }
+
+                        if (!BOTAO && Menu.m.COMBATEb) //se soltar o botao apos ter clicado encima
+                        {
+                            JANELA.J.GERARQuest(aleatório); //cria uma quest antes de entra na fase
+                            JANELA.J.OPÇFASES = true;
+                            //MediaPlayer.Play(AUDIO.combatesong);
+                            MediaPlayer.Pause();
+                        }
+
+                        //sair
+                        if (Menu.m.SairB.Contains(mousePosition) && Mouse.GetState().LeftButton == ButtonState.Pressed)
+                        {
+                            BOTAO = true;
+                            Menu.m.SAIRb = true;
+                        }
+                        if (!Menu.m.SairB.Contains(mousePosition))
+                            Menu.m.SAIRb = false;
+                        if (Menu.m.SAIRb && !BOTAO)//botao pra saida
+                        {
+                            Exit();
+                        }
+
+                        //carregar
+                        if (Menu.m.CarregarB.Contains(mousePosition) && Mouse.GetState().LeftButton == ButtonState.Pressed)
+                        {
+                            BOTAO = true;
+                            Menu.m.CARREGARb = true;
+                        }
+                        if (!Menu.m.CarregarB.Contains(mousePosition))
+                            Menu.m.CARREGARb = false;
+
+                        if (Menu.m.CARREGARb && !BOTAO)
+                        {
+                            Savegame.S.Leitura(P1);
+                        }
+                        //gravar
+                        if (Menu.m.SalvarB.Contains(mousePosition) && Mouse.GetState().LeftButton == ButtonState.Pressed)
+                        {
+                            BOTAO = true;
+                            Menu.m.SALVARb = true;
+                        }
+                        if (!Menu.m.SalvarB.Contains(mousePosition))
+                            Menu.m.SALVARb = false;
+
+                        if (Menu.m.SALVARb && !BOTAO)
+                        {
+                            Savegame.S.Gravacao(P1);
+                        }
+                    }//fim menu
 
 
                     //FIM DO UNIVERSAL ITENS:
@@ -313,7 +346,7 @@ namespace Stick_RPG_Fight
 
                 //============================================================ MENU ===================================================
                 //============================================================ MENU ===================================================
-                if (MENU && !M1.COMBATE)
+                if (Menu.m.MENU && !Menu.m.COMBATES)
                 {
                     if (menu00)
                     {
@@ -365,33 +398,30 @@ namespace Stick_RPG_Fight
 
                     if (menu01)
                     {
-
                         var WidthTela = Window.ClientBounds.Width;
                         var HeightTela = Window.ClientBounds.Height;
 
-                        if (Keyboard.GetState().IsKeyDown(Keys.Escape))//saida
-                            Exit();
-                        else
+                        JANELA.J.POSIÇÃOPAUSE(WidthTela, HeightTela);
+                        if (UMAVEZ)
                         {
+                            ATUALIZAÇÃO.ATLZÇ.AtualizaTamanhoComeço(WidthTela, HeightTela, Botao, P1, FlechaE, FlechaD); // retangulos
+                            UMAVEZ = false;
 
-                            M1.menu01GAME(WidthTela, HeightTela); //RESUMAO 
-                            JANELA.J.POSIÇÃOPAUSE(WidthTela, HeightTela);
-                            if (UMAVEZ)
-                            {
-                                ATUALIZAÇÃO.ATLZÇ.AtualizaTamanhoComeço(WidthTela, HeightTela, Botao, P1, M1, FlechaE, FlechaD); // retangulos
-                                UMAVEZ = false;
+                            //flecha
+                            FlechaD = new Rectangle(WidthTela - HeightTela / 11, HeightTela - HeightTela / 11, HeightTela / 11, HeightTela / 11);
+                            FlechaE = new Rectangle(0, HeightTela - HeightTela / 11, HeightTela / 11, HeightTela / 11);
 
-                                //flecha
-                                FlechaD = new Rectangle(WidthTela - HeightTela / 11, HeightTela - HeightTela / 11, HeightTela / 11, HeightTela / 11);
-                                FlechaE = new Rectangle(0, HeightTela - HeightTela / 11, HeightTela / 11, HeightTela / 11);
-                            }
-
-                            P1.RPGatualização(WidthTela, HeightTela);
-                            JANELA.J.COMPLETARQuest(M1, P1, Botao, listai1, WidthTela, HeightTela);
-                            JANELA.J.POSQUEST(WidthTela, HeightTela);
-                           
+                            MediaPlayer.Play(Audio.A1.menusong);
                         }
-                    }
+
+                        P1.RPGatualização(WidthTela, HeightTela);
+                        Menu.m.menu01GAME(WidthTela, HeightTela, P1, aleatório); //RESUMAO 
+                        JANELA.J.COMPLETARQuest(P1, Botao, listai1, WidthTela, HeightTela);
+                        JANELA.J.POSQUEST(WidthTela, HeightTela);
+
+                        
+
+                    }//fim menu1
                 }// FIM DO INICIO
 
                 // #--------------------------------------------------------------------------------- jogo ------------------------------------------------------#
@@ -407,7 +437,7 @@ namespace Stick_RPG_Fight
 
 
                 // #--------------------------------------------------------------------------------- jogo ------------------------------------------------------#
-                if (M1.COMBATE)
+                if (Menu.m.COMBATES)
                 {
 
                     var WidthTela = Window.ClientBounds.Width;
@@ -416,131 +446,87 @@ namespace Stick_RPG_Fight
                     Contexto.Fundo.atualizaçao(Contexto.Fundo, HeightTela);
 
                     if (Keyboard.GetState().IsKeyDown(Keys.Escape))//saida
-                        Exit();
-                    else
+                        Botao.HOMEb = true; //é como se clicasse no botao home
+
+                    //mov da flecha
+                    FlechaD.X += posflecha.X;
+                    FlechaE.X += posflecha.X;
+                    if (Frenteflecha)
                     {
-                        //mov da flecha
-                        FlechaD.X += posflecha.X;
-                        FlechaE.X += posflecha.X;
-                        if (Frenteflecha)
+                        posflecha.X++;
+                        if (posflecha.X >= Window.ClientBounds.Height / 300)// /3
                         {
-                            posflecha.X++;
-                            if (posflecha.X >= Window.ClientBounds.Height / 300)// /3
+                            Frenteflecha = false;
+                        }
+                    }
+                    else if (!Frenteflecha)
+                    {
+                        posflecha.X--;
+                        if (posflecha.X <= -Window.ClientBounds.Height / 300)// /3
+                        {
+                            Frenteflecha = true;
+                        }
+                    }
+
+                    //METODOS
+                    //METODOS
+                    //mostrar tamanho da janela do combo
+                    COMBO.c.TamanhoEatz(WidthTela, HeightTela, P1);
+
+                    //quest
+                    JANELA.J.COMPLETARQuest(P1, Botao, listai1, WidthTela, HeightTela);
+                    JANELA.J.POSQUEST(WidthTela, HeightTela);
+
+                    //placar
+                    JANELA.J.POSPLACAR(WidthTela, HeightTela);
+
+                    //TUDO do personagem
+                    P1.MOV(WidthTela, HeightTela, aleatório); // tudo sobre movimentação (+metodos)
+                    P1.RPGatualização(WidthTela, HeightTela); //atualiza os dados
+                    P1.Luta(WidthTela, HeightTela, aleatório); // atualiza a posição, tamanho, frames
+
+                    if (Contexto.Fase[0])
+                    {
+                        P1.SubirAgua(WidthTela, HeightTela, aleatório);
+                        P1.OndasH2O(WidthTela, HeightTela);
+                    }
+
+                    //posiçao do bot
+                    for (int i = 0; i < listai1.Count; i++) // atualização de todos os inimigos
+                    {
+                        listai1[i].PosiçãoINIMIGO(WidthTela, HeightTela, aleatório, P1, listai1); ///NELA CONTEM TODOS OS OUTROS MÉTODOS DO INIMIGO <-
+                    }
+
+                    // SEPARADO --- PARA PODER USAR O PODER DE SLOW MOTION + CLONES
+                    if (P1.PODER)
+                    {
+                        //preço
+                        if (P1.mana > 0)
+                            P1.mana -= 1;
+                        else if (P1.mana <= 0)
+                        {
+                            P1.PODER = false;
+                            //MediaPlayer.Play(AUDIO.combatesong);
+                        }
+
+                        P1.POSIÇÃOdoCLONE(P1);
+
+                        //se eu atacar, eless vao reagir , mesmo no slowmotiom
+                        for (int i = 0; i < listai1.Count; i++)
+                        {
+                            if (P1.individuo.Intersects(listai1[i].individuo) && P1.ATACANDO && listai1[i].TOMANDOHIT)
                             {
-                                Frenteflecha = false;
+                                listai1[i].INTELIGENCIA(WidthTela, HeightTela, P1, listai1, aleatório);
                             }
                         }
-                        else if (!Frenteflecha)
-                        {
-                            posflecha.X--;
-                            if (posflecha.X <= -Window.ClientBounds.Height / 300)// /3
-                            {
-                                Frenteflecha = true;
-                            }
-                        }
-
-                        //METODOS
-                        //METODOS
-                        //mostrar tamanho da janela do combo
-                        COMBO.c.TamanhoEatz(WidthTela, HeightTela, P1);
-                        
-                        //quest
-                        JANELA.J.COMPLETARQuest(M1, P1, Botao, listai1, WidthTela, HeightTela);
-                        JANELA.J.POSQUEST(WidthTela, HeightTela);
-
-                        //placar
-                        JANELA.J.POSPLACAR(WidthTela, HeightTela);
-
-                        //TUDO do personagem
-                        P1.MOV(WidthTela, HeightTela, aleatório); // tudo sobre movimentação (+metodos)
-                        P1.RPGatualização(WidthTela, HeightTela); //atualiza os dados
-                        P1.Luta(WidthTela, HeightTela, aleatório); // atualiza a posição, tamanho, frames
-
-                        if (Contexto.Fase[0])
-                        {
-                            P1.SubirAgua(WidthTela, HeightTela, aleatório);
-                            P1.OndasH2O(WidthTela, HeightTela);
-                        }
-
-                        //posiçao do bot
-                        for (int i = 0; i < listai1.Count; i++) // atualização de todos os inimigos
-                        {
-                            listai1[i].PosiçãoINIMIGO(WidthTela, HeightTela, aleatório, P1, listai1); ///NELA CONTEM TODOS OS OUTROS MÉTODOS DO INIMIGO <-
-                        }
-
-                        // SEPARADO --- PARA PODER USAR O PODER DE SLOW MOTION + CLONES
-                        if (P1.PODER)
-                        {
-                            //preço
-                            if (P1.mana > 0)
-                                P1.mana -= 1;
-                            else if (P1.mana <= 0)
-                            {
-                                P1.PODER = false;
-                                //MediaPlayer.Play(AUDIO.combatesong);
-                            }
-
-                            P1.POSIÇÃOdoCLONE(P1);
-
-                            //se eu atacar, eless vao reagir , mesmo no slowmotiom
-                            for (int i = 0; i < listai1.Count; i++)
-                            {
-                                if (P1.individuo.Intersects(listai1[i].individuo) && P1.ATACANDO && listai1[i].TOMANDOHIT)
-                                {
-                                    listai1[i].INTELIGENCIA(WidthTela, HeightTela, P1, listai1, aleatório);
-                                }
-                            }
 
 
 
-                            //açao
-                            //açao
-                            //açao
-                            //açao
-                            if (slowmotion == 7)
-                            {
-                                //mov do bot
-                                for (int i = 0; i < listai1.Count; i++) // atualização de todos os inimigos
-                                {
-                                    listai1[i].MOV(WidthTela, HeightTela, aleatório, P1);
-                                    listai1[i].INTELIGENCIA(WidthTela, HeightTela, P1, listai1, aleatório);
-                                }
-                                //gerador de inimigos
-                                if (TempoParaInimigos == 500)
-                                {
-                                    for (int G = 0; G < JANELA.J.qtddOLEADA; G++)
-                                    {
-                                        if (listai1.Count >= 70)
-                                        {
-                                            JANELA.J.qtddOLEADA = 1;
-                                        }
-                                        i1.GERARi1(listai1, WidthTela, HeightTela, aleatório);
-                                    }
-                                    TempoParaInimigos = 0;
-                                    JANELA.J.qtddOLEADA++;
-                                }
-                                else
-                                {
-                                    TempoParaInimigos++;
-                                }
-                                slowmotion = 0;
-                            }
-                            else
-                            {
-                                slowmotion++;
-                            }
-                            if (contagemGERADOR == 5)
-                            {
-                                P1.GERADORdeCLONES(P1);
-                                contagemGERADOR = 0;
-                            }
-                            else
-                            {
-                                contagemGERADOR++;
-                            }
-
-                        }
-                        else if (!P1.PODER)
+                        //açao
+                        //açao
+                        //açao
+                        //açao
+                        if (slowmotion == 7)
                         {
                             //mov do bot
                             for (int i = 0; i < listai1.Count; i++) // atualização de todos os inimigos
@@ -559,61 +545,104 @@ namespace Stick_RPG_Fight
                                     }
                                     i1.GERARi1(listai1, WidthTela, HeightTela, aleatório);
                                 }
-                                JANELA.J.qtddOLEADA++;
                                 TempoParaInimigos = 0;
+                                JANELA.J.qtddOLEADA++;
                             }
                             else
                             {
                                 TempoParaInimigos++;
                             }
-
-                            P1.listaclonePoder.Clear();
+                            slowmotion = 0;
+                        }
+                        else
+                        {
+                            slowmotion++;
+                        }
+                        if (contagemGERADOR == 5)
+                        {
+                            P1.GERADORdeCLONES(P1);
+                            contagemGERADOR = 0;
+                        }
+                        else
+                        {
+                            contagemGERADOR++;
                         }
 
-
-                        //definir o combate
+                    }
+                    else if (!P1.PODER)
+                    {
+                        //mov do bot
                         for (int i = 0; i < listai1.Count; i++) // atualização de todos os inimigos
                         {
-                            if (listai1[i].individuo.Intersects(JANELA.J.FUNDO)) // se ele estiver NA TELA
-                            {
-                                P1.COMBATE = true;
-                            }
-                            else if (listai1.Count == 0) // se ele nao estiver NA TELA
-                            {
-                                P1.COMBATE = false;
-                            }
+                            listai1[i].MOV(WidthTela, HeightTela, aleatório, P1);
+                            listai1[i].INTELIGENCIA(WidthTela, HeightTela, P1, listai1, aleatório);
                         }
-
-
-                        //constantes (AUMENTA ENERGIA OU MANA COM O TEMPO)
-                        if (P1.energia < P1.energiaTOTAL && !P1.CORRENDO && !P1.PULANDOcorrendo && !P1.ATACANDO)
+                        //gerador de inimigos
+                        if (TempoParaInimigos == 500)
                         {
-                            P1.energia += 2;
+                            for (int G = 0; G < JANELA.J.qtddOLEADA; G++)
+                            {
+                                if (listai1.Count >= 70)
+                                {
+                                    JANELA.J.qtddOLEADA = 1;
+                                }
+                                i1.GERARi1(listai1, WidthTela, HeightTela, aleatório);
+                            }
+                            JANELA.J.qtddOLEADA++;
+                            TempoParaInimigos = 0;
                         }
-                        if (P1.mana < P1.manaTOTAL && !P1.PODER)
+                        else
                         {
-                            if (contagemREGEN >= 2)
-                            {
-                                P1.mana += 1;
-                                contagemREGEN = 0;
-                            }
-                            else
-                            {
-                                contagemREGEN++;
-                            }
+                            TempoParaInimigos++;
                         }
 
-                        //ATIVAR PODER QUE ESTIVER DESTRAVADO
-                        if (Keyboard.GetState().IsKeyDown(Keys.NumPad5) && !P1.PODER && P1.mana >= 75)
-                        {
-                            P1.PODER = true;
-                            //MediaPlayer.Play(AUDIO.PODERsong);
-                            P1.VISUPODER(); // criar efeito especial
-                            P1.COLIDINDOdireita = false; // não ter colisao
-                            P1.COLIDINDOesquerda = false;
-                        }
+                        P1.listaclonePoder.Clear();
+                    }
 
-                    }//fim do jogo
+
+                    //definir o combate
+                    for (int i = 0; i < listai1.Count; i++) // atualização de todos os inimigos
+                    {
+                        if (listai1[i].individuo.Intersects(JANELA.J.FUNDO)) // se ele estiver NA TELA
+                        {
+                            P1.COMBATE = true;
+                        }
+                        else if (listai1.Count == 0) // se ele nao estiver NA TELA
+                        {
+                            P1.COMBATE = false;
+                        }
+                    }
+
+
+                    //constantes (AUMENTA ENERGIA OU MANA COM O TEMPO)
+                    if (P1.energia < P1.energiaTOTAL && !P1.CORRENDO && !P1.PULANDOcorrendo && !P1.ATACANDO)
+                    {
+                        P1.energia += 2;
+                    }
+                    if (P1.mana < P1.manaTOTAL && !P1.PODER)
+                    {
+                        if (contagemREGEN >= 2)
+                        {
+                            P1.mana += 1;
+                            contagemREGEN = 0;
+                        }
+                        else
+                        {
+                            contagemREGEN++;
+                        }
+                    }
+
+                    //ATIVAR PODER QUE ESTIVER DESTRAVADO
+                    if (Keyboard.GetState().IsKeyDown(Keys.NumPad5) && !P1.PODER && P1.mana >= 75)
+                    {
+                        P1.PODER = true;
+                        //MediaPlayer.Play(AUDIO.PODERsong);
+                        P1.VISUPODER(); // criar efeito especial
+                        P1.COLIDINDOdireita = false; // não ter colisao
+                        P1.COLIDINDOesquerda = false;
+                    }
+
+
                 }//fim do combate
 
                 //PAUSE
@@ -648,7 +677,7 @@ namespace Stick_RPG_Fight
             {
                 var WidthTela = Window.ClientBounds.Width;
                 var HeightTela = Window.ClientBounds.Height;
-                JANELA.J.FUNÇÕESOPÇFASE(WidthTela, HeightTela, Botao, M1, MENU, BOTAO);
+                JANELA.J.FUNÇÕESOPÇFASE(WidthTela, HeightTela, Botao, BOTAO);
                 JANELA.J.POSopçfase(WidthTela, HeightTela);
             }
             if (JANELA.J.JANELAQUEST)
@@ -663,7 +692,7 @@ namespace Stick_RPG_Fight
                 var WidthTela = Window.ClientBounds.Width;
                 var HeightTela = Window.ClientBounds.Height;
                 JANELA.J.POSPLACAR(WidthTela, HeightTela);
-                JANELA.J.FUNÇOESPLACAR(BOTAO, P1, Botao, listai1, WidthTela, HeightTela, M1, aleatório);
+                JANELA.J.FUNÇOESPLACAR(BOTAO, P1, Botao, listai1, WidthTela, HeightTela, aleatório);
 
                 //mostrar tamanho da janela do combo
                 COMBO.c.TamanhoEatz(WidthTela, HeightTela, P1);
@@ -687,28 +716,23 @@ namespace Stick_RPG_Fight
             spriteBatch.Begin();
 
 
-
-
-            if (MENU)
+            if (Menu.m.MENU)
             {
 
                 if (menu00)
                 {
-
-                    DRAW.Drawmenu00(WidthTela, HeightTela, spriteBatch, imgAPPLY2, imgAPPLY3, imgAPPLY, APPLY, Bapply, B1, imgB1, imgB2, b1, BFULL, menu, Bfull, M1); // resumao
-
-
+                    DRAW.Drawmenu00(WidthTela, HeightTela, spriteBatch, imgAPPLY2, imgAPPLY3, imgAPPLY, APPLY, Bapply, B1, imgB1, imgB2, b1, BFULL, menu, Bfull); // resumao
                 }
 
                 if (menu01)
                 {
-                    DRAW.Drawmenu01(spriteBatch, M1, WidthTela, HeightTela, menu); // resumao
+                    DRAW.Drawmenu01(spriteBatch, WidthTela, HeightTela, menu); // resumao
                 }
             }//FIM DO MENU
 
 
 
-            if (M1.COMBATE)
+            if (Menu.m.COMBATES)
             {
 
                 DRAW.DrawCombate(spriteBatch, P1, listai1, FlechaD, FlechaE, imgFlechaD, imgFlechaE, menu, HUDfont, WidthTela, HeightTela, imgSangue, i1, DefineAgua, BARfont); //RESUMAO
@@ -721,7 +745,7 @@ namespace Stick_RPG_Fight
             }//FIM DO COMBATE
 
             //botao menu e comercio
-            DRAW.DrawBotaoEstatico(Botao, spriteBatch, MENU, M1); //resumo dos botoes
+            DRAW.DrawBotaoEstatico(Botao, spriteBatch); //resumo dos botoes
             if (JANELA.J.JANELACOMBO || JANELA.J.JANELACOMERCIO)
             {
                 DRAW.DrawJANELACC(Botao, spriteBatch);
@@ -733,7 +757,7 @@ namespace Stick_RPG_Fight
             }
             if (JANELA.J.OPÇFASES)
             {
-                DRAW.DrawJANELAopçfase(Botao, spriteBatch, MENU, M1, BOTAO);
+                DRAW.DrawJANELAopçfase(Botao, spriteBatch,BOTAO);
             }
             if (JANELA.J.JANELAQUEST)
             {

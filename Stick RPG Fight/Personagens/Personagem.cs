@@ -251,6 +251,8 @@ namespace Stick_RPG_Fight
             if (vida <= 0)
             {
                 vida = 0;
+                JANELA.J.JANELAPLACAR = true;
+
             }
 
 

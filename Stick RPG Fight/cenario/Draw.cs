@@ -734,12 +734,12 @@ namespace Stick_RPG_Fight
         //--------------------------------------------------------------------------------------------------
         //--------------------------------------------------------------------------------------------------
         //--------------------------------------------------------------------------------------------------
-        public void Drawmenu00(int WidthTela, int HeightTela, SpriteBatch spriteBatch, Texture2D imgAPPLY2, Texture2D imgAPPLY3, Texture2D imgAPPLY, Rectangle APPLY, bool Bapply, Rectangle[] B1, Texture2D imgB1, Texture2D imgB2, bool[] b1, bool BFULL, SpriteFont menu, Rectangle Bfull,Menu M1)
+        public void Drawmenu00(int WidthTela, int HeightTela, SpriteBatch spriteBatch, Texture2D imgAPPLY2, Texture2D imgAPPLY3, Texture2D imgAPPLY, Rectangle APPLY, bool Bapply, Rectangle[] B1, Texture2D imgB1, Texture2D imgB2, bool[] b1, bool BFULL, SpriteFont menu, Rectangle Bfull)
         {
             var mouseState = Mouse.GetState();
             var mousePosition = new Point(mouseState.X, mouseState.Y);
 
-            spriteBatch.Draw(M1.imgintromenu_comtraçado, new Rectangle(0, 0, WidthTela, HeightTela), Color.White);
+            spriteBatch.Draw(Menu.m.imgintromenu_comtraçado, new Rectangle(0, 0, WidthTela, HeightTela), Color.White);
 
             if (!APPLY.Contains(mousePosition))
             {
@@ -799,21 +799,59 @@ namespace Stick_RPG_Fight
         //--------------------------------------------------------------------------------------------------
         //--------------------------------------------------------------------------------------------------
         //--------------------------------------------------------------------------------------------------
-        public void Drawmenu01(SpriteBatch spriteBatch, Menu M1, int WidthTela, int HeightTela, SpriteFont menu)
+        public void Drawmenu01(SpriteBatch spriteBatch, int WidthTela, int HeightTela, SpriteFont menu)
         {
+            var mouseState = Mouse.GetState();
+            var mousePosition = new Point(mouseState.X, mouseState.Y);
             spriteBatch.Draw(Contexto.Fundo.menu00fundo, new Rectangle(0, 0, WidthTela, HeightTela), Color.White);
 
-            spriteBatch.Draw(M1.imghistory, M1.HistoryBotao,
-                                   new Rectangle(M1.framehistoryB.X * M1.TamanhoSpritesheethistoryB.X, M1.framehistoryB.Y * M1.TamanhoSpritesheethistoryB.Y,
-                                                 M1.TamanhoSpritesheethistoryB.X, M1.TamanhoSpritesheethistoryB.Y),
-                                                 Color.White);
+            if (!JANELA.J.JANELACOMBO && !JANELA.J.JANELACOMERCIO)
+            {
+                if (!Menu.m.CampanhaB.Contains(mousePosition))
+                    spriteBatch.Draw(Menu.m.imgcampanha1, Menu.m.CampanhaB, Color.White);
+                else if (Menu.m.CampanhaB.Contains(mousePosition) && Mouse.GetState().LeftButton != ButtonState.Pressed)
+                    spriteBatch.Draw(Menu.m.imgcampanha2, Menu.m.CampanhaB, Color.White);
+                else if (Menu.m.CampanhaB.Contains(mousePosition) && Mouse.GetState().LeftButton == ButtonState.Pressed)
+                    spriteBatch.Draw(Menu.m.imgcampanha3, Menu.m.CampanhaB, Color.White);
 
-            spriteBatch.Draw(M1.imgcombate, M1.CombateBotao,
-                           new Rectangle(M1.framecombateB.X * M1.TamanhoSpritesheetcombateB.X, M1.framecombateB.Y * M1.TamanhoSpritesheetcombateB.Y,
-                                         M1.TamanhoSpritesheetcombateB.X, M1.TamanhoSpritesheetcombateB.Y),
-                                         Color.White);
+                if (!Menu.m.CombateB.Contains(mousePosition))
+                    spriteBatch.Draw(Menu.m.imgcombates1, Menu.m.CombateB, Color.White);
+                else if (Menu.m.CombateB.Contains(mousePosition) && Mouse.GetState().LeftButton != ButtonState.Pressed)
+                    spriteBatch.Draw(Menu.m.imgcombates2, Menu.m.CombateB, Color.White);
+                else if (Menu.m.CombateB.Contains(mousePosition) && Mouse.GetState().LeftButton == ButtonState.Pressed)
+                    spriteBatch.Draw(Menu.m.imgcombates3, Menu.m.CombateB, Color.White);
 
-            spriteBatch.DrawString(menu, "Versão 1.0", new Vector2(WidthTela - 100, HeightTela - 15), Color.Cyan);
+                if (!Menu.m.SairB.Contains(mousePosition))
+                    spriteBatch.Draw(Menu.m.imgsair1, Menu.m.SairB, Color.White);
+                else if (Menu.m.SairB.Contains(mousePosition) && Mouse.GetState().LeftButton != ButtonState.Pressed)
+                    spriteBatch.Draw(Menu.m.imgsair2, Menu.m.SairB, Color.White);
+                else if (Menu.m.SairB.Contains(mousePosition) && Mouse.GetState().LeftButton == ButtonState.Pressed)
+                    spriteBatch.Draw(Menu.m.imgsair3, Menu.m.SairB, Color.White);
+
+                if (!Menu.m.CarregarB.Contains(mousePosition))
+                    spriteBatch.Draw(Menu.m.imgcarregar1, Menu.m.CarregarB, Color.White);
+                else if (Menu.m.CarregarB.Contains(mousePosition) && Mouse.GetState().LeftButton != ButtonState.Pressed)
+                    spriteBatch.Draw(Menu.m.imgcarregar2, Menu.m.CarregarB, Color.White);
+                else if (Menu.m.CarregarB.Contains(mousePosition) && Mouse.GetState().LeftButton == ButtonState.Pressed)
+                    spriteBatch.Draw(Menu.m.imgcarregar3, Menu.m.CarregarB, Color.White);
+
+                if (!Menu.m.SalvarB.Contains(mousePosition))
+                    spriteBatch.Draw(Menu.m.imgsalvar1, Menu.m.SalvarB, Color.White);
+                else if (Menu.m.SalvarB.Contains(mousePosition) && Mouse.GetState().LeftButton != ButtonState.Pressed)
+                    spriteBatch.Draw(Menu.m.imgsalvar2, Menu.m.SalvarB, Color.White);
+                else if (Menu.m.SalvarB.Contains(mousePosition) && Mouse.GetState().LeftButton == ButtonState.Pressed)
+                    spriteBatch.Draw(Menu.m.imgsalvar3, Menu.m.SalvarB, Color.White);
+
+                if (!Menu.m.OpçoesB.Contains(mousePosition))
+                    spriteBatch.Draw(Menu.m.imgopçoes1, Menu.m.OpçoesB, Color.White);
+                else if (Menu.m.OpçoesB.Contains(mousePosition) && Mouse.GetState().LeftButton != ButtonState.Pressed)
+                    spriteBatch.Draw(Menu.m.imgopçoes2, Menu.m.OpçoesB, Color.White);
+                else if (Menu.m.OpçoesB.Contains(mousePosition) && Mouse.GetState().LeftButton == ButtonState.Pressed)
+                    spriteBatch.Draw(Menu.m.imgopçoes3, Menu.m.OpçoesB, Color.White);
+            }
+            
+
+            spriteBatch.DrawString(menu, "Versão 1.0 " + Savegame.S.Ex + " " + Savegame.S.Ex2, new Vector2(0, HeightTela - 15), Color.Cyan);
         } //fim draw menu 01
         //--------------------------------------------------------------------------------------------------
         //--------------------------------------------------------------------------------------------------
@@ -1323,7 +1361,7 @@ namespace Stick_RPG_Fight
         //--------------------------------------------------------------------------------------------------
         //--------------------------------------------------------------------------------------------------
         //--------------------------------------------------------------------------------------------------
-        public void DrawJANELAopçfase(Botoes Botao, SpriteBatch spriteBatch, bool MENU, Menu M1, bool BOTAO)
+        public void DrawJANELAopçfase(Botoes Botao, SpriteBatch spriteBatch, bool BOTAO)
         {
             var mouseState = Mouse.GetState();
             var mousePosition = new Point(mouseState.X, mouseState.Y);
@@ -1383,7 +1421,7 @@ namespace Stick_RPG_Fight
         //--------------------------------------------------------------------------------------------------
         //--------------------------------------------------------------------------------------------------
         //--------------------------------------------------------------------------------------------------
-        public void DrawBotaoEstatico(Botoes Botao, SpriteBatch spriteBatch, bool MENU, Menu M1)
+        public void DrawBotaoEstatico(Botoes Botao, SpriteBatch spriteBatch)
         {
             var mouseState = Mouse.GetState();
             var mousePosition = new Point(mouseState.X, mouseState.Y);
@@ -1417,9 +1455,9 @@ namespace Stick_RPG_Fight
                 }
                 else
                 {
-                    if (MENU)
+                    if (Menu.m.MENU)
                         spriteBatch.Draw(Botao.imghomeOFF, Botao.HOMEquadrado, Color.White);
-                    else if (M1.COMBATE || M1.HISTORY)
+                    else if (Menu.m.COMBATES || Menu.m.CAMPANHA)
                     {
                         spriteBatch.Draw(Botao.imghomeOFFTP, Botao.HOMEquadrado, Color.White);
                     }
@@ -1456,9 +1494,9 @@ namespace Stick_RPG_Fight
                 }
                 else
                 {
-                    if (MENU)
+                    if (Menu.m.MENU)
                         spriteBatch.Draw(Botao.imgcomercioOFF, Botao.COMERCIOquadrado, Color.White);
-                    else if (M1.COMBATE || M1.HISTORY)
+                    else if (Menu.m.COMBATES || Menu.m.CAMPANHA)
                     {
                         spriteBatch.Draw(Botao.imgcomercioOFFTP, Botao.COMERCIOquadrado, Color.White);
                     }
@@ -1494,9 +1532,9 @@ namespace Stick_RPG_Fight
                 }
                 else
                 {
-                    if (MENU)
+                    if (Menu.m.MENU)
                         spriteBatch.Draw(Botao.imgcombosOFF, Botao.COMBOSquadrado, Color.White);
-                    else if (M1.COMBATE || M1.HISTORY) //diferença entre game e menu
+                    else if (Menu.m.COMBATES || Menu.m.CAMPANHA) //diferença entre game e menu
                     {
                         spriteBatch.Draw(Botao.imgcombosOFFTP, Botao.COMBOSquadrado, Color.White);
                     }

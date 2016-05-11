@@ -17,7 +17,7 @@ namespace Stick_RPG_Fight
         public static Background Fundo = new Background();
         public static bool[] Fase = new bool[4]; // qual fase usar
 
-        public static void inicializar(ContentManager content, Menu M1,Personagem P1, Botoes Botao,  Inimigo i1, Agua DefineAgua) // carregar imagens quando a fase começa (não no começo)
+        public static void inicializar(ContentManager content,Personagem P1, Botoes Botao,  Inimigo i1, Agua DefineAgua) // carregar imagens quando a fase começa (não no começo)
         {
             Info.I.img = content.Load<Texture2D>("Info");
 
@@ -53,14 +53,36 @@ namespace Stick_RPG_Fight
             Fundo.imgfase1 = content.Load<Texture2D>("fase de luta");
             Fundo.imgfundopoder = content.Load<Texture2D>("fundo poder");
 
-            M1.imghistory = content.Load<Texture2D>("history");
-            M1.imgcombate = content.Load<Texture2D>("combate");
-            M1.imgintromenu_comtraçado = content.Load<Texture2D>("intro game");
-            M1.imgintromenu_semtraçado = content.Load<Texture2D>("intro game sem traçado");
+            Menu.m.imgcampanha1 = content.Load<Texture2D>("campanha");
+            Menu.m.imgcampanha2 = content.Load<Texture2D>("campanha2");
+            Menu.m.imgcampanha3 = content.Load<Texture2D>("campanha3");
+
+            Menu.m.imgcombates1 = content.Load<Texture2D>("combates1");
+            Menu.m.imgcombates2 = content.Load<Texture2D>("combates2");
+            Menu.m.imgcombates3 = content.Load<Texture2D>("combates3");
+
+            Menu.m.imgsair1 = content.Load<Texture2D>("sair1");
+            Menu.m.imgsair2 = content.Load<Texture2D>("sair2");
+            Menu.m.imgsair3 = content.Load<Texture2D>("sair3");
+
+            Menu.m.imgsalvar1 = content.Load<Texture2D>("salvar1");
+            Menu.m.imgsalvar2 = content.Load<Texture2D>("salvar2");
+            Menu.m.imgsalvar3 = content.Load<Texture2D>("salvar3");
+
+            Menu.m.imgopçoes1 = content.Load<Texture2D>("opçoes1");
+            Menu.m.imgopçoes2 = content.Load<Texture2D>("opçoes2");
+            Menu.m.imgopçoes3 = content.Load<Texture2D>("opçoes3");
+
+            Menu.m.imgcarregar1 = content.Load<Texture2D>("carregar");
+            Menu.m.imgcarregar2 = content.Load<Texture2D>("carregar2");
+            Menu.m.imgcarregar3 = content.Load<Texture2D>("carregar3");
+
+            Menu.m.imgintromenu_comtraçado = content.Load<Texture2D>("intro game");
+            Menu.m.imgintromenu_semtraçado = content.Load<Texture2D>("intro game sem traçado");
             //M1.imgpredio_do_P1 = content.Load<Texture2D>("predio");
             
             Audio.A1.menusong = content.Load<Song>("Menu song");
-            Audio.A1.combatesong = content.Load<Song>("Base1");
+            Audio.A1.combatesong = content.Load<Song>("Combate song");
             Audio.A1.PODERsong = content.Load<Song>("coração LENTO");
             Audio.A1.COINCOLLECT = content.Load<SoundEffect>("COINS Collect");
             Audio.A1.PLACAREFFECT = content.Load<SoundEffect>("SUCCESS CHIME");

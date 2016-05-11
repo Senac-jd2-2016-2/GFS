@@ -16,70 +16,78 @@ namespace Stick_RPG_Fight
     {
 
         public int g = 0;
+        public string Ex = "", Ex2 = "";
         public static Savegame S = new Savegame();
 
         public void Gravacao(Personagem P1)
         {
-            
+            //@"C:\savegame.txt"
             try
             {
                 using (StreamWriter Warquivo = new
-                StreamWriter(@"C:\Usuários\Documentos\savegame.txt"))
+                StreamWriter("savegame.txt"))
                 {
-                    Warquivo.Write(P1.leite + "@"
-                        + P1.honra + "@" + P1.qntdcombos + "@");
+                    Warquivo.Write(P1.leite + " "
+                        + P1.honra + " " + P1.qntdcombos + " ");
                     for (int i = 0; i < JANELA.J.qntddefases; i++)
                     {
-                        Warquivo.Write(JANELA.J.FASEdestravada[i] + "@");
+                        Warquivo.Write(JANELA.J.FASEdestravada[i] + " ");
                     }
-                    Warquivo.WriteLine(P1.XP + "@" + P1.LVL + "@" + JANELA.J.ESPADA2HATIVA + "@" + JANELA.J.ADAGATIVA + "@" + JANELA.J.ARCOATIVO + "@" + JANELA.J.TRIDENTEATIVO + "@" + JANELA.J.RETROCEDERATIVO + "@" + JANELA.J.ESCUDOATIVO + "@" + JANELA.J.VENTOATIVO + "@" + JANELA.J.RAIOATIVO);
+                    Warquivo.WriteLine(P1.XP + " " + P1.LVL + " " + JANELA.J.ESPADA2HATIVA + " " + JANELA.J.ADAGATIVA + " " + JANELA.J.ARCOATIVO + " " + JANELA.J.TRIDENTEATIVO + " " + JANELA.J.RETROCEDERATIVO + " " + JANELA.J.ESCUDOATIVO + " " + JANELA.J.VENTOATIVO + " " + JANELA.J.RAIOATIVO);
                     Warquivo.Close();
                 }
             }
             catch (Exception ex) //colocar em linguagem do monogame
             {
-                Console.WriteLine(ex.Message);
+                Ex2 = ex.Message;
             }
         }
 
         public void Leitura(Personagem P1)
         {
-            try
+            if (File.Exists("savegame.txt"))
             {
-                using (StreamReader Rarquivo = new
-                StreamReader(@"C:\Usuários\Documentos\savegame.txt"))
+                try
                 {
-                    string linha;
-                    while ((linha = Rarquivo.ReadLine()) != null)
+                    using (StreamReader Rarquivo = new
+                    StreamReader("savegame.txt"))
                     {
-                        string[] dados = linha.Split('@');
-                        P1.leite = int.Parse(dados[0]);
-                        P1.honra = int.Parse(dados[1]);
-                        P1.qntdcombos = int.Parse(dados[2]);
-                        for (int i = 0; i < JANELA.J.qntddefases; i++)
+                        string linha;
+                        while ((linha = Rarquivo.ReadLine()) != null)
                         {
-                            JANELA.J.FASEdestravada[i] = bool.Parse(dados[3 + (i)]);
-                            g = 3 + i;
+                            string[] dados = linha.Split(' ');
+                            P1.leite = int.Parse(dados[0]);
+                            P1.honra = int.Parse(dados[1]);
+                            P1.qntdcombos = int.Parse(dados[2]);
+                            for (int i = 0; i < JANELA.J.qntddefases; i++)
+                            {
+                                JANELA.J.FASEdestravada[i] = bool.Parse(dados[3 + (i)]);
+                                g = 3 + i;
+                            }
+                            P1.XP = int.Parse(dados[g + 1]);
+                            P1.LVL = int.Parse(dados[g + 2]);
+                            //todos os itens que a pessoa comprou
+                            JANELA.J.ESPADA2HATIVA = bool.Parse(dados[g + 3]);
+                            JANELA.J.ADAGATIVA = bool.Parse(dados[g + 4]);
+                            JANELA.J.ARCOATIVO = bool.Parse(dados[g + 5]);
+                            JANELA.J.TRIDENTEATIVO = bool.Parse(dados[g + 6]);
+                            JANELA.J.RETROCEDERATIVO = bool.Parse(dados[g + 7]);
+                            JANELA.J.ESCUDOATIVO = bool.Parse(dados[g + 8]);
+                            JANELA.J.VENTOATIVO = bool.Parse(dados[g + 9]);
+                            JANELA.J.RAIOATIVO = bool.Parse(dados[g + 10]);
+                            Ex = "";
+                            Rarquivo.Close();
                         }
-                        P1.XP = int.Parse(dados[g + 1]);
-                        P1.LVL = int.Parse(dados[g + 2]);
-                        //todos os itens que a pessoa comprou
-                        JANELA.J.ESPADA2HATIVA = bool.Parse(dados[g + 3]);
-                        JANELA.J.ADAGATIVA = bool.Parse(dados[g + 4]);
-                        JANELA.J.ARCOATIVO = bool.Parse(dados[g + 5]);
-                        JANELA.J.TRIDENTEATIVO = bool.Parse(dados[g + 6]);
-                        JANELA.J.RETROCEDERATIVO = bool.Parse(dados[g + 7]);
-                        JANELA.J.ESCUDOATIVO = bool.Parse(dados[g + 8]);
-                        JANELA.J.VENTOATIVO = bool.Parse(dados[g + 9]);
-                        JANELA.J.RAIOATIVO = bool.Parse(dados[g + 10]);
-                       
-                        Rarquivo.Close();
                     }
                 }
+                catch (Exception ex) //colocar em linguagem do monogame
+                {
+                    Ex = ex.Message;
+                }
             }
-            catch (Exception ex) //colocar em linguagem do monogame
+            else
             {
-                Console.WriteLine(ex.Message);
+                Ex = "Arquivo não existe";
             }
         }
     }
