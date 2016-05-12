@@ -1182,8 +1182,8 @@ namespace Stick_RPG_Fight
                     spriteBatch.Draw(JANELA.J.imgItemraio3, JANELA.J.listadeitens[9].item, Color.White);
                 }
             }
-            
-            
+
+            ItensAll.a.DRAW(spriteBatch);
 
 
             //FIM ITENS

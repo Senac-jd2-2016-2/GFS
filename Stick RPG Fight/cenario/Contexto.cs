@@ -77,6 +77,15 @@ namespace Stick_RPG_Fight
             Menu.m.imgcarregar2 = content.Load<Texture2D>("carregar2");
             Menu.m.imgcarregar3 = content.Load<Texture2D>("carregar3");
 
+            //itens ALL
+            ItensAll.a.imgespada2H = content.Load<Texture2D>("Espada 2H");
+            ItensAll.a.imgmaos = content.Load<Texture2D>("Mãos");
+            ItensAll.a.prop1 = content.Load<Texture2D>("Propriedade 1");
+            ItensAll.a.prop2 = content.Load<Texture2D>("Propriedade 2");
+            ItensAll.a.prop3 = content.Load<Texture2D>("Propriedade 3");
+            ItensAll.a.prop4 = content.Load<Texture2D>("Propriedade 4");
+            
+
             Menu.m.imgintromenu_comtraçado = content.Load<Texture2D>("intro game");
             Menu.m.imgintromenu_semtraçado = content.Load<Texture2D>("intro game sem traçado");
             //M1.imgpredio_do_P1 = content.Load<Texture2D>("predio");

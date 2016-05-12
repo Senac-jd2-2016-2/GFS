@@ -108,6 +108,7 @@ namespace Stick_RPG_Fight
             
             JANELA.J.CRIARlinhas();//cria se linhas do menu
             Itens.IT.CRIARITENS();//cria se itens da janela cc
+            ItensAll.a.Criar();//cria itens para selecionar
             
 
             base.Initialize();
@@ -421,7 +422,7 @@ namespace Stick_RPG_Fight
                         Menu.m.menu01GAME(WidthTela, HeightTela, P1, aleatório); //RESUMAO 
                         JANELA.J.COMPLETARQuest(P1, Botao, listai1, WidthTela, HeightTela);
                         JANELA.J.POSQUEST(WidthTela, HeightTela);
-
+                        JANELA.J.SELECIONADOS[0] = true;
                         
 
                     }//fim menu1

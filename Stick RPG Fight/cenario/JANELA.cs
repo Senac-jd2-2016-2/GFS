@@ -23,9 +23,12 @@ namespace Stick_RPG_Fight
         public int qtddOLEADA = 1;
 
         //posição de itens e qntd
-        public int POSyITEN = 0, QTDITENS = 10, QTDtotalITENSjanela = 9, TamanhodoPulodaSETA = 0; //quantidade q cabe na janela
+        public int POSyITEN = 0, QTDITENS = 15, QTDtotalITENSjanela = 9, TamanhodoPulodaSETA = 0; //quantidade q cabe na janela
         public int contagemMouseClickB = 0, contagemMouseClickC = 0, QuantidadeFaltaProFinalB, QuantidadeFaltaProFinalC;
-        public bool[] ATIVOS = new bool[10], SELECIONADOS = new bool[10]; // se mudar os itens, muda aqui tmb
+        public bool[] ATIVOS = new bool[15], SELECIONADOS = new bool[15]; // se mudar os itens, muda aqui tmb
+
+        //selecionado (PRINCIPAL DA JANELA CC)
+        public List<ItensAll> listaitensall = new List<ItensAll>();
 
         //mov rolo
         public int NewpontoMouse, DistanciaMousePonto;
@@ -485,6 +488,7 @@ namespace Stick_RPG_Fight
                 qntddefases++;
             }
             JANELA.J.FASEdestravada[0] = true;
+            
         }
        
         public void FUNÇÕESOPÇFASE(int W, int H, Botoes Botao, bool BOTAO)
@@ -790,6 +794,8 @@ namespace Stick_RPG_Fight
                 contagemMouseClickC = 0; //cima
                 
             }
+
+            ItensAll.a.FUNÇÕES();// funções da janela ALL
 
             MediaPlayer.Pause();
             //--------------------------------------------------------------------------------
@@ -1548,6 +1554,9 @@ namespace Stick_RPG_Fight
                     listadeitens[i].item.Y = listadeitens[i - 1].item.Y + listadeitens[i - 1].item.Height;
                 }
             }
+            //
+            //Itens all
+            ItensAll.a.POS(W, H);
 
         }//fim poss
 

@@ -18,7 +18,7 @@ namespace Stick_RPG_Fight
         public Texture2D img;
         public int contagemCC, distanciadeletra, contagemitens;
         public bool AMOSTRAjanelacc, direita, esquerda;
-        public string Sair = "Saida", SeleçaoAbaComercio = "Encontre os itens que deseja comprar!", SeleçaoAbaCombo = "Encontre os itens que deseja aprender usar!", itemD = "Item disponível!", itemS = "Item selecionado!", itemV = "Item à venda!", comercio = "Compre seus itens", combo = "Aprenda a usar os itens que você tem!";
+        public string Sair = "Saida", SeleçaoAbaComercio = "Encontre os itens que deseja comprar!", SeleçaoAbaCombo = "Encontre os itens que deseja aprender usar!", itemD = "Item disponível! (CLIQUE PARA ADICIONAR)", itemS = "Item selecionado! (ITEN NO IVENTÁRIO)", itemV = "Item à venda! (CLIQUE PARA IR ATÉ O ENDEREÇO DE COMPRA)", comercio = "Compre seus itens", combo = "Aprenda a usar os itens que você tem!";
 
         public void POS(int W, int H)
         {
