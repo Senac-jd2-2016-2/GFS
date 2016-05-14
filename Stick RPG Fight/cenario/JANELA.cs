@@ -795,7 +795,7 @@ namespace Stick_RPG_Fight
                 
             }
 
-            ItensAll.a.FUNÇÕES();// funções da janela ALL
+            ItensAll.a.FUNÇÕES(BOTAO);// funções da janela ALL
 
             MediaPlayer.Pause();
             //--------------------------------------------------------------------------------

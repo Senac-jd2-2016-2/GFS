@@ -698,16 +698,16 @@
     </EmbeddedResource>
   </ItemGroup>
   <ItemGroup>
-    <None Include="Arquivos do content\AbstractClassicFont.ttf" />
-    <None Include="Arquivos do content\AlphaWood.ttf" />
+    <None Include="Arquivos do content\Installer\AbstractClassicFont.ttf" />
+    <None Include="Arquivos do content\Installer\AlphaWood.ttf" />
     <None Include="Arquivos do content\BAR.spritefont">
       <SubType>Designer</SubType>
     </None>
     <None Include="Arquivos do content\FIRESTARTER.spritefont" />
-    <None Include="Arquivos do content\FIRESTARTER.TTF" />
+    <None Include="Arquivos do content\Installer\FIRESTARTER.TTF" />
     <None Include="Arquivos do content\HUD.spritefont" />
     <None Include="Arquivos do content\Neon.spritefont" />
-    <None Include="Arquivos do content\Neon.ttf" />
+    <None Include="Arquivos do content\Installer\Neon.ttf" />
     <None Include="Arquivos do content\Neon15.spritefont" />
     <None Include="Arquivos do content\Woodfont.spritefont" />
   </ItemGroup>
