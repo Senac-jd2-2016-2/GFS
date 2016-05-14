@@ -19,7 +19,7 @@ namespace Stick_RPG_Fight
         public bool ATIVO, ABASELECIONADA;
         public int PosY, QuantidadePorAba = 9, QuantidadePorLinha = 3; // definir antes de começar
         public Texture2D imgespada2H, imgmaos, imgadaga, imgtridente, imgslow, imgretroceder, imgarco, imgescudo, prop1, prop2, prop3, prop4;
-        public bool B, Bx; //botao pra cada item 
+        public bool B, Bx, ABATRANCADA; //botao pra cada item 
 
 
         public void Criar()
@@ -99,11 +99,13 @@ namespace Stick_RPG_Fight
                         JANELA.J.listaitensall[i].ATIVO = JANELA.J.ATIVOS[i + 10];
                     }
                 }
-
+            }
                 //comercio
                 //combo
                 //ENTRADA
-                if (!JANELA.J.listaitensall[i].ABASELECIONADA)//se nao tiver nenhuma aba selecionada (possibilita a voce clicar nos itens)
+            for (int i = 0; i < JANELA.J.listaitensall.Count; i++)
+            {
+                if (!JANELA.J.listaitensall[i].ABASELECIONADA && !ItensAll.a.ABATRANCADA && i < 5)//se nao tiver nenhuma aba selecionada (possibilita a voce clicar nos itens)
                 {
                     if (JANELA.J.listaitensall[i].Item.Contains(mousePosition) && Mouse.GetState().LeftButton == ButtonState.Pressed)
                     {
@@ -116,11 +118,12 @@ namespace Stick_RPG_Fight
                     {
                         JANELA.J.listaitensall[i].B = false;
                         JANELA.J.listaitensall[i].ABASELECIONADA = true;
+                        ItensAll.a.ABATRANCADA = true;
                     }
                 }//fim 
 
                 //SAIDA
-                if (JANELA.J.listaitensall[i].ABASELECIONADA)//se nao tiver nenhuma aba selecionada (possibilita a voce clicar nos itens)
+                if (ItensAll.a.ABATRANCADA)//se nao tiver nenhuma aba selecionada (possibilita a voce clicar nos itens)
                 {
                     if (JANELA.J.listaitensall[i].Xis.Contains(mousePosition) && Mouse.GetState().LeftButton == ButtonState.Pressed)
                     {
@@ -132,7 +135,11 @@ namespace Stick_RPG_Fight
                     if (JANELA.J.listaitensall[i].Bx && !BOTAO)
                     {
                         JANELA.J.listaitensall[i].Bx = false;
-                        JANELA.J.listaitensall[i].ABASELECIONADA = false;
+                        for (int a = 0; a < JANELA.J.listaitensall.Count; a++)
+                        {
+                            JANELA.J.listaitensall[a].ABASELECIONADA = false;
+                        }
+                        ItensAll.a.ABATRANCADA = false;
                     }
                 }
             }//fim multiplicação
@@ -145,7 +152,7 @@ namespace Stick_RPG_Fight
 
             for (int i = 0; i < JANELA.J.listaitensall.Count; i++)
             {
-                if (!JANELA.J.listaitensall[i].ABASELECIONADA)//se nao tiver nenhuma aba selecionada (ele mostra os itens)
+                if (!ItensAll.a.ABATRANCADA)//se nao tiver nenhuma aba selecionada (ele mostra os itens)
                 {
                     //se estiver dentro da janela
                     if (JANELA.J.listaitensall[i].Item.Y > JANELA.J.Bcombos.Y && JANELA.J.listaitensall[i].Item.Y + JANELA.J.listaitensall[i].Item.Height < JANELA.J.R.Y + JANELA.J.R.Height + 1)
@@ -177,7 +184,7 @@ namespace Stick_RPG_Fight
 
             for (int i = 0; i < JANELA.J.listaitensall.Count; i++)
             {
-                if (!JANELA.J.listaitensall[i].ABASELECIONADA)//se nao tiver nenhuma aba selecionada (ele mostra os itens)
+                if (!ItensAll.a.ABATRANCADA)//se nao tiver nenhuma aba selecionada (ele mostra os itens)
                 {
                     //se estiver dentro da janela
                     if (JANELA.J.listaitensall[i].Item.Y > JANELA.J.Bcombos.Y && JANELA.J.listaitensall[i].Item.Y + JANELA.J.listaitensall[i].Item.Height < JANELA.J.R.Y + JANELA.J.R.Height + 1)
@@ -208,66 +215,152 @@ namespace Stick_RPG_Fight
 
                         }
                     }
-                }//fim do nao estar aba aberta
-                if (JANELA.J.listaitensall[i].ABASELECIONADA)//se nao tiver nenhuma aba selecionada (ele mostra os itens)
+                }//fim do nao estar aba trancada
+                if (JANELA.J.listaitensall[i].ABASELECIONADA && ItensAll.a.ABATRANCADA)//se nao tiver nenhuma aba selecionada (ele mostra os itens)
                 {
                     if (JANELA.J.JANELACOMERCIO)
                     {
                         if (JANELA.J.ARMAS)
                         {
                             if (i == 0)
-                                spriteBatch.DrawString(JANELA.J.Neon, "PUNHOS", new Vector2(JANELA.J.janelaall.X + JANELA.J.janelaall.Width / 4, JANELA.J.janelaall.Y + JANELA.J.janelaall.Height / 16), Color.Black);
+                            {
+                                spriteBatch.DrawString(JANELA.J.Firefont, "PUNHOS", new Vector2(JANELA.J.janelaall.X + JANELA.J.janelaall.Width / 2 - JANELA.J.janelaall.Width / 8, JANELA.J.janelaall.Y + JANELA.J.janelaall.Height / 16), Color.Black);
+                                spriteBatch.DrawString(JANELA.J.Neon, "DEFINIÇÃO:", new Vector2(JANELA.J.janelaall.X + JANELA.J.janelaall.Width / 16, JANELA.J.janelaall.Y + JANELA.J.janelaall.Height / 14 + 30), Color.Black);
+
+                            }
                             if (i == 1)
-                                spriteBatch.DrawString(JANELA.J.Neon, "ESPADA 2 MÃOS", new Vector2(JANELA.J.janelaall.X + JANELA.J.janelaall.Width / 4, JANELA.J.janelaall.Y + JANELA.J.janelaall.Height / 16), Color.Black);
+                            {
+                                spriteBatch.DrawString(JANELA.J.Firefont, "ESPADA 2 MAOS", new Vector2(JANELA.J.janelaall.X + JANELA.J.janelaall.Width / 2 - JANELA.J.janelaall.Width / 8, JANELA.J.janelaall.Y + JANELA.J.janelaall.Height / 16), Color.Black);
+                                spriteBatch.DrawString(JANELA.J.Neon, "DEFINIÇÃO:", new Vector2(JANELA.J.janelaall.X + JANELA.J.janelaall.Width / 16, JANELA.J.janelaall.Y + JANELA.J.janelaall.Height / 14 + 30), Color.Black);
+
+                            }
                             if (i == 2)
-                                spriteBatch.DrawString(JANELA.J.Neon, "ADAGA", new Vector2(JANELA.J.janelaall.X + JANELA.J.janelaall.Width / 4, JANELA.J.janelaall.Y + JANELA.J.janelaall.Height / 16), Color.Black);
+                            {
+                                spriteBatch.DrawString(JANELA.J.Firefont, "ADAGA", new Vector2(JANELA.J.janelaall.X + JANELA.J.janelaall.Width / 2 - JANELA.J.janelaall.Width / 8, JANELA.J.janelaall.Y + JANELA.J.janelaall.Height / 16), Color.Black);
+                                spriteBatch.DrawString(JANELA.J.Neon, "DEFINIÇÃO:", new Vector2(JANELA.J.janelaall.X + JANELA.J.janelaall.Width / 16, JANELA.J.janelaall.Y + JANELA.J.janelaall.Height / 14 + 30), Color.Black);
+
+                            }
                             if (i == 3)
-                                spriteBatch.DrawString(JANELA.J.Neon, "ARCO", new Vector2(JANELA.J.janelaall.X + JANELA.J.janelaall.Width / 4, JANELA.J.janelaall.Y + JANELA.J.janelaall.Height / 16), Color.Black);
+                            {
+                                spriteBatch.DrawString(JANELA.J.Firefont, "ARCO", new Vector2(JANELA.J.janelaall.X + JANELA.J.janelaall.Width / 2 - JANELA.J.janelaall.Width / 8, JANELA.J.janelaall.Y + JANELA.J.janelaall.Height / 16), Color.Black);
+                                spriteBatch.DrawString(JANELA.J.Neon, "DEFINIÇÃO:", new Vector2(JANELA.J.janelaall.X + JANELA.J.janelaall.Width / 16, JANELA.J.janelaall.Y + JANELA.J.janelaall.Height / 14 + 30), Color.Black);
+
+                            }
                             if (i == 4)
-                                spriteBatch.DrawString(JANELA.J.Neon, "TRIDENTE", new Vector2(JANELA.J.janelaall.X + JANELA.J.janelaall.Width / 4, JANELA.J.janelaall.Y + JANELA.J.janelaall.Height / 16), Color.Black);
+                            {
+                                spriteBatch.DrawString(JANELA.J.Firefont, "TRIDENTE", new Vector2(JANELA.J.janelaall.X + JANELA.J.janelaall.Width / 2 - JANELA.J.janelaall.Width / 8, JANELA.J.janelaall.Y + JANELA.J.janelaall.Height / 16), Color.Black);
+                                spriteBatch.DrawString(JANELA.J.Neon, "DEFINIÇÃO:", new Vector2(JANELA.J.janelaall.X + JANELA.J.janelaall.Width / 16, JANELA.J.janelaall.Y + JANELA.J.janelaall.Height / 14 + 30), Color.Black);
+
+                            }
                         }
                         if (JANELA.J.PODERES)
                         {
                             if (i == 0)
-                                spriteBatch.DrawString(JANELA.J.Neon, "SLOW", new Vector2(JANELA.J.janelaall.X + JANELA.J.janelaall.Width / 4, JANELA.J.janelaall.Y + JANELA.J.janelaall.Height / 16), Color.Black);
-                            if (i == 1)
-                                spriteBatch.DrawString(JANELA.J.Neon, "RETROCEDER", new Vector2(JANELA.J.janelaall.X + JANELA.J.janelaall.Width / 4, JANELA.J.janelaall.Y + JANELA.J.janelaall.Height / 16), Color.Black);
-                            if (i == 2)
-                                spriteBatch.DrawString(JANELA.J.Neon, "ESCUDO", new Vector2(JANELA.J.janelaall.X + JANELA.J.janelaall.Width / 4, JANELA.J.janelaall.Y + JANELA.J.janelaall.Height / 16), Color.Black);
+                            {
+                                spriteBatch.DrawString(JANELA.J.Firefont, "SLOW", new Vector2(JANELA.J.janelaall.X + JANELA.J.janelaall.Width / 2 - JANELA.J.janelaall.Width / 8, JANELA.J.janelaall.Y + JANELA.J.janelaall.Height / 16), Color.Black);
+                                spriteBatch.DrawString(JANELA.J.Neon, "DEFINIÇÃO:", new Vector2(JANELA.J.janelaall.X + JANELA.J.janelaall.Width / 16, JANELA.J.janelaall.Y + JANELA.J.janelaall.Height / 14 + 30), Color.Black);
 
+                            }
+                            if (i == 1)
+                            {
+                                spriteBatch.DrawString(JANELA.J.Firefont, "RETROCEDER", new Vector2(JANELA.J.janelaall.X + JANELA.J.janelaall.Width / 2 - JANELA.J.janelaall.Width / 8, JANELA.J.janelaall.Y + JANELA.J.janelaall.Height / 16), Color.Black);
+                                spriteBatch.DrawString(JANELA.J.Neon, "DEFINIÇÃO:", new Vector2(JANELA.J.janelaall.X + JANELA.J.janelaall.Width / 16, JANELA.J.janelaall.Y + JANELA.J.janelaall.Height / 14 + 30), Color.Black);
+
+                            }
+                            if (i == 2)
+                            {
+                                spriteBatch.DrawString(JANELA.J.Firefont, "ESCUDO", new Vector2(JANELA.J.janelaall.X + JANELA.J.janelaall.Width / 2 - JANELA.J.janelaall.Width / 8, JANELA.J.janelaall.Y + JANELA.J.janelaall.Height / 16), Color.Black);
+                                spriteBatch.DrawString(JANELA.J.Neon, "DEFINIÇÃO:", new Vector2(JANELA.J.janelaall.X + JANELA.J.janelaall.Width / 16, JANELA.J.janelaall.Y + JANELA.J.janelaall.Height / 14 + 30), Color.Black);
+
+                            }
+                            if (i == 3)
+                            {
+                                spriteBatch.DrawString(JANELA.J.Firefont, "VENTO", new Vector2(JANELA.J.janelaall.X + JANELA.J.janelaall.Width / 2 - JANELA.J.janelaall.Width / 8, JANELA.J.janelaall.Y + JANELA.J.janelaall.Height / 16), Color.Black);
+                                spriteBatch.DrawString(JANELA.J.Neon, "DEFINIÇÃO:", new Vector2(JANELA.J.janelaall.X + JANELA.J.janelaall.Width / 16, JANELA.J.janelaall.Y + JANELA.J.janelaall.Height / 14 + 30), Color.Black);
+
+                            }
+                            if (i == 4)
+                            {
+                                spriteBatch.DrawString(JANELA.J.Firefont, "RAIO", new Vector2(JANELA.J.janelaall.X + JANELA.J.janelaall.Width / 2 - JANELA.J.janelaall.Width / 8, JANELA.J.janelaall.Y + JANELA.J.janelaall.Height / 16), Color.Black);
+                                spriteBatch.DrawString(JANELA.J.Neon, "DEFINIÇÃO:", new Vector2(JANELA.J.janelaall.X + JANELA.J.janelaall.Width / 16, JANELA.J.janelaall.Y + JANELA.J.janelaall.Height / 14 + 30), Color.Black);
+
+                            }
                         }
                     }
-                    if (JANELA.J.JANELACOMBO)
+                    else if (JANELA.J.JANELACOMBO)
                     {
                         if (JANELA.J.ARMAS)
                         {
                             if (i == 0)
-                                spriteBatch.DrawString(JANELA.J.Neon, "PUNHOS", new Vector2(JANELA.J.janelaall.X + JANELA.J.janelaall.Width / 4, JANELA.J.janelaall.Y + JANELA.J.janelaall.Height / 16), Color.Black);
+                            {
+                                spriteBatch.DrawString(JANELA.J.Firefont, "PUNHOS", new Vector2(JANELA.J.janelaall.X + JANELA.J.janelaall.Width / 2 - JANELA.J.janelaall.Width / 8, JANELA.J.janelaall.Y + JANELA.J.janelaall.Height / 16), Color.Black);
+                                spriteBatch.DrawString(JANELA.J.Neon, "DEFINIÇÃO:", new Vector2(JANELA.J.janelaall.X + JANELA.J.janelaall.Width / 16, JANELA.J.janelaall.Y + JANELA.J.janelaall.Height / 14 + 30), Color.Black);
+
+                            }
                             if (i == 1)
-                                spriteBatch.DrawString(JANELA.J.Neon, "ESPADA 2 MÃOS", new Vector2(JANELA.J.janelaall.X + JANELA.J.janelaall.Width / 4, JANELA.J.janelaall.Y + JANELA.J.janelaall.Height / 16), Color.Black);
+                            {
+                                spriteBatch.DrawString(JANELA.J.Firefont, "ESPADA 2 MAOS", new Vector2(JANELA.J.janelaall.X + JANELA.J.janelaall.Width / 2 - JANELA.J.janelaall.Width / 8, JANELA.J.janelaall.Y + JANELA.J.janelaall.Height / 16), Color.Black);
+                                spriteBatch.DrawString(JANELA.J.Neon, "DEFINIÇÃO:", new Vector2(JANELA.J.janelaall.X + JANELA.J.janelaall.Width / 16, JANELA.J.janelaall.Y + JANELA.J.janelaall.Height / 14 + 30), Color.Black);
+
+                            }
                             if (i == 2)
-                                spriteBatch.DrawString(JANELA.J.Neon, "ADAGA", new Vector2(JANELA.J.janelaall.X + JANELA.J.janelaall.Width / 4, JANELA.J.janelaall.Y + JANELA.J.janelaall.Height / 16), Color.Black);
+                            {
+                                spriteBatch.DrawString(JANELA.J.Firefont, "ADAGA", new Vector2(JANELA.J.janelaall.X + JANELA.J.janelaall.Width / 2 - JANELA.J.janelaall.Width / 8, JANELA.J.janelaall.Y + JANELA.J.janelaall.Height / 16), Color.Black);
+                                spriteBatch.DrawString(JANELA.J.Neon, "DEFINIÇÃO:", new Vector2(JANELA.J.janelaall.X + JANELA.J.janelaall.Width / 16, JANELA.J.janelaall.Y + JANELA.J.janelaall.Height / 14 + 30), Color.Black);
+
+                            }
                             if (i == 3)
-                                spriteBatch.DrawString(JANELA.J.Neon, "ARCO", new Vector2(JANELA.J.janelaall.X + JANELA.J.janelaall.Width / 4, JANELA.J.janelaall.Y + JANELA.J.janelaall.Height / 16), Color.Black);
+                            {
+                                spriteBatch.DrawString(JANELA.J.Firefont, "ARCO", new Vector2(JANELA.J.janelaall.X + JANELA.J.janelaall.Width / 2 - JANELA.J.janelaall.Width / 8, JANELA.J.janelaall.Y + JANELA.J.janelaall.Height / 16), Color.Black);
+                                spriteBatch.DrawString(JANELA.J.Neon, "DEFINIÇÃO:", new Vector2(JANELA.J.janelaall.X + JANELA.J.janelaall.Width / 16, JANELA.J.janelaall.Y + JANELA.J.janelaall.Height / 14 + 30), Color.Black);
+
+                            }
                             if (i == 4)
-                                spriteBatch.DrawString(JANELA.J.Neon, "TRIDENTE", new Vector2(JANELA.J.janelaall.X + JANELA.J.janelaall.Width / 4, JANELA.J.janelaall.Y + JANELA.J.janelaall.Height / 16), Color.Black);
+                            {
+                                spriteBatch.DrawString(JANELA.J.Firefont, "TRIDENTE", new Vector2(JANELA.J.janelaall.X + JANELA.J.janelaall.Width / 2 - JANELA.J.janelaall.Width / 8, JANELA.J.janelaall.Y + JANELA.J.janelaall.Height / 16), Color.Black);
+                                spriteBatch.DrawString(JANELA.J.Neon, "DEFINIÇÃO:", new Vector2(JANELA.J.janelaall.X + JANELA.J.janelaall.Width / 16, JANELA.J.janelaall.Y + JANELA.J.janelaall.Height / 14 + 30), Color.Black);
+
+                            }
                         }
                         if (JANELA.J.PODERES)
                         {
                             if (i == 0)
-                                spriteBatch.DrawString(JANELA.J.Neon, "SLOW", new Vector2(JANELA.J.janelaall.X + JANELA.J.janelaall.Width / 4, JANELA.J.janelaall.Y + JANELA.J.janelaall.Height / 16), Color.Black);
-                            if (i == 1)
-                                spriteBatch.DrawString(JANELA.J.Neon, "RETROCEDER", new Vector2(JANELA.J.janelaall.X + JANELA.J.janelaall.Width / 4, JANELA.J.janelaall.Y + JANELA.J.janelaall.Height / 16), Color.Black);
-                            if (i == 2)
-                                spriteBatch.DrawString(JANELA.J.Neon, "ESCUDO", new Vector2(JANELA.J.janelaall.X + JANELA.J.janelaall.Width / 4, JANELA.J.janelaall.Y + JANELA.J.janelaall.Height / 16), Color.Black);
+                            {
+                                spriteBatch.DrawString(JANELA.J.Firefont, "SLOW", new Vector2(JANELA.J.janelaall.X + JANELA.J.janelaall.Width / 2 - JANELA.J.janelaall.Width / 8, JANELA.J.janelaall.Y + JANELA.J.janelaall.Height / 16), Color.Black);
+                                spriteBatch.DrawString(JANELA.J.Neon, "DEFINIÇÃO:", new Vector2(JANELA.J.janelaall.X + JANELA.J.janelaall.Width / 16, JANELA.J.janelaall.Y + JANELA.J.janelaall.Height / 14 + 30), Color.Black);
 
+                            }
+                            if (i == 1)
+                            {
+                                spriteBatch.DrawString(JANELA.J.Firefont, "RETROCEDER", new Vector2(JANELA.J.janelaall.X + JANELA.J.janelaall.Width / 2 - JANELA.J.janelaall.Width / 8, JANELA.J.janelaall.Y + JANELA.J.janelaall.Height / 16), Color.Black);
+                                spriteBatch.DrawString(JANELA.J.Neon, "DEFINIÇÃO:", new Vector2(JANELA.J.janelaall.X + JANELA.J.janelaall.Width / 16, JANELA.J.janelaall.Y + JANELA.J.janelaall.Height / 14 + 30), Color.Black);
+
+                            }
+                            if (i == 2)
+                            {
+                                spriteBatch.DrawString(JANELA.J.Firefont, "ESCUDO", new Vector2(JANELA.J.janelaall.X + JANELA.J.janelaall.Width / 2 - JANELA.J.janelaall.Width / 8, JANELA.J.janelaall.Y + JANELA.J.janelaall.Height / 16), Color.Black);
+                                spriteBatch.DrawString(JANELA.J.Neon, "DEFINIÇÃO:", new Vector2(JANELA.J.janelaall.X + JANELA.J.janelaall.Width / 16, JANELA.J.janelaall.Y + JANELA.J.janelaall.Height / 14 + 30), Color.Black);
+
+                            }
+                            if (i == 3)
+                            {
+                                spriteBatch.DrawString(JANELA.J.Firefont, "VENTO", new Vector2(JANELA.J.janelaall.X + JANELA.J.janelaall.Width / 2 - JANELA.J.janelaall.Width / 8, JANELA.J.janelaall.Y + JANELA.J.janelaall.Height / 16), Color.Black);
+                                spriteBatch.DrawString(JANELA.J.Neon, "DEFINIÇÃO:", new Vector2(JANELA.J.janelaall.X + JANELA.J.janelaall.Width / 16, JANELA.J.janelaall.Y + JANELA.J.janelaall.Height / 14 + 30), Color.Black);
+
+                            }
+                            if (i == 4)
+                            {
+                                spriteBatch.DrawString(JANELA.J.Firefont, "RAIO", new Vector2(JANELA.J.janelaall.X + JANELA.J.janelaall.Width / 2 - JANELA.J.janelaall.Width / 8, JANELA.J.janelaall.Y + JANELA.J.janelaall.Height / 16), Color.Black);
+                                spriteBatch.DrawString(JANELA.J.Neon, "DEFINIÇÃO:", new Vector2(JANELA.J.janelaall.X + JANELA.J.janelaall.Width / 16, JANELA.J.janelaall.Y + JANELA.J.janelaall.Height / 14 + 30), Color.Black);
+
+                            }
                         }
                     }//fim combo aba 
 
                     if (!JANELA.J.listaitensall[i].Xis.Contains(mousePosition))
-                        spriteBatch.Draw(JANELA.J.imgbotaoX, JANELA.J.listaitensall[i].Xis, Color.White);
+                        spriteBatch.Draw(JANELA.J.imgbotaoX, JANELA.J.listaitensall[i].Xis, Color.Black);
                     else if (JANELA.J.listaitensall[i].Xis.Contains(mousePosition))
-                        spriteBatch.Draw(JANELA.J.imgbotaoXRed, JANELA.J.listaitensall[i].Xis, Color.White);
+                        spriteBatch.Draw(JANELA.J.imgbotaoXred, JANELA.J.listaitensall[i].Xis, Color.White);
 
                 }// fim aba selecionada
             }
