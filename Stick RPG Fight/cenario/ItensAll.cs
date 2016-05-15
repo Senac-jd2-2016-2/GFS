@@ -18,7 +18,7 @@ namespace Stick_RPG_Fight
         public Rectangle Item = new Rectangle(), Xis = new Rectangle();
         public bool ATIVO, ABASELECIONADA;
         public int PosY, QuantidadePorAba = 9, QuantidadePorLinha = 3; // definir antes de começar
-        public Texture2D imgespada2H, imgmaos, imgadaga, imgtridente, imgslow, imgretroceder, imgarco, imgescudo, prop1, prop2, prop3, prop4;
+        public Texture2D imgespada2H, imgmaos, imgadaga, imgtridente, imgslow, imgretroceder, imgarco, imgescudo, imgvento, imgraio, prop1, prop2, prop3, prop4;
         public bool B, Bx, ABATRANCADA; //botao pra cada item 
 
 
@@ -212,6 +212,8 @@ namespace Stick_RPG_Fight
                                 spriteBatch.Draw(imgretroceder, JANELA.J.listaitensall[1].Item, Color.White);
                             if (i == 2)
                                 spriteBatch.Draw(imgescudo, JANELA.J.listaitensall[2].Item, Color.White);
+                            if (i == 3)
+                                spriteBatch.Draw(imgvento, JANELA.J.listaitensall[3].Item, Color.White);
 
                         }
                     }

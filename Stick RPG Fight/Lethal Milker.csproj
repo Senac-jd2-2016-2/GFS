@@ -70,6 +70,7 @@
     <Compile Include="Personagens\Sangue.cs" />
     <Compile Include="Personagens\VIDAperdida.cs" />
     <Compile Include="Savegame.cs" />
+    <Compile Include="VENTO.cs" />
   </ItemGroup>
   <ItemGroup>
     <Reference Include="MonoGame.Framework">
@@ -660,6 +661,12 @@
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
     <Content Include="Content\Tridente.png">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Content\Vento Spritesheet.png">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Content\Vento.png">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
     <Content Include="Content\VIDA.png">

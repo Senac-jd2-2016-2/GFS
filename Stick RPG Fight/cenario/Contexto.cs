@@ -21,6 +21,8 @@ namespace Stick_RPG_Fight
         {
             Info.I.img = content.Load<Texture2D>("Info");
 
+            VENTO.V.Vento = content.Load<Texture2D>("Vento Spritesheet");
+
                 //Direito
             P1.imgSpriteSheetparado1 = content.Load<Texture2D>("spritesheet p1 parado1"); // só imagem, logo posso usar isso também pros inimigos.
             P1.imgSpriteSheetparado2 = content.Load<Texture2D>("spritesheet p1 parado2");
@@ -90,7 +92,8 @@ namespace Stick_RPG_Fight
             ItensAll.a.imgslow = content.Load<Texture2D>("Slow");
             ItensAll.a.imgretroceder = content.Load<Texture2D>("Retroceder");
             ItensAll.a.imgescudo = content.Load<Texture2D>("Escudo");
-            
+            ItensAll.a.imgvento = content.Load<Texture2D>("Vento");
+            //ItensAll.a.imgraio = content.Load<Texture2D>("Raio");
 
             Menu.m.imgintromenu_comtraçado = content.Load<Texture2D>("intro game");
             Menu.m.imgintromenu_semtraçado = content.Load<Texture2D>("intro game sem traçado");
