@@ -852,6 +852,12 @@ namespace Stick_RPG_Fight
                 JANELA.J.ARMAS = true;
                 JANELA.J.PODERES = false;
                 JANELA.J.PET = false;
+                //SAI DA ABA do ALL
+                for (int a = 0; a < JANELA.J.listaitensall.Count; a++)
+                {
+                    JANELA.J.listaitensall[a].ABASELECIONADA = false;
+                }
+                ItensAll.a.ABATRANCADA = false;
             }
             //PET
             if (JANELA.J.Bpet.Contains(mousePosition) && Mouse.GetState().LeftButton == ButtonState.Pressed)
@@ -866,6 +872,12 @@ namespace Stick_RPG_Fight
                 JANELA.J.ARMAS = false;
                 JANELA.J.PODERES = false;
                 JANELA.J.PET = true;
+                //SAI DA ABA do ALL
+                for (int a = 0; a < JANELA.J.listaitensall.Count; a++)
+                {
+                    JANELA.J.listaitensall[a].ABASELECIONADA = false;
+                }
+                ItensAll.a.ABATRANCADA = false;
             }
             //PODERES
             if (JANELA.J.Bpoderes.Contains(mousePosition) && Mouse.GetState().LeftButton == ButtonState.Pressed)
@@ -880,6 +892,12 @@ namespace Stick_RPG_Fight
                 JANELA.J.ARMAS = false;
                 JANELA.J.PODERES = true;
                 JANELA.J.PET = false;
+                //SAI DA ABA do ALL
+                for (int a = 0; a < JANELA.J.listaitensall.Count; a++)
+                {
+                    JANELA.J.listaitensall[a].ABASELECIONADA = false;
+                }
+                ItensAll.a.ABATRANCADA = false;
             }
 
             //Rolometro, dinamico.

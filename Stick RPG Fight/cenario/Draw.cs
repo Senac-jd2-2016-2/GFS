@@ -879,8 +879,14 @@ namespace Stick_RPG_Fight
                 spriteBatch.Draw(JANELA.J.imgjanelacomercio, JANELA.J.R, Color.White);
                
             }
-            //new
-            spriteBatch.Draw(JANELA.J.imgjanelaall, JANELA.J.janelaall, Color.White);
+            
+            //all
+            if (!JANELA.J.ARMAS && !JANELA.J.PET && !JANELA.J.PODERES)
+                spriteBatch.Draw(JANELA.J.imgjanelaall, JANELA.J.janelaall, Color.DarkGray);
+            spriteBatch.DrawString(JANELA.J.Neon15, "[Selecione algum tipo]", new Vector2(JANELA.J.janelaall.X + JANELA.J.janelaall.Width / 30, JANELA.J.janelaall.Y + JANELA.J.janelaall.Height - 20), Color.Green);
+            if (JANELA.J.ARMAS || JANELA.J.PET || JANELA.J.PODERES)
+                spriteBatch.Draw(JANELA.J.imgjanelaall, JANELA.J.janelaall, Color.White);
+
             spriteBatch.Draw(JANELA.J.imgjanelaall, JANELA.J.janelaitens, Color.White);
 
             //itens
