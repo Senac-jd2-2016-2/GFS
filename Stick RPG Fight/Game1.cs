@@ -684,7 +684,7 @@ namespace Stick_RPG_Fight
                 var WidthTela = Window.ClientBounds.Width;
                 var HeightTela = Window.ClientBounds.Height;
 
-                JANELA.J.FUNÇÕESCC(BOTAO, WidthTela, HeightTela); // janelas
+                JANELA.J.FUNÇÕESCC(BOTAO, WidthTela, HeightTela, P1); // janelas
 
                 JANELA.J.POSIÇÃOCC(WidthTela, HeightTela);
                 Info.I.POS(WidthTela, HeightTela);
@@ -776,7 +776,7 @@ namespace Stick_RPG_Fight
             DRAW.DrawBotaoEstatico(Botao, spriteBatch); //resumo dos botoes
             if (JANELA.J.JANELACOMBO || JANELA.J.JANELACOMERCIO)
             {
-                DRAW.DrawJANELACC(Botao, spriteBatch);
+                DRAW.DrawJANELACC(Botao, spriteBatch, P1);
             }
 
             if (JANELA.J.JANELAPAUSE)

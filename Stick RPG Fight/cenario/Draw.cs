@@ -863,7 +863,7 @@ namespace Stick_RPG_Fight
         //--------------------------------------------------------------------------------------------------
         //--------------------------------------------------------------------------------------------------
         //--------------------------------------------------------------------------------------------------
-        public void DrawJANELACC(Botoes Botao, SpriteBatch spriteBatch)
+        public void DrawJANELACC(Botoes Botao, SpriteBatch spriteBatch, Personagem P1)
         {
             var mouseState = Mouse.GetState();
             var mousePosition = new Point(mouseState.X, mouseState.Y);
@@ -1212,7 +1212,16 @@ namespace Stick_RPG_Fight
             }
 
             //parte de cima
-            spriteBatch.Draw(JANELA.J.imgjanelacinzaopç1, JANELA.J.CAPAopç1, Color.White);
+            spriteBatch.Draw(JANELA.J.imgjanelacinzaopç1, JANELA.J.CAPAopç1, Color.White); //AQUI MOSTRA AS INFORMAÇÕES
+            spriteBatch.DrawString(JANELA.J.Neon15, "COMBOS " + P1.qntdcombos, new Vector2(JANELA.J.CAPAopç1.X + JANELA.J.CAPAopç1.Width / 16, JANELA.J.CAPAopç1.Y + JANELA.J.CAPAopç1.Height / 8), Color.DarkGoldenrod); //mostrar MOEDAS
+            spriteBatch.DrawString(JANELA.J.Neon15, "LEITE " + P1.leite, new Vector2(JANELA.J.CAPAopç1.X + JANELA.J.CAPAopç1.Width / 2, JANELA.J.CAPAopç1.Y + JANELA.J.CAPAopç1.Height / 8), Color.DarkSalmon);
+            spriteBatch.DrawString(JANELA.J.Neon15, "HONRA " + P1.honra, new Vector2(JANELA.J.CAPAopç1.X + JANELA.J.CAPAopç1.Width - JANELA.J.CAPAopç1.Width / 4, JANELA.J.CAPAopç1.Y + JANELA.J.CAPAopç1.Height / 8), Color.DarkViolet);
+
+            //informações para as janelas
+            spriteBatch.DrawString(JANELA.J.Neon, "Equipagem", new Vector2(JANELA.J.CAPAopç1.X + JANELA.J.CAPAopç1.Width / 16, JANELA.J.CAPAopç1.Y + JANELA.J.CAPAopç1.Height / 2), Color.DarkGray);
+            spriteBatch.DrawString(JANELA.J.Neon, "Informações e Compras", new Vector2(JANELA.J.CAPAopç1.X + JANELA.J.CAPAopç1.Width / 2, JANELA.J.CAPAopç1.Y + JANELA.J.CAPAopç1.Height / 2), Color.DarkGray);
+
+
             //pet
             if (!JANELA.J.PET)
             {

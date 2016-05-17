@@ -150,6 +150,7 @@ namespace Stick_RPG_Fight
                             contagemMOSTRARPONTOS++;
                             if (contagemMOSTRARPONTOS >= 30)
                             {
+                                MediaPlayer.Pause();
                                 contagemMOSTRARPONTOS = 0;
                                 TRANSFERIRpontos = true; // sai do laço
                                 //como só vou mostrar, não tem nenhuma função no update, apenas no DRAW.
@@ -783,7 +784,7 @@ namespace Stick_RPG_Fight
             }//fim do rolo
         }
 
-        public void FUNÇÕESCC(bool BOTAO, int W, int H)
+        public void FUNÇÕESCC(bool BOTAO, int W, int H, Personagem P1)
         {
             var mouseState = Mouse.GetState();
             var mousePosition = new Point(mouseState.X, mouseState.Y);
@@ -795,7 +796,7 @@ namespace Stick_RPG_Fight
                 
             }
 
-            ItensAll.a.FUNÇÕES(BOTAO);// funções da janela ALL
+            ItensAll.a.FUNÇÕES(BOTAO, P1);// funções da janela ALL
 
             MediaPlayer.Pause();
             //--------------------------------------------------------------------------------

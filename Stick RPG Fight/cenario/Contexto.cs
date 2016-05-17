@@ -93,7 +93,10 @@ namespace Stick_RPG_Fight
             ItensAll.a.imgretroceder = content.Load<Texture2D>("Retroceder");
             ItensAll.a.imgescudo = content.Load<Texture2D>("Escudo");
             ItensAll.a.imgvento = content.Load<Texture2D>("Vento");
-            //ItensAll.a.imgraio = content.Load<Texture2D>("Raio");
+            ItensAll.a.imgraio = content.Load<Texture2D>("Raio");
+            ItensAll.a.imgEQUIPAR1 = content.Load<Texture2D>("equipar1");
+            ItensAll.a.imgEQUIPAR2 = content.Load<Texture2D>("equipar2");
+            ItensAll.a.imgCOMPRAR = content.Load<Texture2D>("comprar");
 
             Menu.m.imgintromenu_comtraçado = content.Load<Texture2D>("intro game");
             Menu.m.imgintromenu_semtraçado = content.Load<Texture2D>("intro game sem traçado");
