@@ -202,6 +202,12 @@ namespace Stick_RPG_Fight
         public int qntdcombos;
         public int qntdcombosrepositório;
 
+        //sobre clones (poder 1 e 2)
+        public Point POSmapacapturado = new Point(0, 0);
+        
+        //gastos
+        public int TRINTAporcento, DEZporcento, CINQUENTAporcento;
+
         //Fase 1 cenario
         public int ONDAcontagem = 0;
 
@@ -216,6 +222,14 @@ namespace Stick_RPG_Fight
         //===========================================================================================================================================================================
         //===========================================================================================================================================================================
         //===========================================================================================================================================================================
+
+        public void PORCENTAGENS()
+        {
+            //de mana
+            TRINTAporcento = (int)(manaTOTAL * 0.3f);
+            DEZporcento = (int)(manaTOTAL * 0.1f);
+            CINQUENTAporcento = (int)(manaTOTAL / 0.5f);
+        }
 
         public void RPGatualização(int WidthTela, int HeightTela) // atualiza tudo em relação ao RPG (vida / mana / money etc etc)
         {
@@ -255,7 +269,6 @@ namespace Stick_RPG_Fight
             {
                 vida = 0;
                 JANELA.J.JANELAPLACAR = true;
-
             }
 
 
@@ -1052,6 +1065,7 @@ namespace Stick_RPG_Fight
             REMOVERVISUPODER(WidthTela, HeightTela);//METODO DE REMOVER O EFEITO (QND CHEGAR EM TAL TAMANHO)
             PosDANO(WidthTela, HeightTela);// posição da informação do dano
             POSvidaperdida(); //barra vermelha
+            
 
             //mov do personagem
             individuo.X += Vx;
@@ -1759,6 +1773,11 @@ namespace Stick_RPG_Fight
             clone.frameATIRARarco = P1.frameATIRARarco; //Marca o frame a ser utilizado 
             clone.frameSACARarco = P1.frameSACARarco; //Marca o frame a ser utilizado 
             clone.frameLUTA = P1.frameLUTA;
+
+            //INT / POSIÇÕES
+            clone.POSmapacapturado.X = Contexto.Fundo.fase.X;
+            clone.POSmapacapturado.Y = Contexto.Fundo.fase.Y;
+            clone.vida = P1.vida;
 
             P1.listaclonePoder.Add(clone);
         }

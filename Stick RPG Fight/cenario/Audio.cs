@@ -16,7 +16,7 @@ namespace Stick_RPG_Fight
         public Song menusong;
         public Song combatesong;
         public Song PODERsong;
-        public SoundEffect COINCOLLECT, GRITOVENCEDOR, RISADA, SUPERCHORO, PLACAREFFECT, pop, LEITEganho;
+        public SoundEffect COINCOLLECT, GRITOVENCEDOR, RISADA, SUPERCHORO, PLACAREFFECT, pop, LEITEganho, EscudoSom;
 
         public Rectangle barra = new Rectangle(), pino = new Rectangle(), Vol = new Rectangle();
 
@@ -39,7 +39,7 @@ namespace Stick_RPG_Fight
                 barra.Y = H / 8;
                 PRIMEIRAVEZ = false;
                 Audio.MasterVolume = 1.0f;
-                pino.X = W / 2 + W / 4 + H / 8;
+                pino.X = barra.X + barra.Width;
             }
 
             if (menu00)
@@ -86,7 +86,7 @@ namespace Stick_RPG_Fight
             {
                 pino.X = barra.X;
             }
-            Audio.MasterVolume = ((float)(pino.X - barra.X) / VolumeMaximo) * VolumeMaximo;
+            Audio.MasterVolume = ((float)(pino.X - barra.X) / VolumeMaximo);
             MediaPlayer.Volume = Audio.MasterVolume;
             
         }

@@ -1024,6 +1024,8 @@ namespace Stick_RPG_Fight
                     ARCOselect = false;
                     TRIDENTEselect = false;
 
+                    
+
                     //descelecionar outros itens do mesmo grupo
                     for (int i = 1; i < 5; i++)
                     {
@@ -1249,6 +1251,8 @@ namespace Stick_RPG_Fight
                     ESCUDOselect = false;
                     VENTOselect = false;
                     RAIOselect = false;
+                    //desabilitar o poder (qnd mudar pra outro poder) - nao gerando conflito
+                    P1.PODER = false;
 
                     //descelecionar outros itens do mesmo grupo
                     for (int i = 6; i < 10; i++)
@@ -1282,6 +1286,9 @@ namespace Stick_RPG_Fight
                         ESCUDOselect = false;
                         VENTOselect = false;
                         RAIOselect = false;
+
+                        //desabilitar o poder (qnd mudar pra outro poder) - nao gerando conflito
+                        P1.PODER = false;
 
                         //descelecionar outros itens do mesmo grupo
                         SELECIONADOS[5] = false;
@@ -1332,6 +1339,9 @@ namespace Stick_RPG_Fight
                         VENTOselect = false;
                         RAIOselect = false;
 
+                        //desabilitar o poder (qnd mudar pra outro poder) - nao gerando conflito
+                        P1.PODER = false;
+
                         //descelecionar outros itens do mesmo grupo
                         SELECIONADOS[5] = false;
                         SELECIONADOS[6] = false;
@@ -1381,6 +1391,9 @@ namespace Stick_RPG_Fight
                         ESCUDOselect = false;
                         RAIOselect = false;
 
+                        //desabilitar o poder (qnd mudar pra outro poder) - nao gerando conflito
+                        P1.PODER = false;
+
                         //descelecionar outros itens do mesmo grupo
                         SELECIONADOS[5] = false;
                         SELECIONADOS[6] = false;
@@ -1426,6 +1439,9 @@ namespace Stick_RPG_Fight
                         RETROCEDERselect = false;
                         ESCUDOselect = false;
                         VENTOselect = false;
+
+                        //desabilitar o poder (qnd mudar pra outro poder) - nao gerando conflito
+                        P1.PODER = false;
 
                         //descelecionar outros itens do mesmo grupo
                         SELECIONADOS[5] = false;

@@ -693,7 +693,7 @@ namespace Stick_RPG_Fight
 
 
 
-            if (P1.PODER)
+            if (P1.PODERretroceder || P1.PODERslow)
             {
                 spriteBatch.Draw(Contexto.Fundo.imgfundopoder, JANELA.J.FUNDO, Color.White);
             }

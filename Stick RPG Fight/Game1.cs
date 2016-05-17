@@ -489,6 +489,7 @@ namespace Stick_RPG_Fight
                     P1.MOV(WidthTela, HeightTela, aleatório); // tudo sobre movimentação (+metodos)
                     P1.RPGatualização(WidthTela, HeightTela); //atualiza os dados
                     P1.Luta(WidthTela, HeightTela, aleatório); // atualiza a posição, tamanho, frames
+                    ESCUDO.e.POS(WidthTela, HeightTela, P1, listai1); //poder escudo (posição)
 
                     if (Contexto.Fase[0])
                     {
@@ -540,7 +541,8 @@ namespace Stick_RPG_Fight
                                 listai1[i].INTELIGENCIA(WidthTela, HeightTela, P1, listai1, aleatório);
                             }
                             //gerador de inimigos
-                            if (TempoParaInimigos == 500)
+                            TempoParaInimigos++;
+                            if (TempoParaInimigos >= 300)
                             {
                                 for (int G = 0; G < JANELA.J.qtddOLEADA; G++)
                                 {
@@ -553,10 +555,7 @@ namespace Stick_RPG_Fight
                                 TempoParaInimigos = 0;
                                 JANELA.J.qtddOLEADA++;
                             }
-                            else
-                            {
-                                TempoParaInimigos++;
-                            }
+                            
                             slowmotion = 0;
                         }
                         else
@@ -573,7 +572,7 @@ namespace Stick_RPG_Fight
                             contagemGERADOR++;
                         }
 
-                    }
+                    }//fim poder slow
                     else
                     {
                         //mov do bot
@@ -583,7 +582,8 @@ namespace Stick_RPG_Fight
                             listai1[i].INTELIGENCIA(WidthTela, HeightTela, P1, listai1, aleatório);
                         }
                         //gerador de inimigos
-                        if (TempoParaInimigos == 500)
+                        TempoParaInimigos++;
+                        if (TempoParaInimigos >= 300)
                         {
                             for (int G = 0; G < JANELA.J.qtddOLEADA; G++)
                             {
@@ -596,12 +596,7 @@ namespace Stick_RPG_Fight
                             JANELA.J.qtddOLEADA++;
                             TempoParaInimigos = 0;
                         }
-                        else
-                        {
-                            TempoParaInimigos++;
-                        }
-
-                        P1.listaclonePoder.Clear();
+                        P1.listaclonePoder.Clear(); // apagam os clones qnd n tiver mais poder
                     }
 
 
@@ -624,7 +619,7 @@ namespace Stick_RPG_Fight
                     {
                         P1.energia += 2;
                     }
-                    if (P1.mana < P1.manaTOTAL && !P1.PODER)
+                    if (P1.mana < P1.manaTOTAL && (!P1.PODER || P1.PODERescudo))//regenera tmb com o escudo ligado
                     {
                         if (contagemREGEN >= 2)
                         {
@@ -638,16 +633,15 @@ namespace Stick_RPG_Fight
                     }
 
                     //ATIVAR PODER QUE ESTIVER DESTRAVADO
-                    if (Keyboard.GetState().IsKeyDown(Keys.NumPad5) && !P1.PODER && P1.mana >= 75)
+                    if (Keyboard.GetState().IsKeyDown(Keys.NumPad5) && (!P1.PODER || P1.PODERescudo))
                     {
                         P1.PODER = true;
                         //MediaPlayer.Play(AUDIO.PODERsong);
-                        
 
-                        if (JANELA.J.SLOWselect)
+                        //SLOW
+                        if (JANELA.J.SLOWselect && P1.mana >= 75)
                         {
                             P1.PODERslow = true;
-
                             //
                             P1.VISUPODER(); // criar efeito especial
                             P1.COLIDINDOdireita = false; // não ter colisao
@@ -657,6 +651,9 @@ namespace Stick_RPG_Fight
                         {
                             P1.PODERslow = false;
                         }
+                        //RETROCEDER
+                        //ESCUDO
+                        ESCUDO.e.ATIVAR(P1);
                     }
                     if (!P1.PODER)
                     {
@@ -767,7 +764,9 @@ namespace Stick_RPG_Fight
 
                 DRAW.DrawCombate(spriteBatch, P1, listai1, FlechaD, FlechaE, imgFlechaD, imgFlechaE, menu, HUDfont, WidthTela, HeightTela, imgSangue, i1, DefineAgua, BARfont); //RESUMAO
                 DRAW.DrawDano(spriteBatch, P1);// dano na tela (ou cura)
-                DRAW.DrawCLONES(spriteBatch, P1); // PODER
+                //poderes
+                DRAW.DrawCLONES(spriteBatch, P1); // PODER clones
+                ESCUDO.e.Draw(spriteBatch, P1);
                 DRAW.DrawCOMBOS(spriteBatch, WidthTela, HeightTela, P1); // face dos combos (mostrando)
 
                 spriteBatch.DrawString(menu, "LISTA: " + listai1.Count, new Vector2(0, Window.ClientBounds.Height - 15), Color.Black); //teste

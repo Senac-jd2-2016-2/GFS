@@ -22,6 +22,8 @@ namespace Stick_RPG_Fight
             Info.I.img = content.Load<Texture2D>("Info");
 
             VENTO.V.Vento = content.Load<Texture2D>("Vento Spritesheet");
+            RAIO.r.Raio = content.Load<Texture2D>("Raio Spritesheet");
+            ESCUDO.e.img = content.Load<Texture2D>("Escudo Poder");
 
             Audio.A1.imgbarra = content.Load<Texture2D>("volume barra");
             Audio.A1.imgpino = content.Load<Texture2D>("volumeB");
@@ -117,6 +119,7 @@ namespace Stick_RPG_Fight
             Audio.A1.GRITOVENCEDOR = content.Load<SoundEffect>("Grito de vencedor");
             Audio.A1.pop = content.Load<SoundEffect>("POP Echo");
             Audio.A1.LEITEganho = content.Load<SoundEffect>("SPLAT Crush 01");
+            Audio.A1.EscudoSom = content.Load<SoundEffect>("escudo Audio");
 
             //botoes statics
             Botao.imgcomercioOFF = content.Load<Texture2D>("comercioOFF");

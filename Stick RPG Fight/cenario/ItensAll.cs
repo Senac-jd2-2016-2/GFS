@@ -115,7 +115,7 @@ namespace Stick_RPG_Fight
                 //ENTRADA
             for (int i = 0; i < JANELA.J.listaitensall.Count; i++)
             {
-                if (!JANELA.J.listaitensall[i].ABASELECIONADA && !ItensAll.a.ABATRANCADA && i < 5)//se nao tiver nenhuma aba selecionada (possibilita a voce clicar nos itens)
+                if (!JANELA.J.listaitensall[i].ABASELECIONADA && !ItensAll.a.ABATRANCADA && i < 5 && (JANELA.J.PODERES || JANELA.J.PET || JANELA.J.ARMAS))//se nao tiver nenhuma aba selecionada (possibilita a voce clicar nos itens)
                 {
                     if (JANELA.J.listaitensall[i].Item.Contains(mousePosition) && Mouse.GetState().LeftButton == ButtonState.Pressed)
                     {
@@ -325,7 +325,8 @@ namespace Stick_RPG_Fight
                                 }
                             }
                             if (JANELA.J.PODERES)
-                            { 
+                            {
+                                P1.PODER = false;
                                 // 5 - 9
                                 if (i == 0)
                                 {
@@ -512,7 +513,7 @@ namespace Stick_RPG_Fight
                                 spriteBatch.DrawString(JANELA.J.Neon15, "Entre rápido e lento, porém com bastante dano.", new Vector2(JANELA.J.janelaall.X + JANELA.J.janelaall.Width / 30, JANELA.J.janelaall.Y + JANELA.J.janelaall.Height / 14 + 60), Color.Gray);
 
                                 spriteBatch.DrawString(JANELA.J.Neon, "PREÇOS:", new Vector2(JANELA.J.janelaall.X + JANELA.J.janelaall.Width / 16, JANELA.J.janelaall.Y + JANELA.J.janelaall.Height / 14 + 100), Color.DarkGray);
-                                spriteBatch.DrawString(JANELA.J.Neon15, "COMBOS: 0, LEITE: 0, HONRA: 0", new Vector2(JANELA.J.janelaall.X + JANELA.J.janelaall.Width / 30, JANELA.J.janelaall.Y + JANELA.J.janelaall.Height / 14 + 130), Color.Gray);
+                                spriteBatch.DrawString(JANELA.J.Neon15, "COMBOS: 1000, LEITE: 0, HONRA: 0", new Vector2(JANELA.J.janelaall.X + JANELA.J.janelaall.Width / 30, JANELA.J.janelaall.Y + JANELA.J.janelaall.Height / 14 + 130), Color.Gray);
                             }
                             if (i == 2)
                             {
@@ -521,7 +522,7 @@ namespace Stick_RPG_Fight
                                 spriteBatch.DrawString(JANELA.J.Neon15, "Extremamente rápido e ágil, porém com pouco dano", new Vector2(JANELA.J.janelaall.X + JANELA.J.janelaall.Width / 30, JANELA.J.janelaall.Y + JANELA.J.janelaall.Height / 14 + 60), Color.Gray);
 
                                 spriteBatch.DrawString(JANELA.J.Neon, "PREÇOS:", new Vector2(JANELA.J.janelaall.X + JANELA.J.janelaall.Width / 16, JANELA.J.janelaall.Y + JANELA.J.janelaall.Height / 14 + 100), Color.DarkGray);
-                                spriteBatch.DrawString(JANELA.J.Neon15, "COMBOS: 0, LEITE: 0, HONRA: 0", new Vector2(JANELA.J.janelaall.X + JANELA.J.janelaall.Width / 30, JANELA.J.janelaall.Y + JANELA.J.janelaall.Height / 14 + 130), Color.Gray);
+                                spriteBatch.DrawString(JANELA.J.Neon15, "COMBOS: 20000, LEITE: 50, HONRA: 10", new Vector2(JANELA.J.janelaall.X + JANELA.J.janelaall.Width / 30, JANELA.J.janelaall.Y + JANELA.J.janelaall.Height / 14 + 130), Color.Gray);
                             }
                             if (i == 3)
                             {
@@ -530,7 +531,7 @@ namespace Stick_RPG_Fight
                                 spriteBatch.DrawString(JANELA.J.Neon15, "Lento, porém causa bastante dano a distância", new Vector2(JANELA.J.janelaall.X + JANELA.J.janelaall.Width / 30, JANELA.J.janelaall.Y + JANELA.J.janelaall.Height / 14 + 60), Color.Gray);
                                 
                                 spriteBatch.DrawString(JANELA.J.Neon, "PREÇOS:", new Vector2(JANELA.J.janelaall.X + JANELA.J.janelaall.Width / 16, JANELA.J.janelaall.Y + JANELA.J.janelaall.Height / 14 + 100), Color.DarkGray);
-                                spriteBatch.DrawString(JANELA.J.Neon15, "COMBOS: 0, LEITE: 0, HONRA: 0", new Vector2(JANELA.J.janelaall.X + JANELA.J.janelaall.Width / 30, JANELA.J.janelaall.Y + JANELA.J.janelaall.Height / 14 + 130), Color.Gray);
+                                spriteBatch.DrawString(JANELA.J.Neon15, "COMBOS: 10000, LEITE: 300, HONRA: 55", new Vector2(JANELA.J.janelaall.X + JANELA.J.janelaall.Width / 30, JANELA.J.janelaall.Y + JANELA.J.janelaall.Height / 14 + 130), Color.Gray);
                             }
                             if (i == 4)
                             {
@@ -539,7 +540,7 @@ namespace Stick_RPG_Fight
                                 spriteBatch.DrawString(JANELA.J.Neon15, "Rápido, longo e poderoso, porém pouco ágil", new Vector2(JANELA.J.janelaall.X + JANELA.J.janelaall.Width / 30, JANELA.J.janelaall.Y + JANELA.J.janelaall.Height / 14 + 60), Color.Gray);
                                 
                                 spriteBatch.DrawString(JANELA.J.Neon, "PREÇOS:", new Vector2(JANELA.J.janelaall.X + JANELA.J.janelaall.Width / 16, JANELA.J.janelaall.Y + JANELA.J.janelaall.Height / 14 + 100), Color.DarkGray);
-                                spriteBatch.DrawString(JANELA.J.Neon15, "COMBOS: 0, LEITE: 0, HONRA: 0", new Vector2(JANELA.J.janelaall.X + JANELA.J.janelaall.Width / 30, JANELA.J.janelaall.Y + JANELA.J.janelaall.Height / 14 + 130), Color.Gray);
+                                spriteBatch.DrawString(JANELA.J.Neon15, "COMBOS: 35000, LEITE: 50, HONRA: 200", new Vector2(JANELA.J.janelaall.X + JANELA.J.janelaall.Width / 30, JANELA.J.janelaall.Y + JANELA.J.janelaall.Height / 14 + 130), Color.Gray);
                             }
                         }
                         if (JANELA.J.PODERES)
@@ -549,7 +550,7 @@ namespace Stick_RPG_Fight
                                 spriteBatch.DrawString(JANELA.J.Firefont, "SLOW", new Vector2(JANELA.J.janelaall.X + JANELA.J.janelaall.Width / 2 - JANELA.J.janelaall.Width / 8, JANELA.J.janelaall.Y + JANELA.J.janelaall.Height / 16), Color.Black);
                                 spriteBatch.DrawString(JANELA.J.Neon, "DEFINIÇÃO:", new Vector2(JANELA.J.janelaall.X + JANELA.J.janelaall.Width / 16, JANELA.J.janelaall.Y + JANELA.J.janelaall.Height / 14 + 30), Color.DarkGray);
                                 spriteBatch.DrawString(JANELA.J.Neon15, "Faça o tempo andar lento para os inimigos. Perfeito para fuga. A mana se esgoda com o ", new Vector2(JANELA.J.janelaall.X + JANELA.J.janelaall.Width / 30, JANELA.J.janelaall.Y + JANELA.J.janelaall.Height / 14 + 60), Color.Gray);
-                                spriteBatch.DrawString(JANELA.J.Neon15, "tempo. Custa mínimo de 70 mana.", new Vector2(JANELA.J.janelaall.X + JANELA.J.janelaall.Width / 30, JANELA.J.janelaall.Y + JANELA.J.janelaall.Height / 14 + 80), Color.Gray);
+                                spriteBatch.DrawString(JANELA.J.Neon15, "tempo. Custo mínimo de 70 mana.", new Vector2(JANELA.J.janelaall.X + JANELA.J.janelaall.Width / 30, JANELA.J.janelaall.Y + JANELA.J.janelaall.Height / 14 + 80), Color.Gray);
                                
                                 spriteBatch.DrawString(JANELA.J.Neon, "PREÇOS:", new Vector2(JANELA.J.janelaall.X + JANELA.J.janelaall.Width / 16, JANELA.J.janelaall.Y + JANELA.J.janelaall.Height / 14 + 120), Color.DarkGray);
                                 spriteBatch.DrawString(JANELA.J.Neon15, "COMBOS: 0, LEITE: 0, HONRA: 0", new Vector2(JANELA.J.janelaall.X + JANELA.J.janelaall.Width / 30, JANELA.J.janelaall.Y + JANELA.J.janelaall.Height / 14 + 150), Color.Gray);
@@ -563,7 +564,7 @@ namespace Stick_RPG_Fight
                                 spriteBatch.DrawString(JANELA.J.Neon15, "quantidade de vida perdida. Custa 50% do mana.", new Vector2(JANELA.J.janelaall.X + JANELA.J.janelaall.Width / 30, JANELA.J.janelaall.Y + JANELA.J.janelaall.Height / 14 + 100), Color.Gray);
                                 
                                 spriteBatch.DrawString(JANELA.J.Neon, "PREÇOS:", new Vector2(JANELA.J.janelaall.X + JANELA.J.janelaall.Width / 16, JANELA.J.janelaall.Y + JANELA.J.janelaall.Height / 14 + 140), Color.DarkGray);
-                                spriteBatch.DrawString(JANELA.J.Neon15, "COMBOS: 0, LEITE: 0, HONRA: 0", new Vector2(JANELA.J.janelaall.X + JANELA.J.janelaall.Width / 30, JANELA.J.janelaall.Y + JANELA.J.janelaall.Height / 14 + 170), Color.Gray);
+                                spriteBatch.DrawString(JANELA.J.Neon15, "COMBOS: 500, LEITE: 200, HONRA: 10", new Vector2(JANELA.J.janelaall.X + JANELA.J.janelaall.Width / 30, JANELA.J.janelaall.Y + JANELA.J.janelaall.Height / 14 + 170), Color.Gray);
                             }
                             if (i == 2)
                             {
@@ -572,10 +573,10 @@ namespace Stick_RPG_Fight
                                 spriteBatch.DrawString(JANELA.J.Neon15, "Te protege do dano inimigo ou/e acerta 1 de dano, 60 vezes por segundo. Todo dano acertado ", new Vector2(JANELA.J.janelaall.X + JANELA.J.janelaall.Width / 30, JANELA.J.janelaall.Y + JANELA.J.janelaall.Height / 14 + 60), Color.Gray);
                                 spriteBatch.DrawString(JANELA.J.Neon15, "desgasta a quantidade do escudo. A quantidade do escudo é definido pela quantidade de mana", new Vector2(JANELA.J.janelaall.X + JANELA.J.janelaall.Width / 30, JANELA.J.janelaall.Y + JANELA.J.janelaall.Height / 14 + 80), Color.Gray);
                                 spriteBatch.DrawString(JANELA.J.Neon15, "ao ativá-lo. Após 5 segudos ele desativa, se reativa-lo durante esse período irá somar na ", new Vector2(JANELA.J.janelaall.X + JANELA.J.janelaall.Width / 30, JANELA.J.janelaall.Y + JANELA.J.janelaall.Height / 14 + 100), Color.Gray);
-                                spriteBatch.DrawString(JANELA.J.Neon15, "quantidade de poder do escudo e recarregar o tempo. Custa minimo de 10 mana.", new Vector2(JANELA.J.janelaall.X + JANELA.J.janelaall.Width / 30, JANELA.J.janelaall.Y + JANELA.J.janelaall.Height / 14 + 120), Color.Gray);
+                                spriteBatch.DrawString(JANELA.J.Neon15, "quantidade de poder do escudo e recarregar o tempo. Custo mínimo de 10 mana.", new Vector2(JANELA.J.janelaall.X + JANELA.J.janelaall.Width / 30, JANELA.J.janelaall.Y + JANELA.J.janelaall.Height / 14 + 120), Color.Gray);
                                
                                 spriteBatch.DrawString(JANELA.J.Neon, "PREÇOS:", new Vector2(JANELA.J.janelaall.X + JANELA.J.janelaall.Width / 16, JANELA.J.janelaall.Y + JANELA.J.janelaall.Height / 14 + 160), Color.DarkGray);
-                                spriteBatch.DrawString(JANELA.J.Neon15, "COMBOS: 0, LEITE: 0, HONRA: 0", new Vector2(JANELA.J.janelaall.X + JANELA.J.janelaall.Width / 30, JANELA.J.janelaall.Y + JANELA.J.janelaall.Height / 14 + 190), Color.Gray);
+                                spriteBatch.DrawString(JANELA.J.Neon15, "COMBOS: 1000, LEITE: 300, HONRA: 150", new Vector2(JANELA.J.janelaall.X + JANELA.J.janelaall.Width / 30, JANELA.J.janelaall.Y + JANELA.J.janelaall.Height / 14 + 190), Color.Gray);
 
                             }
                             if (i == 3)
@@ -583,21 +584,21 @@ namespace Stick_RPG_Fight
                                 spriteBatch.DrawString(JANELA.J.Firefont, "VENTO", new Vector2(JANELA.J.janelaall.X + JANELA.J.janelaall.Width / 2 - JANELA.J.janelaall.Width / 8, JANELA.J.janelaall.Y + JANELA.J.janelaall.Height / 16), Color.Black);
                                 spriteBatch.DrawString(JANELA.J.Neon, "DEFINIÇÃO:", new Vector2(JANELA.J.janelaall.X + JANELA.J.janelaall.Width / 16, JANELA.J.janelaall.Y + JANELA.J.janelaall.Height / 14 + 30), Color.DarkGray);
                                 spriteBatch.DrawString(JANELA.J.Neon15, "Solta uma rajada de vento que irá empurrar os inimigos na direção que ele está indo e tira", new Vector2(JANELA.J.janelaall.X + JANELA.J.janelaall.Width / 30, JANELA.J.janelaall.Y + JANELA.J.janelaall.Height / 14 + 60), Color.Gray);
-                                spriteBatch.DrawString(JANELA.J.Neon15, " 1 de dano 60x por segundo. Perfeito pra quem estiver encurralado. Custa 30% de mana.", new Vector2(JANELA.J.janelaall.X + JANELA.J.janelaall.Width / 30, JANELA.J.janelaall.Y + JANELA.J.janelaall.Height / 14 + 80), Color.Gray);
+                                spriteBatch.DrawString(JANELA.J.Neon15, " 1 de dano 60x por segundo ao encostar. Perfeito pra quem estiver encurralado. Custa 30% de mana.", new Vector2(JANELA.J.janelaall.X + JANELA.J.janelaall.Width / 30, JANELA.J.janelaall.Y + JANELA.J.janelaall.Height / 14 + 80), Color.Gray);
                                 
                                 spriteBatch.DrawString(JANELA.J.Neon, "PREÇOS:", new Vector2(JANELA.J.janelaall.X + JANELA.J.janelaall.Width / 16, JANELA.J.janelaall.Y + JANELA.J.janelaall.Height / 14 + 120), Color.DarkGray);
-                                spriteBatch.DrawString(JANELA.J.Neon15, "COMBOS: 0, LEITE: 0, HONRA: 0", new Vector2(JANELA.J.janelaall.X + JANELA.J.janelaall.Width / 30, JANELA.J.janelaall.Y + JANELA.J.janelaall.Height / 14 + 150), Color.Gray);
+                                spriteBatch.DrawString(JANELA.J.Neon15, "COMBOS: 30000, LEITE: 100, HONRA: 50", new Vector2(JANELA.J.janelaall.X + JANELA.J.janelaall.Width / 30, JANELA.J.janelaall.Y + JANELA.J.janelaall.Height / 14 + 150), Color.Gray);
                             }
                             if (i == 4)
                             {
                                 spriteBatch.DrawString(JANELA.J.Firefont, "RAIO", new Vector2(JANELA.J.janelaall.X + JANELA.J.janelaall.Width / 2 - JANELA.J.janelaall.Width / 8, JANELA.J.janelaall.Y + JANELA.J.janelaall.Height / 16), Color.Black);
                                 spriteBatch.DrawString(JANELA.J.Neon, "DEFINIÇÃO:", new Vector2(JANELA.J.janelaall.X + JANELA.J.janelaall.Width / 16, JANELA.J.janelaall.Y + JANELA.J.janelaall.Height / 14 + 30), Color.DarkGray);
                                 spriteBatch.DrawString(JANELA.J.Neon15, "Faz com que caiam raios na direção que estiver, um após o outro. Quando um raio atingir o ", new Vector2(JANELA.J.janelaall.X + JANELA.J.janelaall.Width / 30, JANELA.J.janelaall.Y + JANELA.J.janelaall.Height / 14 + 60), Color.Gray);
-                                spriteBatch.DrawString(JANELA.J.Neon15, "chão o outro será lançado até esgotar o mana. Perfeito para matar inimgos em área. Custa", new Vector2(JANELA.J.janelaall.X + JANELA.J.janelaall.Width / 30, JANELA.J.janelaall.Y + JANELA.J.janelaall.Height / 14 + 80), Color.Gray);
+                                spriteBatch.DrawString(JANELA.J.Neon15, "chão o outro será lançado até esgotar o mana. Perfeito para matar inimigos em área. Custa", new Vector2(JANELA.J.janelaall.X + JANELA.J.janelaall.Width / 30, JANELA.J.janelaall.Y + JANELA.J.janelaall.Height / 14 + 80), Color.Gray);
                                 spriteBatch.DrawString(JANELA.J.Neon15, "10% de mana cada raio criado.", new Vector2(JANELA.J.janelaall.X + JANELA.J.janelaall.Width / 30, JANELA.J.janelaall.Y + JANELA.J.janelaall.Height / 14 + 100), Color.Gray);
 
                                 spriteBatch.DrawString(JANELA.J.Neon, "PREÇOS:", new Vector2(JANELA.J.janelaall.X + JANELA.J.janelaall.Width / 16, JANELA.J.janelaall.Y + JANELA.J.janelaall.Height / 14 + 140), Color.DarkGray);
-                                spriteBatch.DrawString(JANELA.J.Neon15, "COMBOS: 0, LEITE: 0, HONRA: 0", new Vector2(JANELA.J.janelaall.X + JANELA.J.janelaall.Width / 30, JANELA.J.janelaall.Y + JANELA.J.janelaall.Height / 14 + 190), Color.Gray);
+                                spriteBatch.DrawString(JANELA.J.Neon15, "COMBOS: 10500, LEITE: 500, HONRA: 350", new Vector2(JANELA.J.janelaall.X + JANELA.J.janelaall.Width / 30, JANELA.J.janelaall.Y + JANELA.J.janelaall.Height / 14 + 190), Color.Gray);
                             }
                         }
 
@@ -664,6 +665,8 @@ namespace Stick_RPG_Fight
                                 spriteBatch.DrawString(JANELA.J.Neon15, "Faça o tempo andar lento para os inimigos. Perfeito para fuga. A mana se esgoda com o ", new Vector2(JANELA.J.janelaall.X + JANELA.J.janelaall.Width / 30, JANELA.J.janelaall.Y + JANELA.J.janelaall.Height / 14 + 60), Color.Gray);
                                 spriteBatch.DrawString(JANELA.J.Neon15, "tempo. Custa mínimo de 70 mana.", new Vector2(JANELA.J.janelaall.X + JANELA.J.janelaall.Width / 30, JANELA.J.janelaall.Y + JANELA.J.janelaall.Height / 14 + 80), Color.Gray);
 
+                                spriteBatch.DrawString(JANELA.J.Neon, "MANUAL (tecla):", new Vector2(JANELA.J.janelaall.X + JANELA.J.janelaall.Width / 16, JANELA.J.janelaall.Y + JANELA.J.janelaall.Height / 14 + 120), Color.DarkGray);
+                                spriteBatch.DrawString(JANELA.J.Neon15, "(Num Ped) 5", new Vector2(JANELA.J.janelaall.X + JANELA.J.janelaall.Width / 30, JANELA.J.janelaall.Y + JANELA.J.janelaall.Height / 14 + 150), Color.Gray);
                             }
                             if (i == 1)
                             {
@@ -673,6 +676,8 @@ namespace Stick_RPG_Fight
                                 spriteBatch.DrawString(JANELA.J.Neon15, "Caso tenha recuperado vida, cuidado. Perfeito pra evitar a morte, ou restaurar grande ", new Vector2(JANELA.J.janelaall.X + JANELA.J.janelaall.Width / 30, JANELA.J.janelaall.Y + JANELA.J.janelaall.Height / 14 + 80), Color.Gray);
                                 spriteBatch.DrawString(JANELA.J.Neon15, "quantidade de vida perdida. Custa 50% do mana.", new Vector2(JANELA.J.janelaall.X + JANELA.J.janelaall.Width / 30, JANELA.J.janelaall.Y + JANELA.J.janelaall.Height / 14 + 100), Color.Gray);
 
+                                spriteBatch.DrawString(JANELA.J.Neon, "MANUAL (tecla):", new Vector2(JANELA.J.janelaall.X + JANELA.J.janelaall.Width / 16, JANELA.J.janelaall.Y + JANELA.J.janelaall.Height / 14 + 140), Color.DarkGray);
+                                spriteBatch.DrawString(JANELA.J.Neon15, "(Num Ped) 5", new Vector2(JANELA.J.janelaall.X + JANELA.J.janelaall.Width / 30, JANELA.J.janelaall.Y + JANELA.J.janelaall.Height / 14 + 170), Color.Gray);
                             }
                             if (i == 2)
                             {
@@ -681,17 +686,20 @@ namespace Stick_RPG_Fight
                                 spriteBatch.DrawString(JANELA.J.Neon15, "Te protege do dano inimigo ou/e acerta 1 de dano, 60 vezes por segundo. Todo dano acertado ", new Vector2(JANELA.J.janelaall.X + JANELA.J.janelaall.Width / 30, JANELA.J.janelaall.Y + JANELA.J.janelaall.Height / 14 + 60), Color.Gray);
                                 spriteBatch.DrawString(JANELA.J.Neon15, "desgasta a quantidade do escudo. A quantidade do escudo é definido pela quantidade de mana", new Vector2(JANELA.J.janelaall.X + JANELA.J.janelaall.Width / 30, JANELA.J.janelaall.Y + JANELA.J.janelaall.Height / 14 + 80), Color.Gray);
                                 spriteBatch.DrawString(JANELA.J.Neon15, "ao ativá-lo. Após 5 segudos ele desativa, se reativa-lo durante esse período irá somar na ", new Vector2(JANELA.J.janelaall.X + JANELA.J.janelaall.Width / 30, JANELA.J.janelaall.Y + JANELA.J.janelaall.Height / 14 + 100), Color.Gray);
-                                spriteBatch.DrawString(JANELA.J.Neon15, "quantidade de poder do escudo e recarregar o tempo. Custa minimo de 10 mana.", new Vector2(JANELA.J.janelaall.X + JANELA.J.janelaall.Width / 30, JANELA.J.janelaall.Y + JANELA.J.janelaall.Height / 14 + 120), Color.Gray);
+                                spriteBatch.DrawString(JANELA.J.Neon15, "quantidade de poder do escudo e recarregar o tempo. Custo mínimo de 10 mana.", new Vector2(JANELA.J.janelaall.X + JANELA.J.janelaall.Width / 30, JANELA.J.janelaall.Y + JANELA.J.janelaall.Height / 14 + 120), Color.Gray);
 
-
+                                spriteBatch.DrawString(JANELA.J.Neon, "MANUAL (tecla):", new Vector2(JANELA.J.janelaall.X + JANELA.J.janelaall.Width / 16, JANELA.J.janelaall.Y + JANELA.J.janelaall.Height / 14 + 160), Color.DarkGray);
+                                spriteBatch.DrawString(JANELA.J.Neon15, "(Num Ped) 5", new Vector2(JANELA.J.janelaall.X + JANELA.J.janelaall.Width / 30, JANELA.J.janelaall.Y + JANELA.J.janelaall.Height / 14 + 200), Color.Gray);
                             }
                             if (i == 3)
                             {
                                 spriteBatch.DrawString(JANELA.J.Firefont, "VENTO", new Vector2(JANELA.J.janelaall.X + JANELA.J.janelaall.Width / 2 - JANELA.J.janelaall.Width / 8, JANELA.J.janelaall.Y + JANELA.J.janelaall.Height / 16), Color.Black);
                                 spriteBatch.DrawString(JANELA.J.Neon, "DEFINIÇÃO:", new Vector2(JANELA.J.janelaall.X + JANELA.J.janelaall.Width / 16, JANELA.J.janelaall.Y + JANELA.J.janelaall.Height / 14 + 30), Color.DarkGray);
                                 spriteBatch.DrawString(JANELA.J.Neon15, "Solta uma rajada de vento que irá empurrar os inimigos na direção que ele está indo e tira", new Vector2(JANELA.J.janelaall.X + JANELA.J.janelaall.Width / 30, JANELA.J.janelaall.Y + JANELA.J.janelaall.Height / 14 + 60), Color.Gray);
-                                spriteBatch.DrawString(JANELA.J.Neon15, " 1 de dano 60x por segundo. Perfeito pra quem estiver encurralado. Custa 30% de mana.", new Vector2(JANELA.J.janelaall.X + JANELA.J.janelaall.Width / 30, JANELA.J.janelaall.Y + JANELA.J.janelaall.Height / 14 + 80), Color.Gray);
+                                spriteBatch.DrawString(JANELA.J.Neon15, " 1 de dano 60x por segundo ao encostar. Perfeito pra quem estiver encurralado. Custa 30% de mana.", new Vector2(JANELA.J.janelaall.X + JANELA.J.janelaall.Width / 30, JANELA.J.janelaall.Y + JANELA.J.janelaall.Height / 14 + 80), Color.Gray);
 
+                                spriteBatch.DrawString(JANELA.J.Neon, "MANUAL (tecla):", new Vector2(JANELA.J.janelaall.X + JANELA.J.janelaall.Width / 16, JANELA.J.janelaall.Y + JANELA.J.janelaall.Height / 14 + 120), Color.DarkGray);
+                                spriteBatch.DrawString(JANELA.J.Neon15, "(Num Ped) 5", new Vector2(JANELA.J.janelaall.X + JANELA.J.janelaall.Width / 30, JANELA.J.janelaall.Y + JANELA.J.janelaall.Height / 14 + 150), Color.Gray);
                             }
                             if (i == 4)
                             {
@@ -700,6 +708,9 @@ namespace Stick_RPG_Fight
                                 spriteBatch.DrawString(JANELA.J.Neon15, "Faz com que caiam raios na direção que estiver, um após o outro. Quando um raio atingir o ", new Vector2(JANELA.J.janelaall.X + JANELA.J.janelaall.Width / 30, JANELA.J.janelaall.Y + JANELA.J.janelaall.Height / 14 + 60), Color.Gray);
                                 spriteBatch.DrawString(JANELA.J.Neon15, "chão o outro será lançado até esgotar o mana. Perfeito para matar inimgos em área. Custa", new Vector2(JANELA.J.janelaall.X + JANELA.J.janelaall.Width / 30, JANELA.J.janelaall.Y + JANELA.J.janelaall.Height / 14 + 80), Color.Gray);
                                 spriteBatch.DrawString(JANELA.J.Neon15, "10% de mana cada raio criado.", new Vector2(JANELA.J.janelaall.X + JANELA.J.janelaall.Width / 30, JANELA.J.janelaall.Y + JANELA.J.janelaall.Height / 14 + 100), Color.Gray);
+
+                                spriteBatch.DrawString(JANELA.J.Neon, "MANUAL (tecla):", new Vector2(JANELA.J.janelaall.X + JANELA.J.janelaall.Width / 16, JANELA.J.janelaall.Y + JANELA.J.janelaall.Height / 14 + 140), Color.DarkGray);
+                                spriteBatch.DrawString(JANELA.J.Neon15, "(Num Ped) 5", new Vector2(JANELA.J.janelaall.X + JANELA.J.janelaall.Width / 30, JANELA.J.janelaall.Y + JANELA.J.janelaall.Height / 14 + 170), Color.Gray);
                             }
                         }
 

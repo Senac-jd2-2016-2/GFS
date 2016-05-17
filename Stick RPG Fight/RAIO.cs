@@ -11,12 +11,11 @@ using System.Text;
 
 namespace Stick_RPG_Fight
 {
-    class VENTO
+    class RAIO
     {
-        public static VENTO V = new VENTO();
-        public Texture2D Vento;
-        public Point frame = new Point(0, 0), tamanho = new Point(426, 348), spritesheet = new Point(11, 1);
+        public static RAIO r = new RAIO();
+        public Texture2D Raio;
+        public Point frame = new Point(0, 0), tamanho = new Point(146, 458), spritesheet = new Point(10, 1);
         public Rectangle R = new Rectangle();
-        
     }
 }

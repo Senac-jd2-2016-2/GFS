@@ -2134,7 +2134,7 @@ namespace Stick_RPG_Fight
                 if (((P1.DIREITA && (P1.PARTE1 && P1.frameLUTA.Y == 1 && P1.frameLUTA.X == 1) && (!DEFENDENDO && ESQUERDA || DIREITA)) || (P1.ESQUERDA && (P1.PARTE1 && P1.frameLUTA.Y >= 1 && P1.frameLUTA.X == 6) && (!DEFENDENDO && DIREITA || ESQUERDA))) && !P1.INVERSO && !AGACHADO && !RASTEIRA)
                 {//para sangrar / tomar dano apenas qnd estiver em tal parte do ataque
                     vida -= 10;
-                    gerarHUDVidaPerdida(HeightTela/100);
+                    gerarHUDVidaPerdida(HeightTela / 100, P1);
                     P1.GERARdano(this.individuo.X, this.individuo.Y, this.individuo.Width, this.individuo.Height, P1.DIREITA, P1.ESQUERDA, 10, WidthTela, HeightTela, 1); // personagem leva dano (do personagem)
                     HIT1 = true;
                     opçluta = 10; //faz tomar hit e parar tudo
@@ -2169,7 +2169,7 @@ namespace Stick_RPG_Fight
                 if (((P1.DIREITA && (P1.PARTE2 && P1.frameLUTA.X == 4 && P1.frameLUTA.Y == 2) && (!DEFENDENDO && ESQUERDA || DIREITA)) || P1.ESQUERDA && (P1.PARTE2 && P1.frameLUTA.X == 2 && P1.frameLUTA.Y == 2) && (!DEFENDENDO && DIREITA || ESQUERDA)) && P1.COMBO1 && !AGACHADO && !RASTEIRA)
                 {
                     vida -= 20;
-                    gerarHUDVidaPerdida(HeightTela / 52);
+                    gerarHUDVidaPerdida(HeightTela / 52, P1);
                     P1.GERARdano(this.individuo.X, this.individuo.Y, this.individuo.Width, this.individuo.Height, P1.DIREITA, P1.ESQUERDA, 20, WidthTela, HeightTela, 1); // personagem leva dano (do personagem)
                     HIT1 = true;
                     TOMANDOHIT = true;
@@ -2206,7 +2206,7 @@ namespace Stick_RPG_Fight
                 if ((P1.DIREITA && (P1.PARTE3 && P1.frameLUTA.X == 4 && P1.frameLUTA.Y == 3) && (!DEFENDENDO && ESQUERDA || DIREITA) || P1.ESQUERDA && (P1.PARTE3 && (P1.frameLUTA.X == 3 && P1.frameLUTA.Y == 3) && (!DEFENDENDO && DIREITA || ESQUERDA))) && P1.COMBO1 && !RASTEIRA)
                 {
                     vida -= 30;
-                    gerarHUDVidaPerdida(HeightTela / 27);
+                    gerarHUDVidaPerdida(HeightTela / 27, P1);
                     P1.GERARdano(this.individuo.X, this.individuo.Y, this.individuo.Width, this.individuo.Height, P1.DIREITA, P1.ESQUERDA, 30, WidthTela, HeightTela, 1); // personagem leva dano (do personagem)
                     HIT2 = true;
                     TOMANDOHIT = true;
@@ -2242,7 +2242,7 @@ namespace Stick_RPG_Fight
                 if ((P1.DIREITA && P1.PARTE4 && P1.frameLUTA.Y == 4 && P1.frameLUTA.X == 0 && (!DEFENDENDO && ESQUERDA || DIREITA) || P1.ESQUERDA && P1.PARTE4 && P1.frameLUTA.Y == 4 && P1.frameLUTA.X == 7 && (!DEFENDENDO && DIREITA || ESQUERDA)) && P1.COMBO1 && !RASTEIRA)
                 {
                     vida -= 30;
-                    gerarHUDVidaPerdida(HeightTela / 27);
+                    gerarHUDVidaPerdida(HeightTela / 27, P1);
                     P1.GERARdano(this.individuo.X, this.individuo.Y, this.individuo.Width, this.individuo.Height, P1.DIREITA, P1.ESQUERDA, 30, WidthTela, HeightTela, 1); // personagem leva dano (do personagem)
                     HIT2 = true;
 
@@ -2391,7 +2391,7 @@ namespace Stick_RPG_Fight
             }
         }//fim do remover efeito
 
-        public void gerarHUDVidaPerdida(int qtdd)
+        public void gerarHUDVidaPerdida(int qtdd, Personagem P1)
         {
             VIDAperdida V = new VIDAperdida();
 
@@ -2404,7 +2404,7 @@ namespace Stick_RPG_Fight
             this.listavidaperdida.Add(V);
 
             //COMBOS
-            if (!COMBO.c.PONTUAÇÃO) // CASO ESTEJA PONTUANDO -> passou dos 2 segundos.
+            if (!COMBO.c.PONTUAÇÃO && !P1.PODERescudo) // CASO ESTEJA PONTUANDO -> passou dos 2 segundos. (nao faz combo qnd estiver com escudo ativo)
             {
                 COMBO.c.HITS++;
                 COMBO.c.contagem = 0;
