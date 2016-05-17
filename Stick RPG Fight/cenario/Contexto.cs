@@ -23,6 +23,11 @@ namespace Stick_RPG_Fight
 
             VENTO.V.Vento = content.Load<Texture2D>("Vento Spritesheet");
 
+            Audio.A1.imgbarra = content.Load<Texture2D>("volume barra");
+            Audio.A1.imgpino = content.Load<Texture2D>("volumeB");
+            Audio.A1.imgVol1 = content.Load<Texture2D>("volume-");
+            Audio.A1.imgVol2 = content.Load<Texture2D>("volume+");
+
                 //Direito
             P1.imgSpriteSheetparado1 = content.Load<Texture2D>("spritesheet p1 parado1"); // só imagem, logo posso usar isso também pros inimigos.
             P1.imgSpriteSheetparado2 = content.Load<Texture2D>("spritesheet p1 parado2");

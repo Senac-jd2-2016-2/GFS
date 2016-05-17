@@ -356,7 +356,8 @@ namespace Stick_RPG_Fight
                     {
                         IsMouseVisible = true;
 
-
+                        //VOLUME
+                        Audio.A1.POS(Window.ClientBounds.Width, Window.ClientBounds.Height, menu00);
 
                         Entrada.INTROMENU(b1, Bapply, B1, APPLY, Bfull, BFULL, graphics); // tentativa de guardar o codigo em uma classe (fail)
 
@@ -750,6 +751,7 @@ namespace Stick_RPG_Fight
                 if (menu00)
                 {
                     DRAW.Drawmenu00(WidthTela, HeightTela, spriteBatch, imgAPPLY2, imgAPPLY3, imgAPPLY, APPLY, Bapply, B1, imgB1, imgB2, b1, BFULL, menu, Bfull); // resumao
+                    DRAW.DrawAudio(spriteBatch);
                 }
 
                 if (menu01)
