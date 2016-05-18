@@ -86,7 +86,7 @@ namespace Stick_RPG_Fight
         protected override void Initialize()
         {
 
-            Window.Title = "Stick RPG Fight";
+            Window.Title = "Lethal Milker";
 
             aleatório = new Random();
 
@@ -300,6 +300,8 @@ namespace Stick_RPG_Fight
                             Menu.m.SAIRb = false;
                         if (Menu.m.SAIRb && !BOTAO)//botao pra saida
                         {
+                            Menu.m.SAIRb = false;
+                            Savegame.S.Gravacao2();
                             Exit();
                         }
 
@@ -389,6 +391,9 @@ namespace Stick_RPG_Fight
                                 menu00 = false;//sai pro proximo menu
                                 menu01 = true;
 
+                                //
+                                Savegame.S.Leitura(P1); //carrega o jogo antes de começar
+                                Savegame.S.Leitura2(); //leitura feita no começo do game
 
                             }//fim da transição
 
@@ -490,6 +495,7 @@ namespace Stick_RPG_Fight
                     P1.RPGatualização(WidthTela, HeightTela); //atualiza os dados
                     P1.Luta(WidthTela, HeightTela, aleatório); // atualiza a posição, tamanho, frames
                     ESCUDO.e.POS(WidthTela, HeightTela, P1, listai1); //poder escudo (posição)
+                    RETROCEDER.r.FUNÇÃO(P1);
 
                     if (Contexto.Fase[0])
                     {
@@ -654,6 +660,7 @@ namespace Stick_RPG_Fight
                         //RETROCEDER
                         //ESCUDO
                         ESCUDO.e.ATIVAR(P1);
+                        RETROCEDER.r.ATIVAR(P1);
                     }
                     if (!P1.PODER)
                     {

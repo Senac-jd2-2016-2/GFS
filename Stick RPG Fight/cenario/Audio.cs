@@ -35,6 +35,11 @@ namespace Stick_RPG_Fight
 
             if (PRIMEIRAVEZ)
             {
+                VolumeMaximo = 100; //*100 tamanho
+
+                barra.Width = VolumeMaximo;
+                barra.Height = 10;
+
                 barra.X = W / 2 + W / 4;
                 barra.Y = H / 8;
                 PRIMEIRAVEZ = false;

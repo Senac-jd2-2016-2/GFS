@@ -24,8 +24,8 @@ namespace Stick_RPG_Fight
         {
             if (JANELA.J.ESCUDOselect && P1.PODER)
             {
-                R.Width = (H / 3 - H / 67) * 2; //360 - 16 = 344
-                R.Height = (H / 3 - H / 67) * 2; //360 - 16 = 344
+                R.Width = (H / 3 - H / 67); //360 - 16 = 344
+                R.Height = (H / 3 - H / 67); //360 - 16 = 344
                 R.X = P1.individuo.X + P1.individuo.Width / 2 - R.Width / 2;
                 R.Y = P1.individuo.Y + P1.individuo.Height/ 2 - R.Width / 2;
 
