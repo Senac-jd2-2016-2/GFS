@@ -109,6 +109,15 @@ namespace Stick_RPG_Fight
             JANELA.J.CRIARlinhas();//cria se linhas do menu
             Itens.IT.CRIARITENS();//cria se itens da janela cc
             ItensAll.a.Criar();//cria itens para selecionar
+
+            //
+            Savegame.S.Leitura(P1); //carrega o jogo antes de começar
+            Savegame.S.Leitura2(); //leitura feita no começo do game (esse save é feito quando clica em botao SAIR, no menu)
+
+            //faz o save que possa ter, e caso nao tenha, faz a primeira vez
+            Audio.A1.PRIMEIRAvez(Window.ClientBounds.Width, Window.ClientBounds.Height); 
+            
+
             
 
             base.Initialize();
@@ -270,6 +279,7 @@ namespace Stick_RPG_Fight
                     //FORA DE GAME (menu)
                     if (!Menu.m.COMBATES && !Menu.m.CAMPANHA)
                     {
+                        //botao de combate
                         if (Mouse.GetState().LeftButton == ButtonState.Pressed && Menu.m.CombateB.Contains(mousePosition))
                         {
                             BOTAO = true;
@@ -283,11 +293,12 @@ namespace Stick_RPG_Fight
 
                         if (!BOTAO && Menu.m.COMBATEb) //se soltar o botao apos ter clicado encima
                         {
+                            Menu.m.COMBATEb = false;
                             JANELA.J.GERARQuest(aleatório); //cria uma quest antes de entra na fase
                             JANELA.J.OPÇFASES = true;
                             //MediaPlayer.Play(AUDIO.combatesong);
                             MediaPlayer.Pause();
-                            Menu.m.COMBATEb = false;
+                            
                         }
 
                         //sair
@@ -391,9 +402,8 @@ namespace Stick_RPG_Fight
                                 menu00 = false;//sai pro proximo menu
                                 menu01 = true;
 
-                                //
-                                Savegame.S.Leitura(P1); //carrega o jogo antes de começar
-                                Savegame.S.Leitura2(); //leitura feita no começo do game
+                                
+                               
 
                             }//fim da transição
 
@@ -409,7 +419,7 @@ namespace Stick_RPG_Fight
                     if (menu01)
                     {
                         var WidthTela = Window.ClientBounds.Width;
-                        var HeightTela = Window.ClientBounds.Height;
+                        var HeightTela = Window.ClientBounds.Height;    
 
                         JANELA.J.POSIÇÃOPAUSE(WidthTela, HeightTela);
                         if (UMAVEZ)
@@ -518,7 +528,8 @@ namespace Stick_RPG_Fight
                         else if (P1.mana <= 0)
                         {
                             P1.PODER = false;
-                            //MediaPlayer.Play(AUDIO.combatesong);
+                            P1.listaclonePoder.Clear(); // apagam os clones qnd n tiver mais poder
+                            
                         }
 
                         P1.POSIÇÃOdoCLONE(P1);
@@ -602,7 +613,7 @@ namespace Stick_RPG_Fight
                             JANELA.J.qtddOLEADA++;
                             TempoParaInimigos = 0;
                         }
-                        P1.listaclonePoder.Clear(); // apagam os clones qnd n tiver mais poder
+                        
                     }
 
 

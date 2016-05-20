@@ -204,6 +204,7 @@ namespace Stick_RPG_Fight
 
         //sobre clones (poder 1 e 2)
         public Point POSmapacapturado = new Point(0, 0);
+        public Point POSp1capturado = new Point(0, 0);
         
         //gastos
         public int TRINTAporcento, DEZporcento, CINQUENTAporcento;
@@ -1737,6 +1738,7 @@ namespace Stick_RPG_Fight
             //atualizar posiçao
             clone.individuo.X = P1.individuo.X;
             clone.individuo.Y = P1.individuo.Y;
+            
             clone.individuo.Width = P1.individuo.Width;
             clone.individuo.Height = P1.individuo.Height;
             clone.Vx = P1.individuo.X + (-Contexto.Fundo.fase.X); // posiçao do jogador + a posição mapa = posição universal
@@ -1777,6 +1779,8 @@ namespace Stick_RPG_Fight
             //INT / POSIÇÕES
             clone.POSmapacapturado.X = Contexto.Fundo.fase.X;
             clone.POSmapacapturado.Y = Contexto.Fundo.fase.Y;
+            clone.POSp1capturado.X = P1.individuo.X;
+            clone.POSp1capturado.Y = P1.individuo.Y;
             clone.vida = P1.vida;
 
             P1.listaclonePoder.Add(clone);

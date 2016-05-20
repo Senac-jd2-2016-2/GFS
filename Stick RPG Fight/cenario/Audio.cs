@@ -33,20 +33,7 @@ namespace Stick_RPG_Fight
             var mouseState = Mouse.GetState();
             var mousePosition = new Point(mouseState.X, mouseState.Y);
 
-            if (PRIMEIRAVEZ)
-            {
-                VolumeMaximo = 100; //*100 tamanho
-
-                barra.Width = VolumeMaximo;
-                barra.Height = 10;
-
-                barra.X = W / 2 + W / 4;
-                barra.Y = H / 8;
-                PRIMEIRAVEZ = false;
-                Audio.MasterVolume = 1.0f;
-                pino.X = barra.X + barra.Width;
-            }
-
+            
             if (menu00)
             {
                 VolumeMaximo = 100; //*100 tamanho
@@ -94,6 +81,16 @@ namespace Stick_RPG_Fight
             Audio.MasterVolume = ((float)(pino.X - barra.X) / VolumeMaximo);
             MediaPlayer.Volume = Audio.MasterVolume;
             
+        }
+
+        public void PRIMEIRAvez(int W, int H)
+        {
+            if (PRIMEIRAVEZ)
+            {
+                PRIMEIRAVEZ = false;
+                Audio.MasterVolume = 1.0f;
+                pino.X = barra.X + barra.Width;
+            }
         }
     }
 }

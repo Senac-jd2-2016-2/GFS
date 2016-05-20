@@ -110,15 +110,15 @@ namespace Stick_RPG_Fight
 
         //ESCOLHA DE FASE
         public Texture2D imgPbranco;
-        public Texture2D[] imgfaseB = new Texture2D[2];
+        public Texture2D[] imgfaseB = new Texture2D[10];
 
-        public Rectangle[] Rfase = new Rectangle[2];
-        public Rectangle[] linhas = new Rectangle[2];
+        public Rectangle[] Rfase = new Rectangle[10];
+        public Rectangle[] linhas = new Rectangle[10];
         public Point Prolar = new Point(0, 0);
 
         public bool OPÇFASES, PRIMEIROclick;
-        public bool[] Bfase = new bool[2];
-        public bool[] FASEdestravada = new bool[2];
+        public bool[] Bfase = new bool[10];
+        public bool[] FASEdestravada = new bool[10];
 
         public List<Itens> listadeitens = new List<Itens>();
         
@@ -178,7 +178,7 @@ namespace Stick_RPG_Fight
                         if (contagemTRANSFERIRPONTOS >= 60)
                         {
                             contagemTRANSFERIRPONTOS = 0;
-                            
+
                             //VOU TRANSFERIR OS PONTOS AQUI => pra poder atualizar 1x só.
                             P1.leite += P1.leiterepositório;
                             P1.honra += P1.honrarepositório;
@@ -186,7 +186,8 @@ namespace Stick_RPG_Fight
                             P1.XP += 50 + (10 * Qcompletadas); // add XP
 
                             //audio de dinheiro
-                            Audio.A1.COINCOLLECT.Play();
+                            if (P1.leiterepositório > 0 || P1.qntdcombosrepositório > 0 || P1.honrarepositório > 0)
+                                Audio.A1.COINCOLLECT.Play(); //so sai som de dinheiro qnd tiver ganhado algo
 
                             TRANSFERIDO = true; //saida do laço
                         }
@@ -246,7 +247,7 @@ namespace Stick_RPG_Fight
                         MOSTRARpontos = false;
                         MediaPlayer.Play(Audio.A1.menusong);
 
-                        for (int i = 0; i < Bfase.Length; i++)
+                        for (int i = 0; i < Contexto.Fase.Length; i++)
                             Contexto.Fase[i] = false;
                     }
                 }//transferido
@@ -342,7 +343,7 @@ namespace Stick_RPG_Fight
             if (Qopç == 3)
             {
                 //DEFESA
-                Qqtdd = 30 + (5 * Qcompletadas);
+                Qqtdd = 20 + (5 * Qcompletadas);
             }
         }//fim gerar quest
 
@@ -523,6 +524,9 @@ namespace Stick_RPG_Fight
 
                         //abre janela de quest
                         JANELA.J.JANELAQUEST = true;
+
+                        //pra desabilitar o botao qnd sair
+                        JANELA.J.Bfase[i] = false;
                     }
                 }
             }
@@ -532,21 +536,93 @@ namespace Stick_RPG_Fight
         {
            
             var PULO = W / 2;
+            var PULOH = H / 2;
             for (int i = 0; i < Rfase.Length; i++)
             {
                 //FASE ((TODAS))
-                Rfase[i].Width = H / 3 + H / 10 - H / 400;// de lei
-                Rfase[i].Height = H / 6 + H / 250;// de lei 
-                Rfase[i].X = Prolar.X + W / 8 + (PULO * i);
-                Rfase[i].Y = Prolar.Y + H / 8;
+                if (i == 0 || i == 1)
+                {
+                    Rfase[i].Width = H / 3 + H / 10 - H / 400;// de lei
+                    Rfase[i].Height = H / 6 + H / 250;// de lei 
+                    Rfase[i].X = Prolar.X + W / 8 + (PULO * i);
+                    Rfase[i].Y = Prolar.Y + H / 8;
+                }
+                if (i == 2 || i == 3)
+                {
+                    Rfase[i].Width = H / 3 + H / 10 - H / 400;// de lei
+                    Rfase[i].Height = H / 6 + H / 250;// de lei 
+                    if (i == 2)
+                        Rfase[i].X = Prolar.X + W / 8 + (PULO);
+                    if (i == 3)
+                        Rfase[i].X = Prolar.X + W / 8;
+                    Rfase[i].Y = Prolar.Y + H / 8 + (PULOH);
+                }
+                if (i == 4 || i == 5)
+                {
+                    Rfase[i].Width = H / 3 + H / 10 - H / 400;// de lei
+                    Rfase[i].Height = H / 6 + H / 250;// de lei 
+                    if (i == 5)
+                        Rfase[i].X = Prolar.X + W / 8 + (PULO);
+                    if (i == 4)
+                        Rfase[i].X = Prolar.X + W / 8;
+                    Rfase[i].Y = Prolar.Y + H / 8 + (PULOH * 2);
+                }
+                if (i == 6 || i == 7)
+                {
+                    Rfase[i].Width = H / 3 + H / 10 - H / 400;// de lei
+                    Rfase[i].Height = H / 6 + H / 250;// de lei 
+                    if (i == 6)
+                        Rfase[i].X = Prolar.X + W / 8 + (PULO);
+                    if (i == 7)
+                        Rfase[i].X = Prolar.X + W / 8;
+                    Rfase[i].Y = Prolar.Y + H / 8 + (PULOH * 3);
+                }
+                if (i == 8 || i == 9)
+                {
+                    Rfase[i].Width = H / 3 + H / 10 - H / 400;// de lei
+                    Rfase[i].Height = H / 6 + H / 250;// de lei 
+                    if (i == 9)
+                        Rfase[i].X = Prolar.X + W / 8 + (PULO);
+                    if (i == 8)
+                        Rfase[i].X = Prolar.X + W / 8;
+                    Rfase[i].Y = Prolar.Y + H / 8 + (PULOH * 3);
+                }
+                if (i == 10 || i == 11)
+                {
+                    Rfase[i].Width = H / 3 + H / 10 - H / 400;// de lei
+                    Rfase[i].Height = H / 6 + H / 250;// de lei 
+                    if (i == 10)
+                        Rfase[i].X = Prolar.X + W / 8 + (PULO);
+                    if (i == 11)
+                        Rfase[i].X = Prolar.X + W / 8;
+                    Rfase[i].Y = Prolar.Y + H / 8 + (PULOH * 4);
+                }
 
                 if (i < Rfase.Length)
                 {
-                    //LINHAS (TODAS)
-                    linhas[i].X = Rfase[i].X + Rfase[i].Width;
-                    linhas[i].Y = Rfase[i].Y + Rfase[i].Height / 2;
-                    linhas[i].Width = PULO - Rfase[i].Width;
-                    linhas[i].Height = H / 300; // = 3
+                    //LINHAS 1
+                    if (i == 0 || i == 4 || i == 8 || i == 12)//direita ( 4 em 4 )
+                    {
+                        linhas[i].X = Rfase[i].X + Rfase[i].Width;
+                        linhas[i].Y = Rfase[i].Y + Rfase[i].Height / 2;
+                        linhas[i].Width = PULO - Rfase[i].Width;
+                        linhas[i].Height = H / 300; // = 3
+                    }
+
+                    if (i == 1 || i == 3 || i == 5 || i == 7 || i == 9 || i == 11 || i == 13) //descendo (2 em 2)
+                    {
+                        linhas[i].Width = H / 300;// = 3
+                        linhas[i].Height = PULOH - Rfase[i].Height; 
+                        linhas[i].X = Rfase[i].X + Rfase[i].Width / 2;
+                        linhas[i].Y = Rfase[i].Y + Rfase[i].Height;
+                    }
+                    if (i == 2 || i == 6 || i == 10 || i == 14)//esquerda // (4 em 4)
+                    {
+                        linhas[i].Width = PULO - Rfase[i].Width;
+                        linhas[i].Height = H / 300; // = 3
+                        linhas[i].X = Rfase[i].X - linhas[i].Width; 
+                        linhas[i].Y = Rfase[i].Y + Rfase[i].Height / 2;
+                    }
                 }
                
             }
@@ -559,7 +635,7 @@ namespace Stick_RPG_Fight
             //sai pro menu
             if (!JANELAPLACAR && !JANELAQUEST)
             {
-                for (int i = 0; i < Bfase.Length; i++)
+                for (int i = 0; i < Contexto.Fase.Length; i++)
                     Contexto.Fase[i] = false;
 
                 Botao.HOME = true;
@@ -585,6 +661,7 @@ namespace Stick_RPG_Fight
             P1.SENDOAGARRADO = false;
             P1.COLIDINDOdireita = false;
             P1.COLIDINDOesquerda = false;
+            P1.PODER = false;
 
             //limpando listas
             P1.listadedano.Clear();
@@ -594,6 +671,13 @@ namespace Stick_RPG_Fight
             P1.listadevisualPOWER.Clear();
             P1.listavidaperdida.Clear();
 
+            //sair do poder 
+            P1.PODERslow = false;
+
+            RETROCEDER.r.Contagem = 0;
+            P1.listaclonePoder.Clear(); //limpa
+            P1.PODERretroceder = false;
+            RETROCEDER.r.FIM = false;
             
             //oleada
             qtddOLEADA = 1;

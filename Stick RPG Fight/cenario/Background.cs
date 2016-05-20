@@ -11,7 +11,7 @@ namespace Stick_RPG_Fight
     class Background
     {
         public Texture2D menu00fundo;
-        public Texture2D imgfase1;
+        public Texture2D imgfase1, imgfase2, imgfase3, imgfase4;
         public Texture2D imgfundopoder;
         public Rectangle fase = new Rectangle();
         public Rectangle chao = new Rectangle();

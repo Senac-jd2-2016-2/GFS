@@ -59,7 +59,9 @@ namespace Stick_RPG_Fight
             P1.imgjoelhada4C1E = content.Load<Texture2D>("p1 - joelhada4 combo1 E");
 
             Fundo.menu00fundo = content.Load<Texture2D>("menu1");
-            Fundo.imgfase1 = content.Load<Texture2D>("fase de luta");
+            Fundo.imgfase1 = content.Load<Texture2D>("fase 1");
+            Fundo.imgfase2 = content.Load<Texture2D>("fase 2");
+            Fundo.imgfase3 = content.Load<Texture2D>("fase 3");
             Fundo.imgfundopoder = content.Load<Texture2D>("fundo poder");
 
             Menu.m.imgcampanha1 = content.Load<Texture2D>("campanha");
@@ -259,10 +261,15 @@ namespace Stick_RPG_Fight
 
             JANELA.J.imgPbranco = content.Load<Texture2D>("ponto branco");
             JANELA.J.imgfaseB[0] = content.Load<Texture2D>("fase B1");
-            JANELA.J.imgfaseB[1] = content.Load<Texture2D>("fase B1");
+            JANELA.J.imgfaseB[1] = content.Load<Texture2D>("fase B2");
+            JANELA.J.imgfaseB[2] = content.Load<Texture2D>("fase B3");
+            for (int i = 3; i < JANELA.J.imgfaseB.Length; i++ )
+            {
+                JANELA.J.imgfaseB[i] = content.Load<Texture2D>("fase B1");
+            }
 
-            //quests
-            JANELA.J.imgQuest = content.Load<Texture2D>("Q S");
+                //quests
+                JANELA.J.imgQuest = content.Load<Texture2D>("Q S");
             JANELA.J.imgRefresh1 = content.Load<Texture2D>("refresh 1");
             JANELA.J.imgRefresh2 = content.Load<Texture2D>("refresh 2");
             JANELA.J.imgOK1 = content.Load<Texture2D>("OK 1");

@@ -33,7 +33,7 @@ namespace Stick_RPG_Fight
                     {
                         Warquivo.Write(JANELA.J.FASEdestravada[i] + " ");
                     }
-                    Warquivo.WriteLine(P1.XP + " " + P1.LVL + " " + JANELA.J.ESPADA2HATIVA + " " + JANELA.J.ADAGATIVA + " " + JANELA.J.ARCOATIVO + " " + JANELA.J.TRIDENTEATIVO + " " + JANELA.J.RETROCEDERATIVO + " " + JANELA.J.ESCUDOATIVO + " " + JANELA.J.VENTOATIVO + " " + JANELA.J.RAIOATIVO);
+                    Warquivo.WriteLine(P1.XP + " " + P1.LVL + " " + JANELA.J.ESPADA2HATIVA + " " + JANELA.J.ADAGATIVA + " " + JANELA.J.ARCOATIVO + " " + JANELA.J.TRIDENTEATIVO + " " + JANELA.J.RETROCEDERATIVO + " " + JANELA.J.ESCUDOATIVO + " " + JANELA.J.VENTOATIVO + " " + JANELA.J.RAIOATIVO + " " + JANELA.J.Qcompletadas);
                     Warquivo.Close();
                 }
             }
@@ -74,6 +74,8 @@ namespace Stick_RPG_Fight
                             JANELA.J.ESCUDOATIVO = bool.Parse(dados[g + 8]);
                             JANELA.J.VENTOATIVO = bool.Parse(dados[g + 9]);
                             JANELA.J.RAIOATIVO = bool.Parse(dados[g + 10]);
+                            JANELA.J.Qcompletadas = int.Parse(dados[g + 11]);
+                            
                             Ex = "";
                             
                         }
@@ -111,15 +113,16 @@ namespace Stick_RPG_Fight
                             Warquivo.Write(JANELA.J.SELECIONADOS[i] + " ");
                             
                         }
-                        //armas
-                        Warquivo.Write(JANELA.J.MAOselect + " " + JANELA.J.ESPADA2Hselect + " " + JANELA.J.ADAGAselect + " " + JANELA.J.ARCOselect + " " + JANELA.J.TRIDENTEselect + " ");
-                        
-                        //Poderes
-                        Warquivo.Write(JANELA.J.SLOWselect + " " + JANELA.J.RETROCEDERselect + " " + JANELA.J.ESCUDOselect + " " + JANELA.J.VENTOselect + " " + JANELA.J.RAIOselect + " ");
-
-                        
-                        //pet
                     }
+                    //armas
+                    Warquivo.Write(JANELA.J.MAOselect + " " + JANELA.J.ESPADA2Hselect + " " + JANELA.J.ADAGAselect + " " + JANELA.J.ARCOselect + " " + JANELA.J.TRIDENTEselect + " ");
+
+                    //Poderes
+                    Warquivo.Write(JANELA.J.SLOWselect + " " + JANELA.J.RETROCEDERselect + " " + JANELA.J.ESCUDOselect + " " + JANELA.J.VENTOselect + " " + JANELA.J.RAIOselect + " ");
+
+                    //SOM
+                    Warquivo.Write(Audio.A1.pino.X + " " + Audio.MasterVolume + " " + Audio.A1.PRIMEIRAVEZ + " ");
+                    //pet
                     Warquivo.Close();
                 }
             }
@@ -162,6 +165,11 @@ namespace Stick_RPG_Fight
                             JANELA.J.ESCUDOselect = bool.Parse(dados[g2 + 8]);
                             JANELA.J.VENTOselect = bool.Parse(dados[g2 + 9]);
                             JANELA.J.RAIOselect = bool.Parse(dados[g2 + 10]);
+
+                            //audio
+                            Audio.A1.pino.X = int.Parse(dados[g2 + 11]);
+                            Audio.MasterVolume = int.Parse(dados[g2 + 12]);
+                            Audio.A1.PRIMEIRAVEZ = bool.Parse(dados[g2 + 13]);
 
                             //pet
                         }

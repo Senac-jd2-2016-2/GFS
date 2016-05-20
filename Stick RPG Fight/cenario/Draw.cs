@@ -19,7 +19,14 @@ namespace Stick_RPG_Fight
             {
                 spriteBatch.Draw(Contexto.Fundo.imgfase1, Contexto.Fundo.fase, Color.White); // fundo
             }
-            
+            if (Contexto.Fase[1])
+            {
+                spriteBatch.Draw(Contexto.Fundo.imgfase2, Contexto.Fundo.fase, Color.White); // fundo
+            }
+            if (Contexto.Fase[2])
+            {
+                spriteBatch.Draw(Contexto.Fundo.imgfase3, Contexto.Fundo.fase, Color.White); // fundo
+            }
 
             //--------------------------------------------------------------------------------------------------
             //--------------------------------------------------------------------------------------------------
