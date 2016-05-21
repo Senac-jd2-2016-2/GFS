@@ -110,14 +110,13 @@ namespace Stick_RPG_Fight
             Itens.IT.CRIARITENS();//cria se itens da janela cc
             ItensAll.a.Criar();//cria itens para selecionar
 
+
+            //faz o save que possa ter, e caso nao tenha, faz a primeira vez
+            Audio.A1.PRIMEIRAvez(Window.ClientBounds.Width, Window.ClientBounds.Height);
+
             //
             Savegame.S.Leitura(P1); //carrega o jogo antes de começar
             Savegame.S.Leitura2(); //leitura feita no começo do game (esse save é feito quando clica em botao SAIR, no menu)
-
-            //faz o save que possa ter, e caso nao tenha, faz a primeira vez
-            Audio.A1.PRIMEIRAvez(Window.ClientBounds.Width, Window.ClientBounds.Height); 
-            
-
             
 
             base.Initialize();
@@ -402,7 +401,7 @@ namespace Stick_RPG_Fight
                                 menu00 = false;//sai pro proximo menu
                                 menu01 = true;
 
-                                
+                                Audio.A1.DISPONIVEL = false; // o audio para de funcionar
                                
 
                             }//fim da transição
@@ -464,6 +463,7 @@ namespace Stick_RPG_Fight
                     var HeightTela = Window.ClientBounds.Height;
 
                     Contexto.Fundo.atualizaçao(Contexto.Fundo, HeightTela);
+                    Audio.A1.POS(WidthTela, HeightTela, menu00);
 
                     if (Keyboard.GetState().IsKeyDown(Keys.Escape))//saida
                         Botao.HOMEb = true; //é como se clicasse no botao home

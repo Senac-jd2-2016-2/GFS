@@ -26,14 +26,14 @@ namespace Stick_RPG_Fight
 
         public static float MasterVolume { get; set; }
         public int VolumeMaximo, POSxClick;
-        public bool PRIMEIRAVEZ = true;
+        public bool PRIMEIRAVEZ = true, DISPONIVEL;
 
         public void POS(int W, int H, bool menu00)
         {
             var mouseState = Mouse.GetState();
             var mousePosition = new Point(mouseState.X, mouseState.Y);
 
-            
+            pino.X = (int)((barra.X + (barra.Width * Audio.MasterVolume))); //tirar o tamanho em relação do tanto de volume
             if (menu00)
             {
                 VolumeMaximo = 100; //*100 tamanho
@@ -42,9 +42,11 @@ namespace Stick_RPG_Fight
                 barra.Height = 10;
                 barra.X = W / 2 + W / 4;
                 barra.Y = H / 8;
+                DISPONIVEL = true;
             }
             else
             {
+                
                 
                 VolumeMaximo = H / 10 - H / 130; //*100 tamanho
 
@@ -62,9 +64,18 @@ namespace Stick_RPG_Fight
             Vol.Y = barra.Y + barra.Height / 2 - Vol.Height / 2;
             
             //formula do volume
-            if (barra.Contains(mousePosition) && Mouse.GetState().LeftButton == ButtonState.Pressed)
+            if (DISPONIVEL)
             {
-                pino.X = mouseState.X;
+                if (barra.Contains(mousePosition) && Mouse.GetState().LeftButton == ButtonState.Pressed)
+                {
+                    pino.X = mouseState.X;
+                }
+                if (Vol.Contains(mousePosition) && Mouse.GetState().LeftButton == ButtonState.Pressed)
+                {
+                    pino.X = barra.X;
+                }
+
+                //
                 if (pino.X > barra.X + barra.Width)
                 {
                     pino.X = barra.X + barra.Width;
@@ -73,10 +84,6 @@ namespace Stick_RPG_Fight
                 {
                     pino.X = barra.X;
                 }
-            }
-            if (Vol.Contains(mousePosition) && Mouse.GetState().LeftButton == ButtonState.Pressed)
-            {
-                pino.X = barra.X;
             }
             Audio.MasterVolume = ((float)(pino.X - barra.X) / VolumeMaximo);
             MediaPlayer.Volume = Audio.MasterVolume;
@@ -87,9 +94,13 @@ namespace Stick_RPG_Fight
         {
             if (PRIMEIRAVEZ)
             {
+                barra.Width = 100;
+                barra.Height = 10;
+                barra.X = W / 2 + W / 4;
+                barra.Y = H / 8;
                 PRIMEIRAVEZ = false;
                 Audio.MasterVolume = 1.0f;
-                pino.X = barra.X + barra.Width;
+                pino.X = (int)((barra.X + (barra.Width * Audio.MasterVolume))); //tirar o tamanho em relação do tanto de volume
             }
         }
     }

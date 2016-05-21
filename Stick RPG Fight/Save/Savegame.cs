@@ -106,13 +106,12 @@ namespace Stick_RPG_Fight
                 using (StreamWriter Warquivo = new
                 StreamWriter("savepos.txt"))
                 {
-                    for (int i = 0; i < JANELA.J.listadeitens.Count; i++)
+                    for (int i = 0; i < JANELA.J.QTDITENS; i++)
                     {
-                        if (JANELA.J.ATIVOS[i])
-                        {
+                        
                             Warquivo.Write(JANELA.J.SELECIONADOS[i] + " ");
                             
-                        }
+                        
                     }
                     //armas
                     Warquivo.Write(JANELA.J.MAOselect + " " + JANELA.J.ESPADA2Hselect + " " + JANELA.J.ADAGAselect + " " + JANELA.J.ARCOselect + " " + JANELA.J.TRIDENTEselect + " ");
@@ -121,7 +120,7 @@ namespace Stick_RPG_Fight
                     Warquivo.Write(JANELA.J.SLOWselect + " " + JANELA.J.RETROCEDERselect + " " + JANELA.J.ESCUDOselect + " " + JANELA.J.VENTOselect + " " + JANELA.J.RAIOselect + " ");
 
                     //SOM
-                    Warquivo.Write(Audio.A1.pino.X + " " + Audio.MasterVolume + " " + Audio.A1.PRIMEIRAVEZ + " ");
+                    Warquivo.Write(Audio.MasterVolume + " ");
                     //pet
                     Warquivo.Close();
                 }
@@ -144,13 +143,12 @@ namespace Stick_RPG_Fight
                         while ((linha = Rarquivo.ReadLine()) != null)
                         {
                             string[] dados = linha.Split(' ');
-                            for (int i = 0; i < JANELA.J.listadeitens.Count; i++)
+                            for (int i = 0; i < JANELA.J.QTDITENS; i++)
                             {
-                                if (JANELA.J.ATIVOS[i])
-                                {
+                                
                                     JANELA.J.SELECIONADOS[i] = bool.Parse(dados[i]);
                                     g2 = i;
-                                }
+                                
                             }
                             //armas
                             JANELA.J.MAOselect = bool.Parse(dados[g2 + 1]);
@@ -167,9 +165,8 @@ namespace Stick_RPG_Fight
                             JANELA.J.RAIOselect = bool.Parse(dados[g2 + 10]);
 
                             //audio
-                            Audio.A1.pino.X = int.Parse(dados[g2 + 11]);
-                            Audio.MasterVolume = int.Parse(dados[g2 + 12]);
-                            Audio.A1.PRIMEIRAVEZ = bool.Parse(dados[g2 + 13]);
+                            Audio.MasterVolume = float.Parse(dados[g2 + 11]);
+                            
 
                             //pet
                         }
