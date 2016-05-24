@@ -518,7 +518,7 @@ namespace Stick_RPG_Fight
                     {
                         Menu.m.MENU = false;
                         Menu.m.COMBATES = true;
-                        Contexto.Fase[i] = true;
+                        Contexto.Fase[i] = true; // quantas fases
                         Botao.HOME = false;
                         JANELA.J.OPÇFASES = false;
 

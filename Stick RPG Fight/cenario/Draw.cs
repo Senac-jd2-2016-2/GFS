@@ -15,17 +15,12 @@ namespace Stick_RPG_Fight
     {
         public void DrawCombate(SpriteBatch spriteBatch, Personagem P1, List<Inimigo> listai1, Rectangle FlechaD, Rectangle FlechaE, Texture2D imgFlechaD, Texture2D imgFlechaE, SpriteFont menu, SpriteFont HUDfont, int WidthTela, int HeightTela, Texture2D imgSangue, Inimigo i1, Agua DefineAgua, SpriteFont BARfont)
         {
-            if (Contexto.Fase[0])
+            for (int i = 0; i < Contexto.Fase.Length; i++)
             {
-                spriteBatch.Draw(Contexto.Fundo.imgfase1, Contexto.Fundo.fase, Color.White); // fundo
-            }
-            if (Contexto.Fase[1])
-            {
-                spriteBatch.Draw(Contexto.Fundo.imgfase2, Contexto.Fundo.fase, Color.White); // fundo
-            }
-            if (Contexto.Fase[2])
-            {
-                spriteBatch.Draw(Contexto.Fundo.imgfase3, Contexto.Fundo.fase, Color.White); // fundo
+                if (Contexto.Fase[i])
+                {
+                    spriteBatch.Draw(Contexto.Fundo.imgfase[i], Contexto.Fundo.fase, Color.White); // fundo
+                }
             }
 
             //--------------------------------------------------------------------------------------------------

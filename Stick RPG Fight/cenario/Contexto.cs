@@ -15,7 +15,7 @@ namespace Stick_RPG_Fight
     {
         
         public static Background Fundo = new Background();
-        public static bool[] Fase = new bool[4]; // qual fase usar
+        public static bool[] Fase = new bool[10]; // Quantas fases
 
         public static void inicializar(ContentManager content,Personagem P1, Botoes Botao,  Inimigo i1, Agua DefineAgua) // carregar imagens quando a fase começa (não no começo)
         {
@@ -59,9 +59,10 @@ namespace Stick_RPG_Fight
             P1.imgjoelhada4C1E = content.Load<Texture2D>("p1 - joelhada4 combo1 E");
 
             Fundo.menu00fundo = content.Load<Texture2D>("menu1");
-            Fundo.imgfase1 = content.Load<Texture2D>("fase 1");
-            Fundo.imgfase2 = content.Load<Texture2D>("fase 2");
-            Fundo.imgfase3 = content.Load<Texture2D>("fase 3");
+            Fundo.imgfase[0] = content.Load<Texture2D>("fase 1");
+            Fundo.imgfase[1] = content.Load<Texture2D>("fase 2");
+            Fundo.imgfase[2] = content.Load<Texture2D>("fase 3");
+            Fundo.imgfase[3] = content.Load<Texture2D>("fase 4");
             Fundo.imgfundopoder = content.Load<Texture2D>("fundo poder");
 
             Menu.m.imgcampanha1 = content.Load<Texture2D>("campanha");
@@ -263,7 +264,8 @@ namespace Stick_RPG_Fight
             JANELA.J.imgfaseB[0] = content.Load<Texture2D>("fase B1");
             JANELA.J.imgfaseB[1] = content.Load<Texture2D>("fase B2");
             JANELA.J.imgfaseB[2] = content.Load<Texture2D>("fase B3");
-            for (int i = 3; i < JANELA.J.imgfaseB.Length; i++ )
+            JANELA.J.imgfaseB[3] = content.Load<Texture2D>("fase B4");
+            for (int i = 4; i < JANELA.J.imgfaseB.Length; i++ )
             {
                 JANELA.J.imgfaseB[i] = content.Load<Texture2D>("fase B1");
             }
