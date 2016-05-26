@@ -32,68 +32,101 @@ namespace Stick_RPG_Fight
         public Rectangle XPrec = new Rectangle();
         public Rectangle Pino = new Rectangle();
 
-        public Texture2D imgSpriteSheetparado1E; // parado fora de combate (E)
-        public Texture2D imgSpriteSheetandandoE;// andando (E)
+        //                                                                                                  IMAGENS
+
+        //                                                                                                 ESQUERDA
+        public Texture2D imgparado1maosE; // parado fora de combate (E)
+        public Texture2D imgandandomaosE;// andando (E)
         public Texture2D imgSpriteSheetcorrendoE;//correndo (E)
         public Texture2D imgSpriteSheetpularE; //Pular (E)
-        public Texture2D imgSpriteSheetparado2E; // em combate (E)
-        public Texture2D imgsoco1E; //soco esquerdo 1 (E)
-        public Texture2D imgsoco2C1E; // soco direito 2 - combo 1 (E)
-        public Texture2D imgsoco3C1E; // girada direito 3 - combo 1 (E)
-        public Texture2D imgjoelhada4C1E; // joelhada esquerda 4 - combo 1 (E)
+        public Texture2D imgparado2maosE; // em combate (E)
+        public Texture2D imgsoco1maosE; //soco esquerdo 1 (E)
+        public Texture2D imgsoco2C1maosE; // soco direito 2 - combo 1 (E)
+        public Texture2D imgsoco3C1maosE; // girada direito 3 - combo 1 (E)
+        public Texture2D imgjoelhada4C1maosE; // joelhada esquerda 4 - combo 1 (E)
 
-        public Texture2D imgSpriteSheetparado1; // parado fora de combate (D)
-        public Texture2D imgSpriteSheetparado2; // em combate (D)
+        //ARMAS
+        //Adaga
+        public Texture2D imgParadoAdagaE, imgPulandoAdagaE, imgSacarAdagaE, imgCorrendoAdagaE, imgDefendendoAdagaE, imgHit1AdagaE, imgHit2AdagaE, imgCombo1_1AdagaE, imgCombo1_2AdagaE, imgCombo1_3AdagaE, imgCombo1_4AdagaE;
+        //ARCO
+        public Texture2D imgParadoArcoE, imgPulandoArcoE, imgSacarArcoE, imgCorrendoArcoE, imgHit1ArcoE, imgHit2ArcoE, imgSpriteSheetATIRARarcoE, imgFlechaE; 
+
+        //                                                                                               /DIREITA
+        public Texture2D imgparado1maos; // parado fora de combate (D)
+        public Texture2D imgparado2maos; // em combate (D)
+        public Texture2D imgagacharmaos;//em combate (D)
+        public Texture2D imgandandomaos;// andando (D)
+        public Texture2D imgcorrendomaos;//correndo (D)
+        public Texture2D imgdefesa1maos; //defesa em PE (D)
+        public Texture2D imgagachadoHITmaos; //tomando hit agachado (D)
+        public Texture2D imgHIT1maos, imgHIT2maos;//tomando hit em pé (D) 
         
-        public Texture2D imgSpriteSheetagachar;//em combate (D)
-        public Texture2D imgSpriteSheetandando;// andando (D)
-        public Texture2D imgSpriteSheetcorrendo;//correndo (D)
-        public Texture2D imgSpriteSheetdefesa1; //defesa em PE (D)
-        public Texture2D imgSpriteSheetagachadoHIT; //tomando hit agachado (D)
-        public Texture2D imgSpriteSheetATIRARarco; //atirando com o arco (D)
-        public Texture2D imgSpriteSheetSACARarco; //atirando com o arco (D)
-        public Texture2D imgSpriteSheetpular; //Pular (D)
-        public Texture2D imgsoco1; //soco esquerdo 1
-        public Texture2D imgsoco2C1; // soco direito 2 - combo 1 (D)
-        public Texture2D imgsoco3C1; // girada direito 3 - combo 1 (D)
-        public Texture2D imgjoelhada4C1; // joelhada esquerda 4 - combo 1 (D)
+        public Texture2D imgpularmaos; //Pular (D)
+        public Texture2D imgsoco1maos; //soco esquerdo 1
+        public Texture2D imgsoco2C1maos; // soco direito 2 - combo 1 (D)
+        public Texture2D imgsoco3C1maos; // girada direito 3 - combo 1 (D)
+        public Texture2D imgjoelhada4C1Maos; // joelhada esquerda 4 - combo 1 (D)
 
-        //      TAMANHO
+        //ARMAS
+        //ARMAS
+        //Adaga
+        public Texture2D imgParadoAdagaD, imgPulandoAdagaD, imgSacarAdagaD, imgCorrendoAdagaD, imgDefendendoAdagaD, imgHit1AdagaD, imgHit2AdagaD, imgCombo1_1AdagaD, imgCombo1_2AdagaD, imgCombo1_3AdagaD, imgCombo1_4AdagaD; 
+        //ARCO
+        public Texture2D imgParadoArcoD, imgPulandoArcoD, imgSacarArcoD, imgCorrendoArcoD, imgHit1ArcoD, imgHit2ArcoD, imgSpriteSheetATIRARarcoD, imgFlechaD; 
+        //ESPADA 2H
+        public Texture2D imgParadoEspada2mD, imgCorrerEspada2mD, imgDefenderEspada2mD, imgHit1Espada2mD, imgHit2Espada2mD, imgSacarEspada2mD, imgCombo1_1Espada2mD, imgCombo1_2Espada2mD, imgCombo1_3Espada2mD, imgCombo1_4Espada2mD;
+        
+
+
+
+
+
+
+
+
+
+
+        //                                                       TAMANHO
         //MOVIMENTAÇÃO
-        public Point tamanhoSpriteSheetparado1 = new Point(148, 466); //Dimensões do sprite
-        public Point tamanhoSpriteSheetparado2 = new Point(283, 452); //Dimensões do sprite
-        public Point tamanhoSpriteSheetagachar1 = new Point(353, 474); //Dimensões do sprite
-        public Point tamanhoSpriteSheetagachar2 = new Point(323, 452); //Dimensões do sprite
-        public Point tamanhoSpriteSheetandando = new Point(200, 462); //Dimensões do sprite
-        public Point tamanhoSpriteSheetcorrendo = new Point(355, 474); //Dimensões do sprite
-        public Point tamanhoSpriteSheetdefesa1 = new Point(307, 447); //Dimensões do sprite
-        public Point tamanhoSpriteSheetagachadoHIT = new Point(682, 651); //Dimensões do sprite
-        public Point tamanhoSpriteSheetpular = new Point(284, 454); //Dimensões do sprite
+        //MAOS
+        public Point tamanhoMaosparado1 = new Point(148, 466); //Dimensões do sprite
+        public Point tamanhoMaosparado2 = new Point(283, 452); //Dimensões do sprite
+        
+        public Point tamanhoMaosagachar = new Point(323, 452); //Dimensões do sprite
+        public Point tamanhoMaosandando = new Point(200, 462); //Dimensões do sprite
+        public Point tamanhoMaoscorrendo = new Point(355, 474); //Dimensões do sprite
+        public Point tamanhoMaosdefesa1 = new Point(309, 451); //Dimensões do sprite
+        public Point tamanhoMaosagachadoHIT = new Point(682, 651); //Dimensões do sprite
+        public Point tamanhoMaospular = new Point(284, 454); //Dimensões do sprite
 
         //LUTA
-        public Point tamanhosoco1 = new Point(360, 446); //Dimensões do sprite
-        public Point tamanhosoco2C1 = new Point(370, 443); //Dimensões do sprite
-        public Point tamanhosoco3C1 = new Point(403, 458); //Dimensões do sprite
-        public Point tamanhojoelhada4C1 = new Point(341, 469); //Dimensões do sprite
+        //MAOS
+        public Point tamanhosoco1Maos = new Point(360, 446); //Dimensões do sprite
+        public Point tamanhosoco2C1Maos = new Point(370, 443); //Dimensões do sprite
+        public Point tamanhosoco3C1Maos = new Point(403, 458); //Dimensões do sprite
+        public Point tamanhojoelhada4C1Maos = new Point(341, 469); //Dimensões do sprite
 
         //ARMA
         public Point tamanhoSpriteSheetATIRARarco = new Point(694, 683); //Dimensões do sprite
         public Point tamanhoSpriteSheetSACARarco = new Point(626, 692); //Dimensões do sprite
         
         //      sprite qntdd
+        //MAOS
         public Point SpriteSheetparado1 = new Point(8, 8); //Dimensões da spritesheet
         public Point SpriteSheetparado2 = new Point(8, 8); //Dimensões da spritesheet
         public Point SpriteSheetagachar1 = new Point(8, 8); //Dimensões da spritesheet
         public Point SpriteSheetagachar2 = new Point(8, 8); //Dimensões da spritesheet
         public Point SpriteSheetmovendo = new Point(8, 8); //Dimensões da spritesheet
         public Point SpriteSheetpular = new Point(8, 4); //Dimensões da spritesheet
-        
         public Point SpriteSheetdefesa1 = new Point(8, 8); //Dimensões da spritesheet
         public Point SpriteSheetagachadoHIT = new Point(10, 8); //Dimensões da spritesheet
+
+        //armas
         public Point SpriteSheetATIRARarco = new Point(9, 7); //Dimensões da spritesheet
         public Point SpriteSheetSACARarco = new Point(8, 8); //Dimensões da spritesheet
 
         //luta
+        //MAOS
         public Point SpriteSheetsoco1 = new Point(8, 3); //Dimensões da spritesheet
         public Point SpriteSheetsoco2C1 = new Point(8, 5); //Dimensões da spritesheet
         public Point SpriteSheetsoco3C1 = new Point(8, 5); //Dimensões da spritesheet
@@ -1059,12 +1092,12 @@ namespace Stick_RPG_Fight
         //===========================================================================================================================================================================
         //===========================================================================================================================================================================
         //===========================================================================================================================================================================
-        public void MOV(int WidthTela, int HeightTela, Random aleatório)
+        public void MOV(int W, int H, Random aleatório)
         {
             //METODOS
             //visual efeito
-            REMOVERVISUPODER(WidthTela, HeightTela);//METODO DE REMOVER O EFEITO (QND CHEGAR EM TAL TAMANHO)
-            PosDANO(WidthTela, HeightTela);// posição da informação do dano
+            REMOVERVISUPODER(W, H);//METODO DE REMOVER O EFEITO (QND CHEGAR EM TAL TAMANHO)
+            PosDANO(W, H);// posição da informação do dano
             POSvidaperdida(); //barra vermelha
             
 
@@ -1077,20 +1110,20 @@ namespace Stick_RPG_Fight
             meio.Width = individuo.Width / 2;
             meio.Height = individuo.Height;
 
-            DistanciadeLuta.X = individuo.X - WidthTela / 8;
+            DistanciadeLuta.X = individuo.X - W / 8;
             DistanciadeLuta.Y = individuo.Y;
-            DistanciadeLuta.Width = WidthTela / 4;
+            DistanciadeLuta.Width = W / 4;
             DistanciadeLuta.Height = individuo.Height;
 
-            DistanciadeLutaADistancia.X = individuo.X - WidthTela / 4;
+            DistanciadeLutaADistancia.X = individuo.X - W / 4;
             DistanciadeLutaADistancia.Y = individuo.Y;
-            DistanciadeLutaADistancia.Width = WidthTela / 2;
+            DistanciadeLutaADistancia.Width = W / 2;
             DistanciadeLutaADistancia.Height = individuo.Height;
 
             //chao empurra pra cima
             if (individuo.Intersects(Contexto.Fundo.chao))
             {
-                individuo.Y -= HeightTela / 270;
+                individuo.Y -= H / 270;
             }
 
             //subindo tela (impressao)
@@ -1098,7 +1131,7 @@ namespace Stick_RPG_Fight
             {
                 if (Vy + g < 0)
                 {
-                    Contexto.Fundo.fase.Y += HeightTela / 100; //10
+                    Contexto.Fundo.fase.Y += H / 100; //10
                 }
             }
             else if (Contexto.Fundo.fase.Y > 0)
@@ -1108,23 +1141,26 @@ namespace Stick_RPG_Fight
 
 
             //descendo tela (impressao)
-            if (Contexto.Fundo.fase.Y > -HeightTela / 10)
+            if (Contexto.Fundo.fase.Y > -H / 10)
             {
                 if (Vy + g > 0)
                 {
-                    Contexto.Fundo.fase.Y -= HeightTela / 100; //10
+                    Contexto.Fundo.fase.Y -= H / 100; //10
                 }
             }
-            else if (Contexto.Fundo.fase.Y < -HeightTela / 10)
+            else if (Contexto.Fundo.fase.Y < -H / 10)
             {
-                Contexto.Fundo.fase.Y = -HeightTela / 10;
+                Contexto.Fundo.fase.Y = -H / 10;
             }
 
             if (SENDOAGARRADO)
             {
-                Vx = 0;
-                Vy = 0;
-                g = 0;
+                if (!PODER) //se ele nao estiver soltando poder
+                {
+                    Vx = 0;
+                    Vy = 0;
+                    g = 0;
+                }
             }
             else if (!SENDOAGARRADO) // PARALIZADO
             {
@@ -1136,7 +1172,7 @@ namespace Stick_RPG_Fight
                     CORRENDO = false;
                     ANDANDO = false;
                     subindo = true;
-                    Vy = aleatório.Next(-HeightTela / 15, -HeightTela / 25);
+                    Vy = aleatório.Next(-H / 15, -H / 25);
                     if (ESQUERDA)
                     {
                         framepular.X = 7;
@@ -1154,7 +1190,7 @@ namespace Stick_RPG_Fight
                     ANDANDO = false;
                     subindo = true;
 
-                    Vy = aleatório.Next(-HeightTela / 15, -HeightTela / 25);
+                    Vy = aleatório.Next(-H / 15, -H / 25);
                     if (ESQUERDA)
                     {
                         framepular.X = 7;
@@ -1171,7 +1207,7 @@ namespace Stick_RPG_Fight
                     CORRENDO = false;
                     ANDANDO = false;
                     subindo = true;
-                    Vy = aleatório.Next(-HeightTela / 15, -HeightTela / 25);
+                    Vy = aleatório.Next(-H / 15, -H / 25);
                     if (ESQUERDA)
                     {
                         framepular.X = 7;
@@ -1191,7 +1227,7 @@ namespace Stick_RPG_Fight
                     //gravidade
                     if (subindo || (descendo && !individuo.Intersects(Contexto.Fundo.chao)))
                     {
-                        g += HeightTela / 300;
+                        g += H / 300;
                     }
                     if (descendo && individuo.Intersects(Contexto.Fundo.chao) && !subindo)
                     {
@@ -1265,28 +1301,28 @@ namespace Stick_RPG_Fight
                         frameparado2.Y = 0;
 
                         //mov DIREITA
-                        if (individuo.X + individuo.Width < WidthTela) //movimento do individuo dentro da tela
+                        if (individuo.X + individuo.Width < W) //movimento do individuo dentro da tela
                         {
-                            Vx = HeightTela / 130; // = 8
+                            Vx = H / 130; // = 8
                         }
-                        else if (individuo.X + individuo.Width >= WidthTela)//se chegar no final para de andar
+                        else if (individuo.X + individuo.Width >= W)//se chegar no final para de andar
                         {
                             Vx = 0;
                             //tirar o personagem do nada
-                            if (individuo.X + individuo.Width > WidthTela + HeightTela / 100)
+                            if (individuo.X + individuo.Width > W + H / 100)
                                 individuo.X -= 5;
 
                         }
-                        if (Contexto.Fundo.fase.X + Contexto.Fundo.fase.Width > WidthTela) // se a fase chegar no final ela nao anda mais
+                        if (Contexto.Fundo.fase.X + Contexto.Fundo.fase.Width > W) // se a fase chegar no final ela nao anda mais
                         {
-                            if (individuo.X + individuo.Width >= WidthTela - HeightTela / 80) // HeightTela/80 = 13 , se o individuo passar do final da tela - 10 = movimento;
+                            if (individuo.X + individuo.Width >= W - H / 80) // HeightTela/80 = 13 , se o individuo passar do final da tela - 10 = movimento;
                             {
-                                Contexto.Fundo.fase.X -= HeightTela / 130; // = 8
+                                Contexto.Fundo.fase.X -= H / 130; // = 8
                             }
                             //tirar o fundo do vacuo
-                            if (Contexto.Fundo.fase.X + Contexto.Fundo.fase.Width <= WidthTela)
+                            if (Contexto.Fundo.fase.X + Contexto.Fundo.fase.Width <= W)
                             {
-                                Contexto.Fundo.fase.X += HeightTela / 130; // = 8
+                                Contexto.Fundo.fase.X += H / 130; // = 8
                             }
                         }
 
@@ -1311,27 +1347,27 @@ namespace Stick_RPG_Fight
                             energia -= 3;
 
                         //mov DIREITA
-                        if (individuo.X + individuo.Width < WidthTela) //movimento do individuo dentro da tela
+                        if (individuo.X + individuo.Width < W) //movimento do individuo dentro da tela
                         {
-                            Vx = HeightTela / 54; // = 20
+                            Vx = H / 54; // = 20
                         }
-                        else if (individuo.X + individuo.Width >= WidthTela)//se encostar no final para de correr
+                        else if (individuo.X + individuo.Width >= W)//se encostar no final para de correr
                         {
                             Vx = 0;
                             //tirar o personagem do nada
-                            if (individuo.X + individuo.Width > WidthTela + HeightTela / 100)
+                            if (individuo.X + individuo.Width > W + H / 100)
                                 individuo.X -= 5;
                         }
-                        if (Contexto.Fundo.fase.X + Contexto.Fundo.fase.Width > WidthTela) // se a fase chegar no final ela nao anda mais
+                        if (Contexto.Fundo.fase.X + Contexto.Fundo.fase.Width > W) // se a fase chegar no final ela nao anda mais
                         {
-                            if (individuo.X + individuo.Width >= WidthTela - HeightTela / 80) // HeightTela/80 = 13 , se o individuo passar do final da tela - 10 = movimento;
+                            if (individuo.X + individuo.Width >= W - H / 80) // HeightTela/80 = 13 , se o individuo passar do final da tela - 10 = movimento;
                             {
-                                Contexto.Fundo.fase.X -= HeightTela / 54; // = 20
+                                Contexto.Fundo.fase.X -= H / 54; // = 20
                             }
                             //tirar o fundo do vacuo
-                            if (Contexto.Fundo.fase.X + Contexto.Fundo.fase.Width <= WidthTela)
+                            if (Contexto.Fundo.fase.X + Contexto.Fundo.fase.Width <= W)
                             {
-                                Contexto.Fundo.fase.X += HeightTela / 54; // = 20
+                                Contexto.Fundo.fase.X += H / 54; // = 20
                             }
                         }
 
@@ -1351,28 +1387,28 @@ namespace Stick_RPG_Fight
                     if (PULANDOandando)
                     {
                         //mov DIREITA
-                        if (individuo.X + individuo.Width < WidthTela) //movimento do individuo dentro da tela
+                        if (individuo.X + individuo.Width < W) //movimento do individuo dentro da tela
                         {
-                            Vx = HeightTela / 130; // = 8
+                            Vx = H / 130; // = 8
                         }
-                        else if (individuo.X + individuo.Width >= WidthTela)//se chegar no final para de andar
+                        else if (individuo.X + individuo.Width >= W)//se chegar no final para de andar
                         {
                             Vx = 0;
                             //tirar o personagem do nada
-                            if (individuo.X + individuo.Width > WidthTela + HeightTela / 100)
+                            if (individuo.X + individuo.Width > W + H / 100)
                                 individuo.X -= 5;
 
                         }
-                        if (Contexto.Fundo.fase.X + Contexto.Fundo.fase.Width > WidthTela) // se a fase chegar no final ela nao anda mais
+                        if (Contexto.Fundo.fase.X + Contexto.Fundo.fase.Width > W) // se a fase chegar no final ela nao anda mais
                         {
-                            if (individuo.X + individuo.Width >= WidthTela - HeightTela / 80) // HeightTela/80 = 13 , se o individuo passar do final da tela - 10 = movimento;
+                            if (individuo.X + individuo.Width >= W - H / 80) // HeightTela/80 = 13 , se o individuo passar do final da tela - 10 = movimento;
                             {
-                                Contexto.Fundo.fase.X -= HeightTela / 130; // = 8
+                                Contexto.Fundo.fase.X -= H / 130; // = 8
                             }
                             //tirar o fundo do vacuo
-                            if (Contexto.Fundo.fase.X + Contexto.Fundo.fase.Width <= WidthTela)
+                            if (Contexto.Fundo.fase.X + Contexto.Fundo.fase.Width <= W)
                             {
-                                Contexto.Fundo.fase.X += HeightTela / 130; // = 8
+                                Contexto.Fundo.fase.X += H / 130; // = 8
                             }
                         }
                     }
@@ -1380,27 +1416,27 @@ namespace Stick_RPG_Fight
                     if (PULANDOcorrendo)
                     {
                         //mov DIREITA
-                        if (individuo.X + individuo.Width < WidthTela) //movimento do individuo dentro da tela
+                        if (individuo.X + individuo.Width < W) //movimento do individuo dentro da tela
                         {
-                            Vx = HeightTela / 54; // = 20
+                            Vx = H / 54; // = 20
                         }
-                        else if (individuo.X + individuo.Width >= WidthTela)//se encostar no final para de correr
+                        else if (individuo.X + individuo.Width >= W)//se encostar no final para de correr
                         {
                             Vx = 0;
                             //tirar o personagem do nada
-                            if (individuo.X + individuo.Width > WidthTela + HeightTela / 100)
+                            if (individuo.X + individuo.Width > W + H / 100)
                                 individuo.X -= 5;
                         }
-                        if (Contexto.Fundo.fase.X + Contexto.Fundo.fase.Width > WidthTela) // se a fase chegar no final ela nao anda mais
+                        if (Contexto.Fundo.fase.X + Contexto.Fundo.fase.Width > W) // se a fase chegar no final ela nao anda mais
                         {
-                            if (individuo.X + individuo.Width >= WidthTela - HeightTela / 80) // HeightTela/80 = 13 , se o individuo passar do final da tela - 10 = movimento;
+                            if (individuo.X + individuo.Width >= W - H / 80) // HeightTela/80 = 13 , se o individuo passar do final da tela - 10 = movimento;
                             {
-                                Contexto.Fundo.fase.X -= HeightTela / 54; // = 20
+                                Contexto.Fundo.fase.X -= H / 54; // = 20
                             }
                             //tirar o fundo do vacuo
-                            if (Contexto.Fundo.fase.X + Contexto.Fundo.fase.Width <= WidthTela)
+                            if (Contexto.Fundo.fase.X + Contexto.Fundo.fase.Width <= W)
                             {
-                                Contexto.Fundo.fase.X += HeightTela / 54; // = 20
+                                Contexto.Fundo.fase.X += H / 54; // = 20
                             }
                         }
                     }
@@ -1429,7 +1465,7 @@ namespace Stick_RPG_Fight
                         //mov ESQUERDA
                         if (individuo.X > 0) // se o individuo estiver maior que 0 ele pode correr pra esquerda
                         {
-                            Vx = -HeightTela / 130; // = 8
+                            Vx = -H / 130; // = 8
                         }
                         else if (individuo.X <= 0) // se colidir com o começo ele para
                         {
@@ -1438,14 +1474,14 @@ namespace Stick_RPG_Fight
                         }
                         if (Contexto.Fundo.fase.X < 0) // se o fundo estiver no 0 ele para
                         {
-                            if (individuo.X <= HeightTela / 80) // se o individuo estiver menor ou igual a 13 ele começa a ir pra esquerda (fundo)
+                            if (individuo.X <= H / 80) // se o individuo estiver menor ou igual a 13 ele começa a ir pra esquerda (fundo)
                             {
-                                Contexto.Fundo.fase.X += HeightTela / 130; // = 8
+                                Contexto.Fundo.fase.X += H / 130; // = 8
                             }
                             //tirar o fundo do vacuo
                             if (Contexto.Fundo.fase.X >= 0)
                             {
-                                Contexto.Fundo.fase.X -= HeightTela / 130; // = 8
+                                Contexto.Fundo.fase.X -= H / 130; // = 8
                             }
                         }
 
@@ -1470,7 +1506,7 @@ namespace Stick_RPG_Fight
                         //mov ESQUERDA
                         if (individuo.X > 0) // se o individuo estiver maior que 0 ele pode correr pra esquerda
                         {
-                            Vx = -HeightTela / 54; // = 20
+                            Vx = -H / 54; // = 20
                         }
                         else if (individuo.X <= 0) // se colidir com o começo ele para
                         {
@@ -1479,14 +1515,14 @@ namespace Stick_RPG_Fight
                         }
                         if (Contexto.Fundo.fase.X < 0) // se o fundo estiver no 0 ele para
                         {
-                            if (individuo.X <= HeightTela / 80) // se o individuo estiver menor ou igual a 13 ele começa a ir pra esquerda (fundo)
+                            if (individuo.X <= H / 80) // se o individuo estiver menor ou igual a 13 ele começa a ir pra esquerda (fundo)
                             {
-                                Contexto.Fundo.fase.X += HeightTela / 54; // = 20
+                                Contexto.Fundo.fase.X += H / 54; // = 20
                             }
                             //tirar o fundo do vacuo
                             if (Contexto.Fundo.fase.X >= 0)
                             {
-                                Contexto.Fundo.fase.X -= HeightTela / 54; // = 20
+                                Contexto.Fundo.fase.X -= H / 54; // = 20
                             }
                         }
 
@@ -1511,7 +1547,7 @@ namespace Stick_RPG_Fight
                         //mov ESQUERDA
                         if (individuo.X > 0) // se o individuo estiver maior que 0 ele pode correr pra esquerda
                         {
-                            Vx = -HeightTela / 130; // = 8
+                            Vx = -H / 130; // = 8
                         }
                         else if (individuo.X <= 0) // se colidir com o começo ele para
                         {
@@ -1520,14 +1556,14 @@ namespace Stick_RPG_Fight
                         }
                         if (Contexto.Fundo.fase.X < 0) // se o fundo estiver no 0 ele para
                         {
-                            if (individuo.X <= HeightTela / 80) // se o individuo estiver menor ou igual a 13 ele começa a ir pra esquerda (fundo)
+                            if (individuo.X <= H / 80) // se o individuo estiver menor ou igual a 13 ele começa a ir pra esquerda (fundo)
                             {
-                                Contexto.Fundo.fase.X += HeightTela / 130; // = 8
+                                Contexto.Fundo.fase.X += H / 130; // = 8
                             }
                             //tirar o fundo do vacuo
                             if (Contexto.Fundo.fase.X >= 0)
                             {
-                                Contexto.Fundo.fase.X -= HeightTela / 130; // = 8
+                                Contexto.Fundo.fase.X -= H / 130; // = 8
                             }
                         }
                     }
@@ -1537,7 +1573,7 @@ namespace Stick_RPG_Fight
                         //mov ESQUERDA
                         if (individuo.X > 0) // se o individuo estiver maior que 0 ele pode correr pra esquerda
                         {
-                            Vx = -HeightTela / 54; // = 20
+                            Vx = -H / 54; // = 20
                         }
                         else if (individuo.X <= 0) // se colidir com o começo ele para
                         {
@@ -1546,14 +1582,14 @@ namespace Stick_RPG_Fight
                         }
                         if (Contexto.Fundo.fase.X < 0) // se o fundo estiver no 0 ele para
                         {
-                            if (individuo.X <= HeightTela / 80) // se o individuo estiver menor ou igual a 13 ele começa a ir pra esquerda (fundo)
+                            if (individuo.X <= H / 80) // se o individuo estiver menor ou igual a 13 ele começa a ir pra esquerda (fundo)
                             {
-                                Contexto.Fundo.fase.X += HeightTela / 54; // = 20
+                                Contexto.Fundo.fase.X += H / 54; // = 20
                             }
                             //tirar o fundo do vacuo
                             if (Contexto.Fundo.fase.X >= 0)
                             {
-                                Contexto.Fundo.fase.X -= HeightTela / 54; // = 20
+                                Contexto.Fundo.fase.X -= H / 54; // = 20
                             }
                         }
                     }
@@ -1570,7 +1606,7 @@ namespace Stick_RPG_Fight
                             //frame
                             FRAMESparado1();
                             //tamanho do personagem
-                            individuo.Width = WidthTela / 22;
+                            individuo.Width = W / 22;
                         }
                     }
                     else if (COMBATE) //dentro de combate
@@ -1580,7 +1616,7 @@ namespace Stick_RPG_Fight
                             //frame
                             FRAMESparado2();
                             //tamanho do personagem
-                            individuo.Width = WidthTela / 11;
+                            individuo.Width = W / 11;
                         }
                     }
                     if (ANDANDO)
@@ -1588,7 +1624,7 @@ namespace Stick_RPG_Fight
                         //frame
                         FRAMESmovendo();
                         //tamanho do personagem
-                        individuo.Width = WidthTela / 13;
+                        individuo.Width = W / 13;
 
                     }
 
@@ -1597,7 +1633,7 @@ namespace Stick_RPG_Fight
                         //frame
                         FRAMESmovendo();
                         //tamanho do personagem
-                        individuo.Width = WidthTela / 9 + WidthTela / 120; //16
+                        individuo.Width = W / 9 + W / 120; //16
                     }
 
                     if (PULANDOparado)
@@ -1605,11 +1641,11 @@ namespace Stick_RPG_Fight
                         //frame
                         if (!ATACANDO)
                         {
-                            FRAMESpular(WidthTela, HeightTela);
+                            FRAMESpular(W, H);
                         }
 
                         //tamanho do personagem
-                        individuo.Width = WidthTela / 10;
+                        individuo.Width = W / 10;
                     }
 
                     if (PULANDOandando)
@@ -1618,13 +1654,13 @@ namespace Stick_RPG_Fight
                         //frame
                         if (!ATACANDO)
                         {
-                            FRAMESpular(WidthTela, HeightTela);
+                            FRAMESpular(W, H);
                         }
 
 
 
                         //tamanho do personagem
-                        individuo.Width = WidthTela / 10;
+                        individuo.Width = W / 10;
                     }
 
                     if (PULANDOcorrendo)
@@ -1633,13 +1669,13 @@ namespace Stick_RPG_Fight
                         //frame
                         if (!ATACANDO)
                         {
-                            FRAMESpular(WidthTela, HeightTela);
+                            FRAMESpular(W, H);
                         }
 
 
 
                         //tamanho do personagem
-                        individuo.Width = WidthTela / 9;
+                        individuo.Width = W / 9;
                     }
 
                 }//fim da direita
@@ -1653,7 +1689,7 @@ namespace Stick_RPG_Fight
                             //frame
                             FRAMESparado1E();
                             //tamanho do personagem
-                            individuo.Width = WidthTela / 18;
+                            individuo.Width = W / 18;
                         }
                     }
                     else if (COMBATE)
@@ -1663,7 +1699,7 @@ namespace Stick_RPG_Fight
                             //frame
                             FRAMESparado2E();
                             //tamanho do personagem
-                            individuo.Width = WidthTela / 11;
+                            individuo.Width = W / 11;
                         }
                     }
                     if (ANDANDO)
@@ -1671,7 +1707,7 @@ namespace Stick_RPG_Fight
                         //frame
                         FRAMESmovendoE();
                         //tamanho do personagem
-                        individuo.Width = WidthTela / 13;
+                        individuo.Width = W / 13;
 
                     }
 
@@ -1680,7 +1716,7 @@ namespace Stick_RPG_Fight
                         //frame
                         FRAMESmovendoE();
                         //tamanho do personagem
-                        individuo.Width = WidthTela / 9 + WidthTela / 120; //16
+                        individuo.Width = W / 9 + W / 120; //16
                     }
 
                     if (PULANDOparado)
@@ -1688,11 +1724,11 @@ namespace Stick_RPG_Fight
                         //frame
                         if (!ATACANDO)
                         {
-                            FRAMESpularE(WidthTela, HeightTela);
+                            FRAMESpularE(W, H);
                         }
 
                         //tamanho do personagem
-                        individuo.Width = WidthTela / 10;
+                        individuo.Width = W / 10;
                     }
 
                     if (PULANDOandando)
@@ -1701,13 +1737,13 @@ namespace Stick_RPG_Fight
                         //frame
                         if (!ATACANDO)
                         {
-                            FRAMESpularE(WidthTela, HeightTela);
+                            FRAMESpularE(W, H);
                         }
 
 
 
                         //tamanho do personagem
-                        individuo.Width = WidthTela / 10;
+                        individuo.Width = W / 10;
                     }
 
                     if (PULANDOcorrendo)
@@ -1716,13 +1752,13 @@ namespace Stick_RPG_Fight
                         //frame
                         if (!ATACANDO)
                         {
-                            FRAMESpularE(WidthTela, HeightTela);
+                            FRAMESpularE(W, H);
                         }
 
 
 
                         //tamanho do personagem
-                        individuo.Width = WidthTela / 9;
+                        individuo.Width = W / 9;
                     }
                 }//fim da direita
             } // FIM DO SENDO AGARRADO / PARALIZADO (é dizer q o personagem n pode se mecher)
