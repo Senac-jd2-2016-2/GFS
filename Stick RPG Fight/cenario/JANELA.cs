@@ -109,16 +109,19 @@ namespace Stick_RPG_Fight
         public int Qopç, Qqtdd, Qcompletadas, Qqtddcompletada, Qtempo;//opç de quest/ quantidade pra terminar quest/ quantas quests completadas/ quantidade de coisas feitas na quest/ tempo;
 
         //ESCOLHA DE FASE
-        public Texture2D imgPbranco;
+        public Texture2D imgPbranco, imgCapaMapas, imgsetamenu1, imgsetamenu2, imgsetamenu3, imgsetamenu4, imgclickmenucompra, imgcompramenu1,imgcompramenu2;
         public Texture2D[] imgfaseB = new Texture2D[10];
 
+        public Rectangle CapaMapas = new Rectangle(), Setamenu1 = new Rectangle(), Setamenu3 = new Rectangle(), Clickmenucompra = new Rectangle(), compramenu = new Rectangle();
         public Rectangle[] Rfase = new Rectangle[10];
         public Rectangle[] linhas = new Rectangle[10];
         public Point Prolar = new Point(0, 0);
+        public Point Pclickmenu = new Point(0, 0);
 
-        public bool OPÇFASES, PRIMEIROclick;
+        public bool OPÇFASES, CLICKMENUCOMPRA, Bcompramenu;
         public bool[] Bfase = new bool[10];
         public bool[] FASEdestravada = new bool[10];
+        public bool[] INFOeCOMPRAfase = new bool[10];
 
         public List<Itens> listadeitens = new List<Itens>();
         
@@ -487,13 +490,14 @@ namespace Stick_RPG_Fight
             {
                 Rfase[i] = new Rectangle();
                 Bfase[i] = false;
+                INFOeCOMPRAfase[i] = false;
                 qntddefases++;
             }
             JANELA.J.FASEdestravada[0] = true;
             
         }
        
-        public void FUNÇÕESOPÇFASE(int W, int H, Botoes Botao, bool BOTAO)
+        public void FUNÇÕESOPÇFASE(int W, int H, Botoes Botao, bool BOTAO, Personagem P1)
         {
             
             var mouseState = Mouse.GetState();
@@ -528,6 +532,110 @@ namespace Stick_RPG_Fight
                         //pra desabilitar o botao qnd sair
                         JANELA.J.Bfase[i] = false;
                     }
+                }
+            }
+
+            //setas
+            if (Setamenu1.Contains(mousePosition))
+            {
+                if (Prolar.Y < 0)
+                {
+                    Prolar.Y += H / 35;
+                }
+                if (Mouse.GetState().LeftButton == ButtonState.Pressed || Prolar.Y > 0)
+                {
+                    Prolar.Y = 0;
+                }
+            }
+            if (Setamenu3.Contains(mousePosition))
+            {
+                if (Prolar.Y > -H)
+                {
+                    Prolar.Y -= H / 35;
+                }
+                if (Mouse.GetState().LeftButton == ButtonState.Pressed || Prolar.Y < -H)
+                {
+                    Prolar.Y = -H;
+                }
+            }
+
+            //botao compra da opç de fases
+            if (Mouse.GetState().RightButton == ButtonState.Pressed && !CLICKMENUCOMPRA)//ativar
+            {
+                for (int i = 0; i < Bfase.Length; i++)
+                {
+                    if (Rfase[i].Contains(mousePosition) && FASEdestravada[i] == false)
+                    {
+                        CLICKMENUCOMPRA = true;//ativa a aba
+                        INFOeCOMPRAfase[i] = true; //mostra apenas aquela na qual cliquei
+                        Pclickmenu.X = mouseState.X - (Prolar.X);
+                        Pclickmenu.Y = mouseState.Y + H / 50 - (Prolar.Y);
+                    }
+
+                }
+            }
+            if (Mouse.GetState().LeftButton == ButtonState.Pressed && CLICKMENUCOMPRA && !Clickmenucompra.Contains(mousePosition))//desativar
+            {
+                CLICKMENUCOMPRA = false;
+                for (int i = 0; i < Bfase.Length; i++) //desativar todas as informaçoes
+                {
+                    INFOeCOMPRAfase[i] = false;
+                }
+            }
+
+            //compra
+            if (CLICKMENUCOMPRA)
+            {
+                if (!compramenu.Contains(mousePosition))
+                    Bcompramenu = false;
+
+                //fase arena
+                if (INFOeCOMPRAfase[1] && Mouse.GetState().LeftButton == ButtonState.Pressed && compramenu.Contains(mousePosition))
+                {
+                    BOTAO = true;
+                    Bcompramenu = true;
+                }
+                if (Bcompramenu && !BOTAO && INFOeCOMPRAfase[1])
+                {
+                    if (Qcompletadas >= 5)
+                    {
+                        FASEdestravada[1] = true;
+                        CLICKMENUCOMPRA = false;
+                        INFOeCOMPRAfase[1] = false;
+                    }
+                    Bcompramenu = false;
+                }
+                //fase floresta amaldiçoada
+                if (INFOeCOMPRAfase[2] && Mouse.GetState().LeftButton == ButtonState.Pressed && compramenu.Contains(mousePosition))
+                {
+                    BOTAO = true;
+                    Bcompramenu = true;
+                }
+                if (Bcompramenu && !BOTAO && INFOeCOMPRAfase[2])
+                {
+                    if (P1.leite >= 50 && P1.honra >= 5)
+                    {
+                        FASEdestravada[2] = true;
+                        CLICKMENUCOMPRA = false;
+                        INFOeCOMPRAfase[2] = false;
+                    }
+                    Bcompramenu = false;
+                }
+                //fase celeiro
+                if (INFOeCOMPRAfase[3] && Mouse.GetState().LeftButton == ButtonState.Pressed && compramenu.Contains(mousePosition))
+                {
+                    BOTAO = true;
+                    Bcompramenu = true;
+                }
+                if (Bcompramenu && !BOTAO && INFOeCOMPRAfase[3])
+                {
+                    if (Qcompletadas >= 50)
+                    {
+                        FASEdestravada[3] = true;
+                        CLICKMENUCOMPRA = false;
+                        INFOeCOMPRAfase[3] = false;
+                    }
+                    Bcompramenu = false;
                 }
             }
         }
@@ -625,8 +733,43 @@ namespace Stick_RPG_Fight
                     }
                 }
                
+            }//fim multipl
+
+            //capa
+            CapaMapas.X = Prolar.X + H / 10 + H / 100 + H / 100;//128
+            CapaMapas.Width = W - ((H / 10 + H / 100 + H / 100) * 2); //1920 - 256 = 1664
+            CapaMapas.Y = Prolar.Y;
+            CapaMapas.Height = H * 2;
+
+            Setamenu1.Width = CapaMapas.Width;
+            Setamenu3.Width = CapaMapas.Width;
+
+            Setamenu1.Height = H / 100 + H / 10;//118
+            Setamenu3.Height = H / 100 + H / 10;//118
+
+            Setamenu1.X = CapaMapas.X;
+            Setamenu3.X = CapaMapas.X;
+
+            Setamenu1.Y = 0;
+            Setamenu3.Y = H - Setamenu3.Height;
+
+            //compra
+            Clickmenucompra.Width = H / 2 + H / 24; //540 + 45
+            Clickmenucompra.Height = H / 4 + H / 400; //280 + 2
+            compramenu.Width = H / 5 - H / 200;//211 = 216 - 5
+            compramenu.Height = H / 18 - H / 400;//58 = 60 - 2
+            if (CLICKMENUCOMPRA)
+            {
+                Clickmenucompra.X = Pclickmenu.X + Prolar.X;
+                Clickmenucompra.Y = Pclickmenu.Y + Prolar.Y;
+
+                compramenu.X = Clickmenucompra.X + Clickmenucompra.Width / 2 - compramenu.Width / 2;//no meio
+                compramenu.Y = Clickmenucompra.Y + Clickmenucompra.Height / 2 + Clickmenucompra.Height / 5;
             }
-        }
+
+
+            
+        }//fim void
 
         //
 

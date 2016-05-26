@@ -742,6 +742,11 @@ namespace Stick_RPG_Fight
             var mousePosition = new Point(mouseState.X, mouseState.Y);
 
             spriteBatch.Draw(Menu.m.imgintromenu_comtraçado, new Rectangle(0, 0, WidthTela, HeightTela), Color.White);
+            //fundo escuro
+            if (APPLY.Contains(mousePosition) && Bapply)
+            {
+                spriteBatch.Draw(JANELA.J.imgFUNDOmenu, new Rectangle(0, 0, WidthTela, HeightTela), Color.White);
+            }
 
             if (!APPLY.Contains(mousePosition))
             {
@@ -769,15 +774,15 @@ namespace Stick_RPG_Fight
                 }
             }
 
-            spriteBatch.DrawString(menu, "1920x1080p", new Vector2(B1[0].X - 20, B1[0].Y - 15), Color.White);
+            spriteBatch.DrawString(menu, "1920x1080p", new Vector2(B1[0].X - 20, B1[0].Y - 15), Color.Black);
 
-            spriteBatch.DrawString(menu, "1440x900p", new Vector2(B1[1].X, B1[1].Y - 15), Color.White);
+            spriteBatch.DrawString(menu, "1440x900p", new Vector2(B1[1].X, B1[1].Y - 15), Color.Black);
 
-            spriteBatch.DrawString(menu, "1360x768p", new Vector2(B1[2].X, B1[2].Y - 15), Color.White);
+            spriteBatch.DrawString(menu, "1360x768p", new Vector2(B1[2].X, B1[2].Y - 15), Color.Black);
 
-            spriteBatch.DrawString(menu, "1280x960p", new Vector2(B1[3].X, B1[3].Y - 15), Color.White);
+            spriteBatch.DrawString(menu, "1280x960p", new Vector2(B1[3].X, B1[3].Y - 15), Color.Black);
 
-            spriteBatch.DrawString(menu, "800x600p", new Vector2(B1[4].X, B1[4].Y - 15), Color.White);
+            spriteBatch.DrawString(menu, "800x600p", new Vector2(B1[4].X, B1[4].Y - 15), Color.Black);
 
             if (!BFULL)
             {
@@ -788,7 +793,9 @@ namespace Stick_RPG_Fight
                 spriteBatch.Draw(imgB2, Bfull, Color.White);
             }
 
-            spriteBatch.DrawString(menu, "FULL SCREEN", new Vector2(Bfull.X, Bfull.Y - 15), Color.White);
+            spriteBatch.DrawString(JANELA.J.Neon, "FULL SCREEN", new Vector2(Bfull.X, Bfull.Y - 25), Color.Yellow);
+
+            spriteBatch.DrawString(JANELA.J.Neon15, "Escolha sua resolução de tela", new Vector2(APPLY.X, 15), Color.Black);
         }//fim draw menu 00
         //--------------------------------------------------------------------------------------------------
         //--------------------------------------------------------------------------------------------------
@@ -1378,13 +1385,16 @@ namespace Stick_RPG_Fight
         //--------------------------------------------------------------------------------------------------
         //--------------------------------------------------------------------------------------------------
         //--------------------------------------------------------------------------------------------------
-        public void DrawJANELAopçfase(Botoes Botao, SpriteBatch spriteBatch, bool BOTAO)
+        public void DrawJANELAopçfase(Botoes Botao, SpriteBatch spriteBatch, bool BOTAO, Personagem P1)
         {
             var mouseState = Mouse.GetState();
             var mousePosition = new Point(mouseState.X, mouseState.Y);
 
+            
+            //fundo escuro
             spriteBatch.Draw(JANELA.J.imgFUNDOmenu, JANELA.J.FUNDO, Color.White);
-
+            //capa fundo
+            spriteBatch.Draw(JANELA.J.imgCapaMapas, JANELA.J.CapaMapas, Color.White);
 
             for (int i = 0; i < JANELA.J.Rfase.Length; i++)
             {
@@ -1424,8 +1434,71 @@ namespace Stick_RPG_Fight
                         spriteBatch.Draw(JANELA.J.imgPbranco, JANELA.J.linhas[i], Color.Red);
                     }
                 }
+            }//fim mult
+
+            //botao voltar (menu)
+            if (Botao.HOMEquadrado.Contains(mousePosition))
+            {
+                spriteBatch.Draw(Botao.imghomeOFF, Botao.HOMEquadrado, Color.Gold);
+                if (Mouse.GetState().LeftButton == ButtonState.Pressed)
+                {
+                    spriteBatch.Draw(Botao.imghomeON, Botao.HOMEquadrado, Color.Gold);
+                }
             }
-        }
+            else
+            {
+                if (Menu.m.MENU)
+                    spriteBatch.Draw(Botao.imghomeOFF, Botao.HOMEquadrado, Color.White);
+                else if (Menu.m.COMBATES || Menu.m.CAMPANHA)
+                {
+                    spriteBatch.Draw(Botao.imghomeOFFTP, Botao.HOMEquadrado, Color.White);
+                }
+            }
+            //setas
+            if (!JANELA.J.Setamenu1.Contains(mousePosition))
+            {
+                spriteBatch.Draw(JANELA.J.imgsetamenu1, JANELA.J.Setamenu1, Color.White);
+            }
+            else if (JANELA.J.Setamenu1.Contains(mousePosition))
+            {
+                spriteBatch.Draw(JANELA.J.imgsetamenu2, JANELA.J.Setamenu1, Color.White);
+            }
+            if (!JANELA.J.Setamenu3.Contains(mousePosition))
+            {
+                spriteBatch.Draw(JANELA.J.imgsetamenu3, JANELA.J.Setamenu3, Color.White);
+            }
+            else if (JANELA.J.Setamenu3.Contains(mousePosition))
+            {
+                spriteBatch.Draw(JANELA.J.imgsetamenu4, JANELA.J.Setamenu3, Color.White);
+            }
+            //botao compra
+            if (JANELA.J.CLICKMENUCOMPRA)
+            {
+                spriteBatch.Draw(JANELA.J.imgclickmenucompra, JANELA.J.Clickmenucompra, Color.White);
+                if (Mouse.GetState().LeftButton != ButtonState.Pressed)
+                    spriteBatch.Draw(JANELA.J.imgcompramenu1, JANELA.J.compramenu, Color.White);
+                if (JANELA.J.compramenu.Contains(mousePosition) && Mouse.GetState().LeftButton == ButtonState.Pressed)
+                    spriteBatch.Draw(JANELA.J.imgcompramenu2, JANELA.J.compramenu, Color.White);
+            }
+
+            //ESCRITO NA ABA INFO PRA COMPRAR
+            if (JANELA.J.INFOeCOMPRAfase[1])
+            {
+                spriteBatch.DrawString(JANELA.J.Neon15, "Arena", new Vector2(JANELA.J.Clickmenucompra.X + JANELA.J.Clickmenucompra.Width / 8, JANELA.J.Clickmenucompra.Y + JANELA.J.Clickmenucompra.Height / 9), Color.Black);
+                spriteBatch.DrawString(JANELA.J.Neon15, "O mapa custa: 5 Missões completadas. Você fez: " + JANELA.J.Qcompletadas, new Vector2(JANELA.J.Clickmenucompra.X + JANELA.J.Clickmenucompra.Width / 8, JANELA.J.Clickmenucompra.Y + JANELA.J.Clickmenucompra.Height / 2), Color.Black);
+            }
+            if (JANELA.J.INFOeCOMPRAfase[2])
+            {
+                spriteBatch.DrawString(JANELA.J.Neon15, "Floresta Japonesa Encantada", new Vector2(JANELA.J.Clickmenucompra.X + JANELA.J.Clickmenucompra.Width / 8, JANELA.J.Clickmenucompra.Y + JANELA.J.Clickmenucompra.Height / 9), Color.Black);
+                spriteBatch.DrawString(JANELA.J.Neon15, "O mapa custa: 50 LEITE e 5 HONRA. Você tem: L: " + P1.leite + " H: " + P1.honra, new Vector2(JANELA.J.Clickmenucompra.X + JANELA.J.Clickmenucompra.Width / 8, JANELA.J.Clickmenucompra.Y + JANELA.J.Clickmenucompra.Height / 2), Color.Black);
+            }
+            if (JANELA.J.INFOeCOMPRAfase[3])
+            {
+                spriteBatch.DrawString(JANELA.J.Neon15, "Celeiro", new Vector2(JANELA.J.Clickmenucompra.X + JANELA.J.Clickmenucompra.Width / 8, JANELA.J.Clickmenucompra.Y + JANELA.J.Clickmenucompra.Height / 9), Color.Black);
+                spriteBatch.DrawString(JANELA.J.Neon15, "O mapa custa: 50 Missões completadas. Você fez: " + JANELA.J.Qcompletadas, new Vector2(JANELA.J.Clickmenucompra.X + JANELA.J.Clickmenucompra.Width / 8, JANELA.J.Clickmenucompra.Y + JANELA.J.Clickmenucompra.Height / 2), Color.Black);
+            }
+            
+        }//fim void
 
 
 

@@ -36,8 +36,8 @@ namespace Stick_RPG_Fight
             P1.imgSpriteSheetandando = content.Load<Texture2D>("spritesheet p1 andando");
             P1.imgSpriteSheetATIRARarco = content.Load<Texture2D>("spritesheet p1 atirar (arco)");
             P1.imgSpriteSheetSACARarco = content.Load<Texture2D>("spritesheet p1 sacar arco");
-            P1.imgSpriteSheetagachar1 = content.Load<Texture2D>("spritesheet p1 agachar1");
-            P1.imgSpriteSheetagachar2 = content.Load<Texture2D>("spritesheet p1 agachar2");
+            
+            P1.imgSpriteSheetagachar = content.Load<Texture2D>("spritesheet p1 agachar2");
             P1.imgSpriteSheetcorrendo = content.Load<Texture2D>("spritesheet p1 correndo");
             P1.imgSpriteSheetdefesa1 = content.Load<Texture2D>("spritesheet p1 defesa1");
             P1.imgSpriteSheetagachadoHIT = content.Load<Texture2D>("spritesheet p1 agachar hit");
@@ -48,11 +48,11 @@ namespace Stick_RPG_Fight
             P1.imgjoelhada4C1 = content.Load<Texture2D>("p1 - joelhada4 combo1");
 
             //ESQUERDO
-            P1.imgSpriteSheetparado1E = content.Load<Texture2D>("spritesheet p1 parado1 ESQUERDA"); // (E)
-            P1.imgSpriteSheetandandoE = content.Load<Texture2D>("spritesheet p1 andando ESQUERDA");
-            P1.imgSpriteSheetcorrendoE = content.Load<Texture2D>("spritesheet p1 correndo ESQUERDA");
-            P1.imgSpriteSheetpularE = content.Load<Texture2D>("spritesheet p1 pular1 ESQUERDA");
-            P1.imgSpriteSheetparado2E = content.Load<Texture2D>("spritesheet p1 parado2 ESQUERDA");
+            P1.imgSpriteSheetparado1E = content.Load<Texture2D>("spritesheet p1 parado1 E"); // (E)
+            P1.imgSpriteSheetandandoE = content.Load<Texture2D>("spritesheet p1 andando E");
+            P1.imgSpriteSheetcorrendoE = content.Load<Texture2D>("spritesheet p1 correndo E");
+            P1.imgSpriteSheetpularE = content.Load<Texture2D>("spritesheet p1 pular1 E");
+            P1.imgSpriteSheetparado2E = content.Load<Texture2D>("spritesheet p1 parado2 E");
             P1.imgsoco1E = content.Load<Texture2D>("p1 - soco1 E");
             P1.imgsoco2C1E = content.Load<Texture2D>("p1 - soco2 combo1 E");
             P1.imgsoco3C1E = content.Load<Texture2D>("p1 - soco3 combo1 E");
@@ -204,6 +204,14 @@ namespace Stick_RPG_Fight
             JANELA.J.imgjanelacinzaopç1 = content.Load<Texture2D>("janela cinza (opç1)");
             JANELA.J.imgjanelacombo = content.Load<Texture2D>("janela combo");
             JANELA.J.imgjanelacomercio = content.Load<Texture2D>("janela comercio");
+            JANELA.J.imgCapaMapas = content.Load<Texture2D>("Capa menu mapas");
+            JANELA.J.imgsetamenu1 = content.Load<Texture2D>("setamenu1");
+            JANELA.J.imgsetamenu2 = content.Load<Texture2D>("setamenu2");
+            JANELA.J.imgsetamenu3 = content.Load<Texture2D>("setamenu3");
+            JANELA.J.imgsetamenu4 = content.Load<Texture2D>("setamenu4");
+            JANELA.J.imgclickmenucompra = content.Load<Texture2D>("clickmenucompra");
+            JANELA.J.imgcompramenu1 = content.Load<Texture2D>("comprarmenu1");
+            JANELA.J.imgcompramenu2 = content.Load<Texture2D>("comprarmenu2");
             //new
             JANELA.J.imgrolo = content.Load<Texture2D>("rolo");
             JANELA.J.imgjanelarolo = content.Load<Texture2D>("janela rolo");

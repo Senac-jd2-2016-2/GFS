@@ -44,8 +44,8 @@ namespace Stick_RPG_Fight
 
         public Texture2D imgSpriteSheetparado1; // parado fora de combate (D)
         public Texture2D imgSpriteSheetparado2; // em combate (D)
-        public Texture2D imgSpriteSheetagachar1;//fora de combate (D)
-        public Texture2D imgSpriteSheetagachar2;//em combate (D)
+        
+        public Texture2D imgSpriteSheetagachar;//em combate (D)
         public Texture2D imgSpriteSheetandando;// andando (D)
         public Texture2D imgSpriteSheetcorrendo;//correndo (D)
         public Texture2D imgSpriteSheetdefesa1; //defesa em PE (D)
