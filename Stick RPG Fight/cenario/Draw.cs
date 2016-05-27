@@ -511,7 +511,7 @@ namespace Stick_RPG_Fight
                 {
                     if (P1.PARADO) // parado fora de luta
                     {
-                        spriteBatch.Draw(P1.imgparado1maos, P1.individuo,
+                        spriteBatch.Draw(P1.imgparado1maosD, P1.individuo,
                                       new Rectangle(P1.frameparado1.X * P1.tamanhoMaosparado1.X, P1.frameparado1.Y * P1.tamanhoMaosparado1.Y,
                                                     P1.tamanhoMaosparado1.X, P1.tamanhoMaosparado1.Y),
                                                     Color.White);
@@ -521,7 +521,7 @@ namespace Stick_RPG_Fight
                 {
                     if (P1.PARADO)
                     {
-                        spriteBatch.Draw(P1.imgparado2maos, P1.individuo,
+                        spriteBatch.Draw(P1.imgparado2maosD, P1.individuo,
                                       new Rectangle(P1.frameparado2.X * P1.tamanhoMaosparado2.X, P1.frameparado2.Y * P1.tamanhoMaosparado2.Y,
                                                     P1.tamanhoMaosparado2.X, P1.tamanhoMaosparado2.Y),
                                                     Color.White);
@@ -532,7 +532,7 @@ namespace Stick_RPG_Fight
                 {
                     if (P1.PARADO) // parado na luta
                     {
-                        spriteBatch.Draw(P1.imgparado2maos, P1.individuo,
+                        spriteBatch.Draw(P1.imgparado2maosD, P1.individuo,
                                       new Rectangle(P1.frameparado2.X * P1.tamanhoMaosparado2.X, P1.frameparado2.Y * P1.tamanhoMaosparado2.Y,
                                                     P1.tamanhoMaosparado2.X, P1.tamanhoMaosparado2.Y),
                                                     Color.White);
@@ -541,7 +541,7 @@ namespace Stick_RPG_Fight
 
                 if (P1.ANDANDO) // se movimentando pra direita
                 {
-                    spriteBatch.Draw(P1.imgandandomaos, P1.individuo,
+                    spriteBatch.Draw(P1.imgandandomaosD, P1.individuo,
                                       new Rectangle(P1.framemovendo.X * P1.tamanhoMaosandando.X, P1.framemovendo.Y * P1.tamanhoMaosandando.Y,
                                                     P1.tamanhoMaosandando.X, P1.tamanhoMaosandando.Y),
                                                     Color.White);
@@ -549,7 +549,7 @@ namespace Stick_RPG_Fight
 
                 if (P1.CORRENDO)
                 {
-                    spriteBatch.Draw(P1.imgcorrendomaos, P1.individuo,
+                    spriteBatch.Draw(P1.imgcorrendomaosD, P1.individuo,
                                       new Rectangle(P1.framemovendo.X * P1.tamanhoMaoscorrendo.X, P1.framemovendo.Y * P1.tamanhoMaoscorrendo.Y,
                                                     P1.tamanhoMaoscorrendo.X, P1.tamanhoMaoscorrendo.Y),
                                                     Color.White);
@@ -643,7 +643,7 @@ namespace Stick_RPG_Fight
 
                 if (P1.CORRENDO)
                 {
-                    spriteBatch.Draw(P1.imgSpriteSheetcorrendoE, P1.individuo,
+                    spriteBatch.Draw(P1.imgcorrendomaosE, P1.individuo,
                                       new Rectangle(P1.framemovendo.X * P1.tamanhoMaoscorrendo.X, P1.framemovendo.Y * P1.tamanhoMaoscorrendo.Y,
                                                     P1.tamanhoMaoscorrendo.X, P1.tamanhoMaoscorrendo.Y),
                                                     Color.White);
@@ -651,7 +651,7 @@ namespace Stick_RPG_Fight
 
                 if (P1.PULANDOandando || P1.PULANDOcorrendo || P1.PULANDOparado)
                 {
-                    spriteBatch.Draw(P1.imgSpriteSheetpularE, P1.individuo,
+                    spriteBatch.Draw(P1.imgpularmaosE, P1.individuo,
                                      new Rectangle(P1.framepular.X * P1.tamanhoMaospular.X, P1.framepular.Y * P1.tamanhoMaospular.Y,
                                                    P1.tamanhoMaospular.X, P1.tamanhoMaospular.Y),
                                                    Color.White);
@@ -1485,17 +1485,20 @@ namespace Stick_RPG_Fight
             if (JANELA.J.INFOeCOMPRAfase[1])
             {
                 spriteBatch.DrawString(JANELA.J.Neon15, "Arena", new Vector2(JANELA.J.Clickmenucompra.X + JANELA.J.Clickmenucompra.Width / 8, JANELA.J.Clickmenucompra.Y + JANELA.J.Clickmenucompra.Height / 9), Color.Black);
-                spriteBatch.DrawString(JANELA.J.Neon15, "O mapa custa: 5 Missões completadas. Você fez: " + JANELA.J.Qcompletadas, new Vector2(JANELA.J.Clickmenucompra.X + JANELA.J.Clickmenucompra.Width / 8, JANELA.J.Clickmenucompra.Y + JANELA.J.Clickmenucompra.Height / 2), Color.Black);
+                spriteBatch.DrawString(JANELA.J.Neon15, "O mapa custa: 5 Missões completadas.", new Vector2(JANELA.J.Clickmenucompra.X + JANELA.J.Clickmenucompra.Width / 8, JANELA.J.Clickmenucompra.Y + JANELA.J.Clickmenucompra.Height / 2), Color.Black);
+                spriteBatch.DrawString(JANELA.J.Neon15, "Você fez: " + JANELA.J.Qcompletadas, new Vector2(JANELA.J.Clickmenucompra.X + JANELA.J.Clickmenucompra.Width / 8, JANELA.J.Clickmenucompra.Y + JANELA.J.Clickmenucompra.Height / 2 + 20), Color.Black);
             }
             if (JANELA.J.INFOeCOMPRAfase[2])
             {
                 spriteBatch.DrawString(JANELA.J.Neon15, "Floresta Japonesa Encantada", new Vector2(JANELA.J.Clickmenucompra.X + JANELA.J.Clickmenucompra.Width / 8, JANELA.J.Clickmenucompra.Y + JANELA.J.Clickmenucompra.Height / 9), Color.Black);
-                spriteBatch.DrawString(JANELA.J.Neon15, "O mapa custa: 50 LEITE e 5 HONRA. Você tem: L: " + P1.leite + " H: " + P1.honra, new Vector2(JANELA.J.Clickmenucompra.X + JANELA.J.Clickmenucompra.Width / 8, JANELA.J.Clickmenucompra.Y + JANELA.J.Clickmenucompra.Height / 2), Color.Black);
+                spriteBatch.DrawString(JANELA.J.Neon15, "O mapa custa: 50 LEITE e 5 HONRA.", new Vector2(JANELA.J.Clickmenucompra.X + JANELA.J.Clickmenucompra.Width / 8, JANELA.J.Clickmenucompra.Y + JANELA.J.Clickmenucompra.Height / 2), Color.Black);
+                spriteBatch.DrawString(JANELA.J.Neon15, "Você tem: L: " + P1.leite + " H: " + P1.honra, new Vector2(JANELA.J.Clickmenucompra.X + JANELA.J.Clickmenucompra.Width / 8, JANELA.J.Clickmenucompra.Y + JANELA.J.Clickmenucompra.Height / 2 + 20), Color.Black);
             }
             if (JANELA.J.INFOeCOMPRAfase[3])
             {
                 spriteBatch.DrawString(JANELA.J.Neon15, "Celeiro", new Vector2(JANELA.J.Clickmenucompra.X + JANELA.J.Clickmenucompra.Width / 8, JANELA.J.Clickmenucompra.Y + JANELA.J.Clickmenucompra.Height / 9), Color.Black);
-                spriteBatch.DrawString(JANELA.J.Neon15, "O mapa custa: 50 Missões completadas. Você fez: " + JANELA.J.Qcompletadas, new Vector2(JANELA.J.Clickmenucompra.X + JANELA.J.Clickmenucompra.Width / 8, JANELA.J.Clickmenucompra.Y + JANELA.J.Clickmenucompra.Height / 2), Color.Black);
+                spriteBatch.DrawString(JANELA.J.Neon15, "O mapa custa: 50 Missões completadas.", new Vector2(JANELA.J.Clickmenucompra.X + JANELA.J.Clickmenucompra.Width / 8, JANELA.J.Clickmenucompra.Y + JANELA.J.Clickmenucompra.Height / 2), Color.Black);
+                spriteBatch.DrawString(JANELA.J.Neon15, "Você fez: " + JANELA.J.Qcompletadas, new Vector2(JANELA.J.Clickmenucompra.X + JANELA.J.Clickmenucompra.Width / 8, JANELA.J.Clickmenucompra.Y + JANELA.J.Clickmenucompra.Height / 2 + 20), Color.Black);
             }
             
         }//fim void
@@ -1964,7 +1967,7 @@ namespace Stick_RPG_Fight
                     {
                         if (P1.listaclonePoder[i].PARADO) // parado fora de luta
                         {
-                            spriteBatch.Draw(P1.imgparado1maos, P1.listaclonePoder[i].individuo,
+                            spriteBatch.Draw(P1.imgparado1maosD, P1.listaclonePoder[i].individuo,
                                           new Rectangle(P1.listaclonePoder[i].frameparado1.X * P1.listaclonePoder[i].tamanhoMaosparado1.X, P1.listaclonePoder[i].frameparado1.Y * P1.listaclonePoder[i].tamanhoMaosparado1.Y,
                                                         P1.listaclonePoder[i].tamanhoMaosparado1.X, P1.listaclonePoder[i].tamanhoMaosparado1.Y),
                                                         Color.White);
@@ -1974,7 +1977,7 @@ namespace Stick_RPG_Fight
                     {
                         if (P1.listaclonePoder[i].PARADO)
                         {
-                            spriteBatch.Draw(P1.imgparado2maos, P1.listaclonePoder[i].individuo,
+                            spriteBatch.Draw(P1.imgparado2maosD, P1.listaclonePoder[i].individuo,
                                           new Rectangle(P1.listaclonePoder[i].frameparado2.X * P1.listaclonePoder[i].tamanhoMaosparado2.X, P1.listaclonePoder[i].frameparado2.Y * P1.listaclonePoder[i].tamanhoMaosparado2.Y,
                                                         P1.listaclonePoder[i].tamanhoMaosparado2.X, P1.listaclonePoder[i].tamanhoMaosparado2.Y),
                                                         Color.White);
@@ -1985,7 +1988,7 @@ namespace Stick_RPG_Fight
                     {
                         if (P1.listaclonePoder[i].PARADO) // parado na luta
                         {
-                            spriteBatch.Draw(P1.imgparado2maos, P1.listaclonePoder[i].individuo,
+                            spriteBatch.Draw(P1.imgparado2maosD, P1.listaclonePoder[i].individuo,
                                           new Rectangle(P1.listaclonePoder[i].frameparado2.X * P1.listaclonePoder[i].tamanhoMaosparado2.X, P1.listaclonePoder[i].frameparado2.Y * P1.listaclonePoder[i].tamanhoMaosparado2.Y,
                                                         P1.listaclonePoder[i].tamanhoMaosparado2.X, P1.listaclonePoder[i].tamanhoMaosparado2.Y),
                                                         Color.White);
@@ -1994,7 +1997,7 @@ namespace Stick_RPG_Fight
 
                     if (P1.listaclonePoder[i].ANDANDO) // se movimentando pra direita
                     {
-                        spriteBatch.Draw(P1.imgandandomaos, P1.listaclonePoder[i].individuo,
+                        spriteBatch.Draw(P1.imgandandomaosD, P1.listaclonePoder[i].individuo,
                                           new Rectangle(P1.listaclonePoder[i].framemovendo.X * P1.listaclonePoder[i].tamanhoMaosandando.X, P1.listaclonePoder[i].framemovendo.Y * P1.listaclonePoder[i].tamanhoMaosandando.Y,
                                                         P1.listaclonePoder[i].tamanhoMaosandando.X, P1.listaclonePoder[i].tamanhoMaosandando.Y),
                                                         Color.White);
@@ -2002,7 +2005,7 @@ namespace Stick_RPG_Fight
 
                     if (P1.listaclonePoder[i].CORRENDO)
                     {
-                        spriteBatch.Draw(P1.imgcorrendomaos, P1.listaclonePoder[i].individuo,
+                        spriteBatch.Draw(P1.imgcorrendomaosD, P1.listaclonePoder[i].individuo,
                                           new Rectangle(P1.listaclonePoder[i].framemovendo.X * P1.listaclonePoder[i].tamanhoMaoscorrendo.X, P1.listaclonePoder[i].framemovendo.Y * P1.listaclonePoder[i].tamanhoMaoscorrendo.Y,
                                                         P1.listaclonePoder[i].tamanhoMaoscorrendo.X, P1.listaclonePoder[i].tamanhoMaoscorrendo.Y),
                                                         Color.White);
@@ -2084,7 +2087,7 @@ namespace Stick_RPG_Fight
 
                     if (P1.listaclonePoder[i].CORRENDO)
                     {
-                        spriteBatch.Draw(P1.imgSpriteSheetcorrendoE, P1.listaclonePoder[i].individuo,
+                        spriteBatch.Draw(P1.imgcorrendomaosE, P1.listaclonePoder[i].individuo,
                                           new Rectangle(P1.listaclonePoder[i].framemovendo.X * P1.listaclonePoder[i].tamanhoMaoscorrendo.X, P1.listaclonePoder[i].framemovendo.Y * P1.listaclonePoder[i].tamanhoMaoscorrendo.Y,
                                                         P1.listaclonePoder[i].tamanhoMaoscorrendo.X, P1.listaclonePoder[i].tamanhoMaoscorrendo.Y),
                                                         Color.White);
@@ -2092,7 +2095,7 @@ namespace Stick_RPG_Fight
 
                     if (P1.listaclonePoder[i].PULANDOandando || P1.listaclonePoder[i].PULANDOcorrendo || P1.listaclonePoder[i].PULANDOparado)
                     {
-                        spriteBatch.Draw(P1.imgSpriteSheetpularE, P1.listaclonePoder[i].individuo,
+                        spriteBatch.Draw(P1.imgpularmaosE, P1.listaclonePoder[i].individuo,
                                          new Rectangle(P1.listaclonePoder[i].framepular.X * P1.listaclonePoder[i].tamanhoMaospular.X, P1.listaclonePoder[i].framepular.Y * P1.listaclonePoder[i].tamanhoMaospular.Y,
                                                        P1.listaclonePoder[i].tamanhoMaospular.X, P1.listaclonePoder[i].tamanhoMaospular.Y),
                                                        Color.White);

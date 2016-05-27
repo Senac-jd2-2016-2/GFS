@@ -31,16 +31,16 @@ namespace Stick_RPG_Fight
             Audio.A1.imgVol2 = content.Load<Texture2D>("volume+");
 
                 //Direito
-            P1.imgparado1maos = content.Load<Texture2D>("spritesheet p1 parado1"); // só imagem, logo posso usar isso também pros inimigos.
-            P1.imgparado2maos = content.Load<Texture2D>("spritesheet p1 parado2");
-            P1.imgandandomaos = content.Load<Texture2D>("spritesheet p1 andando");
-            P1.imgSpriteSheetATIRARarco = content.Load<Texture2D>("spritesheet p1 atirar (arco)");
-            P1.imgSpriteSheetSACARarco = content.Load<Texture2D>("spritesheet p1 sacar arco");
+            P1.imgparado1maosD = content.Load<Texture2D>("spritesheet p1 parado1"); // só imagem, logo posso usar isso também pros inimigos.
+            P1.imgparado2maosD = content.Load<Texture2D>("spritesheet p1 parado2");
+            P1.imgandandomaosD = content.Load<Texture2D>("spritesheet p1 andando");
+            P1.imgATIRARarcoD = content.Load<Texture2D>("spritesheet p1 atirar (arco)");
+            P1.imgSacarArcoD = content.Load<Texture2D>("spritesheet p1 sacar arco");
             
-            P1.imgagacharmaos = content.Load<Texture2D>("spritesheet p1 agachar2");
-            P1.imgcorrendomaos = content.Load<Texture2D>("spritesheet p1 correndo");
-            P1.imgdefesa1maos = content.Load<Texture2D>("spritesheet p1 defesa1");
-            P1.imgagachadoHITmaos = content.Load<Texture2D>("spritesheet p1 agachar hit");
+            P1.imgagacharmaosD = content.Load<Texture2D>("spritesheet p1 agachar2");
+            P1.imgcorrendomaosD = content.Load<Texture2D>("spritesheet p1 correndo");
+            P1.imgdefesa1maosD = content.Load<Texture2D>("spritesheet p1 defesa1");
+            P1.imgagachadoHITmaosD = content.Load<Texture2D>("spritesheet p1 agachar hit");
             P1.imgpularmaos = content.Load<Texture2D>("spritesheet p1 pular1");
             P1.imgsoco1maos = content.Load<Texture2D>("p1 - soco1");
             P1.imgsoco2C1maos = content.Load<Texture2D>("p1 - soco2 combo1");
@@ -50,8 +50,8 @@ namespace Stick_RPG_Fight
             //ESQUERDO
             P1.imgparado1maosE = content.Load<Texture2D>("spritesheet p1 parado1 E"); // (E)
             P1.imgandandomaosE = content.Load<Texture2D>("spritesheet p1 andando E");
-            P1.imgSpriteSheetcorrendoE = content.Load<Texture2D>("spritesheet p1 correndo E");
-            P1.imgSpriteSheetpularE = content.Load<Texture2D>("spritesheet p1 pular1 E");
+            P1.imgcorrendomaosE = content.Load<Texture2D>("spritesheet p1 correndo E");
+            P1.imgpularmaosE = content.Load<Texture2D>("spritesheet p1 pular1 E");
             P1.imgparado2maosE = content.Load<Texture2D>("spritesheet p1 parado2 E");
             P1.imgsoco1maosE = content.Load<Texture2D>("p1 - soco1 E");
             P1.imgsoco2C1maosE = content.Load<Texture2D>("p1 - soco2 combo1 E");

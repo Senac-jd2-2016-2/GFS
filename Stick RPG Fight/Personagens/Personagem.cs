@@ -37,9 +37,12 @@ namespace Stick_RPG_Fight
         //                                                                                                 ESQUERDA
         public Texture2D imgparado1maosE; // parado fora de combate (E)
         public Texture2D imgandandomaosE;// andando (E)
-        public Texture2D imgSpriteSheetcorrendoE;//correndo (E)
-        public Texture2D imgSpriteSheetpularE; //Pular (E)
+        public Texture2D imgcorrendomaosE;//correndo (E)
+        public Texture2D imgpularmaosE; //Pular (E)
         public Texture2D imgparado2maosE; // em combate (E)
+        public Texture2D imgHIT1maosE, imgHIT2maosE;//tomando hit em pé (D) 
+        public Texture2D imgdefesa1maosE; //defesa em PE (D)
+
         public Texture2D imgsoco1maosE; //soco esquerdo 1 (E)
         public Texture2D imgsoco2C1maosE; // soco direito 2 - combo 1 (E)
         public Texture2D imgsoco3C1maosE; // girada direito 3 - combo 1 (E)
@@ -49,17 +52,21 @@ namespace Stick_RPG_Fight
         //Adaga
         public Texture2D imgParadoAdagaE, imgPulandoAdagaE, imgSacarAdagaE, imgCorrendoAdagaE, imgDefendendoAdagaE, imgHit1AdagaE, imgHit2AdagaE, imgCombo1_1AdagaE, imgCombo1_2AdagaE, imgCombo1_3AdagaE, imgCombo1_4AdagaE;
         //ARCO
-        public Texture2D imgParadoArcoE, imgPulandoArcoE, imgSacarArcoE, imgCorrendoArcoE, imgHit1ArcoE, imgHit2ArcoE, imgSpriteSheetATIRARarcoE, imgFlechaE; 
+        public Texture2D imgParadoArcoE, imgPulandoArcoE, imgSacarArcoE, imgCorrendoArcoE, imgHit1ArcoE, imgHit2ArcoE, imgATIRARarcoE, imgFlechaE;
+        //ESPADA 2H
+        public Texture2D imgParadoEspada2mE, imgCorrerEspada2mE, imgDefenderEspada2mE, imgHit1Espada2mE, imgHit2Espada2mE, imgSacarEspada2mE, imgCombo1_1Espada2mE, imgCombo1_2Espada2mE, imgCombo1_3Espada2mE, imgCombo1_4Espada2mE;
+        //TRIDENTE
+        public Texture2D imgParadoTridenteE, imgCombo2_1TridenteE, imgCorrerTridenteE, imgDefenderTridenteE, imgPularTridenteE, imgHit1TridenteE, imgHit2TridenteE, imgSacarTridenteE, imgCombo1_1TridenteE, imgCombo1_2TridenteE, imgCombo1_3TridenteE, imgCombo1_4TridenteE;
 
         //                                                                                               /DIREITA
-        public Texture2D imgparado1maos; // parado fora de combate (D)
-        public Texture2D imgparado2maos; // em combate (D)
-        public Texture2D imgagacharmaos;//em combate (D)
-        public Texture2D imgandandomaos;// andando (D)
-        public Texture2D imgcorrendomaos;//correndo (D)
-        public Texture2D imgdefesa1maos; //defesa em PE (D)
-        public Texture2D imgagachadoHITmaos; //tomando hit agachado (D)
-        public Texture2D imgHIT1maos, imgHIT2maos;//tomando hit em pé (D) 
+        public Texture2D imgparado1maosD; // parado fora de combate (D)
+        public Texture2D imgparado2maosD; // em combate (D)
+        public Texture2D imgagacharmaosD;//em combate (D)
+        public Texture2D imgandandomaosD;// andando (D)
+        public Texture2D imgcorrendomaosD;//correndo (D)
+        public Texture2D imgdefesa1maosD; //defesa em PE (D)
+        public Texture2D imgagachadoHITmaosD; //tomando hit agachado (D)
+        public Texture2D imgHIT1maosD, imgHIT2maosD;//tomando hit em pé (D) 
         
         public Texture2D imgpularmaos; //Pular (D)
         public Texture2D imgsoco1maos; //soco esquerdo 1
@@ -72,9 +79,11 @@ namespace Stick_RPG_Fight
         //Adaga
         public Texture2D imgParadoAdagaD, imgPulandoAdagaD, imgSacarAdagaD, imgCorrendoAdagaD, imgDefendendoAdagaD, imgHit1AdagaD, imgHit2AdagaD, imgCombo1_1AdagaD, imgCombo1_2AdagaD, imgCombo1_3AdagaD, imgCombo1_4AdagaD; 
         //ARCO
-        public Texture2D imgParadoArcoD, imgPulandoArcoD, imgSacarArcoD, imgCorrendoArcoD, imgHit1ArcoD, imgHit2ArcoD, imgSpriteSheetATIRARarcoD, imgFlechaD; 
+        public Texture2D imgParadoArcoD, imgPulandoArcoD, imgSacarArcoD, imgCorrendoArcoD, imgHit1ArcoD, imgHit2ArcoD, imgATIRARarcoD, imgFlechaD; 
         //ESPADA 2H
         public Texture2D imgParadoEspada2mD, imgCorrerEspada2mD, imgDefenderEspada2mD, imgHit1Espada2mD, imgHit2Espada2mD, imgSacarEspada2mD, imgCombo1_1Espada2mD, imgCombo1_2Espada2mD, imgCombo1_3Espada2mD, imgCombo1_4Espada2mD;
+        //TRIDENTE
+        public Texture2D imgParadoTridenteD, imgCombo2_1TridenteD, imgCorrerTridenteD, imgDefenderTridenteD, imgPularTridenteD, imgHit1TridenteD, imgHit2TridenteD, imgSacarTridenteD, imgCombo1_1TridenteD, imgCombo1_2TridenteD, imgCombo1_3TridenteD, imgCombo1_4TridenteD;
         
 
 
@@ -91,12 +100,11 @@ namespace Stick_RPG_Fight
         //MAOS
         public Point tamanhoMaosparado1 = new Point(148, 466); //Dimensões do sprite
         public Point tamanhoMaosparado2 = new Point(283, 452); //Dimensões do sprite
-        
         public Point tamanhoMaosagachar = new Point(323, 452); //Dimensões do sprite
         public Point tamanhoMaosandando = new Point(200, 462); //Dimensões do sprite
         public Point tamanhoMaoscorrendo = new Point(355, 474); //Dimensões do sprite
         public Point tamanhoMaosdefesa1 = new Point(309, 451); //Dimensões do sprite
-        public Point tamanhoMaosagachadoHIT = new Point(682, 651); //Dimensões do sprite
+        public Point tamanhoMaosagachadoHIT = new Point(663, 622); //Dimensões do sprite
         public Point tamanhoMaospular = new Point(284, 454); //Dimensões do sprite
 
         //LUTA

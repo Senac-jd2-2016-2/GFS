@@ -417,26 +417,26 @@ namespace Stick_RPG_Fight
 
                     if (menu01)
                     {
-                        var WidthTela = Window.ClientBounds.Width;
-                        var HeightTela = Window.ClientBounds.Height;    
+                        var W = Window.ClientBounds.Width;
+                        var H = Window.ClientBounds.Height;    
 
-                        JANELA.J.POSIÇÃOPAUSE(WidthTela, HeightTela);
+                        JANELA.J.POSIÇÃOPAUSE(W, H);
                         if (UMAVEZ)
                         {
-                            ATUALIZAÇÃO.ATLZÇ.AtualizaTamanhoComeço(WidthTela, HeightTela, Botao, P1, FlechaE, FlechaD); // retangulos
+                            ATUALIZAÇÃO.ATLZÇ.AtualizaTamanhoComeço(W, H, Botao, P1, FlechaE, FlechaD); // retangulos
                             UMAVEZ = false;
 
                             //flecha
-                            FlechaD = new Rectangle(WidthTela - HeightTela / 11, HeightTela - HeightTela / 11, HeightTela / 11, HeightTela / 11);
-                            FlechaE = new Rectangle(0, HeightTela - HeightTela / 11, HeightTela / 11, HeightTela / 11);
+                            FlechaD = new Rectangle(W - H / 11, H - H / 11, H / 11, H / 11);
+                            FlechaE = new Rectangle(0, H - H / 11, H / 11, H / 11);
 
                             MediaPlayer.Play(Audio.A1.menusong);
                         }
 
-                        P1.RPGatualização(WidthTela, HeightTela);
-                        Menu.m.menu01GAME(WidthTela, HeightTela, P1, aleatório); //RESUMAO 
-                        JANELA.J.COMPLETARQuest(P1, Botao, listai1, WidthTela, HeightTela);
-                        JANELA.J.POSQUEST(WidthTela, HeightTela);
+                        P1.RPGatualização(W, H);
+                        Menu.m.menu01GAME(W, H, P1, aleatório); //RESUMAO 
+                        JANELA.J.COMPLETARQuest(P1, Botao, listai1, W, H);
+                        JANELA.J.POSQUEST(W, H);
                         JANELA.J.SELECIONADOS[0] = true;
                         
 
