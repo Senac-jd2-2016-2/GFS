@@ -41,7 +41,7 @@ namespace Stick_RPG_Fight
         public Texture2D imgpularmaosE; //Pular (E)
         public Texture2D imgparado2maosE; // em combate (E)
         public Texture2D imgHIT1maosE, imgHIT2maosE;//tomando hit em pé (D) 
-        public Texture2D imgdefesa1maosE; //defesa em PE (D)
+        public Texture2D imgdefesamaosE; //defesa em PE (D)
 
         public Texture2D imgsoco1maosE; //soco esquerdo 1 (E)
         public Texture2D imgsoco2C1maosE; // soco direito 2 - combo 1 (E)
@@ -64,7 +64,7 @@ namespace Stick_RPG_Fight
         public Texture2D imgagacharmaosD;//em combate (D)
         public Texture2D imgandandomaosD;// andando (D)
         public Texture2D imgcorrendomaosD;//correndo (D)
-        public Texture2D imgdefesa1maosD; //defesa em PE (D)
+        public Texture2D imgdefesamaosD; //defesa em PE (D)
         public Texture2D imgagachadoHITmaosD; //tomando hit agachado (D)
         public Texture2D imgHIT1maosD, imgHIT2maosD;//tomando hit em pé (D) 
         
@@ -100,13 +100,15 @@ namespace Stick_RPG_Fight
         //MAOS
         public Point tamanhoMaosparado1 = new Point(148, 466); //Dimensões do sprite
         public Point tamanhoMaosparado2 = new Point(283, 452); //Dimensões do sprite
-        public Point tamanhoMaosagachar = new Point(323, 452); //Dimensões do sprite
+        public Point tamanhoMaosagachar = new Point(323, 450); //Dimensões do sprite
         public Point tamanhoMaosandando = new Point(200, 462); //Dimensões do sprite
         public Point tamanhoMaoscorrendo = new Point(355, 474); //Dimensões do sprite
         public Point tamanhoMaosdefesa1 = new Point(309, 451); //Dimensões do sprite
         public Point tamanhoMaosagachadoHIT = new Point(663, 622); //Dimensões do sprite
         public Point tamanhoMaospular = new Point(284, 454); //Dimensões do sprite
 
+        public Point tamanhoMaosHIT1 = new Point(273, 452); //Dimensões do sprite
+        public Point tamanhoMaosHIT2 = new Point(303, 468); //Dimensões do sprite
         //LUTA
         //MAOS
         public Point tamanhosoco1Maos = new Point(360, 446); //Dimensões do sprite
@@ -115,23 +117,109 @@ namespace Stick_RPG_Fight
         public Point tamanhojoelhada4C1Maos = new Point(341, 469); //Dimensões do sprite
 
         //ARMA
-        public Point tamanhoSpriteSheetATIRARarco = new Point(694, 683); //Dimensões do sprite
-        public Point tamanhoSpriteSheetSACARarco = new Point(626, 692); //Dimensões do sprite
+        //adaga
+        public Point tamanhoSacarAdaga = new Point(388, 542); //Dimensões do sprite
+        public Point tamanhoPularAdaga = new Point(309, 468); //Dimensões do sprite
+        public Point tamanhoParadoAdaga = new Point(291, 457); //Dimensões do sprite
+        public Point tamanhoHIT1Adaga = new Point(311, 466); //Dimensões do sprite
+        public Point tamanhoHIT2Adaga = new Point(295, 468); //Dimensões do sprite
+        public Point tamanhoDefenderAdaga = new Point(293, 470); //Dimensões do sprite
+        public Point tamanhoCorrerAdaga = new Point(414, 481); //Dimensões do sprite
+        public Point tamanhoCombo1_1Adaga = new Point(426, 457); //Dimensões do sprite
+        public Point tamanhoCombo1_2Adaga = new Point(448, 471); //Dimensões do sprite
+        public Point tamanhoCombo1_3Adaga = new Point(456, 459); //Dimensões do sprite
+        public Point tamanhoCombo1_4Adaga = new Point(511, 492); //Dimensões do sprite
+        //arco
+        public Point tamanhoATIRARarco = new Point(688, 668); //Dimensões do sprite
+        public Point tamanhoSACARarco = new Point(634, 683); //Dimensões do sprite
+        public Point tamanhoPulararco = new Point(548, 535); //Dimensões do sprite
+        public Point tamanhoParadoarco = new Point(540, 511); //Dimensões do sprite
+        public Point tamanhoHIT2arco = new Point(550, 483); //Dimensões do sprite
+        public Point tamanhoHIT1arco = new Point(609, 485); //Dimensões do sprite
+        public Point tamanhoCORRERarco = new Point(658, 566); //Dimensões do sprite
+        //espada
+        public Point tamanhoSACARespada = new Point(488, 505); //Dimensões do sprite
+        public Point tamanhoPARADOespada = new Point(435, 500); //Dimensões do sprite
+        public Point tamanhoHIT2espada = new Point(438, 514); //Dimensões do sprite
+        public Point tamanhoHIT1espada = new Point(443, 490); //Dimensões do sprite
+        public Point tamanhoDEFENDERespada = new Point(435, 620); //Dimensões do sprite
+        public Point tamanhoCORRERespada = new Point(442, 499); //Dimensões do sprite
+        public Point tamanhoCombo1_1espada = new Point(1050, 522); //Dimensões do sprite
+        public Point tamanhoCombo1_2espada = new Point(1176, 668); //Dimensões do sprite
+        public Point tamanhoCombo1_3espada = new Point(589, 488); //Dimensões do sprite
+        public Point tamanhoCombo1_4espada = new Point(572, 549); //Dimensões do sprite
+        //TRIDENTE
+        public Point tamanhoSACARtridente = new Point(699, 673); //Dimensões do sprite
+        public Point tamanhoPULARtridente = new Point(480, 535); //Dimensões do sprite
+        public Point tamanhoPARADOtridente = new Point(469, 530); //Dimensões do sprite
+        public Point tamanhoDEFENDERtridente = new Point(512, 592); //Dimensões do sprite
+        public Point tamanhoCORRERtridente = new Point(616, 584); //Dimensões do sprite
+        public Point tamanhocombo2_1tridente = new Point(687, 524); //Dimensões do sprite
+        public Point tamanhocombo1_1tridente = new Point(635, 668); //Dimensões do sprite
+        public Point tamanhocombo1_2tridente = new Point(659, 718); //Dimensões do sprite
+        public Point tamanhocombo1_3tridente = new Point(677, 571); //Dimensões do sprite
+        public Point tamanhocombo1_4tridente = new Point(821, 679); //Dimensões do sprite
+        public Point tamanhoHIT1tridente = new Point(393, 509); //Dimensões do sprite
+        public Point tamanhoHIT2tridente = new Point(391, 518); //Dimensões do sprite
         
         //      sprite qntdd
         //MAOS
-        public Point SpriteSheetparado1 = new Point(8, 8); //Dimensões da spritesheet
-        public Point SpriteSheetparado2 = new Point(8, 8); //Dimensões da spritesheet
-        public Point SpriteSheetagachar1 = new Point(8, 8); //Dimensões da spritesheet
-        public Point SpriteSheetagachar2 = new Point(8, 8); //Dimensões da spritesheet
-        public Point SpriteSheetmovendo = new Point(8, 8); //Dimensões da spritesheet
-        public Point SpriteSheetpular = new Point(8, 4); //Dimensões da spritesheet
-        public Point SpriteSheetdefesa1 = new Point(8, 8); //Dimensões da spritesheet
-        public Point SpriteSheetagachadoHIT = new Point(10, 8); //Dimensões da spritesheet
+        public Point SpriteSheetparado1maos = new Point(8, 8); //Dimensões da spritesheet
+        public Point SpriteSheetparado2maos = new Point(8, 8); //Dimensões da spritesheet
+        public Point SpriteSheetagacharmaos = new Point(8, 4); //Dimensões da spritesheet
+        public Point SpriteSheetmovendomaos = new Point(8, 8); //Dimensões da spritesheet
+        public Point SpriteSheetpularmaos = new Point(8, 4); //Dimensões da spritesheet
+        public Point SpriteSheetdefesamaos = new Point(8, 4); //Dimensões da spritesheet
+        public Point SpriteSheetagachadoHITmaos = new Point(10, 8); //Dimensões da spritesheet
+
+        public Point SpriteSheetHIT1maos = new Point(8, 4); //Dimensões da spritesheet
+        public Point SpriteSheetHIT2maos = new Point(8, 4); //Dimensões da spritesheet
 
         //armas
-        public Point SpriteSheetATIRARarco = new Point(9, 7); //Dimensões da spritesheet
-        public Point SpriteSheetSACARarco = new Point(8, 8); //Dimensões da spritesheet
+        //adaga
+        public Point SpriteSheetSacarAdaga = new Point(8, 6); //Dimensões do sprite
+        public Point SpriteSheetPularAdaga = new Point(8, 4); //Dimensões do sprite
+        public Point SpriteSheetParadoAdaga = new Point(8, 4); //Dimensões do sprite
+        public Point SpriteSheetHIT1Adaga = new Point(8, 3); //Dimensões do sprite
+        public Point SpriteSheetHIT2Adaga = new Point(8, 3); //Dimensões do sprite
+        public Point SpriteSheetDefenderAdaga = new Point(8, 4); //Dimensões do sprite
+        public Point SpriteSheetCorrerAdaga = new Point(8, 7); //Dimensões do sprite
+        public Point SpriteSheetCombo1_1Adaga = new Point(8, 4); //Dimensões do sprite
+        public Point SpriteSheetCombo1_2Adaga = new Point(8, 5); //Dimensões do sprite
+        public Point SpriteSheetCombo1_3Adaga = new Point(8, 4); //Dimensões do sprite
+        public Point SpriteSheetCombo1_4Adaga = new Point(8, 8); //Dimensões do sprite
+        //arco
+        public Point SpriteSheetATIRARarco = new Point(8, 7); //Dimensões do sprite
+        public Point SpriteSheetSACARarco = new Point(8, 6); //Dimensões do sprite
+        public Point SpriteSheetPulararco = new Point(8, 4); //Dimensões do sprite
+        public Point SpriteSheetParadoarco = new Point(8, 4); //Dimensões do sprite
+        public Point SpriteSheetHIT2arco = new Point(8, 4); //Dimensões do sprite
+        public Point SpriteSheetHIT1arco = new Point(8, 4); //Dimensões do sprite
+        public Point SpriteSheetCORRERarco = new Point(8, 6); //Dimensões do sprite
+        //espada
+        public Point SpriteSheetSACARespada = new Point(8, 6); //Dimensões do sprite
+        public Point SpriteSheetPARADOespada = new Point(8, 4); //Dimensões do sprite
+        public Point SpriteSheetHIT2espada = new Point(8, 3); //Dimensões do sprite
+        public Point SpriteSheetHIT1espada = new Point(8, 3); //Dimensões do sprite
+        public Point SpriteSheetDEFENDERespada = new Point(8, 4); //Dimensões do sprite
+        public Point SpriteSheetCORRERespada = new Point(8, 8); //Dimensões do sprite
+        public Point SpriteSheetCombo1_1espada = new Point(6, 8); //Dimensões do sprite
+        public Point SpriteSheetCombo1_2espada = new Point(4, 6); //Dimensões do sprite
+        public Point SpriteSheetCombo1_3espada = new Point(8, 6); //Dimensões do sprite
+        public Point SpriteSheetCombo1_4espada = new Point(8, 7); //Dimensões do sprite
+        //TRIDENTE
+        public Point SpriteSheetSACARtridente = new Point(8, 6); //Dimensões do sprite
+        public Point SpriteSheetPULARtridente = new Point(8, 3); //Dimensões do sprite
+        public Point SpriteSheetPARADOtridente = new Point(8, 4); //Dimensões do sprite
+        public Point SpriteSheetDEFENDERtridente = new Point(8, 4); //Dimensões do sprite
+        public Point SpriteSheetCORRERtridente = new Point(8, 6); //Dimensões do sprite
+        public Point SpriteSheetcombo2_1tridente = new Point(9, 5); //Dimensões do sprite
+        public Point SpriteSheetcombo1_1tridente = new Point(8, 4); //Dimensões do sprite
+        public Point SpriteSheetcombo1_2tridente = new Point(8, 6); //Dimensões do sprite
+        public Point SpriteSheetcombo1_3tridente = new Point(8, 7); //Dimensões do sprite
+        public Point SpriteSheetcombo1_4tridente = new Point(9, 7); //Dimensões do sprite
+        public Point SpriteSheetHIT1tridente = new Point(8, 4); //Dimensões do sprite
+        public Point SpriteSheetHIT2tridente = new Point(8, 4); //Dimensões do sprite
 
         //luta
         //MAOS
@@ -159,6 +247,7 @@ namespace Stick_RPG_Fight
 
         //luta
         public Point frameLUTA = new Point(0, 0); //Marca o frame a ser utilizado 
+        public Point frameARMA = new Point(0, 0); //marca o frame a ser usado pelas armas
 
         public Rectangle individuo = new Rectangle();
         public Rectangle meio = new Rectangle();
@@ -189,13 +278,14 @@ namespace Stick_RPG_Fight
         public bool TOMANDOHIT;
         public bool HIT1;
         public bool HIT2;
-        public bool HIT3;
+        
 
-        public bool LEVARCONTRAATAQUE;
+        public bool LEVARCONTRAATAQUE; //bool para inimigos
 
         public bool UsarArma;
 
         //LUTA
+        //MAOS
         //frame voltando
         public bool INVERSO;
         //combo de ataques
@@ -207,6 +297,18 @@ namespace Stick_RPG_Fight
         public bool PARTE3;
         public bool PARTE4;
         //
+        //ADAGA
+        public bool COMBO1adaga;
+        public bool PARTE1adaga, PARTE2adaga, PARTE3adaga, PARTE4adaga;
+        //ESPADA
+        public bool COMBO1espada2m;
+        public bool PARTE1espada2m, PARTE2espada2m, PARTE3espada2m, PARTE4espada2m;
+        //ARCO
+        public bool COMBO1arco;
+        public bool PARTE1arco, PARTE2arco, PARTE3arco, PARTE4arco;
+        //TRIDENTE
+        public bool COMBO1tridente, COMBO2tridente;
+        public bool PARTE1_1tridente, PARTE1_2tridente, PARTE2tridente, PARTE3tridente, PARTE4tridente;
 
         public bool COLIDINDOdireita;
         public bool COLIDINDOesquerda;
@@ -699,7 +801,7 @@ namespace Stick_RPG_Fight
         public void FRAMESparado2()
         {
             frameparado2.X++;
-            if (frameparado2.X >= SpriteSheetparado2.X)
+            if (frameparado2.X >= SpriteSheetparado2maos.X)
             {
                 frameparado2.X = 0;
                 frameparado2.Y++;
@@ -739,7 +841,7 @@ namespace Stick_RPG_Fight
                 {
                     framepular.X++;
                 }
-                if (framepular.X >= SpriteSheetpular.X)
+                if (framepular.X >= SpriteSheetpularmaos.X)
                 {
                     framepular.X = 0;
                     framepular.Y++;
@@ -812,7 +914,7 @@ namespace Stick_RPG_Fight
                 {
                     framepular.X++;
                 }
-                if (framepular.X >= SpriteSheetpular.X)
+                if (framepular.X >= SpriteSheetpularmaos.X)
                 {
                     framepular.X = 0;
                     framepular.Y--;
@@ -835,7 +937,7 @@ namespace Stick_RPG_Fight
         public void FRAMESparado1()
         {
             frameparado1.X++;
-            if (frameparado1.X >= SpriteSheetparado1.X)
+            if (frameparado1.X >= SpriteSheetparado1maos.X)
             {
                 frameparado1.X = 0;
                 frameparado1.Y++;
@@ -866,7 +968,7 @@ namespace Stick_RPG_Fight
         public void FRAMESmovendo()
         {
             framemovendo.X++;
-            if (framemovendo.X >= SpriteSheetmovendo.X)
+            if (framemovendo.X >= SpriteSheetmovendomaos.X)
             {
                 framemovendo.X = 0;
                 framemovendo.Y++;
