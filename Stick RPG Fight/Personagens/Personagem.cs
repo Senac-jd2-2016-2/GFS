@@ -42,6 +42,7 @@ namespace Stick_RPG_Fight
         public Texture2D imgparado2maosE; // em combate (E)
         public Texture2D imgHIT1maosE, imgHIT2maosE;//tomando hit em pé (D) 
         public Texture2D imgdefesamaosE; //defesa em PE (D)
+        public Texture2D imgagachadoHITmaosE; //tomando hit agachado (D)
 
         public Texture2D imgsoco1maosE; //soco esquerdo 1 (E)
         public Texture2D imgsoco2C1maosE; // soco direito 2 - combo 1 (E)
@@ -170,7 +171,7 @@ namespace Stick_RPG_Fight
         public Point SpriteSheetmovendomaos = new Point(8, 8); //Dimensões da spritesheet
         public Point SpriteSheetpularmaos = new Point(8, 4); //Dimensões da spritesheet
         public Point SpriteSheetdefesamaos = new Point(8, 4); //Dimensões da spritesheet
-        public Point SpriteSheetagachadoHITmaos = new Point(10, 8); //Dimensões da spritesheet
+        public Point SpriteSheetagachadoHITmaos = new Point(8, 10); //Dimensões da spritesheet
 
         public Point SpriteSheetHIT1maos = new Point(8, 4); //Dimensões da spritesheet
         public Point SpriteSheetHIT2maos = new Point(8, 4); //Dimensões da spritesheet
@@ -238,12 +239,9 @@ namespace Stick_RPG_Fight
         public Point framepular = new Point(0, 0); //Marca o frame a ser utilizado
 
         //hitado
-        public Point framedefesa1 = new Point(0, 0); //Marca o frame a ser utilizado 
-        public Point frameagachadoHIT = new Point(0, 0); //Marca o frame a ser utilizado 
-
-        //arma
-        public Point frameATIRARarco = new Point(0, 0); //Marca o frame a ser utilizado 
-        public Point frameSACARarco = new Point(0, 0); //Marca o frame a ser utilizado 
+        public Point framedefesa = new Point(0, 0); //Marca o frame a ser utilizado 
+        public Point frameHIT = new Point(0, 0); //Marca o frame a ser utilizado 
+        
 
         //luta
         public Point frameLUTA = new Point(0, 0); //Marca o frame a ser utilizado 
@@ -268,6 +266,8 @@ namespace Stick_RPG_Fight
         public bool DEFENDENDO;
         public bool PODER;
         public bool DESCANSANDO;
+        public bool SACARARMA;
+
 
         //poderes que se tem
         public bool PODERslow, PODERvento, PODERraio, PODERretroceder, PODERescudo;
@@ -275,10 +275,10 @@ namespace Stick_RPG_Fight
         public bool ATAQUELANÇADO;
         public bool SENDOAGARRADO;
 
-        public bool TOMANDOHIT;
+       
         public bool HIT1;
         public bool HIT2;
-        
+        public bool AGACHADOHIT;
 
         public bool LEVARCONTRAATAQUE; //bool para inimigos
 
@@ -301,11 +301,10 @@ namespace Stick_RPG_Fight
         public bool COMBO1adaga;
         public bool PARTE1adaga, PARTE2adaga, PARTE3adaga, PARTE4adaga;
         //ESPADA
-        public bool COMBO1espada2m;
+        public bool COMBO1espada2m, COMBO2espada2m;
         public bool PARTE1espada2m, PARTE2espada2m, PARTE3espada2m, PARTE4espada2m;
         //ARCO
-        public bool COMBO1arco;
-        public bool PARTE1arco, PARTE2arco, PARTE3arco, PARTE4arco;
+        public bool ATIRAR1arco, ATIRAR2arco, ATIRAR3arco, ATIRAR4arco;
         //TRIDENTE
         public bool COMBO1tridente, COMBO2tridente;
         public bool PARTE1_1tridente, PARTE1_2tridente, PARTE2tridente, PARTE3tridente, PARTE4tridente;
@@ -314,6 +313,7 @@ namespace Stick_RPG_Fight
         public bool COLIDINDOesquerda;
         public bool subindo;
         public bool descendo;
+        public bool IVUNERAVEL;
 
         //      INT
         public int Vx;
@@ -336,6 +336,8 @@ namespace Stick_RPG_Fight
         public int manaTOTAL;
 
         public int escudo;
+
+        
 
         //DINHEIRO
         public int leite;
@@ -1209,7 +1211,8 @@ namespace Stick_RPG_Fight
             REMOVERVISUPODER(W, H);//METODO DE REMOVER O EFEITO (QND CHEGAR EM TAL TAMANHO)
             PosDANO(W, H);// posição da informação do dano
             POSvidaperdida(); //barra vermelha
-            
+            //
+            HITfunçao(W, H);//tudo sobre levar HIT inimigo
 
             //mov do personagem
             individuo.X += Vx;
@@ -1275,7 +1278,7 @@ namespace Stick_RPG_Fight
             else if (!SENDOAGARRADO) // PARALIZADO
             {
                 //pulando parado
-                if (Keyboard.GetState().IsKeyDown(Keys.W) && !Keyboard.GetState().IsKeyDown(Keys.D) && !Keyboard.GetState().IsKeyDown(Keys.A) && !AGACHADO && !ATACANDO && !PULANDOparado && !PULANDOandando && !PULANDOcorrendo)
+                if (Keyboard.GetState().IsKeyDown(Keys.W) && !Keyboard.GetState().IsKeyDown(Keys.D) && !Keyboard.GetState().IsKeyDown(Keys.A) && !AGACHADO && !ATACANDO && !PULANDOparado && !PULANDOandando && !PULANDOcorrendo && !HIT1 && !HIT2 && !AGACHADOHIT)
                 {
                     PULANDOparado = true;
                     PARADO = false;
@@ -1292,7 +1295,7 @@ namespace Stick_RPG_Fight
                 }
 
                 //pulando andando
-                if (Keyboard.GetState().IsKeyDown(Keys.W) && (Keyboard.GetState().IsKeyDown(Keys.D) || Keyboard.GetState().IsKeyDown(Keys.A)) && !Keyboard.GetState().IsKeyDown(Keys.LeftShift) && !AGACHADO && !ATACANDO && !PULANDOparado && !PULANDOandando && !PULANDOcorrendo)
+                if (Keyboard.GetState().IsKeyDown(Keys.W) && (Keyboard.GetState().IsKeyDown(Keys.D) || Keyboard.GetState().IsKeyDown(Keys.A)) && !Keyboard.GetState().IsKeyDown(Keys.LeftShift) && !AGACHADO && !ATACANDO && !PULANDOparado && !PULANDOandando && !PULANDOcorrendo && !HIT1 && !HIT2 && !AGACHADOHIT)
                 {
                     PULANDOandando = true;
                     PARADO = false;
@@ -1310,7 +1313,7 @@ namespace Stick_RPG_Fight
                 }
 
                 //pulando andando
-                if (Keyboard.GetState().IsKeyDown(Keys.W) && (Keyboard.GetState().IsKeyDown(Keys.D) || Keyboard.GetState().IsKeyDown(Keys.A)) && Keyboard.GetState().IsKeyDown(Keys.LeftShift) && !AGACHADO && !ATACANDO && !PULANDOparado && !PULANDOandando && !PULANDOcorrendo && energia >= 35)
+                if (Keyboard.GetState().IsKeyDown(Keys.W) && (Keyboard.GetState().IsKeyDown(Keys.D) || Keyboard.GetState().IsKeyDown(Keys.A)) && Keyboard.GetState().IsKeyDown(Keys.LeftShift) && !AGACHADO && !ATACANDO && !PULANDOparado && !PULANDOandando && !PULANDOcorrendo && energia >= 35 && !HIT1 && !HIT2 && !AGACHADOHIT)
                 {
                     PULANDOcorrendo = true;
                     PARADO = false;
@@ -1373,7 +1376,7 @@ namespace Stick_RPG_Fight
 
 
                 //parado
-                if (!Keyboard.GetState().IsKeyDown(Keys.D) && !Keyboard.GetState().IsKeyDown(Keys.A) && !PULANDOparado && !PULANDOandando && !PULANDOcorrendo && !AGACHADO && !ATACANDO)
+                if (!Keyboard.GetState().IsKeyDown(Keys.D) && !Keyboard.GetState().IsKeyDown(Keys.A) && !PULANDOparado && !PULANDOandando && !PULANDOcorrendo && !AGACHADO && !ATACANDO && !HIT1 && !HIT2 && !AGACHADOHIT)
                 {
                     PARADO = true;
                     Vx = 0;
@@ -1385,7 +1388,7 @@ namespace Stick_RPG_Fight
                     framemovendo.Y = 0;
                 }// fim do parado
 
-                if (Keyboard.GetState().IsKeyDown(Keys.D) && Keyboard.GetState().IsKeyDown(Keys.A) && !PULANDOparado && !AGACHADO && !ATACANDO && !PULANDOandando && !PULANDOcorrendo) // qnd apertar os dois botoes
+                if (Keyboard.GetState().IsKeyDown(Keys.D) && Keyboard.GetState().IsKeyDown(Keys.A) && !PULANDOparado && !AGACHADO && !ATACANDO && !PULANDOandando && !PULANDOcorrendo && !HIT1 && !HIT2 && !AGACHADOHIT) // qnd apertar os dois botoes
                 {
                     PARADO = true;
                     ANDANDO = false;
@@ -1402,7 +1405,7 @@ namespace Stick_RPG_Fight
                 if (DIREITA) /// POSIÇÃO (CORPO) estiver olhando para --  DIREITA
                 {
                     //andar DIREITA
-                    if (Keyboard.GetState().IsKeyDown(Keys.D) && !Keyboard.GetState().IsKeyDown(Keys.A) && (!Keyboard.GetState().IsKeyDown(Keys.LeftShift) || DESCANSANDO) && !PULANDOparado && !PULANDOandando && !PULANDOcorrendo && !AGACHADO && !ATACANDO && !COLIDINDOdireita)
+                    if (Keyboard.GetState().IsKeyDown(Keys.D) && !Keyboard.GetState().IsKeyDown(Keys.A) && (!Keyboard.GetState().IsKeyDown(Keys.LeftShift) || DESCANSANDO) && !PULANDOparado && !PULANDOandando && !PULANDOcorrendo && !AGACHADO && !ATACANDO && !COLIDINDOdireita && !HIT1 && !HIT2 && !AGACHADOHIT)
                     {
                         //atualizando o frame parado
                         frameparado1.X = 0;
@@ -1443,7 +1446,7 @@ namespace Stick_RPG_Fight
 
                     //correr DIREITA
 
-                    else if (Keyboard.GetState().IsKeyDown(Keys.D) && !Keyboard.GetState().IsKeyDown(Keys.A) && Keyboard.GetState().IsKeyDown(Keys.LeftShift) && !PULANDOparado && !PULANDOandando && !PULANDOcorrendo && !AGACHADO && !ATACANDO && !DESCANSANDO && !COLIDINDOdireita)
+                    else if (Keyboard.GetState().IsKeyDown(Keys.D) && !Keyboard.GetState().IsKeyDown(Keys.A) && Keyboard.GetState().IsKeyDown(Keys.LeftShift) && !PULANDOparado && !PULANDOandando && !PULANDOcorrendo && !AGACHADO && !ATACANDO && !DESCANSANDO && !COLIDINDOdireita && !HIT1 && !HIT2 && !AGACHADOHIT)
                     {
 
                         //atualizando o frame parado
@@ -1487,7 +1490,7 @@ namespace Stick_RPG_Fight
                     }
 
                    //desabilitar
-                    else if (Keyboard.GetState().IsKeyDown(Keys.A) && !Keyboard.GetState().IsKeyDown(Keys.D) && !PULANDOparado && !PULANDOandando && !PULANDOcorrendo && !AGACHADO && !ATACANDO)
+                    else if (Keyboard.GetState().IsKeyDown(Keys.A) && !Keyboard.GetState().IsKeyDown(Keys.D) && !PULANDOparado && !PULANDOandando && !PULANDOcorrendo && !AGACHADO && !ATACANDO && !HIT1 && !HIT2 && !AGACHADOHIT)
                     {
                         DIREITA = false;
                         ESQUERDA = true;
@@ -1564,7 +1567,7 @@ namespace Stick_RPG_Fight
                 if (ESQUERDA) /// POSIÇÃO (CORPO) estiver olhando para --  ESQUERDA
                 {
                     //Andando ESQUERDA
-                    if (Keyboard.GetState().IsKeyDown(Keys.A) && !Keyboard.GetState().IsKeyDown(Keys.D) && (!Keyboard.GetState().IsKeyDown(Keys.LeftShift) || DESCANSANDO) && !PULANDOparado && !PULANDOandando && !PULANDOcorrendo && !AGACHADO && !ATACANDO && !COLIDINDOesquerda)
+                    if (Keyboard.GetState().IsKeyDown(Keys.A) && !Keyboard.GetState().IsKeyDown(Keys.D) && (!Keyboard.GetState().IsKeyDown(Keys.LeftShift) || DESCANSANDO) && !PULANDOparado && !PULANDOandando && !PULANDOcorrendo && !AGACHADO && !ATACANDO && !COLIDINDOesquerda && !HIT1 && !HIT2 && !AGACHADOHIT)
                     {
                         //atualizando o frame parado
                         frameparado1.X = 0;
@@ -1601,7 +1604,7 @@ namespace Stick_RPG_Fight
                     }
 
                     //Correndo ESQUERDA
-                    else if (!Keyboard.GetState().IsKeyDown(Keys.D) && Keyboard.GetState().IsKeyDown(Keys.A) && Keyboard.GetState().IsKeyDown(Keys.LeftShift) && !PULANDOparado && !PULANDOandando && !PULANDOcorrendo && !AGACHADO && !ATACANDO && !DESCANSANDO && !COLIDINDOesquerda)
+                    else if (!Keyboard.GetState().IsKeyDown(Keys.D) && Keyboard.GetState().IsKeyDown(Keys.A) && Keyboard.GetState().IsKeyDown(Keys.LeftShift) && !PULANDOparado && !PULANDOandando && !PULANDOcorrendo && !AGACHADO && !ATACANDO && !DESCANSANDO && !COLIDINDOesquerda && !HIT1 && !HIT2 && !AGACHADOHIT)
                     {
                         //atualizando o frame parado
                         frameparado1.X = 0;
@@ -1644,7 +1647,7 @@ namespace Stick_RPG_Fight
                     }
 
                     //desabilitar lado
-                    else if (Keyboard.GetState().IsKeyDown(Keys.D) && !Keyboard.GetState().IsKeyDown(Keys.A) && !PULANDOparado && !PULANDOandando && !PULANDOcorrendo && !AGACHADO && !ATACANDO)
+                    else if (Keyboard.GetState().IsKeyDown(Keys.D) && !Keyboard.GetState().IsKeyDown(Keys.A) && !PULANDOparado && !PULANDOandando && !PULANDOcorrendo && !AGACHADO && !ATACANDO && !HIT1 && !HIT2 && !AGACHADOHIT)
                     {
                         DIREITA = true;
                         ESQUERDA = false;
@@ -1874,6 +1877,180 @@ namespace Stick_RPG_Fight
             } // FIM DO SENDO AGARRADO / PARALIZADO (é dizer q o personagem n pode se mecher)
         }//fim do MOV
 
+        //Quando tomar um hit, parar tudo e mostrar tomando hit
+        public void HITfunçao(int W, int H)
+        {
+            //HIT
+            //HIT
+            //PERSONAGEM TOMA HIT
+            if (!PULANDOandando && !PULANDOcorrendo && !PULANDOparado && (HIT1 || HIT2 || AGACHADOHIT))
+            {
+                DEFENDENDO = false;
+                PARADO = false;
+                ATACANDO = false;
+                ANDANDO = false;
+                AGACHADO = false;
+                CORRENDO = false;
+                SACARARMA = false;
+                //
+                COMBO1 = false;
+                COMBO2 = false;
+                COMBO1adaga = false;
+                COMBO1espada2m = false;
+                COMBO1tridente = false;
+                COMBO2espada2m = false;
+                COMBO2tridente = false;
+                ATIRAR1arco = false;
+                ATIRAR2arco = false;
+                ATIRAR3arco = false;
+                ATIRAR4arco = false;
+                
+                PARTE1 = false;
+                PARTE1_1tridente = false;
+                PARTE1_2tridente = false;
+                PARTE1adaga = false;
+                PARTE1espada2m = false;
+                PARTE2 = false;
+                PARTE2adaga = false;
+                PARTE2espada2m = false;
+                PARTE2tridente = false;
+                PARTE3 = false;
+                PARTE3adaga = false;
+                PARTE3espada2m = false;
+                PARTE3tridente = false;
+                PARTE4 = false;
+                PARTE4adaga = false;
+                PARTE4espada2m = false;
+                PARTE4tridente = false;
+
+            }
+
+            if (HIT1)
+            {
+                individuo.Width = W / 9;
+                //MAO
+                if (JANELA.J.MAOselect && DIREITA)
+                {
+                    frameHIT.X++;
+                    if (frameHIT.X >= SpriteSheetHIT1maos.X)
+                    {
+                        frameHIT.X = 0;
+                        frameHIT.Y++;
+                    }
+                    if (frameHIT.X >= SpriteSheetHIT1maos.X - 1 && frameHIT.Y >= 3)
+                    {
+                        frameHIT.X = 0;
+                        frameHIT.Y = 0;
+                        HIT1 = false;
+                        PARADO = true;
+                    }
+                }
+                if (JANELA.J.MAOselect && ESQUERDA)
+                {
+                    frameHIT.X--;
+                    if (frameHIT.X <= -1)
+                    {
+                        frameHIT.X = 7;
+                        frameHIT.Y++;
+                    }
+                    if (frameHIT.X <= 0 && frameHIT.Y >= 3)
+                    {
+                        frameHIT.X = 7;
+                        frameHIT.Y = 0;
+                        HIT1 = false;
+                        PARADO = true;
+                    }
+                }
+                //ADAGA
+            }
+            if (HIT2)
+            {
+                individuo.Width = W / 9;
+                //MAO
+                if (JANELA.J.MAOselect && DIREITA)
+                {
+                    frameHIT.X++;
+                    if (frameHIT.X >= SpriteSheetHIT2maos.X)
+                    {
+                        frameHIT.X = 0;
+                        frameHIT.Y++;
+                    }
+                    if (frameHIT.X >= SpriteSheetHIT2maos.X - 1 && frameHIT.Y >= 3)
+                    {
+                        frameHIT.X = 0;
+                        frameHIT.Y = 0;
+                        HIT2 = false;
+                        PARADO = true;
+                    }
+                }
+                if (JANELA.J.MAOselect && ESQUERDA)
+                {
+                    frameHIT.X--;
+                    if (frameHIT.X <= -1)
+                    {
+                        frameHIT.X = 7;
+                        frameHIT.Y++;
+                    }
+                    if (frameHIT.X <= 0 && frameHIT.Y >= 3)
+                    {
+                        frameHIT.X = 7;
+                        frameHIT.Y = 0;
+                        HIT2 = false;
+                        PARADO = true;
+                    }
+                }
+                //ADAGA
+            }
+            if (AGACHADOHIT)
+            {
+                individuo.Width = W / 4;
+                if (!JANELA.J.MAOselect)
+                {
+                    HIT2 = true;
+                    AGACHADOHIT = false;
+                }
+                //MAO
+                if (JANELA.J.MAOselect)
+                {
+                    if (DIREITA)
+                    {
+                        frameHIT.X++;
+                        if (frameHIT.X >= SpriteSheetagachadoHITmaos.X)
+                        {
+                            frameHIT.X = 0;
+                            frameHIT.Y++;
+                        }
+                        if (frameHIT.X >= SpriteSheetagachadoHITmaos.X - 2 && frameHIT.Y >= 9)
+                        {
+                            frameHIT.X = 0;
+                            frameHIT.Y = 0;
+                            AGACHADOHIT = false;
+                            PARADO = true;
+                        }
+                    }
+
+                    if (ESQUERDA)
+                    {
+                        frameHIT.X--;
+                        if (frameHIT.X <= -1)
+                        {
+                            frameHIT.X = 7;
+                            frameHIT.Y++;
+                        }
+                        if (frameHIT.X <= 1 && frameHIT.Y >= 9)
+                        {
+                            frameHIT.X = 7;
+                            frameHIT.Y = 0;
+                            AGACHADOHIT = false;
+                            PARADO = true;
+                        }
+                    }
+                }
+                //ADAGA
+            }
+           
+        }
+
 
         public void GERADORdeCLONES(Personagem P1)
         {
@@ -1908,6 +2085,37 @@ namespace Stick_RPG_Fight
             clone.PARTE4 = P1.PARTE4;
             clone.COMBO1 = P1.COMBO1;
             clone.COMBO2 = P1.COMBO2;
+            clone.DEFENDENDO = P1.DEFENDENDO;
+            clone.HIT1 = P1.HIT1;
+            clone.HIT2 = P1.HIT2;
+            clone.SACARARMA = P1.SACARARMA;
+            //armas
+            clone.PARTE1adaga = P1.PARTE1adaga;
+            clone.PARTE2adaga = P1.PARTE2adaga;
+            clone.PARTE3adaga = P1.PARTE3adaga;
+            clone.PARTE4adaga = P1.PARTE4adaga;
+            clone.COMBO1adaga = P1.COMBO1adaga;
+
+            clone.ATIRAR1arco = P1.ATIRAR1arco;
+            clone.ATIRAR2arco = P1.ATIRAR2arco;
+            clone.ATIRAR3arco = P1.ATIRAR3arco;
+            clone.ATIRAR4arco = P1.ATIRAR4arco;
+
+            clone.PARTE1espada2m = P1.PARTE1espada2m;
+            clone.PARTE2espada2m = P1.PARTE2espada2m;
+            clone.PARTE3espada2m = P1.PARTE3espada2m;
+            clone.PARTE4espada2m = P1.PARTE4espada2m;
+            clone.COMBO1espada2m = P1.COMBO1espada2m;
+            clone.COMBO2espada2m = P1.COMBO2espada2m;
+
+            clone.PARTE1_1tridente = P1.PARTE1_1tridente;
+            clone.PARTE1_2tridente = P1.PARTE1_2tridente;
+            clone.PARTE2tridente = P1.PARTE2tridente;
+            clone.PARTE3tridente = P1.PARTE3tridente;
+            clone.PARTE4tridente = P1.PARTE4tridente;
+            clone.COMBO1tridente = P1.COMBO1tridente;
+            clone.COMBO2tridente = P1.COMBO2tridente;
+
 
             //frame
             clone.frameparado1 = P1.frameparado1; //Marca o frame a ser utilizado
@@ -1916,10 +2124,8 @@ namespace Stick_RPG_Fight
             clone.frameagachar2 = P1.frameagachar2; //Marca o frame a ser utilizado 
             clone.framemovendo = P1.framemovendo; //Marca o frame a ser utilizado 
             clone.framepular = P1.framepular; //Marca o frame a ser utilizado
-            clone.framedefesa1 = P1.framedefesa1; //Marca o frame a ser utilizado 
-            clone.frameagachadoHIT = P1.frameagachadoHIT; //Marca o frame a ser utilizado 
-            clone.frameATIRARarco = P1.frameATIRARarco; //Marca o frame a ser utilizado 
-            clone.frameSACARarco = P1.frameSACARarco; //Marca o frame a ser utilizado 
+            clone.framedefesa = P1.framedefesa; //Marca o frame a ser utilizado 
+            clone.frameHIT = P1.frameHIT; //Marca o frame a ser utilizado 
             clone.frameLUTA = P1.frameLUTA;
 
             //INT / POSIÇÕES

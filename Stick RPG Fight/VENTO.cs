@@ -18,5 +18,6 @@ namespace Stick_RPG_Fight
         public Point frame = new Point(0, 0), tamanho = new Point(426, 348), spritesheet = new Point(11, 1);
         public Rectangle R = new Rectangle();
         
+
     }
 }

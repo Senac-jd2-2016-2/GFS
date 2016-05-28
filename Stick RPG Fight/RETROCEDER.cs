@@ -18,7 +18,7 @@ namespace Stick_RPG_Fight
         public bool FIM;
         public void ATIVAR(Personagem P1)
         {
-            if (JANELA.J.RETROCEDERselect && P1.mana >= P1.mana / 2)
+            if (JANELA.J.RETROCEDERselect && P1.mana >= P1.manaTOTAL / 2)
             {
                 Contagem = 0;
                 ContagemGERADOR = 0;
@@ -52,6 +52,7 @@ namespace Stick_RPG_Fight
                     {
                         if (P1.listaclonePoder.Count > 1)//ultimo
                         {
+                            P1.IVUNERAVEL = true;
                             P1.individuo.X = P1.listaclonePoder[P1.listaclonePoder.Count - 1].POSp1capturado.X; //vou até o ultimo clone
                             P1.individuo.Y = P1.listaclonePoder[P1.listaclonePoder.Count - 1].POSp1capturado.Y;
                             Contexto.Fundo.fase.X = P1.listaclonePoder[P1.listaclonePoder.Count - 1].POSmapacapturado.X;
@@ -62,6 +63,7 @@ namespace Stick_RPG_Fight
                         }
                         if (P1.listaclonePoder.Count <= 1) //primeiro (final)
                         {
+                            P1.IVUNERAVEL = false;
                             P1.individuo.X = P1.listaclonePoder[0].POSp1capturado.X;
                             P1.individuo.Y = P1.listaclonePoder[0].POSp1capturado.Y;
                             Contexto.Fundo.fase.X = P1.listaclonePoder[0].POSmapacapturado.X;

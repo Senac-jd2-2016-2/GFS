@@ -805,6 +805,7 @@ namespace Stick_RPG_Fight
             P1.COLIDINDOdireita = false;
             P1.COLIDINDOesquerda = false;
             P1.PODER = false;
+            P1.IVUNERAVEL = false;
 
             //limpando listas
             P1.listadedano.Clear();

@@ -841,6 +841,12 @@
     <Content Include="Content\spritesheet p1 hit1 %28espada2M%29.png">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
+    <Content Include="Content\spritesheet p1 hit1 %28tridente%29 E.png">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Content\spritesheet p1 hit1 %28tridente%29.png">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
     <Content Include="Content\spritesheet p1 hit1 E.png">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
@@ -863,6 +869,12 @@
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
     <Content Include="Content\spritesheet p1 hit2 %28espada2M%29.png">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Content\spritesheet p1 hit2 %28tridente%29 E.png">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Content\spritesheet p1 hit2 %28tridente%29.png">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
     <Content Include="Content\spritesheet p1 hit2 E.png">

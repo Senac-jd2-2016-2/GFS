@@ -519,7 +519,7 @@ namespace Stick_RPG_Fight
                 }
                 else if (P1.COMBATE)
                 {
-                    if (P1.PARADO)
+                    if (P1.PARADO && !P1.HIT1 && !P1.HIT2 && !P1.AGACHADOHIT)
                     {
                         spriteBatch.Draw(P1.imgparado2maosD, P1.individuo,
                                       new Rectangle(P1.frameparado2.X * P1.tamanhoMaosparado2.X, P1.frameparado2.Y * P1.tamanhoMaosparado2.Y,
@@ -563,12 +563,46 @@ namespace Stick_RPG_Fight
                                                    Color.White);
                 }
 
+                //HIT
+                if (P1.HIT1)
+                {
+                    if (JANELA.J.MAOselect)
+                    {
+
+                        spriteBatch.Draw(P1.imgHIT1maosD, P1.individuo,
+                                        new Rectangle(P1.frameHIT.X * P1.tamanhoMaosHIT1.X, P1.frameHIT.Y * P1.tamanhoMaosHIT1.Y,
+                                                      P1.tamanhoMaosHIT1.X, P1.tamanhoMaosHIT1.Y),
+                                                      Color.White);
+                    }
+                }
+                if (P1.HIT2)
+                {
+                    if (JANELA.J.MAOselect)
+                    {
+
+                        spriteBatch.Draw(P1.imgHIT2maosD, P1.individuo,
+                                        new Rectangle(P1.frameHIT.X * P1.tamanhoMaosHIT2.X, P1.frameHIT.Y * P1.tamanhoMaosHIT2.Y,
+                                                      P1.tamanhoMaosHIT2.X, P1.tamanhoMaosHIT2.Y),
+                                                      Color.White);
+                    }
+                }
+                if (P1.AGACHADOHIT)
+                {
+                    if (JANELA.J.MAOselect)
+                    {
+
+                        spriteBatch.Draw(P1.imgagachadoHITmaosD, P1.individuo,
+                                        new Rectangle(P1.frameHIT.X * P1.tamanhoMaosagachadoHIT.X, P1.frameHIT.Y * P1.tamanhoMaosagachadoHIT.Y,
+                                                      P1.tamanhoMaosagachadoHIT.X, P1.tamanhoMaosagachadoHIT.Y),
+                                                      Color.White);
+                    }
+                }
+
 
                 //ATAQUE
                 if (P1.ATACANDO)
                 {
-                    if (P1.DIREITA)
-                    {
+                   
                         if (P1.PARTE1)
                         {
                             spriteBatch.Draw(P1.imgsoco1maos, P1.individuo,
@@ -601,11 +635,8 @@ namespace Stick_RPG_Fight
                             }
                         }//combo 1
 
-                    }//fim D
-
-
-                }
-            }
+                }//ataque
+            }//fim D
 
 
             //--------------------------------------------------------------------------------------------------
@@ -615,7 +646,7 @@ namespace Stick_RPG_Fight
             {
                 if (!P1.COMBATE) // fora de combate
                 {
-                    if (P1.PARADO) // parado fora de luta
+                    if (P1.PARADO ) // parado fora de luta
                     {
                         spriteBatch.Draw(P1.imgparado1maosE, P1.individuo,
                                       new Rectangle(P1.frameparado1.X * P1.tamanhoMaosparado1.X, P1.frameparado1.Y * P1.tamanhoMaosparado1.Y,
@@ -625,7 +656,7 @@ namespace Stick_RPG_Fight
                 }
                 else if (P1.COMBATE)
                 {
-                    if (P1.PARADO)
+                    if (P1.PARADO && !P1.HIT1 && !P1.HIT2 && !P1.AGACHADOHIT)
                     {
                         spriteBatch.Draw(P1.imgparado2maosE, P1.individuo,
                                       new Rectangle(P1.frameparado2.X * P1.tamanhoMaosparado2.X, P1.frameparado2.Y * P1.tamanhoMaosparado2.Y,
@@ -657,7 +688,42 @@ namespace Stick_RPG_Fight
                                                    Color.White);
                 }
 
-                if (P1.ESQUERDA)
+                //HIT
+                if (P1.HIT1)
+                {
+                    if (JANELA.J.MAOselect)
+                    {
+
+                        spriteBatch.Draw(P1.imgHIT1maosE, P1.individuo,
+                                        new Rectangle(P1.frameHIT.X * P1.tamanhoMaosHIT1.X, P1.frameHIT.Y * P1.tamanhoMaosHIT1.Y,
+                                                      P1.tamanhoMaosHIT1.X, P1.tamanhoMaosHIT1.Y),
+                                                      Color.White);
+                    }
+                }
+                if (P1.HIT2)
+                {
+                    if (JANELA.J.MAOselect)
+                    {
+
+                        spriteBatch.Draw(P1.imgHIT2maosE, P1.individuo,
+                                        new Rectangle(P1.frameHIT.X * P1.tamanhoMaosHIT2.X, P1.frameHIT.Y * P1.tamanhoMaosHIT2.Y,
+                                                      P1.tamanhoMaosHIT2.X, P1.tamanhoMaosHIT2.Y),
+                                                      Color.White);
+                    }
+                }
+                if (P1.AGACHADOHIT)
+                {
+                    if (JANELA.J.MAOselect)
+                    {
+
+                        spriteBatch.Draw(P1.imgagachadoHITmaosE, P1.individuo,
+                                        new Rectangle(P1.frameHIT.X * P1.tamanhoMaosagachadoHIT.X, P1.frameHIT.Y * P1.tamanhoMaosagachadoHIT.Y,
+                                                      P1.tamanhoMaosagachadoHIT.X, P1.tamanhoMaosagachadoHIT.Y),
+                                                      Color.White);
+                    }
+                }
+
+                if (P1.ATACANDO)
                 {
                     if (P1.PARTE1)
                     {
@@ -690,8 +756,8 @@ namespace Stick_RPG_Fight
                                                   Color.White);
                         }
                     }//fim combo1
-                }//fim esquerda
-            }
+                }//fim ataque
+            }//fim E
 
 
 

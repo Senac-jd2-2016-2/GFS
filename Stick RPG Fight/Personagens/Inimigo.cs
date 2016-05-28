@@ -1126,12 +1126,46 @@ namespace Stick_RPG_Fight
                             PARADO = true; // FAZER COM QUE NAO DESAPAREÇA
                         }
                         //SE ENCOSTAR NO INIMIGO ELE TOMA HIT
-                        if (frameALLi1.X == 0 && frameALLi1.Y == 2 && (!P1.DEFENDENDO && P1.ESQUERDA || P1.DIREITA) && P1.meio.Intersects(individuo))
+                        if (frameALLi1.X == 0 && frameALLi1.Y == 2 && (!P1.DEFENDENDO && P1.ESQUERDA || P1.DIREITA) && P1.meio.Intersects(individuo) && !P1.IVUNERAVEL)
                         {
                             P1.vida -= 10;
-                            P1.Vx += HeightTela / 20;
+                            P1.Vx += HeightTela / 50;
                             P1.GERARdano(P1.individuo.X, P1.individuo.Y, P1.individuo.Width, P1.individuo.Height, this.DIREITA, this.ESQUERDA, 10, WidthTela, HeightTela, 2); // personagem leva hit
                             P1.gerarHUDVidaPerdida(HeightTela / 100); //10 de vida
+
+                            //HIT
+                            //HIT
+                            //PERSONAGEM TOMA HIT
+                            if (!P1.PULANDOandando && !P1.PULANDOcorrendo && !P1.PULANDOparado && !P1.AGACHADO)
+                            {
+                                if (P1.DIREITA)
+                                {
+                                    P1.frameHIT.X = 0;
+                                    P1.frameHIT.Y = 0;
+                                }
+                                else if (P1.ESQUERDA)
+                                {
+                                    P1.frameHIT.X = 7;
+                                    P1.frameHIT.Y = 0;
+                                }
+                                P1.HIT1 = true;
+                                P1.HIT2 = false;
+                            }
+                            if (P1.AGACHADO)
+                            {
+                                if (P1.DIREITA)
+                                {
+                                    P1.frameHIT.X = 0;
+                                    P1.frameHIT.Y = 0;
+                                }
+                                else if (P1.ESQUERDA)
+                                {
+                                    P1.frameHIT.X = 7;
+                                    P1.frameHIT.Y = 0;
+                                }
+                                P1.AGACHADOHIT = true;
+                            }
+                            
                         }
 
                         //FALTA MOSTRAR VC TOMANDO HIT
@@ -1240,11 +1274,44 @@ namespace Stick_RPG_Fight
                     {
                         Px += HeightTela / 70;
                     }
-                    if (individuo.Intersects(P1.meio) && (!P1.DEFENDENDO && !P1.AGACHADO && P1.ESQUERDA) && P1.meio.X > individuo.X && frameALLi1.Y >= 2 && frameALLi1.Y <= 5)
+                    if (individuo.Intersects(P1.meio) && (!P1.DEFENDENDO && !P1.AGACHADO && P1.ESQUERDA) && P1.meio.X > individuo.X && frameALLi1.Y >= 2 && frameALLi1.Y <= 5 && !P1.IVUNERAVEL)
                     {
                         P1.vida -= 1;
                         P1.gerarHUDVidaPerdida(HeightTela / HeightTela); //1 de vida
                         P1.GERARdano(P1.individuo.X, P1.individuo.Y, P1.individuo.Width, P1.individuo.Height, this.DIREITA, this.ESQUERDA, 1, WidthTela, HeightTela, 2); // personagem leva hit
+
+                        //HIT
+                        //HIT
+                        //PERSONAGEM TOMA HIT
+                        if (!P1.PULANDOandando && !P1.PULANDOcorrendo && !P1.PULANDOparado && !P1.AGACHADO)
+                        {
+                            if (P1.DIREITA)
+                            {
+                                P1.frameHIT.X = 0;
+                                P1.frameHIT.Y = 0;
+                            }
+                            else if (P1.ESQUERDA)
+                            {
+                                P1.frameHIT.X = 7;
+                                P1.frameHIT.Y = 0;
+                            }
+                            P1.HIT2 = true;
+                            P1.HIT1 = false;
+                        }
+                        if (P1.AGACHADO)
+                        {
+                            if (P1.DIREITA)
+                            {
+                                P1.frameHIT.X = 0;
+                                P1.frameHIT.Y = 0;
+                            }
+                            else if (P1.ESQUERDA)
+                            {
+                                P1.frameHIT.X = 7;
+                                P1.frameHIT.Y = 0;
+                            }
+                            P1.AGACHADOHIT = true;
+                        }
                     }
                     //falta fz P1 cair (hit)
                 }
@@ -1274,18 +1341,84 @@ namespace Stick_RPG_Fight
                         P1.PARADO = true; // <=
                     }
                     //TOMANDO HIT (qnd FOR PEGO e esteja em TAL FRAME)
-                    if (frameALLi1.X == 6 && P1.meio.X > individuo.X && frameALLi1.Y == 5 && P1.meio.Intersects(individuo))
+                    if (frameALLi1.X == 6 && P1.meio.X > individuo.X && frameALLi1.Y == 5 && P1.meio.Intersects(individuo) && !P1.IVUNERAVEL)
                     {
                         P1.vida -= 10;
                         P1.gerarHUDVidaPerdida(HeightTela / 100); //10 de vida
                         P1.GERARdano(P1.individuo.X, P1.individuo.Y, P1.individuo.Width, P1.individuo.Height, this.DIREITA, this.ESQUERDA, 10, WidthTela, HeightTela, 2); // personagem leva hit
 
+                        //HIT
+                        //HIT
+                        //PERSONAGEM TOMA HIT
+                        if (!P1.PULANDOandando && !P1.PULANDOcorrendo && !P1.PULANDOparado && !P1.AGACHADO)
+                        {
+                            if (P1.DIREITA)
+                            {
+                                P1.frameHIT.X = 0;
+                                P1.frameHIT.Y = 0;
+                            }
+                            else if (P1.ESQUERDA)
+                            {
+                                P1.frameHIT.X = 7;
+                                P1.frameHIT.Y = 0;
+                            }
+                            P1.HIT2 = true;
+                            P1.HIT1 = false;
+                        }
+                        if (P1.AGACHADO)
+                        {
+                            if (P1.DIREITA)
+                            {
+                                P1.frameHIT.X = 0;
+                                P1.frameHIT.Y = 0;
+                            }
+                            else if (P1.ESQUERDA)
+                            {
+                                P1.frameHIT.X = 7;
+                                P1.frameHIT.Y = 0;
+                            }
+                            P1.AGACHADOHIT = true;
+                        }
+
                     }
-                    if (frameALLi1.Y == 10 && P1.meio.X > individuo.X && P1.meio.Intersects(individuo))
+                    if (frameALLi1.Y == 10 && P1.meio.X > individuo.X && P1.meio.Intersects(individuo) && !P1.IVUNERAVEL)
                     {
                         P1.vida -= 2;
                         P1.gerarHUDVidaPerdida(HeightTela / 400); //2 de vida
                         P1.GERARdano(P1.individuo.X, P1.individuo.Y, P1.individuo.Width, P1.individuo.Height, this.DIREITA, this.ESQUERDA, 2, WidthTela, HeightTela, 2); // personagem leva hit
+
+                        //HIT
+                        //HIT
+                        //PERSONAGEM TOMA HIT
+                        if (!P1.PULANDOandando && !P1.PULANDOcorrendo && !P1.PULANDOparado && !P1.AGACHADO)
+                        {
+                            if (P1.DIREITA)
+                            {
+                                P1.frameHIT.X = 0;
+                                P1.frameHIT.Y = 0;
+                            }
+                            else if (P1.ESQUERDA)
+                            {
+                                P1.frameHIT.X = 7;
+                                P1.frameHIT.Y = 0;
+                            }
+                            P1.HIT2 = true;
+                            P1.HIT1 = false;
+                        }
+                        if (P1.AGACHADO)
+                        {
+                            if (P1.DIREITA)
+                            {
+                                P1.frameHIT.X = 0;
+                                P1.frameHIT.Y = 0;
+                            }
+                            else if (P1.ESQUERDA)
+                            {
+                                P1.frameHIT.X = 7;
+                                P1.frameHIT.Y = 0;
+                            }
+                            P1.AGACHADOHIT = true;
+                        }
                     }
                     //fim do agarrar
                     if (frameALLi1.X <= 3 && frameALLi1.Y == 12 || frameALLi1.Y > 12)
@@ -1500,12 +1633,45 @@ namespace Stick_RPG_Fight
                             PARADO = true; // FAZER COM QUE NAO DESAPAREÇA
                         }
                         //SE ENCOSTAR NO INIMIGO ELE TOMA HIT
-                        if (frameALLi1.X == 7 && frameALLi1.Y == 2 && (!P1.DEFENDENDO && P1.DIREITA || P1.ESQUERDA) && P1.meio.Intersects(individuo))
+                        if (frameALLi1.X == 7 && frameALLi1.Y == 2 && (!P1.DEFENDENDO && P1.DIREITA || P1.ESQUERDA) && P1.meio.Intersects(individuo) && !P1.IVUNERAVEL)
                         {
                             P1.vida -= 10;
-                            P1.Vx -= HeightTela / 20;
+                            P1.Vx -= HeightTela / 50;
                             P1.gerarHUDVidaPerdida(HeightTela / 100); //10 de vida
                             P1.GERARdano(P1.individuo.X, P1.individuo.Y, P1.individuo.Width, P1.individuo.Height, this.DIREITA, this.ESQUERDA, 10, WidthTela, HeightTela, 2); // personagem leva hit
+
+                            //HIT
+                            //HIT
+                            //PERSONAGEM TOMA HIT
+                            if (!P1.PULANDOandando && !P1.PULANDOcorrendo && !P1.PULANDOparado && !P1.AGACHADO)
+                            {
+                                if (P1.DIREITA)
+                                {
+                                    P1.frameHIT.X = 0;
+                                    P1.frameHIT.Y = 0;
+                                }
+                                else if (P1.ESQUERDA)
+                                {
+                                    P1.frameHIT.X = 7;
+                                    P1.frameHIT.Y = 0;
+                                }
+                                P1.HIT1 = true;
+                                P1.HIT2 = false;
+                            }
+                            if (P1.AGACHADO)
+                            {
+                                if (P1.DIREITA)
+                                {
+                                    P1.frameHIT.X = 0;
+                                    P1.frameHIT.Y = 0;
+                                }
+                                else if (P1.ESQUERDA)
+                                {
+                                    P1.frameHIT.X = 7;
+                                    P1.frameHIT.Y = 0;
+                                }
+                                P1.AGACHADOHIT = true;
+                            }
                         }
                     }//fim atack1
                 }
@@ -1610,11 +1776,44 @@ namespace Stick_RPG_Fight
                     {
                         Px -= HeightTela / 70;
                     }
-                    if (individuo.Intersects(P1.meio) && (!P1.DEFENDENDO && !P1.AGACHADO && P1.DIREITA) && P1.meio.X < individuo.X && frameALLi1.Y >= 2 && frameALLi1.Y <= 5)
+                    if (individuo.Intersects(P1.meio) && (!P1.DEFENDENDO && !P1.AGACHADO && P1.DIREITA) && P1.meio.X < individuo.X && frameALLi1.Y >= 2 && frameALLi1.Y <= 5 && !P1.IVUNERAVEL)
                     {
                         P1.vida -= 1;
                         P1.gerarHUDVidaPerdida(HeightTela / HeightTela); //1 de vida
                         P1.GERARdano(P1.individuo.X, P1.individuo.Y, P1.individuo.Width, P1.individuo.Height, this.DIREITA, this.ESQUERDA, 1, WidthTela, HeightTela, 2); // personagem leva hit
+
+                        //HIT
+                        //HIT
+                        //PERSONAGEM TOMA HIT
+                        if (!P1.PULANDOandando && !P1.PULANDOcorrendo && !P1.PULANDOparado && !P1.AGACHADO)
+                        {
+                            if (P1.DIREITA)
+                            {
+                                P1.frameHIT.X = 0;
+                                P1.frameHIT.Y = 0;
+                            }
+                            else if (P1.ESQUERDA)
+                            {
+                                P1.frameHIT.X = 7;
+                                P1.frameHIT.Y = 0;
+                            }
+                            P1.HIT2 = true;
+                            P1.HIT1 = false;
+                        }
+                        if (P1.AGACHADO)
+                        {
+                            if (P1.DIREITA)
+                            {
+                                P1.frameHIT.X = 0;
+                                P1.frameHIT.Y = 0;
+                            }
+                            else if (P1.ESQUERDA)
+                            {
+                                P1.frameHIT.X = 7;
+                                P1.frameHIT.Y = 0;
+                            }
+                            P1.AGACHADOHIT = true;
+                        }
                     }
                     //falta fz P1 cair (hit)
                 }
@@ -1644,17 +1843,85 @@ namespace Stick_RPG_Fight
                         P1.PARADO = true;
                     }
                     //TOMANDO HIT (qnd FOR PEGO e esteja em TAL FRAME)
-                    if (frameALLi1.X == 2 && P1.meio.X < individuo.X && frameALLi1.Y == 5 && P1.meio.Intersects(individuo))
+                    if (frameALLi1.X == 2 && P1.meio.X < individuo.X && frameALLi1.Y == 5 && P1.meio.Intersects(individuo) && !P1.IVUNERAVEL)
                     {
                         P1.vida -= 10;
                         P1.gerarHUDVidaPerdida(HeightTela / 100); //10 de vida
-                        P1.GERARdano(P1.individuo.X, P1.individuo.Y, P1.individuo.Width, P1.individuo.Height, this.DIREITA, this.ESQUERDA, 10, WidthTela, HeightTela, 2); // personagem leva hit
+                        P1.GERARdano(P1.individuo.X, P1.individuo.Y, P1.individuo.Width, P1.individuo.Height, this.DIREITA, this.ESQUERDA, 10, WidthTela, HeightTela, 2);
+
+                        //HIT
+                        //HIT
+                        //PERSONAGEM TOMA HIT
+                        if (!P1.PULANDOandando && !P1.PULANDOcorrendo && !P1.PULANDOparado && !P1.AGACHADO)
+                        {
+                            if (P1.DIREITA)
+                            {
+                                P1.frameHIT.X = 0;
+                                P1.frameHIT.Y = 0;
+                            }
+                            else if (P1.ESQUERDA)
+                            {
+                                P1.frameHIT.X = 7;
+                                P1.frameHIT.Y = 0;
+                            }
+                            P1.HIT2 = true;
+                            P1.HIT1 = false;
+                        }
+                        if (P1.AGACHADO)
+                        {
+                            if (P1.DIREITA)
+                            {
+                                P1.frameHIT.X = 0;
+                                P1.frameHIT.Y = 0;
+                            }
+                            else if (P1.ESQUERDA)
+                            {
+                                P1.frameHIT.X = 7;
+                                P1.frameHIT.Y = 0;
+                            }
+                            P1.AGACHADOHIT = true;
+                        }
                     }
-                    if (frameALLi1.Y == 10 && P1.meio.X < individuo.X && P1.meio.Intersects(individuo))
+                    if (frameALLi1.Y == 10 && P1.meio.X < individuo.X && P1.meio.Intersects(individuo) && !P1.IVUNERAVEL)
                     {
                         P1.vida -= 2;
                         P1.gerarHUDVidaPerdida(HeightTela / 400); //2 de vida
                         P1.GERARdano(P1.individuo.X, P1.individuo.Y, P1.individuo.Width, P1.individuo.Height, this.DIREITA, this.ESQUERDA, 2, WidthTela, HeightTela, 2); // personagem leva hit
+
+                        //HIT
+                        //HIT
+                        //PERSONAGEM TOMA HIT
+                        if (!P1.PULANDOandando && !P1.PULANDOcorrendo && !P1.PULANDOparado && !P1.AGACHADO)
+                        {
+                            if (P1.DIREITA)
+                            {
+                                P1.frameHIT.X = 0;
+                                P1.frameHIT.Y = 0;
+                            }
+                            else if (P1.ESQUERDA)
+                            {
+                                P1.frameHIT.X = 7;
+                                P1.frameHIT.Y = 0;
+                            }
+                            P1.HIT2 = true;
+                            P1.HIT1 = false;
+                            
+                        }
+                        if (P1.AGACHADO)
+                        {
+                            if (P1.DIREITA)
+                            {
+                                P1.frameHIT.X = 0;
+                                P1.frameHIT.Y = 0;
+                            }
+                            else if (P1.ESQUERDA)
+                            {
+                                P1.frameHIT.X = 7;
+                                P1.frameHIT.Y = 0;
+                            }
+                            P1.AGACHADOHIT = true;
+                            
+                        }
                     }
                     //fim do agarrar
                     if (frameALLi1.X >= 4 && frameALLi1.Y == 12 || frameALLi1.Y > 12)
@@ -1957,9 +2224,45 @@ namespace Stick_RPG_Fight
 
                         if (P1.meio.Intersects(listadefacas[i].OBJ))
                         {
-                            P1.vida -= HeightTela / 70; //(15 de vida)
-                            P1.gerarHUDVidaPerdida(HeightTela / 70); //15 de vida
-                            P1.GERARdano(P1.individuo.X, P1.individuo.Y, P1.individuo.Width, P1.individuo.Height, this.DIREITA, this.ESQUERDA, 15, WidthTela, HeightTela, 2); // personagem leva hit
+                            if (!P1.IVUNERAVEL || !P1.DEFENDENDO)
+                            {
+                                P1.vida -= HeightTela / 70; //(15 de vida)
+                                P1.gerarHUDVidaPerdida(HeightTela / 70); //15 de vida
+                                P1.GERARdano(P1.individuo.X, P1.individuo.Y, P1.individuo.Width, P1.individuo.Height, this.DIREITA, this.ESQUERDA, 15, WidthTela, HeightTela, 2); // personagem leva hit
+
+                                //HIT
+                                //HIT
+                                //PERSONAGEM TOMA HIT
+                                if (!P1.PULANDOandando && !P1.PULANDOcorrendo && !P1.PULANDOparado && !P1.AGACHADO)
+                                {
+                                    if (P1.DIREITA)
+                                    {
+                                        P1.frameHIT.X = 0;
+                                        P1.frameHIT.Y = 0;
+                                    }
+                                    else if (P1.ESQUERDA)
+                                    {
+                                        P1.frameHIT.X = 7;
+                                        P1.frameHIT.Y = 0;
+                                    }
+                                    P1.HIT2 = true;
+                                    P1.HIT1 = false;
+                                }
+                                if (P1.AGACHADO && !P1.DEFENDENDO)
+                                {
+                                    if (P1.DIREITA)
+                                    {
+                                        P1.frameHIT.X = 0;
+                                        P1.frameHIT.Y = 0;
+                                    }
+                                    else if (P1.ESQUERDA)
+                                    {
+                                        P1.frameHIT.X = 7;
+                                        P1.frameHIT.Y = 0;
+                                    }
+                                    P1.AGACHADOHIT = true;
+                                }
+                            }
                             listadefacas.Remove(listadefacas[i]);
                         }
                     }
@@ -1977,9 +2280,45 @@ namespace Stick_RPG_Fight
 
                         if (P1.meio.Intersects(listadefacas[i].OBJ))
                         {
-                            P1.vida -= HeightTela / 70; //(15 de vida)
-                            P1.gerarHUDVidaPerdida(HeightTela / 70); //15 de vida
-                            P1.GERARdano(P1.individuo.X, P1.individuo.Y, P1.individuo.Width, P1.individuo.Height, this.DIREITA, this.ESQUERDA, 15, WidthTela, HeightTela, 2); // personagem leva hit
+                            if (!P1.IVUNERAVEL || !P1.DEFENDENDO)
+                            {
+                                P1.vida -= HeightTela / 70; //(15 de vida)
+                                P1.gerarHUDVidaPerdida(HeightTela / 70); //15 de vida
+                                P1.GERARdano(P1.individuo.X, P1.individuo.Y, P1.individuo.Width, P1.individuo.Height, this.DIREITA, this.ESQUERDA, 15, WidthTela, HeightTela, 2); // personagem leva hit
+
+                                //HIT
+                                //HIT
+                                //PERSONAGEM TOMA HIT
+                                if (!P1.PULANDOandando && !P1.PULANDOcorrendo && !P1.PULANDOparado && !P1.AGACHADO)
+                                {
+                                    if (P1.DIREITA)
+                                    {
+                                        P1.frameHIT.X = 0;
+                                        P1.frameHIT.Y = 0;
+                                    }
+                                    else if (P1.ESQUERDA)
+                                    {
+                                        P1.frameHIT.X = 7;
+                                        P1.frameHIT.Y = 0;
+                                    }
+                                    P1.HIT2 = true;
+                                    P1.HIT1 = false;
+                                }
+                                if (P1.AGACHADO && !P1.DEFENDENDO)
+                                {
+                                    if (P1.DIREITA)
+                                    {
+                                        P1.frameHIT.X = 0;
+                                        P1.frameHIT.Y = 0;
+                                    }
+                                    else if (P1.ESQUERDA)
+                                    {
+                                        P1.frameHIT.X = 7;
+                                        P1.frameHIT.Y = 0;
+                                    }
+                                    P1.AGACHADOHIT = true;
+                                }
+                            }
                             listadefacas.Remove(listadefacas[i]);
                         }
                     }
@@ -2277,7 +2616,7 @@ namespace Stick_RPG_Fight
 
                 
             }//fim dos ATAQUES do personagem (PARTE HIT)
-
+            //posição do SANGUE
             if (listadesangue.Count > 0) // se nao for nulo a qntdd
             {
                 for (int i = 0; i < listadesangue.Count; i++)

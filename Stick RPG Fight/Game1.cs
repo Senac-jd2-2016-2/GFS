@@ -24,7 +24,7 @@ namespace Stick_RPG_Fight
         Random aleatório;
 
         //booleaveis usuais comuns no game
-        bool menu00 = true, menu01, Bapply, BFULL, BOTAO, UMAVEZ = true;
+        bool menu00 = true, menu01, Bapply, BFULL, BOTAO, UMAVEZ = true, SAIU;
         bool[] b1 = new bool[5];//botoes do menu
         Rectangle[] B1 = new Rectangle[5]; //botao
         Rectangle Bfull, APPLY ;
@@ -312,6 +312,7 @@ namespace Stick_RPG_Fight
                         {
                             Menu.m.SAIRb = false;
                             Savegame.S.Gravacao2();
+                            SAIU = true;
                             Exit();
                         }
 
@@ -362,7 +363,7 @@ namespace Stick_RPG_Fight
 
                 //============================================================ MENU ===================================================
                 //============================================================ MENU ===================================================
-                if (Menu.m.MENU && !Menu.m.COMBATES)
+                if (Menu.m.MENU && !Menu.m.COMBATES && !SAIU)
                 {
                     if (menu00)
                     {
