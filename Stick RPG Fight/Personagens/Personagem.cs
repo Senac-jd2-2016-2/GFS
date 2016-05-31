@@ -352,7 +352,7 @@ namespace Stick_RPG_Fight
         public Point POSp1capturado = new Point(0, 0);
         
         //gastos
-        public int TRINTAporcento, DEZporcento, CINQUENTAporcento;
+        public int TRINTAporcento, DEZporcento, CINQUENTAporcento, TREZporcento;
 
         //Fase 1 cenario
         public int ONDAcontagem = 0;
@@ -362,6 +362,8 @@ namespace Stick_RPG_Fight
         public List<OndasdeAgua> listadeondadeagua = new List<OndasdeAgua>();
         public List<Poder_Visual> listadevisualPOWER = new List<Poder_Visual>();
         public List<VIDAperdida> listavidaperdida = new List<VIDAperdida>();
+        public List<VENTO> listavento = new List<VENTO>();
+        public List<RAIO> listaraio = new List<RAIO>();
         
         //dano
         public List<Dano> listadedano = new List<Dano>();
@@ -374,16 +376,17 @@ namespace Stick_RPG_Fight
             //de mana
             TRINTAporcento = (int)(manaTOTAL * 0.3f);
             DEZporcento = (int)(manaTOTAL * 0.1f);
-            CINQUENTAporcento = (int)(manaTOTAL / 0.5f);
+            CINQUENTAporcento = (int)(manaTOTAL * 0.5f);
+            TREZporcento = (int)(manaTOTAL * 0.03f);//trez porcento
         }
 
         public void RPGatualização(int WidthTela, int HeightTela) // atualiza tudo em relação ao RPG (vida / mana / money etc etc)
         {
+            PORCENTAGENS();
             if (XP >= XPT)//aumentar de lvl
             {
                 XP = 0;
                 LVL++;
-                XPT = 100 * LVL;
                 vidaTOTAL += 10 * LVL;
                 manaTOTAL += 5 * LVL;
                 energiaTOTAL += 5 * LVL;
@@ -392,6 +395,7 @@ namespace Stick_RPG_Fight
                 energia = energiaTOTAL;
             }
 
+            XPT = 100 * LVL;
             XPrec.Width = (int)(((float)(XP) / XPT) * XPTrec.Width);
 
             if (XPrec.Width > 0)
@@ -416,8 +420,6 @@ namespace Stick_RPG_Fight
                 vida = 0;
                 JANELA.J.JANELAPLACAR = true;
             }
-
-            PORCENTAGENS();
         }
         //===========================================================================================================================================================================
 

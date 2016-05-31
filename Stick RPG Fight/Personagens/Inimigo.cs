@@ -2743,7 +2743,7 @@ namespace Stick_RPG_Fight
             this.listavidaperdida.Add(V);
 
             //COMBOS
-            if (!COMBO.c.PONTUAÇÃO && !P1.PODERescudo) // CASO ESTEJA PONTUANDO -> passou dos 2 segundos. (nao faz combo qnd estiver com escudo ativo)
+            if (!COMBO.c.PONTUAÇÃO && !P1.PODERescudo && !P1.PODERvento) // CASO ESTEJA PONTUANDO -> passou dos 2 segundos. (nao faz combo qnd estiver com escudo ativo)
             {
                 COMBO.c.HITS++;
                 COMBO.c.contagem = 0;

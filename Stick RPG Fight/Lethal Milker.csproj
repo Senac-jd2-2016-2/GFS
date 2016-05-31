@@ -985,7 +985,10 @@
     <Content Include="Content\Tridente.png">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
-    <Content Include="Content\Vento Spritesheet.png">
+    <Content Include="Content\Vento Spritesheet D.png">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Content\Vento Spritesheet E.png">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
     <Content Include="Content\Vento.png">

@@ -21,7 +21,8 @@ namespace Stick_RPG_Fight
         {
             Info.I.img = content.Load<Texture2D>("Info");
 
-            VENTO.V.Vento = content.Load<Texture2D>("Vento Spritesheet");
+            VENTO.V.VentoD = content.Load<Texture2D>("Vento Spritesheet D");
+            VENTO.V.VentoE = content.Load<Texture2D>("Vento Spritesheet E");
             RAIO.r.Raio = content.Load<Texture2D>("Raio Spritesheet");
             ESCUDO.e.img = content.Load<Texture2D>("Escudo Poder");
 

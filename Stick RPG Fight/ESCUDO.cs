@@ -46,11 +46,12 @@ namespace Stick_RPG_Fight
         {
             if (JANELA.J.ESCUDOselect && P1.mana >= 10)
             {
-                Quantidade += P1.mana;
+                Quantidade += P1.mana * 2;
                 Contagem = 0;
                 P1.mana = 0; //joga tudo no escudo;
                 P1.PODERescudo = true;
                 P1.VISUPODER(); // criar efeito especial
+                
 
                 Audio.A1.EscudoSom.Play();
             }
@@ -61,6 +62,7 @@ namespace Stick_RPG_Fight
         {
             if (JANELA.J.ESCUDOselect)
             {
+                P1.SENDOAGARRADO = false;
                 Contagem++;
                 if (Contagem >= 300 || Quantidade <= 0)//caso dê 5 segundos ou acabe a quantidade do escudo
                 {

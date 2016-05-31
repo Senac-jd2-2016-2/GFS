@@ -25,7 +25,7 @@ namespace Stick_RPG_Fight
                 P1.mana -= P1.mana / 2; //joga tudo no escudo;
                 P1.PODERretroceder = true;
                 P1.VISUPODER(); // criar efeito especial
-
+                
             }
         }
 
@@ -33,6 +33,7 @@ namespace Stick_RPG_Fight
         {
             if (JANELA.J.RETROCEDERselect && P1.PODER && P1.PODERretroceder)
             {
+                P1.SENDOAGARRADO = false;
                 if (!FIM)
                 {
                     Contagem++;

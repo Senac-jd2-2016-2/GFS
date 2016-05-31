@@ -506,7 +506,8 @@ namespace Stick_RPG_Fight
                     P1.RPGatualização(WidthTela, HeightTela); //atualiza os dados
                     P1.Luta(WidthTela, HeightTela, aleatório); // atualiza a posição, tamanho, frames
                     ESCUDO.e.POS(WidthTela, HeightTela, P1, listai1); //poder escudo (posição)
-                    RETROCEDER.r.FUNÇÃO(P1);
+                    RETROCEDER.r.FUNÇÃO(P1);//voltar no tempo
+                    VENTO.V.Funçao(P1, WidthTela, HeightTela, listai1);//vento
 
                     if (Contexto.Fase[0])
                     {
@@ -641,7 +642,7 @@ namespace Stick_RPG_Fight
                     {
                         if (contagemREGEN >= 2)
                         {
-                            P1.mana += 1;
+                            P1.mana += P1.TREZporcento;
                             contagemREGEN = 0;
                         }
                         else
@@ -664,6 +665,7 @@ namespace Stick_RPG_Fight
                             P1.VISUPODER(); // criar efeito especial
                             P1.COLIDINDOdireita = false; // não ter colisao
                             P1.COLIDINDOesquerda = false;
+                            P1.SENDOAGARRADO = false;
                         }
                         else
                         {
@@ -673,6 +675,7 @@ namespace Stick_RPG_Fight
                         //ESCUDO
                         ESCUDO.e.ATIVAR(P1);
                         RETROCEDER.r.ATIVAR(P1);
+                        VENTO.V.ATIVAR(P1, WidthTela, HeightTela);
                     }
                     if (!P1.PODER)
                     {
@@ -809,6 +812,7 @@ namespace Stick_RPG_Fight
                 //poderes
                 DRAW.DrawCLONES(spriteBatch, P1); // PODER clones
                 ESCUDO.e.Draw(spriteBatch, P1);
+                VENTO.V.Draw(spriteBatch, P1);
                 DRAW.DrawCOMBOS(spriteBatch, WidthTela, HeightTela, P1); // face dos combos (mostrando)
 
                 spriteBatch.DrawString(menu, "LISTA: " + listai1.Count, new Vector2(0, Window.ClientBounds.Height - 15), Color.Black); //teste
