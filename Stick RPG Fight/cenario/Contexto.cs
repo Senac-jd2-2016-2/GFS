@@ -54,56 +54,96 @@ namespace Stick_RPG_Fight
 
             //ARMAS
             //adaga
-            /*
+            
             P1.imgParadoAdagaD = content.Load<Texture2D>("spritesheet p1 parado (adaga)");
+
             P1.imgPulandoAdagaD = content.Load<Texture2D>("spritesheet p1 pulando (adaga)");
+
             P1.imgSacarAdagaD = content.Load<Texture2D>("spritesheet p1 sacar (adaga)");
+
             P1.imgCorrendoAdagaD = content.Load<Texture2D>("spritesheet p1 correndo (adaga)");
+
             P1.imgDefendendoAdagaD = content.Load<Texture2D>("spritesheet p1 defendendo (adaga)");
+
             P1.imgHit1AdagaD = content.Load<Texture2D>("spritesheet p1 hit1 (adaga)");
+
             P1.imgHit2AdagaD = content.Load<Texture2D>("spritesheet p1 hit2 (adaga)");
+
             P1.imgCombo1_1AdagaD = content.Load<Texture2D>("spritesheet p1 combo1 - 1 (adaga)");
+
             P1.imgCombo1_2AdagaD = content.Load<Texture2D>("spritesheet p1 combo1 - 2 (adaga)");
+
             P1.imgCombo1_3AdagaD = content.Load<Texture2D>("spritesheet p1 combo1 - 3 (adaga)");
+
             P1.imgCombo1_4AdagaD = content.Load<Texture2D>("spritesheet p1 combo1 - 4 (adaga)");
+
 
             //arco
             P1.imgParadoArcoD = content.Load<Texture2D>("spritesheet p1 parado (arco)");
+
             P1.imgPulandoArcoD = content.Load<Texture2D>("spritesheet p1 pular (arco)");
+
             P1.imgSacarArcoD = content.Load<Texture2D>("spritesheet p1 sacar (arco)");
+
             P1.imgCorrendoArcoD = content.Load<Texture2D>("spritesheet p1 correndo (arco)");
+
             P1.imgHit1ArcoD = content.Load<Texture2D>("spritesheet p1 hit1 (arco)");
+
             P1.imgHit2ArcoD = content.Load<Texture2D>("spritesheet p1 hit2 (arco)");
+
             P1.imgATIRARarcoD = content.Load<Texture2D>("spritesheet p1 atirar (arco)");
+
             P1.imgFlechaD = content.Load<Texture2D>("Flecha E");
 
             
             //espada 2H
             P1.imgParadoEspada2mD = content.Load<Texture2D>("spritesheet p1 parado (espada2M)");
+
             P1.imgSacarEspada2mD = content.Load<Texture2D>("spritesheet p1 sacar (espada2M)");
+
             P1.imgCorrerEspada2mD = content.Load<Texture2D>("spritesheet p1 correr (espada2M)");
+
             P1.imgDefenderEspada2mD = content.Load<Texture2D>("spritesheet p1 defender (espada2M)");
+
             P1.imgHit1Espada2mD = content.Load<Texture2D>("spritesheet p1 hit1 (espada2M)");
+
             P1.imgHit2Espada2mD = content.Load<Texture2D>("spritesheet p1 hit2 (espada2M)");
+
             P1.imgCombo1_1Espada2mD = content.Load<Texture2D>("spritesheet p1 combo1 - 1 (espada2M)");
+
             P1.imgCombo1_2Espada2mD = content.Load<Texture2D>("spritesheet p1 combo1 - 2 (espada2M)");
+
             P1.imgCombo1_3Espada2mD = content.Load<Texture2D>("spritesheet p1 combo1 - 3 (espada2M)");
+
             P1.imgCombo1_4Espada2mD = content.Load<Texture2D>("spritesheet p1 combo1 - 4 (espada2M)");
+
 
             //tridente
             P1.imgParadoTridenteD = content.Load<Texture2D>("spritesheet p1 parado (tridente)");
+
             P1.imgCombo2_1TridenteD = content.Load<Texture2D>("spritesheet p1 combo2 - 1 (tridente)");
+
             P1.imgCorrerTridenteD = content.Load<Texture2D>("spritesheet p1 correndo (tridente)");
+
             P1.imgDefenderTridenteD = content.Load<Texture2D>("spritesheet p1 defendendo (tridente)");
+
             P1.imgPularTridenteD = content.Load<Texture2D>("spritesheet p1 pulando (tridente)");
+
             P1.imgHit1TridenteD = content.Load<Texture2D>("spritesheet p1 hit1 (tridente)");
+
             P1.imgHit2TridenteD = content.Load<Texture2D>("spritesheet p1 hit2 (tridente)");
+
             P1.imgSacarTridenteD = content.Load<Texture2D>("spritesheet p1 sacar (tridente)");
+
             P1.imgCombo1_1TridenteD = content.Load<Texture2D>("spritesheet p1 combo1 - 1 (tridente)");
+
             P1.imgCombo1_2TridenteD = content.Load<Texture2D>("spritesheet p1 combo1 - 2 (tridente)");
+
             P1.imgCombo1_3TridenteD = content.Load<Texture2D>("spritesheet p1 combo1 - 3 (tridente)");
+
             P1.imgCombo1_4TridenteD = content.Load<Texture2D>("spritesheet p1 combo1 - 4 (tridente)");
-             * */
+            
+
 
             //                                                                                                  ESQUERDO
             //MAO
@@ -125,55 +165,95 @@ namespace Stick_RPG_Fight
            
             //ARMAS
             //adaga
-            /*
+            
             P1.imgParadoAdagaE = content.Load<Texture2D>("spritesheet p1 parado (adaga) E");
+              
             P1.imgPulandoAdagaE = content.Load<Texture2D>("spritesheet p1 pulando (adaga) E");
+              
             P1.imgSacarAdagaE = content.Load<Texture2D>("spritesheet p1 sacar (adaga) E");
+              
             P1.imgCorrendoAdagaE = content.Load<Texture2D>("spritesheet p1 correndo (adaga) E");
+              
             P1.imgDefendendoAdagaE = content.Load<Texture2D>("spritesheet p1 defendendo (adaga) E");
+              
             P1.imgHit1AdagaE = content.Load<Texture2D>("spritesheet p1 hit1 (adaga) E");
+              
             P1.imgHit2AdagaE = content.Load<Texture2D>("spritesheet p1 hit2 (adaga) E");
+              
             P1.imgCombo1_1AdagaE = content.Load<Texture2D>("spritesheet p1 combo1 - 1 (adaga) E");
+              
             P1.imgCombo1_2AdagaE = content.Load<Texture2D>("spritesheet p1 combo1 - 2 (adaga) E");
+              
             P1.imgCombo1_3AdagaE = content.Load<Texture2D>("spritesheet p1 combo1 - 3 (adaga) E");
+              
             P1.imgCombo1_4AdagaE = content.Load<Texture2D>("spritesheet p1 combo1 - 4 (adaga) E");
 
+              
             //arco
             P1.imgParadoArcoE = content.Load<Texture2D>("spritesheet p1 parado (arco) E");
+              
             P1.imgPulandoArcoE = content.Load<Texture2D>("spritesheet p1 pular (arco) E");
+              
             P1.imgSacarArcoE = content.Load<Texture2D>("spritesheet p1 sacar (arco) E");
+             
             P1.imgCorrendoArcoE = content.Load<Texture2D>("spritesheet p1 correndo (arco) E");
+              
             P1.imgHit1ArcoE = content.Load<Texture2D>("spritesheet p1 hit1 (arco) E");
+              
             P1.imgHit2ArcoE = content.Load<Texture2D>("spritesheet p1 hit2 (arco) E");
+              
             P1.imgATIRARarcoE = content.Load<Texture2D>("spritesheet p1 atirar (arco) E");
+              
             P1.imgFlechaE = content.Load<Texture2D>("Flecha E");
+              
             
+              
            //espada 2H
            P1.imgParadoEspada2mE = content.Load<Texture2D>("spritesheet p1 parado (espada2M) E");
+             
            P1.imgSacarEspada2mE = content.Load<Texture2D>("spritesheet p1 sacar (espada2M) E");
+              
            P1.imgCorrerEspada2mE = content.Load<Texture2D>("spritesheet p1 correr (espada2M) E");
+              
            P1.imgDefenderEspada2mE = content.Load<Texture2D>("spritesheet p1 defender (espada2M) E");
+              
            P1.imgHit1Espada2mE = content.Load<Texture2D>("spritesheet p1 hit1 (espada2M) E");
+              
            P1.imgHit2Espada2mE = content.Load<Texture2D>("spritesheet p1 hit2 (espada2M) E");
+             
            P1.imgCombo1_1Espada2mE = content.Load<Texture2D>("spritesheet p1 combo1 - 1 (espada2M) E");
+             
            P1.imgCombo1_2Espada2mE = content.Load<Texture2D>("spritesheet p1 combo1 - 2 (espada2M) E");
+              
            P1.imgCombo1_3Espada2mE = content.Load<Texture2D>("spritesheet p1 combo1 - 3 (espada2M) E");
+
            P1.imgCombo1_4Espada2mE = content.Load<Texture2D>("spritesheet p1 combo1 - 4 (espada2M) E");
 
            //tridente
            P1.imgParadoTridenteE = content.Load<Texture2D>("spritesheet p1 parado (tridente) E");
+
            P1.imgCombo2_1TridenteE = content.Load<Texture2D>("spritesheet p1 combo2 - 1 (tridente) E");
+
            P1.imgCorrerTridenteE = content.Load<Texture2D>("spritesheet p1 correndo (tridente) E");
+
            P1.imgDefenderTridenteE = content.Load<Texture2D>("spritesheet p1 defendendo (tridente) E");
+
            P1.imgPularTridenteE = content.Load<Texture2D>("spritesheet p1 pulando (tridente) E");
+
            P1.imgHit1TridenteE = content.Load<Texture2D>("spritesheet p1 hit1 (tridente) E");
+
            P1.imgHit2TridenteE = content.Load<Texture2D>("spritesheet p1 hit2 (tridente) E");
+
            P1.imgSacarTridenteE = content.Load<Texture2D>("spritesheet p1 sacar (tridente) E");
+
            P1.imgCombo1_1TridenteE = content.Load<Texture2D>("spritesheet p1 combo1 - 1 (tridente) E");
+
            P1.imgCombo1_2TridenteE = content.Load<Texture2D>("spritesheet p1 combo1 - 2 (tridente) E");
+
            P1.imgCombo1_3TridenteE = content.Load<Texture2D>("spritesheet p1 combo1 - 3 (tridente) E");
+
            P1.imgCombo1_4TridenteE = content.Load<Texture2D>("spritesheet p1 combo1 - 4 (tridente) E");
-           */
+           
 
 
 
