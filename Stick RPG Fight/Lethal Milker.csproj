@@ -601,7 +601,10 @@
     <Content Include="Content\Q S.png">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
-    <Content Include="Content\Raio Spritesheet.png">
+    <Content Include="Content\Raio Spritesheet D.png">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Content\Raio Spritesheet E.png">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
     <Content Include="Content\Raio.png">

@@ -352,7 +352,7 @@ namespace Stick_RPG_Fight
         public Point POSp1capturado = new Point(0, 0);
         
         //gastos
-        public int TRINTAporcento, DEZporcento, CINQUENTAporcento, TREZporcento;
+        public int TRINTAporcento, DEZporcento, CINQUENTAporcento, MEIOporcento;
 
         //Fase 1 cenario
         public int ONDAcontagem = 0;
@@ -377,7 +377,7 @@ namespace Stick_RPG_Fight
             TRINTAporcento = (int)(manaTOTAL * 0.3f);
             DEZporcento = (int)(manaTOTAL * 0.1f);
             CINQUENTAporcento = (int)(manaTOTAL * 0.5f);
-            TREZporcento = (int)(manaTOTAL * 0.03f);//trez porcento
+            MEIOporcento = (int)((manaTOTAL * 0.01f) / 2);//meio porcento
         }
 
         public void RPGatualização(int WidthTela, int HeightTela) // atualiza tudo em relação ao RPG (vida / mana / money etc etc)
@@ -387,9 +387,7 @@ namespace Stick_RPG_Fight
             {
                 XP = 0;
                 LVL++;
-                vidaTOTAL += 10 * LVL;
-                manaTOTAL += 5 * LVL;
-                energiaTOTAL += 5 * LVL;
+                
                 vida = vidaTOTAL;
                 mana = manaTOTAL;
                 energia = energiaTOTAL;
@@ -397,6 +395,9 @@ namespace Stick_RPG_Fight
 
             XPT = 100 * LVL;
             XPrec.Width = (int)(((float)(XP) / XPT) * XPTrec.Width);
+            vidaTOTAL = 200 + ((10 * LVL) * LVL);
+            manaTOTAL = 150 + ((5 * LVL) * LVL);
+            energiaTOTAL = 120 + ((5 * LVL) * LVL);
 
             if (XPrec.Width > 0)
             {

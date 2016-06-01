@@ -508,6 +508,7 @@ namespace Stick_RPG_Fight
                     ESCUDO.e.POS(WidthTela, HeightTela, P1, listai1); //poder escudo (posição)
                     RETROCEDER.r.FUNÇÃO(P1);//voltar no tempo
                     VENTO.V.Funçao(P1, WidthTela, HeightTela, listai1);//vento
+                    RAIO.r.FUNÇAO(P1, W, H, listai1);
 
                     if (Contexto.Fase[0])
                     {
@@ -642,7 +643,7 @@ namespace Stick_RPG_Fight
                     {
                         if (contagemREGEN >= 2)
                         {
-                            P1.mana += P1.TREZporcento;
+                            P1.mana += P1.MEIOporcento;
                             contagemREGEN = 0;
                         }
                         else
@@ -676,6 +677,7 @@ namespace Stick_RPG_Fight
                         ESCUDO.e.ATIVAR(P1);
                         RETROCEDER.r.ATIVAR(P1);
                         VENTO.V.ATIVAR(P1, WidthTela, HeightTela);
+                        RAIO.r.ATIVAR(P1, WidthTela, HeightTela);
                     }
                     if (!P1.PODER)
                     {

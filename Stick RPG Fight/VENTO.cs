@@ -34,15 +34,19 @@ namespace Stick_RPG_Fight
                     v1.PS = new Point(P1.individuo.X + P1.individuo.Width + (-Contexto.Fundo.fase.X), P1.individuo.Y + (-Contexto.Fundo.fase.Y));
                     v1.D = true;
                     v1.frame.X = 0;
+                    v1.R.X = P1.individuo.X + P1.individuo.Width + (-Contexto.Fundo.fase.X);
+                    v1.R.Y = P1.individuo.Y + (-Contexto.Fundo.fase.Y);
                 }
                 if (P1.ESQUERDA)
                 {
                     v1.PS = new Point(P1.individuo.X - P1.individuo.Width + (-Contexto.Fundo.fase.X), P1.individuo.Y + (-Contexto.Fundo.fase.Y));
                     v1.E = true;
                     v1.frame.X = 10;
+                    v1.R.X = P1.individuo.X - P1.individuo.Width + (-Contexto.Fundo.fase.X);
+                    v1.R.Y = P1.individuo.Y + (-Contexto.Fundo.fase.Y);
                 }
-                v1.R.X = v1.PS.X;
-                v1.R.Y = v1.PS.Y;
+                
+                
                 v1.R.Width = H / 3 + H / 10 - H / 250;//464 = 360 + 108 - 4
                 v1.R.Height = H / 3 - H / 90;//348 = 360 - 12
                 v1.Vx = 0;
@@ -70,9 +74,9 @@ namespace Stick_RPG_Fight
                             {
                                 if (P1.listavento[i].R.Intersects(i1[a].individuo))
                                 {
-                                    i1[a].vida -= 1;
-                                    i1[a].gerarHUDVidaPerdida(1, P1);
-                                    P1.GERARdano(i1[a].individuo.X, i1[a].individuo.Y, i1[a].individuo.Width, i1[a].individuo.Height, P1.DIREITA, P1.ESQUERDA, 1, W, H, 1); // personagem leva dano (do personagem)
+                                    i1[a].vida -= H / 200;
+                                    i1[a].gerarHUDVidaPerdida(H / 200, P1);
+                                    P1.GERARdano(i1[a].individuo.X, i1[a].individuo.Y, i1[a].individuo.Width, i1[a].individuo.Height, P1.DIREITA, P1.ESQUERDA, H / 200, W, H, 1); // personagem leva dano (do personagem)
                                     if (P1.listavento[i].D)
                                         i1[a].Px += H / 15; //72
                                     else if (P1.listavento[i].E)
