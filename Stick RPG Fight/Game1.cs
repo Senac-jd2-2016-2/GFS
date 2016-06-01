@@ -508,7 +508,7 @@ namespace Stick_RPG_Fight
                     ESCUDO.e.POS(WidthTela, HeightTela, P1, listai1); //poder escudo (posição)
                     RETROCEDER.r.FUNÇÃO(P1);//voltar no tempo
                     VENTO.V.Funçao(P1, WidthTela, HeightTela, listai1);//vento
-                    RAIO.r.FUNÇAO(P1, W, H, listai1);
+                    RAIO.r.FUNÇAO(P1, WidthTela, HeightTela, listai1);
 
                     if (Contexto.Fase[0])
                     {
@@ -815,6 +815,7 @@ namespace Stick_RPG_Fight
                 DRAW.DrawCLONES(spriteBatch, P1); // PODER clones
                 ESCUDO.e.Draw(spriteBatch, P1);
                 VENTO.V.Draw(spriteBatch, P1);
+                RAIO.r.Draw(spriteBatch, P1);
                 DRAW.DrawCOMBOS(spriteBatch, WidthTela, HeightTela, P1); // face dos combos (mostrando)
 
                 spriteBatch.DrawString(menu, "LISTA: " + listai1.Count, new Vector2(0, Window.ClientBounds.Height - 15), Color.Black); //teste

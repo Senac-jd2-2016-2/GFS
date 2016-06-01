@@ -22,7 +22,7 @@ namespace Stick_RPG_Fight
 
         public void ATIVAR(Personagem P1, int W, int H)
         {
-            if (JANELA.J.VENTOselect && P1.mana >= P1.DEZporcento && P1.listaraio.Count <= 0)
+            if (JANELA.J.RAIOselect && P1.mana >= P1.DEZporcento && P1.listaraio.Count == 0)
             {
                 P1.mana -= P1.DEZporcento;
 
@@ -52,7 +52,7 @@ namespace Stick_RPG_Fight
                 
                 P1.listaraio.Add(r1);
                 P1.SENDOAGARRADO = false;
-                P1.PODERvento = true;
+                P1.PODERraio = true;
             }
         }
 
@@ -62,13 +62,9 @@ namespace Stick_RPG_Fight
         {
             for (int i = 0; i < P1.listaraio.Count; i++)
             {
+                
                 if (P1.PODERraio && P1.listaraio.Count > 0)
                 {
-                    if (P1.listaraio.Count <= 0)
-                    {
-                        P1.PODERraio = false;
-                    }
-
                     if (JANELA.J.RAIOselect && P1.listaraio[i].PODERraio)
                     {
                         //POSIÇÃO
@@ -99,7 +95,7 @@ namespace Stick_RPG_Fight
                         //no ar
                         if (!P1.listaraio[i].R.Intersects(Contexto.Fundo.chao) && !P1.listaraio[i].AcertouCHAO)//sem encostar no chao
                         {
-                            P1.listaraio[i].Vy += H / 53; //20
+                            P1.listaraio[i].Vy += H / 30; //36
                             if (P1.listaraio[i].D)
                                 P1.listaraio[i].frame.X++;
                             else if (P1.listaraio[i].E)
@@ -163,7 +159,7 @@ namespace Stick_RPG_Fight
 
                                     P1.listaraio.Add(r1);
                                     P1.SENDOAGARRADO = false;
-                                    P1.PODERvento = true;
+                                    P1.PODERraio = true;
                                 }
                                 P1.listaraio.Remove(P1.listaraio[i]);
                             }
@@ -201,7 +197,7 @@ namespace Stick_RPG_Fight
 
                                     P1.listaraio.Add(r1);
                                     P1.SENDOAGARRADO = false;
-                                    P1.PODERvento = true;
+                                    P1.PODERraio = true;
                                 }
                                 P1.listaraio.Remove(P1.listaraio[i]);
                             }
@@ -209,9 +205,35 @@ namespace Stick_RPG_Fight
 
                     }
                 }//fim poder
+
+                if (P1.listaraio.Count <= 0)
+                {
+                    P1.PODERraio = false;
+                    P1.PODER = false;
+                }
             }//fim multiplicação
 
             
         }//void
+
+        public void Draw(SpriteBatch s, Personagem P1)
+        {
+            for (int i = 0; i < P1.listaraio.Count; i++)
+            {
+                if (P1.listaraio.Count > 0 && P1.PODERraio && P1.listaraio[i].PODERraio)
+                {
+                    if (P1.listaraio[i].D)
+                    {
+                        s.Draw(r.RaioD, P1.listaraio[i].R, new Rectangle(P1.listaraio[i].frame.X * P1.listaraio[i].tamanho.X, P1.listaraio[i].frame.Y * P1.listaraio[i].tamanho.Y,
+                                                      P1.listaraio[i].tamanho.X, P1.listaraio[i].tamanho.Y), Color.White);
+                    }
+                    if (P1.listaraio[i].E)
+                    {
+                        s.Draw(r.RaioE, P1.listaraio[i].R, new Rectangle(P1.listaraio[i].frame.X * P1.listaraio[i].tamanho.X, P1.listaraio[i].frame.Y * P1.listaraio[i].tamanho.Y,
+                                                     P1.listaraio[i].tamanho.X, P1.listaraio[i].tamanho.Y), Color.White);
+                    }
+                }
+            }
+        }
     }
 }
