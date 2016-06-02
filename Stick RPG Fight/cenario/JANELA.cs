@@ -806,6 +806,8 @@ namespace Stick_RPG_Fight
             P1.COLIDINDOesquerda = false;
             P1.PODER = false;
             P1.IVUNERAVEL = false;
+            P1.PODERraio = false;
+            P1.PODERvento = false;
 
             //limpando listas
             P1.listadedano.Clear();
@@ -814,6 +816,8 @@ namespace Stick_RPG_Fight
             P1.listadeondadeagua.Clear();
             P1.listadevisualPOWER.Clear();
             P1.listavidaperdida.Clear();
+            P1.listavento.Clear();
+            P1.listaraio.Clear();
 
             //sair do poder 
             P1.PODERslow = false;

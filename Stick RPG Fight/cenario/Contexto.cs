@@ -56,7 +56,7 @@ namespace Stick_RPG_Fight
 
             //ARMAS
             //adaga
-            
+            /*
             P1.imgParadoAdagaD = content.Load<Texture2D>("spritesheet p1 parado (adaga)");
 
             P1.imgPulandoAdagaD = content.Load<Texture2D>("spritesheet p1 pulando (adaga)");
@@ -145,7 +145,7 @@ namespace Stick_RPG_Fight
 
             P1.imgCombo1_4TridenteD = content.Load<Texture2D>("spritesheet p1 combo1 - 4 (tridente)");
             
-
+            */
 
             //                                                                                                  ESQUERDO
             //MAO
@@ -167,7 +167,7 @@ namespace Stick_RPG_Fight
            
             //ARMAS
             //adaga
-            
+            /*
             P1.imgParadoAdagaE = content.Load<Texture2D>("spritesheet p1 parado (adaga) E");
               
             P1.imgPulandoAdagaE = content.Load<Texture2D>("spritesheet p1 pulando (adaga) E");
@@ -257,7 +257,7 @@ namespace Stick_RPG_Fight
            P1.imgCombo1_4TridenteE = content.Load<Texture2D>("spritesheet p1 combo1 - 4 (tridente) E");
            
 
-
+            */
 
 
 
@@ -494,7 +494,7 @@ namespace Stick_RPG_Fight
             }
 
                 //quests
-                JANELA.J.imgQuest = content.Load<Texture2D>("Q S");
+            JANELA.J.imgQuest = content.Load<Texture2D>("Q S");
             JANELA.J.imgRefresh1 = content.Load<Texture2D>("refresh 1");
             JANELA.J.imgRefresh2 = content.Load<Texture2D>("refresh 2");
             JANELA.J.imgOK1 = content.Load<Texture2D>("OK 1");

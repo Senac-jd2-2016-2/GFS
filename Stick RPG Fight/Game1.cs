@@ -117,8 +117,9 @@ namespace Stick_RPG_Fight
             //
             Savegame.S.Leitura(P1); //carrega o jogo antes de começar
             Savegame.S.Leitura2(); //leitura feita no começo do game (esse save é feito quando clica em botao SAIR, no menu)
-            
 
+           
+            
             base.Initialize();
         }
 
@@ -295,6 +296,7 @@ namespace Stick_RPG_Fight
                             Menu.m.COMBATEb = false;
                             JANELA.J.GERARQuest(aleatório); //cria uma quest antes de entra na fase
                             JANELA.J.OPÇFASES = true;
+                            JANELA.J.ZERARFASE(listai1, P1, Botao, WidthTela, HeightTela);
                             //MediaPlayer.Play(AUDIO.combatesong);
                             MediaPlayer.Pause();
                             
@@ -328,6 +330,7 @@ namespace Stick_RPG_Fight
                         if (Menu.m.CARREGARb && !BOTAO)
                         {
                             Savegame.S.Leitura(P1);
+                            Savegame.S.Leitura2();
                             Menu.m.CARREGARb = false;
                         }
                         //gravar
@@ -643,7 +646,7 @@ namespace Stick_RPG_Fight
                     {
                         if (contagemREGEN >= 2)
                         {
-                            P1.mana += P1.MEIOporcento;
+                            P1.mana += P1.UMporcento;
                             contagemREGEN = 0;
                         }
                         else

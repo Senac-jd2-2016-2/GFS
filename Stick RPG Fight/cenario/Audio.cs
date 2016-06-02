@@ -84,8 +84,10 @@ namespace Stick_RPG_Fight
                 {
                     pino.X = barra.X;
                 }
+
+                Audio.MasterVolume = ((float)(pino.X - barra.X) / VolumeMaximo);
             }
-            Audio.MasterVolume = ((float)(pino.X - barra.X) / VolumeMaximo);
+            
             MediaPlayer.Volume = Audio.MasterVolume;
             
         }

@@ -22,7 +22,7 @@ namespace Stick_RPG_Fight
 
         public void ATIVAR(Personagem P1, int W, int H)
         {
-            if (JANELA.J.RAIOselect && P1.mana >= P1.DEZporcento && P1.listaraio.Count == 0)
+            if (JANELA.J.RAIOselect && P1.mana >= P1.DEZporcento && P1.listaraio.Count <= 0)
             {
                 P1.mana -= P1.DEZporcento;
 
@@ -47,8 +47,8 @@ namespace Stick_RPG_Fight
                 }
 
                 r1.Vy = 0;
-                r1.R.Width = H / 7 - H / 130;//146 = 154 - 8
-                r1.R.Height = H / 3 + H / 11;//458 = 360 + 98
+                r1.R.Width = (H / 7 - H / 130) * 2;//146 = 154 - 8
+                r1.R.Height = (H / 3 + H / 11) * 2;//458 = 360 + 98
                 
                 P1.listaraio.Add(r1);
                 P1.SENDOAGARRADO = false;
@@ -111,7 +111,7 @@ namespace Stick_RPG_Fight
                                 P1.listaraio[i].frame.X = 9;
                             }
                         }
-                        if (P1.listaraio[i].R.Intersects(Contexto.Fundo.chao))//sem encostar no chao
+                        if (P1.listaraio[i].R.Intersects(Contexto.Fundo.chao) || P1.listaraio[i].R.Y + P1.listaraio[i].R.Height >= Contexto.Fundo.chao.Y)//sem encostar no chao
                         {
                             P1.listaraio[i].Vy = 0; //para de se mover
                             P1.listaraio[i].PS.Y = Contexto.Fundo.chao.Y - P1.listaraio[i].R.Height + (-Contexto.Fundo.fase.Y);
@@ -154,14 +154,21 @@ namespace Stick_RPG_Fight
                                     }
 
                                     r1.Vy = 0;
-                                    r1.R.Width = H / 7 - H / 130;//146 = 154 - 8
-                                    r1.R.Height = H / 3 + H / 11;//458 = 360 + 98
+                                    r1.R.Width = (H / 7 - H / 130) * 2;//146 = 154 - 8
+                                    r1.R.Height = (H / 3 + H / 11) * 2;//458 = 360 + 98
 
                                     P1.listaraio.Add(r1);
                                     P1.SENDOAGARRADO = false;
                                     P1.PODERraio = true;
+                                    P1.listaraio.Remove(P1.listaraio[i]);
+                                }//
+                                else if (P1.mana < P1.DEZporcento)
+                                {
+                                    P1.PODER = false;
+                                    P1.PODERraio = false;
+                                    P1.listaraio.Clear();
                                 }
-                                P1.listaraio.Remove(P1.listaraio[i]);
+                                
                             }
 
                             else if (P1.listaraio[i].frame.X <= -1 && P1.listaraio[i].E)
@@ -192,25 +199,28 @@ namespace Stick_RPG_Fight
                                     }
 
                                     r1.Vy = 0;
-                                    r1.R.Width = H / 7 - H / 130;//146 = 154 - 8
-                                    r1.R.Height = H / 3 + H / 11;//458 = 360 + 98
+                                    r1.R.Width = (H / 7 - H / 130) * 2;//146 = 154 - 8
+                                    r1.R.Height = (H / 3 + H / 11) * 2;//458 = 360 + 98
 
                                     P1.listaraio.Add(r1);
                                     P1.SENDOAGARRADO = false;
                                     P1.PODERraio = true;
+                                    P1.listaraio.Remove(P1.listaraio[i]);
                                 }
-                                P1.listaraio.Remove(P1.listaraio[i]);
+                                else if (P1.mana < P1.DEZporcento)
+                                {
+                                    P1.listaraio.Clear();
+                                    P1.PODERraio = false;
+                                    P1.PODER = false;
+                                }
+                                
                             }
                         }
 
                     }
                 }//fim poder
 
-                if (P1.listaraio.Count <= 0)
-                {
-                    P1.PODERraio = false;
-                    P1.PODER = false;
-                }
+                
             }//fim multiplicação
 
             
