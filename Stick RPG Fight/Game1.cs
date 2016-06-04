@@ -168,7 +168,7 @@ namespace Stick_RPG_Fight
             {
                 BOTAO = false;
             }
-
+            TUTORIAL.t.FUNÇÃO(menu01);
 
 
             //GAME
@@ -377,7 +377,7 @@ namespace Stick_RPG_Fight
 
                         Entrada.INTROMENU(b1, Bapply, B1, APPLY, Bfull, BFULL, graphics); // tentativa de guardar o codigo em uma classe (fail)
 
-
+                        
 
                         if (Mouse.GetState().LeftButton == ButtonState.Pressed && Bfull.Contains(mousePosition))
                         {
@@ -424,6 +424,7 @@ namespace Stick_RPG_Fight
                         var W = Window.ClientBounds.Width;
                         var H = Window.ClientBounds.Height;    
 
+                        LEVEL.l.POS(W, H, P1);
                         JANELA.J.POSIÇÃOPAUSE(W, H);
                         if (UMAVEZ)
                         {
@@ -573,7 +574,7 @@ namespace Stick_RPG_Fight
                                     {
                                         JANELA.J.qtddOLEADA = 1;
                                     }
-                                    i1.GERARi1(listai1, WidthTela, HeightTela, aleatório);
+                                    i1.GERARi1(listai1, WidthTela, HeightTela, aleatório, P1);
                                 }
                                 TempoParaInimigos = 0;
                                 JANELA.J.qtddOLEADA++;
@@ -614,7 +615,7 @@ namespace Stick_RPG_Fight
                                 {
                                     JANELA.J.qtddOLEADA = 1;
                                 }
-                                i1.GERARi1(listai1, WidthTela, HeightTela, aleatório);
+                                i1.GERARi1(listai1, WidthTela, HeightTela, aleatório, P1);
                             }
                             JANELA.J.qtddOLEADA++;
                             TempoParaInimigos = 0;
@@ -849,6 +850,8 @@ namespace Stick_RPG_Fight
                 DRAW.DrawPLACAR(spriteBatch, WidthTela, HeightTela, P1);
             }
             DRAW.DrawINFO(spriteBatch, WidthTela, HeightTela);
+
+            TUTORIAL.t.Draw(spriteBatch, menu01, WidthTela, HeightTela);
 
             spriteBatch.End();
 

@@ -777,6 +777,11 @@ namespace Stick_RPG_Fight
                     spriteBatch.Draw(P1.imgVIDA2, P1.listavidaperdida[i].R, Color.White);
                 }
             }
+            if (P1.PODERescudo)
+            {
+                spriteBatch.Draw(ESCUDO.e.Bar, ESCUDO.e.BarHudP1, Color.White);
+            }
+
             spriteBatch.DrawString(HUDfont, "HP " + P1.vida, new Vector2(P1.BarraVida.X + 5, P1.BarraVida.Y + HeightTela / 100 + HeightTela / 200), Color.Black);
             spriteBatch.Draw(P1.imgMANA, P1.BarraMana, Color.White);
             spriteBatch.DrawString(HUDfont, "PODER " + P1.mana, new Vector2(P1.BarraMana.X + 5, P1.BarraMana.Y + (HeightTela / 100 * 5) + HeightTela / 200), Color.Black);
@@ -786,10 +791,43 @@ namespace Stick_RPG_Fight
 
             spriteBatch.Draw(P1.imgXP, P1.XPrec, Color.White);
             spriteBatch.DrawString(HUDfont, "XP " + P1.XP, new Vector2(P1.XPrec.X + HeightTela / 100, P1.XPrec.Y + HeightTela / 100), Color.Black);//dentro da barra de xp
-            spriteBatch.DrawString(HUDfont, "LVL " + P1.LVL, new Vector2(P1.XPrec.X + HeightTela / 100, P1.XPrec.Y + P1.XPrec.Height + HeightTela / 100), Color.GreenYellow); // LVL
+            
             spriteBatch.Draw(P1.imgXPT, P1.XPTrec, Color.White);
             spriteBatch.Draw(P1.imgpino, P1.Pino, Color.White);
 
+            LEVEL.l.DrawLVL(spriteBatch);
+            if (P1.LVL < 10)
+            {
+                spriteBatch.DrawString(JANELA.J.Firefont, "LVL " + P1.LVL, new Vector2(LEVEL.l.R.X + LEVEL.l.R.Width / 3, LEVEL.l.R.Y + LEVEL.l.R.Height / 4), Color.White); // LVL
+            }
+            else if (P1.LVL < 20 && P1.LVL >= 10)
+            {
+                spriteBatch.DrawString(JANELA.J.Firefont, "LVL " + P1.LVL, new Vector2(LEVEL.l.R.X + LEVEL.l.R.Width / 3, LEVEL.l.R.Y + LEVEL.l.R.Height / 4), Color.Gray); // LVL
+            }
+            else if (P1.LVL < 30 && P1.LVL >= 20)
+            {
+                spriteBatch.DrawString(JANELA.J.Firefont, "LVL " + P1.LVL, new Vector2(LEVEL.l.R.X + LEVEL.l.R.Width / 3, LEVEL.l.R.Y + LEVEL.l.R.Height / 4), Color.Yellow); // LVL
+            }
+            else if (P1.LVL < 40 && P1.LVL >= 30)
+            {
+                spriteBatch.DrawString(JANELA.J.Firefont, "LVL " + P1.LVL, new Vector2(LEVEL.l.R.X + LEVEL.l.R.Width / 3, LEVEL.l.R.Y + LEVEL.l.R.Height / 4), Color.Blue); // LVL
+            }
+            else if (P1.LVL >= 40)
+            {
+                if (P1.LVL < 100)
+                {
+                    spriteBatch.DrawString(JANELA.J.Firefont, "LVL " + P1.LVL, new Vector2(LEVEL.l.R.X + LEVEL.l.R.Width / 3, LEVEL.l.R.Y + LEVEL.l.R.Height / 4), Color.Green); // LVL
+                }
+                if (P1.LVL > 100)
+                {
+                    spriteBatch.DrawString(JANELA.J.Firefont, "LVL " + P1.LVL, new Vector2(LEVEL.l.R.X + LEVEL.l.R.Width / 4, LEVEL.l.R.Y + LEVEL.l.R.Height / 4), Color.Green); // LVL
+                }
+            }
+            //quest
+            spriteBatch.DrawString(HUDfont, "MISSAO COMPLETADA " + ((int)(((float)(JANELA.J.Qqtddcompletada) / JANELA.J.Qqtdd) * 100)) + "%", new Vector2(LEVEL.l.R.X + LEVEL.l.R.Width / 4, LEVEL.l.R.Y + LEVEL.l.R.Height / 2), Color.White); // LVL
+
+            //pontos
+            spriteBatch.DrawString(HUDfont, "Leite:" + P1.leiterepositório + ", Honra: " + P1.honrarepositório + ", Tempo:" + JANELA.J.Qminuto + ":" + JANELA.J.Qtempo, new Vector2(LEVEL.l.R.X + LEVEL.l.R.Width / 5, LEVEL.l.R.Y + LEVEL.l.R.Height / 2 + LEVEL.l.R.Height / 10), Color.White); // LVL
         }//fim draw combate
         //--------------------------------------------------------------------------------------------------
         //--------------------------------------------------------------------------------------------------
@@ -1728,6 +1766,10 @@ namespace Stick_RPG_Fight
                     {
                         spriteBatch.DrawString(JANELA.J.Neon, "" + P1.listadedano[i].qntd, new Vector2(P1.listadedano[i].P.X, P1.listadedano[i].P.Y), Color.Green);
                     }
+                    if (P1.listadedano[i].opç == 4)//heal
+                    {
+                        spriteBatch.DrawString(JANELA.J.Neon, "" + P1.listadedano[i].qntd, new Vector2(P1.listadedano[i].P.X, P1.listadedano[i].P.Y), Color.Violet);
+                    }
                 }
             }
         }//fim draw dano
@@ -1852,6 +1894,7 @@ namespace Stick_RPG_Fight
                 spriteBatch.DrawString(JANELA.J.Neon, "COMBOS: " + P1.qntdcombos, new Vector2(JANELA.J.Placar.X + JANELA.J.Placar.Width / 2, JANELA.J.Placar.Y + JANELA.J.Placar.Height / 4 + (30 * 2)), Color.DarkBlue);
                 spriteBatch.DrawString(JANELA.J.Neon, "XP ATUAL: " + P1.XP, new Vector2(JANELA.J.Placar.X + JANELA.J.Placar.Width / 2, JANELA.J.Placar.Y + JANELA.J.Placar.Height / 4 + (30 * 3)), Color.DarkBlue);
                 spriteBatch.DrawString(JANELA.J.Neon, "LVL ATUAL: " + P1.LVL, new Vector2(JANELA.J.Placar.X + JANELA.J.Placar.Width / 2, JANELA.J.Placar.Y + JANELA.J.Placar.Height / 4 + (30 * 4)), Color.DarkBlue);
+                spriteBatch.DrawString(JANELA.J.Neon, "MISSÕES feitas: " + JANELA.J.Qcompletadas, new Vector2(JANELA.J.Placar.X + JANELA.J.Placar.Width / 2, JANELA.J.Placar.Y + JANELA.J.Placar.Height / 4 + (30 * 5)), Color.DarkBlue);
                 
                 if (JANELA.J.TRANSFERIDO)
                 {

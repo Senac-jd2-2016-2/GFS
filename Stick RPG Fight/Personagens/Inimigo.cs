@@ -185,7 +185,7 @@ namespace Stick_RPG_Fight
         //CRIANDO NOVO INIMIGO (1)//CRIANDO NOVO INIMIGO (1)
         //CRIANDO NOVO INIMIGO (1)
         //CRIANDO NOVO INIMIGO (1)
-        public void GERARi1(List<Inimigo> listai1, int WidthTela, int HeightTela, Random aleatório)
+        public void GERARi1(List<Inimigo> listai1, int WidthTela, int HeightTela, Random aleatório, Personagem P1)
         {
             Inimigo i1 = new Inimigo(); // gera um novo
             i1.opç = aleatório.Next(1, 3);
@@ -206,10 +206,10 @@ namespace Stick_RPG_Fight
 
             i1.Px = 0;
             i1.Py = 0;
-            i1.vidaT = 100;
-            i1.manaT = 20;
-            i1.energiaT = 100;
-            i1.vida = 100;
+            i1.vidaT = 100 + (P1.LVL * 2);
+            i1.manaT = 20 + (P1.LVL * 2);
+            i1.energiaT = 100 + (P1.LVL * 2);
+            i1.vida = 100 + (P1.LVL * 2);
 
             listai1.Add(i1);
         }
@@ -1128,42 +1128,50 @@ namespace Stick_RPG_Fight
                         //SE ENCOSTAR NO INIMIGO ELE TOMA HIT
                         if (frameALLi1.X == 0 && frameALLi1.Y == 2 && (!P1.DEFENDENDO && P1.ESQUERDA || P1.DIREITA) && P1.meio.Intersects(individuo) && !P1.IVUNERAVEL)
                         {
-                            P1.vida -= 10;
-                            P1.Vx += HeightTela / 50;
-                            P1.GERARdano(P1.individuo.X, P1.individuo.Y, P1.individuo.Width, P1.individuo.Height, this.DIREITA, this.ESQUERDA, 10, WidthTela, HeightTela, 2); // personagem leva hit
-                            P1.gerarHUDVidaPerdida(HeightTela / 100); //10 de vida
+                            if (!P1.PODERescudo)
+                            {
+                                P1.vida -= 10 + P1.LVL;
+                                P1.Vx += HeightTela / 50;
+                                P1.GERARdano(P1.individuo.X, P1.individuo.Y, P1.individuo.Width, P1.individuo.Height, this.DIREITA, this.ESQUERDA, 10 + P1.LVL, WidthTela, HeightTela, 2); // personagem leva hit
+                                P1.gerarHUDVidaPerdida(HeightTela / 100); //10 de vida
 
-                            //HIT
-                            //HIT
-                            //PERSONAGEM TOMA HIT
-                            if (!P1.PULANDOandando && !P1.PULANDOcorrendo && !P1.PULANDOparado && !P1.AGACHADO)
-                            {
-                                if (P1.DIREITA)
+                                //HIT
+                                //HIT
+                                //PERSONAGEM TOMA HIT
+                                if (!P1.PULANDOandando && !P1.PULANDOcorrendo && !P1.PULANDOparado && !P1.AGACHADO)
                                 {
-                                    P1.frameHIT.X = 0;
-                                    P1.frameHIT.Y = 0;
+                                    if (P1.DIREITA)
+                                    {
+                                        P1.frameHIT.X = 0;
+                                        P1.frameHIT.Y = 0;
+                                    }
+                                    else if (P1.ESQUERDA)
+                                    {
+                                        P1.frameHIT.X = 7;
+                                        P1.frameHIT.Y = 0;
+                                    }
+                                    P1.HIT1 = true;
+                                    P1.HIT2 = false;
                                 }
-                                else if (P1.ESQUERDA)
+                                if (P1.AGACHADO)
                                 {
-                                    P1.frameHIT.X = 7;
-                                    P1.frameHIT.Y = 0;
+                                    if (P1.DIREITA)
+                                    {
+                                        P1.frameHIT.X = 0;
+                                        P1.frameHIT.Y = 0;
+                                    }
+                                    else if (P1.ESQUERDA)
+                                    {
+                                        P1.frameHIT.X = 7;
+                                        P1.frameHIT.Y = 0;
+                                    }
+                                    P1.AGACHADOHIT = true;
                                 }
-                                P1.HIT1 = true;
-                                P1.HIT2 = false;
                             }
-                            if (P1.AGACHADO)
+                            else if (P1.PODERescudo)
                             {
-                                if (P1.DIREITA)
-                                {
-                                    P1.frameHIT.X = 0;
-                                    P1.frameHIT.Y = 0;
-                                }
-                                else if (P1.ESQUERDA)
-                                {
-                                    P1.frameHIT.X = 7;
-                                    P1.frameHIT.Y = 0;
-                                }
-                                P1.AGACHADOHIT = true;
+                                ESCUDO.e.Quantidade -= 10 + P1.LVL;
+                                P1.GERARdano(P1.individuo.X, P1.individuo.Y, P1.individuo.Width, P1.individuo.Height, this.DIREITA, this.ESQUERDA, 10 + P1.LVL, WidthTela, HeightTela, 4); // personagem leva hit
                             }
                             
                         }
@@ -1276,41 +1284,49 @@ namespace Stick_RPG_Fight
                     }
                     if (individuo.Intersects(P1.meio) && (!P1.DEFENDENDO && !P1.AGACHADO && P1.ESQUERDA) && P1.meio.X > individuo.X && frameALLi1.Y >= 2 && frameALLi1.Y <= 5 && !P1.IVUNERAVEL)
                     {
-                        P1.vida -= 1;
-                        P1.gerarHUDVidaPerdida(HeightTela / HeightTela); //1 de vida
-                        P1.GERARdano(P1.individuo.X, P1.individuo.Y, P1.individuo.Width, P1.individuo.Height, this.DIREITA, this.ESQUERDA, 1, WidthTela, HeightTela, 2); // personagem leva hit
+                        if (!P1.PODERescudo)
+                        {
+                            P1.vida -= 1 + P1.LVL;
+                            P1.gerarHUDVidaPerdida(HeightTela / HeightTela); //1 de vida
+                            P1.GERARdano(P1.individuo.X, P1.individuo.Y, P1.individuo.Width, P1.individuo.Height, this.DIREITA, this.ESQUERDA, 1 + P1.LVL, WidthTela, HeightTela, 2); // personagem leva hit
 
-                        //HIT
-                        //HIT
-                        //PERSONAGEM TOMA HIT
-                        if (!P1.PULANDOandando && !P1.PULANDOcorrendo && !P1.PULANDOparado && !P1.AGACHADO)
-                        {
-                            if (P1.DIREITA)
+                            //HIT
+                            //HIT
+                            //PERSONAGEM TOMA HIT
+                            if (!P1.PULANDOandando && !P1.PULANDOcorrendo && !P1.PULANDOparado && !P1.AGACHADO)
                             {
-                                P1.frameHIT.X = 0;
-                                P1.frameHIT.Y = 0;
+                                if (P1.DIREITA)
+                                {
+                                    P1.frameHIT.X = 0;
+                                    P1.frameHIT.Y = 0;
+                                }
+                                else if (P1.ESQUERDA)
+                                {
+                                    P1.frameHIT.X = 7;
+                                    P1.frameHIT.Y = 0;
+                                }
+                                P1.HIT2 = true;
+                                P1.HIT1 = false;
                             }
-                            else if (P1.ESQUERDA)
+                            if (P1.AGACHADO)
                             {
-                                P1.frameHIT.X = 7;
-                                P1.frameHIT.Y = 0;
+                                if (P1.DIREITA)
+                                {
+                                    P1.frameHIT.X = 0;
+                                    P1.frameHIT.Y = 0;
+                                }
+                                else if (P1.ESQUERDA)
+                                {
+                                    P1.frameHIT.X = 7;
+                                    P1.frameHIT.Y = 0;
+                                }
+                                P1.AGACHADOHIT = true;
                             }
-                            P1.HIT2 = true;
-                            P1.HIT1 = false;
                         }
-                        if (P1.AGACHADO)
+                        else if (P1.PODERescudo)
                         {
-                            if (P1.DIREITA)
-                            {
-                                P1.frameHIT.X = 0;
-                                P1.frameHIT.Y = 0;
-                            }
-                            else if (P1.ESQUERDA)
-                            {
-                                P1.frameHIT.X = 7;
-                                P1.frameHIT.Y = 0;
-                            }
-                            P1.AGACHADOHIT = true;
+                            ESCUDO.e.Quantidade -= 1 + P1.LVL; //
+                            P1.GERARdano(P1.individuo.X, P1.individuo.Y, P1.individuo.Width, P1.individuo.Height, this.DIREITA, this.ESQUERDA, 1 + P1.LVL, WidthTela, HeightTela, 4); // personagem leva hit
                         }
                     }
                     //falta fz P1 cair (hit)
@@ -1343,81 +1359,97 @@ namespace Stick_RPG_Fight
                     //TOMANDO HIT (qnd FOR PEGO e esteja em TAL FRAME)
                     if (frameALLi1.X == 6 && P1.meio.X > individuo.X && frameALLi1.Y == 5 && P1.meio.Intersects(individuo) && !P1.IVUNERAVEL)
                     {
-                        P1.vida -= 10;
-                        P1.gerarHUDVidaPerdida(HeightTela / 100); //10 de vida
-                        P1.GERARdano(P1.individuo.X, P1.individuo.Y, P1.individuo.Width, P1.individuo.Height, this.DIREITA, this.ESQUERDA, 10, WidthTela, HeightTela, 2); // personagem leva hit
+                        if (!P1.PODERescudo)
+                        {
+                            P1.vida -= 10 + P1.LVL;
+                            P1.gerarHUDVidaPerdida(HeightTela / 100); //10 de vida
+                            P1.GERARdano(P1.individuo.X, P1.individuo.Y, P1.individuo.Width, P1.individuo.Height, this.DIREITA, this.ESQUERDA, 10 + P1.LVL, WidthTela, HeightTela, 2); // personagem leva hit
 
-                        //HIT
-                        //HIT
-                        //PERSONAGEM TOMA HIT
-                        if (!P1.PULANDOandando && !P1.PULANDOcorrendo && !P1.PULANDOparado && !P1.AGACHADO)
-                        {
-                            if (P1.DIREITA)
+                            //HIT
+                            //HIT
+                            //PERSONAGEM TOMA HIT
+                            if (!P1.PULANDOandando && !P1.PULANDOcorrendo && !P1.PULANDOparado && !P1.AGACHADO)
                             {
-                                P1.frameHIT.X = 0;
-                                P1.frameHIT.Y = 0;
+                                if (P1.DIREITA)
+                                {
+                                    P1.frameHIT.X = 0;
+                                    P1.frameHIT.Y = 0;
+                                }
+                                else if (P1.ESQUERDA)
+                                {
+                                    P1.frameHIT.X = 7;
+                                    P1.frameHIT.Y = 0;
+                                }
+                                P1.HIT2 = true;
+                                P1.HIT1 = false;
                             }
-                            else if (P1.ESQUERDA)
+                            if (P1.AGACHADO)
                             {
-                                P1.frameHIT.X = 7;
-                                P1.frameHIT.Y = 0;
+                                if (P1.DIREITA)
+                                {
+                                    P1.frameHIT.X = 0;
+                                    P1.frameHIT.Y = 0;
+                                }
+                                else if (P1.ESQUERDA)
+                                {
+                                    P1.frameHIT.X = 7;
+                                    P1.frameHIT.Y = 0;
+                                }
+                                P1.AGACHADOHIT = true;
                             }
-                            P1.HIT2 = true;
-                            P1.HIT1 = false;
                         }
-                        if (P1.AGACHADO)
+                        else if (P1.PODERescudo)
                         {
-                            if (P1.DIREITA)
-                            {
-                                P1.frameHIT.X = 0;
-                                P1.frameHIT.Y = 0;
-                            }
-                            else if (P1.ESQUERDA)
-                            {
-                                P1.frameHIT.X = 7;
-                                P1.frameHIT.Y = 0;
-                            }
-                            P1.AGACHADOHIT = true;
+                            ESCUDO.e.Quantidade -= 10 + P1.LVL;
+                            P1.GERARdano(P1.individuo.X, P1.individuo.Y, P1.individuo.Width, P1.individuo.Height, this.DIREITA, this.ESQUERDA, 10 + P1.LVL, WidthTela, HeightTela, 4); // personagem leva hit
                         }
 
                     }
                     if (frameALLi1.Y == 10 && P1.meio.X > individuo.X && P1.meio.Intersects(individuo) && !P1.IVUNERAVEL)
                     {
-                        P1.vida -= 2;
-                        P1.gerarHUDVidaPerdida(HeightTela / 400); //2 de vida
-                        P1.GERARdano(P1.individuo.X, P1.individuo.Y, P1.individuo.Width, P1.individuo.Height, this.DIREITA, this.ESQUERDA, 2, WidthTela, HeightTela, 2); // personagem leva hit
+                        if (!P1.PODERescudo)
+                        {
+                            P1.vida -= 2 + P1.LVL;
+                            P1.gerarHUDVidaPerdida(HeightTela / 400); //2 de vida
+                            P1.GERARdano(P1.individuo.X, P1.individuo.Y, P1.individuo.Width, P1.individuo.Height, this.DIREITA, this.ESQUERDA, 2 + P1.LVL, WidthTela, HeightTela, 2); // personagem leva hit
 
-                        //HIT
-                        //HIT
-                        //PERSONAGEM TOMA HIT
-                        if (!P1.PULANDOandando && !P1.PULANDOcorrendo && !P1.PULANDOparado && !P1.AGACHADO)
-                        {
-                            if (P1.DIREITA)
+                            //HIT
+                            //HIT
+                            //PERSONAGEM TOMA HIT
+                            if (!P1.PULANDOandando && !P1.PULANDOcorrendo && !P1.PULANDOparado && !P1.AGACHADO)
                             {
-                                P1.frameHIT.X = 0;
-                                P1.frameHIT.Y = 0;
+                                if (P1.DIREITA)
+                                {
+                                    P1.frameHIT.X = 0;
+                                    P1.frameHIT.Y = 0;
+                                }
+                                else if (P1.ESQUERDA)
+                                {
+                                    P1.frameHIT.X = 7;
+                                    P1.frameHIT.Y = 0;
+                                }
+                                P1.HIT2 = true;
+                                P1.HIT1 = false;
                             }
-                            else if (P1.ESQUERDA)
+                            if (P1.AGACHADO)
                             {
-                                P1.frameHIT.X = 7;
-                                P1.frameHIT.Y = 0;
+                                if (P1.DIREITA)
+                                {
+                                    P1.frameHIT.X = 0;
+                                    P1.frameHIT.Y = 0;
+                                }
+                                else if (P1.ESQUERDA)
+                                {
+                                    P1.frameHIT.X = 7;
+                                    P1.frameHIT.Y = 0;
+                                }
+                                P1.AGACHADOHIT = true;
                             }
-                            P1.HIT2 = true;
-                            P1.HIT1 = false;
                         }
-                        if (P1.AGACHADO)
+                        else if (P1.PODERescudo)
                         {
-                            if (P1.DIREITA)
-                            {
-                                P1.frameHIT.X = 0;
-                                P1.frameHIT.Y = 0;
-                            }
-                            else if (P1.ESQUERDA)
-                            {
-                                P1.frameHIT.X = 7;
-                                P1.frameHIT.Y = 0;
-                            }
-                            P1.AGACHADOHIT = true;
+                            ESCUDO.e.Quantidade -= 2 + P1.LVL;
+                            P1.GERARdano(P1.individuo.X, P1.individuo.Y, P1.individuo.Width, P1.individuo.Height, this.DIREITA, this.ESQUERDA, 2 + P1.LVL, WidthTela, HeightTela, 4); // personagem leva hit
                         }
                     }
                     //fim do agarrar
@@ -1635,44 +1667,53 @@ namespace Stick_RPG_Fight
                         //SE ENCOSTAR NO INIMIGO ELE TOMA HIT
                         if (frameALLi1.X == 7 && frameALLi1.Y == 2 && (!P1.DEFENDENDO && P1.DIREITA || P1.ESQUERDA) && P1.meio.Intersects(individuo) && !P1.IVUNERAVEL)
                         {
-                            P1.vida -= 10;
-                            P1.Vx -= HeightTela / 50;
-                            P1.gerarHUDVidaPerdida(HeightTela / 100); //10 de vida
-                            P1.GERARdano(P1.individuo.X, P1.individuo.Y, P1.individuo.Width, P1.individuo.Height, this.DIREITA, this.ESQUERDA, 10, WidthTela, HeightTela, 2); // personagem leva hit
+                            if (!P1.PODERescudo)
+                            {
+                                P1.vida -= 10 + P1.LVL;
+                                P1.Vx -= HeightTela / 50;
+                                P1.gerarHUDVidaPerdida(HeightTela / 100); //10 de vida
+                                P1.GERARdano(P1.individuo.X, P1.individuo.Y, P1.individuo.Width, P1.individuo.Height, this.DIREITA, this.ESQUERDA, 10 + P1.LVL, WidthTela, HeightTela, 2); // personagem leva hit
 
-                            //HIT
-                            //HIT
-                            //PERSONAGEM TOMA HIT
-                            if (!P1.PULANDOandando && !P1.PULANDOcorrendo && !P1.PULANDOparado && !P1.AGACHADO)
-                            {
-                                if (P1.DIREITA)
+                                //HIT
+                                //HIT
+                                //PERSONAGEM TOMA HIT
+                                if (!P1.PULANDOandando && !P1.PULANDOcorrendo && !P1.PULANDOparado && !P1.AGACHADO)
                                 {
-                                    P1.frameHIT.X = 0;
-                                    P1.frameHIT.Y = 0;
+                                    if (P1.DIREITA)
+                                    {
+                                        P1.frameHIT.X = 0;
+                                        P1.frameHIT.Y = 0;
+                                    }
+                                    else if (P1.ESQUERDA)
+                                    {
+                                        P1.frameHIT.X = 7;
+                                        P1.frameHIT.Y = 0;
+                                    }
+                                    P1.HIT1 = true;
+                                    P1.HIT2 = false;
                                 }
-                                else if (P1.ESQUERDA)
+                                if (P1.AGACHADO)
                                 {
-                                    P1.frameHIT.X = 7;
-                                    P1.frameHIT.Y = 0;
+                                    if (P1.DIREITA)
+                                    {
+                                        P1.frameHIT.X = 0;
+                                        P1.frameHIT.Y = 0;
+                                    }
+                                    else if (P1.ESQUERDA)
+                                    {
+                                        P1.frameHIT.X = 7;
+                                        P1.frameHIT.Y = 0;
+                                    }
+                                    P1.AGACHADOHIT = true;
                                 }
-                                P1.HIT1 = true;
-                                P1.HIT2 = false;
                             }
-                            if (P1.AGACHADO)
+                            else if (P1.PODERescudo)
                             {
-                                if (P1.DIREITA)
-                                {
-                                    P1.frameHIT.X = 0;
-                                    P1.frameHIT.Y = 0;
-                                }
-                                else if (P1.ESQUERDA)
-                                {
-                                    P1.frameHIT.X = 7;
-                                    P1.frameHIT.Y = 0;
-                                }
-                                P1.AGACHADOHIT = true;
+                                ESCUDO.e.Quantidade -= 10 + P1.LVL;
+                                P1.GERARdano(P1.individuo.X, P1.individuo.Y, P1.individuo.Width, P1.individuo.Height, this.DIREITA, this.ESQUERDA, 10 + P1.LVL, WidthTela, HeightTela, 4); // personagem leva hit
                             }
                         }
+                        
                     }//fim atack1
                 }
 
@@ -1778,41 +1819,49 @@ namespace Stick_RPG_Fight
                     }
                     if (individuo.Intersects(P1.meio) && (!P1.DEFENDENDO && !P1.AGACHADO && P1.DIREITA) && P1.meio.X < individuo.X && frameALLi1.Y >= 2 && frameALLi1.Y <= 5 && !P1.IVUNERAVEL)
                     {
-                        P1.vida -= 1;
-                        P1.gerarHUDVidaPerdida(HeightTela / HeightTela); //1 de vida
-                        P1.GERARdano(P1.individuo.X, P1.individuo.Y, P1.individuo.Width, P1.individuo.Height, this.DIREITA, this.ESQUERDA, 1, WidthTela, HeightTela, 2); // personagem leva hit
+                        if (!P1.PODERescudo)
+                        {
+                            P1.vida -= 1 + P1.LVL;
+                            P1.gerarHUDVidaPerdida(HeightTela / HeightTela); //1 de vida
+                            P1.GERARdano(P1.individuo.X, P1.individuo.Y, P1.individuo.Width, P1.individuo.Height, this.DIREITA, this.ESQUERDA, 1 + P1.LVL, WidthTela, HeightTela, 2); // personagem leva hit
 
-                        //HIT
-                        //HIT
-                        //PERSONAGEM TOMA HIT
-                        if (!P1.PULANDOandando && !P1.PULANDOcorrendo && !P1.PULANDOparado && !P1.AGACHADO)
-                        {
-                            if (P1.DIREITA)
+                            //HIT
+                            //HIT
+                            //PERSONAGEM TOMA HIT
+                            if (!P1.PULANDOandando && !P1.PULANDOcorrendo && !P1.PULANDOparado && !P1.AGACHADO)
                             {
-                                P1.frameHIT.X = 0;
-                                P1.frameHIT.Y = 0;
+                                if (P1.DIREITA)
+                                {
+                                    P1.frameHIT.X = 0;
+                                    P1.frameHIT.Y = 0;
+                                }
+                                else if (P1.ESQUERDA)
+                                {
+                                    P1.frameHIT.X = 7;
+                                    P1.frameHIT.Y = 0;
+                                }
+                                P1.HIT2 = true;
+                                P1.HIT1 = false;
                             }
-                            else if (P1.ESQUERDA)
+                            if (P1.AGACHADO)
                             {
-                                P1.frameHIT.X = 7;
-                                P1.frameHIT.Y = 0;
+                                if (P1.DIREITA)
+                                {
+                                    P1.frameHIT.X = 0;
+                                    P1.frameHIT.Y = 0;
+                                }
+                                else if (P1.ESQUERDA)
+                                {
+                                    P1.frameHIT.X = 7;
+                                    P1.frameHIT.Y = 0;
+                                }
+                                P1.AGACHADOHIT = true;
                             }
-                            P1.HIT2 = true;
-                            P1.HIT1 = false;
                         }
-                        if (P1.AGACHADO)
+                        else if (P1.PODERescudo)
                         {
-                            if (P1.DIREITA)
-                            {
-                                P1.frameHIT.X = 0;
-                                P1.frameHIT.Y = 0;
-                            }
-                            else if (P1.ESQUERDA)
-                            {
-                                P1.frameHIT.X = 7;
-                                P1.frameHIT.Y = 0;
-                            }
-                            P1.AGACHADOHIT = true;
+                            ESCUDO.e.Quantidade -= 1 + P1.LVL;
+                            P1.GERARdano(P1.individuo.X, P1.individuo.Y, P1.individuo.Width, P1.individuo.Height, this.DIREITA, this.ESQUERDA, 1 + P1.LVL, WidthTela, HeightTela, 4); // personagem leva hit
                         }
                     }
                     //falta fz P1 cair (hit)
@@ -1845,82 +1894,98 @@ namespace Stick_RPG_Fight
                     //TOMANDO HIT (qnd FOR PEGO e esteja em TAL FRAME)
                     if (frameALLi1.X == 2 && P1.meio.X < individuo.X && frameALLi1.Y == 5 && P1.meio.Intersects(individuo) && !P1.IVUNERAVEL)
                     {
-                        P1.vida -= 10;
-                        P1.gerarHUDVidaPerdida(HeightTela / 100); //10 de vida
-                        P1.GERARdano(P1.individuo.X, P1.individuo.Y, P1.individuo.Width, P1.individuo.Height, this.DIREITA, this.ESQUERDA, 10, WidthTela, HeightTela, 2);
+                        if (!P1.PODERescudo)
+                        {
+                            P1.vida -= 10 + P1.LVL;
+                            P1.gerarHUDVidaPerdida(HeightTela / 100); //10 de vida
+                            P1.GERARdano(P1.individuo.X, P1.individuo.Y, P1.individuo.Width, P1.individuo.Height, this.DIREITA, this.ESQUERDA, 10 + P1.LVL, WidthTela, HeightTela, 2);
 
-                        //HIT
-                        //HIT
-                        //PERSONAGEM TOMA HIT
-                        if (!P1.PULANDOandando && !P1.PULANDOcorrendo && !P1.PULANDOparado && !P1.AGACHADO)
-                        {
-                            if (P1.DIREITA)
+                            //HIT
+                            //HIT
+                            //PERSONAGEM TOMA HIT
+                            if (!P1.PULANDOandando && !P1.PULANDOcorrendo && !P1.PULANDOparado && !P1.AGACHADO)
                             {
-                                P1.frameHIT.X = 0;
-                                P1.frameHIT.Y = 0;
+                                if (P1.DIREITA)
+                                {
+                                    P1.frameHIT.X = 0;
+                                    P1.frameHIT.Y = 0;
+                                }
+                                else if (P1.ESQUERDA)
+                                {
+                                    P1.frameHIT.X = 7;
+                                    P1.frameHIT.Y = 0;
+                                }
+                                P1.HIT2 = true;
+                                P1.HIT1 = false;
                             }
-                            else if (P1.ESQUERDA)
+                            if (P1.AGACHADO)
                             {
-                                P1.frameHIT.X = 7;
-                                P1.frameHIT.Y = 0;
+                                if (P1.DIREITA)
+                                {
+                                    P1.frameHIT.X = 0;
+                                    P1.frameHIT.Y = 0;
+                                }
+                                else if (P1.ESQUERDA)
+                                {
+                                    P1.frameHIT.X = 7;
+                                    P1.frameHIT.Y = 0;
+                                }
+                                P1.AGACHADOHIT = true;
                             }
-                            P1.HIT2 = true;
-                            P1.HIT1 = false;
                         }
-                        if (P1.AGACHADO)
+                        else if (P1.PODERescudo)
                         {
-                            if (P1.DIREITA)
-                            {
-                                P1.frameHIT.X = 0;
-                                P1.frameHIT.Y = 0;
-                            }
-                            else if (P1.ESQUERDA)
-                            {
-                                P1.frameHIT.X = 7;
-                                P1.frameHIT.Y = 0;
-                            }
-                            P1.AGACHADOHIT = true;
+                            ESCUDO.e.Quantidade -= 10 + P1.LVL;
+                            P1.GERARdano(P1.individuo.X, P1.individuo.Y, P1.individuo.Width, P1.individuo.Height, this.DIREITA, this.ESQUERDA, 10 + P1.LVL, WidthTela, HeightTela, 4); // personagem leva hit
                         }
                     }
                     if (frameALLi1.Y == 10 && P1.meio.X < individuo.X && P1.meio.Intersects(individuo) && !P1.IVUNERAVEL)
                     {
-                        P1.vida -= 2;
-                        P1.gerarHUDVidaPerdida(HeightTela / 400); //2 de vida
-                        P1.GERARdano(P1.individuo.X, P1.individuo.Y, P1.individuo.Width, P1.individuo.Height, this.DIREITA, this.ESQUERDA, 2, WidthTela, HeightTela, 2); // personagem leva hit
+                        if (!P1.PODERescudo)
+                        {
+                            P1.vida -= 2 + P1.LVL;
+                            P1.gerarHUDVidaPerdida(HeightTela / 400); //2 de vida
+                            P1.GERARdano(P1.individuo.X, P1.individuo.Y, P1.individuo.Width, P1.individuo.Height, this.DIREITA, this.ESQUERDA, 2 + P1.LVL, WidthTela, HeightTela, 2); // personagem leva hit
 
-                        //HIT
-                        //HIT
-                        //PERSONAGEM TOMA HIT
-                        if (!P1.PULANDOandando && !P1.PULANDOcorrendo && !P1.PULANDOparado && !P1.AGACHADO)
-                        {
-                            if (P1.DIREITA)
+                            //HIT
+                            //HIT
+                            //PERSONAGEM TOMA HIT
+                            if (!P1.PULANDOandando && !P1.PULANDOcorrendo && !P1.PULANDOparado && !P1.AGACHADO)
                             {
-                                P1.frameHIT.X = 0;
-                                P1.frameHIT.Y = 0;
+                                if (P1.DIREITA)
+                                {
+                                    P1.frameHIT.X = 0;
+                                    P1.frameHIT.Y = 0;
+                                }
+                                else if (P1.ESQUERDA)
+                                {
+                                    P1.frameHIT.X = 7;
+                                    P1.frameHIT.Y = 0;
+                                }
+                                P1.HIT2 = true;
+                                P1.HIT1 = false;
+
                             }
-                            else if (P1.ESQUERDA)
+                            if (P1.AGACHADO)
                             {
-                                P1.frameHIT.X = 7;
-                                P1.frameHIT.Y = 0;
+                                if (P1.DIREITA)
+                                {
+                                    P1.frameHIT.X = 0;
+                                    P1.frameHIT.Y = 0;
+                                }
+                                else if (P1.ESQUERDA)
+                                {
+                                    P1.frameHIT.X = 7;
+                                    P1.frameHIT.Y = 0;
+                                }
+                                P1.AGACHADOHIT = true;
+
                             }
-                            P1.HIT2 = true;
-                            P1.HIT1 = false;
-                            
                         }
-                        if (P1.AGACHADO)
+                        else if (P1.PODERescudo)
                         {
-                            if (P1.DIREITA)
-                            {
-                                P1.frameHIT.X = 0;
-                                P1.frameHIT.Y = 0;
-                            }
-                            else if (P1.ESQUERDA)
-                            {
-                                P1.frameHIT.X = 7;
-                                P1.frameHIT.Y = 0;
-                            }
-                            P1.AGACHADOHIT = true;
-                            
+                            ESCUDO.e.Quantidade -= 2 + P1.LVL;
+                            P1.GERARdano(P1.individuo.X, P1.individuo.Y, P1.individuo.Width, P1.individuo.Height, this.DIREITA, this.ESQUERDA, 2 + P1.LVL, WidthTela, HeightTela, 4); // personagem leva hit
                         }
                     }
                     //fim do agarrar
@@ -2226,41 +2291,54 @@ namespace Stick_RPG_Fight
                         {
                             if (!P1.IVUNERAVEL || !P1.DEFENDENDO)
                             {
-                                P1.vida -= HeightTela / 70; //(15 de vida)
-                                P1.gerarHUDVidaPerdida(HeightTela / 70); //15 de vida
-                                P1.GERARdano(P1.individuo.X, P1.individuo.Y, P1.individuo.Width, P1.individuo.Height, this.DIREITA, this.ESQUERDA, 15, WidthTela, HeightTela, 2); // personagem leva hit
+                                if (!P1.PODERescudo)
+                                {
+                                    P1.vida -= HeightTela / 70 + P1.LVL; //(15 de vida)
+                                    P1.gerarHUDVidaPerdida(HeightTela / 70); //15 de vida
+                                    P1.GERARdano(P1.individuo.X, P1.individuo.Y, P1.individuo.Width, P1.individuo.Height, this.DIREITA, this.ESQUERDA, 15 + P1.LVL, WidthTela, HeightTela, 2); // personagem leva hit
 
-                                //HIT
-                                //HIT
-                                //PERSONAGEM TOMA HIT
-                                if (!P1.PULANDOandando && !P1.PULANDOcorrendo && !P1.PULANDOparado && !P1.AGACHADO)
-                                {
-                                    if (P1.DIREITA)
+                                    //HIT
+                                    //HIT
+                                    //PERSONAGEM TOMA HIT
+                                    if (!P1.PULANDOandando && !P1.PULANDOcorrendo && !P1.PULANDOparado && !P1.AGACHADO)
                                     {
-                                        P1.frameHIT.X = 0;
-                                        P1.frameHIT.Y = 0;
+
+                                        if (P1.DIREITA)
+                                        {
+                                            P1.frameHIT.X = 0;
+                                            P1.frameHIT.Y = 0;
+                                        }
+                                        else if (P1.ESQUERDA)
+                                        {
+                                            P1.frameHIT.X = 7;
+                                            P1.frameHIT.Y = 0;
+                                        }
+                                        P1.HIT2 = true;
+                                        P1.HIT1 = false;
+
                                     }
-                                    else if (P1.ESQUERDA)
+                                    if (P1.AGACHADO && !P1.DEFENDENDO)
                                     {
-                                        P1.frameHIT.X = 7;
-                                        P1.frameHIT.Y = 0;
+
+                                        if (P1.DIREITA)
+                                        {
+                                            P1.frameHIT.X = 0;
+                                            P1.frameHIT.Y = 0;
+                                        }
+                                        else if (P1.ESQUERDA)
+                                        {
+                                            P1.frameHIT.X = 7;
+                                            P1.frameHIT.Y = 0;
+                                        }
+                                        P1.AGACHADOHIT = true;
+
+                                        
                                     }
-                                    P1.HIT2 = true;
-                                    P1.HIT1 = false;
                                 }
-                                if (P1.AGACHADO && !P1.DEFENDENDO)
+                                else if (P1.PODERescudo)
                                 {
-                                    if (P1.DIREITA)
-                                    {
-                                        P1.frameHIT.X = 0;
-                                        P1.frameHIT.Y = 0;
-                                    }
-                                    else if (P1.ESQUERDA)
-                                    {
-                                        P1.frameHIT.X = 7;
-                                        P1.frameHIT.Y = 0;
-                                    }
-                                    P1.AGACHADOHIT = true;
+                                    ESCUDO.e.Quantidade -= HeightTela / 70 + P1.LVL; //(15 de vida)
+                                    P1.GERARdano(P1.individuo.X, P1.individuo.Y, P1.individuo.Width, P1.individuo.Height, this.DIREITA, this.ESQUERDA, 15 + P1.LVL, WidthTela, HeightTela, 4); // personagem leva hit
                                 }
                             }
                             listadefacas.Remove(listadefacas[i]);
@@ -2282,41 +2360,49 @@ namespace Stick_RPG_Fight
                         {
                             if (!P1.IVUNERAVEL || !P1.DEFENDENDO)
                             {
-                                P1.vida -= HeightTela / 70; //(15 de vida)
-                                P1.gerarHUDVidaPerdida(HeightTela / 70); //15 de vida
-                                P1.GERARdano(P1.individuo.X, P1.individuo.Y, P1.individuo.Width, P1.individuo.Height, this.DIREITA, this.ESQUERDA, 15, WidthTela, HeightTela, 2); // personagem leva hit
+                                if (!P1.PODERescudo)
+                                {
+                                    P1.vida -= HeightTela / 70 + P1.LVL; //(15 de vida)
+                                    P1.gerarHUDVidaPerdida(HeightTela / 70); //15 de vida
+                                    P1.GERARdano(P1.individuo.X, P1.individuo.Y, P1.individuo.Width, P1.individuo.Height, this.DIREITA, this.ESQUERDA, 15 + P1.LVL, WidthTela, HeightTela, 2); // personagem leva hit
 
-                                //HIT
-                                //HIT
-                                //PERSONAGEM TOMA HIT
-                                if (!P1.PULANDOandando && !P1.PULANDOcorrendo && !P1.PULANDOparado && !P1.AGACHADO)
-                                {
-                                    if (P1.DIREITA)
+                                    //HIT
+                                    //HIT
+                                    //PERSONAGEM TOMA HIT
+                                    if (!P1.PULANDOandando && !P1.PULANDOcorrendo && !P1.PULANDOparado && !P1.AGACHADO)
                                     {
-                                        P1.frameHIT.X = 0;
-                                        P1.frameHIT.Y = 0;
+                                        if (P1.DIREITA)
+                                        {
+                                            P1.frameHIT.X = 0;
+                                            P1.frameHIT.Y = 0;
+                                        }
+                                        else if (P1.ESQUERDA)
+                                        {
+                                            P1.frameHIT.X = 7;
+                                            P1.frameHIT.Y = 0;
+                                        }
+                                        P1.HIT2 = true;
+                                        P1.HIT1 = false;
                                     }
-                                    else if (P1.ESQUERDA)
+                                    if (P1.AGACHADO && !P1.DEFENDENDO)
                                     {
-                                        P1.frameHIT.X = 7;
-                                        P1.frameHIT.Y = 0;
+                                        if (P1.DIREITA)
+                                        {
+                                            P1.frameHIT.X = 0;
+                                            P1.frameHIT.Y = 0;
+                                        }
+                                        else if (P1.ESQUERDA)
+                                        {
+                                            P1.frameHIT.X = 7;
+                                            P1.frameHIT.Y = 0;
+                                        }
+                                        P1.AGACHADOHIT = true;
                                     }
-                                    P1.HIT2 = true;
-                                    P1.HIT1 = false;
                                 }
-                                if (P1.AGACHADO && !P1.DEFENDENDO)
+                                else if (P1.PODERescudo)
                                 {
-                                    if (P1.DIREITA)
-                                    {
-                                        P1.frameHIT.X = 0;
-                                        P1.frameHIT.Y = 0;
-                                    }
-                                    else if (P1.ESQUERDA)
-                                    {
-                                        P1.frameHIT.X = 7;
-                                        P1.frameHIT.Y = 0;
-                                    }
-                                    P1.AGACHADOHIT = true;
+                                    ESCUDO.e.Quantidade -= HeightTela / 70 + P1.LVL; //(15 de vida)
+                                    P1.GERARdano(P1.individuo.X, P1.individuo.Y, P1.individuo.Width, P1.individuo.Height, this.DIREITA, this.ESQUERDA, 15 + P1.LVL, WidthTela, HeightTela, 4); // personagem leva hit
                                 }
                             }
                             listadefacas.Remove(listadefacas[i]);
@@ -2472,9 +2558,9 @@ namespace Stick_RPG_Fight
                 //COMBO1
                 if (((P1.DIREITA && (P1.PARTE1 && P1.frameLUTA.Y == 1 && P1.frameLUTA.X == 1) && (!DEFENDENDO && ESQUERDA || DIREITA)) || (P1.ESQUERDA && (P1.PARTE1 && P1.frameLUTA.Y >= 1 && P1.frameLUTA.X == 6) && (!DEFENDENDO && DIREITA || ESQUERDA))) && !P1.INVERSO && !AGACHADO && !RASTEIRA)
                 {//para sangrar / tomar dano apenas qnd estiver em tal parte do ataque
-                    vida -= 10;
+                    vida -= 10 + P1.LVL;
                     gerarHUDVidaPerdida(HeightTela / 100, P1);
-                    P1.GERARdano(this.individuo.X, this.individuo.Y, this.individuo.Width, this.individuo.Height, P1.DIREITA, P1.ESQUERDA, 10, WidthTela, HeightTela, 1); // personagem leva dano (do personagem)
+                    P1.GERARdano(this.individuo.X, this.individuo.Y, this.individuo.Width, this.individuo.Height, P1.DIREITA, P1.ESQUERDA, 10 + P1.LVL, WidthTela, HeightTela, 1); // personagem leva dano (do personagem)
                     HIT1 = true;
                     opçluta = 10; //faz tomar hit e parar tudo
 
@@ -2507,9 +2593,9 @@ namespace Stick_RPG_Fight
                 }
                 if (((P1.DIREITA && (P1.PARTE2 && P1.frameLUTA.X == 4 && P1.frameLUTA.Y == 2) && (!DEFENDENDO && ESQUERDA || DIREITA)) || P1.ESQUERDA && (P1.PARTE2 && P1.frameLUTA.X == 2 && P1.frameLUTA.Y == 2) && (!DEFENDENDO && DIREITA || ESQUERDA)) && P1.COMBO1 && !AGACHADO && !RASTEIRA)
                 {
-                    vida -= 20;
+                    vida -= 20 + P1.LVL;
                     gerarHUDVidaPerdida(HeightTela / 52, P1);
-                    P1.GERARdano(this.individuo.X, this.individuo.Y, this.individuo.Width, this.individuo.Height, P1.DIREITA, P1.ESQUERDA, 20, WidthTela, HeightTela, 1); // personagem leva dano (do personagem)
+                    P1.GERARdano(this.individuo.X, this.individuo.Y, this.individuo.Width, this.individuo.Height, P1.DIREITA, P1.ESQUERDA, 20 + P1.LVL, WidthTela, HeightTela, 1); // personagem leva dano (do personagem)
                     HIT1 = true;
                     TOMANDOHIT = true;
 
@@ -2544,9 +2630,9 @@ namespace Stick_RPG_Fight
                 }
                 if ((P1.DIREITA && (P1.PARTE3 && P1.frameLUTA.X == 4 && P1.frameLUTA.Y == 3) && (!DEFENDENDO && ESQUERDA || DIREITA) || P1.ESQUERDA && (P1.PARTE3 && (P1.frameLUTA.X == 3 && P1.frameLUTA.Y == 3) && (!DEFENDENDO && DIREITA || ESQUERDA))) && P1.COMBO1 && !RASTEIRA)
                 {
-                    vida -= 30;
+                    vida -= 30 + P1.LVL;
                     gerarHUDVidaPerdida(HeightTela / 27, P1);
-                    P1.GERARdano(this.individuo.X, this.individuo.Y, this.individuo.Width, this.individuo.Height, P1.DIREITA, P1.ESQUERDA, 30, WidthTela, HeightTela, 1); // personagem leva dano (do personagem)
+                    P1.GERARdano(this.individuo.X, this.individuo.Y, this.individuo.Width, this.individuo.Height, P1.DIREITA, P1.ESQUERDA, 30 + P1.LVL, WidthTela, HeightTela, 1); // personagem leva dano (do personagem)
                     HIT2 = true;
                     TOMANDOHIT = true;
 
@@ -2580,9 +2666,9 @@ namespace Stick_RPG_Fight
                 }
                 if ((P1.DIREITA && P1.PARTE4 && P1.frameLUTA.Y == 4 && P1.frameLUTA.X == 0 && (!DEFENDENDO && ESQUERDA || DIREITA) || P1.ESQUERDA && P1.PARTE4 && P1.frameLUTA.Y == 4 && P1.frameLUTA.X == 7 && (!DEFENDENDO && DIREITA || ESQUERDA)) && P1.COMBO1 && !RASTEIRA)
                 {
-                    vida -= 30;
+                    vida -= 30 + P1.LVL;
                     gerarHUDVidaPerdida(HeightTela / 27, P1);
-                    P1.GERARdano(this.individuo.X, this.individuo.Y, this.individuo.Width, this.individuo.Height, P1.DIREITA, P1.ESQUERDA, 30, WidthTela, HeightTela, 1); // personagem leva dano (do personagem)
+                    P1.GERARdano(this.individuo.X, this.individuo.Y, this.individuo.Width, this.individuo.Height, P1.DIREITA, P1.ESQUERDA, 30 + P1.LVL, WidthTela, HeightTela, 1); // personagem leva dano (do personagem)
                     HIT2 = true;
 
 

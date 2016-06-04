@@ -352,7 +352,7 @@ namespace Stick_RPG_Fight
         public Point POSp1capturado = new Point(0, 0);
         
         //gastos
-        public int TRINTAporcento, DEZporcento, CINQUENTAporcento, UMporcento;
+        public int TRINTAporcento, DEZporcento, CINQUENTAporcento, UMporcento, VINTECINTOporcento;
 
         //Fase 1 cenario
         public int ONDAcontagem = 0;
@@ -378,6 +378,7 @@ namespace Stick_RPG_Fight
             DEZporcento = (int)(manaTOTAL * 0.1f);
             CINQUENTAporcento = (int)(manaTOTAL * 0.5f);
             UMporcento = (int)(manaTOTAL * 0.01f);//1% (meio porcento nao pode)
+            VINTECINTOporcento = (int)(manaTOTAL * 0.25f);
         }
 
         public void RPGatualização(int WidthTela, int HeightTela) // atualiza tudo em relação ao RPG (vida / mana / money etc etc)
@@ -395,9 +396,9 @@ namespace Stick_RPG_Fight
 
             XPT = 100 * LVL;
             XPrec.Width = (int)(((float)(XP) / XPT) * XPTrec.Width);
-            vidaTOTAL = 200 + ((10 * LVL) * LVL);
-            manaTOTAL = 150 + ((5 * LVL) * LVL);
-            energiaTOTAL = 120 + ((5 * LVL) * LVL);
+            vidaTOTAL = 200 + ((3 * LVL) * LVL);
+            manaTOTAL = 150 + ((2 * LVL) * LVL);
+            energiaTOTAL = 120 + ((4 * LVL) * LVL);
 
             if (XPrec.Width > 0)
             {
@@ -2091,6 +2092,7 @@ namespace Stick_RPG_Fight
             clone.DEFENDENDO = P1.DEFENDENDO;
             clone.HIT1 = P1.HIT1;
             clone.HIT2 = P1.HIT2;
+            clone.AGACHADOHIT = P1.AGACHADOHIT;
             clone.SACARARMA = P1.SACARARMA;
             //armas
             clone.PARTE1adaga = P1.PARTE1adaga;
@@ -2356,7 +2358,7 @@ namespace Stick_RPG_Fight
 
             D1.opç = opção;
             
-            // OPÇ 1 = DANO / 2 = HIT / 3 = HEAL
+            // OPÇ 1 = DANO / 2 = HIT / 3 = HEAL / 4 = ESCUDO
 
             this.listadedano.Add(D1);
         }

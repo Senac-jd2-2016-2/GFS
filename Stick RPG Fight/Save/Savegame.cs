@@ -181,6 +181,9 @@ namespace Stick_RPG_Fight
             else
             {
                 Ex = " Primeira vez jogando";
+                TUTORIAL.t.MENU = true;
+                TUTORIAL.t.JANELACC = true;
+                TUTORIAL.t.JANELAMAPAS = true;
             }
         }
     }

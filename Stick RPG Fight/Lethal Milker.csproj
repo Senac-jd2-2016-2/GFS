@@ -45,6 +45,7 @@
     <Compile Include="Info.cs" />
     <Compile Include="cenario\Itens.cs" />
     <Compile Include="cenario\ItensAll.cs" />
+    <Compile Include="LEVEL.cs" />
     <Compile Include="Opçoes.cs" />
     <Compile Include="Personagens\Dano.cs" />
     <Compile Include="Personagens\OndasdeAgua.cs" />
@@ -73,6 +74,7 @@
     <Compile Include="RAIO.cs" />
     <Compile Include="RETROCEDER.cs" />
     <Compile Include="Save\Savegame.cs" />
+    <Compile Include="TUTORIAL.cs" />
     <Compile Include="VENTO.cs" />
   </ItemGroup>
   <ItemGroup>
@@ -998,6 +1000,15 @@
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
     <Content Include="Content\Tridente.png">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Content\tutorial 1.png">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Content\tutorial 2.png">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Content\tutorial 3.png">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
     <Content Include="Content\Vento Spritesheet D.png">

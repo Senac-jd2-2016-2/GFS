@@ -26,11 +26,16 @@ namespace Stick_RPG_Fight
             RAIO.r.RaioD = content.Load<Texture2D>("Raio Spritesheet D");
             RAIO.r.RaioE = content.Load<Texture2D>("Raio Spritesheet E");
             ESCUDO.e.img = content.Load<Texture2D>("Escudo Poder");
+            ESCUDO.e.Bar = content.Load<Texture2D>("ESCUDObarra");
 
             Audio.A1.imgbarra = content.Load<Texture2D>("volume barra");
             Audio.A1.imgpino = content.Load<Texture2D>("volumeB");
             Audio.A1.imgVol1 = content.Load<Texture2D>("volume-");
             Audio.A1.imgVol2 = content.Load<Texture2D>("volume+");
+
+            TUTORIAL.t.menu = content.Load<Texture2D>("tutorial 1");
+            TUTORIAL.t.janelacc = content.Load<Texture2D>("tutorial 2");
+            TUTORIAL.t.janelamapas = content.Load<Texture2D>("tutorial 3");
 
                 //                                                                                      Direito
             //MAO
@@ -516,6 +521,9 @@ namespace Stick_RPG_Fight
 
             //combo
             COMBO.c.img = content.Load<Texture2D>("HITSface");
+
+            //lvl imagem
+            LEVEL.l.sprites = content.Load<Texture2D>("LVL");
         }
     }
 }

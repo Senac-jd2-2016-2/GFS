@@ -106,7 +106,7 @@ namespace Stick_RPG_Fight
         public Point tamanhoQuest = new Point(788, 613);
         public Point spriteQuest = new Point(8, 6);
         public Point frameQuest = new Point(0, 0), POSquest = new Point(0,0);
-        public int Qopç, Qqtdd, Qcompletadas, Qqtddcompletada, Qtempo;//opç de quest/ quantidade pra terminar quest/ quantas quests completadas/ quantidade de coisas feitas na quest/ tempo;
+        public int Qopç, Qqtdd, Qcompletadas, Qqtddcompletada, Qtempo, Qminuto;//opç de quest/ quantidade pra terminar quest/ quantas quests completadas/ quantidade de coisas feitas na quest/ tempo;
 
         //ESCOLHA DE FASE
         public Texture2D imgPbranco, imgCapaMapas, imgsetamenu1, imgsetamenu2, imgsetamenu3, imgsetamenu4, imgclickmenucompra, imgcompramenu1,imgcompramenu2;
@@ -312,21 +312,25 @@ namespace Stick_RPG_Fight
                     JANELAPLACAR = true; // leva até o placar (QND TERMINAR A QUEST)
                 }
 
-                if (Qopç == 2 || Qopç == 3)
+
+                Qtempo++;
+                if (Qtempo >= 60)
                 {
-                    Qtempo++;
-                    if (Qtempo >= 60)
+                    Qtempo = 0;
+                    Qminuto++;
+                    if (Qopç == 2 || Qopç == 3)
                     {
-                        Qtempo = 0;
                         Qqtddcompletada++;
                     }
                 }
-            
+
+
             }
             else if (!Menu.m.COMBATES)
             {
                 Qqtddcompletada = 0;
                 Qtempo = 0;
+                Qminuto = 0;
             }
         }
 

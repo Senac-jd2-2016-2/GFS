@@ -15,9 +15,9 @@ namespace Stick_RPG_Fight
     class ESCUDO
     {
         public static ESCUDO e = new ESCUDO();
-        public Texture2D img;
-        public Rectangle R = new Rectangle();
-        public int Contagem, Quantidade;
+        public Texture2D img, Bar;
+        public Rectangle R = new Rectangle(), Barra = new Rectangle(), BarHudP1 = new Rectangle();
+        public int Contagem, Quantidade, Qtotal;
 
 
         public void POS(int W, int H, Personagem P1, List<Inimigo> listai1)
@@ -29,6 +29,28 @@ namespace Stick_RPG_Fight
                 R.X = P1.individuo.X + P1.individuo.Width / 2 - R.Width / 2;
                 R.Y = P1.individuo.Y + P1.individuo.Height/ 2 - R.Width / 2;
 
+                //barra por cima da barra de vida
+                Barra.Height = H / 70; //15
+                Barra.Width = (int)(((float)(Quantidade) / Qtotal) * R.Width);
+                Barra.X = R.X;
+                Barra.Y = R.Y - Barra.Height;
+                
+                
+                //se menor
+                if (BarHudP1.Width <= P1.BarraVida.Width)
+                {
+                    BarHudP1.Width = Quantidade;
+                    BarHudP1.X = P1.BarraVida.X + P1.BarraVida.Width - BarHudP1.Width;
+                }
+                //se ela for maior
+                if (BarHudP1.Width > P1.BarraVida.Width)
+                {
+                    BarHudP1.Width = (int)(((float)(Quantidade) / Qtotal) * P1.BarraVida.Width); ;
+                    BarHudP1.X = P1.BarraVida.X + P1.BarraVida.Width - BarHudP1.Width;
+                }
+                BarHudP1.Height = P1.BarraVida.Height;
+                BarHudP1.Y = P1.BarraVida.Y;
+
                 Funções(P1, listai1, W, H);
             }
             
@@ -39,20 +61,21 @@ namespace Stick_RPG_Fight
             if (JANELA.J.ESCUDOselect && P1.PODER)
             {
                 s.Draw(img, R, Color.White);
+                s.Draw(Bar, Barra, Color.White);
             }
         }
 
         public void ATIVAR(Personagem P1)
         {
-            if (JANELA.J.ESCUDOselect && P1.mana >= 10)
+            if (JANELA.J.ESCUDOselect && P1.mana >= P1.VINTECINTOporcento)
             {
-                Quantidade += P1.mana * 2;
+                Quantidade += P1.mana;
+                Qtotal = Quantidade;
                 Contagem = 0;
                 P1.mana = 0; //joga tudo no escudo;
                 P1.PODERescudo = true;
                 P1.VISUPODER(); // criar efeito especial
                 
-
                 Audio.A1.EscudoSom.Play();
             }
             
