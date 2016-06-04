@@ -517,6 +517,9 @@
     <Content Include="Content\janela rolo.png">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
+    <Content Include="Content\LVL.png">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
     <Content Include="Content\MANA.png">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
