@@ -308,6 +308,9 @@ namespace Stick_RPG_Fight
                     Qcompletadas++;
                     Qqtddcompletada = 0;
 
+                    if (Qopç == 3)
+                        P1.honrarepositório++;
+
                     //isto acontece 2x... Qnd morrer ou qnd terminar quest
                     JANELAPLACAR = true; // leva até o placar (QND TERMINAR A QUEST)
                 }
