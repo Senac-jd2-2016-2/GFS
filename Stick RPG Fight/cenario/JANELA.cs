@@ -74,7 +74,7 @@ namespace Stick_RPG_Fight
 
         //janela OPTION  =============-
         public Rectangle janelaopçao, somB, resoluçaoB, creditosB;
-        public bool JANELAOPÇOES, SOM, SOMb, RESOLUÇAO, RESOLUÇAOb, CREDITOS, CREDITOSb, opçDESCER;
+        public bool JANELAOPÇOES, SOM, SOMb, RESOLUÇAO, RESOLUÇAOb, CREDITOS, CREDITOSb, opçDESCER, MudarRESULUÇAO;
         public Texture2D imgjanelaopç1, imgjanelaopç2, imgsomb1, imgsomb2, imgresoluçao1, imgresoluçao2, imgcreditos1, imgcreditos2;
         public Point POSopç = new Point(0, 0);
 
@@ -319,6 +319,14 @@ namespace Stick_RPG_Fight
                 Audio.A1.DISPONIVEL = false;
                 if (Mouse.GetState().LeftButton == ButtonState.Pressed && janelaopçao.Contains(mousePosition) && !resoluçaoB.Contains(mousePosition) && !creditosB.Contains(mousePosition) && !somB.Contains(mousePosition))
                 {
+                    BOTAO = true;
+                    MudarRESULUÇAO = true;
+                    
+                }
+                if (!janelaopçao.Contains(mousePosition))
+                    MudarRESULUÇAO = false;
+                if (MudarRESULUÇAO && !BOTAO)
+                {
                     graphics.PreferredBackBufferWidth = 800;
                     graphics.PreferredBackBufferHeight = 600;
                     graphics.IsFullScreen = false;
@@ -328,11 +336,12 @@ namespace Stick_RPG_Fight
                     {
                         b1[i] = false;
                     }
+                    graphics.ApplyChanges();
+                    JANELAOPÇOES = false;
+                    MudarRESULUÇAO = false;
+                    BOTAO = false;
                     menu01 = false;
                     menu00 = true;
-                    JANELAOPÇOES = false;
-                    graphics.ApplyChanges();
-
                 }
             }
             else if (CREDITOS)

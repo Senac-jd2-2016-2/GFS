@@ -390,6 +390,7 @@ namespace Stick_RPG_Fight
                     if (menu00)
                     {
                         IsMouseVisible = true;
+                        menu01 = false;
 
                         //VOLUME
                         Audio.A1.POS(Window.ClientBounds.Width, Window.ClientBounds.Height, menu00);
