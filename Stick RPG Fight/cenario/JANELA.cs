@@ -72,6 +72,12 @@ namespace Stick_RPG_Fight
         public Rectangle janelarolo2 = new Rectangle();
         public Rectangle rolo2 = new Rectangle();
 
+        //janela OPTION  =============-
+        public Rectangle janelaopçao, somB, resoluçaoB, creditosB;
+        public bool JANELAOPÇOES, SOM, SOMb, RESOLUÇAO, RESOLUÇAOb, CREDITOS, CREDITOSb, opçDESCER;
+        public Texture2D imgjanelaopç1, imgjanelaopç2, imgsomb1, imgsomb2, imgresoluçao1, imgresoluçao2, imgcreditos1, imgcreditos2;
+        public Point POSopç = new Point(0, 0);
+
         //placar
         public Texture2D imgPlacar;
         public Point POSplacar = new Point(0, 0);
@@ -129,6 +135,211 @@ namespace Stick_RPG_Fight
         public bool JANELACOMBO = false, JANELACOMERCIO = false, ARMAS, PET, PODERES, bXIS, bCOMBO, bCOMERCIO, bARMAS, bPET, bPODERES;
         //pause
         public bool JANELAPAUSE, bSAIR, bRESUME;
+
+        public void DrawJANELAOPÇOES(SpriteBatch s, Botoes Botao, int W, int H, intromenu Entrada)
+        {
+            var mouseState = Mouse.GetState();
+            var mousePosition = new Point(mouseState.X, mouseState.Y);
+
+            //capa fundo
+            s.Draw(JANELA.J.imgFUNDOmenu, new Rectangle(0, 0, W, H), Color.White);
+
+            if (JANELAOPÇOES)
+            {
+                if (!CREDITOS)
+                {
+                    s.Draw(imgjanelaopç1, janelaopçao, Color.White);
+                    s.Draw(imgcreditos1, creditosB, Color.White);
+                }
+                else if (CREDITOS)
+                {
+                    s.Draw(imgjanelaopç2, janelaopçao, Color.White);
+                    s.Draw(imgcreditos2, creditosB, Color.White);
+                }
+                if (!SOM)
+                {
+                    s.Draw(imgsomb1, somB, Color.White);
+                }
+                else if (SOM)
+                {
+                    s.Draw(imgsomb2, somB, Color.White);
+                }
+                if (!RESOLUÇAO)
+                {
+                    s.Draw(imgresoluçao1, resoluçaoB, Color.White);
+                }
+                else if (RESOLUÇAO)
+                {
+                    s.Draw(imgresoluçao2, resoluçaoB, Color.White);
+                    s.DrawString(Neon, "Clique aqui para voltar ao começo", new Vector2(janelaopçao.X + janelaopçao.Width / 4, janelaopçao.Y + janelaopçao.Height / 2), Color.White);
+                }
+
+
+                //botao voltar (menu)
+                if (Botao.HOMEquadrado.Contains(mousePosition))
+                {
+                    s.Draw(Botao.imghomeOFF, Botao.HOMEquadrado, Color.Gold);
+                    if (Mouse.GetState().LeftButton == ButtonState.Pressed)
+                    {
+                        s.Draw(Botao.imghomeON, Botao.HOMEquadrado, Color.Gold);
+                    }
+                }
+                else
+                {
+                    if (Menu.m.MENU)
+                        s.Draw(Botao.imghomeOFF, Botao.HOMEquadrado, Color.White);
+                    else if (Menu.m.COMBATES || Menu.m.CAMPANHA)
+                    {
+                        s.Draw(Botao.imghomeOFFTP, Botao.HOMEquadrado, Color.White);
+                    }
+                }
+            }
+        }
+
+        public void POSOPÇÕES(int W, int H, bool BOTAO, bool menu00, bool menu01, GraphicsDeviceManager graphics, bool[] b1, bool Bapply, bool BFULL)
+        {
+            var mouseState = Mouse.GetState();
+            var mousePosition = new Point(mouseState.X, mouseState.Y);
+            janelaopçao.X = POSopç.X;
+            janelaopçao.Y = POSopç.Y;
+
+            somB.Height = H / 16 - 1;
+            resoluçaoB.Height = H / 16 - 1;
+            creditosB.Height = H / 16 - 1;
+            somB.Width = H / 4 + H / 20 + 1;//321 = 270 + 54
+            resoluçaoB.Width = H / 4 + 4;//274 = 270 + 4
+            creditosB.Width = H / 4 + H / 21;//325 = 270 + 51
+
+            somB.X = POSopç.X;
+            somB.Y = POSopç.Y;
+            resoluçaoB.X = POSopç.X + somB.Width;
+            resoluçaoB.Y = POSopç.Y;
+            creditosB.X = POSopç.X + somB.Width + resoluçaoB.Width;
+            creditosB.Y = POSopç.Y;
+
+            janelaopçao.Width = H - H / 7 - 2;//924 = 1080 - 154 - 2
+            janelaopçao.Height = H / 2 - H / 16 - 1;//540 - 67 - 1 = 472
+            if (!opçDESCER)
+            {
+                Audio.A1.DISPONIVEL = false;
+                SOM = true;
+                RESOLUÇAO = false;
+                CREDITOS = false;
+                POSopç.X = W / 2 - janelaopçao.Width / 2;
+                POSopç.Y += H / 20;
+                if (POSopç.Y >= H / 2 - janelaopçao.Height / 2)
+                {
+                    opçDESCER = true;
+                }
+            }
+            else if (opçDESCER)
+            {
+                POSopç.Y = H / 2 - janelaopçao.Height / 2;
+                //              SOM
+                if (somB.Contains(mousePosition) && Mouse.GetState().LeftButton == ButtonState.Pressed) // botao home
+                {
+                    BOTAO = true;
+                    SOMb = true;
+                }
+                //se passar mouse fora
+                //se passar mouse fora
+                if (!somB.Contains(mousePosition))
+                {
+                    SOMb = false;
+
+                }
+                //passagem (para o menu do jogo)
+                //passagem
+                if (SOMb && !BOTAO)
+                {
+                    SOM = true;
+                    RESOLUÇAO = false;
+                    CREDITOS = false;
+
+                    SOMb = false;
+                }
+                //              RESOLUÇAO
+                if (resoluçaoB.Contains(mousePosition) && Mouse.GetState().LeftButton == ButtonState.Pressed) // botao home
+                {
+                    BOTAO = true;
+                    RESOLUÇAOb = true;
+                }
+                //se passar mouse fora
+                //se passar mouse fora
+                if (!resoluçaoB.Contains(mousePosition))
+                {
+                    RESOLUÇAOb = false;
+
+                }
+                //passagem (para o menu do jogo)
+                //passagem
+                if (RESOLUÇAOb && !BOTAO)
+                {
+                    SOM = false;
+                    RESOLUÇAO = true;
+                    CREDITOS = false;
+
+                    RESOLUÇAOb = false;
+                }
+                //              CREDITOS
+                if (creditosB.Contains(mousePosition) && Mouse.GetState().LeftButton == ButtonState.Pressed) // botao home
+                {
+                    BOTAO = true;
+                    CREDITOSb = true;
+                }
+                //se passar mouse fora
+                //se passar mouse fora
+                if (!creditosB.Contains(mousePosition))
+                {
+                    CREDITOSb = false;
+
+                }
+                //passagem (para o menu do jogo)
+                //passagem
+                if (CREDITOSb && !BOTAO)
+                {
+                    SOM = false;
+                    RESOLUÇAO = false;
+                    CREDITOS = true;
+
+                    CREDITOSb = false;
+                }
+
+            }
+
+            if (SOM)
+            {
+                Audio.A1.DISPONIVEL = true;
+                Audio.A1.barra.X = janelaopçao.X + janelaopçao.Width / 3;
+                Audio.A1.barra.Y = janelaopçao.Y + janelaopçao.Height / 2;
+                Audio.A1.POS(W, H, menu00);
+            }
+            else if (RESOLUÇAO)
+            {
+                Audio.A1.DISPONIVEL = false;
+                if (Mouse.GetState().LeftButton == ButtonState.Pressed && janelaopçao.Contains(mousePosition) && !resoluçaoB.Contains(mousePosition) && !creditosB.Contains(mousePosition) && !somB.Contains(mousePosition))
+                {
+                    graphics.PreferredBackBufferWidth = 800;
+                    graphics.PreferredBackBufferHeight = 600;
+                    graphics.IsFullScreen = false;
+                    BFULL = false;
+                    Bapply = false;
+                    for (int i = 0; i < b1.Length; i++)
+                    {
+                        b1[i] = false;
+                    }
+                    menu01 = false;
+                    menu00 = true;
+                    JANELAOPÇOES = false;
+                    graphics.ApplyChanges();
+
+                }
+            }
+            else if (CREDITOS)
+            {
+                Audio.A1.DISPONIVEL = false;
+            }
+        }
 
         public void FUNÇOESPLACAR(bool BOTAO, Personagem P1, Botoes Botao, List<Inimigo> listai1, int W, int H,Random A)
         {

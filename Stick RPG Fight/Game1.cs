@@ -172,7 +172,7 @@ namespace Stick_RPG_Fight
 
 
             //GAME
-            if (!JANELA.J.JANELACOMBO && !JANELA.J.JANELACOMERCIO && !JANELA.J.JANELAPAUSE && !JANELA.J.OPÇFASES && !JANELA.J.JANELAQUEST && !JANELA.J.JANELAPLACAR)
+            if (!JANELA.J.JANELACOMBO && !JANELA.J.JANELACOMERCIO && !JANELA.J.JANELAPAUSE && !JANELA.J.OPÇFASES && !JANELA.J.JANELAQUEST && !JANELA.J.JANELAPLACAR && !JANELA.J.JANELAOPÇOES)
             {
                 if (menu01 || Menu.m.COMBATES || Menu.m.CAMPANHA)
                 {
@@ -347,6 +347,25 @@ namespace Stick_RPG_Fight
                             Savegame.S.Gravacao(P1);
                             Menu.m.SALVARb = false;
                         }
+
+                        //OPÇÕES
+                        if (Menu.m.OpçoesB.Contains(mousePosition) && Mouse.GetState().LeftButton == ButtonState.Pressed)
+                        {
+                            BOTAO = true;
+                            Menu.m.OPÇOESb = true;
+                        }
+                        if (!Menu.m.OpçoesB.Contains(mousePosition))
+                            Menu.m.OPÇOESb = false;
+
+                        if (Menu.m.OPÇOESb && !BOTAO)
+                        {
+                            JANELA.J.opçDESCER = false;
+                            JANELA.J.POSopç.Y = 0 - JANELA.J.janelaopçao.Height;
+                            JANELA.J.POSopç.X = WidthTela / 2 - JANELA.J.janelaopçao.Width / 2;
+                            JANELA.J.JANELAOPÇOES = true;
+                            Menu.m.OPÇOESb = false;
+                        }
+
                     }//fim menu
 
 
@@ -705,6 +724,7 @@ namespace Stick_RPG_Fight
                 //PAUSE
                 //PAUSE
             }//FIM DO QUE PAUSA A TELA (botões: COMBATE E COMERCIO || PAUSE || OPÇ das fases)
+            //janela principal
             if (JANELA.J.JANELACOMBO || JANELA.J.JANELACOMERCIO)
             {
                 var WidthTela = Window.ClientBounds.Width;
@@ -716,6 +736,7 @@ namespace Stick_RPG_Fight
                 Info.I.POS(WidthTela, HeightTela);
 
             }
+            //PAUSE
             if (JANELA.J.JANELAPAUSE)
             {
                 var WidthTela = Window.ClientBounds.Width;
@@ -727,6 +748,7 @@ namespace Stick_RPG_Fight
 
                 JANELA.J.FUNÇÕESPAUSE(BOTAO, listai1, P1, Botao, WidthTela, HeightTela); // pause
             }
+            //FASES
             if (JANELA.J.OPÇFASES)
             {
                 var WidthTela = Window.ClientBounds.Width;
@@ -734,7 +756,7 @@ namespace Stick_RPG_Fight
                 JANELA.J.FUNÇÕESOPÇFASE(WidthTela, HeightTela, Botao, BOTAO, P1);
                 JANELA.J.POSopçfase(WidthTela, HeightTela);
                 //para sair dessa opçao
-
+                //X
                 if (Botao.HOMEquadrado.Contains(mousePosition) && Mouse.GetState().LeftButton == ButtonState.Pressed) // botao home
                 {
                     BOTAO = true;
@@ -756,7 +778,9 @@ namespace Stick_RPG_Fight
                     JANELA.J.OPÇFASES = false;
                     MediaPlayer.Resume();
                 }
+                
             }
+            //QUEST
             if (JANELA.J.JANELAQUEST)
             {
                 var WidthTela = Window.ClientBounds.Width;
@@ -764,6 +788,7 @@ namespace Stick_RPG_Fight
                 JANELA.J.POSQUEST(WidthTela, HeightTela);
                 JANELA.J.FUNÇOESQUEST(BOTAO, aleatório);
             }
+            //PLACAR
             if (JANELA.J.JANELAPLACAR)
             {
                 var WidthTela = Window.ClientBounds.Width;
@@ -773,6 +798,37 @@ namespace Stick_RPG_Fight
 
                 //mostrar tamanho da janela do combo
                 COMBO.c.TamanhoEatz(WidthTela, HeightTela, P1);
+            }
+            //OPÇ
+            if (JANELA.J.JANELAOPÇOES)
+            {
+                var WidthTela = Window.ClientBounds.Width;
+                var HeightTela = Window.ClientBounds.Height;
+                JANELA.J.POSOPÇÕES(WidthTela, HeightTela, BOTAO, menu00, menu01, graphics, b1, Bapply, BFULL);
+                //X
+                if (Botao.HOMEquadrado.Contains(mousePosition) && Mouse.GetState().LeftButton == ButtonState.Pressed) // botao home
+                {
+                    BOTAO = true;
+                    Botao.HOMEb = true;
+
+                    JANELA.J.POSIÇÃOPAUSE(WidthTela, HeightTela);
+                }
+                //se passar mouse fora
+                //se passar mouse fora
+                if (!Botao.HOMEquadrado.Contains(mousePosition))
+                {
+                    Botao.HOMEb = false;
+
+                }
+                //passagem (para o menu do jogo)
+                //passagem
+                if (Botao.HOMEb && !BOTAO)
+                {
+                    JANELA.J.JANELAOPÇOES = false;
+                    JANELA.J.opçDESCER = false;
+                    JANELA.J.POSopç.Y = 0 - JANELA.J.janelaopçao.Height;
+                    MediaPlayer.Resume();
+                }
             }
                 
            
@@ -848,6 +904,12 @@ namespace Stick_RPG_Fight
             if (JANELA.J.JANELAPLACAR)
             {
                 DRAW.DrawPLACAR(spriteBatch, WidthTela, HeightTela, P1);
+            }
+            if (JANELA.J.JANELAOPÇOES)
+            {
+                JANELA.J.DrawJANELAOPÇOES(spriteBatch, Botao, WidthTela, HeightTela, Entrada);
+                if (Audio.A1.DISPONIVEL)
+                    DRAW.DrawAudio(spriteBatch);
             }
             DRAW.DrawINFO(spriteBatch, WidthTela, HeightTela);
 

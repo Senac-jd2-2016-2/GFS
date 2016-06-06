@@ -17,7 +17,7 @@ namespace Stick_RPG_Fight
         public Texture2D VentoD, VentoE;
         public Point frame = new Point(0, 0), tamanho = new Point(426, 348), spritesheet = new Point(11, 1), PS = new Point(0, 0);
         public Rectangle R = new Rectangle();
-        public int Contagem, Vx;
+        public int Contagem, Vx, Delay;
         public bool PODERvento, D, E;
 
         public void ATIVAR(Personagem P1, int W, int H)
@@ -34,22 +34,23 @@ namespace Stick_RPG_Fight
                     v1.PS = new Point(P1.individuo.X + P1.individuo.Width + (-Contexto.Fundo.fase.X), P1.individuo.Y + (-Contexto.Fundo.fase.Y));
                     v1.D = true;
                     v1.frame.X = 0;
-                    v1.R.X = P1.individuo.X + P1.individuo.Width + (-Contexto.Fundo.fase.X);
-                    v1.R.Y = P1.individuo.Y + (-Contexto.Fundo.fase.Y);
+                    v1.R.X = P1.individuo.X + P1.individuo.Width;
+                    v1.R.Y = P1.individuo.Y;
                 }
                 if (P1.ESQUERDA)
                 {
                     v1.PS = new Point(P1.individuo.X - P1.individuo.Width + (-Contexto.Fundo.fase.X), P1.individuo.Y + (-Contexto.Fundo.fase.Y));
                     v1.E = true;
                     v1.frame.X = 10;
-                    v1.R.X = P1.individuo.X - P1.individuo.Width + (-Contexto.Fundo.fase.X);
-                    v1.R.Y = P1.individuo.Y + (-Contexto.Fundo.fase.Y);
+                    v1.R.X = P1.individuo.X - P1.individuo.Width;
+                    v1.R.Y = P1.individuo.Y;
                 }
                 
                 
                 v1.R.Width = H / 3 + H / 10 - H / 250;//464 = 360 + 108 - 4
                 v1.R.Height = H / 3 - H / 90;//348 = 360 - 12
                 v1.Vx = 0;
+                v1.Delay = 0;
                 P1.listavento.Add(v1);
                 P1.SENDOAGARRADO = false;
                 P1.PODERvento = true;
@@ -85,26 +86,30 @@ namespace Stick_RPG_Fight
                             }//
 
                         }
-
-                        if (P1.listavento[i].D)
+                        P1.listavento[i].Delay++;
+                        if (P1.listavento[i].D && P1.listavento[i].Delay >= 2)
                         {
                             P1.listavento[i].Vx += H / 20; //54
                             P1.listavento[i].frame.X++;
+                            P1.listavento[i].Delay = 0;
                             if (P1.listavento[i].frame.X >= P1.listavento[i].spritesheet.X)
                             {
                                 P1.listavento[i].PODERvento = false;
                                 P1.listavento.Remove(P1.listavento[i]);
                             }
+                            
                         }
-                        else if (P1.listavento[i].E)
+                        else if (P1.listavento[i].E && P1.listavento[i].Delay >= 2)
                         {
                             P1.listavento[i].Vx -= H / 20; //-54
                             P1.listavento[i].frame.X--;
+                            P1.listavento[i].Delay = 0;
                             if (P1.listavento[i].frame.X <= -1)
                             {
                                 P1.listavento[i].PODERvento = false;
                                 P1.listavento.Remove(P1.listavento[i]);
                             }
+                            
                         }
                         
                     }

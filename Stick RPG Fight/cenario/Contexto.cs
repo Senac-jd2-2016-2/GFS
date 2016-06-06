@@ -509,6 +509,15 @@ namespace Stick_RPG_Fight
             //placar
             JANELA.J.imgPlacar = content.Load<Texture2D>("Placar");
 
+            //opçoes
+            JANELA.J.imgjanelaopç1 = content.Load<Texture2D>("opçao janela");
+            JANELA.J.imgjanelaopç2 = content.Load<Texture2D>("opçao janela C");
+            JANELA.J.imgsomb1 = content.Load<Texture2D>("som 1");
+            JANELA.J.imgsomb2 = content.Load<Texture2D>("som 2");
+            JANELA.J.imgresoluçao1 = content.Load<Texture2D>("resoluçao 1");
+            JANELA.J.imgresoluçao2 = content.Load<Texture2D>("resoluçao 2");
+            JANELA.J.imgcreditos1 = content.Load<Texture2D>("creditos 1");
+            JANELA.J.imgcreditos2 = content.Load<Texture2D>("creditos 2");
 
             //spritefonte
             JANELA.J.Neon15 = content.Load<SpriteFont>("Neon15");

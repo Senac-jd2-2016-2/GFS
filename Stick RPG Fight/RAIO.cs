@@ -34,16 +34,16 @@ namespace Stick_RPG_Fight
                     r1.PS = new Point(P1.individuo.X + P1.individuo.Width + (-Contexto.Fundo.fase.X), (-Contexto.Fundo.fase.Y));
                     r1.D = true;
                     r1.frame.X = 0;
-                    r1.R.X = P1.individuo.X + P1.individuo.Width + (-Contexto.Fundo.fase.X);
-                    r1.R.Y = (-Contexto.Fundo.fase.Y);
+                    r1.R.X = P1.individuo.X + P1.individuo.Width;
+                    r1.R.Y = 0;
                 }
                 if (P1.ESQUERDA)
                 {
                     r1.PS = new Point(P1.individuo.X - P1.individuo.Width + (-Contexto.Fundo.fase.X), (-Contexto.Fundo.fase.Y));
                     r1.E = true;
                     r1.frame.X = 9;
-                    r1.R.X = P1.individuo.X - P1.individuo.Width + (-Contexto.Fundo.fase.X);
-                    r1.R.Y = (-Contexto.Fundo.fase.Y);
+                    r1.R.X = P1.individuo.X - P1.individuo.Width;
+                    r1.R.Y = 0;
                 }
 
                 r1.Vy = 0;
@@ -141,16 +141,16 @@ namespace Stick_RPG_Fight
                                         r1.PS = new Point(P1.listaraio[i].R.X + P1.listaraio[i].R.Width + (-Contexto.Fundo.fase.X), (-Contexto.Fundo.fase.Y));
                                         r1.D = true;
                                         r1.frame.X = 0;
-                                        r1.R.X = P1.listaraio[i].R.X + P1.listaraio[i].R.Width + (-Contexto.Fundo.fase.X);
-                                        r1.R.Y = (-Contexto.Fundo.fase.Y);
+                                        r1.R.X = P1.listaraio[i].R.X + P1.listaraio[i].R.Width;
+                                        r1.R.Y = 0;
                                     }
                                     if (P1.listaraio[i].E)
                                     {
                                         r1.PS = new Point(P1.listaraio[i].R.X - P1.listaraio[i].R.Width + (-Contexto.Fundo.fase.X), (-Contexto.Fundo.fase.Y));
                                         r1.E = true;
                                         r1.frame.X = 9;
-                                        r1.R.X = P1.listaraio[i].R.X - P1.listaraio[i].R.Width + (-Contexto.Fundo.fase.X);
-                                        r1.R.Y = (-Contexto.Fundo.fase.Y);
+                                        r1.R.X = P1.listaraio[i].R.X - P1.listaraio[i].R.Width;
+                                        r1.R.Y = 0;
                                     }
 
                                     r1.Vy = 0;
@@ -186,16 +186,16 @@ namespace Stick_RPG_Fight
                                         r1.PS = new Point(P1.listaraio[i].R.X + P1.listaraio[i].R.Width + (-Contexto.Fundo.fase.X), (-Contexto.Fundo.fase.Y));
                                         r1.D = true;
                                         r1.frame.X = 0;
-                                        r1.R.X = P1.listaraio[i].R.X + P1.listaraio[i].R.Width + (-Contexto.Fundo.fase.X);
-                                        r1.R.Y = (-Contexto.Fundo.fase.Y);
+                                        r1.R.X = P1.listaraio[i].R.X + P1.listaraio[i].R.Width;
+                                        r1.R.Y = 0;
                                     }
                                     if (P1.listaraio[i].E)
                                     {
                                         r1.PS = new Point(P1.listaraio[i].R.X - P1.listaraio[i].R.Width + (-Contexto.Fundo.fase.X), (-Contexto.Fundo.fase.Y));
                                         r1.E = true;
                                         r1.frame.X = 9;
-                                        r1.R.X = P1.listaraio[i].R.X - P1.listaraio[i].R.Width + (-Contexto.Fundo.fase.X);
-                                        r1.R.Y = (-Contexto.Fundo.fase.Y);
+                                        r1.R.X = P1.listaraio[i].R.X - P1.listaraio[i].R.Width ;
+                                        r1.R.Y = 0;
                                     }
 
                                     r1.Vy = 0;
