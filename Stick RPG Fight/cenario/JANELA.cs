@@ -78,6 +78,16 @@ namespace Stick_RPG_Fight
         public Texture2D imgjanelaopç1, imgjanelaopç2, imgsomb1, imgsomb2, imgresoluçao1, imgresoluçao2, imgcreditos1, imgcreditos2;
         public Point POSopç = new Point(0, 0);
 
+        //Janela CAMPANHA 
+        
+        public Rectangle[] Ato = new Rectangle[3]; // Quantidade de ATOS na história ((((((((( ATOs )))))))))
+        public bool JANELACAMPANHA, campanhaDESLIZAR;
+        public bool[] ATO = new bool[3];
+        public bool[] atoB = new bool[3];
+        public bool[] ATO_CAMPANHA = new bool[3];
+        public Texture2D[] imgATOS = new Texture2D[3];
+        public Point POSatos = new Point(0, 0);
+
         //placar
         public Texture2D imgPlacar;
         public Point POSplacar = new Point(0, 0);
@@ -135,6 +145,97 @@ namespace Stick_RPG_Fight
         public bool JANELACOMBO = false, JANELACOMERCIO = false, ARMAS, PET, PODERES, bXIS, bCOMBO, bCOMERCIO, bARMAS, bPET, bPODERES;
         //pause
         public bool JANELAPAUSE, bSAIR, bRESUME;
+
+        public void DrawCAMPANHA(SpriteBatch s, Botoes Botao, int W, int H)
+        {
+            var mouseState = Mouse.GetState();
+            var mousePosition = new Point(mouseState.X, mouseState.Y);
+
+            //capa fundo
+            s.Draw(JANELA.J.imgFUNDOmenu, new Rectangle(0, 0, W, H), Color.White);
+
+            s.DrawString(Neon, "Modo Campanha", new Vector2(POSatos.X + W / 3, POSatos.Y - H / 6), Color.White);
+            for (int i = 0; i < Ato.Length; i++)
+            {
+                if (!Ato[i].Contains(mousePosition))
+                    s.Draw(imgATOS[i], Ato[i], Color.White);
+                else if (Ato[i].Contains(mousePosition) && ATO[i])
+                    s.Draw(imgATOS[i], Ato[i], Color.White);
+                else if (Ato[i].Contains(mousePosition) && !ATO[i])
+                    s.Draw(imgATOS[i], Ato[i], Color.Red);
+            }
+
+            //botao voltar (menu)
+            if (Botao.HOMEquadrado.Contains(mousePosition))
+            {
+                s.Draw(Botao.imghomeOFF, Botao.HOMEquadrado, Color.Gold);
+                if (Mouse.GetState().LeftButton == ButtonState.Pressed)
+                {
+                    s.Draw(Botao.imghomeON, Botao.HOMEquadrado, Color.Gold);
+                }
+            }
+            else
+            {
+                if (Menu.m.MENU)
+                    s.Draw(Botao.imghomeOFF, Botao.HOMEquadrado, Color.White);
+                else if (Menu.m.COMBATES || Menu.m.CAMPANHA)
+                {
+                    s.Draw(Botao.imghomeOFFTP, Botao.HOMEquadrado, Color.White);
+                }
+            }
+        }
+
+        public void POSJANELACAMPANHA(int W, int H, bool BOTAO)
+        {
+            var mouseState = Mouse.GetState();
+            var mousePosition = new Point(mouseState.X, mouseState.Y);
+            if (Mouse.GetState().LeftButton != ButtonState.Pressed) //desclicar
+            {
+                BOTAO = false;
+            }
+
+            //POSIÇÕES DE CADA ATO (ISSO NA JANELA DO CAMPANHA, ANTES DE ENTRAR NO JOGO)
+            for (int i = 0; i < Ato.Length; i++)
+            {
+                Ato[i].Width = W;
+                Ato[i].X = POSatos.X;
+                Ato[i].Height = H / 6 - H / 180;// 180 - 6 = 174 
+                Ato[i].Y = POSatos.Y + (i * (Ato[i].Height + H / 35)); //um embaixo do outro
+
+            }//mult
+
+            //FAZER OS ATOS DESLIZAREM PRA DIREITA TODA VEZ QUE CLICAR
+            if (!campanhaDESLIZAR)
+            {
+                POSatos.X += H / 15;
+                if (POSatos.X >= 0)
+                {
+                    POSatos.X = 0;
+                    campanhaDESLIZAR = true;
+                }
+                
+            }
+            else if (campanhaDESLIZAR)
+            {
+                for (int i = 0; i < Ato.Length; i++)
+                {
+                    if (ATO[i] && Ato[i].Contains(mousePosition) &&  Mouse.GetState().LeftButton == ButtonState.Pressed)
+                    {
+                        BOTAO = true;
+                        atoB[i] = true;
+                    }
+                    if (ATO[i] && !Ato[i].Contains(mousePosition))
+                        atoB[i] = false;
+                    if (atoB[i] && !BOTAO)
+                    {
+                        ATO_CAMPANHA[i] = true;
+                        Menu.m.CAMPANHA = true;
+                        JANELA.J.JANELACAMPANHA = false;
+                        atoB[i] = false;
+                    }
+                }
+            }
+        }
 
         public void DrawJANELAOPÇOES(SpriteBatch s, Botoes Botao, int W, int H, intromenu Entrada)
         {
@@ -864,6 +965,24 @@ namespace Stick_RPG_Fight
                     }
                     Bcompramenu = false;
                 }
+                //
+                //fase rua japonesa
+                if (INFOeCOMPRAfase[4] && Mouse.GetState().LeftButton == ButtonState.Pressed && compramenu.Contains(mousePosition))
+                {
+                    BOTAO = true;
+                    Bcompramenu = true;
+                }
+                if (Bcompramenu && !BOTAO && INFOeCOMPRAfase[4])
+                {
+                    if (Qcompletadas >= 75 && P1.honra >= 20)
+                    {
+                        FASEdestravada[4] = true;
+                        CLICKMENUCOMPRA = false;
+                        INFOeCOMPRAfase[4] = false;
+                    }
+                    Bcompramenu = false;
+                }
+                
             }
         }
 

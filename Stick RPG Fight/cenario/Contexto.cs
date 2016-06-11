@@ -37,6 +37,10 @@ namespace Stick_RPG_Fight
             TUTORIAL.t.janelacc = content.Load<Texture2D>("tutorial 2");
             TUTORIAL.t.janelamapas = content.Load<Texture2D>("tutorial 3");
 
+            JANELA.J.imgATOS[0] = content.Load<Texture2D>("ato 1");
+            JANELA.J.imgATOS[1] = content.Load<Texture2D>("ato 2");
+            JANELA.J.imgATOS[2] = content.Load<Texture2D>("ato 3");
+
                 //                                                                                      Direito
             //MAO
             P1.imgparado1maosD = content.Load<Texture2D>("spritesheet p1 parado1"); // só imagem, logo posso usar isso também pros inimigos.
@@ -283,6 +287,7 @@ namespace Stick_RPG_Fight
             Fundo.imgfase[1] = content.Load<Texture2D>("fase 2");
             Fundo.imgfase[2] = content.Load<Texture2D>("fase 3");
             Fundo.imgfase[3] = content.Load<Texture2D>("fase 4");
+            Fundo.imgfase[4] = content.Load<Texture2D>("fase 5");
             Fundo.imgfundopoder = content.Load<Texture2D>("fundo poder");
 
             Menu.m.imgcampanha1 = content.Load<Texture2D>("campanha");
@@ -493,7 +498,8 @@ namespace Stick_RPG_Fight
             JANELA.J.imgfaseB[1] = content.Load<Texture2D>("fase B2");
             JANELA.J.imgfaseB[2] = content.Load<Texture2D>("fase B3");
             JANELA.J.imgfaseB[3] = content.Load<Texture2D>("fase B4");
-            for (int i = 4; i < JANELA.J.imgfaseB.Length; i++ )
+            JANELA.J.imgfaseB[4] = content.Load<Texture2D>("fase B5");
+            for (int i = 5; i < JANELA.J.imgfaseB.Length; i++ )
             {
                 JANELA.J.imgfaseB[i] = content.Load<Texture2D>("fase B1");
             }

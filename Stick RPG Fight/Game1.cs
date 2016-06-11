@@ -105,6 +105,7 @@ namespace Stick_RPG_Fight
                 Contexto.Fase[i] = false;
             }
 
+            JANELA.J.ATO[0] = true;
             
             JANELA.J.CRIARlinhas();//cria se linhas do menu
             Itens.IT.CRIARITENS();//cria se itens da janela cc
@@ -172,7 +173,7 @@ namespace Stick_RPG_Fight
 
 
             //GAME
-            if (!JANELA.J.JANELACOMBO && !JANELA.J.JANELACOMERCIO && !JANELA.J.JANELAPAUSE && !JANELA.J.OPÇFASES && !JANELA.J.JANELAQUEST && !JANELA.J.JANELAPLACAR && !JANELA.J.JANELAOPÇOES)
+            if (!JANELA.J.JANELACOMBO && !JANELA.J.JANELACOMERCIO && !JANELA.J.JANELAPAUSE && !JANELA.J.OPÇFASES && !JANELA.J.JANELAQUEST && !JANELA.J.JANELAPLACAR && !JANELA.J.JANELAOPÇOES && !JANELA.J.JANELACAMPANHA)
             {
                 if (menu01 || Menu.m.COMBATES || Menu.m.CAMPANHA)
                 {
@@ -366,6 +367,24 @@ namespace Stick_RPG_Fight
                             Menu.m.OPÇOESb = false;
                         }
 
+                        //CAMPANHA
+                        if (Menu.m.CampanhaB.Contains(mousePosition) && Mouse.GetState().LeftButton == ButtonState.Pressed)
+                        {
+                            BOTAO = true;
+                            Menu.m.CAMPANHAb = true;
+                        }
+                        if (!Menu.m.CampanhaB.Contains(mousePosition))
+                            Menu.m.CAMPANHAb = false;
+
+                        if (Menu.m.CAMPANHAb && !BOTAO)
+                        {
+                            JANELA.J.campanhaDESLIZAR = false;
+                            JANELA.J.POSatos.Y = HeightTela / 4;
+                            JANELA.J.POSatos.X = - WidthTela;
+                            JANELA.J.JANELACAMPANHA = true;
+                            Menu.m.CAMPANHAb = false;
+                        }
+
                     }//fim menu
 
 
@@ -385,7 +404,7 @@ namespace Stick_RPG_Fight
 
                 //============================================================ MENU ===================================================
                 //============================================================ MENU ===================================================
-                if (Menu.m.MENU && !Menu.m.COMBATES && !SAIU)
+                if (Menu.m.MENU && !Menu.m.COMBATES && !Menu.m.CAMPANHA && !SAIU)
                 {
                     if (menu00)
                     {
@@ -454,6 +473,9 @@ namespace Stick_RPG_Fight
                             //flecha
                             FlechaD = new Rectangle(W - H / 11, H - H / 11, H / 11, H / 11);
                             FlechaE = new Rectangle(0, H - H / 11, H / 11, H / 11);
+
+                            JANELA.J.POSatos.X = -W;
+                            JANELA.J.POSatos.Y = H / 4;
 
                             MediaPlayer.Play(Audio.A1.menusong);
                         }
@@ -831,6 +853,40 @@ namespace Stick_RPG_Fight
                     MediaPlayer.Resume();
                 }
             }
+
+            //CAMPANHA
+            if (JANELA.J.JANELACAMPANHA)
+            {
+                var W = Window.ClientBounds.Width;
+                var H = Window.ClientBounds.Height;
+
+                JANELA.J.POSJANELACAMPANHA(W, H, BOTAO);
+
+                //X
+                if (Botao.HOMEquadrado.Contains(mousePosition) && Mouse.GetState().LeftButton == ButtonState.Pressed) // botao home
+                {
+                    BOTAO = true;
+                    Botao.HOMEb = true;
+
+                    JANELA.J.POSIÇÃOPAUSE(W, H);
+                }
+                //se passar mouse fora
+                //se passar mouse fora
+                if (!Botao.HOMEquadrado.Contains(mousePosition))
+                {
+                    Botao.HOMEb = false;
+
+                }
+                //passagem (para o menu do jogo)
+                //passagem
+                if (Botao.HOMEb && !BOTAO)
+                {
+                    JANELA.J.JANELACAMPANHA = false;
+                    JANELA.J.campanhaDESLIZAR = false;
+                    JANELA.J.POSatos.X = -W;
+                    MediaPlayer.Resume();
+                }
+            }
                 
            
 
@@ -911,6 +967,10 @@ namespace Stick_RPG_Fight
                 JANELA.J.DrawJANELAOPÇOES(spriteBatch, Botao, WidthTela, HeightTela, Entrada);
                 if (Audio.A1.DISPONIVEL)
                     DRAW.DrawAudio(spriteBatch);
+            }
+            if (JANELA.J.JANELACAMPANHA)
+            {
+                JANELA.J.DrawCAMPANHA(spriteBatch, Botao, WidthTela, HeightTela);
             }
             DRAW.DrawINFO(spriteBatch, WidthTela, HeightTela);
 

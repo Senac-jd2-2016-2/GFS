@@ -510,7 +510,7 @@ namespace Stick_RPG_Fight
                             {
                                 spriteBatch.DrawString(JANELA.J.Firefont, "ESPADA 2 MAOS", new Vector2(JANELA.J.janelaall.X + JANELA.J.janelaall.Width / 2 - JANELA.J.janelaall.Width / 8, JANELA.J.janelaall.Y + JANELA.J.janelaall.Height / 16), Color.Black);
                                 spriteBatch.DrawString(JANELA.J.Neon, "DEFINIÇÃO:", new Vector2(JANELA.J.janelaall.X + JANELA.J.janelaall.Width / 16, JANELA.J.janelaall.Y + JANELA.J.janelaall.Height / 14 + 30), Color.DarkGray);
-                                spriteBatch.DrawString(JANELA.J.Neon15, "Entre rápido e lento, porém com bastante dano.", new Vector2(JANELA.J.janelaall.X + JANELA.J.janelaall.Width / 30, JANELA.J.janelaall.Y + JANELA.J.janelaall.Height / 14 + 60), Color.Gray);
+                                spriteBatch.DrawString(JANELA.J.Neon15, "Entre rápido e lento, não pula, porém com bastante dano.", new Vector2(JANELA.J.janelaall.X + JANELA.J.janelaall.Width / 30, JANELA.J.janelaall.Y + JANELA.J.janelaall.Height / 14 + 60), Color.Gray);
 
                                 spriteBatch.DrawString(JANELA.J.Neon, "PREÇOS:", new Vector2(JANELA.J.janelaall.X + JANELA.J.janelaall.Width / 16, JANELA.J.janelaall.Y + JANELA.J.janelaall.Height / 14 + 100), Color.DarkGray);
                                 spriteBatch.DrawString(JANELA.J.Neon15, "COMBOS: 1000, LEITE: 0, HONRA: 0", new Vector2(JANELA.J.janelaall.X + JANELA.J.janelaall.Width / 30, JANELA.J.janelaall.Y + JANELA.J.janelaall.Height / 14 + 130), Color.Gray);
@@ -632,7 +632,7 @@ namespace Stick_RPG_Fight
                             {
                                 spriteBatch.DrawString(JANELA.J.Firefont, "ESPADA 2 MAOS", new Vector2(JANELA.J.janelaall.X + JANELA.J.janelaall.Width / 2 - JANELA.J.janelaall.Width / 8, JANELA.J.janelaall.Y + JANELA.J.janelaall.Height / 16), Color.Black);
                                 spriteBatch.DrawString(JANELA.J.Neon, "DEFINIÇÃO:", new Vector2(JANELA.J.janelaall.X + JANELA.J.janelaall.Width / 16, JANELA.J.janelaall.Y + JANELA.J.janelaall.Height / 14 + 30), Color.DarkGray);
-                                spriteBatch.DrawString(JANELA.J.Neon15, "Entre rápido e lento, porém com bastante dano.", new Vector2(JANELA.J.janelaall.X + JANELA.J.janelaall.Width / 30, JANELA.J.janelaall.Y + JANELA.J.janelaall.Height / 14 + 60), Color.Gray);
+                                spriteBatch.DrawString(JANELA.J.Neon15, "Entre rápido e lento, não pula, porém com bastante dano.", new Vector2(JANELA.J.janelaall.X + JANELA.J.janelaall.Width / 30, JANELA.J.janelaall.Y + JANELA.J.janelaall.Height / 14 + 60), Color.Gray);
                             }
                             if (i == 2)
                             {

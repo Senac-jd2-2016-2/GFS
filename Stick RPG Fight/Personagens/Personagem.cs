@@ -1281,14 +1281,101 @@ namespace Stick_RPG_Fight
             }
             else if (!SENDOAGARRADO) // PARALIZADO
             {
-                //pulando parado
-                if (Keyboard.GetState().IsKeyDown(Keys.W) && !Keyboard.GetState().IsKeyDown(Keys.D) && !Keyboard.GetState().IsKeyDown(Keys.A) && !AGACHADO && !ATACANDO && !PULANDOparado && !PULANDOandando && !PULANDOcorrendo && !HIT1 && !HIT2 && !AGACHADOHIT)
+                //DEFENDER
+                if (Keyboard.GetState().IsKeyDown(Keys.NumPad7) && !AGACHADO && !ATACANDO && !PULANDOparado && !PULANDOandando && !PULANDOcorrendo && !HIT1 && !HIT2 && !AGACHADOHIT)
                 {
-                    PULANDOparado = true;
+                    Vx = 0;
+                    individuo.Width = W / 9;
+                    //ON
+                    DEFENDENDO = true;
+                    //OFF
                     PARADO = false;
                     CORRENDO = false;
                     ANDANDO = false;
+                    AGACHADO = false;
+                    if (DIREITA)//escolher posição de defesa
+                    {
+                        if (framedefesa.Y < 3)
+                        {
+                            framedefesa.X++;
+                        }
+                        else if (framedefesa.Y >= 3)
+                        {
+                            framedefesa.X = 0;
+                            framedefesa.Y = 3;
+                        }
+                        if (Keyboard.GetState().IsKeyDown(Keys.A))
+                        {
+                            framedefesa.X = 7;
+                            framedefesa.Y = 0;
+                            //ON
+                            ESQUERDA = true;
+                            //OFF
+                            DIREITA = false;
+                        }
+
+                        if (framedefesa.X >= SpriteSheetdefesamaos.X)
+                        {
+                            framedefesa.X = 0;
+                            framedefesa.Y++;
+                        }
+                    }
+                    if (ESQUERDA)//escolher posição de defesa
+                    {
+
+                        if (framedefesa.Y < 3)
+                        {
+                            framedefesa.X--;
+                        }
+                        else if (framedefesa.Y >= 3)
+                        {
+                            framedefesa.X = 7;
+                            framedefesa.Y = 3;
+                        }
+                        if (Keyboard.GetState().IsKeyDown(Keys.D))
+                        {
+                            framedefesa.X = 0;
+                            framedefesa.Y = 0;
+                            //ON
+                            DIREITA = true;
+                            //OFF
+                            ESQUERDA = false;
+                        }
+
+                        if (framedefesa.X <= -1)
+                        {
+                            framedefesa.X = 7;
+                            framedefesa.Y++;
+                        }
+                    }
+                }//
+                else if (!Keyboard.GetState().IsKeyDown(Keys.NumPad7))
+                {
+                    DEFENDENDO = false;
+                    if (DIREITA)
+                    {
+                        framedefesa.X = 0;
+                        framedefesa.Y = 0;
+                    }
+                    else if (ESQUERDA)
+                    {
+                        framedefesa.X = 7;
+                        framedefesa.Y = 0;
+                    }
+                }
+
+
+                //pulando parado
+                if (Keyboard.GetState().IsKeyDown(Keys.W) && !Keyboard.GetState().IsKeyDown(Keys.D) && !Keyboard.GetState().IsKeyDown(Keys.A) && !AGACHADO && !ATACANDO && !PULANDOparado && !PULANDOandando && !PULANDOcorrendo && !HIT1 && !HIT2 && !AGACHADOHIT && !DEFENDENDO && !AGACHADO)
+                {
+                    //ON
+                    PULANDOparado = true;
                     subindo = true;
+                    //OFF
+                    PARADO = false;
+                    CORRENDO = false;
+                    ANDANDO = false;
+                    
                     Vy = aleatório.Next(-H / 15, -H / 25);
                     if (ESQUERDA)
                     {
@@ -1299,7 +1386,7 @@ namespace Stick_RPG_Fight
                 }
 
                 //pulando andando
-                if (Keyboard.GetState().IsKeyDown(Keys.W) && (Keyboard.GetState().IsKeyDown(Keys.D) || Keyboard.GetState().IsKeyDown(Keys.A)) && !Keyboard.GetState().IsKeyDown(Keys.LeftShift) && !AGACHADO && !ATACANDO && !PULANDOparado && !PULANDOandando && !PULANDOcorrendo && !HIT1 && !HIT2 && !AGACHADOHIT)
+                if (Keyboard.GetState().IsKeyDown(Keys.W) && (Keyboard.GetState().IsKeyDown(Keys.D) || Keyboard.GetState().IsKeyDown(Keys.A)) && !Keyboard.GetState().IsKeyDown(Keys.LeftShift) && !AGACHADO && !ATACANDO && !PULANDOparado && !PULANDOandando && !PULANDOcorrendo && !DEFENDENDO && !AGACHADO && !HIT1 && !HIT2 && !AGACHADOHIT)
                 {
                     PULANDOandando = true;
                     PARADO = false;
@@ -1317,7 +1404,7 @@ namespace Stick_RPG_Fight
                 }
 
                 //pulando andando
-                if (Keyboard.GetState().IsKeyDown(Keys.W) && (Keyboard.GetState().IsKeyDown(Keys.D) || Keyboard.GetState().IsKeyDown(Keys.A)) && Keyboard.GetState().IsKeyDown(Keys.LeftShift) && !AGACHADO && !ATACANDO && !PULANDOparado && !PULANDOandando && !PULANDOcorrendo && energia >= 35 && !HIT1 && !HIT2 && !AGACHADOHIT)
+                if (Keyboard.GetState().IsKeyDown(Keys.W) && (Keyboard.GetState().IsKeyDown(Keys.D) || Keyboard.GetState().IsKeyDown(Keys.A)) && Keyboard.GetState().IsKeyDown(Keys.LeftShift) && !AGACHADO && !ATACANDO && !PULANDOparado && !PULANDOandando && !PULANDOcorrendo && energia >= 35 && !HIT1 && !HIT2 && !AGACHADOHIT && !DEFENDENDO && !AGACHADO)
                 {
                     PULANDOcorrendo = true;
                     PARADO = false;
@@ -1380,19 +1467,21 @@ namespace Stick_RPG_Fight
 
 
                 //parado
-                if (!Keyboard.GetState().IsKeyDown(Keys.D) && !Keyboard.GetState().IsKeyDown(Keys.A) && !PULANDOparado && !PULANDOandando && !PULANDOcorrendo && !AGACHADO && !ATACANDO && !HIT1 && !HIT2 && !AGACHADOHIT)
+                if (!Keyboard.GetState().IsKeyDown(Keys.D) && !Keyboard.GetState().IsKeyDown(Keys.A) && !Keyboard.GetState().IsKeyDown(Keys.S) && !Keyboard.GetState().IsKeyDown(Keys.W) && !PULANDOparado && !PULANDOandando && !PULANDOcorrendo && !AGACHADO && !ATACANDO && !HIT1 && !HIT2 && !AGACHADOHIT && !DEFENDENDO)
                 {
                     PARADO = true;
                     Vx = 0;
                     Vy = 0;
                     ANDANDO = false;
                     CORRENDO = false;
+                    DEFENDENDO = false;
+                    AGACHADO = false;
                     //atualização de spritesheet
                     framemovendo.X = 0;
                     framemovendo.Y = 0;
                 }// fim do parado
 
-                if (Keyboard.GetState().IsKeyDown(Keys.D) && Keyboard.GetState().IsKeyDown(Keys.A) && !PULANDOparado && !AGACHADO && !ATACANDO && !PULANDOandando && !PULANDOcorrendo && !HIT1 && !HIT2 && !AGACHADOHIT) // qnd apertar os dois botoes
+                if (Keyboard.GetState().IsKeyDown(Keys.D) && Keyboard.GetState().IsKeyDown(Keys.A) && !PULANDOparado && !AGACHADO && !ATACANDO && !PULANDOandando && !PULANDOcorrendo && !HIT1 && !HIT2 && !AGACHADOHIT && !DEFENDENDO && !AGACHADO) // qnd apertar os dois botoes
                 {
                     PARADO = true;
                     ANDANDO = false;
@@ -1409,7 +1498,7 @@ namespace Stick_RPG_Fight
                 if (DIREITA) /// POSIÇÃO (CORPO) estiver olhando para --  DIREITA
                 {
                     //andar DIREITA
-                    if (Keyboard.GetState().IsKeyDown(Keys.D) && !Keyboard.GetState().IsKeyDown(Keys.A) && (!Keyboard.GetState().IsKeyDown(Keys.LeftShift) || DESCANSANDO) && !PULANDOparado && !PULANDOandando && !PULANDOcorrendo && !AGACHADO && !ATACANDO && !COLIDINDOdireita && !HIT1 && !HIT2 && !AGACHADOHIT)
+                    if (Keyboard.GetState().IsKeyDown(Keys.D) && !Keyboard.GetState().IsKeyDown(Keys.A) && (!Keyboard.GetState().IsKeyDown(Keys.LeftShift) || DESCANSANDO) && !PULANDOparado && !PULANDOandando && !PULANDOcorrendo && !AGACHADO && !ATACANDO && !COLIDINDOdireita && !HIT1 && !HIT2 && !AGACHADOHIT && !DEFENDENDO)
                     {
                         //atualizando o frame parado
                         frameparado1.X = 0;
@@ -1450,7 +1539,7 @@ namespace Stick_RPG_Fight
 
                     //correr DIREITA
 
-                    else if (Keyboard.GetState().IsKeyDown(Keys.D) && !Keyboard.GetState().IsKeyDown(Keys.A) && Keyboard.GetState().IsKeyDown(Keys.LeftShift) && !PULANDOparado && !PULANDOandando && !PULANDOcorrendo && !AGACHADO && !ATACANDO && !DESCANSANDO && !COLIDINDOdireita && !HIT1 && !HIT2 && !AGACHADOHIT)
+                    else if (Keyboard.GetState().IsKeyDown(Keys.D) && !Keyboard.GetState().IsKeyDown(Keys.A) && Keyboard.GetState().IsKeyDown(Keys.LeftShift) && !PULANDOparado && !PULANDOandando && !PULANDOcorrendo && !AGACHADO && !ATACANDO && !DESCANSANDO && !COLIDINDOdireita && !HIT1 && !HIT2 && !AGACHADOHIT && !DEFENDENDO)
                     {
 
                         //atualizando o frame parado
@@ -1494,7 +1583,7 @@ namespace Stick_RPG_Fight
                     }
 
                    //desabilitar
-                    else if (Keyboard.GetState().IsKeyDown(Keys.A) && !Keyboard.GetState().IsKeyDown(Keys.D) && !PULANDOparado && !PULANDOandando && !PULANDOcorrendo && !AGACHADO && !ATACANDO && !HIT1 && !HIT2 && !AGACHADOHIT)
+                    else if (Keyboard.GetState().IsKeyDown(Keys.A) && !Keyboard.GetState().IsKeyDown(Keys.D) && !PULANDOparado && !PULANDOandando && !PULANDOcorrendo && !AGACHADO && !ATACANDO && !HIT1 && !HIT2 && !AGACHADOHIT && !DEFENDENDO)
                     {
                         DIREITA = false;
                         ESQUERDA = true;
@@ -1571,7 +1660,7 @@ namespace Stick_RPG_Fight
                 if (ESQUERDA) /// POSIÇÃO (CORPO) estiver olhando para --  ESQUERDA
                 {
                     //Andando ESQUERDA
-                    if (Keyboard.GetState().IsKeyDown(Keys.A) && !Keyboard.GetState().IsKeyDown(Keys.D) && (!Keyboard.GetState().IsKeyDown(Keys.LeftShift) || DESCANSANDO) && !PULANDOparado && !PULANDOandando && !PULANDOcorrendo && !AGACHADO && !ATACANDO && !COLIDINDOesquerda && !HIT1 && !HIT2 && !AGACHADOHIT)
+                    if (Keyboard.GetState().IsKeyDown(Keys.A) && !Keyboard.GetState().IsKeyDown(Keys.D) && (!Keyboard.GetState().IsKeyDown(Keys.LeftShift) || DESCANSANDO) && !PULANDOparado && !PULANDOandando && !PULANDOcorrendo && !AGACHADO && !ATACANDO && !COLIDINDOesquerda && !HIT1 && !HIT2 && !AGACHADOHIT && !DEFENDENDO)
                     {
                         //atualizando o frame parado
                         frameparado1.X = 0;
@@ -1608,7 +1697,7 @@ namespace Stick_RPG_Fight
                     }
 
                     //Correndo ESQUERDA
-                    else if (!Keyboard.GetState().IsKeyDown(Keys.D) && Keyboard.GetState().IsKeyDown(Keys.A) && Keyboard.GetState().IsKeyDown(Keys.LeftShift) && !PULANDOparado && !PULANDOandando && !PULANDOcorrendo && !AGACHADO && !ATACANDO && !DESCANSANDO && !COLIDINDOesquerda && !HIT1 && !HIT2 && !AGACHADOHIT)
+                    else if (!Keyboard.GetState().IsKeyDown(Keys.D) && Keyboard.GetState().IsKeyDown(Keys.A) && Keyboard.GetState().IsKeyDown(Keys.LeftShift) && !PULANDOparado && !PULANDOandando && !PULANDOcorrendo && !AGACHADO && !ATACANDO && !DESCANSANDO && !COLIDINDOesquerda && !HIT1 && !HIT2 && !AGACHADOHIT && !DEFENDENDO)
                     {
                         //atualizando o frame parado
                         frameparado1.X = 0;
@@ -1651,7 +1740,7 @@ namespace Stick_RPG_Fight
                     }
 
                     //desabilitar lado
-                    else if (Keyboard.GetState().IsKeyDown(Keys.D) && !Keyboard.GetState().IsKeyDown(Keys.A) && !PULANDOparado && !PULANDOandando && !PULANDOcorrendo && !AGACHADO && !ATACANDO && !HIT1 && !HIT2 && !AGACHADOHIT)
+                    else if (Keyboard.GetState().IsKeyDown(Keys.D) && !Keyboard.GetState().IsKeyDown(Keys.A) && !PULANDOparado && !PULANDOandando && !PULANDOcorrendo && !AGACHADO && !ATACANDO && !HIT1 && !HIT2 && !AGACHADOHIT && !DEFENDENDO)
                     {
                         DIREITA = true;
                         ESQUERDA = false;

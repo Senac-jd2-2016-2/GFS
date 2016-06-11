@@ -539,28 +539,48 @@ namespace Stick_RPG_Fight
                     }
                 }
 
+                if (P1.DEFENDENDO)
+                {
+                    if (JANELA.J.MAOselect)
+                    {
+                        s.Draw(P1.imgdefesamaosD, P1.individuo,
+                                          new Rectangle(P1.framedefesa.X * P1.tamanhoMaosdefesa1.X, P1.framedefesa.Y * P1.tamanhoMaosdefesa1.Y,
+                                                        P1.tamanhoMaosdefesa1.X, P1.tamanhoMaosdefesa1.Y),
+                                                        Color.White);
+                    }
+                }
+
                 if (P1.ANDANDO) // se movimentando pra direita
                 {
-                    s.Draw(P1.imgandandomaosD, P1.individuo,
-                                      new Rectangle(P1.framemovendo.X * P1.tamanhoMaosandando.X, P1.framemovendo.Y * P1.tamanhoMaosandando.Y,
-                                                    P1.tamanhoMaosandando.X, P1.tamanhoMaosandando.Y),
-                                                    Color.White);
+                    if (JANELA.J.MAOselect)
+                    {
+                        s.Draw(P1.imgandandomaosD, P1.individuo,
+                                          new Rectangle(P1.framemovendo.X * P1.tamanhoMaosandando.X, P1.framemovendo.Y * P1.tamanhoMaosandando.Y,
+                                                        P1.tamanhoMaosandando.X, P1.tamanhoMaosandando.Y),
+                                                        Color.White);
+                    }
                 }
 
                 if (P1.CORRENDO)
                 {
-                    s.Draw(P1.imgcorrendomaosD, P1.individuo,
-                                      new Rectangle(P1.framemovendo.X * P1.tamanhoMaoscorrendo.X, P1.framemovendo.Y * P1.tamanhoMaoscorrendo.Y,
-                                                    P1.tamanhoMaoscorrendo.X, P1.tamanhoMaoscorrendo.Y),
-                                                    Color.White);
+                    if (JANELA.J.MAOselect)
+                    {
+                        s.Draw(P1.imgcorrendomaosD, P1.individuo,
+                                          new Rectangle(P1.framemovendo.X * P1.tamanhoMaoscorrendo.X, P1.framemovendo.Y * P1.tamanhoMaoscorrendo.Y,
+                                                        P1.tamanhoMaoscorrendo.X, P1.tamanhoMaoscorrendo.Y),
+                                                        Color.White);
+                    }
                 }
 
                 if (P1.PULANDOandando || P1.PULANDOcorrendo || P1.PULANDOparado)
                 {
-                    s.Draw(P1.imgpularmaos, P1.individuo,
-                                     new Rectangle(P1.framepular.X * P1.tamanhoMaospular.X, P1.framepular.Y * P1.tamanhoMaospular.Y,
-                                                   P1.tamanhoMaospular.X, P1.tamanhoMaospular.Y),
-                                                   Color.White);
+                    if (JANELA.J.MAOselect)
+                    {
+                        s.Draw(P1.imgpularmaos, P1.individuo,
+                                         new Rectangle(P1.framepular.X * P1.tamanhoMaospular.X, P1.framepular.Y * P1.tamanhoMaospular.Y,
+                                                       P1.tamanhoMaospular.X, P1.tamanhoMaospular.Y),
+                                                       Color.White);
+                    }
                 }
 
                 //HIT
@@ -664,28 +684,49 @@ namespace Stick_RPG_Fight
                                                     Color.White);
                     }
                 }
+
+                if (P1.DEFENDENDO)
+                {
+                    if (JANELA.J.MAOselect)
+                    {
+                        s.Draw(P1.imgdefesamaosE, P1.individuo,
+                                          new Rectangle(P1.framedefesa.X * P1.tamanhoMaosdefesa1.X, P1.framedefesa.Y * P1.tamanhoMaosdefesa1.Y,
+                                                        P1.tamanhoMaosdefesa1.X, P1.tamanhoMaosdefesa1.Y),
+                                                        Color.White);
+                    }
+                }
+
                 if (P1.ANDANDO) // se movimentando pra esquerda
                 {
-                    s.Draw(P1.imgandandomaosE, P1.individuo,
-                                      new Rectangle(P1.framemovendo.X * P1.tamanhoMaosandando.X, P1.framemovendo.Y * P1.tamanhoMaosandando.Y,
-                                                    P1.tamanhoMaosandando.X, P1.tamanhoMaosandando.Y),
-                                                    Color.White);
+                    if (JANELA.J.MAOselect)
+                    {
+                        s.Draw(P1.imgandandomaosE, P1.individuo,
+                                          new Rectangle(P1.framemovendo.X * P1.tamanhoMaosandando.X, P1.framemovendo.Y * P1.tamanhoMaosandando.Y,
+                                                        P1.tamanhoMaosandando.X, P1.tamanhoMaosandando.Y),
+                                                        Color.White);
+                    }
                 }
 
                 if (P1.CORRENDO)
                 {
-                    s.Draw(P1.imgcorrendomaosE, P1.individuo,
-                                      new Rectangle(P1.framemovendo.X * P1.tamanhoMaoscorrendo.X, P1.framemovendo.Y * P1.tamanhoMaoscorrendo.Y,
-                                                    P1.tamanhoMaoscorrendo.X, P1.tamanhoMaoscorrendo.Y),
-                                                    Color.White);
+                    if (JANELA.J.MAOselect)
+                    {
+                        s.Draw(P1.imgcorrendomaosE, P1.individuo,
+                                          new Rectangle(P1.framemovendo.X * P1.tamanhoMaoscorrendo.X, P1.framemovendo.Y * P1.tamanhoMaoscorrendo.Y,
+                                                        P1.tamanhoMaoscorrendo.X, P1.tamanhoMaoscorrendo.Y),
+                                                        Color.White);
+                    }
                 }
 
                 if (P1.PULANDOandando || P1.PULANDOcorrendo || P1.PULANDOparado)
                 {
-                    s.Draw(P1.imgpularmaosE, P1.individuo,
-                                     new Rectangle(P1.framepular.X * P1.tamanhoMaospular.X, P1.framepular.Y * P1.tamanhoMaospular.Y,
-                                                   P1.tamanhoMaospular.X, P1.tamanhoMaospular.Y),
-                                                   Color.White);
+                    if (JANELA.J.MAOselect)
+                    {
+                        s.Draw(P1.imgpularmaosE, P1.individuo,
+                                         new Rectangle(P1.framepular.X * P1.tamanhoMaospular.X, P1.framepular.Y * P1.tamanhoMaospular.Y,
+                                                       P1.tamanhoMaospular.X, P1.tamanhoMaospular.Y),
+                                                       Color.White);
+                    }
                 }
 
                 //HIT
@@ -1585,7 +1626,7 @@ namespace Stick_RPG_Fight
                     spriteBatch.Draw(JANELA.J.imgcompramenu2, JANELA.J.compramenu, Color.White);
             }
 
-            //ESCRITO NA ABA INFO PRA COMPRAR
+            //ESCRITO NA ABA INFO PRA COMPRAR (FASES)
             if (JANELA.J.INFOeCOMPRAfase[1])
             {
                 spriteBatch.DrawString(JANELA.J.Neon15, "Arena", new Vector2(JANELA.J.Clickmenucompra.X + JANELA.J.Clickmenucompra.Width / 8, JANELA.J.Clickmenucompra.Y + JANELA.J.Clickmenucompra.Height / 9), Color.Black);
@@ -1603,6 +1644,12 @@ namespace Stick_RPG_Fight
                 spriteBatch.DrawString(JANELA.J.Neon15, "Celeiro", new Vector2(JANELA.J.Clickmenucompra.X + JANELA.J.Clickmenucompra.Width / 8, JANELA.J.Clickmenucompra.Y + JANELA.J.Clickmenucompra.Height / 9), Color.Black);
                 spriteBatch.DrawString(JANELA.J.Neon15, "O mapa custa: 50 Missões completadas.", new Vector2(JANELA.J.Clickmenucompra.X + JANELA.J.Clickmenucompra.Width / 8, JANELA.J.Clickmenucompra.Y + JANELA.J.Clickmenucompra.Height / 2), Color.Black);
                 spriteBatch.DrawString(JANELA.J.Neon15, "Você fez: " + JANELA.J.Qcompletadas, new Vector2(JANELA.J.Clickmenucompra.X + JANELA.J.Clickmenucompra.Width / 8, JANELA.J.Clickmenucompra.Y + JANELA.J.Clickmenucompra.Height / 2 + 20), Color.Black);
+            }
+            if (JANELA.J.INFOeCOMPRAfase[4])
+            {
+                spriteBatch.DrawString(JANELA.J.Neon15, "Rua japonesa", new Vector2(JANELA.J.Clickmenucompra.X + JANELA.J.Clickmenucompra.Width / 8, JANELA.J.Clickmenucompra.Y + JANELA.J.Clickmenucompra.Height / 9), Color.Black);
+                spriteBatch.DrawString(JANELA.J.Neon15, "O mapa custa: 75 Missões completadas e 20 HONRA.", new Vector2(JANELA.J.Clickmenucompra.X + JANELA.J.Clickmenucompra.Width / 8, JANELA.J.Clickmenucompra.Y + JANELA.J.Clickmenucompra.Height / 2), Color.Black);
+                spriteBatch.DrawString(JANELA.J.Neon15, "Você fez: " + JANELA.J.Qcompletadas + " Missões e tem " + P1.honra + " de HONRA", new Vector2(JANELA.J.Clickmenucompra.X + JANELA.J.Clickmenucompra.Width / 8, JANELA.J.Clickmenucompra.Y + JANELA.J.Clickmenucompra.Height / 2 + 20), Color.Black);
             }
             
         }//fim void

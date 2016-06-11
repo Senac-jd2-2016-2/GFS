@@ -11,7 +11,7 @@ namespace Stick_RPG_Fight
     class Background
     {
         public Texture2D menu00fundo;
-        public Texture2D[] imgfase = new Texture2D[4]; //quantidade de imagem fases que se tem (para add, mudar aqui)
+        public Texture2D[] imgfase = new Texture2D[5]; //quantidade de imagem fases que se tem (para add, mudar aqui)
         public Texture2D imgfundopoder;
         public Rectangle fase = new Rectangle();
         public Rectangle chao = new Rectangle();

@@ -860,7 +860,7 @@ namespace Stick_RPG_Fight
             //COLISÃO COM O PERSONAGEM
             if (!MORRENDO && P1.g == 0)
             {
-                if (P1.meio.Intersects(meio) && meio.X > P1.meio.X && !P1.ATACANDO && (!P1.PULANDOandando || !P1.PULANDOcorrendo || !P1.PULANDOparado) && !P1.PODER)
+                if (P1.meio.Intersects(meio) && meio.X > P1.meio.X && !P1.ATACANDO && (!P1.PULANDOandando || !P1.PULANDOcorrendo || !P1.PULANDOparado) && !P1.PODER && !P1.DEFENDENDO && !P1.AGACHADO)
                 {
                     P1.COLIDINDOdireita = true;
                     P1.Vx = 0;
@@ -872,7 +872,7 @@ namespace Stick_RPG_Fight
                 {
                     P1.COLIDINDOdireita = false;
                 }
-                if (P1.meio.Intersects(meio) && meio.X < P1.meio.X && !P1.ATACANDO && (!P1.PULANDOandando || !P1.PULANDOcorrendo || !P1.PULANDOparado) && !P1.PODER)
+                if (P1.meio.Intersects(meio) && meio.X < P1.meio.X && !P1.ATACANDO && (!P1.PULANDOandando || !P1.PULANDOcorrendo || !P1.PULANDOparado) && !P1.PODER && !P1.DEFENDENDO && !P1.AGACHADO)
                 {
                     P1.COLIDINDOesquerda = true;
                     P1.Vx = 0;
