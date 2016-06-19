@@ -288,6 +288,7 @@ namespace Stick_RPG_Fight
             Fundo.imgfase[2] = content.Load<Texture2D>("fase 3");
             Fundo.imgfase[3] = content.Load<Texture2D>("fase 4");
             Fundo.imgfase[4] = content.Load<Texture2D>("fase 5");
+            Fundo.imgfase[5] = content.Load<Texture2D>("fase 6");
             Fundo.imgfundopoder = content.Load<Texture2D>("fundo poder");
 
             Menu.m.imgcampanha1 = content.Load<Texture2D>("campanha");
@@ -499,7 +500,8 @@ namespace Stick_RPG_Fight
             JANELA.J.imgfaseB[2] = content.Load<Texture2D>("fase B3");
             JANELA.J.imgfaseB[3] = content.Load<Texture2D>("fase B4");
             JANELA.J.imgfaseB[4] = content.Load<Texture2D>("fase B5");
-            for (int i = 5; i < JANELA.J.imgfaseB.Length; i++ )
+            JANELA.J.imgfaseB[5] = content.Load<Texture2D>("fase B6");
+            for (int i = 6; i < JANELA.J.imgfaseB.Length; i++ )
             {
                 JANELA.J.imgfaseB[i] = content.Load<Texture2D>("fase B1");
             }

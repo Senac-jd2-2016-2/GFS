@@ -935,7 +935,7 @@ namespace Stick_RPG_Fight
                 RAIO.r.Draw(spriteBatch, P1);
                 DRAW.DrawCOMBOS(spriteBatch, WidthTela, HeightTela, P1); // face dos combos (mostrando)
 
-                spriteBatch.DrawString(menu, "LISTA: " + listai1.Count, new Vector2(0, Window.ClientBounds.Height - 15), Color.Black); //teste
+                //spriteBatch.DrawString(menu, "LISTA: " + listai1.Count, new Vector2(0, Window.ClientBounds.Height - 15), Color.Black); //teste
 
             }//FIM DO COMBATE
 

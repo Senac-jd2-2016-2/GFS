@@ -1005,7 +1005,7 @@ namespace Stick_RPG_Fight
             }
             
 
-            spriteBatch.DrawString(menu, "Versão 1.0 " + Savegame.S.Ex + " " + Savegame.S.Ex2, new Vector2(0, HeightTela - 15), Color.Cyan);
+            spriteBatch.DrawString(menu, "Versão 0.5 " + Savegame.S.Ex + " " + Savegame.S.Ex2, new Vector2(0, HeightTela - 15), Color.Cyan);
         } //fim draw menu 01
         //--------------------------------------------------------------------------------------------------
         //--------------------------------------------------------------------------------------------------
@@ -1651,7 +1651,13 @@ namespace Stick_RPG_Fight
                 spriteBatch.DrawString(JANELA.J.Neon15, "O mapa custa: 75 Missões completadas e 20 HONRA.", new Vector2(JANELA.J.Clickmenucompra.X + JANELA.J.Clickmenucompra.Width / 8, JANELA.J.Clickmenucompra.Y + JANELA.J.Clickmenucompra.Height / 2), Color.Black);
                 spriteBatch.DrawString(JANELA.J.Neon15, "Você fez: " + JANELA.J.Qcompletadas + " Missões e tem " + P1.honra + " de HONRA", new Vector2(JANELA.J.Clickmenucompra.X + JANELA.J.Clickmenucompra.Width / 8, JANELA.J.Clickmenucompra.Y + JANELA.J.Clickmenucompra.Height / 2 + 20), Color.Black);
             }
-            
+            if (JANELA.J.INFOeCOMPRAfase[5])
+            {
+                spriteBatch.DrawString(JANELA.J.Neon15, "Metrô japonês", new Vector2(JANELA.J.Clickmenucompra.X + JANELA.J.Clickmenucompra.Width / 8, JANELA.J.Clickmenucompra.Y + JANELA.J.Clickmenucompra.Height / 9), Color.Black);
+                spriteBatch.DrawString(JANELA.J.Neon15, "O mapa custa: 100 Missões completadas e 50 HONRA.", new Vector2(JANELA.J.Clickmenucompra.X + JANELA.J.Clickmenucompra.Width / 8, JANELA.J.Clickmenucompra.Y + JANELA.J.Clickmenucompra.Height / 2), Color.Black);
+                spriteBatch.DrawString(JANELA.J.Neon15, "Você fez: " + JANELA.J.Qcompletadas + " Missões e tem " + P1.honra + " de HONRA", new Vector2(JANELA.J.Clickmenucompra.X + JANELA.J.Clickmenucompra.Width / 8, JANELA.J.Clickmenucompra.Y + JANELA.J.Clickmenucompra.Height / 2 + 20), Color.Black);
+            }
+
         }//fim void
 
 

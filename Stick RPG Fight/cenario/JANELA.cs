@@ -982,6 +982,23 @@ namespace Stick_RPG_Fight
                     }
                     Bcompramenu = false;
                 }
+
+                //fase rua japonesa
+                if (INFOeCOMPRAfase[5] && Mouse.GetState().LeftButton == ButtonState.Pressed && compramenu.Contains(mousePosition))
+                {
+                    BOTAO = true;
+                    Bcompramenu = true;
+                }
+                if (Bcompramenu && !BOTAO && INFOeCOMPRAfase[5])
+                {
+                    if (Qcompletadas >= 100 && P1.honra >= 50)
+                    {
+                        FASEdestravada[5] = true;
+                        CLICKMENUCOMPRA = false;
+                        INFOeCOMPRAfase[5] = false;
+                    }
+                    Bcompramenu = false;
+                }
                 
             }
         }
@@ -1806,7 +1823,7 @@ namespace Stick_RPG_Fight
 
 
 
-
+            //5
             if (!SLOWselect)
             {
                 
@@ -1868,6 +1885,9 @@ namespace Stick_RPG_Fight
                         //desabilitar o poder (qnd mudar pra outro poder) - nao gerando conflito
                         P1.PODER = false;
 
+                        //limpar a tela de clones
+                        P1.listaclonePoder.Clear();
+
                         //descelecionar outros itens do mesmo grupo
                         SELECIONADOS[5] = false;
                         for (int i = 7; i < 10; i++)
@@ -1920,6 +1940,9 @@ namespace Stick_RPG_Fight
                         //desabilitar o poder (qnd mudar pra outro poder) - nao gerando conflito
                         P1.PODER = false;
 
+                        //limpar a tela de clones
+                        P1.listaclonePoder.Clear();
+
                         //descelecionar outros itens do mesmo grupo
                         SELECIONADOS[5] = false;
                         SELECIONADOS[6] = false;
@@ -1969,6 +1992,9 @@ namespace Stick_RPG_Fight
                         ESCUDOselect = false;
                         RAIOselect = false;
 
+                        //limpar a tela de clones
+                        P1.listaclonePoder.Clear();
+
                         //desabilitar o poder (qnd mudar pra outro poder) - nao gerando conflito
                         P1.PODER = false;
 
@@ -2017,6 +2043,9 @@ namespace Stick_RPG_Fight
                         RETROCEDERselect = false;
                         ESCUDOselect = false;
                         VENTOselect = false;
+
+                        //limpar a tela de clones
+                        P1.listaclonePoder.Clear();
 
                         //desabilitar o poder (qnd mudar pra outro poder) - nao gerando conflito
                         P1.PODER = false;
