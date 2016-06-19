@@ -379,8 +379,13 @@ namespace Stick_RPG_Fight
                         if (Menu.m.CAMPANHAb && !BOTAO)
                         {
                             JANELA.J.campanhaDESLIZAR = false;
-                            JANELA.J.POSatos.Y = HeightTela / 4;
-                            JANELA.J.POSatos.X = - WidthTela;
+                            JANELA.J.POSatos[0].X = -WidthTela;
+                            JANELA.J.POSatos[1].X = -WidthTela - WidthTela / 2;
+                            JANELA.J.POSatos[2].X = -WidthTela * 2;
+
+                            for (int i = 0; i < JANELA.J.POSatos.Length; i++)
+                                JANELA.J.POSatos[i].Y = HeightTela / 4;
+
                             JANELA.J.JANELACAMPANHA = true;
                             Menu.m.CAMPANHAb = false;
                         }
@@ -474,8 +479,12 @@ namespace Stick_RPG_Fight
                             FlechaD = new Rectangle(W - H / 11, H - H / 11, H / 11, H / 11);
                             FlechaE = new Rectangle(0, H - H / 11, H / 11, H / 11);
 
-                            JANELA.J.POSatos.X = -W;
-                            JANELA.J.POSatos.Y = H / 4;
+                            JANELA.J.POSatos[0].X = -W;
+                            JANELA.J.POSatos[1].X = -W - W / 2;
+                            JANELA.J.POSatos[2].X = -W * 2;
+
+                            for (int i = 0; i < JANELA.J.POSatos.Length; i++ )
+                                JANELA.J.POSatos[i].Y = H / 4;
 
                             MediaPlayer.Play(Audio.A1.menusong);
                         }
@@ -883,7 +892,11 @@ namespace Stick_RPG_Fight
                 {
                     JANELA.J.JANELACAMPANHA = false;
                     JANELA.J.campanhaDESLIZAR = false;
-                    JANELA.J.POSatos.X = -W;
+                    
+                    JANELA.J.POSatos[0].X = -W;
+                    JANELA.J.POSatos[1].X = -W - W/2;
+                    JANELA.J.POSatos[2].X = -W * 2;
+
                     MediaPlayer.Resume();
                 }
             }

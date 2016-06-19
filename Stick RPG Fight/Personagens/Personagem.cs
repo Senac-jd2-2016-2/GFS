@@ -396,7 +396,7 @@ namespace Stick_RPG_Fight
 
             XPT = 100 * LVL;
             XPrec.Width = (int)(((float)(XP) / XPT) * XPTrec.Width);
-            vidaTOTAL = 200 + ((3 * LVL) * LVL);
+            vidaTOTAL = 200 + ((5 * LVL) * LVL);
             manaTOTAL = 150 + ((2 * LVL) * LVL);
             energiaTOTAL = 120 + ((4 * LVL) * LVL);
 

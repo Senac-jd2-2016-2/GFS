@@ -86,7 +86,7 @@ namespace Stick_RPG_Fight
         public bool[] atoB = new bool[3];
         public bool[] ATO_CAMPANHA = new bool[3];
         public Texture2D[] imgATOS = new Texture2D[3];
-        public Point POSatos = new Point(0, 0);
+        public Point[] POSatos = new Point[3];
 
         //placar
         public Texture2D imgPlacar;
@@ -154,7 +154,7 @@ namespace Stick_RPG_Fight
             //capa fundo
             s.Draw(JANELA.J.imgFUNDOmenu, new Rectangle(0, 0, W, H), Color.White);
 
-            s.DrawString(Neon, "Modo Campanha", new Vector2(POSatos.X + W / 3, POSatos.Y - H / 6), Color.White);
+            s.DrawString(Neon, "Modo Campanha", new Vector2(POSatos[0].X + W / 3, POSatos[0].Y - H / 6), Color.White);
             for (int i = 0; i < Ato.Length; i++)
             {
                 if (!Ato[i].Contains(mousePosition))
@@ -198,22 +198,27 @@ namespace Stick_RPG_Fight
             for (int i = 0; i < Ato.Length; i++)
             {
                 Ato[i].Width = W;
-                Ato[i].X = POSatos.X;
                 Ato[i].Height = H / 6 - H / 180;// 180 - 6 = 174 
-                Ato[i].Y = POSatos.Y + (i * (Ato[i].Height + H / 35)); //um embaixo do outro
+
+                Ato[i].X = POSatos[i].X;
+                Ato[i].Y = POSatos[i].Y + (i * (Ato[i].Height + H / 35)); //um embaixo do outro
 
             }//mult
 
             //FAZER OS ATOS DESLIZAREM PRA DIREITA TODA VEZ QUE CLICAR
             if (!campanhaDESLIZAR)
             {
-                POSatos.X += H / 15;
-                if (POSatos.X >= 0)
+                for (int i = 0; i < POSatos.Length; i++)
                 {
-                    POSatos.X = 0;
-                    campanhaDESLIZAR = true;
+                    if (POSatos[i].X < 0)
+                        POSatos[i].X += H / 15;
+                    if (POSatos[i].X >= 0)
+                    {
+                        POSatos[i].X = 0;
+                        if (i == POSatos.Length - 1)
+                            campanhaDESLIZAR = true;
+                    }
                 }
-                
             }
             else if (campanhaDESLIZAR)
             {
