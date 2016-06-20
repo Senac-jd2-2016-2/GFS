@@ -617,7 +617,7 @@ namespace Stick_RPG_Fight
                             }
                             //gerador de inimigos
                             TempoParaInimigos++;
-                            if (TempoParaInimigos >= 300)
+                            if (TempoParaInimigos >= 500)
                             {
                                 for (int G = 0; G < JANELA.J.qtddOLEADA; G++)
                                 {
@@ -658,7 +658,7 @@ namespace Stick_RPG_Fight
                         }
                         //gerador de inimigos
                         TempoParaInimigos++;
-                        if (TempoParaInimigos >= 300)
+                        if (TempoParaInimigos >= 500)
                         {
                             for (int G = 0; G < JANELA.J.qtddOLEADA; G++)
                             {
